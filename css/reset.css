@@ -77,6 +77,11 @@
     margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
 }
 
+iframe{
+    /* iframe을 사용할꺼라면 참고! 기본으로 주는 가로/세로 줄 등 다 취소했습니다. */
+    border-width: 0; border-style: none; border-color: none; border-image: none; overflow: hidden;
+}
+
 a, button{
     color: #000000 ; cursor: pointer;
 }
