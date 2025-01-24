@@ -1,0 +1,46 @@
+.workorder{
+    width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+}
+/* 상단 레이어 */
+.workorder-search-layer{
+    width: 90%; height: 80px; background-color: #d9d9d9; display: flex; align-items: center;
+}
+
+.workorder-bookmark{
+    width: 40px; height: 40px; margin-left: 2%;
+}
+
+.workorder-search{
+    width: 40%; height: 40px; margin-left: 1%;
+}
+
+.workorder-search-button{
+    width: 100px; height: 40px; margin-left: 1%; font-size: 18px;color: #ffffff;background-color: #007bff; border: none;
+}
+/* 중단 레이어 */
+.workorder-layer{
+    width: 85%; height: 80%; border: 2px solid #999999;
+}
+
+.workorder-tag{
+    width: 100%; height: 40px; border-bottom: 2px solid #999999; display: flex; justify-content: space-around;
+}
+
+/* 중단 태그 레이어 */
+.workorder-tag li{
+     border-right: 1px solid #999999;
+}
+
+
+/* 하단 레이어 */
+.workorder-page{
+    width: 85%; height: 50px; margin-bottom: 30px; padding: 0 10px;background-color: #666666; display: flex; justify-content: space-between; align-items: center;
+}
+
+.workorder-pagenation{
+    width: 70%; height: 40px; background-color: orange;
+}
+
+.new-workorder-button{
+    width: 100px; height: 40px; color: #ffffff; background-color: #007bff; border: none; font-size: 16px; letter-spacing: 1px;
+}
