@@ -1,11 +1,123 @@
+@media screen and (max-width: 767px){
+
+    /* 주로 navigation이나 footer 등의 모든 영역에서 만약 나중에 봇 등에 css가 필요하다면 여기에! */
+    /* 태그 적용 */
+    nav{
+        width: 100%; height: auto; max-height: 1000px; position: absolute; left: 0; top: 100px; display: none; overflow: hidden; transition: 0.5s; z-index: 10;
+    }
+    
+nav.open{
+max-height: 100vh; display: block; overflow: visible;
+}
+nav.open ~ .navopen-shadow {
+    display: block; z-index: 1
+}
+
+.mobnav-bar .mobnav {
+    width: 30px; height: 4px; background-color: #ffffff; margin: 2.689px 0; transition: 0.4s;
+}
+
+/* 네비게이션 열렸을 때 X로 변경 */
+.nav.open .mobnav-bar .bar1 {
+    transform: rotate(-45deg) translate(5px, 6px);  
+}
+
+.nav.open .mobnav-bar .bar2 {
+    opacity: 0;
+}
+
+.nav.open .mobnav-bar .bar3 {
+    transform: rotate(45deg) translate(5px, -6px); 
+}
+
+    iframe{
+        width: 100%; height: calc(100% - 100px); display: block; 
+    }
+    
+    li{
+        font-size: 16px; 
+    }
+    
+    /* 클래스 적용 */
+    
+    .index{
+        width: 100%; height: 100vh; display: flex; flex-direction: column;
+    }
+    .logo-layer{
+        width: 100%; height: 100px; margin-top: 20px;display: none; justify-content: center; padding: 10px;
+    }
+    .logo-layer img:hover{
+        cursor: pointer;
+    }
+    .navigation{
+        width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    
+    .nav-button{
+        width: 100%; height: 10%; margin-top: 50px;padding: 0 10px ; font-size: 24px;font-weight: 600; letter-spacing: 2px; text-align: center; border: none; background-color: unset;
+    }
+    .nav-button.nav-blue {
+        color: #007bff; transition: 0.3s
+    }
+    .nav-tag{
+        width: 80%; margin: 8px 0; padding: 0 10px; font-size: 24px; text-align: center;   display: flex; flex-direction: column; justify-content: space-around;
+        /* 효과 */
+        height: 0; overflow: hidden; transition: 0.8s ease;
+    }
+    .nav-tag li:hover{
+        transition: 0.1s; cursor: pointer; color: #007bff;
+    }
+    .nav-tag.open {
+        height: 200px; border-top: 2px solid #007bff;
+    }
+    .gnb-bar{
+     height: 100%; flex-grow: 1;
+    }
+    
+    .my-layer{
+     width: 100%; height: 100px; position: relative; display: flex; flex-direction: column; z-index: 5; filter: none;
+    }
+    
+    .my-populater{
+        width: 100%; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background-color: #ffffff;
+    }
+    
+    .my-page{
+    width: 40px; height: 40px; background-color: #007bff; border-radius: 100px;  cursor: pointer;
+    }
+    
+    .mobnav-bar{
+        width: 55px; height: 55px; display:flex; flex-direction: column; color: #ffffff; background-color: #007bff; border: none; justify-content: center; align-items: center; cursor: pointer;
+    }
+
+    .mobnav-bar:hover {
+        background-color: #0056b3;
+    }
+
+    .mypage-img{
+        width: 100%; height: 100%; border-radius: 100px; padding: 3px;
+    }
+    .local-bar{
+    width: 100%; height: 40px; display: flex; padding: 10px; background-color: #999999;
+    }
+    .local-bar li{
+        margin-right: 10px;
+    }
+    
+    .navopen-shadow {
+        width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5); z-index: 2; display: none; filter: blur(5px); /* 흐림 효과 추가 */
+    }
+    }
+
+@media screen and (min-width: 768px){
 /* 주로 navigation이나 footer 등의 모든 영역에서 만약 나중에 봇 등에 css가 필요하다면 여기에! */
 /* 태그 적용 */
 nav{
-    width: 190px; height: 100vh; background-color: #d9d9d9;
+    width: 190px; height: 100%; background-color: #d9d9d9; flex-shrink: 0;
 }
 
 iframe{
-    width: 100%; height: 90%;
+    width: 100%; height: calc(100% - 100px); display: block;
 }
 
 li{
@@ -17,25 +129,35 @@ li{
 .index{
     width: 100%; height: 100vh; display: flex; 
 }
-
-.logo{
-    width: 100%; height: 100px; background-color: #888888;
+.logo-layer{
+    width: 100%; height: 100px; margin-top: 20px;display: flex; justify-content: center; padding: 10px;
 }
-
+.logo-layer img:hover{
+    cursor: pointer;
+}
 .navigation{
-    width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 
 .nav-button{
-    width: 100%; height: 10%; padding: 0 10px ; font-size: 24px; text-align: left; border: none; background-color: unset;
+    width: 100%; height: 10%; margin-top: 50px;padding: 0 10px ; font-size: 24px;font-weight: 600; letter-spacing: 2px; text-align: left; border: none; background-color: unset;
 }
-
+.nav-button.nav-blue {
+    color: #007bff;transition: 0.3s
+}
 .nav-tag{
-    width: 80%; height: 20%; margin: 8px 0; padding: 0 10px; font-size: 24px; border-left: 2px solid #007bff; display: flex; flex-direction: column; justify-content: space-around;
+    width: 80%; margin: 8px 0; padding: 0 10px; font-size: 24px; border-left: 2px solid #007bff;  display: flex; flex-direction: column; justify-content: space-around;
+    /* 효과 */
+    height: 0; overflow: hidden; transition: 0.8s ease;
 }
-
+.nav-tag li:hover{
+    transition: 0.1s; cursor: pointer; color: #007bff;
+}
+.nav-tag.open {
+    height: 200px;
+}
 .gnb-bar{
-    width: 85%; height: 100%; 
+ height: 100%; flex-grow: 1;
 }
 
 .my-layer{
@@ -43,13 +165,20 @@ li{
 }
 
 .my-populater{
-    width: 100%; height: 60px;
+    width: 100%; height: 60px; padding: 0 10px; display: flex; flex-direction: row-reverse;align-items: center;
 }
 
 .my-page{
-width: 40px; height: 40px; background-color: #007bff; float: right; border-radius: 100px; margin: 1%;
+width: 40px; height: 40px; background-color: #007bff;  border-radius: 100px; cursor: pointer;
 }
 
+.mobnav-bar{
+    display: none;
+}
+
+.mypage-img{
+    width: 100%; height: 100%; border-radius: 100px; padding: 3px;
+}
 .local-bar{
 width: 100%; height: 40px; display: flex; padding: 10px; background-color: #999999;
 }
@@ -57,4 +186,8 @@ width: 100%; height: 40px; display: flex; padding: 10px; background-color: #9999
     margin-right: 10px;
 }
 
+.navopen-shadow{
+    display: none; 
+}
 
+}
