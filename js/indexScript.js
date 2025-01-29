@@ -44,3 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+    const iframe = document.querySelector("iframe")
+    const workOrdermenu = document.querySelector("#nav-workorder");
+    workOrdermenu.addEventListener("click", function(){
+        iframe.src = "componant/WorkOrder.html"
+    })
+})
