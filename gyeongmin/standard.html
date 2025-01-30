@@ -1,131 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/data/material.js"></script>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        body{
+
+        body {
             width: 95vw;
             margin: 0 auto;
         }
-        #top-contain{
+
+        #top-contain {
             border: 1px solid black;
             padding: 50px 0 0 0;
-           display: flex;
-           justify-content: space-between; 
+            display: flex;
+            justify-content: space-between;
         }
-      
-        .crud, .button{
+
+        .crud,
+        .button {
             border: 1px solid black;
             border-radius: 10px;
             height: 80px;
             width: 80px;
         }
-        #mid-contain{
+
+        #mid-contain {
             border: 1px solid black;
             margin: 20px 0 0 0;
         }
-        .mid-contain-article{
+
+        .mid-contain-article {
             border: 1px solid red;
             display: inline-block;
             margin: 10px;
 
         }
-        #id2{
+
+        #id2 {
             margin-left: 26px;
         }
-        #id3{
+
+        #id3 {
+            margin-left: 39px;
+        }
+
+        #id4 {
             margin-left: 42px;
         }
-        #id4{
-            margin-left: 42px;
+
+        #id7 {
+            margin-left: 26px;
         }
-        #id7{
-            margin-left:26px ;
-        }
-        #check{
+
+        #check {
             border-radius: 10px;
             width: 50px;
             height: 30px;
         }
-        #main-contain{
-            margin-top: 30px;
+
+        #main-contain {
+        margin-top: 20px;
+           display: flex;
+           justify-content: center;
         }
 
-        table, tr, th{
+        table,
+        tr,
+        th {
             /* 중복 테두리 제거 코드 */
             border-collapse: collapse;
             border: 1px solid black;
         }
-        table{
-            width: 100%;
+
+        table {
+            width: 80%;
+            
         }
- 
+
+
+
+        .start-table {
+            display: none;
+           
+        }
+
+        .finishe-table {
+            display: none;
+         
+        }
+
+        .crud:hover {
+            background-color: rgb(149, 149, 155);
+        }
     </style>
 </head>
+
 <body>
     <div id="top-contain">
         <div id="top-1">
-            <input type="button" value="생성" class="crud" id="c">
             <input type="button" value="조회" class="crud" id="r">
+            <input type="button" value="생성" class="crud" id="c">
             <input type="button" value="수정" class="crud" id="u">
             <input type="button" value="삭제" class="crud" id="d">
         </div>
         <div id="top-2">
-            <select name="option"style="width: 200px; height: 80px;" id="check-option" >
+            <select name="option" style="width: 200px; height: 80px;" id="check-option">
                 <option value="1">원재료 조회</option>
                 <option value="2">완재품 조회</option>
             </select>
-            <input type="button" value="확인" class="button">
+            <input type="button" value="확인" class="button" id="check-option-button">
         </div>
     </div>
 
     <div id="mid-contain">
-            <div class="mid-contain-article" id="id1"> 제품명:<input type="text" placeholder="입력하세요"> </div>
-            <div class="mid-contain-article" id="id2"> 가격:<input type="text" placeholder="입력하세요"> </div>
-            <div class="mid-contain-article" id="id3"> 규격:<input type="text" placeholder="입력하세요"> </div>
-            <div class="mid-contain-article" id="id4"> 단위:<input type="text" placeholder="입력하세요"> </div>
-            <br>
-            <div class="mid-contain-article" id="id5"> 공급업체:<input type="text" placeholder="입력하세요"> </div>
-            <div class="mid-contain-article" id="id6"> LotNo:<input type="text" placeholder="입력하세요"> </div>
-            <div class="mid-contain-article" id="id7"> 창고위치:<input type="text" placeholder="입력하세요"> </div>
-            <div class="mid-contain-article" id="id8"> <input type="button" value="확인" id="check"> </div>
+        <div class="mid-contain-article" id="id1"> 제품명:<input type="text" placeholder="입력하세요" class="mid-data" > </div>
+        <div class="mid-contain-article" id="id2"> 가격:<input type="text" placeholder="입력하세요" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id3"> 규격:<input type="text" placeholder="입력하세요" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id4"> 단위:<input type="text" placeholder="입력하세요" class="mid-data"> </div>
+        <br>
+        <div class="mid-contain-article" id="id5"> 공급업체:<input type="text" placeholder="입력하세요" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id6"> LotNo:<input type="text" placeholder="입력하세요" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id7"> 창고위치:<input type="text" placeholder="입력하세요" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id8"> <input type="button" value="확인" id="mid-contain-check"> </div>
     </div>
     </div>
-    
+
     <div id="main-contain">
         <!-- 원재료 테이블 -->
-        <table id="start-table">
+        <table class="start-table">
             <tr>
-                <th><div style="width: 30px;"></div> </th><th>제품명</th><th>가격</th><th>규격</th><th>단위</th><th>공급업체</th><th>LotNo</th><th>창고위치</th>
+                <th>
+                    <div style="width: 30px;"></div>
+                </th>
+                <th>제품명</th>
+                <th>가격</th>
+                <th>규격</th>
+                <th>단위</th>
+                <th>공급업체</th>
+                <th>LotNo</th>
+                <th>창고위치</th>
             </tr>
-            <tr>
-                <th>1<input type="checkbox"></th><th>상추</th><th>2000</th><th>500</th><th>g</th><th>*고기명가</th><th>ING-20250124-017</th><th>냉장</th>
-            </tr>
+            <br>
         </table>
         <!-- 완제품 테이블 -->
-        <table id="finishe-table">
+        <table class="finishe-table">
             <tr>
-                <th><div style="width: 30px;"></div> </th><th>제품명</th><th>가격</th><th>규격</th><th>단위</th><th>공급업체</th><th>LotNo</th><th>창고위치</th>
+                <th>
+                    <div style="width: 30px;"></div>
+                </th>
+                <th>제품명</th>
+                <th>가격</th>
+                <th>규격</th>
+                <th>단위</th>
+                <th>공급업체</th>
+                <th>LotNo</th>
+                <th>창고위치</th>
             </tr>
-            <tr>
-                <th>1<input type="checkbox"></th><th>상추</th><th>2000</th><th>500</th><th>g</th><th>*고기명가</th><th>ING-20250124-017</th><th>냉장</th>
-            </tr>
+
         </table>
 
     </div>
     <script>
-        window.addEventListener("load",function(){
-            fi
+        window.addEventListener("load", function () {
+            const start = [
+                { 제품명: "베이크드빈", 가격: 1500, 규격: 1, 단위: "캔", 공급업체: "*울식품", LotNo: "ING-20250124-001", 창고위치: "상온" },
+                { 제품명: "햄", 가격: 5000, 규격: 500, 단위: "g", 공급업체: "*른햄", LotNo: "ING-20250124-002", 창고위치: "상온" },
+                { 제품명: "사골육수", 가격: 3000, 규격: 500, 단위: "ml", 공급업체: "*한맛육수", LotNo: "ING-20250124-003", 창고위치: "냉장" },
+                { 제품명: "사골 농축 육수", 가격: 2500, 규격: 100, 단위: "ml", 공급업체: "*은맛푸드", LotNo: "ING-20250124-004", 창고위치: "냉장" },
+                { 제품명: "사리면", 가격: 1200, 규격: 200, 단위: "g", 공급업체: "*사랑", LotNo: "ING-20250124-005", 창고위치: "상온" },
+                { 제품명: "부대찌개 소스", 가격: 2000, 규격: 500, 단위: "g", 공급업체: "*대맛집", LotNo: "ING-20250124-006", 창고위치: "상온" },
+                { 제품명: "각종 채소", 가격: 2500, 규격: 500, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-007", 창고위치: "냉장" },
+                { 제품명: "체다슬라이스 치즈", 가격: 3000, 규격: 200, 단위: "g", 공급업체: "*즈향기", LotNo: "ING-20250124-008", 창고위치: "냉장" },
+                { 제품명: "찌개용 용기", 가격: 500, 규격: 1, 단위: "개", 공급업체: "*리용기판매점", LotNo: "PKG-20250124-001", 창고위치: "상온" },
+                { 제품명: "김치", 가격: 1500, 규격: 500, 단위: "g", 공급업체: "*치공방", LotNo: "ING-20250124-009", 창고위치: "냉장" },
+                { 제품명: "고춧가루", 가격: 3000, 규격: 500, 단위: "g", 공급업체: "*운맛상회", LotNo: "ING-20250124-010", 창고위치: "상온" },
+                { 제품명: "설탕", 가격: 1000, 규격: 1, 단위: "kg", 공급업체: "*탕마을", LotNo: "ING-20250124-011", 창고위치: "상온" },
+                { 제품명: "마늘", 가격: 2000, 규격: 500, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-012", 창고위치: "상온" },
+                { 제품명: "대파", 가격: 1000, 규격: 500, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-013", 창고위치: "냉장" },
+                { 제품명: "돈육", 가격: 6000, 규격: 500, 단위: "g", 공급업체: "*육전문점", LotNo: "ING-20250124-014", 창고위치: "냉동" },
+                { 제품명: "두부", 가격: 1500, 규격: 300, 단위: "g", 공급업체: "*부명가", LotNo: "ING-20250124-015", 창고위치: "냉동" },
+                { 제품명: "김치찌개용 육수", 가격: 2500, 규격: 500, 단위: "ml", 공급업체: "*치육수전문", LotNo: "ING-20250124-016", 창고위치: "냉장" },
+                { 제품명: "소고기", 가격: 10000, 규격: 500, 단위: "g", 공급업체: "*고기명가", LotNo: "ING-20250124-017", 창고위치: "냉동" },
+                { 제품명: "팽이버섯", 가격: 2000, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-018", 창고위치: "냉동" },
+                { 제품명: "당면", 가격: 1500, 규격: 200, 단위: "g", 공급업체: "*성전문점", LotNo: "ING-20250124-019", 창고위치: "냉동" },
+                { 제품명: "깻잎", 가격: 1500, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-020", 창고위치: "냉장" },
+                { 제품명: "초간장", 가격: 1500, 규격: 500, 단위: "ml", 공급업체: "*장공방", LotNo: "ING-20250124-021", 창고위치: "상온" },
+                { 제품명: "밀푀유나베 소스", 가격: 2000, 규격: 500, 단위: "g", 공급업체: "*스마스터", LotNo: "ING-20250124-022", 창고위치: "상온" },
+                { 제품명: "칠리소스", 가격: 2000, 규격: 500, 단위: "g", 공급업체: "*리의왕국", LotNo: "ING-20250124-023", 창고위치: "상온" },
+                { 제품명: "새송이 버섯", 가격: 2500, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-024", 창고위치: "냉동" },
+                { 제품명: "표고 버섯", 가격: 3000, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-025", 창고위치: "냉동" },
+                { 제품명: "생면", 가격: 1500, 규격: 200, 단위: "g", 공급업체: "*성전문점", LotNo: "ING-20250124-026", 창고위치: "냉동" },
+                { 제품명: "배추", 가격: 1000, 규격: 1, 단위: "kg", 공급업체: "*선채소마켓", LotNo: "ING-20250124-027", 창고위치: "냉장" },
+                { 제품명: "청경채", 가격: 1500, 규격: 500, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-028", 창고위치: "냉장" },
+                { 제품명: "샤브용 육수", 가격: 2500, 규격: 500, 단위: "ml", 공급업체: "*브샤브푸드", LotNo: "ING-20250124-029", 창고위치: "냉장" },
+                { 제품명: "나베용 용기", 가격: 500, 규격: 1, 단위: "개", 공급업체: "*리용기판매점", LotNo: "PKG-20250124-002", 창고위치: "상온" },
+                { 제품명: "떡", 가격: 2000, 규격: 500, 단위: "g", 공급업체: "*마을", LotNo: "ING-20250124-030", 창고위치: "냉동" },
+                { 제품명: "어묵", 가격: 3000, 규격: 500, 단위: "g", 공급업체: "*묵이야기", LotNo: "ING-20250124-031", 창고위치: "냉동" },
+                { 제품명: "떡볶이 소스", 가격: 2000, 규격: 500, 단위: "g", 공급업체: "*볶이집", LotNo: "ING-20250124-032", 창고위치: "상온" },
+                { 제품명: "떡볶이 용기", 가격: 500, 규격: 1, 단위: "개", 공급업체: "*볶이용기전문", LotNo: "PKG-20250124-003", 창고위치: "상온" },
+                { 제품명: "양념육 (소곱창, 대곱창)", 가격: 8000, 규격: 500, 단위: "g", 공급업체: "*창명가", LotNo: "ING-20250124-033", 창고위치: "냉동" },
+                { 제품명: "전골용 육수", 가격: 2500, 규격: 500, 단위: "ml", 공급업체: "*골육수전문", LotNo: "ING-20250124-034", 창고위치: "냉장" },
+                { 제품명: "새송이버섯", 가격: 2500, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-035", 창고위치: "냉동" },
+                { 제품명: "느타리버섯", 가격: 2000, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-036", 창고위치: "냉동" },
+                { 제품명: "소고기", 가격: 10000, 규격: 500, 단위: "g", 공급업체: "*고기전문점", LotNo: "ING-20250124-037", 창고위치: "냉동" },
+                { 제품명: "두부", 가격: 1500, 규격: 300, 단위: "g", 공급업체: "*부마을", LotNo: "ING-20250124-038", 창고위치: "냉동" },
+                { 제품명: "배추", 가격: 1000, 규격: 1, 단위: "kg", 공급업체: "*선채소마켓", LotNo: "ING-20250124-039", 창고위치: "냉장" },
+                { 제품명: "양파", 가격: 1000, 규격: 500, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-040", 창고위치: "냉장" },
+                { 제품명: "깻잎", 가격: 1500, 규격: 100, 단위: "g", 공급업체: "*선채소마켓", LotNo: "ING-20250124-041", 창고위치: "냉장" },
+                { 제품명: "라면 사리", 가격: 1200, 규격: 200, 단위: "g", 공급업체: "*성전문점", LotNo: "ING-20250124-042", 창고위치: "상온" },
+                { 제품명: "곱창 전골 용기", 가격: 500, 규격: 1, 단위: "개", 공급업체: "*리용기판매점", LotNo: "PKG-20250124-004", 창고위치: "상온" },
+
+
+            ];
+            
+            let starttablebody = document.querySelector(".start-table tbody")
+            start.forEach(function (v, i) {
+                let newstart = document.createElement("tr")
+                newstart.innerHTML = `
+                <th>${i+1}<input type="checkbox"></th>
+                <th>${v.제품명}</th>
+                <th>${v.가격}</th>
+                <th>${v.규격}</th>
+                <th>${v.단위}</th>
+                <th>${v.공급업체}</th>
+                <th>${v.LotNo}</th>
+                <th>${v.창고위치}</th>
+                `
+                starttablebody.append(newstart)
+            })
+
+
+            const finishe = [
+                { 제품명: "부대찌개", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-001", 창고위치: null },
+                { 제품명: "김치찌개", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-002", 창고위치: null },
+                { 제품명: "밀푀유나베", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-003", 창고위치: null },
+                { 제품명: "떡볶이", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-004", 창고위치: null },
+                { 제품명: "곱창전골", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-005", 창고위치: null }
+            ]
+          
+            let finishebody = document.querySelector(".finishe-table tbody")
+            finishe.forEach(function (v, i) {
+               
+                let newfinish = document.createElement("tr")
+                newfinish.innerHTML = `
+                <th>${i+1}<input type="checkbox"></th>
+                <th>${v.제품명}</th>
+                <th>${v.가격}</th>
+                <th>${v.규격}</th>
+                <th>${v.단위}</th>
+                <th>${v.공급업체}</th>
+                <th>${v.LotNo}</th>
+                <th>${v.창고위치}</th>
+                `
+                finishebody.append(newfinish)
+            })
+            let startcount = 46;
+            let finishecount = 5;
+            
+            //------------------------------------
+            //조회 버튼 클릭시 테이블 변경
+            document.querySelector("#r").addEventListener("click", function () {
+                console.log("조회클릭")
+                let starttable = document.querySelector(".start-table")
+                let finishetable = document.querySelector(".finishe-table")
+
+                // 원재료 조회 완재품조회 버튼 클릭시 테이블 변경
+                //------------------------------------
+                document.querySelector("#check-option-button").addEventListener("click", function () {
+                    let checkOption = document.querySelector("#check-option").value;
+                    if (checkOption == 1) {
+                        //원재료 조회 선택시 입력항목 초기화
+             
+
+                        console.log("원재료 조회가 선택됨")
+                        starttable.classList.remove("start-table")
+                        finishetable.classList.add("finishe-table")
+
+                            //원재료 에서 조회버튼 누르고 나서 생성 버튼 이벤트 만들기
+                            document.querySelector("#c").addEventListener("click", function () {
+                                console.log("생성 버튼 클릭됨")
+                                    document.querySelector("#mid-contain-check").addEventListener("click", function () {
+                                        console.log("확인 버튼 클릭됨")
+                                        let middata = document.querySelectorAll(".mid-data")
+                                        for(let i = 0; i < middata.length; i++){
+                                            console.log(middata[i].value)
+                                            zi = middata[i].value
+                                        }
+                                        startcount++
+                                        let newstart = document.createElement("tr")
+                                        newstart.innerHTML = `
+                                        <th>${startcount}<input type="checkbox"></th>
+                                        <th>${middata[0].value}</th>
+                                        <th>${middata[1].value}</th>
+                                        <th>${middata[2].value}</th>
+                                        <th>${middata[3].value}</th>
+                                        <th>${middata[4].value}</th>
+                                        <th>${middata[5].value}</th>
+                                        <th>${middata[6].value}</th>
+                                        `
+                                        starttablebody.append(newstart)
+                                        //지우기 하는중
+                                        let ddata = document.querySelectorAll(".mid-data").value
+                                        for(let i = 0; i< ddata.length; i++){
+                                            ddata[i].innerHTML = " "
+                                        }
+                                        
+                                        
+                                    })
+                            })
+
+                    } else {
+                        //완재품 조회 선택시 입력항목 초기화
+                        console.log("완재품 조회가 선택됨")
+                        starttable.classList.add("start-table")
+                        finishetable.classList.remove("finishe-table")
+
+                        document.querySelector("#c").addEventListener("click", function () {
+                                console.log("생성 버튼 클릭됨")
+                                    document.querySelector("#mid-contain-check").addEventListener("click", function () {
+                                        console.log("확인 버튼 클릭됨")
+                                        let middata = document.querySelectorAll(".mid-data")
+                                        for(let i = 0; i < middata.length; i++){
+                                            console.log(middata[i].value)
+                                            zi = middata[i].value
+                                        }
+                                        finishecount++
+                                        let newfinishe = document.createElement("tr")
+                                        newfinishe.innerHTML = `
+                                        <th>${finishecount}<input type="checkbox"></th>
+                                        <th>${middata[0].value}</th>
+                                        <th>${middata[1].value}</th>
+                                        <th>${middata[2].value}</th>
+                                        <th>${middata[3].value}</th>
+                                        <th>${middata[4].value}</th>
+                                        <th>${middata[5].value}</th>
+                                        <th>${middata[6].value}</th>
+                                        `
+                                        finishebody.append(newfinishe)
+
+                                    })
+                                })
+                    }
+                })
+            })
+            //------------------------------------
+
 
 
 
         })
     </script>
 </body>
+
 </html>
