@@ -9,51 +9,55 @@
     width: 100%; height: 120px; display: flex; flex-wrap: wrap;
 }
 .productinfo-info-list{
-    width: 50%; height: 40px; border: 1px solid #999999;
+    width: 50%; height: 40px; border: 1px solid #999999; text-align: center;
 }
 .productinfo-info-name{
-    width: 30%; height: 100%; background-color: #ABD7F9; float: left; display: flex; justify-content: center;align-items: center;
+    width: 30%; height: 100%; color: #ffffff; background-color: #007bff; letter-spacing:  1px;float: left; display: flex; justify-content: center; align-items: center;
 }
 .productinfo-info-completion{
-    width: 70%; height: 100%; float: right;  outline: none; text-align: center;
+    width: 70%; height: 100%; float: right;  outline: none; border: 0; text-align: center; display: flex; justify-content: center; align-items: center;
 }
+
 /* 자재창 CSS */
 .material-info{
-    width: 60%; height: 80%; display: flex; flex-direction: column;
+    width: 60%; height: 80%; display: flex; flex-direction: column; 
 }
 .material-info-title{
-    width: 100%; height: 40px; background-color: #999999;
+    width: 100%; height: 40px; color: #ffffff;background-color: #007bff; display: flex; justify-content: center; align-items: center; font-weight: 100;
 }
 .material-info-tag{
-    width: 100%; height: 40px; background-color: #ABD7F9; border: 1px solid #999999; font-weight: 300; display: flex;  justify-content: space-around; align-items: center;
+    width: 100%; height: 40px; color: #ffffff; background-color: #007bff;  border: 1px solid #999999; font-weight: 300; display: flex;  justify-content: space-around; align-items: center;
 }
 .material-info-tag th{
     width: 100%; height: 100%; border-right: 1px solid #999999; display: flex; justify-content: center; align-items: center;
 }
 .material-info-content{
-    width: 100%; height: 40px; border: 1px solid #999999; font-weight: 300; display: flex; justify-content: space-around; align-items: center; 
+    width: 100%; height: 40px; border: 1px solid #999999; display: flex; justify-content: space-around; align-items: center; 
 }
 .material-info-content td{
     width: 100%; height: 100%; border-right: 1px solid #999999; display: flex; justify-content: center; align-items: center; background-color: #ffffff;
 }
 /* 확인창 CSS */
 .check-info{
-    width: 40%; height: 80%; background-color: #333333;
+    width: 40%; height: 80%; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
 }
 .check-info-title{
-    width: 100%; height: 40px; background-color: #999999;
+    width: 100%; height: 40px; color: #ffffff; background-color: #007bff; border: 1px solid #999999; display: flex; justify-content: center; align-items: center;
 }
 .check-info-process{
-    width: 100%; height: 60%; background-color: #666666;
+    width: 98%; height: 80%; border: 2px solid #666666;
+}
+.check-info-buttoncontainer{
+    width: 100%; 
 }
 .check-info-buttonlayer{
-    width: 100%; height: 20%; background-color: #333333; display: flex; justify-content: space-around;
+    width: 100%; height: 100%; margin-bottom: 10px; display: flex; justify-content: space-around;
 }
 .check-info-registration{
-    width: 100px; height: 50px;
+    width: 150px; height: 50px; background-color: #4CAF50; border: 1px solid #999999; font-size: 20px; letter-spacing: 3px;
 }
 .check-info-close{
-    width: 100px; height: 50px;
+    width: 150px; height: 50px; border: 1px solid #999999; font-size: 20px; letter-spacing: 3px;
 }
 .check-info-mark{
     width: 50px; height: 50px;

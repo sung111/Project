@@ -3,7 +3,7 @@
 }
 /* 상단 레이어 */
 .workorder-search-layer{
-    width: 90%; height: 80px; background-color: #d9d9d9; display: flex; align-items: center;
+    width: 100%; height: 60px; background-color: #d9d9d9; display: flex; align-items: center;
 }
 
 .workorder-bookmark{
@@ -19,28 +19,38 @@
 }
 /* 중단 레이어 */
 .workorder-layer{
-    width: 85%; height: 80%; border: 2px solid #999999;
+    width: 85%; height: 80%; 
 }
-
 .workorder-tag{
-    width: 100%; height: 40px; border-bottom: 2px solid #999999; display: flex; justify-content: space-around;
+    width: 100%; height: 40px;  display: flex; justify-content: space-around;
 }
-
-/* 중단 태그 레이어 */
-.workorder-tag li{
-     border-right: 1px solid #999999;
+.workorder-tag-productionCalculation, .workorder-tag-etc{
+    width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
 }
-
-
+.workorder-tag-createDate, .workorder-tag-productionPeriod, .workorder-tag-MRPCalculation, .workorder-tag-productionPlan{
+    width: 20%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+/* 리스트 CSS */
+.workorderlist-content{
+    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #d9d9d9; text-align: center;
+}
+.workorderlist-productplancalc, .workorderlist-etc{
+    width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+.workorderlist-createdate, .workorderlist-productplandate, .workorderlist-MRPcalc, .workorderlist-productplanstatus{
+    width: 20%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+.workorderlist-content a{
+    color: #007bff;
+}
 /* 하단 레이어 */
 .workorder-page{
-    width: 85%; height: 50px; margin-bottom: 30px; padding: 0 10px;background-color: #666666; display: flex; justify-content: space-between; align-items: center;
+    width: 85%; height: 50px; margin-bottom: 30px; padding: 0 10px; border: 2px solid #999999; display: flex; justify-content: space-between; align-items: center;
 }
 
 .workorder-pagenation{
-    width: 70%; height: 40px; background-color: orange;
+    width: 60%; height: 40px; display: flex; justify-content: space-around; align-items: center;
 }
-
 .new-workorder-button{
     width: 100px; height: 40px; color: #ffffff; background-color: #007bff; border: none; font-size: 16px; letter-spacing: 1px;
 }
