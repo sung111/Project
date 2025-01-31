@@ -3,11 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>품질관리</title>
   <link rel="stylesheet" href="../css/qualityControl.css">
   <script src="../js/qualityControl.js"></script>
 </head>
 <body>
-  
+  <div class="warrap">
+    <div class="wkr">
+      <div class="wkrTop">
+        <div class="wkrwl">
+          작업지시서
+        </div>
+        <div>
+          <button class="btn1">조회</button>
+        </div>
+      </div>
+      <div class="wkrView">보임ㅋ</div>
+    </div>
+    <div class="bord">
+      <div class="inBord">
+        <div>검사완료율</div>
+        <div>%</div>
+        <div>(계획대비)</div>
+      </div>
+      <div class="inBord">
+        <div>불량률</div>
+        <div>%</div>
+        <div>(최근 일주일 기준)</div>
+      </div>
+      <div class="inBord">
+        <div>평균검사시간</div>
+        <div>분</div>
+        <div>(제품당 평균)</div>
+      </div>
+      <div class="inBord">
+        <div>경고 (재검사) 횟수</div>
+        <div>회</div>
+        <div>(최근 일주일 기준)</div>
+      </div>
+    </div>
+    <div class="box2">
+      <div class="left">
+        <div class="wp">제품명</div>
+        <div class="btn2B">
+          <button class="btn2">제품 합격 / 불합격 기준</button>
+        </div>
+      </div>
+      <div class="right">
+        <div class="rightTop">
+          <div class="wp2">제품명</div>
+        </div>
+        <div>
+          <input type="radio" name="ra"> 합격
+          <input type="radio" name="ra"> 불합격
+        </div>
+        <div>
+          <select class="dropBox">
+            <option value="">불합격 사유</option>
+            <option value="">무게 미달</option>
+            <option value="">외관 불량</option>
+            <option value="">자재 불량</option>
+          </select>
+        </div>
+        <div class="insert">
+          <textarea name="" id="" placeholder="기타사항" class="textBox" rows="3"></textarea>
+          <button class="btn3">등록</button>
+        </div>
+      </div>
+    </div>
+    <div class="box3">
+      <div class="box3Top">
+        <div>
+          <input type="text" placeholder="제품명" class="wp3">
+        </div>
+        <div class="date2">
+          날짜 : <input type="datetime-local" class="indate1"> ~ <input type="datetime-local" class="indate1">
+        </div>
+        <div>
+          결과 :
+          <select class="dropBox2">
+            <option value="">전체</option>
+            <option value="">합격</option>
+            <option value="">불합격</option>
+          </select>
+        </div>
+        <div>
+          불합격 사유 : 
+          <select class="dropBox2">
+            <option value="">전체</option>
+            <option value="">무게 미달</option>
+            <option value="">외관 불량</option>
+            <option value="">자재 불량</option>
+          </select>
+        </div>
+        <div>
+          <button class="btn4">검색</button>
+        </div>
+      </div>
+      <div class="box3View">
+        보임ㅋ
+      </div>
+    </div>
+  </div>
 </body>
 </html>
