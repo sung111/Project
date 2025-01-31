@@ -8,10 +8,12 @@ body{
 }
 .warrap{
   width: 100%;
-  padding: 30px;
+  padding: 10px;
 }
 .wkr{
   border: 1px solid rgb(199, 196, 196);
+  background-color: #007bff;
+  color: white;
 }
 .wkrTop{
   display: flex;
@@ -27,7 +29,7 @@ body{
   font-size: 18px;
   width: 130px;
   text-align: center;
-  margin-left: 3px;
+  margin: 8px;
 }
 .btn1{
   font-size: 15px;
@@ -42,6 +44,9 @@ body{
   border: 1px solid rgb(199, 196, 196);
   height: 130px;
   overflow-y: scroll;
+  margin: 10px;
+  background-color: white;
+  color: black;
 }
 
 .bord{
@@ -49,14 +54,19 @@ body{
   display: flex;
   padding: 15px;
   justify-content: space-around;
-  margin-top: 10px;
+  /* margin-top: 10px; */
+  background-color: #007bff;
+  color: white;
 }
 .inBord{
   border: 1px solid rgb(199, 196, 196);
   width: 200px;
   text-align: center;
   display: inline-block;
+  background-color: #0056b3;
+  color: white;
 }
+
 .inBord>div{
   min-width: 100%;
   margin: 10px 0 10px 0;
@@ -67,13 +77,14 @@ body{
   height: 180px;
   border: 1px solid rgb(199, 196, 196);
   padding: 10px;
+  background-color: #007bff;
+  color: white;
 }
 .left{
   width: 50%;
   border: 1px solid rgb(199, 196, 196);
   margin-right: 5px;
   padding: 5px;
-  
 }
 .wp{
   font-size: 15px;
@@ -132,6 +143,8 @@ body{
 .box3{
   border: 1px solid rgb(199, 196, 196);
   align-items: center;
+  background-color: #007bff;
+  color: white;
 }
 .box3Top{
   display: flex;
@@ -156,6 +169,8 @@ body{
   margin: 10px;
   height: 240px;
   overflow-y: scroll;
+  background-color: white;
+  color: black;
 }
 .dropBox{
   width: 180px;
@@ -173,4 +188,11 @@ body{
 
 .btn1, .btn2, .btn3, .btn4{
   cursor: pointer;
+  border-radius: 5px;
+  background-color: #0056b3;
+  color: white;
+}
+.wkrwl, .wp, .wp2{
+  background-color: aliceblue;
+  color: black;
 }

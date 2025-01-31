@@ -8,10 +8,12 @@ body{
 }
 .warrap{
   width: 100%;
-  padding: 30px;
+  padding: 10px;
 }
 .instruction{
   border: 1px solid rgb(199, 196, 196);
+  background-color: #007bff;
+  /* color: white; */
   
 }
 .instTop{
@@ -19,6 +21,8 @@ body{
   justify-content: space-between;
   font-size: 15px;
   align-items: center;
+  padding: 5px;
+  background-color: #007bff;
 }
 .wkr{
   border: 1px solid rgb(199, 196, 196);
@@ -28,7 +32,7 @@ body{
   font-size: 18px;
   width: 130px;
   text-align: center;
-  margin-left: 3px;
+  color: white;
 }
 .btn1{
   font-size: 15px;
@@ -38,13 +42,14 @@ body{
   margin-top: 3px;
   margin-bottom: 3px;
   border-radius: 5px;
-  /* background-color: rgb(175, 184, 184); */
 }
 
 .instView{
   border: 1px solid rgb(199, 196, 196);
   height: 130px;
   overflow-y: scroll;
+  margin: 10px;
+  background-color: white;
 }
 
 .box2{
@@ -52,6 +57,8 @@ body{
   height: 180px;
   border: 1px solid rgb(199, 196, 196);
   padding: 10px;
+  background-color: #007bff;
+  color: white;
 }
 .criteria{
   width: 50%;
@@ -102,7 +109,7 @@ body{
 }
 .btn3{
   width: 60px;
-  height: 20px;
+  height: 25px;
   font-size: 13px;
   flex-grow: 0.5;
   /* border-radius: 5px; */
@@ -112,10 +119,14 @@ body{
   margin: 5px;
   border: 1px solid rgb(199, 196, 196);
   height: 70%;
+  background-color: white;
+  color: black;
 }
 .box3{
   border: 1px solid rgb(199, 196, 196);
   align-items: center;
+  background-color: #007bff;
+  color: white;
 }
 .box3Top{
   display: flex;
@@ -143,7 +154,20 @@ body{
   margin: 10px;
   height: 280px;
   overflow-y: scroll;
+  background-color: white;
+  color: black;
 }
 .btn1, .btn2, .btn3, .btn4{
   cursor: pointer;
+  border-radius: 5px;
+  background-color: #0056b3;
+  color: white;
+}
+.wkr, .wp, .wp2{
+  background-color: white;
+  color: black;
+}
+
+@media (max-width:600px) {
+  
 }
