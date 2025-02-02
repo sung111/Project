@@ -1,3 +1,4 @@
+// PC version and nav accodian script
 document.addEventListener('DOMContentLoaded', function () {
     const navButtons = document.querySelectorAll('.nav-button');
     navButtons.forEach(function (navbtn) {
@@ -45,10 +46,39 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// 네비게이션 버튼 클릭 시, iframe 이동 스크립트 + 로컬 네비게이션
 document.addEventListener("DOMContentLoaded", function(){
     const iframe = document.querySelector("iframe")
+    const localBar = document.querySelector(".local-bar");
+
+    function LocalNavigationbar(componantname){
+        localBar.innerHTML = `<li>Home</li> <li>> 생산관리</li> <li>> ${componantname}</li>`;
+    }
+    // 메인 페이지(로고클릭 시)탭
+    const logomenu = document.querySelector("#nav-mainlogo");
+    logomenu.addEventListener("click", function(){
+        iframe.src = "componant/MainTitle.html";
+        localBar.innerHTML = `<li>Home</li>`; 
+    })
+    // 생산관리 탭
     const workOrdermenu = document.querySelector("#nav-workorder");
     workOrdermenu.addEventListener("click", function(){
         iframe.src = "componant/WorkOrder.html"
+        LocalNavigationbar("생산계획", "WorkOrder"); 
+    })
+    const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");
+    perfomanceRegistrationmenu.addEventListener("click", function(){
+        iframe.src = "componant/performanceRegistration.html"
+        LocalNavigationbar("실적등록", "performanceRegistration"); 
+    })
+    const qualityControlmenu = document.querySelector("#nav-qualityControl");
+    qualityControlmenu.addEventListener("click", function(){
+        iframe.src = "componant/qualityControl.html"
+        LocalNavigationbar("품질관리", "qualityControl"); 
+    })
+    const 재고조사현황menu = document.querySelector("#nav-inventory");
+    재고조사현황menu.addEventListener("click", function(){
+        iframe.src = "componant/재고조사현황.html"
+        LocalNavigationbar("재고현황조회", "재고조사현황"); 
     })
 })
