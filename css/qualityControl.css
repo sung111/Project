@@ -1,198 +1,473 @@
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-body{
+
+body {
   align-items: center;
 }
-.warrap{
-  width: 100%;
-  padding: 10px;
-}
-.wkr{
-  border: 1px solid rgb(199, 196, 196);
-  background-color: #007bff;
-  color: white;
-}
-.wkrTop{
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
-  align-items: center;
-}
-.wkrwl{
-  border: 1px solid rgb(199, 196, 196);
-  border-radius: 3px;
-  padding: 3px;
-  height: 100%;
-  font-size: 18px;
-  width: 130px;
-  text-align: center;
-  margin: 8px;
-}
-.btn1{
-  font-size: 15px;
-  padding: 3px;
-  margin-right: 15px;
-  width: 100px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  border-radius: 5px;
-}
-.wkrView{
-  border: 1px solid rgb(199, 196, 196);
-  height: 130px;
-  overflow-y: scroll;
-  margin: 10px;
-  background-color: white;
-  color: black;
+
+/* 모바일 */
+@media screen and (max-width: 767px) {
+  .warrap {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .wkr {
+    border: 1px solid rgb(199, 196, 196);
+    background-color: #d9d9d9;
+    color: white;
+  }
+
+  .wkrTop {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    align-items: center;
+  }
+
+  .wkrwl {
+    border: 1px solid rgb(199, 196, 196);
+    border-radius: 3px;
+    padding: 3px;
+    height: 100%;
+    font-size: 18px;
+    width: 130px;
+    text-align: center;
+    margin: 8px;
+  }
+
+  .btn1 {
+    font-size: 15px;
+    padding: 3px;
+    margin-right: 15px;
+    width: 100px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+  }
+
+  .wkrView {
+    border: 1px solid rgb(199, 196, 196);
+    height: 130px;
+    overflow-y: scroll;
+    margin: 10px;
+    background-color: white;
+    color: black;
+  }
+
+  .bord {
+    border: 1px solid rgb(199, 196, 196);
+    /* display: flex; */
+    padding: 15px;
+    /* justify-content: space-around; */
+    /* margin-top: 10px; */
+    background-color: #d9d9d9;
+    color: white;
+  }
+
+  .inBord {
+    border: 1px solid rgb(199, 196, 196);
+    /* text-align: center; */
+    width: 80%;
+    text-align: center;
+    /* display: inline-block; */
+    background-color: #63adfc;
+    color: white;
+    border: 1px solid #0056b3;
+    border-radius: 15px;
+    margin: 5px auto;
+  }
+
+  .inBord>div {
+    min-width: 100%;
+    margin: 10px 0 10px 0;
+  }
+
+  .box2 {
+    /* display: flex; */
+    /* height: 230px; */
+    border: 1px solid rgb(199, 196, 196);
+    padding: 10px;
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .left {
+    width: 100%;
+    border: 1px solid rgb(199, 196, 196);
+    margin-right: 5px;
+    padding: 5px;
+  }
+
+  .wp {
+    font-size: 15px;
+    border: 1px solid rgb(199, 196, 196);
+    width: 80px;
+    text-align: center;
+    /* margin: 8px; */
+    font-size: 20px;
+    justify-content: center;
+  }
+
+  .btn2B {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+  }
+
+  .btn2 {
+    width: 80%;
+    height: 100px;
+    font-size: 25px;
+  }
+
+  .right {
+    width: 100%;
+    border: 1px solid rgb(199, 196, 196);
+    margin-left: 5px;
+    padding: 8px;
+  }
+
+  .rightTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 8px;
+  }
+
+  .wp2 {
+    border: 1px solid rgb(199, 196, 196);
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    flex-grow: 0.8;
+  }
+
+  .insert {
+    margin-top: 8px;
+    display: flex;
+  }
+
+  .textBox {
+    font-size: 13px;
+    width: 80%;
+    height: 90px;
+  }
+
+  .btn3 {
+    width: 60px;
+    height: 40px;
+    font-size: 13px;
+    padding: 3px;
+    vertical-align: top;
+  }
+
+  .box3 {
+    border: 1px solid rgb(199, 196, 196);
+    align-items: center;
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .box3Top {
+    /* display: flex; */
+    /* justify-content: space-around; */
+    padding: 5px;
+    font-size: 15px;
+  }
+  .box3Top > div{
+    margin: 3px;
+  }
+
+  .wp3 {
+    width: 180px;
+    font-size: 18px;
+  }
+
+  .date2 {
+    font-size: 16px;
+  }
+
+  .indate1,
+  .indate2 {
+    font-size: 12px;
+  }
+
+
+  .box3View {
+    border: 1px solid rgb(199, 196, 196);
+    margin: 10px;
+    height: 240px;
+    overflow-y: scroll;
+    background-color: white;
+    color: black;
+  }
+
+  .dropBox {
+    width: 180px;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+
+  .dropBox2 {
+    font-size: 13px;
+  }
+
+  .btn4 {
+    width: 50px;
+    font-size: 15px;
+    vertical-align: top;
+  }
+
+  .btn1,
+  .btn2,
+  .btn3,
+  .btn4 {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+  }
+
+  .wkrwl,
+  .wp,
+  .wp2 {
+    background-color: aliceblue;
+    color: black;
+  }
 }
 
-.bord{
-  border: 1px solid rgb(199, 196, 196);
-  display: flex;
-  padding: 15px;
-  justify-content: space-around;
-  /* margin-top: 10px; */
-  background-color: #007bff;
-  color: white;
-}
-.inBord{
-  border: 1px solid rgb(199, 196, 196);
-  width: 200px;
-  text-align: center;
-  display: inline-block;
-  background-color: #0056b3;
-  color: white;
+
+/* 데탑 */
+@media screen and (min-width:768px) {
+  .warrap {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .wkr {
+    border: 1px solid rgb(199, 196, 196);
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .wkrTop {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    align-items: center;
+  }
+
+  .wkrwl {
+    border: 1px solid rgb(199, 196, 196);
+    border-radius: 3px;
+    padding: 3px;
+    height: 100%;
+    font-size: 18px;
+    width: 130px;
+    text-align: center;
+    margin: 8px;
+  }
+
+  .btn1 {
+    font-size: 15px;
+    padding: 3px;
+    margin-right: 15px;
+    width: 100px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+  }
+
+  .wkrView {
+    border: 1px solid rgb(199, 196, 196);
+    height: 130px;
+    overflow-y: scroll;
+    margin: 10px;
+    background-color: white;
+    color: black;
+  }
+
+  .bord {
+    border: 1px solid rgb(199, 196, 196);
+    display: flex;
+    padding: 15px;
+    justify-content: space-around;
+    /* margin-top: 10px; */
+    background-color: #d9d9d9;
+    color: white;
+  }
+
+  .inBord {
+    border: 1px solid rgb(199, 196, 196);
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+    background-color: #63adfc;
+    color: white;
+    border: 1px solid #0056b3;
+    border-radius: 15px;
+  }
+
+  .inBord>div {
+    min-width: 100%;
+    margin: 10px 0 10px 0;
+  }
+
+  .box2 {
+    display: flex;
+    height: 180px;
+    border: 1px solid rgb(199, 196, 196);
+    padding: 10px;
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .left {
+    width: 50%;
+    border: 1px solid rgb(199, 196, 196);
+    margin-right: 5px;
+    padding: 5px;
+  }
+
+  .wp {
+    font-size: 15px;
+    border: 1px solid rgb(199, 196, 196);
+    width: 80px;
+    text-align: center;
+    /* margin: 8px; */
+    font-size: 20px;
+    justify-content: center;
+  }
+
+  .btn2B {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+  }
+
+  .btn2 {
+    width: 80%;
+    height: 100px;
+    font-size: 25px;
+  }
+
+  .right {
+    width: 50%;
+    border: 1px solid rgb(199, 196, 196);
+    margin-left: 5px;
+    padding: 5px;
+  }
+
+  .rightTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 8px;
+  }
+
+  .wp2 {
+    border: 1px solid rgb(199, 196, 196);
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    flex-grow: 0.8;
+  }
+
+  .insert {
+    margin-top: 8px;
+  }
+
+  .textBox {
+    font-size: 13px;
+    width: 80%;
+
+  }
+
+  .btn3 {
+    width: 60px;
+    font-size: 13px;
+    padding: 3px;
+    vertical-align: top;
+  }
+
+  .box3 {
+    border: 1px solid rgb(199, 196, 196);
+    align-items: center;
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .box3Top {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    font-size: 15px;
+  }
+
+  .wp3 {
+    width: 180px;
+    font-size: 18px;
+  }
+
+  .date2 {
+    font-size: 16px;
+  }
+
+  .indate1,
+  .indate2 {
+    font-size: 15px;
+  }
+
+
+  .box3View {
+    border: 1px solid rgb(199, 196, 196);
+    margin: 10px;
+    height: 240px;
+    overflow-y: scroll;
+    background-color: white;
+    color: black;
+  }
+
+  .dropBox {
+    width: 180px;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+
+  .dropBox2 {
+    font-size: 13px;
+  }
+
+  .btn4 {
+    width: 50px;
+    font-size: 15px;
+    vertical-align: top;
+  }
+
+  .btn1,
+  .btn2,
+  .btn3,
+  .btn4 {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+  }
+
+  .wkrwl,
+  .wp,
+  .wp2 {
+    background-color: aliceblue;
+    color: black;
+  }
 }
 
-.inBord>div{
-  min-width: 100%;
-  margin: 10px 0 10px 0;
-}
-
-.box2{
-  display: flex;
-  height: 180px;
-  border: 1px solid rgb(199, 196, 196);
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-}
-.left{
-  width: 50%;
-  border: 1px solid rgb(199, 196, 196);
-  margin-right: 5px;
-  padding: 5px;
-}
-.wp{
-  font-size: 15px;
-  border: 1px solid rgb(199, 196, 196);
-  width: 80px;
-  text-align: center;
-  /* margin: 8px; */
-  font-size: 20px;
-  justify-content: center;
-}
-.btn2B{
-  display: flex;
-  justify-content: center;
-  margin: 5px;
-}
-.btn2{
-  width: 80%;
-  height: 100px;
-  font-size: 25px;
-}
-
-.right{
-  width: 50%;
-  border: 1px solid rgb(199, 196, 196);
-  margin-left: 5px;
-  padding: 5px;
-}
-.rightTop{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 8px;
-}
-.wp2{
-  border: 1px solid rgb(199, 196, 196);
-  width: 100%;
-  font-size: 20px;
-  text-align: center;
-  flex-grow: 0.8;
-}
-.insert{
-  margin-top: 8px;
-}
-.textBox{
-  font-size: 13px;
-  width: 80%;
-  
-}
-.btn3{
-  width: 60px;
-  font-size: 13px;
-  padding: 3px;
-  vertical-align: top;
-}
-
-.box3{
-  border: 1px solid rgb(199, 196, 196);
-  align-items: center;
-  background-color: #007bff;
-  color: white;
-}
-.box3Top{
-  display: flex;
-  justify-content: space-around;
-  padding: 5px;
-  font-size: 15px;
-}
-.wp3{
-  width: 180px;
-  font-size: 18px;
-}
-.date2{
-  font-size: 16px;
-}
-.indate1{
-  font-size: 14px;
-}
-
-
-.box3View{
-  border: 1px solid rgb(199, 196, 196);
-  margin: 10px;
-  height: 240px;
-  overflow-y: scroll;
-  background-color: white;
-  color: black;
-}
-.dropBox{
-  width: 180px;
-  font-size: 15px;
-  margin-top: 8px;
-}
-.dropBox2{
-  font-size: 13px;
-}
-.btn4{
-  width: 50px;
-  font-size: 15px;
-  vertical-align: top;
-}
-
-.btn1, .btn2, .btn3, .btn4{
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #0056b3;
-  color: white;
-}
-.wkrwl, .wp, .wp2{
-  background-color: aliceblue;
-  color: black;
+@media screen and (max-width : 1070px) {
+  .box3Top{
+    display: block;
+  }
 }
