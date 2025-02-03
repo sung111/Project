@@ -60,6 +60,27 @@ document.addEventListener("DOMContentLoaded", function(){
         iframe.src = "componant/MainTitle.html";
         localBar.innerHTML = `<li>Home</li>`; 
     })
+    // 기준관리 탭
+    const bomlistmenu = document.querySelector("#nav-bomlist")
+    bomlistmenu.addEventListener("click", function(){
+        iframe.src = "componant/bomlist.html"
+        LocalNavigationbar("부품코드", "bomlist"); 
+    })
+    const processmenu = document.querySelector("#nav-process")
+    processmenu.addEventListener("click", function(){
+        iframe.src = "componant/process.html"
+        LocalNavigationbar("생산공정", "process"); 
+    })
+    const bommenu = document.querySelector("#nav-bom")
+    bommenu.addEventListener("click", function(){
+        iframe.src = "componant/bom.html"
+        LocalNavigationbar("BOM", "bom"); 
+    })
+    const standardmenu = document.querySelector("#nav-standard")
+    standardmenu.addEventListener("click", function(){
+        iframe.src = "componant/bomlist.html"
+        LocalNavigationbar("검사기준", "standard"); 
+    })
     // 생산관리 탭
     const workOrdermenu = document.querySelector("#nav-workorder");
     workOrdermenu.addEventListener("click", function(){
