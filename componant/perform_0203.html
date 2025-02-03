@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../perform.css">
+    
+</head>
+<body class="perform">
+    
+        <nav id="nav">
+        <!-- <select option></select>
+        <option>일간</option>
+        <option>주간</option>
+        <option>월간</option> -->
+    
+            
+            <select id="sel">
+            <option id="daily">일간</option>
+            <option id="week">주간</option>
+            <option id="month">월간</option>
+            </select>
+    
+            
+            <div id="cal">
+            <input type="date" id="date" value="2025-02-03" name="날짜선택">
+            <input type="week" id="weeks" value="2025-02-03" name="날짜선택">
+            <input type="month" id="months" value="2025-02-03" name="날짜선택">
+            </div>    
+
+            
+            <div id="set">
+            <input type="text" id="text">
+            <button id="sele">조회</button>
+            </div>
+            </nav>
+
+
+                <div id="cor">
+                <button id="del">표 삭제</button>
+                <button id="fix">표 수정</button>
+                </div>
+
+
+
+
+
+
+
+
+
+            <div>
+                <br>
+                <table border="1" id="first">
+                    <thead>
+                        <tr>
+                            <th class="daytime"></th>
+                            <th class="daytime">06:00~08:00</th>
+                            <th class="daytime">08:00~10:00</th>
+                            <th class="daytime">10:00~12:00</th>
+                            <th class="daytime">12:00~14:00</th>
+                            <th class="daytime">14:00~16:00</th>
+                            <th class="daytime">16:00~18:00</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                     
+
+
+
+                            <tr id="budae1">
+                            <td>부대찌개</td>
+                                <td>월요일</td>
+                                <td>화요일</td>
+                                <td>수요일</td>
+                                <td>목요일</td>
+                                <td>금요일</td>
+                                <td>토요일</td> 
+                            </tr>
+
+                            <tr id="nabe1">
+                                <td >밀푀유 나베</td>
+                                <td>월요일</td>
+                                <td>화요일</td>
+                                <td>수요일</td>
+                                <td>목요일</td>
+                                <td>금요일</td>
+                                <td>토요일</td>
+                               
+                            </tr>
+
+                            <tr id="kimchi1">
+                                <td>김치찌개</td>
+                                <td>월요일</td>
+                                <td>화요일</td>
+                                <td>수요일</td>
+                                <td>목요일</td>
+                                <td>금요일</td>
+                                <td>토요일</td>
+                              
+                            </tr>
+
+                            <tr id="ttuk1">
+                                <td>떡볶이</td>
+                                <td>월요일</td>
+                                <td>화요일</td>
+                                <td>수요일</td>
+                                <td>목요일</td>
+                                <td>금요일</td>
+                                <td>토요일</td>
+                             
+                            </tr>
+
+                            <tr id="ggop1">
+                                <td>곱창전골</td>
+                                <td>월요일</td>
+                                <td>화요일</td>
+                                <td>수요일</td>
+                                <td>목요일</td>
+                                <td>금요일</td>
+                                <td>토요일</td>
+                               
+                            </tr>
+                         
+                    </tbody>
+
+                   </table>
+
+
+
+
+                   <!-- <table border=1>" 
+                                        
+                    + "<thead>"
+                       
+                        +"<tr>"
+                            +"<th>" + day + "</th>"
+                            +"<th>06:00~08:00</th>"
+                            +"<th>08:00~10:00</th>"
+                            +"<th>10:00~12:00</th>"
+                            +"<th>12:00~14:00</th>"
+                            +"<th>14:00~16:00</th>"
+                            +"<th>16:00~18:00</th>"
+                        
+                        +"</tr>"
+                      +"</thead>" -->
+
+
+
+
+
+
+
+
+
+
+                   
+                   <table border=1 id="second">
+                    <thead>
+              <tr>
+                  <th class="wektime"></th>
+                  <th class="wektime">월요일</th>
+                  <th class="wektime">화요일</th>
+                  <th class="wektime">수요일</th>
+                  <th class="wektime">목요일</th>
+                  <th class="wektime">금요일</th>
+                  <th class="wektime">토요일</th>
+                  <th class="wektime">일요일</th>
+              </tr>
+                   </thead>
+                   <tbody>
+                    <tr id="budae2">
+                        <td >부대찌개</td>
+                        <td >월요일</td>
+                        <td >화요일</td>
+                        <td >수요일</td>
+                        <td >목요일</td>
+                        <td >목요일</td>
+                        <td >목요일</td>
+                        
+                </tr>
+                <tr id="nabe2">
+                    <td >밀푀유나베</td>
+                    <td >월요일</td>
+                    <td >화요일</td>
+                    <td >수요일</td>
+                    <td >목요일</td>
+                    <td >목요일</td>
+                    <td >목요일</td>
+                    
+            </tr>
+            <tr id="kimchi2">
+                <td >김치찌개</td>
+                <td >월요일</td>
+                <td >화요일</td>
+                <td >수요일</td>
+                <td >목요일</td>
+                <td >목요일</td>
+                <td >목요일</td>
+                
+        </tr>
+        <tr id="ttuk2">
+            <td >떡볶이</td>
+            <td >월요일</td>
+            <td >화요일</td>
+            <td >수요일</td>
+            <td >목요일</td>
+            <td >목요일</td>
+            <td >목요일</td>
+            
+    </tr>
+    <tr id="ggop2">
+        <td >곱창전골</td>
+        <td >월요일</td>
+        <td >화요일</td>
+        <td >수요일</td>
+        <td >목요일</td>
+        <td >목요일</td>
+        <td >목요일</td>
+        
+</tr>
+                   </tbody>
+                    </table>
+
+
+
+
+
+
+
+                   <table border="1" id="third">
+                    <thead>
+                        <tr>
+                            <th class="montime"></th>
+                            <th class="montime">1주차</th>
+                            <th class="montime">2주차</th>
+                            <th class="montime">3주차</th>
+                            <th class="montime">4주차</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="budae3">
+                                <td >부대찌개</td>
+                                <td >월요일</td>
+                                <td >화요일</td>
+                                <td >수요일</td>
+                                <td >목요일</td>
+                                
+                        </tr>
+                        <tr id="nabe3">
+                            <td >밀푀유나베</td>
+                            <td >월요일</td>
+                            <td >화요일</td>
+                            <td >수요일</td>
+                            <td >목요일</td>
+                            
+                    </tr>
+                    <tr id="kimchi3">
+                        <td >김치찌개</td>
+                        <td >월요일</td>
+                        <td >화요일</td>
+                        <td >수요일</td>
+                        <td >목요일</td>
+                        
+                </tr>
+                <tr id="ttuk3">
+                    <td >떡볶이</td>
+                    <td >월요일</td>
+                    <td >화요일</td>
+                    <td >수요일</td>
+                    <td >목요일</td>
+                    
+            </tr>
+            <tr id="ggop3">
+                <td >곱창전골</td>
+                <td >월요일</td>
+                <td >화요일</td>
+                <td >수요일</td>
+                <td >목요일</td>
+                
+        </tr>
+                    </tbody>
+                   </table>
+                   <script src="../perform.js"></script>
+                   
+            </div>
+</body>
+</html>
