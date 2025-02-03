@@ -57,15 +57,15 @@ body{
   }
   
   .box2{
-    display: flex;
-    height: 230px;
+    /* display: flex; */
+    /* height: 230px; */
     border: 1px solid rgb(199, 196, 196);
     padding: 10px;
     background-color: #d9d9d9;
     color: white;
   }
   .criteria{
-    width: 50%;
+    width: 100%;
     border: 1px solid rgb(199, 196, 196);
     margin-right: 5px;
     padding: 5px;
@@ -91,9 +91,9 @@ body{
     font-size: 25px;
   }
   .registration{
-    width: 50%;
+    width: 100%;
     border: 1px solid rgb(199, 196, 196);
-    margin-left: 5px;
+    /* margin-left: 5px; */
     padding: 5px;
   }
   /* .rightTop{
@@ -124,9 +124,10 @@ body{
   .registrationView{
     margin: 5px;
     border: 1px solid rgb(199, 196, 196);
-    height: 40%;
+    height: 180px;
     background-color: white;
     color: black;
+    overflow-y: scroll;
   }
   .box3{
     border: 1px solid rgb(199, 196, 196);
@@ -156,7 +157,7 @@ body{
     margin: 5px;
   }
   .indate1, .indate2{
-    font-size: 15px;
+    font-size: 14px;
   }
   .box3View{
     border: 1px solid rgb(199, 196, 196);
@@ -184,6 +185,7 @@ body{
 }
 
 
+/* 데탑 */
 @media screen and (min-width:768px) {
   .warrap{
     width: 100%;
@@ -306,7 +308,7 @@ body{
     border: 1px solid rgb(199, 196, 196);
     align-items: center;
     background-color: #d9d9d9;
-    color: white;
+    color: black;
   }
   .box3Top{
     display: flex;
@@ -351,5 +353,17 @@ body{
   .workorder-pagenation{
     display: flex;
     justify-content: center;
+  }
+
+  .index{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .index > div{
+    width: 100%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
   }
 }

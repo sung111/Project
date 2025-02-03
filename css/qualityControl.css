@@ -66,18 +66,19 @@ body {
     /* margin-top: 10px; */
     background-color: #d9d9d9;
     color: white;
-    
   }
 
   .inBord {
     border: 1px solid rgb(199, 196, 196);
-    width: 100%;
+    /* text-align: center; */
+    width: 80%;
     text-align: center;
     /* display: inline-block; */
     background-color: #63adfc;
     color: white;
     border: 1px solid #0056b3;
     border-radius: 15px;
+    margin: 5px auto;
   }
 
   .inBord>div {
@@ -86,8 +87,8 @@ body {
   }
 
   .box2 {
-    display: flex;
-    height: 230px;
+    /* display: flex; */
+    /* height: 230px; */
     border: 1px solid rgb(199, 196, 196);
     padding: 10px;
     background-color: #d9d9d9;
@@ -95,7 +96,7 @@ body {
   }
 
   .left {
-    width: 50%;
+    width: 100%;
     border: 1px solid rgb(199, 196, 196);
     margin-right: 5px;
     padding: 5px;
@@ -124,7 +125,7 @@ body {
   }
 
   .right {
-    width: 50%;
+    width: 100%;
     border: 1px solid rgb(199, 196, 196);
     margin-left: 5px;
     padding: 8px;
@@ -192,7 +193,7 @@ body {
 
   .indate1,
   .indate2 {
-    font-size: 14px;
+    font-size: 12px;
   }
 
 
@@ -239,6 +240,8 @@ body {
   }
 }
 
+
+/* 데탑 */
 @media screen and (min-width:768px) {
   .warrap {
     width: 100%;
@@ -248,7 +251,7 @@ body {
   .wkr {
     border: 1px solid rgb(199, 196, 196);
     background-color: #d9d9d9;
-    color: white;
+    color: black;
   }
 
   .wkrTop {
@@ -416,7 +419,7 @@ body {
 
   .indate1,
   .indate2 {
-    font-size: 14px;
+    font-size: 15px;
   }
 
 
@@ -460,5 +463,11 @@ body {
   .wp2 {
     background-color: aliceblue;
     color: black;
+  }
+}
+
+@media screen and (max-width : 1070px) {
+  .box3Top{
+    display: block;
   }
 }
