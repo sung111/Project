@@ -41,10 +41,13 @@ function time(){
     const year   = now.getFullYear();
     const month  = ("0" + (now.getMonth() + 1)).slice(-2);
     const day    = ("0" + now.getDate()).slice(-2);
+    
     const hour   = ("0" + now.getHours()).slice(-2);
     const minute = ("0" + now.getMinutes()).slice(-2);
 
     const date = `${year}-${month}-${day}T${hour}:${minute}`;
     document.querySelector('.date1').value = date;
+    document.querySelector('.indate1').value = date;
+    document.querySelector('.indate2').value = date;
   
 }
