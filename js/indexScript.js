@@ -113,5 +113,10 @@ document.addEventListener("DOMContentLoaded", function(){
         iframe.src = "componant/chart_0203.html"
         LocalNavigationbar("대시보드", "perform"); 
     })
-
+    // 게시판
+    const 공지사항menu = document.querySelector("#nav-공지사항");
+    공지사항menu.addEventListener("click", function(){
+        iframe.src = "componant/공지사항.html"
+        LocalNavigationbar("공지사항", "공지사항"); 
+    })
 })
