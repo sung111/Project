@@ -102,4 +102,15 @@ document.addEventListener("DOMContentLoaded", function(){
         iframe.src = "componant/재고조사현황.html"
         LocalNavigationbar("재고현황조회", "재고조사현황"); 
     })
+    // 실적 보고서
+    const chartmenu = document.querySelector("#nav-chart");
+    chartmenu.addEventListener("click", function(){
+        iframe.src = "componant/chart_0203.html"
+        LocalNavigationbar("실적보고서", "chart"); 
+    })
+    const performmenu = document.querySelector("#nav-perform");
+    performmenu.addEventListener("click", function(){
+        iframe.src = "componant/perform.html"
+        LocalNavigationbar("대시보드", "perform"); 
+    })
 })
