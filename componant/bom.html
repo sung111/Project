@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bom</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 95vw;
+            margin: 0 auto;
+        }
+
+        th {
+            font-weight: 900;
+        }
+
+        td {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        table,
+        th,
+        td {
+            /* 중복 테두리 제거 코드 */
+            font-size: 20px;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            width: 100vw;
+        }
+
+        #toptext {
+            margin-left: 30px;
+        }
+
+        #top-container {
+            margin: 30px 0 30px 0;
+        }
+
+        .imge {
+            width: 100px;
+            height: 100px;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            th {
+                font-size: 15px;
+            }
+
+            td {
+                font-size: 15px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="top-container">
+        <span>완제품 이름</span> <input type="text" id="toptext"> <input type="button" value="확인" id="topbnt">
+    </div>
+    <table>
+        <tr>
+            <th style="width: 30px;"></th>
+            <th>완제품:품번</th>
+            <th>완제품:이름</th>
+            <th>규격</th>
+            <th>완제품 이미지</th>
+        </tr>
+
+        <tr class="list" data-vlaue="1">
+            <td>1</td>
+            <td>미지정</td>
+            <td>부대찌개</td>
+            <td>미지정</td>
+            <td><img src="/img/Budae-Jjigae.png" class="imge"></td>
+        </tr>
+
+        <tr class="list" data-vlaue="2">
+            <td>2</td>
+            <td>미지정</td>
+            <td>김치찌개</td>
+            <td>미지정</td>
+            <td><img src="/img/kimchisoup.png" class="imge"></td>
+        </tr>
+
+        <tr class="list" data-vlaue="3">
+            <td>3</td>
+            <td>미지정</td>
+            <td>밀푀유나베</td>
+            <td>미지정</td>
+            <td><img src="/img/Millefeuille.png" class="imge"></td>
+        </tr>
+
+        <tr class="list" data-vlaue="4">
+            <td>4</td>
+            <td>미지정</td>
+            <td>떡볶이</td>
+            <td>미지정</td>
+            <td><img src="/img/tteokbokki.png" class="imge"></td>
+        </tr>
+
+        <tr class="list" data-vlaue="5">
+            <td>5</td>
+            <td>미지정</td>
+            <td>곱창전골</td>
+            <td>미지정</td>
+            <td><img src="/img/Gopchanghotpot.png" class="imge"></td>
+        </tr>
+
+        <tr>
+            <td>6</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
+
+
+
+    <script>
+        window.addEventListener("load", function () {
+
+            let lists = document.querySelectorAll(".list");
+            console.log(lists);
+            for(let i=0 ; i<lists.length; i++){
+                console.log("포문안됨")
+                console.log(lists[i].getAttribute("data-vlaue"))
+                let value = lists[i].getAttribute("data-vlaue")
+                lists[i].addEventListener("click",function(){
+                    window.location.href = "bomlist.html";
+                    window.location.href = `bomlist.html?value=${value}`;
+
+                })
+            }
+            
+
+
+
+
+        })
+    </script>
+
+</body>
+
+</html>

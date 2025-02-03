@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bomlist</title>
+    <style>
+          * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 95vw;
+            margin: 0 auto;
+        }
+
+        #top-contain {
+            border: 1px solid black;
+            padding: 50px 0 0 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .crud,
+        .button {
+            border: 1px solid black;
+            border-radius: 10px;
+            height: 80px;
+            width: 80px;
+        }
+
+        #mid-contain {
+            border: 1px solid black;
+            margin: 20px 0 0 0;
+        }
+
+        .mid-contain-article {
+            border: 1px solid red;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top-contain">
+        <div id="top-1">
+            <input type="button" value="조회" class="crud" id="r">
+            <input type="button" value="생성" class="crud" id="c">
+            <input type="button" value="수정" class="crud" id="u">
+            <input type="button" value="삭제" class="crud" id="d">
+        </div>
+        <div id="top-2">
+            <select name="option"  id="check-option">
+                <option value="1">원재료 조회</option>
+                <option value="2">완재품 조회</option>
+            </select>
+            <input type="button" value="확인" class="button" id="check-option-button">
+        </div>
+    </div>
+
+    <div id="mid-contain">
+        <div class="mid-contain-article" id="id1"> 제품명:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id2"> 가격:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id3"> 규격:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id4"> 단위:<input type="text" class="mid-data"> </div>
+        <br>
+        <div class="mid-contain-article" id="id5"> 공급업체:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id6"> LotNo:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id7"> 창고위치:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id8"> <input type="button" value="확인" id="mid-contain-check"> </div>
+    </div>
+
+
+
+    <script>
+        window.addEventListener("load", function () {
+            // URL에서 ?value=값 부분 가져오기
+            let params = new URLSearchParams(window.location.search);
+            let value = params.get("value"); // 'value' 값 가져오기
+            console.log("넘어온 값:", value);
+            
+            
+        });
+    </script>
+</body>
+
+</html>
