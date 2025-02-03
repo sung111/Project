@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* bar모양 차트 */
 #myChart {
 
@@ -100,3 +101,107 @@ font-family: 'Apple SD Gothic Neo', serif;
     src: url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),
          url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype');
 }
+=======
+/* bar모양 차트 */
+#myChart {
+
+
+    position: relative;
+    left: 100px;
+border: 1px solid red;
+display: block;
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+
+}
+
+/* pie모양 차트 */
+#Pie {
+
+
+position: relative;
+left: 100px;
+border: 1px solid red;
+display: inline-block;
+/* width: 100%; */
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+
+}
+
+/* 도넛모양 차트 */
+#doughnut {
+
+
+    position: relative;
+left: 100px;
+border: 1px solid red;
+/* width: 75%; */
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+
+
+}
+
+/* 차트 - 부모요소 */
+#charset {
+
+
+    display: flex;
+    /* flex-wrap: wrap;
+	align-content: stretch; */
+    flex-wrap: wrap;
+    width: 75%;
+}
+
+
+
+
+/* 월간 목표 실적(숫자) - 부모요소 */
+#count {
+
+    border: 1px solid red;
+    width: 400px;
+    height: 400px;
+
+    position: relative;
+    left: 100px;
+    
+   
+
+    
+}
+
+/* 월간 목표 실적(숫자) */
+#number {
+
+
+    position: relative;
+    text-align: center;
+    top: 150px;
+
+    font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+}
+
+
+/* 폰트 */
+@font-face {
+    font-family: 'Apple SD Gothic Neo';
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype');
+}
+>>>>>>> be0db528cddf2eb664a15bb8d36b80bde50043ba
