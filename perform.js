@@ -63,6 +63,7 @@ op1.addEventListener("change", function() {
         case "주간":
             days.style.display = "none";
             weeks.style.display = "block"
+            weeks.value = " 2025-02-03 ";
             months.style.display = "none"
             // one.style.display ="none"
 
@@ -99,7 +100,7 @@ op1.addEventListener("change", function() {
             days.style.display = "none";
             weeks.style.display = "none"
             months.style.display = "block"
-           
+            months.valuesAsDate = new Date("2025-02-03");
             // def.innerHTML = "<br> <table border=1 id=t>" 
 
             //                                     + "<thead>"
