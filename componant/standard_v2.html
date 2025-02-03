@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>standard</title>
-    <script src="/data/material.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -40,7 +40,7 @@
         }
 
         .mid-contain-article {
-            border: 1px solid red;
+
             display: inline-block;
             margin: 10px;
 
@@ -61,6 +61,7 @@
         #id7 {
             margin-left: 26px;
         }
+
 
         #check {
             border-radius: 10px;
@@ -95,19 +96,6 @@
             width: 100vw;
         }
 
-
-
-        .start-table {
-            display: none;
-
-
-        }
-
-        .finishe-table {
-            display: none;
-
-        }
-
         .button:hover {
             background-color: rgb(149, 149, 155);
         }
@@ -117,9 +105,11 @@
             height: 50px;
         }
 
-        /* .none {
+        .none {
             display: none;
-        } */
+        }
+
+      
 
         /* 넓이에따른 if문 0~600px까지만 적용  */
         @media screen and (max-width: 600px) {
@@ -130,9 +120,13 @@
                 width: 30px;
             }
 
-            #check-option {
+            #check-option- {
                 width: 100px;
                 height: 20px;
+            }
+            #check-option-button {
+                width: 50px;
+                height: 50px;
             }
 
             .mid-contain-article {
@@ -163,7 +157,11 @@
                 width: 100%;
             }
 
-            .start-td {
+            th {
+                font-size: 15px;
+            }
+
+            td {
                 font-size: 10px;
             }
 
@@ -183,10 +181,12 @@
         <div class="mid-contain-article" id="id5"> 공급업체:<input type="text" class="mid-data"> </div>
         <div class="mid-contain-article" id="id6"> LotNo:<input type="text" class="mid-data"> </div>
         <div class="mid-contain-article" id="id7"> 창고위치:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="id8"> <input type="button" value="원재료생성확인c" id="c"> </div>
-        <div class="mid-contain-article" id="id8"> <input type="button" value="완재품생성확인c2" id="c2"> </div>
-        <div class="mid-contain-article" id="id8"> <input type="button" value="원재료수정확인u" id="u"> </div>
-        <div class="mid-contain-article" id="id8"> <input type="button" value="완재품수정확인u2" id="u2"> </div>
+        <div class="mid-contain-article " id="id8">
+            <input type="button" value="생성 확인" id="c">
+            <input type="button" value="수정 확인" id="u">
+            <input type="button" value="생성 확인" id="c2">
+            <input type="button" value="수정 확인" id="u2">
+        </div>
     </div>
     <div id="top-contain">
 
@@ -211,9 +211,7 @@
                 <th>공급업체</th>
                 <th>LotNo</th>
                 <th>창고위치</th>
-                <th>
-                    수정/삭제
-                </th>
+                <th>수정/삭제</th>
             </tr>
             <br>
         </table>
@@ -237,6 +235,15 @@
     </div>
     <script>
         window.addEventListener("load", function () {
+
+            //처음 항목 출력 
+            document.querySelector(".finishe-table").classList.add("none")
+            document.querySelector(".start-table").classList.add("none")
+            document.querySelector("#c").classList.remove("none")
+            document.querySelector("#u").classList.remove("none")
+            document.querySelector("#c2").classList.add("none")
+            document.querySelector("#u2").classList.add("none")
+
 
             const start = [
                 { 제품명: "베이크드빈", 가격: 1500, 규격: 1, 단위: "캔", 공급업체: "네이처하이브", LotNo: "ING-20250124-001", 창고위치: "상온" },
@@ -288,7 +295,6 @@
 
 
             ];
-
             const finishe = [
                 { 제품명: "부대찌개", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-001", 창고위치: null },
                 { 제품명: "김치찌개", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-002", 창고위치: null },
@@ -296,33 +302,50 @@
                 { 제품명: "떡볶이", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-004", 창고위치: null },
                 { 제품명: "곱창전골", 가격: null, 규격: null, 공급업체: null, LotNo: "WPD-20250124-005", 창고위치: null }
             ]
+            //내일 물어보기 맨처음에 꼭 나와야되는지
+            // let starttablebody = document.querySelector(".start-table")
+            // console.log(starttablebody)
+            // start.forEach(function (v, i) {
+            //     newstart = document.createElement("tr")
+            //     newstart.classList.add("start-tr")
+            //     newstart.innerHTML = `
+            //                     <td class="start-td">${v.제품명}</td>
+            //                     <td class="start-td">${v.가격}</td>
+            //                     <td class="start-td">${v.규격}</td>
+            //                     <td class="start-td">${v.단위}</td>
+            //                     <td class="start-td">${v.공급업체}</td>
+            //                     <td class="start-td">${v.LotNo}</td>
+            //                     <td class="start-td">${v.창고위치}</td>
+            //                     <td class="start-td">
+            //                         <input type="button" value="수정" id="update">
+            //                         <input type="button" value="삭제" id="delet">
+            //                     </td>           
+            //                     `
+            //     starttablebody.append(newstart)
+            //     newstart.querySelector("#delet").addEventListener("click", function (even) {
+            //         console.log(even.target.parentNode.parentNode)
+            //         even.target.parentNode.parentNode.remove()
+            //     })
+
+            // })
 
 
 
-
-
-
-
-
-
+            //동작방법 1. 조회버튼을 누르면 조회창 열린다
             document.querySelector("#check-option-button").addEventListener("click", function () {
                 console.log("조회버튼 클릭됨")
-                let checkOption = document.querySelector("#check-option").value;
-                if (checkOption == 1) {
-                    console.log("원재료선택됨")
-                    document.querySelector("#c").addEventListener("click", function () {
-                        let middatas = document.querySelectorAll(".mid-data")
-                        start.push({제품명: middatas[0].value, 가격: middatas[1].value, 규격: middatas[2].value, 
-                                    단위: middatas[3].value, 공급업체: middatas[4].value, 
-                                    LotNo: middatas[5].value, 창고위치: middatas[6].value})
-                                    console.log(start)
-                                    
-                    })
-                    let starttablebody = document.querySelector(".start-table tbody")
-                    console.log(starttablebody)
-                    start.forEach(function (v, i) {
-                            newstart = document.createElement("tr")
-                            newstart.innerHTML = `
+
+                //--------------------------원재료
+                let starttrs = document.querySelectorAll(".start-tr ")
+                for (let i = 0; i < starttrs.length; i++) {
+                    starttrs[i].innerHTML = " "
+                    console.log("starttrs[i].innerHTML", starttrs[i].innerHTML)
+                }
+                let starttablebody = document.querySelector(".start-table ")
+                start.forEach(function (v) {
+                    newstart = document.createElement("tr")
+                    newstart.classList.add("start-tr")
+                    newstart.innerHTML = `
                                 <td class="start-td">${v.제품명}</td>
                                 <td class="start-td">${v.가격}</td>
                                 <td class="start-td">${v.규격}</td>
@@ -331,20 +354,166 @@
                                 <td class="start-td">${v.LotNo}</td>
                                 <td class="start-td">${v.창고위치}</td>
                                 <td class="start-td">
-                                    <input type="button" value="수정" class="update">
+                                    <input type="button" value="수정" id="update">
                                     <input type="button" value="삭제" id="delet">
                                 </td>           
                                 `
-                            starttablebody.append(newstart)
+                    starttablebody.append(newstart)
+                    //삭제인데 생성을한번해야된다. 하 
+                    //삭제 완
+                    newstart.querySelector("#delet").addEventListener("click", function (even) {
+                        // console.log(even.target)
+                        even.target.parentNode.parentNode.remove()
                     })
 
+                    // 수정버튼
+                    newstart.querySelector("#update").addEventListener("click", function (even) {
+
+                        console.log(even.target.parentNode.parentNode)
+                        let tdtext = even.target.parentNode.parentNode.querySelectorAll("td")
+                        let middatas = document.querySelectorAll(".mid-data")
+                        //let i = 0; i <tdtext.length; i++ 안되는이유 물어보기
+                        for (let i = 0; i < middatas.length; i++) {
+
+                            middatas[i].value = tdtext[i].innerText
+                            // middatas[6].value = tdtext[6].innerText
+                        }
+
+                        //수정 버튼을 클릭할 때마다 #u 버튼에 대한 이벤트 리스너가 추가되고 있습니다.
+                        //이렇게 하면 수정 버튼을 클릭할 때마다 #u 버튼에 대한 이벤트 리스너가 새로 추가되지 않고, 
+                        // 이전의 리스너가 덮어쓰여지게 됩니다. 따라서 각 제품의 수정이 독립적으로 이루어질 수 있습니다.
+                        // 또한, #u 버튼에 대한 이벤트 리스너를 onclick 속성으로 설정하여, 
+                        // 이전 리스너가 제거되도록 하였습니다. 이렇게 하면 수정할 때마다 새로운 리스너가 
+                        // 추가되지 않으므로, 이전 수정 내용이 지워지는 문제를 방지할 수 있습니다.
+                        document.querySelector("#u").onclick = function () {
+                            console.log(middatas[0].value);
+                            for (let i = 0; i < middatas.length; i++) {
+                                tdtext[i].innerText = middatas[i].value;
+                                middatas[i].value = ""
+                            }
+                        }
+
+                    })
+                })
+                //---------------------------
+
+
+
+                //--------------------------완재품
+                let finishetrs = document.querySelectorAll(".finishe-tr ")
+                for (let i = 0; i < finishetrs.length; i++) {
+                    finishetrs[i].innerHTML = " "
+                    console.log("finishetrs[i].innerHTML", finishetrs[i].innerHTML)
+                }
+                let finishetablebody = document.querySelector(".finishe-table")
+                finishe.forEach(function (v) {
+                    newfinishe = document.createElement("tr")
+                    newfinishe.classList.add("finishe-tr")
+                    newfinishe.innerHTML = `
+                                <td class="finishe-td">${v.제품명}</td>
+                                <td class="finishe-td">${v.가격}</td>
+                                <td class="finishe-td">${v.규격}</td>
+                                <td class="finishe-td">${v.공급업체}</td>
+                                <td class="finishe-td">${v.LotNo}</td>
+                                <td class="finishe-td">${v.창고위치}</td>
+                                <td class="finishe-td">${v.창고위치}</td>
+                                <td class="finishe-td">
+                                    <input type="button" value="수정" id="update">
+                                    <input type="button" value="삭제" id="delet">
+                                </td>           
+                                `
+
+                    finishetablebody.append(newfinishe)
+                    //삭제인데 생성을한번해야된다. 하 
+                    //삭제 완
+                    newfinishe.querySelector("#delet").addEventListener("click", function (even) {
+                        // console.log(even.target)
+                        even.target.parentNode.parentNode.remove()
+                    })
+
+                    // 수정버튼
+                    newfinishe.querySelector("#update").addEventListener("click", function (even) {
+                        console.log(even.target.parentNode.parentNode)
+                        let tdtext = even.target.parentNode.parentNode.querySelectorAll("td")
+                        let middatas = document.querySelectorAll(".mid-data")
+                        //let i = 0; i <tdtext.length; i++ 안되는이유 물어보기
+                        for (let i = 0; i < middatas.length; i++) {
+
+                            middatas[i].value = tdtext[i].innerText
+                            // middatas[6].value = tdtext[6].innerText
+                        }
+
+                        //수정 버튼을 클릭할 때마다 #u 버튼에 대한 이벤트 리스너가 추가되고 있습니다.
+                        //이렇게 하면 수정 버튼을 클릭할 때마다 #u 버튼에 대한 이벤트 리스너가 새로 추가되지 않고, 
+                        // 이전의 리스너가 덮어쓰여지게 됩니다. 따라서 각 제품의 수정이 독립적으로 이루어질 수 있습니다.
+                        // 또한, #u 버튼에 대한 이벤트 리스너를 onclick 속성으로 설정하여, 
+                        // 이전 리스너가 제거되도록 하였습니다. 이렇게 하면 수정할 때마다 새로운 리스너가 
+                        // 추가되지 않으므로, 이전 수정 내용이 지워지는 문제를 방지할 수 있습니다.
+                        document.querySelector("#u2").onclick = function () {
+                            console.log(middatas[0].value);
+                            for (let i = 0; i < middatas.length; i++) {
+                                tdtext[i].innerText = middatas[i].value;
+                                middatas[i].value = ""
+                            }
+                        }
+
+                    })
+                })
+                //--------------------------
+
+
+                let checkOption = document.querySelector("#check-option").value;
+                if (checkOption == 1) {
+                    document.querySelector(".finishe-table").classList.add("none")
+                    document.querySelector(".start-table").classList.remove("none")
+                    document.querySelector("#c").classList.remove("none")
+                    document.querySelector("#u").classList.remove("none")
+                    document.querySelector("#c2").classList.add("none")
+                    document.querySelector("#u2").classList.add("none")
                 } else {
+                    document.querySelector(".finishe-table").classList.remove("none")
+                    document.querySelector(".start-table").classList.add("none")
+                    document.querySelector("#c").classList.add("none")
+                    document.querySelector("#u").classList.add("none")
+                    document.querySelector("#c2").classList.remove("none")
+                    document.querySelector("#u2").classList.remove("none")
+                }
+            })
 
-
-
+            //원재료생성
+            document.querySelector("#c").addEventListener("click", function () {
+                console.log("원재료생성됨")
+                let middatas = document.querySelectorAll(".mid-data")
+                start.push({
+                    제품명: middatas[0].value, 가격: middatas[1].value, 규격: middatas[2].value,
+                    단위: middatas[3].value, 공급업체: middatas[4].value,
+                    LotNo: middatas[5].value, 창고위치: middatas[6].value
+                })
+                for (let i = 0; i < middatas.length; i++) {
+                    middatas[i].value = ""
                 }
 
             })
+            //완재품생성
+            document.querySelector("#c2").addEventListener("click", function () {
+                console.log("완재품생성됨")
+                let middatas = document.querySelectorAll(".mid-data")
+                finishe.push({
+                    제품명: middatas[0].value, 가격: middatas[1].value, 규격: middatas[2].value,
+                    단위: middatas[3].value, 공급업체: middatas[4].value,
+                    LotNo: middatas[5].value, 창고위치: middatas[6].value
+                })
+                for (let i = 0; i < middatas.length; i++) {
+                    middatas[i].value = ""
+                }
+
+            })
+
+
+
+
+
+
 
 
 
