@@ -122,10 +122,14 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     const processmenu = document.querySelector("#nav-process")
     processmenu.addEventListener("click", function () {
-        iframe.src = "componant/process.html"
-        LocalNavigationbar("기준관리", "생산공정/검사기준");
+        iframe.src = "componant/production_process.html"
+        LocalNavigationbar("기준관리", "생산공정");
     })
-
+    const inspection = document.querySelector("#nav-inspection")
+    inspection.addEventListener("click", function () {
+        iframe.src = "componant/Inspection_standards.html"
+        LocalNavigationbar("기준관리", "성분지표/검사기준");
+    })
     const bommenu = document.querySelector("#nav-bom")
     bommenu.addEventListener("click", function () {
         iframe.src = "componant/bom.html"

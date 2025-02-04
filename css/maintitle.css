@@ -10,8 +10,9 @@
     width: 100% ; height: 70%; border-top: 2px solid #007bff;display: flex; flex-direction: column; justify-content: space-around; align-items: center;
 }
 .notice-latestlist{
-    width: 90%; height: 40%; background-color: #ffffff; border: 1px solid #555555; border-radius: 10px;
+    width: 90%; height: 40%; padding: 10px;background-color: #ffffff; border: 1px solid #555555; border-radius: 10px; font-size: 20px; 
 }
+
 /* 페이지들 태그 CSS */
 .tagtitlecontainer{
     width: 90%; height: 600px; display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center;
@@ -26,5 +27,14 @@
 align-self: end;
 }
 .taglist{
-    width: 100%; height: 70%;  border-top: 2px solid #007bff;
+    width: 100%; height: 70%;  border-top: 2px solid #007bff; display: flex; flex-direction: column;
+}
+.taglist li{
+    margin-top: 15px; display: flex; justify-content: space-between;
+}
+.taglist li div{
+    font-size: 14px; color: #555555;
+}
+.taglist li div a{
+    color: #222222;font-size: 14px;
 }
