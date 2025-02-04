@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 기준관리 탭
     const bomlistmenu = document.querySelector("#nav-bomlist")
     bomlistmenu.addEventListener("click", function () {
-        iframe.src = "componant/bomlist.html"
+        iframe.src = "componant/standard.html"
         LocalNavigationbar("기준관리", "부품코드");
     })
     const processmenu = document.querySelector("#nav-process")
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 게시판
     const 공지사항menu = document.querySelector("#nav-공지사항");
     공지사항menu.addEventListener("click", function () {
-        iframe.src = "componant/공지사항.html"
+        iframe.src = "componant/공지사항.html";
         LocalNavigationbar("게시판", "공지사항");
     })
 })
