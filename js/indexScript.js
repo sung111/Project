@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     const 재고조사현황menu = document.querySelector("#nav-inventory");
     재고조사현황menu.addEventListener("click", function () {
-        iframe.src = "componant/재고조사현황.html"
+        iframe.src = "componant/01_재고조사현황.html"
         LocalNavigationbar("생산관리", "재고현황조회");
     })
     // 실적 보고서
@@ -166,7 +166,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // 게시판
     const 공지사항menu = document.querySelector("#nav-공지사항");
     공지사항menu.addEventListener("click", function () {
-        iframe.src = "componant/공지사항.html";
+        iframe.src = "componant/02_공지사항.html";
         LocalNavigationbar("게시판", "공지사항");
+    })
+    const 사내복지menu = document.querySelector("#nav-사내복지");
+    사내복지menu.addEventListener("click", function(){
+        iframe.src = "componant/03_사내복지.html"
+        LocalNavigationbar("게시판", "사내복지");
+    })
+    const 일반게시판menu = document.querySelector("#nav-일반게시판");
+    일반게시판menu.addEventListener("click", function(){
+        iframe.src = "componant/04_일반게시판.html"
+        LocalNavigationbar("게시판", "일반게시판");
     })
 })

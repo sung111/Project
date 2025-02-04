@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/productinfo.css">
     <script src="../data/material.js"></script>
+    <script src="../data/productdata.js"></script>
+    <script src="../data/productinmaterialdata.js"></script>
+    <script src="../data/start.js"></script>
 </head>
 
 <body>
@@ -35,7 +38,7 @@
                 </td>
                 <td class="productinfo-info-list">
                     <div class="productinfo-info-name">생산 시작</div><input type="date" class="productinfo-info-completion"
-                        alt="productinfo-입고날짜">
+                        alt="productinfo-입고날짜" id="startDate">
                 </td>
                 <td class="productinfo-info-list">
                     <div class="productinfo-info-name">생산 완료</div><input type="date" class="productinfo-info-completion"
@@ -45,9 +48,7 @@
         </table>
         <div class="material-info">
         <table>
-            <tr class="material-info-title">
-                <th>상품원료</th>
-            </tr>
+
             <tr class="material-info-tag">
                 <th>명칭</th>
                 <th>LOT/NO</th>
@@ -56,15 +57,6 @@
                 <th>공급업체</th>
                 <th>창고위치</th>
                 <th>관리사항</th>
-            </tr>
-            <tr class="material-info-content">
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
             </tr>
         </table>
     </div>
@@ -89,6 +81,43 @@
     </div>
 </body>
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const inputField = document.querySelector(".productinfo-info-productname");
+    const searchButton = document.querySelector(".productsearch");
+    const materialTable = document.querySelector(".material-info table");
+
+    searchButton.addEventListener("click", function () {
+        let query = inputField.value.split(" [")[0].trim(); // 제품명만 추출
+        let foundItem = product.find(item => item.제품명 === query);
+
+        if (foundItem) {
+            let ingredients = productIngredients[query] || []; // 제품별 원료 목록 가져오기
+
+            let tableContent = `<tr class="material-info-tag">
+                                    <th>명칭</th><th>LOT/NO</th><th>투입단위</th><th>재고수량</th><th>공급업체</th><th>창고위치</th><th>관리사항</th>
+                                </tr>`;
+
+            ingredients.forEach(ingredient => {
+                let materialData = start.find(item => item.제품명 === ingredient) || {};
+                tableContent += `<tr class="material-info-content">
+                                    <td>${ingredient}</td>
+                                    <td>${materialData.LotNo || "N/A"}</td>
+                                    <td>${materialData.단위 || "N/A"}</td>
+                                    <td>${materialData.규격 || "N/A"}</td>
+                                    <td>${materialData.공급업체 || "N/A"}</td>
+                                    <td>${materialData.창고위치 || "N/A"}</td>
+                                    <td>${materialData.창고위치 || "N/A"}</td>
+                                </tr>`;
+            });
+
+            materialTable.innerHTML = tableContent;
+        } else {
+            alert("해당 제품을 찾을 수 없습니다.");
+        }
+    });
+});
+
+// 잠만..
 document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.querySelector(".productinfo-info-productname");
     const suggestionList = document.getElementById("finishi-list");
@@ -150,7 +179,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
     // 제작수량을 작성해야 필요한 상품 원료의 리스트 투입단위가 나타나게 된다. 작성하지 않았을 경우, null로 나타남. 
     // 생산 시작은 기본적으로 당일로 지정해준다
+        // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
+        function getTodayDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // 2자리로 맞춤
+        const day = String(today.getDate()).padStart(2, '0'); // 2자리로 맞춤
+        return `${year}-${month}-${day}`;
+    }
+
+    // input 요소에 오늘 날짜 설정
+    document.getElementById("startDate").value = getTodayDate();
 // 등록을 누르면 현재 작성한 생산정보가 NewWorkorder.html의 리스트로 저장되게 된다.
 // 만약 NOTNO., 단위, 품명[규격], 제작수량, 생산 시작, 생산 완료 중 하나라도 작성되지 않았다면 등록을 눌러도 알림이 나타나며 저장되지 않는다.
+// colspan?
 </script>
 </html>
