@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-    #header-bacor{
+        #header-bacor {
             background-color: #007bff;
             border-radius: 20px;
             padding-top: 1px;
@@ -15,41 +16,49 @@
         #header {
             border: 1px solid white;
             margin-left: 20px;
-            width: 60%;
+            width: 80%;
             height: 50px;
-            
+
 
         }
-        #header-name{
-            border:1px solid white;
+
+        #header-name {
+            border: 1px solid white;
             width: 300px;
-           
-            margin:20px 20px;
+
+            margin: 20px 20px;
             color: white;
             font-size: 40px;
         }
-        td,th{
+
+        td,
+        th {
             border: 1px solid black;
             border-collapse: collapse;
         }
 
+
+        .none{
+            display: none;
+        }
     </style>
 </head>
+
 <body>
     <h1>생산공정</h1>
     <div id="total">
         <div id="header-bacor">
-            <div id="header-name">제품</div>
+            <div id="header-name">밀키트 제품</div>
             <div id="header">
-                <select name="milkits" id="milkit">
-                    <option value="1">부대찌개 밀키트</option>
-                    <option value="2">김치찌개 밀키트 밀키트</option>
-                    <option value="3">밀푀유나배 밀키트</option>
-                    <option value="4">떡볶이 밀키트</option>
-                    <option value="5">곱창전골 밀키트</option>
-                </select>
-                <input type="button"value="">
-                
+                <input type="text" id="mil-c">
+                <input type="button" value="밀키트 생성" id="millitc">
+                <input type="button" value="밀키트 수정" id="millitu">
+                <input type="button" value="밀키트 삭제" id="millitd">
+                <div>
+                    <select name="milkits" id="milkit">
+                    </select>
+    
+                </div>
             </div>
         </div>
         <table id="content">
@@ -84,10 +93,97 @@
                 <td>검사기계, 스캐너</td>
                 <td>출하 전 최종 품질 검사, 포장 상태 확인.</td>
             </tr>
-         
+
         </table>
         <script>
-            window.onload
+
+            window.addEventListener("load", function () {
+                
+                
+                      let cit = [
+                          { 1: "부대찌개 밀키트" },
+                          { 2: "김치찌개 밀키트" },
+                          { 3: "밀푀유나배 밀키트" },
+                          { 4: "떡볶이 밀키트" },
+                          { 5: "곱창전골 밀키트" }
+                      ];
+      
+                      for (let i = 0; i < cit.length; i++) {
+                          let milcit = document.createElement("option");
+                          milcit.value = i + 1; // 1부터 시작하는 값을 사용
+                          milcit.innerHTML = Object.values(cit[i])[0]; // 객체의 첫 번째 값을 가져옴
+      
+                          let milkit = document.querySelector("#milkit");
+                          milkit.append(milcit);
+                          console.log("cit[i]", cit[i]);
+                          // console.log("milkit", milkit);
+                      }
+
+                document.querySelector("#millitc").addEventListener("click",function(){
+
+                    for (let i = 0; i < cit.length; i++) {
+                          let milcit = document.createElement("option");
+                          milcit.value = i + 1; // 1부터 시작하는 값을 사용
+                          milcit.innerHTML = ""; // 객체의 첫 번째 값을 가져옴
+      
+                          let milkit = document.querySelector("#milkit");
+                          milkit.append(milcit);
+                          console.log("cit[i]", cit[i]);
+                          // console.log("milkit", milkit);
+                      }
+
+
+
+
+
+                    let mil_c = document.querySelector("#mil-c")
+                    let newmilkitname = mil_c.value
+                    let newmilkit = {};
+                    let newid = cit.length +1;
+                    
+                    newmilkit[newid] = newmilkitname;
+                    cit.push(newmilkit)
+                    console.log(cit)
+
+                    let milcit = document.createElement("option");
+                    
+
+                    for (let i = 0; i < cit.length; i++) {
+                          let milcit = document.createElement("option");
+                          milcit.value = i + 1; // 1부터 시작하는 값을 사용
+                          milcit.innerHTML = Object.values(cit[i])[0]; // 객체의 첫 번째 값을 가져옴
+      
+                          let milkit = document.querySelector("#milkit");
+                          milkit.append(milcit);
+                          console.log("cit[i]", cit[i]);
+                          // console.log("milkit", milkit);
+                      }
+
+
+
+
+                    
+                })
+                
+                
+
+
+
+               
+
+
+
+
+
+
+
+
+
+
+
+
+            })
         </script>
 </body>
+
 </html>
