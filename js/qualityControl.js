@@ -15,6 +15,11 @@ function time() {
   document.querySelector('.date2').value = date;
 }
 
+function openPop(){
+  const options = 'width=700, heigth=600, top=50, left=50,scrollbars=yes'
+
+  window.open('http://127.0.0.1:5500/componant/process.html?targe=standards-contain', '_blank',options);
+}
 
 function init() {
 
@@ -42,6 +47,12 @@ function init() {
         console.error('페이지를 불러오는 도중 에러 발생:', error);
       });
   })
+
+  document.querySelector('.btn2').addEventListener('click', (e) => {
+
+  })
+
+
 
 
   // 제품 합/불 라디오버튼클릭시 숨기기/나오기
@@ -85,39 +96,68 @@ function init() {
     console.log(date)
     const wp2 = document.querySelector('.wp2')
     const box3 = document.querySelector('.box3View')
-    box3.innerHTML = `
-                      <div class="dex">
-                        <div>${date}</div>
-                        <div>${wp2.innerText}</div>
-                        <div>${ss}</div>
-                        <div>사유 ㅋ</div>
-                        <div>${textB}</div>
-                        <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
-                      </div>
-                    ` + box3.innerHTML
+    if (ss == "합격") {
+      box3.innerHTML = `
+                        <div class="dex">
+                          <div>${date}</div>
+                          <div>${wp2.innerText}</div>
+                          <div>${ss}</div>
+                          <div></div>
+                          <div>${textB}</div>
+                          <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                        </div>
+                      `+ box3.innerHTML;
+    } else {
+      box3.innerHTML = `
+                        <div class="dex">
+                          <div>${date}</div>
+                          <div>${wp2.innerText}</div>
+                          <div>${ss}</div>
+                          <div>${drop}</div>
+                          <div>${textB}</div>
+                          <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                        </div>
+                      `+ box3.innerHTML;
+
+    }
     alert("품질등록을 완료했습니다.")
 
   })
 
-  document.querySelector('.box3View').addEventListener('click', (e)=>{
+  document.querySelector('.box3View').addEventListener('click', (e) => {
 
     //삭제
     // console.log(e.target);
-    if(e.target.innerText == "삭제"){
+    if (e.target.innerText == "삭제") {
       e.target.parentNode.parentNode.remove();
     }
 
-    if(e.target.innerText == "수정"){
+    //수정
+    if (e.target.innerText == "수정") {
       e.target.parentNode.parentNode.innerHTML =
+        `
+        <div><input type="datetime-local" class="inputT"></div>
+        <div><input type="text" class="inputT"></div>
+        <div><input type="text" class="inputT"></div>
+        <div><input type="text" class="inputT"></div>
+        <div><input type="text" class="inputT"></div>
+        <div><button class="tn">완료</button><button class="tkr">취소</button></div>
       `
-      <div><input type="datetime-local"></div>
-      <div><input type="text"></div>
-      <div><input type="text"></div>
-      <div><input type="text"></div>
-      <div><input type="text"></div>
-      <div><button class="tn">완료</button><button class="tkr">취소</button></div>
+    }
 
-      `
+    // 수정완료
+    if (e.target.innerText == "완료") {
+      const inP = document.querySelectorAll('.inputT')
+      const view = e.target.parentNode.parentNode
+      view.innerHTML = ""
+      for (let i = 0; i < inP.length; i++) {
+        // console.log(inP.value)
+        view.innerHTML += `<div>${inP[i].value}</div>`
+      }
+      view.innerHTML += `
+                        <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                        </div>
+                      `
     }
 
 

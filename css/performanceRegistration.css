@@ -186,7 +186,8 @@ body{
     width: 100%;
     display: flex;
     justify-content: space-around;
-
+    padding: 5px;
+    border: 1px solid #c2c2c2
   }
   .index{
     margin: 8px;
@@ -385,7 +386,6 @@ body{
     justify-content: space-around;
     padding: 5px;
     border: 1px solid #c2c2c2
-
   }
   .index{
     margin: 8px;
