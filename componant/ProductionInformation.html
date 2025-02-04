@@ -125,28 +125,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const lotnoField = document.querySelector('[alt="productinfo-LOTNO"]');
     const unitField = document.querySelector('[alt="productinfo-단위"]');
 
-    // 제품명과 규격 데이터를 포함하는 배열
-    let finishe = [
-        { 제품명: "부대찌개", 가격: null, 규격: "500g", 공급업체: null, LotNo: "WPD-20250124-001", 단위: "팩", 창고위치: null },
-        { 제품명: "김치찌개", 가격: null, 규격: "600g", 공급업체: null, LotNo: "WPD-20250124-002", 단위: "팩", 창고위치: null },
-        { 제품명: "밀푀유나베", 가격: null, 규격: "700g", 공급업체: null, LotNo: "WPD-20250124-003", 단위: "세트", 창고위치: null },
-        { 제품명: "떡볶이", 가격: null, 규격: "400g", 공급업체: null, LotNo: "WPD-20250124-004", 단위: "팩", 창고위치: null },
-        { 제품명: "곱창전골", 가격: null, 규격: "800g", 공급업체: null, LotNo: "WPD-20250124-005", 단위: "냄비", 창고위치: null }
-    ];
-
     // 입력창에서 키 입력할 때마다 실행 (자동완성)
     inputField.addEventListener("input", function () {
         let query = inputField.value.trim().toLowerCase();
         suggestionList.innerHTML = "";
 
         if (query !== "") {
-            let filtered = finishe.filter(item => item.제품명.includes(query));
+            let filtered = product.filter(item => item.제품명.includes(query));
 
             filtered.forEach(item => {
                 let listItem = document.createElement("li");
                 listItem.textContent = `${item.제품명} [${item.규격}]`;
 
-                // 클릭 시 해당 제품명과 규격을 입력 필드에 설정
+                // 클릭 시 입력 필드에 제품명과 규격 설정
                 listItem.addEventListener("click", function () {
                     inputField.value = `${item.제품명} [${item.규격}]`;
                     suggestionList.innerHTML = "";
@@ -159,8 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 조회 버튼 클릭 시 LOTNO와 단위 업데이트
     searchButton.addEventListener("click", function () {
-        let query = inputField.value.split(" [")[0].trim(); // 규격 제외하고 제품명만 가져오기
-        let foundItem = finishe.find(item => item.제품명 === query);
+        let query = inputField.value.split(" [")[0].trim(); // 제품명만 가져오기
+        let foundItem = product.find(item => item.제품명 === query);
 
         if (foundItem) {
             lotnoField.textContent = foundItem.LotNo; // LOTNO 업데이트
@@ -193,6 +184,37 @@ document.addEventListener("DOMContentLoaded", function () {
 // 등록을 누르면 현재 작성한 생산정보가 NewWorkorder.html의 리스트로 저장되게 된다.
 // 만약 NOTNO., 단위, 품명[규격], 제작수량, 생산 시작, 생산 완료 중 하나라도 작성되지 않았다면 등록을 눌러도 알림이 나타나며 저장되지 않는다.
 // colspan?
+// 잠만잠만..
+document.addEventListener("DOMContentLoaded", function () {
+    const registerButton = document.querySelector(".check-info-registration");
 
+    registerButton.addEventListener("click", function () {
+        // 입력된 데이터 가져오기
+        const lotno = document.querySelector('[alt="productinfo-LOTNO"]').textContent.trim();
+        const unit = document.querySelector('[alt="productinfo-단위"]').textContent.trim();
+        const productName = document.querySelector(".productinfo-info-productname").value.trim();
+        const quantity = document.querySelector('[alt="productinfo-제작수량"]').value.trim();
+        const startDate = document.querySelector('[alt="productinfo-입고날짜"]').value.trim();
+        const endDate = document.querySelector('[alt="productinfo-유효기간"]').value.trim();
+
+        // 필수 입력값 확인 (비어 있으면 경고 메시지 출력)
+        if (!lotno || !unit || !productName || !quantity || !startDate || !endDate) {
+            alert("모든 필수 정보를 입력해주세요.");
+            return; // 등록 중단
+        }
+
+        // 기존 데이터 불러오기
+        let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+
+        // 새로운 데이터 추가
+        workOrders.push({ lotno, unit, productName, quantity, startDate, endDate });
+
+        // 업데이트된 데이터 저장
+        sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+
+        // NewWorkorder.html로 이동
+        window.parent.document.querySelector("iframe").src = "componant/NewWorkorder.html";
+    });
+});
 </script>
 </html>

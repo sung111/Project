@@ -54,3 +54,183 @@
         });
     });
 
+    // 상품 선택을 불러온다.
+    document.addEventListener("DOMContentLoaded", function () {
+        const tbody = document.querySelector(".new-workorder tbody");
+        let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || []; // 기존 데이터 불러오기
+    
+        // 📌 테이블에 데이터 추가하는 함수
+        function renderTable() {
+            // 테이블 초기화 전에 제목 행(order-info-title)을 따로 저장
+            const titleRow = `
+                <tr class="order-info-title">
+                    <th>품명[규격]</th>
+                    <th>품목코드</th>
+                    <th>단위</th>
+                    <th>제작수량</th>
+                    <th>생산시작일</th>
+                    <th>생산종료일</th>
+                    <th>등록삭제</th>
+                </tr>`;
+    
+            tbody.innerHTML = titleRow; // 제목 행 유지 후 데이터 추가
+    
+            workOrders.forEach((data, index) => {
+                const newRow = document.createElement("tr");
+                newRow.classList.add("order-info-content");
+    
+                newRow.innerHTML = `
+                    <td>${data.productName}</td>
+                    <td>${data.lotno}</td>
+                    <td>${data.unit}</td>
+                    <td>${data.quantity}</td>
+                    <td>${data.startDate}</td>
+                    <td>${data.endDate}</td>
+                    <td class="order-info-content-delete" data-index="${index}">삭제하기</td>
+                `;
+    
+                tbody.appendChild(newRow);
+            });
+    
+            // "삭제하기" 버튼 이벤트 추가
+            document.querySelectorAll(".order-info-content-delete").forEach(button => {
+                button.addEventListener("click", function () {
+                    const index = this.getAttribute("data-index"); // 삭제할 데이터의 인덱스 가져오기
+                    workOrders.splice(index, 1); // 배열에서 해당 데이터 삭제
+                    sessionStorage.setItem("workOrders", JSON.stringify(workOrders)); // 변경된 데이터 저장
+                    renderTable(); // 테이블 다시 렌더링
+                });
+            });
+        }
+        renderTable(); // 페이지 로드 시 테이블 렌더링
+    });
+
+            // 작성일자를 오늘로 시작
+            document.addEventListener("DOMContentLoaded", function () {
+                // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
+                function getTodayDate() {
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = String(today.getMonth() + 1).padStart(2, '0'); // 2자리 숫자로 변환
+                    const day = String(today.getDate()).padStart(2, '0'); // 2자리 숫자로 변환
+                    return `${year}-${month}-${day}`;
+                }
+            
+                // "작성일" input 요소에 오늘 날짜 자동 입력
+                const dateInput = document.querySelector('[alt="작성일"]');
+                if (dateInput) {
+                    dateInput.value = getTodayDate(); // 오늘 날짜 입력
+                }
+            });
+
+            // 작업지시서 내용의 저장
+            document.addEventListener("DOMContentLoaded", function () {
+                const registerButton = document.querySelector(".workorder-registration");
+            
+                if (!registerButton) {
+                    console.error("❌ '등록' 버튼을 찾을 수 없습니다.");
+                    return;
+                }
+            
+                registerButton.addEventListener("click", function () {
+                    console.log("✅ 등록 버튼 클릭됨!");
+            
+                    // ✅ 여기에서 입력 필드 가져오기
+                    const companyInput = document.querySelector('[name="company"]');
+                    const deliveryInput = document.querySelector('[name="delivery"]');
+                    const docNumberInput = document.querySelector('[name="docNumber"]');
+                    const writerInput = document.querySelector('[name="writer"]');
+                    const createDateInput = document.querySelector('[name="createDate"]');
+                    const dueDateInput = document.querySelector('[name="dueDate"]');
+            
+                    // ✅ 요소가 존재하는지 확인
+                    if (!companyInput || !deliveryInput || !docNumberInput || !writerInput || !createDateInput || !dueDateInput) {
+                        console.error("❌ 필수 입력 필드 중 하나를 찾을 수 없습니다.");
+                        alert("⚠️ 모든 필수 정보를 입력해주세요.");
+                        return;
+                    }
+            
+                    // ✅ 입력값 가져오기
+                    const company = companyInput.value.trim();
+                    const delivery = deliveryInput.value.trim();
+                    const docNumber = docNumberInput.value.trim();
+                    const writer = writerInput.value.trim();
+                    const createDate = createDateInput.value.trim();
+                    const dueDate = dueDateInput.value.trim();
+            
+                    if (!company || !delivery || !docNumber || !writer || !createDate || !dueDate) {
+                        alert("⚠️ 모든 필수 정보를 입력해주세요.");
+                        return;
+                    }
+            
+                    // ✅ 기존 작업 지시서 목록 불러오기
+                    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+            
+                    // ✅ 새로운 작업 지시서 추가
+                    let newOrder = { company, delivery, docNumber, writer, createDate, dueDate };
+                    workOrders.push(newOrder);
+            
+                    // ✅ 업데이트된 데이터 저장
+                    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+            
+                    console.log("✅ 작업 지시서 저장 완료:", workOrders);
+            
+                    // ✅ WorkOrder.html로 이동
+                    window.location.href = "WorkOrder.html"; 
+                });
+            });
+
+            // 기존 작업 지시서의 수정
+            document.addEventListener("DOMContentLoaded", function () {
+                const workOrderList = document.querySelector(".workorderlist");
+            
+                // 기존 작업 지시서 불러오기
+                let workOrders = [];
+                try {
+                    let storedData = sessionStorage.getItem("workOrders");
+                    workOrders = storedData ? JSON.parse(storedData) : [];
+                } catch (error) {
+                    console.error("❌ sessionStorage 데이터 오류:", error);
+                    sessionStorage.removeItem("workOrders"); // 데이터 손상 시 초기화
+                    workOrders = [];
+                }
+            
+                console.log("✅ 불러온 작업 지시서:", workOrders);
+            
+                // 📌 목록 추가하는 함수
+                function renderWorkOrderList() {
+                    workOrderList.innerHTML = ""; // 기존 목록 초기화
+            
+                    if (workOrders.length === 0) {
+                        workOrderList.innerHTML = "<li>등록된 작업 지시서가 없습니다.</li>";
+                        return;
+                    }
+            
+                    workOrders.forEach((order, index) => {
+                        let listItem = document.createElement("ul");
+                        listItem.classList.add("workorderlist-content");
+            
+                        listItem.innerHTML = `
+                            <li class="workorderlist-createdate">${order.createDate}</li>
+                            <li class="workorderlist-productplandate">${order.createDate}<br/>~<br/>${order.dueDate}</li>
+                            <li class="workorderlist-productplancalc"><button class="edit-workorder" data-index="${index}">수정</button></li>
+                            <li class="workorderlist-MRPcalc"><a href="#">생성</a></li>
+                            <li class="workorderlist-productplanstatus"><a href="#">생산계획현황</a></li>
+                            <li class="workorderlist-etc"></li>
+                        `;
+            
+                        workOrderList.appendChild(listItem);
+                    });
+            
+                    // "수정" 버튼 이벤트 추가
+                    document.querySelectorAll(".edit-workorder").forEach(button => {
+                        button.addEventListener("click", function () {
+                            const index = this.getAttribute("data-index");
+                            sessionStorage.setItem("editWorkOrder", index); // 수정할 데이터 인덱스 저장
+                            window.location.href = "NewWorkorder.html"; // NewWorkorder.html로 이동
+                        });
+                    });
+                }
+            
+                renderWorkOrderList(); // 목록 렌더링
+            });
