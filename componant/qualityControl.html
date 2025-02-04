@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="../css/workorder.css">
   <script src="../js/qualityControl.js"></script>
 </head>
+
 <body>
   <div class="warrap">
     <div class="wkr">
@@ -55,20 +57,24 @@
           <div class="wp2">제품명</div>
         </div>
         <div>
-          <input type="radio" name="ra" checked="checked"> 합격
-          <input type="radio" name="ra"> 불합격
-        </div>
-        <div>
-          <select class="dropBox">
-            <option value="">불합격 사유</option>
-            <option value="">무게 미달</option>
-            <option value="">외관 불량</option>
-            <option value="">자재 불량</option>
-          </select>
+          <div>
+            <input type="radio" name="ra" checked="checked" class="rad" value="합격"> 합격
+            <input type="radio" name="ra" class="rad" value="불합격"> 불합격
+          </div>
+          <div>
+            <input type="datetime-local" class="date2">
+          </div>
         </div>
         <div class="insert">
           <textarea name="" id="" placeholder="기타사항" class="textBox" rows="3"></textarea>
           <button class="btn3">등록</button>
+          <div>
+            <select class="dropBox hide">
+              <option value="무게 미달">무게 미달</option>
+              <option value="외관 불량">외관 불량</option>
+              <option value="자재 불량">자재 불량</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -89,7 +95,7 @@
           </select>
         </div>
         <div>
-          불합격 사유 : 
+          불합격 사유 :
           <select class="dropBox2">
             <option value="">전체</option>
             <option value="">무게 미달</option>
@@ -101,10 +107,21 @@
           <button class="btn4">검색</button>
         </div>
       </div>
+      <div class="dede">
+        <div class="index">
+          <div>날짜</div>
+          <div>제품명</div>
+          <div>합격/불합격</div>
+          <div>불합격 사유</div>
+          <div>코멘트</div>
+          <div>비고</div>
+        </div>
+      </div>
       <div class="box3View">
-        보임ㅋ
+        
       </div>
     </div>
   </div>
 </body>
+
 </html>

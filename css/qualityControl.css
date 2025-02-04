@@ -153,7 +153,7 @@ body {
 
   .textBox {
     font-size: 13px;
-    width: 80%;
+    width: 90%;
     height: 90px;
   }
 
@@ -238,6 +238,31 @@ body {
     background-color: aliceblue;
     color: black;
   }
+  .index{
+    display: flex;
+    justify-content: space-around;
+    width: 98%;
+    margin: auto;
+
+  }
+  .index > div{
+    width: 100%;
+    text-align: center;
+  }
+  .hide{
+    display: none;
+  }
+  .dex{
+    border: 1px solid #c2c2c2;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .dex > div{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 
@@ -319,7 +344,7 @@ body {
 
   .box2 {
     display: flex;
-    height: 180px;
+    height: 100%;
     border: 1px solid rgb(199, 196, 196);
     padding: 10px;
     background-color: #d9d9d9;
@@ -463,6 +488,36 @@ body {
   .wp2 {
     background-color: aliceblue;
     color: black;
+  }
+  .dede{
+    width: 97%;
+  }
+
+  .index{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+  }
+  .index > div{
+    width: 100%;
+    text-align: center;
+  }
+  .hide{
+    display: none;
+  }
+  .dex{
+    border: 1px solid #c2c2c2;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 5px;
+  }
+  .dex > div{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #d9d9d9;
   }
 }
 
