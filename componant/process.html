@@ -9,7 +9,8 @@
         body {
             margin: 0 auto;
             padding: 0;
-            width: 95vw
+            width: 95vw;
+            background-color: #d9d9d9;
         }
 
         .de {
@@ -18,7 +19,7 @@
         }
 
         #contain-grandfather {
-            margin: 20px 0 100px 0 ;
+            margin: 20px 0 100px 0;
             border: 1px solid black;
             width: 100%;
 
@@ -102,29 +103,125 @@
                 height: 20px;
                 width: 20px;
             }
-            li{
+
+            li {
                 font-size: 13px;
             }
-            table{
+
+            table {
                 width: 100vw;
             }
-            th{
+
+            th {
                 font-size: 10px;
             }
-            .standards-font-charild{
+
+            .standards-font-charild {
                 font-size: 10px;
-                
+
             }
-            .standards-font-contain{
+
+            .standards-font-contain {
                 width: 100%;
             }
+        }
+        #header-bacor{
+            background-color: #007bff;
+            border-radius: 20px;
+            padding-top: 1px;
+            height: 150px;
+        }
+
+        #header {
+            border: 1px solid white;
+            margin-left: 20px;
+            width: 60%;
+            height: 50px;
+            
+
+        }
+        #header-name{
+            border:1px solid white;
+            width: 300px;
+           
+            margin:20px 20px;
+            color: white;
+            font-size: 40px;
+        }
+        #content{
+            
         }
     </style>
 </head>
 
+
 <body>
     <h1>생산공정</h1>
-    <div id="contain-grandfather">
+    <div id="total">
+        <div id="header-bacor">
+            <div id="header-name">제품</div>
+            <div id="header">
+                <select name="milkits" id="milkit">
+                    <option value="1">부대찌개 밀키트</option>
+                    <option value="2">김치찌개 밀키트 밀키트</option>
+                    <option value="3">밀푀유나배 밀키트</option>
+                    <option value="4">떡볶이 밀키트</option>
+                    <option value="5">곱창전골 밀키트</option>
+                </select>
+                <input type="button"value="">
+                
+            </div>
+        </div>
+        <table id="content">
+            <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
+            <tr>
+                <th class="">공정단계</th>
+                <th>설명</th>
+                <th>사용장비</th>
+                <th>위생 기준</th>
+            </tr>
+            <tr>
+                <td>원재료 입고</td>
+                <td>부대찌개에 필요한 재료(소시지, 햄, 두부, 양파, 대파, 고추장 등)를 공급업체로부터 입고합니다.</td>
+                <td>입고 검수대, 온도계</td>
+                <td> 원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</td>
+            </tr>
+            <tr>
+                <td>세척 및 손질</td>
+                <td>채소(양파, 대파 등)는 깨끗이 세척하고, 두부는 적당한 크기로 자릅니다. 소시지와 햄도 먹기 좋은 크기로 손질합니다.</td>
+                <td>세척기, 칼, 도마</td>
+                <td>손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</td>
+            </tr>
+            <tr>
+                <td>채소별,소스별 포장</td>
+                <td>손질된 채소와 소스(고추장 등)를 각각 별도의 용기에 포장합니다. 모든 재료는 밀키트 포장재에 담아 밀봉합니다.</td>
+                <td> 포장기계, 진공포장기</td>
+                <td>포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</td>
+            </tr>
+            <tr>
+                <td>검사 및 출하</td>
+                <td>포장된 밀키트를 검사하여 품질을 확인한 후, 출하 준비를 합니다.</td>
+                <td>검사기계, 스캐너</td>
+                <td>출하 전 최종 품질 검사, 포장 상태 확인.</td>
+            </tr>
+         
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!-- <div id="contain-grandfather">
         <div class="contain-parents">
 
             <div class="contain-child">
@@ -207,7 +304,7 @@
         </div>
 
 
-    </div>
+    </div> -->
     <br>
     <br>
     <!-- ------------------------------------------------------------------------------------------- -->
@@ -413,7 +510,7 @@
     </table>
     <style>
         #standards-top {
-            
+
             border: 1px solid red;
             display: flex;
             flex-wrap: wrap;
@@ -460,14 +557,15 @@
             font-size: 20px;
             font-weight: 900;
         }
-        .standards-font-contain{
+
+        .standards-font-contain {
             display: flex;
         }
     </style>
-    
+
     <h1>검사기준</h1>
     <div id="standards-top">
-        
+
         <div class="standards-contain">
             <div class="standards-imege-contain">
                 <div class="manu-name">부대찌개 밀키트</div>
@@ -518,7 +616,7 @@
                     <div class="standards-font-charild">
                         <h2>비정상제품기준</h2>
                         1.김치가 부패 냄새가 나거나 너무 묽어짐<br>
-                        2.돼지고기가 색이 변했거나 냄새가 남br>
+                        2.돼지고기가 색이 변했거나 냄새가 남<br>
                         3.양념이 새거나 육수 포장이 불량<br>
                     </div>
                 </div>

@@ -93,8 +93,20 @@
         th,
         td {
             text-align: center;
-            width: 100vw;
         }
+
+        .manu-name {
+            width: 25%;
+        }
+
+        .lotno {
+            width: 20%;
+        }
+
+        .ud {
+            width: 15%;
+        }
+
 
         .button:hover {
             background-color: rgb(149, 149, 155);
@@ -108,8 +120,34 @@
         .none {
             display: none;
         }
+        #page-container{
+            border: 1px solid rebeccapurple;
+            margin: 0 auto;
+            width: 200px;
+            display: flex;
+            justify-content: space-between;
+            
+            
+        }
+        .page-none{
+            display: none;
+        }
+        .page1{
+            color: blueviolet;
+            font-weight: 900;
+            font-size: 20px;
+        }
+       
+        .page-number:hover{
+            font-weight: 900;
+            font-size: 20px;
+            color: blueviolet;
+        }
 
-      
+        
+
+
+
 
         /* 넓이에따른 if문 0~600px까지만 적용  */
         @media screen and (max-width: 600px) {
@@ -124,6 +162,7 @@
                 width: 100px;
                 height: 20px;
             }
+
             #check-option-button {
                 width: 50px;
                 height: 50px;
@@ -158,7 +197,7 @@
             }
 
             th {
-                font-size: 15px;
+                font-size: 11px;
             }
 
             td {
@@ -182,10 +221,12 @@
         <div class="mid-contain-article" id="id6"> LotNo:<input type="text" class="mid-data"> </div>
         <div class="mid-contain-article" id="id7"> 창고위치:<input type="text" class="mid-data"> </div>
         <div class="mid-contain-article " id="id8">
-            <input type="button" value="생성 확인" id="c">
-            <input type="button" value="수정 확인" id="u">
-            <input type="button" value="생성 확인" id="c2">
-            <input type="button" value="수정 확인" id="u2">
+            <input type="button" value="생성" id="c">
+            <input type="button" value="수정" id="u">
+            <input type="button" value="취소" id="ud">
+            <input type="button" value="생성" id="c2">
+            <input type="button" value="수정" id="u2">
+            <input type="button" value="취소" id="ud2">
         </div>
     </div>
     <div id="top-contain">
@@ -204,14 +245,14 @@
         <!-- 원재료 테이블 -->
         <table class="start-table">
             <tr>
-                <th>제품명</th>
+                <th class="manu-name">제품명</th>
                 <th>가격</th>
                 <th>규격</th>
                 <th>단위</th>
                 <th>공급업체</th>
-                <th>LotNo</th>
+                <th class="lotno">LotNo</th>
                 <th>창고위치</th>
-                <th>수정/삭제</th>
+                <th class="ud">수정/삭제</th>
             </tr>
             <br>
         </table>
@@ -231,7 +272,13 @@
             </tr>
 
         </table>
-
+    </div>
+    <div id="page-container">
+        <div class="page-number page-none">1</div>
+        <div class="page-number page-none">2</div>
+        <div class="page-number page-none">3</div>
+        <div class="page-number page-none">4</div>
+        <div class="page-number page-none">5</div>
     </div>
     <script>
         window.addEventListener("load", function () {
@@ -240,9 +287,12 @@
             document.querySelector(".finishe-table").classList.add("none")
             document.querySelector(".start-table").classList.add("none")
             document.querySelector("#c").classList.remove("none")
-            document.querySelector("#u").classList.remove("none")
+            document.querySelector("#u").classList.add("none")
+            document.querySelector("#ud").classList.add("none")
             document.querySelector("#c2").classList.add("none")
             document.querySelector("#u2").classList.add("none")
+            document.querySelector("#ud2").classList.add("none")
+           
 
 
             const start = [
@@ -330,10 +380,16 @@
             // })
 
 
-
+            
             //동작방법 1. 조회버튼을 누르면 조회창 열린다
             document.querySelector("#check-option-button").addEventListener("click", function () {
                 console.log("조회버튼 클릭됨")
+                let pages = document.querySelectorAll(".page-number")
+                for(let i = 0; i < pages.length; i++){
+                    pages[i].classList.remove("page-none")
+                    pages[0].classList.add("page1")
+
+                }
 
                 //--------------------------원재료
                 let starttrs = document.querySelectorAll(".start-tr ")
@@ -368,6 +424,12 @@
 
                     // 수정버튼
                     newstart.querySelector("#update").addEventListener("click", function (even) {
+                        document.querySelector("#c").classList.add("none")
+                        document.querySelector("#u").classList.remove("none")
+                        document.querySelector("#ud").classList.remove("none")
+                        document.querySelector("#c2").classList.add("none")
+                        document.querySelector("#u2").classList.add("none")
+                        document.querySelector("#ud2").classList.add("none")
 
                         console.log(even.target.parentNode.parentNode)
                         let tdtext = even.target.parentNode.parentNode.querySelectorAll("td")
@@ -389,7 +451,12 @@
                             console.log(middatas[0].value);
                             for (let i = 0; i < middatas.length; i++) {
                                 tdtext[i].innerText = middatas[i].value;
-                                middatas[i].value = ""
+                                middatas[i].value = " "
+                            }
+                        }
+                        document.querySelector("#ud").onclick = function () {
+                            for (let i = 0; i < middatas.length; i++) {
+                                middatas[i].value = " "
                             }
                         }
 
@@ -433,6 +500,12 @@
 
                     // 수정버튼
                     newfinishe.querySelector("#update").addEventListener("click", function (even) {
+                        document.querySelector("#c").classList.add("none")
+                        document.querySelector("#u").classList.add("none")
+                        document.querySelector("#ud").classList.add("none")
+                        document.querySelector("#c2").classList.add("none")
+                        document.querySelector("#u2").classList.remove("none")
+                        document.querySelector("#ud2").classList.remove("none")
                         console.log(even.target.parentNode.parentNode)
                         let tdtext = even.target.parentNode.parentNode.querySelectorAll("td")
                         let middatas = document.querySelectorAll(".mid-data")
@@ -456,6 +529,11 @@
                                 middatas[i].value = ""
                             }
                         }
+                        document.querySelector("#ud2").onclick = function () {
+                            for (let i = 0; i < middatas.length; i++) {
+                                middatas[i].value = " "
+                            }
+                        }
 
                     })
                 })
@@ -467,16 +545,20 @@
                     document.querySelector(".finishe-table").classList.add("none")
                     document.querySelector(".start-table").classList.remove("none")
                     document.querySelector("#c").classList.remove("none")
-                    document.querySelector("#u").classList.remove("none")
+                    document.querySelector("#u").classList.add("none")
+                    document.querySelector("#ud").classList.add("none")
                     document.querySelector("#c2").classList.add("none")
                     document.querySelector("#u2").classList.add("none")
+                    document.querySelector("#ud2").classList.add("none")
                 } else {
                     document.querySelector(".finishe-table").classList.remove("none")
                     document.querySelector(".start-table").classList.add("none")
                     document.querySelector("#c").classList.add("none")
                     document.querySelector("#u").classList.add("none")
                     document.querySelector("#c2").classList.remove("none")
-                    document.querySelector("#u2").classList.remove("none")
+                    document.querySelector("#u2").classList.add("none")
+                    document.querySelector("#ud").classList.add("none")
+                    document.querySelector("#ud2").classList.add("none")
                 }
             })
 
