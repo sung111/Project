@@ -120,10 +120,7 @@ function init() {
       const row = e.target.parentNode.parentNode;
       if (row.dataset.original) {
         row.innerHTML = row.dataset.original;
-        delete row.dataset.original;
-      } else {
-        console.error("원래 데이터를 찾을 수 없습니다.");
-      }
+      } 
     }
 
 
@@ -132,6 +129,8 @@ function init() {
     for (let i = 0; i < tkr.length; i++) {
       if (e.target.innerText == '삭제') {
         e.target.parentNode.parentNode.remove();
+        alert("삭제되었습니다.")
+        break;
       }
     }
   })

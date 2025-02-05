@@ -15,10 +15,10 @@ function time() {
   document.querySelector('.date2').value = date;
 }
 
-function openPop(){
+function openPop() {
   const options = 'width=700, heigth=600, top=50, left=50,scrollbars=yes'
 
-  window.open('http://127.0.0.1:5500/componant/process.html?targe=standards-contain', '_blank',options);
+  window.open('http://127.0.0.1:5500/componant/process.html?targe=standards-contain', '_blank', options);
 }
 
 function init() {
@@ -134,6 +134,10 @@ function init() {
 
     //수정
     if (e.target.innerText == "수정") {
+
+      const row = e.target.parentNode.parentNode;
+      row.dataset.original = row.innerHTML
+
       e.target.parentNode.parentNode.innerHTML =
         `
         <div><input type="datetime-local" class="inputT"></div>
@@ -160,12 +164,121 @@ function init() {
                       `
     }
 
+    if (e.target.innerText === "취소") {
+      const row = e.target.parentNode.parentNode;
+      if (row.dataset.original) {
+        row.innerHTML = row.dataset.original;
+      }
+    }
+
 
   })
 
+document.querySelector('.btn4').addEventListener('click', function() {
+
+  const productSearch = document.querySelector('.wp3').value.trim().toLowerCase();
+  const startD = document.querySelector('.indate1').value;
+  const endD = document.querySelector('.indate2').value;
+  
+  const dropBoxes = document.querySelectorAll('.dropBox2');
+  const resultSearch = dropBoxes[0] ? dropBoxes[0].value : "";      // 결과 (합격/불합격)
+  const failReasonSearch = dropBoxes[1] ? dropBoxes[1].value : "";    // 불합격 사유
+  
+  const items = document.querySelectorAll('.box3View .dex');
+  
+  items.forEach(item => {
+    let match = true;
+    
+    const itemDateText = item.children[0] ? item.children[0].innerText.trim() : "";
+    const itemProductText = item.children[1] ? item.children[1].innerText.trim().toLowerCase() : "";
+    const itemResultText = item.children[2] ? item.children[2].innerText.trim() : "";
+    const itemFailReasonText = item.children[3] ? item.children[3].innerText.trim() : "";
+    
+    if (productSearch && !itemProductText.includes(productSearch)) {
+      match = false;
+    }
+    
+    if (startD) {
+      const startDate = new Date(startD);
+      const itemDate = new Date(itemDateText);
+      if (itemDate < startDate) {
+        match = false;
+      }
+    }
+    if (endD) {
+      const endDate = new Date(endD);
+      const itemDate = new Date(itemDateText);
+      if (itemDate > endDate) {
+        match = false;
+      }
+    }
+    
+    if (resultSearch && itemResultText !== resultSearch) {
+      match = false;
+    }
+    
+    if (failReasonSearch && itemFailReasonText !== failReasonSearch) {
+      match = false;
+    }
+    
+    item.style.display = match ? '' : 'none';
+  });
+});
 
 
 
+
+  // 페이지네이션 관련 전역 변수
+  let currentPage = 1;
+  const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
+
+  // 페이지네이션을 적용하는 함수
+  function renderPagination() {
+    // 모든 등록된 항목 선택 (.item 클래스 사용)
+    const view = document.querySelector('.box3View');
+    const items = Array.from(view.querySelectorAll('.item'));
+    const totalItems = items.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
+    items.forEach((item, index) => {
+      if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    // pagination 컨테이너 업데이트
+    let paginationContainer = document.querySelector('.pagination');
+    if (!paginationContainer) {
+      // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
+      paginationContainer = document.createElement('div');
+      paginationContainer.classList.add('pagination');
+      // box3 하단에 추가
+      document.querySelector('.box3').appendChild(paginationContainer);
+    }
+
+    // 기존 페이지네이션 버튼 초기화
+    paginationContainer.innerHTML = '';
+
+    // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
+    for (let page = 1; page <= totalPages; page++) {
+      const btn = document.createElement('button');
+      btn.textContent = page;
+      if (page === currentPage) {
+        btn.disabled = true;
+      }
+      btn.addEventListener('click', () => {
+        currentPage = page;
+        renderPagination();
+      });
+      paginationContainer.appendChild(btn);
+    }
+  }
+
+  // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
+  // window.addEventListener('DOMContentLoaded', renderPagination);
 
 
 }
