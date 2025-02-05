@@ -1,25 +1,28 @@
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-body{
+
+body {
   align-items: center;
 }
 
 /* 모바일 */
 @media screen and (max-width:767px) {
-  .warrap{
+  .warrap {
     width: 100%;
     padding: 10px;
   }
-  .instruction{
+
+  .instruction {
     border: 1px solid rgb(199, 196, 196);
     background-color: #d9d9d9;
     /* color: white; */
-    
+
   }
-  .instTop{
+
+  .instTop {
     display: flex;
     justify-content: space-between;
     font-size: 15px;
@@ -27,7 +30,8 @@ body{
     padding: 5px;
     background-color: #d9d9d9;
   }
-  .wkr{
+
+  .wkr {
     border: 1px solid rgb(199, 196, 196);
     border-radius: 3px;
     padding: 3px;
@@ -38,7 +42,8 @@ body{
     color: white;
     margin: 5px 0 0 5px;
   }
-  .btn1{
+
+  .btn1 {
     font-size: 15px;
     padding: 3px;
     margin-right: 15px;
@@ -47,16 +52,16 @@ body{
     margin-bottom: 3px;
     border-radius: 5px;
   }
-  
-  .instView{
+
+  .instView {
     border: 1px solid rgb(199, 196, 196);
     height: 130px;
     overflow-y: scroll;
     margin: 10px;
     background-color: white;
   }
-  
-  .box2{
+
+  .box2 {
     /* display: flex; */
     /* height: 230px; */
     border: 1px solid rgb(199, 196, 196);
@@ -64,14 +69,16 @@ body{
     background-color: #d9d9d9;
     color: white;
   }
-  .criteria{
+
+  .criteria {
     width: 100%;
     border: 1px solid rgb(199, 196, 196);
     margin-right: 5px;
     padding: 5px;
-    
+
   }
-  .wp{
+
+  .wp {
     font-size: 15px;
     border: 1px solid rgb(199, 196, 196);
     width: 80px;
@@ -80,39 +87,45 @@ body{
     font-size: 20px;
     justify-content: center;
   }
-  .btn2B{
+
+  .btn2B {
     display: flex;
     justify-content: center;
     margin: 5px;
   }
-  .btn2{
+
+  .btn2 {
     width: 65%;
     height: 100px;
     font-size: 25px;
   }
-  .registration{
+
+  .registration {
     width: 100%;
     border: 1px solid rgb(199, 196, 196);
     /* margin-left: 5px; */
     padding: 5px;
   }
+
   /* .rightTop{
     display: flex;
     align-items: center;
     justify-content: space-around;
   } */
-  .wp2{
+  .wp2 {
     border: 1px solid rgb(199, 196, 196);
     width: 80px;
     font-size: 20px;
     text-align: center;
     margin: 5px;
   }
-  .date1{
+
+  .date1 {
     font-size: 15px;
     margin: 5px;
   }
-  .btn3{
+
+  .btn3 {
     width: 60px;
     height: 25px;
     font-size: 13px;
@@ -120,8 +133,8 @@ body{
     /* border-radius: 5px; */
     margin: 5px;
   }
-  
-  .registrationView{
+
+  .registrationView {
     margin: 5px;
     border: 1px solid rgb(199, 196, 196);
     height: 180px;
@@ -129,37 +142,45 @@ body{
     color: black;
     overflow-y: scroll;
   }
-  .box3{
+
+  .box3 {
     border: 1px solid rgb(199, 196, 196);
     align-items: center;
     background-color: #d9d9d9;
     color: black;
   }
-  .box3Top{
+
+  .box3Top {
     /* display: flex; */
     justify-content: space-around;
     padding: 5px;
   }
-  .wp3{
+
+  .wp3 {
     width: 180px;
     height: 23px;
     font-size: 18px;
     margin: 5px;
   }
-  .date2{
+
+  .date2 {
     flex-grow: 0.9;
     font-size: 16px;
     margin: 5px;
   }
-  .btn4{
+
+  .btn4 {
     width: 100px;
     font-size: 15px;
     margin: 5px;
   }
-  .indate1, .indate2{
+
+  .indate1,
+  .indate2 {
     font-size: 14px;
   }
-  .box3View{
+
+  .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
     height: 280px;
@@ -167,44 +188,54 @@ body{
     background-color: white;
     color: black;
   }
-  .btn1, .btn2, .btn3, .btn4{
+
+  .btn1,
+  .btn2,
+  .btn3,
+  .btn4 {
     cursor: pointer;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
   }
-  .wkr, .wp, .wp2{
+
+  .wkr,
+  .wp,
+  .wp2 {
     background-color: white;
     color: black;
   }
-  
-  .workorder-pagenation{
+
+  .workorder-pagenation {
     display: flex;
     justify-content: center;
   }
-  .dex{
+
+  .dex {
     width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 5px;
     border: 1px solid #c2c2c2
   }
-  .index{
+
+  .index {
     margin: 8px;
     width: 97%;
     display: flex;
     justify-content: space-around;
   }
-  
-  .dex > div{
+
+  .dex>div {
     width: 70%;
     flex-grow: 1;
     border: 1px solid #c9c9c9;
     text-align: center;
     /* justify-content: space-around; */
-    
+
   }
-  .indexBox{
+
+  .indexBox {
     text-align: center;
     width: 95%;
   }
@@ -213,17 +244,19 @@ body{
 
 /* 데탑 */
 @media screen and (min-width:768px) {
-  .warrap{
+  .warrap {
     width: 100%;
     padding: 10px;
   }
-  .instruction{
+
+  .instruction {
     border: 1px solid rgb(199, 196, 196);
     background-color: #d9d9d9;
     /* color: white; */
-    
+
   }
-  .instTop{
+
+  .instTop {
     display: flex;
     justify-content: space-between;
     font-size: 15px;
@@ -231,7 +264,8 @@ body{
     padding: 5px;
     background-color: #d9d9d9;
   }
-  .wkr{
+
+  .wkr {
     border: 1px solid rgb(199, 196, 196);
     border-radius: 3px;
     padding: 3px;
@@ -242,7 +276,8 @@ body{
     color: white;
     margin: 5px 0 0 5px;
   }
-  .btn1{
+
+  .btn1 {
     font-size: 15px;
     padding: 3px;
     margin-right: 15px;
@@ -251,16 +286,16 @@ body{
     margin-bottom: 3px;
     border-radius: 5px;
   }
-  
-  .instView{
+
+  .instView {
     border: 1px solid rgb(199, 196, 196);
     height: 130px;
     overflow-y: scroll;
     margin: 10px;
     background-color: white;
   }
-  
-  .box2{
+
+  .box2 {
     display: flex;
     height: 180px;
     border: 1px solid rgb(199, 196, 196);
@@ -268,14 +303,16 @@ body{
     background-color: #d9d9d9;
     color: white;
   }
-  .criteria{
+
+  .criteria {
     width: 50%;
     border: 1px solid rgb(199, 196, 196);
     margin-right: 5px;
     padding: 5px;
-    
+
   }
-  .wp{
+
+  .wp {
     font-size: 15px;
     border: 1px solid rgb(199, 196, 196);
     width: 80px;
@@ -284,80 +321,95 @@ body{
     font-size: 20px;
     justify-content: center;
   }
-  .btn2B{
+
+  .btn2B {
     display: flex;
     justify-content: center;
     margin: 5px;
   }
-  .btn2{
+
+  .btn2 {
     width: 80%;
     height: 100px;
     font-size: 25px;
   }
-  .registration{
+
+  .registration {
     width: 50%;
     border: 1px solid rgb(199, 196, 196);
     margin-left: 5px;
     padding: 5px;
   }
-  .rightTop{
+
+  .rightTop {
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-  .wp2{
+
+  .wp2 {
     border: 1px solid rgb(199, 196, 196);
     width: 80px;
     font-size: 20px;
     text-align: center;
     /* margin: 5px; */
   }
-  .date1{
+
+  .date1 {
     font-size: 15px;
   }
-  .btn3{
+
+  .btn3 {
     width: 60px;
     height: 25px;
     font-size: 13px;
     flex-grow: 0.5;
     /* border-radius: 5px; */
   }
-  
-  .registrationView{
+
+  .registrationView {
     margin: 5px;
     border: 1px solid rgb(199, 196, 196);
     height: 70%;
     background-color: white;
     color: black;
   }
-  .box3{
+
+  .box3 {
     border: 1px solid rgb(199, 196, 196);
     align-items: center;
     background-color: #d9d9d9;
     color: black;
   }
-  .box3Top{
+
+  .box3Top {
     display: flex;
     justify-content: space-around;
     padding: 5px;
   }
-  .wp3{
+
+  .wp3 {
     width: 180px;
     height: 23px;
     font-size: 18px;
   }
-  .date2{
+
+  .date2 {
     flex-grow: 0.9;
     font-size: 16px;
   }
-  .btn4{
+
+  .btn4 {
     width: 100px;
     font-size: 15px;
   }
-  .indate1, .indate2{
+
+  .indate1,
+  .indate2 {
     font-size: 15px;
   }
-  .box3View{
+
+  .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 5px;
     height: 280px;
@@ -365,44 +417,54 @@ body{
     background-color: white;
     color: black;
   }
-  .btn1, .btn2, .btn3, .btn4{
+
+  .btn1,
+  .btn2,
+  .btn3,
+  .btn4 {
     cursor: pointer;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
   }
-  .wkr, .wp, .wp2{
+
+  .wkr,
+  .wp,
+  .wp2 {
     background-color: white;
     color: black;
   }
-  
-  .workorder-pagenation{
+
+  .workorder-pagenation {
     display: flex;
     justify-content: center;
   }
-  .dex{
+
+  .dex {
     width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 5px;
     border: 1px solid #c2c2c2
   }
-  .index{
+
+  .index {
     margin: 8px;
     width: 97%;
     display: flex;
     justify-content: space-around;
   }
-  
-  .dex > div{
+
+  .dex>div {
     width: 70%;
     flex-grow: 1;
     border: 1px solid #d9d9d9;
     text-align: center;
     /* justify-content: space-around; */
-    
+
   }
-  .indexBox{
+
+  .indexBox {
     text-align: center;
   }
 }
