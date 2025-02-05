@@ -14,7 +14,7 @@
 .menufacturer-info-completion{
     width: 70%; height: 100%; float: right;  outline: none; text-align: center; border: 0;
 }
-
+ 
 /* 작성품목 위치 CSS */
 .order-info-list{
 display: flex; flex-direction: column;

@@ -3,38 +3,54 @@
     width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-around; align-items: center;
 }
 .noticelayer{
-    width: 90%; height: 300px; padding: 10px 20px; display: flex; flex-direction: column;
+    width: 90%; height: 300px; padding: 10px 20px; display: flex; flex-direction: column; justify-content: space-around;
 }
 
 .notice{
     width: 100% ; height: 70%; border-top: 2px solid #007bff;display: flex; flex-direction: column; justify-content: space-around; align-items: center;
 }
 .notice-latestlist{
-    width: 90%; height: 40%; padding: 10px;background-color: #ffffff; border: 1px solid #555555; border-radius: 10px; font-size: 20px; 
+    width: 100%; height: 60%; padding: 10px 14px; background-color: #ffffff; border-radius: 10px; font-size: 16px; display: flex; flex-direction: column; justify-content: space-between;
 }
-
+.notice-latestlist a{
+ font-size: 24px; color: #007bff;
+}
+.notice-latestlist div{
+    font-size: 14px; display: flex; flex-direction: row-reverse; color: #777777;
+}
+.notice-latestlist div a{
+    font-size: 18px; color: #000000;
+}
+.Notice-more{
+    text-align: end;
+}
 /* 페이지들 태그 CSS */
 .tagtitlecontainer{
     width: 90%; height: 600px; display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center;
 }
 .taglayer{
-    width: 45%; height: 45%; display: flex; flex-direction: column; align-items: center;
+    width: 45%; height: 50%; display: flex; flex-direction: column; align-items: center;
 }
 .noticelayer h2, .taglayer h2{
     align-self: start;
 }
-.noticelayer a, .taglayer a{
-align-self: end;
+ .taglayer a{
+align-self: end; 
 }
 .taglist{
-    width: 100%; height: 70%;  border-top: 2px solid #007bff; display: flex; flex-direction: column;
+    width: 100%; height: 70%;  border-top: 2px solid #007bff; display: flex; flex-direction: column; justify-content: space-around;
 }
+
 .taglist li{
-    margin-top: 15px; display: flex; justify-content: space-between;
+    margin-top: 15px; display: flex; align-items: center; justify-content: space-between; font-size: 14px;
+}
+.taglist li a{
+    width: 70%;
 }
 .taglist li div{
-    font-size: 14px; color: #555555;
+     width: 30%; color: #555555; text-align: end;
 }
-.taglist li div a{
-    color: #222222;font-size: 14px;
+.more{
+    width: 100%; text-align: end;
 }
+

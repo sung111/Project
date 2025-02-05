@@ -103,23 +103,106 @@
             });
         }
         renderTable(); // 페이지 로드 시 테이블 렌더링
+    document.getElementById("saveWorkOrder").addEventListener("click", function () {
+    const creatorInput = document.querySelector('[name="writer"]').value.trim(); // 작성자 입력값 가져오기
+
+    if (!creatorInput) {
+        alert("작성자를 입력해주세요!");
+        return;
+    }
+
+    const newWorkOrder = {
+        createDate: document.querySelector('[name="createDate"]').value,
+        dueDate: document.querySelector('[name="dueDate"]').value,
+        creator: creatorInput, // ✅ 작성자를 writer 필드에서 가져옴
+        productName: "제품명",
+        lotno: "1234",
+        unit: "개",
+        quantity: "10",
+        startDate: "2025-02-01",
+        endDate: "2025-02-10"
+    };
+
+    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    workOrders.push(newWorkOrder);
+    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+
+    alert("작업 지시서가 저장되었습니다!");
+    window.location.href = "WorkOrder.html"; 
+});
+// 새로 추가
+document.getElementById("saveWorkOrder").addEventListener("click", function () {
+    const creatorInput = document.querySelector('[name="writer"]').value.trim(); // 작성자 입력값 가져오기
+
+    if (!creatorInput) {
+        alert("작성자를 입력해주세요!");
+        return;
+    }
+
+    const newWorkOrder = {
+        createDate: document.querySelector('[name="createDate"]').value,
+        dueDate: document.querySelector('[name="dueDate"]').value,
+        creator: creatorInput, // ✅ 작성자를 writer 필드에서 가져옴
+        productName: "제품명",
+        lotno: "1234",
+        unit: "개",
+        quantity: "10",
+        startDate: "2025-02-01",
+        endDate: "2025-02-10"
+    };
+
+    console.log("✅ 저장될 작업 지시서:", newWorkOrder); // 로그 확인
+
+    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    workOrders.push(newWorkOrder);
+    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+
+    alert("작업 지시서가 저장되었습니다!");
+    window.location.href = "WorkOrder.html"; 
+});
+        // 📌 "작업지시서 저장" 버튼 클릭 시 저장
+        document.getElementById("saveWorkOrder").addEventListener("click", function () {
+            const creatorName = document.getElementById("creatorName").value; // 작성자 입력값 가져오기
+    
+            if (!creatorName) {
+                alert("작성자를 입력해주세요!");
+                return;
+            }
+    
+            const newWorkOrder = {
+                createDate: document.getElementById("createDate").value,
+                dueDate: document.getElementById("dueDate").value,
+                creator: creatorName, // 👈 작성자 추가
+                productName: "제품명",
+                lotno: "1234",
+                unit: "개",
+                quantity: "10",
+                startDate: "2025-02-01",
+                endDate: "2025-02-10"
+            };
+    
+            workOrders.push(newWorkOrder);
+            sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+    
+            alert("작업 지시서가 저장되었습니다!");
+            window.location.href = "WorkOrder.html"; // 목록 페이지로 이동
+        });
     });
 
             // 작성일자를 오늘로 시작
             document.addEventListener("DOMContentLoaded", function () {
-                // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
                 function getTodayDate() {
                     const today = new Date();
                     const year = today.getFullYear();
-                    const month = String(today.getMonth() + 1).padStart(2, '0'); // 2자리 숫자로 변환
-                    const day = String(today.getDate()).padStart(2, '0'); // 2자리 숫자로 변환
+                    const month = String(today.getMonth() + 1).padStart(2, '0');
+                    const day = String(today.getDate()).padStart(2, '0');
                     return `${year}-${month}-${day}`;
-                }
+                } 
             
-                // "작성일" input 요소에 오늘 날짜 자동 입력
-                const dateInput = document.querySelector('[alt="작성일"]');
+                // 작성일자(`createDate`) 입력 필드에 자동으로 오늘 날짜 설정
+                const dateInput = document.querySelector('[name="createDate"]');
                 if (dateInput) {
-                    dateInput.value = getTodayDate(); // 오늘 날짜 입력
+                    dateInput.value = getTodayDate();
                 }
             });
 
@@ -184,20 +267,10 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const workOrderList = document.querySelector(".workorderlist");
             
-                // 기존 작업 지시서 불러오기
-                let workOrders = [];
-                try {
-                    let storedData = sessionStorage.getItem("workOrders");
-                    workOrders = storedData ? JSON.parse(storedData) : [];
-                } catch (error) {
-                    console.error("❌ sessionStorage 데이터 오류:", error);
-                    sessionStorage.removeItem("workOrders"); // 데이터 손상 시 초기화
-                    workOrders = [];
-                }
-            
+                let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+                
                 console.log("✅ 불러온 작업 지시서:", workOrders);
             
-                // 📌 목록 추가하는 함수
                 function renderWorkOrderList() {
                     workOrderList.innerHTML = ""; // 기존 목록 초기화
             
@@ -213,7 +286,9 @@
                         listItem.innerHTML = `
                             <li class="workorderlist-createdate">${order.createDate}</li>
                             <li class="workorderlist-productplandate">${order.createDate}<br/>~<br/>${order.dueDate}</li>
-                            <li class="workorderlist-productplancalc"><button class="edit-workorder" data-index="${index}">수정</button></li>
+                            <li class="workorderlist-productplancalc">
+                                <button class="edit-workorder" data-index="${index}">수정</button>
+                            </li>
                             <li class="workorderlist-MRPcalc"><a href="#">생성</a></li>
                             <li class="workorderlist-productplanstatus"><a href="#">생산계획현황</a></li>
                             <li class="workorderlist-etc"></li>
@@ -226,11 +301,31 @@
                     document.querySelectorAll(".edit-workorder").forEach(button => {
                         button.addEventListener("click", function () {
                             const index = this.getAttribute("data-index");
-                            sessionStorage.setItem("editWorkOrder", index); // 수정할 데이터 인덱스 저장
-                            window.location.href = "NewWorkorder.html"; // NewWorkorder.html로 이동
+                            sessionStorage.setItem("editWorkOrder", index);
+                            window.location.href = "NewWorkorder.html";
                         });
                     });
                 }
             
-                renderWorkOrderList(); // 목록 렌더링
+                renderWorkOrderList();
             });
+
+            // 추가
+            document.addEventListener("DOMContentLoaded", function () {
+                const manufacturerInput = document.querySelector(".menufacturer-info-completion");
+                
+                if (!manufacturerInput) {
+                    console.error("❌ 'menufacturer-info-completion' 요소를 찾을 수 없습니다.");
+                    return;
+                }
+            
+                manufacturerInput.addEventListener("input", function () {
+                    console.log("입력값 변경:", manufacturerInput.value);
+                });
+            });
+            const targetElement = document.querySelector(".menufacturer-info-completion");
+if (targetElement) {
+    targetElement.innerHTML = "새로운 값";
+} else {
+    console.error("❌ 'menufacturer-info-completion' 요소를 찾을 수 없습니다.");
+}
