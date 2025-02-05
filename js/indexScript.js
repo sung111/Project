@@ -159,8 +159,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // 실적 보고서
     const performmenu = document.querySelector("#nav-perform");
     performmenu.addEventListener("click", function () {
-        iframe.src = "componant/perform.html"
+        iframe.src = "componant/perform_0203.html"
         LocalNavigationbar("실적보고서", "실적보고서");
+    })
+    const reportmenu = document.querySelector("#nav-report");
+    reportmenu.addEventListener("click", function () {
+        iframe.src = "componant/report.html"
+        LocalNavigationbar("실적보고서", "주요지표");
     })
     const chartmenu = document.querySelector("#nav-chart");
     chartmenu.addEventListener("click", function () {
