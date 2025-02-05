@@ -2,32 +2,19 @@
 
 
 let del = document.querySelector("#del")
-let fix = document.querySelector("#fix")
-let table = document.querySelector("table")
-// for(i=0; i<third.length; i++) {
-table.addEventListener("click", function(event) {
-console.log("클릭")
-event.target.style.color = "lightgray"
-// table.style.color = "red"
-
-fix.addEventListener("click", function() {
-    console.log("삭제")
-    alert(event.target.innerHTML + "(이)가 수정되었습니다")
-    
-    // table.style.color = "red"
-    })
-
-
-    
+                                     
 del.addEventListener("click", function() {
-    console.log("삭제")
-    alert(event.target.innerHTML + "(이)가 삭제되었습니다")
-    // table.style.color = "red"
+alert("표가 삭제되었습니다")
     })
 
-})
+
 
     
+    let fix = document.querySelector("#fix")
+                                  
+    fix.addEventListener("click", function() {
+    alert("표가 수정되었습니다")
+        })
 
 
 let first = document.querySelector("#first")
@@ -888,21 +875,31 @@ op1.addEventListener("change", function() {
 
 
 
-                                            let del = document.querySelectorAll("#del")
-                                            for(i=0; i<del.length; i++) 
-                                            del[i].addEventListener("click", function() {
-                                            sp.innerHTML = ""
-                                            console.log("삭제확인")
-                                                })
+                                            // let del = document.querySelectorAll("#del")
+                                            // for(i=0; i<del.length; i++) 
+                                            // del[i].addEventListener("click", function() {
+                                            // sp.innerHTML = ""
+                                            // console.log("삭제확인")
+                                            //     })
+
+
+                                              
+
+
+                                            // let fix = document.querySelectorAll("#fix")
+                                            // for(i=0; i<fix.length; i++) 
+                                            // fix[i].addEventListener("click", function() {
+                                            // console.log("수정확인")
 
 
 
 
 
-                                            let fix = document.querySelectorAll("#fix")
-                                            for(i=0; i<fix.length; i++) 
-                                            fix[i].addEventListener("click", function() {
-                                            console.log("수정확인")
+
+
+
+
+
                                             // let td = document.querySelector("td")
                                             // if(checked = td) {
                                             //     console.log("체크확인")
@@ -910,7 +907,7 @@ op1.addEventListener("change", function() {
                                             // }
 
                                             
-                                            })
+                                            
 
 
 
@@ -1131,10 +1128,13 @@ let td = document.querySelector("td")
 
 
                                         
+  
 
 
                                         
                 }) 
                 // 조회
+
+
 
 
