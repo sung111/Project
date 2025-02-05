@@ -1,0 +1,443 @@
+
+
+ /* 기본 세팅 */
+ body {
+
+
+    margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
+    height: 100%;
+
+    border: 3px solid #007bff;
+       
+    }
+
+
+    #Chart1 {
+
+
+        padding: 1%;
+        position: relative;
+        left: 1%;
+
+
+   } 
+
+   #Chart2, #Chart3 {
+
+
+    padding: 1%;
+    position: relative;
+    left: 1%;
+    display: none;
+
+
+} 
+
+
+
+
+
+
+
+#but1 {
+
+position: absolute;
+right: 2%;
+
+}
+
+
+ #dadd {
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+    
+
+    
+}
+
+#ddel {
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+    
+    
+
+}
+
+
+
+
+#but2 {
+
+    position: absolute;
+    right: 2%;
+    display: none;
+
+
+    }
+
+
+#dadd2 { 
+    
+   
+    
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+   
+    
+    
+}
+
+#ddel2 {
+
+  
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+   
+
+}
+
+
+
+
+
+
+#but3 {
+
+    position: absolute;
+    right: 2%;
+    display: none;
+
+
+    }
+
+
+
+
+
+#dadd3 {
+   
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+    
+   
+
+
+    
+}
+
+
+
+
+#ddel3 {
+   
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+    
+    
+
+}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* #myChart {
+
+
+        padding: 1%;
+        position: relative;
+        left: 1%;
+
+
+   } 
+
+   #myChart2, #myChart3 {
+
+
+    padding: 1%;
+    position: relative;
+    left: 1%;
+    display: none;
+
+
+}  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 전체영역 */
+.perform {
+
+
+
+
+
+padding: 10px;
+}
+
+
+table {
+
+    width: 100%;
+    /* border: 5px solid gray; */
+    border-collapse: collapse;
+    text-align: center;
+    
+    }
+
+    .daytime {
+
+
+
+        background-color: lightblue;
+    }
+
+
+
+
+    #text {
+
+
+
+
+        width: 99%;
+      height: 100px;
+    }
+    
+
+
+
+
+
+
+    #sum {
+
+        width: 99.6%;
+        height: 30%;
+        background-color: lightblue;
+        
+
+
+    }
+
+    .one {
+
+        background-color: lightblue;
+        width: 10%;
+        height: 30%;
+    }
+
+
+
+
+
+
+
+
+
+/* 등록 */
+#regi {
+
+    color: #ffffff  ; cursor: pointer;
+    background-color: #007bff;
+    
+    padding: 1%;
+    /* position: relative;
+    bottom: 65.6%; */
+   
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    /* 삭제 수정 부모 */
+    #cor {
+    
+        
+        /* position: relative;
+        left: 100%; */
+        color: #000000 ; cursor: pointer;
+        
+    
+    }
+    
+    
+    /* 삭제 수정 */
+    
+    #del {
+        padding: 1%;
+    /* position: relative;
+    right: 89.9%;
+    bottom: 5%; */
+    color: #ffffff ; cursor: pointer;
+    background-color: #007bff;
+    }
+    
+    #fix {
+    
+    
+        
+        padding: 1%;
+        /* position: relative;
+        right: 90%;
+        bottom: 5%; */
+            color: #ffffff ; cursor: pointer;
+            background-color: #007bff;
+            
+
+
+    }
+
+
+    li {
+
+            /* text-align: center; */
+            list-style: none;
+            font-size: 35px;
+        
+        
+            position: relative;
+            left: 1%;
+            bottom: 1%;
+            font-weight: bold; 
+            
+           
+        }
+        
+
+
+
+#title {
+
+
+position: relative;
+display: flex;
+left: 35%;
+bottom: 30%;
+margin-top: 3%;
+/* text-align: center; */
+
+
+
+}
+/* 일월주간 부모요소 */
+#sel {
+
+
+    /* position: relative;
+    left: 37%;
+    top: 1%; */
+
+
+
+
+/* text-align: center; */
+width: 10%;
+/* padding: 0.5%; */
+
+
+}
+
+
+
+
+/* 일간 */
+#daily {
+
+text-align: center;
+/* width: 80%; */
+
+
+
+font-family: 'Apple SD Gothic Neo', serif;
+font-size: 15px;
+font-weight: 400;
+}
+
+/* 주간 */
+#week {
+
+text-align: center;
+/* width: 200%; */
+
+font-family: 'Apple SD Gothic Neo', serif;
+font-size: 15px;
+font-weight: 400;
+}
+
+/* 월간 */
+#month {
+
+text-align: center;
+/* width: 200%; */
+
+font-family: 'Apple SD Gothic Neo', serif;
+font-size: 15px;
+font-weight: 400;
+}
+
+
+#second, #third{
+
+
+    display: none;
+ 
+}
+
+
+.daytime {
+
+
+    width: 176px;
+}
+
+
+.wektime {
+
+
+    width: 160px;
+}
+
+.montime {
+
+    width: 250px;
+
+}
+
+
+@font-face {
+    font-family: 'Apple SD Gothic Neo';
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype');
+        }
