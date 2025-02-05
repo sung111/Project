@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     workOrderList.innerHTML = "";
 
     if (workOrders.length === 0) {
-        workOrderList.innerHTML = "<li>등록된 작업 지시서가 없습니다.</li>";
+        workOrderList.innerHTML = "<li></li>";
         return;
     }
 
