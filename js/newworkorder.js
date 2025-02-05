@@ -103,6 +103,90 @@
             });
         }
         renderTable(); // 페이지 로드 시 테이블 렌더링
+    document.getElementById("saveWorkOrder").addEventListener("click", function () {
+    const creatorInput = document.querySelector('[name="writer"]').value.trim(); // 작성자 입력값 가져오기
+
+    if (!creatorInput) {
+        alert("작성자를 입력해주세요!");
+        return;
+    }
+
+    const newWorkOrder = {
+        createDate: document.querySelector('[name="createDate"]').value,
+        dueDate: document.querySelector('[name="dueDate"]').value,
+        creator: creatorInput, // ✅ 작성자를 writer 필드에서 가져옴
+        productName: "제품명",
+        lotno: "1234",
+        unit: "개",
+        quantity: "10",
+        startDate: "2025-02-01",
+        endDate: "2025-02-10"
+    };
+
+    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    workOrders.push(newWorkOrder);
+    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+
+    alert("작업 지시서가 저장되었습니다!");
+    window.location.href = "WorkOrder.html"; 
+});
+// 새로 추가
+document.getElementById("saveWorkOrder").addEventListener("click", function () {
+    const creatorInput = document.querySelector('[name="writer"]').value.trim(); // 작성자 입력값 가져오기
+
+    if (!creatorInput) {
+        alert("작성자를 입력해주세요!");
+        return;
+    }
+
+    const newWorkOrder = {
+        createDate: document.querySelector('[name="createDate"]').value,
+        dueDate: document.querySelector('[name="dueDate"]').value,
+        creator: creatorInput, // ✅ 작성자를 writer 필드에서 가져옴
+        productName: "제품명",
+        lotno: "1234",
+        unit: "개",
+        quantity: "10",
+        startDate: "2025-02-01",
+        endDate: "2025-02-10"
+    };
+
+    console.log("✅ 저장될 작업 지시서:", newWorkOrder); // 로그 확인
+
+    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    workOrders.push(newWorkOrder);
+    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+
+    alert("작업 지시서가 저장되었습니다!");
+    window.location.href = "WorkOrder.html"; 
+});
+        // 📌 "작업지시서 저장" 버튼 클릭 시 저장
+        document.getElementById("saveWorkOrder").addEventListener("click", function () {
+            const creatorName = document.getElementById("creatorName").value; // 작성자 입력값 가져오기
+    
+            if (!creatorName) {
+                alert("작성자를 입력해주세요!");
+                return;
+            }
+    
+            const newWorkOrder = {
+                createDate: document.getElementById("createDate").value,
+                dueDate: document.getElementById("dueDate").value,
+                creator: creatorName, // 👈 작성자 추가
+                productName: "제품명",
+                lotno: "1234",
+                unit: "개",
+                quantity: "10",
+                startDate: "2025-02-01",
+                endDate: "2025-02-10"
+            };
+    
+            workOrders.push(newWorkOrder);
+            sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+    
+            alert("작업 지시서가 저장되었습니다!");
+            window.location.href = "WorkOrder.html"; // 목록 페이지로 이동
+        });
     });
 
             // 작성일자를 오늘로 시작
@@ -113,7 +197,7 @@
                     const month = String(today.getMonth() + 1).padStart(2, '0');
                     const day = String(today.getDate()).padStart(2, '0');
                     return `${year}-${month}-${day}`;
-                }
+                } 
             
                 // 작성일자(`createDate`) 입력 필드에 자동으로 오늘 날짜 설정
                 const dateInput = document.querySelector('[name="createDate"]');
@@ -225,3 +309,23 @@
             
                 renderWorkOrderList();
             });
+
+            // 추가
+            document.addEventListener("DOMContentLoaded", function () {
+                const manufacturerInput = document.querySelector(".menufacturer-info-completion");
+                
+                if (!manufacturerInput) {
+                    console.error("❌ 'menufacturer-info-completion' 요소를 찾을 수 없습니다.");
+                    return;
+                }
+            
+                manufacturerInput.addEventListener("input", function () {
+                    console.log("입력값 변경:", manufacturerInput.value);
+                });
+            });
+            const targetElement = document.querySelector(".menufacturer-info-completion");
+if (targetElement) {
+    targetElement.innerHTML = "새로운 값";
+} else {
+    console.error("❌ 'menufacturer-info-completion' 요소를 찾을 수 없습니다.");
+}
