@@ -7,6 +7,7 @@
     <title>HHMES 신규 작업지시서 생성</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/newworkorder.css">
+    <script src="../js/newworkorder.js"></script>
 </head>
 
 <body>
@@ -15,27 +16,27 @@
             <tr class="menufacturer-info">
                 <td class="menufacturer-info-list">
                     <div class="menufacturer-info-name">회사명</div>
-                    <input type="text" alt="" class="menufacturer-info-completion">
+                    <input type="text" name="company" class="menufacturer-info-completion">
                 </td>
                 <td class="menufacturer-info-list">
                     <div class="menufacturer-info-name">납품처</div>
-                    <input type="text" alt="" class="menufacturer-info-completion">
+                    <input type="text" name="delivery" class="menufacturer-info-completion">
                 </td>
                 <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">전표 번호</div>
-                    <input type="text" alt="" class="menufacturer-info-completion">
+                    <div class="menufacturer-info-name">번호</div>
+                    <input type="text" name="docNumber" class="menufacturer-info-completion">
                 </td>
                 <td class="menufacturer-info-list">
                     <div class="menufacturer-info-name">작성자</div>
-                    <input type="text" alt="" class="menufacturer-info-completion">
+                    <input type="text" name="writer" class="menufacturer-info-completion">
                 </td>
                 <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">의뢰일</div>
-                    <input type="text" alt="" class="menufacturer-info-completion">
+                    <div class="menufacturer-info-name">작성일자</div>
+                    <input type="date" name="createDate" class="menufacturer-info-completion">
                 </td>
                 <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">납기일</div>
-                    <input type="text" alt="" class="menufacturer-info-completion">
+                    <div class="menufacturer-info-name">납품기간</div>
+                    <input type="date" name="dueDate" class="menufacturer-info-completion">
                 </td>
             </tr>
         </thead>
@@ -43,13 +44,13 @@
             <tr class="order-info-list">
                 <th>
                     <ol class="order-info-title">
-                        <li>품목 코드</li>
                         <li>품명[규격]</li>
-                        <li>제조 회사</li>
+                        <li>품목코드</li>
                         <li>단위</li>
-                        <li>생산 수량</li>
-                        <li>비고</li>
-                        <li>등록 삭제</li>
+                        <li>제작수량</li>
+                        <li>생산시작일</li>
+                        <li>생산종료일</li>
+                        <li>등록삭제</li>
                     </ol>
                 </th>
             </tr>
@@ -60,14 +61,14 @@
                 <td>샘플</td>
                 <td>샘플</td>
                 <td>샘플</td>
-                <td>삭제</td>
+                <td class="order-info-content-delete">삭제하기</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <td class="order-buttonlayer">
                     <button type="button" class="workorder-add">추가 생성</button>
-                    <input type="submit" class="workorder-registration" value="등록">
+                    <button type="button" class="workorder-registration">등록</button>
                     <button type="button" class="workorder-delete">삭제</button>
                     <button type="button" class="workorder-cancel">취소</button>
                 </td>

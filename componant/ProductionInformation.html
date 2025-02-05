@@ -1,65 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OOOOO 생산 정보</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/productinfo.css">
+    <script src="../data/material.js"></script>
+    <script src="../data/productdata.js"></script>
+    <script src="../data/productinmaterialdata.js"></script>
+    <script src="../data/start.js"></script>
 </head>
+
 <body>
-    <table class="productinfo">
-<thead>
-    <tr class="productinfo-info">
-        <td class="productinfo-info-list"><div class="productinfo-info-name">LOTNO.</div><p class="productinfo-info-completion" alt="productinfo-LOTNO">샘플</p></td>
-        <td class="productinfo-info-list"><div class="productinfo-info-name">단위</div><p class="productinfo-info-completion" alt="productinfo-단위">샘플</p></td>
-        <td class="productinfo-info-list"><div class="productinfo-info-name">품명[규격]</div><input type="text" class="productinfo-info-completion" alt="productinfo-품명[규격]"></td>
-        <td class="productinfo-info-list"><div class="productinfo-info-name">제작 수량</div><input type="text" class="productinfo-info-completion"alt="productinfo-제작수량"></td>
-        <td class="productinfo-info-list"><div class="productinfo-info-name">입고날짜</div><input type="date" class="productinfo-info-completion" alt="productinfo-입고날짜"></td>
-        <td class="productinfo-info-list"><div class="productinfo-info-name">유효기간</div><input type="date" class="productinfo-info-completion" alt="productinfo-유효기간"></td>
-    </tr>
-</thead>
-<tbody class="material-info">
-    <tr class="material-info-title">
-        <th>상품원료</th>
-    </tr>
-    <tr class="material-info-tag">
-        <th>재료 코드</th>
-        <th>명칭</th>
-        <th>투입 단위</th>
-        <th>재고 수량</th>
-        <th>비고</th>
-        <th>공급 업체</th>
-        <th>창고 위치</th>
-        <th>LOT/NO</th>
-    </tr>
-    <tr class="material-info-content">
-        <td>샘플</td>
-        <td>샘플</td>
-        <td>샘플</td>
-        <td>샘플</td>
-        <td>샘플</td>
-        <td>샘플</td>
-        <td>샘플</td>
-        <td>샘플</td>
-    </tr>
-</tbody>
-<tbody class="check-info">
-    <tr class="check-info-title">
-        <th>제조 과정</th>
-    </tr>
-    <tr class="check-info-process">
-        <td>
-    </td>
-    </tr>
-    <tr class="check-info-buttoncontainer">
-        <td class="check-info-buttonlayer">
-        <input type="submit" class="check-info-registration" value="등록">
-        <button type="button" class="check-info-close">취소</button>
-        <button type="button" class="check-info-mark"></button>
-    </td>
-    </tr>
-</tbody>
-    </table>
+    <div class="productinfo">
+        <table>
+            <tr class="productinfo-info">
+                <td class="productinfo-info-list">
+                    <div class="productinfo-info-name">LOTNO.</div>
+                    <p class="productinfo-info-completion" alt="productinfo-LOTNO"></p>
+                </td>
+                <td class="productinfo-info-list">
+                    <div class="productinfo-info-name">단위</div>
+                    <p class="productinfo-info-completion" alt="productinfo-단위"></p>
+                </td>
+                <td class="productinfo-info-list">
+                    <div class="productinfo-info-name">품명[규격]</div>
+                    <input type="text" class="productinfo-info-productname" alt="productinfo-품명[규격]">
+                    <ul id="finishi-list" class="finishi-list">
+                    </ul>
+                        <button type="button" class="productsearch" alt="조회">조회</button>
+                </td>
+                <td class="productinfo-info-list">
+                    <div class="productinfo-info-name">제작 수량</div><input type="text" class="productinfo-info-completion"
+                        alt="productinfo-제작수량">
+                </td>
+                <td class="productinfo-info-list">
+                    <div class="productinfo-info-name">생산 시작</div><input type="date" class="productinfo-info-completion"
+                        alt="productinfo-입고날짜" id="startDate">
+                </td>
+                <td class="productinfo-info-list">
+                    <div class="productinfo-info-name">생산 완료</div><input type="date" class="productinfo-info-completion"
+                        alt="productinfo-유효기간">
+                </td>
+            </tr>
+        </table>
+        <div class="material-info">
+        <table>
+
+            <tr class="material-info-tag">
+                <th>명칭</th>
+                <th>LOT/NO</th>
+                <th>투입단위</th>
+                <th>재고수량</th>
+                <th>공급업체</th>
+                <th>창고위치</th>
+                <th>관리사항</th>
+            </tr>
+        </table>
+    </div>
+        <div class="check-info">
+            <table>
+            <tr class="check-info-title">
+                <th>제조 과정</th>
+            </tr>
+            <tr class="check-info-process">
+                <td>
+                </td>
+            </tr>
+            <tr class="check-info-buttoncontainer">
+                <td class="check-info-buttonlayer">
+                    <input type="submit" class="check-info-registration" value="등록">
+                    <button type="button" class="check-info-delete">삭제</button>
+                    <button type="button" class="check-info-close">취소</button>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const inputField = document.querySelector(".productinfo-info-productname");
+    const searchButton = document.querySelector(".productsearch");
+    const materialTable = document.querySelector(".material-info table");
+
+    searchButton.addEventListener("click", function () {
+        let query = inputField.value.split(" [")[0].trim(); // 제품명만 추출
+        let foundItem = product.find(item => item.제품명 === query);
+
+        if (foundItem) {
+            let ingredients = productIngredients[query] || []; // 제품별 원료 목록 가져오기
+
+            let tableContent = `<tr class="material-info-tag">
+                                    <th>명칭</th><th>LOT/NO</th><th>투입단위</th><th>재고수량</th><th>공급업체</th><th>창고위치</th><th>관리사항</th>
+                                </tr>`;
+
+            ingredients.forEach(ingredient => {
+                let materialData = start.find(item => item.제품명 === ingredient) || {};
+                tableContent += `<tr class="material-info-content">
+                                    <td>${ingredient}</td>
+                                    <td>${materialData.LotNo || "N/A"}</td>
+                                    <td>${materialData.단위 || "N/A"}</td>
+                                    <td>${materialData.규격 || "N/A"}</td>
+                                    <td>${materialData.공급업체 || "N/A"}</td>
+                                    <td>${materialData.창고위치 || "N/A"}</td>
+                                    <td>${materialData.창고위치 || "N/A"}</td>
+                                </tr>`;
+            });
+
+            materialTable.innerHTML = tableContent;
+        } else {
+            alert("해당 제품을 찾을 수 없습니다.");
+        }
+    });
+});
+
+// 잠만..
+document.addEventListener("DOMContentLoaded", function () {
+    const inputField = document.querySelector(".productinfo-info-productname");
+    const suggestionList = document.getElementById("finishi-list");
+    const searchButton = document.querySelector(".productsearch");
+    const lotnoField = document.querySelector('[alt="productinfo-LOTNO"]');
+    const unitField = document.querySelector('[alt="productinfo-단위"]');
+
+    // 입력창에서 키 입력할 때마다 실행 (자동완성)
+    inputField.addEventListener("input", function () {
+        let query = inputField.value.trim().toLowerCase();
+        suggestionList.innerHTML = "";
+
+        if (query !== "") {
+            let filtered = product.filter(item => item.제품명.includes(query));
+
+            filtered.forEach(item => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `${item.제품명} [${item.규격}]`;
+
+                // 클릭 시 입력 필드에 제품명과 규격 설정
+                listItem.addEventListener("click", function () {
+                    inputField.value = `${item.제품명} [${item.규격}]`;
+                    suggestionList.innerHTML = "";
+                });
+
+                suggestionList.appendChild(listItem);
+            });
+        }
+    });
+
+    // 조회 버튼 클릭 시 LOTNO와 단위 업데이트
+    searchButton.addEventListener("click", function () {
+        let query = inputField.value.split(" [")[0].trim(); // 제품명만 가져오기
+        let foundItem = product.find(item => item.제품명 === query);
+
+        if (foundItem) {
+            lotnoField.textContent = foundItem.LotNo; // LOTNO 업데이트
+            unitField.textContent = foundItem.단위; // 단위 업데이트
+        } else {
+            alert("해당 제품을 찾을 수 없습니다."); // 제품이 없을 경우 경고
+        }
+    });
+
+    // 입력창 외부 클릭 시 목록 닫기
+    document.addEventListener("click", function (event) {
+        if (!inputField.contains(event.target) && !suggestionList.contains(event.target)) {
+            suggestionList.innerHTML = "";
+        }
+    });
+});
+    // 제작수량을 작성해야 필요한 상품 원료의 리스트 투입단위가 나타나게 된다. 작성하지 않았을 경우, null로 나타남. 
+    // 생산 시작은 기본적으로 당일로 지정해준다
+        // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
+        function getTodayDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // 2자리로 맞춤
+        const day = String(today.getDate()).padStart(2, '0'); // 2자리로 맞춤
+        return `${year}-${month}-${day}`;
+    }
+
+    // input 요소에 오늘 날짜 설정
+    document.getElementById("startDate").value = getTodayDate();
+// 등록을 누르면 현재 작성한 생산정보가 NewWorkorder.html의 리스트로 저장되게 된다.
+// 만약 NOTNO., 단위, 품명[규격], 제작수량, 생산 시작, 생산 완료 중 하나라도 작성되지 않았다면 등록을 눌러도 알림이 나타나며 저장되지 않는다.
+// colspan?
+// 잠만잠만..
+document.addEventListener("DOMContentLoaded", function () {
+    const registerButton = document.querySelector(".check-info-registration");
+
+    registerButton.addEventListener("click", function () {
+        // 입력된 데이터 가져오기
+        const lotno = document.querySelector('[alt="productinfo-LOTNO"]').textContent.trim();
+        const unit = document.querySelector('[alt="productinfo-단위"]').textContent.trim();
+        const productName = document.querySelector(".productinfo-info-productname").value.trim();
+        const quantity = document.querySelector('[alt="productinfo-제작수량"]').value.trim();
+        const startDate = document.querySelector('[alt="productinfo-입고날짜"]').value.trim();
+        const endDate = document.querySelector('[alt="productinfo-유효기간"]').value.trim();
+
+        // 필수 입력값 확인 (비어 있으면 경고 메시지 출력)
+        if (!lotno || !unit || !productName || !quantity || !startDate || !endDate) {
+            alert("모든 필수 정보를 입력해주세요.");
+            return; // 등록 중단
+        }
+
+        // 기존 데이터 불러오기
+        let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+
+        // 새로운 데이터 추가
+        workOrders.push({ lotno, unit, productName, quantity, startDate, endDate });
+
+        // 업데이트된 데이터 저장
+        sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+
+        // NewWorkorder.html로 이동
+        window.parent.document.querySelector("iframe").src = "componant/NewWorkorder.html";
+    });
+});
+</script>
 </html>

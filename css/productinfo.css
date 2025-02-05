@@ -1,7 +1,7 @@
 .productinfo{
     width: 80%; height: 700px; margin: 0 auto; margin-top: 50px; display: flex; flex-wrap: wrap;
 } 
-.productinfo thead{
+.productinfo table{
     width: 100%;
 }
 /* 정보창 CSS */
@@ -9,15 +9,33 @@
     width: 100%; height: 120px; display: flex; flex-wrap: wrap;
 }
 .productinfo-info-list{
-    width: 50%; height: 40px; border: 1px solid #999999; text-align: center;
+    width: 50%; height: 40px; border: 1px solid #999999; position: relative;text-align: center; display: flex; justify-content: center; align-items: center;
 }
 .productinfo-info-name{
-    width: 30%; height: 100%; color: #ffffff; background-color: #007bff; letter-spacing:  1px;float: left; display: flex; justify-content: center; align-items: center;
+    width: 30%;  height: 100%; color: #ffffff; background-color: #007bff; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; 
 }
 .productinfo-info-completion{
-    width: 70%; height: 100%; float: right;  outline: none; border: 0; text-align: center; display: flex; justify-content: center; align-items: center;
+    width: 70%; float: right;  outline: none; border: 0; text-align: center;
+}
+.productinfo-info-productname{
+    width: 50%; height: 100%;  outline: none; border: 0; text-align: center; 
+}
+.finishi-list {
+    width: 200px; max-height: 150px; margin-top: 5px; top: 100%; left: 50%; background-color: #ffffff; border: 1px solid #d9d9d9; position: absolute; transform: translateX(-50%); overflow-y: auto; z-index: 10; 
 }
 
+.finishi-list li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.finishi-list li:hover {
+    background-color: #f0f0f0;
+}
+.productsearch{
+    width: 20%; height: 90%; 
+}
 /* 자재창 CSS */
 .material-info{
     width: 60%; height: 80%; display: flex; flex-direction: column; 
@@ -35,16 +53,20 @@
     width: 100%; height: 40px; border: 1px solid #999999; display: flex; justify-content: space-around; align-items: center; 
 }
 .material-info-content td{
-    width: 100%; height: 100%; border-right: 1px solid #999999; display: flex; justify-content: center; align-items: center; background-color: #ffffff;
+    width: 100%; height: 100%; border-right: 1px solid #999999; display: flex; justify-content: center; align-items: center; background-color: #ffffff; font-size: 10px;
 }
 /* 확인창 CSS */
-.check-info{
+.check-info {
     width: 40%; height: 80%; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+}
+.check-info table{
+    height: 100%;
 }
 .check-info-title{
     width: 100%; height: 40px; color: #ffffff; background-color: #007bff; border: 1px solid #999999; display: flex; justify-content: center; align-items: center;
 }
-.check-info-process{
+
+.check-info-process td{
     width: 98%; height: 80%; border: 2px solid #666666;
 }
 .check-info-buttoncontainer{
@@ -53,12 +75,12 @@
 .check-info-buttonlayer{
     width: 100%; height: 100%; margin-bottom: 10px; display: flex; justify-content: space-around;
 }
+.check-info-buttonlayer input, button{
+    width: 30%; height: 50px; font-size: 20px; letter-spacing: 3px; border: 1px solid #999999; 
+}
 .check-info-registration{
-    width: 150px; height: 50px; background-color: #4CAF50; border: 1px solid #999999; font-size: 20px; letter-spacing: 3px;
+    background-color: #4CAF50; 
 }
-.check-info-close{
-    width: 150px; height: 50px; border: 1px solid #999999; font-size: 20px; letter-spacing: 3px;
-}
-.check-info-mark{
-    width: 50px; height: 50px;
+.check-info-delete{
+    background-color: #F44336; 
 }
