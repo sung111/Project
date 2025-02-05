@@ -107,19 +107,18 @@
 
             // 작성일자를 오늘로 시작
             document.addEventListener("DOMContentLoaded", function () {
-                // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
                 function getTodayDate() {
                     const today = new Date();
                     const year = today.getFullYear();
-                    const month = String(today.getMonth() + 1).padStart(2, '0'); // 2자리 숫자로 변환
-                    const day = String(today.getDate()).padStart(2, '0'); // 2자리 숫자로 변환
+                    const month = String(today.getMonth() + 1).padStart(2, '0');
+                    const day = String(today.getDate()).padStart(2, '0');
                     return `${year}-${month}-${day}`;
                 }
             
-                // "작성일" input 요소에 오늘 날짜 자동 입력
-                const dateInput = document.querySelector('[alt="작성일"]');
+                // 작성일자(`createDate`) 입력 필드에 자동으로 오늘 날짜 설정
+                const dateInput = document.querySelector('[name="createDate"]');
                 if (dateInput) {
-                    dateInput.value = getTodayDate(); // 오늘 날짜 입력
+                    dateInput.value = getTodayDate();
                 }
             });
 
@@ -184,20 +183,10 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const workOrderList = document.querySelector(".workorderlist");
             
-                // 기존 작업 지시서 불러오기
-                let workOrders = [];
-                try {
-                    let storedData = sessionStorage.getItem("workOrders");
-                    workOrders = storedData ? JSON.parse(storedData) : [];
-                } catch (error) {
-                    console.error("❌ sessionStorage 데이터 오류:", error);
-                    sessionStorage.removeItem("workOrders"); // 데이터 손상 시 초기화
-                    workOrders = [];
-                }
-            
+                let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+                
                 console.log("✅ 불러온 작업 지시서:", workOrders);
             
-                // 📌 목록 추가하는 함수
                 function renderWorkOrderList() {
                     workOrderList.innerHTML = ""; // 기존 목록 초기화
             
@@ -213,7 +202,9 @@
                         listItem.innerHTML = `
                             <li class="workorderlist-createdate">${order.createDate}</li>
                             <li class="workorderlist-productplandate">${order.createDate}<br/>~<br/>${order.dueDate}</li>
-                            <li class="workorderlist-productplancalc"><button class="edit-workorder" data-index="${index}">수정</button></li>
+                            <li class="workorderlist-productplancalc">
+                                <button class="edit-workorder" data-index="${index}">수정</button>
+                            </li>
                             <li class="workorderlist-MRPcalc"><a href="#">생성</a></li>
                             <li class="workorderlist-productplanstatus"><a href="#">생산계획현황</a></li>
                             <li class="workorderlist-etc"></li>
@@ -226,11 +217,11 @@
                     document.querySelectorAll(".edit-workorder").forEach(button => {
                         button.addEventListener("click", function () {
                             const index = this.getAttribute("data-index");
-                            sessionStorage.setItem("editWorkOrder", index); // 수정할 데이터 인덱스 저장
-                            window.location.href = "NewWorkorder.html"; // NewWorkorder.html로 이동
+                            sessionStorage.setItem("editWorkOrder", index);
+                            window.location.href = "NewWorkorder.html";
                         });
                     });
                 }
             
-                renderWorkOrderList(); // 목록 렌더링
+                renderWorkOrderList();
             });

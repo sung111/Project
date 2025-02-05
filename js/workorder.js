@@ -23,13 +23,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const workOrderList = document.querySelector(".workorderlist");
 
     if (!workOrderList) {
-        console.error("❌ '.workorderlist' 요소를 찾을 수 없습니다. HTML 구조를 확인하세요.");
+        console.error("❌ '.workorderlist' 요소를 찾을 수 없습니다.");
         return;
     }
 
     // 기존 작업 지시서 불러오기
     let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+
+    // ✅ 데이터 정합성 검사: undefined 또는 null인 데이터 필터링
+    workOrders = workOrders.filter(order => order && order.createDate && order.dueDate);
+
     console.log("✅ 불러온 작업 지시서:", workOrders);
+
+    // ✅ 기존 리스트 초기화 (중복 방지)
+    workOrderList.innerHTML = "";
 
     if (workOrders.length === 0) {
         workOrderList.innerHTML = "<li>등록된 작업 지시서가 없습니다.</li>";
@@ -43,12 +50,18 @@ document.addEventListener("DOMContentLoaded", function () {
         listItem.innerHTML = `
             <li class="workorderlist-createdate">${order.createDate}</li>
             <li class="workorderlist-productplandate">${order.createDate}<br/>~<br/>${order.dueDate}</li>
-            <li class="workorderlist-productplancalc"><button class="edit-workorder" data-index="${index}">수정</button></li>
+            <li class="workorderlist-productplancalc">
+                <button class="edit-workorder" data-index="${index}">수정</button>
+            </li>
+            <li class="workorderlist-MRPcalc"><a href="#">생성</a></li>
+            <li class="workorderlist-productplanstatus"><a href="#">생산계획현황</a></li>
+            <li class="workorderlist-etc"></li>
         `;
 
         workOrderList.appendChild(listItem);
     });
 
+    // ✅ "수정" 버튼 클릭 이벤트 추가
     document.querySelectorAll(".edit-workorder").forEach(button => {
         button.addEventListener("click", function () {
             const index = this.getAttribute("data-index");
