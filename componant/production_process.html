@@ -85,6 +85,14 @@
             justify-content: center;
             align-items: center;
         }
+        @media screen and (max-width: 600px){
+            td{
+                font-size: 12px;
+            }
+            .table-wid{
+                width: 70px;
+            }
+        }
     </style>
 </head>
 
@@ -455,29 +463,75 @@
                 let dus = document.querySelectorAll(".du")
                 for (let i = 0; i < dus.length; i++) {
                     dus[i].addEventListener("click", function (e) {
-                        console.log(e.target.parentNode.parentNode)
+                        // console.log(e.target.parentNode.parentNode)
                         let spans = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
                         let textareas = e.target.parentNode.parentNode.querySelectorAll("textarea")
                         for (let a = 0; a < spans.length; a++) {
                             spans[a].classList.add("none")
                             textareas[a].classList.remove("none")
                         }
-                     console.log("e",e.target.parentNode)
-                     e.target.parentNode.querySelector(".uok").classList.remove("none")
-                     e.target.parentNode.querySelector(".ucan").classList.remove("none")
-                     console.log("e",e.target.parentNode)
-                     e.target.parentNode.querySelector(".du").classList.add("none")
-                     e.target.parentNode.querySelector(".dd").classList.add("none")
+                        // console.log("e", e.target.parentNode)
+                        e.target.parentNode.querySelector(".uok").classList.remove("none")
+                        e.target.parentNode.querySelector(".ucan").classList.remove("none")
+                        // console.log("e", e.target.parentNode)
+                        e.target.parentNode.querySelector(".du").classList.add("none")
+                        e.target.parentNode.querySelector(".dd").classList.add("none")
 
                     })
                 }
+
                 let dds = document.querySelectorAll(".dd")
                 for (let i = 0; i < dds.length; i++) {
                     dds[i].addEventListener("click", function (e) {
-                        console.log(e.target.parentNode.parentNode)
+                        // console.log(e.target.parentNode.parentNode)
                         e.target.parentNode.parentNode.remove()
                     })
                 }
+                for (let i = 0; i < uoks.length; i++) {
+                    uoks[i].addEventListener("click", function (e) {
+                        let spans = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                        let textareas = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                        for (let a = 0; a < spans.length; a++) {
+                            spans[a].classList.remove("none")
+                            textareas[a].classList.add("none")
+                        }
+                        // console.log("e", e.target.parentNode)
+                        e.target.parentNode.querySelector(".uok").classList.add("none")
+                        e.target.parentNode.querySelector(".ucan").classList.add("none")
+                        // console.log("e", e.target.parentNode.parentNode)
+                        e.target.parentNode.querySelector(".du").classList.remove("none")
+                        e.target.parentNode.querySelector(".dd").classList.remove("none")
+
+                        let texts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
+                        // console.log(spans[0].innerText)
+                        // console.log(texts[0].value)
+                        spans[0].innerText = texts[0].value
+                        spans[1].innerText = texts[1].value
+                        spans[2].innerText = texts[2].value
+                        spans[3].innerText = texts[3].value
+                    })
+
+                }
+                for (let i = 0; i < ucans.length; i++) {
+                    ucans[i].addEventListener("click", function (e) {
+                        console.log("이벤ㄴ트활성")
+                        let spans = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                        let textareas = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                        for (let a = 0; a < spans.length; a++) {
+                            console.log("포문돔")
+                            spans[a].classList.remove("none")
+                            textareas[a].classList.add("none")
+                        }
+                        // console.log("e", e.target.parentNode)
+                        e.target.parentNode.querySelector(".uok").classList.add("none")
+                        e.target.parentNode.querySelector(".ucan").classList.add("none")
+                        // console.log("e", e.target.parentNode.parentNode)
+                        e.target.parentNode.querySelector(".du").classList.remove("none")
+                        e.target.parentNode.querySelector(".dd").classList.remove("none")
+
+                    })
+                }
+
 
                 //기존값 삭제
                 // document.querySelectorAll(".dd")
@@ -487,101 +541,202 @@
 
                     newbudea = document.createElement("tr")
                     newbudea.innerHTML = `
-                                    <td><textarea class="texttotal"></textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">.</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal"></textarea></td>
-                                    <td><textarea name="" id="" class="texttotal"></textarea></td>
-                                    <td class="table-button"><input type="button"value= "수정" class="u"><input type="button"value= "삭제" class="d"></td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea class="texttotal"></textarea>
+                                        </td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea name="" id="" class="texttotal"></textarea>
+                                        </td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea name="" id="" class="texttotal"></textarea>
+                                        </td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea name="" id="" class="texttotal"></textarea>
+                                        </td>
+                                    <td class="table-button"><input type="button"value= "확인" class="check"><input type="button"value= "수정" class="correction"><input type="button"value= "수정확인" class="correction2">
+                                        <input type="button"value= "삭제" class="delete">
+                                        </td>
                                     
                                     `
-
                     document.querySelector("#budae-jjigae").append(newbudea)
-                    //수정----------------------------
-                    newbudea.querySelector(".u").addEventListener("click", function (e) {
-                        console.log(e.target.parentNode.parentNode)
-                        let ev_parent = e.target.parentNode.parentNode
-                        console.log(e.target.parentNode.parentNode.parentNode)
-                        newbudeau = document.createElement("tr")
-                        newbudeau.innerHTML = `
-                                    <td><textarea class="texttotal">수정값</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">수정값</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">수정값</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">수정값</textarea></td>
-                                    <td class="table-button"><input type="button"value= "확인" class="ok"><input type="button"value= "취소" class="can"></td>
-                                    
-                                    `
-                        e.target.parentNode.parentNode.after(newbudeau)
-                        newbudeau.querySelector(".ok").addEventListener("click", function (e) {
-                            console.log(e.target.parentNode.parentNode)
-                            let ev = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                            console.log(ev[0].value)
-                            console.log(ev_parent.querySelectorAll(".texttotal")[0].value)
-                            ev_parent.querySelectorAll(".texttotal")[0].value = ev[0].value
-                            ev_parent.querySelectorAll(".texttotal")[1].value = ev[1].value
-                            ev_parent.querySelectorAll(".texttotal")[2].value = ev[2].value
-                            ev_parent.querySelectorAll(".texttotal")[3].value = ev[3].value
-                            console.log(e.target.parentNode.parentNode)
-                            e.target.parentNode.parentNode.remove()
-                        })
-                        newbudeau.querySelector(".can").addEventListener("click", function (e) {
-                            e.target.parentNode.parentNode.remove()
-                        })
+                    newbudea.querySelector(".correction").classList.add("none")
+                    newbudea.querySelector(".correction2").classList.add("none")
+                    newbudea.querySelector(".delete").classList.add("none")
+                    newbudea.querySelector(".check").addEventListener("click", function (e) {
+                        // console.log(e.target.parentNode.parentNode)
+                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                        let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
+                        // console.log("es[0].innnerText",es[0].innnerText)
+                        // console.log("ts[0].value",ts[0].value)
+                        es[0].innerText = ts[0].value
+                        es[1].innerText = ts[1].value
+                        es[2].innerText = ts[2].value
+                        es[3].innerText = ts[3].value
+                        // console.log(ts[0].value)
+                        // console.log(ts[1].value)
+                        // console.log(ts[2].value)
+                        // console.log(ts[3].value)
+                        // console.log(e.target)
+                        e.target.classList.add("none")
+                        e.target.parentNode.querySelector(".correction").classList.remove("none")
+                        e.target.parentNode.querySelector(".delete").classList.remove("none")
+                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                        for (let i = 0; i < es.length; i++) {
+                            es[i].classList.remove("none")
+                            texts[i].classList.add("none")
+                        }
+
 
                     })
-                    //삭제---------------------------
-                    newbudea.querySelector(".d").addEventListener("click", function (e) {
+                    newbudea.querySelector(".delete").addEventListener("click", function (e) {
+                        // console.log(e.target.parentNode.parentNode)
                         e.target.parentNode.parentNode.remove()
+                        e.target.classList.add("none")
+                    })
+
+                    newbudea.querySelector(".correction").addEventListener("click", function (e) {
+                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        e.target.parentNode.querySelector(".delete").classList.add("none")
+                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                        e.target.classList.add("none")
+
+
+                        console.log("e.target.parentNode", e.target.parentNode)
+                        e.target.parentNode.querySelector(".correction2").classList.remove("none")
+                        for (let i = 0; i < es.length; i++) {
+                            es[i].classList.add("none")
+                            texts[i].classList.remove("none")
+                        }
+
+                        newbudea.querySelector(".correction2").addEventListener("click", function (e) {
+                            e.target.parentNode.querySelector(".correction2").classList.add("none")
+                            e.target.parentNode.querySelector(".delete").classList.remove("none")
+                            let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                            let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
+                            let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                            es[0].innerText = ts[0].value
+                            es[1].innerText = ts[1].value
+                            es[2].innerText = ts[2].value
+                            es[3].innerText = ts[3].value
+                            for (let i = 0; i < es.length; i++) {
+                                es[i].classList.remove("none")
+                                texts[i].classList.add("none")
+                                e.target.classList.add("none")
+                                // console.log(e.target.parentNode)
+                                e.target.parentNode.querySelector(".correction").classList.remove("none")
+                               
+                            }
+                        })
 
                     })
+
+
                 })
                 //-------------------------------------------------
                 document.querySelector("#c2").addEventListener("click", function () {
 
                     newkimchi = document.createElement("tr")
                     newkimchi.innerHTML = `
-                                    <td><textarea class="texttotal"></textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">.</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal"></textarea></td>
-                                    <td><textarea name="" id="" class="texttotal"></textarea></td>
-                                    <td class="table-button"><input type="button"value= "수정" class="u"><input type="button"value= "삭제" class="d"></td>
-
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea class="texttotal"></textarea>
+                                        </td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea name="" id="" class="texttotal"></textarea>
+                                        </td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea name="" id="" class="texttotal"></textarea>
+                                        </td>
+                                    <td>
+                                        <span class="spantotal"></span>
+                                        <textarea name="" id="" class="texttotal"></textarea>
+                                        </td>
+                                    <td class="table-button"><input type="button"value= "확인" class="check"><input type="button"value= "수정" class="correction"><input type="button"value= "수정확인" class="correction2">
+                                        <input type="button"value= "삭제" class="delete">
+                                        </td>
+                                    
                                     `
 
                     document.querySelector("#kimchi-soup").append(newkimchi)
-                    newkimchi.querySelector(".d").addEventListener("click", function (e) {
-                        e.target.parentNode.parentNode.remove()
+                    newkimchi.querySelector(".correction").classList.add("none")
+                    newkimchi.querySelector(".correction2").classList.add("none")
+                    newkimchi.querySelector(".delete").classList.add("none")
+                    newkimchi.querySelector(".check").addEventListener("click", function (e) {
+                        // console.log(e.target.parentNode.parentNode)
+                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                        let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
+                        // console.log("es[0].innnerText",es[0].innnerText)
+                        // console.log("ts[0].value",ts[0].value)
+                        es[0].innerText = ts[0].value
+                        es[1].innerText = ts[1].value
+                        es[2].innerText = ts[2].value
+                        es[3].innerText = ts[3].value
+                        // console.log(ts[0].value)
+                        // console.log(ts[1].value)
+                        // console.log(ts[2].value)
+                        // console.log(ts[3].value)
+                        // console.log(e.target)
+                        e.target.classList.add("none")
+                        e.target.parentNode.querySelector(".correction").classList.remove("none")
+                        e.target.parentNode.querySelector(".delete").classList.remove("none")
+                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                        for (let i = 0; i < es.length; i++) {
+                            es[i].classList.remove("none")
+                            texts[i].classList.add("none")
+                        }
+
+
                     })
-                    //
-                    newkimchi.querySelector(".u").addEventListener("click", function (e) {
-                        console.log(e.target.parentNode.parentNode)
-                        let ev_parent = e.target.parentNode.parentNode
-                        console.log(e.target.parentNode.parentNode.parentNode)
-                        newkimchiu = document.createElement("tr")
-                        newkimchiu.innerHTML = `
-                                    <td><textarea class="texttotal">수정값</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">수정값</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">수정값</textarea></td>
-                                    <td><textarea name="" id="" class="texttotal">수정값</textarea></td>
-                                    <td class="table-button"><input type="button"value= "확인" class="ok"><input type="button"value= "취소" class="can"></td>
-                                    
-                                    `
-                        e.target.parentNode.parentNode.after(newkimchiu)
-                        newkimchiu.querySelector(".ok").addEventListener("click", function (e) {
-                            console.log(e.target.parentNode.parentNode)
-                            let ev = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                            console.log(ev[0].value)
-                            console.log(ev_parent.querySelectorAll(".texttotal")[0].value)
-                            ev_parent.querySelectorAll(".texttotal")[0].value = ev[0].value
-                            ev_parent.querySelectorAll(".texttotal")[1].value = ev[1].value
-                            ev_parent.querySelectorAll(".texttotal")[2].value = ev[2].value
-                            ev_parent.querySelectorAll(".texttotal")[3].value = ev[3].value
-                            console.log(e.target.parentNode.parentNode)
-                            e.target.parentNode.parentNode.remove()
+                    newkimchi.querySelector(".delete").addEventListener("click", function (e) {
+                        // console.log(e.target.parentNode.parentNode)
+                        e.target.parentNode.parentNode.remove()
+                        e.target.classList.add("none")
+                    })
+
+                    newkimchi.querySelector(".correction").addEventListener("click", function (e) {
+                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        e.target.parentNode.querySelector(".delete").classList.add("none")
+                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                        e.target.classList.add("none")
+
+
+                        console.log("e.target.parentNode", e.target.parentNode)
+                        e.target.parentNode.querySelector(".correction2").classList.remove("none")
+                        for (let i = 0; i < es.length; i++) {
+                            es[i].classList.add("none")
+                            texts[i].classList.remove("none")
+                        }
+
+                        newkimchi.querySelector(".correction2").addEventListener("click", function (e) {
+                            e.target.parentNode.querySelector(".correction2").classList.add("none")
+                            e.target.parentNode.querySelector(".delete").classList.remove("none")
+                            let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
+                            let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
+                            let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
+                            es[0].innerText = ts[0].value
+                            es[1].innerText = ts[1].value
+                            es[2].innerText = ts[2].value
+                            es[3].innerText = ts[3].value
+                            for (let i = 0; i < es.length; i++) {
+                                es[i].classList.remove("none")
+                                texts[i].classList.add("none")
+                                e.target.classList.add("none")
+                                // console.log(e.target.parentNode)
+                                e.target.parentNode.querySelector(".correction").classList.remove("none")
+                               
+                            }
                         })
-                        newkimchiu.querySelector(".can").addEventListener("click", function (e) {
-                            e.target.parentNode.parentNode.remove()
-                        })
-                        //
+
                     })
                 })
                 //-------------------------------------------------
