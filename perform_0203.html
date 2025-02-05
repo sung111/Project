@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../perform.css">
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body class="perform">
     
@@ -15,7 +18,7 @@
         <option>주간</option>
         <option>월간</option> -->
     
-            
+            <div id="sch">
             <select id="sel">
             <option id="daily">일간</option>
             <option id="week">주간</option>
@@ -27,34 +30,38 @@
             <input type="date" id="date" value="2025-02-03" name="날짜선택">
             <input type="week" id="weeks" value="2025-02-03" name="날짜선택">
             <input type="month" id="months" value="2025-02-03" name="날짜선택">
+            <!-- <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> -->
             </div>    
-            
+            </div>
 
             
-            <div id="set">
-            <input type="text" id="text">
-            <button id="sele">조회</button>
-            </div>
-            <div id="cor">
-                <button id="del">삭제</button>
-                <button id="fix">수정</button>
-                </div>
+            <li>실적 확인표</li>
 
             </nav>
 
 
                 
 
+            <div id="cor">
+                <button id="del">삭제</button>
+                <button id="fix">수정</button>
+                <!-- <button id="join">등록</button> -->
+
+                
+                <div id="set">
+                    <input type="text" id="text">
+                    <button id="sele">조회</button>
+                    </div>
+                </div>
 
 
+                    
+          
 
 
-
-
-
-            <div>
-                <br><br>
-                <table border="1" id="first">
+            <div style="overflow-x:auto;">
+                <br><br><br>
+                <table border="1" id="first" 
                     <thead>
                         <tr>
                             <th class="daytime"></th>
@@ -73,7 +80,7 @@
 
 
                             <tr id="budae1">
-                            <td>부대찌개</td>
+                                <td>부대찌개</td>
                                 <td>100</td>
                                 <td>835</td>
                                 <td>445</td>
