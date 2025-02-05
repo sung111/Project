@@ -1,15 +1,22 @@
-<<<<<<< HEAD
-
-   /* 기본 세팅 */
-   body {
+/* 기본 세팅 */
+body {
 
 
     margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
-        
+    height: 100%;
        
+    border: 3px solid #007bff;
     }
 
-    
+    li {
+
+                position: relative;
+                left: 60%;
+                /* top: 2%; */
+                font-size: 35px;
+
+
+    }
 
 
 /* 전체영역 */
@@ -26,30 +33,44 @@ padding: 10px;
     #nav {
 
 width: 100%;
-height: 100px;
-border: 5px solid red;
-display: flex;
-justify-content: space-evenly;
+height: 140px;
+border: 5px solid lightgray;
+/* display: flex;
+justify-content: space-evenly; */
 /* align-items: center; */
 /* padding: 10px; */
 
 
 }
 
+
+
+
+#sch {
+
+display: flex;
+position: relative;
+left: 20%;
+top: 30%;
+
+
+
+}
 /* 일월주간 부모요소 */
 #sel {
 
 
-    position: relative;
-    top: 30px;
-
+    /* position: absolute;
+    top: 8%;
+    left: 10%;
+ */
 
 
 /* height: 30px;
 padding: 5px; */
-width: 100px;
-height: 30px;
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
+width: 10%;
+height: 36px;
+
 
 }
 
@@ -60,29 +81,32 @@ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo
 #daily {
 
 text-align: center;
-width: 100px;
+width: 150%;
+
 font-family: 'Apple SD Gothic Neo', serif;
-font-size: 20px;
+font-size: 15px;
 font-weight: 400;
 }
 
 /* 주간 */
 #week {
 
-text-align: center;
-width: 100px;
+    text-align: center;
+    width: 150%;
+
 font-family: 'Apple SD Gothic Neo', serif;
-font-size: 20px;
+font-size: 15px;
 font-weight: 400;
 }
 
 /* 월간 */
 #month {
 
-text-align: center;
-width: 100px;
+    text-align: center;
+    width: 150%;
+
 font-family: 'Apple SD Gothic Neo', serif;
-font-size: 20px;
+font-size: 15px;
 font-weight: 400;
 }
 
@@ -90,13 +114,29 @@ font-weight: 400;
 
 
 
+
+
+/* 일월주달력 부모요소 */
+#cal {
+
+/* position: absolute;
+left: 200px;
+top: 53px;
+width: 70%; */
+
+}
+
+
 /* 일간 달력 */
 #date {
 
 text-align: center;
-width: 150px;
-position: relative;
-top: 30px;
+
+
+/* position: relative;
+
+left: 10%;
+width: 25%; */
 
 /* font-family: 'Gowun Batang', serif;
 font-size: 20px;
@@ -107,52 +147,54 @@ height: 30px;
 
 
 font-family: 'Apple SD Gothic Neo', serif;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
 
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
+
 }
 
 
 
-/* 주간 달력 */
-#weeks {
+            /* 주간 달력 */
+        #weeks {
 
     text-align: center;
         display: none;
-       position: relative;
-        top: 30px;
+       /* position: relative;
+       left: 10%;
+    width: 20%; */
 
         font-family: 'Apple SD Gothic Neo', serif;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
 
         /* padding: 1px; */
         height: 30px;
 
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
+
 
         
         }
 
 
         /* 월간 달력 */
-#months {
+        #months {
 
     text-align: center;
     display: none;
-       position: relative;
-        top: 30px;
+       /* position: relative;
+       left: 10%;
+       width: 20%; */
 
     
     font-family: 'Apple SD Gothic Neo', serif;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
 
     /* padding: 1px; */
     height: 30px;
 
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;  
+
 
 
 }
@@ -190,9 +232,10 @@ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo
 /* 검색 조회 부모*/
 #set {
 
-
-    position: relative;
-    top: 30px;
+       
+    position: absolute;
+    top: 9%;
+    left: 20%;
 
     color: #000000 ; cursor: pointer;
 }
@@ -201,9 +244,12 @@ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo
 /* 검색 */
 #text {
 
+width: 80%;
+height: 30px;
 
-position: relative;
-top: 5px;
+/* position: relative;
+bottom: 120%;
+left: 32%; */
 
 }
 
@@ -215,8 +261,15 @@ top: 5px;
 color: #ffffff  ; cursor: pointer;
 background-color: #007bff;
 
-position: relative;
-top: 6px;
+padding: 7px;
+position: absolute;
+
+/* bottom: 80%; */
+left: 90%;
+
+
+width: 30%;
+height: 100%;
 }
 
 
@@ -237,7 +290,7 @@ top: 6px;
 
     
     position: relative;
-    left: 100px;
+    top: 46px;
     color: #000000 ; cursor: pointer;
     
 
@@ -246,16 +299,45 @@ top: 6px;
 
 /* 삭제 수정 */
 
-#del, #fix {
-
-position: relative;
-left: -100px;
-top: 24px;
+#del {
+    padding: 3px;
+/* position: relative;
+left: 120%;
+        top: 31%; */
 color: #ffffff ; cursor: pointer;
 background-color: #007bff;
+
+width: 8%;
+height: 29%;
 }
 
+#fix {
 
+
+    
+        padding: 3px;
+        /* position: relative;
+        right: 32%;
+        top: 3%; */
+        color: #ffffff ; cursor: pointer;
+        background-color: #007bff;
+
+        width: 8%;
+        height: 28%;
+        
+}
+
+/* #join {
+
+
+    padding: 3px;
+    position: relative;
+    right: 130px;
+    top: 36px;
+    color: #ffffff ; cursor: pointer;
+    background-color: #007bff;
+
+} */
 
 
 
@@ -283,19 +365,32 @@ width: 100%;
 
 
 /* 가장 맨 윗표 가리기 */
-#first, #second, #third {
+#second {
 
 display: none;
+position: relative;
+bottom: 20px;
 /* border: 5px solid red; */
 /* width: 500px; */
 
 }
+
+#third {
+
+    display: none;
+    position: relative;
+    bottom: 50px;
+    /* border: 5px solid red; */
+    /* width: 500px; */
+    
+    }
 
 .daytime {
 
 
     width: 176px;
 }
+
 
 .wektime {
 
@@ -308,6 +403,12 @@ display: none;
     width: 250px;
 
 }
+
+
+
+
+
+
 
 
 /* 2번째 가릴 표 */
@@ -327,19 +428,21 @@ display: none;
 
 
 
-.budae {
 
-    display: none;
-    width: 500%;
+/* 일간 식품 */
+#budae1 {
+
+    /* display: none; */
+    /* width: 500%; */
 text-align: center;
 
 
 }
 
 
-.nabe {
+#nabe1 {
 
-display: none;
+/* display: none; */
 width: auto;
 text-align: center;
 
@@ -347,9 +450,9 @@ text-align: center;
 }
 
 
-.kimchi {
+#kimchi1 {
 
-display: none;
+/* display: none; */
 width: auto;
 text-align: center;
 
@@ -357,9 +460,9 @@ text-align: center;
 }
 
 
-.ttuk {
+#ttuk1 {
 
-display: none;
+/* display: none; */
 width: auto;
 text-align: center;
 
@@ -367,9 +470,122 @@ text-align: center;
 }
 
 
-.ggop {
+#ggop1 {
 
-display: none;
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+
+
+
+
+
+
+/* 주간 식품 */
+#budae2 {
+
+    /* display: none; */
+    /* width: 500%; */
+text-align: center;
+
+
+}
+
+
+#nabe2 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+#kimchi2 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+#ttuk2 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+#ggop2 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+
+
+
+
+
+/* 월간 식품 */
+#budae3 {
+
+    /* display: none; */
+    /* width: 500%; */
+text-align: center;
+
+
+}
+
+
+#nabe3 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+#kimchi3 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+#ttuk3 {
+
+/* display: none; */
+width: auto;
+text-align: center;
+
+
+}
+
+
+#ggop3 {
+
+/* display: none; */
 width: auto;
 text-align: center;
 
@@ -386,6 +602,9 @@ tr {
     /* border: 5px solid red; */
     width: 100%;
 }
+
+
+
 
 
 
@@ -434,23 +653,38 @@ top: 150px;
 /* 
 #days {
 
-display: none;
+/* display: none; */
 
+/* } */
+
+
+
+
+
+
+/* #comm {
+
+
+    width: 600px;
+    height: 50px;
 } */
-
-
-
-
-
-
-
 
     
 
    
 
 
+#page {
 
+
+
+
+
+
+    position: relative;
+    top: 500px;
+    text-align: center;
+} 
 
 
 
@@ -463,473 +697,6 @@ display: none;
     font-display: swap;
     src: url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),
          url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype');
-}
-
-=======
-
-   /* 기본 세팅 */
-   body {
-
-
-    margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
-        
-       
-    }
-
-    
-
-
-/* 전체영역 */
-.perform {
-
-
-
-
-
-padding: 10px;
-}
-
-    /* 메뉴 세팅 */
-    #nav {
-
-width: 100%;
-height: 100px;
-border: 5px solid red;
-display: flex;
-justify-content: space-evenly;
-/* align-items: center; */
-/* padding: 10px; */
-
-
-}
-
-/* 일월주간 부모요소 */
-#sel {
-
-
-    position: relative;
-    top: 30px;
-
-
-
-/* height: 30px;
-padding: 5px; */
-width: 100px;
-height: 30px;
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
-
-}
-
-
-
-
-/* 일간 */
-#daily {
-
-text-align: center;
-width: 100px;
-font-family: 'Apple SD Gothic Neo', serif;
-font-size: 20px;
-font-weight: 400;
-}
-
-/* 주간 */
-#week {
-
-text-align: center;
-width: 100px;
-font-family: 'Apple SD Gothic Neo', serif;
-font-size: 20px;
-font-weight: 400;
-}
-
-/* 월간 */
-#month {
-
-text-align: center;
-width: 100px;
-font-family: 'Apple SD Gothic Neo', serif;
-font-size: 20px;
-font-weight: 400;
-}
-
-
-
-
-
-/* 일간 달력 */
-#date {
-
-text-align: center;
-width: 150px;
-position: relative;
-top: 30px;
-
-/* font-family: 'Gowun Batang', serif;
-font-size: 20px;
-font-weight: 400; */
-
-padding: 1px;
-height: 30px;
-
-
-font-family: 'Apple SD Gothic Neo', serif;
-    font-size: 20px;
-    font-weight: 400;
-
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
-}
-
-
-
-/* 주간 달력 */
-#weeks {
-
-    text-align: center;
-        display: none;
-       position: relative;
-        top: 30px;
-
-        font-family: 'Apple SD Gothic Neo', serif;
-    font-size: 20px;
-    font-weight: 400;
-
-        /* padding: 1px; */
-        height: 30px;
-
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
-
-        
         }
 
-
-        /* 월간 달력 */
-#months {
-
-    text-align: center;
-    display: none;
-       position: relative;
-        top: 30px;
-
-    
-    font-family: 'Apple SD Gothic Neo', serif;
-    font-size: 20px;
-    font-weight: 400;
-
-    /* padding: 1px; */
-    height: 30px;
-
-margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;  
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 검색 조회 부모*/
-#set {
-
-
-    position: relative;
-    top: 30px;
-
-    color: #000000 ; cursor: pointer;
-}
-
-
-/* 검색 */
-#text {
-
-
-position: relative;
-top: 5px;
-
-}
-
-
-
-/* 조회 */
-#sele {
-
-color: #ffffff  ; cursor: pointer;
-background-color: #007bff;
-
-position: relative;
-top: 6px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 삭제 수정 부모 */
-#cor {
-
-    
-    position: relative;
-    left: 100px;
-    color: #000000 ; cursor: pointer;
-    
-
-}
-
-
-/* 삭제 수정 */
-
-#del, #fix {
-
-position: relative;
-left: -100px;
-top: 24px;
-color: #ffffff ; cursor: pointer;
-background-color: #007bff;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* 표 기본 세팅 */
-table {
-
-width: 100%;
-/* border: 5px solid gray; */
-border-collapse: collapse;
-
-}
-
-/* thead {
-
-width: 100%;
-
-} */
-
-
-/* 가장 맨 윗표 가리기 */
-#first, #second, #third {
-
-display: none;
-/* border: 5px solid red; */
-/* width: 500px; */
-
-}
-
-.daytime {
-
-
-    width: 176px;
-}
-
-.wektime {
-
-
-    width: 160px;
-}
-
-.montime {
-
-    width: 250px;
-
-}
-
-
-/* 2번째 가릴 표 */
-.item {
-
-
-
-/* background-color: lightgray; */
-text-align: center;
-display: none;
-
-}
-
-
-
-
-
-
-
-.budae {
-
-    display: none;
-    width: 500%;
-text-align: center;
-
-
-}
-
-
-.nabe {
-
-display: none;
-width: auto;
-text-align: center;
-
-
-}
-
-
-.kimchi {
-
-display: none;
-width: auto;
-text-align: center;
-
-
-}
-
-
-.ttuk {
-
-display: none;
-width: auto;
-text-align: center;
-
-
-}
-
-
-.ggop {
-
-display: none;
-width: auto;
-text-align: center;
-
-
-}
-
-
-
-
-
-
-tr {
-
-    /* border: 5px solid red; */
-    width: 100%;
-}
-
-
-
-
-
-tbody {
-
-
-     width: 100%;
-    /* border: 5px solid red; */
-}
-
-
-
-
-
-
-/* .budaes {
-
-
-width: auto;
-text-align: center;
-
-
-} */
-
-
-/* 
-.hide {
-
-
-border: 5px solid red;
-} */
-
-/* table {
-            
-position: relative;
-top: 150px;
-
-
-
-} */
-
-
-
-/* 
-#days {
-
-display: none;
-
-} */
-
-
-
-
-
-
-
-
-    
-
-   
-
-
-
-
-
-
-
-
-    @font-face {
-    font-family: 'Apple SD Gothic Neo';
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-    src: url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype');
-}
-
->>>>>>> be0db528cddf2eb664a15bb8d36b80bde50043ba
+ 

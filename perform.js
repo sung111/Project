@@ -1,6 +1,35 @@
 
 
 
+let del = document.querySelector("#del")
+let fix = document.querySelector("#fix")
+let table = document.querySelector("table")
+// for(i=0; i<third.length; i++) {
+table.addEventListener("click", function(event) {
+console.log("클릭")
+event.target.style.color = "lightgray"
+// table.style.color = "red"
+
+fix.addEventListener("click", function() {
+    console.log("삭제")
+    alert(event.target.innerHTML + "(이)가 수정되었습니다")
+    
+    // table.style.color = "red"
+    })
+
+
+    
+del.addEventListener("click", function() {
+    console.log("삭제")
+    alert(event.target.innerHTML + "(이)가 삭제되었습니다")
+    // table.style.color = "red"
+    })
+
+})
+
+    
+
+
 let first = document.querySelector("#first")
 let second = document.querySelector("#second")          
 let third = document.querySelector("#third")
@@ -15,6 +44,11 @@ let op4 = document.querySelector("#month")
 let days = document.querySelector("#date")
 let weeks = document.querySelector("#weeks")
 let months = document.querySelector("#months")
+
+
+
+
+
 
 //select값이 바뀔때마다
 // change 이벤트를 준다
@@ -65,6 +99,7 @@ op1.addEventListener("change", function() {
             weeks.style.display = "block"
             weeks.value = " 2025-02-03 ";
             months.style.display = "none"
+            weeks.valueAsDate = new Date("2025-02-03");
             // one.style.display ="none"
 
             // def.innerHTML = "<br> <table border=1>" 
@@ -100,7 +135,7 @@ op1.addEventListener("change", function() {
             days.style.display = "none";
             weeks.style.display = "none"
             months.style.display = "block"
-            months.valuesAsDate = new Date("2025-02-03");
+            months.valueAsDate = new Date("2025-02-03");
             // def.innerHTML = "<br> <table border=1 id=t>" 
 
             //                                     + "<thead>"
@@ -341,20 +376,20 @@ op1.addEventListener("change", function() {
 
 
 
-                                       if(text == "") {
-                                        alert("검색어를 입력해주세요");
-                                        // sp.innerHTML = ""
-                                       } else if (text == "정답") {
-                                        console.log("정답입니다")
-                                       } else {
-                                         alert("조회된 내용이 없습니다");
-                                        //  sp.innerHTML = ""
-                                       }       
-                                            } 
+                                    //    if(text == "") {
+                                    //     alert("검색어를 입력해주세요");
+                                    //     // sp.innerHTML = ""
+                                    //    } else if (text == "정답") {
+                                    //     console.log("정답입니다")
+                                    //    } else {
+                                    //      alert("조회된 내용이 없습니다");
+                                    //     //  sp.innerHTML = ""
+                                    //    }       
+                                    //         } 
                                             
                                             
                                             
-                                            
+                   }              
 
 
 
@@ -466,15 +501,15 @@ op1.addEventListener("change", function() {
                                     //   console.log(item[i])
                                     //   console.log("확인")
                                                    
-                                       if(text == "") {
-                                        alert("검색어를 입력해주세요");
-                                        // sp.innerHTML = ""
-                                       } else if (text == "정답") {
-                                        console.log("정답입니다")
-                                       } else {
-                                         alert("조회된 내용이 없습니다");
-                                        //  sp.innerHTML = ""
-                                       }           
+                                    //    if(text == "") {
+                                    //     alert("검색어를 입력해주세요");
+                                    //     // sp.innerHTML = ""
+                                    //    } else if (text == "정답") {
+                                    //     console.log("정답입니다")
+                                    //    } else {
+                                    //      alert("조회된 내용이 없습니다");
+                                    //     //  sp.innerHTML = ""
+                                    //    }           
 
 
 
@@ -589,12 +624,6 @@ op1.addEventListener("change", function() {
 
 
 
-                                     // 공백 검색시 알림창 표시
-                                            if(text == "") {
-                                        alert("검색어를 입력해주세요");
-                                        sp.innerHTML = ""
-
-                                            }
 
 
                                         // else  if (text == "밀푀유나베") {
@@ -633,59 +662,140 @@ op1.addEventListener("change", function() {
 
                                        
 
-                                    // 이걸 밖으로 빼야함
-                                    let nabe = document.querySelectorAll(".nabe")
-                                    let budae = document.querySelectorAll(".budae")
-                                        
-                                       switch(text) {
+                                    // // 이걸 밖으로 빼야함
+                                    // let nabe = document.getElementById("nabe3")
+                                    // let budae = document.getElementById("budae3")
+                                    // let td = document.querySelector("td")
+
+                                    //    switch(text) {
 
 
-                                            case "부대찌개":
+                                    //         case "부대찌개":
 
-                                            console.log("정답아니야")
-                                            for(i=0; i<budae.length; i++){
-                                            console.log(budae[i])
-
-                                            // budae[i].style.display = "block";
-                                            budae[i].style.display = "inline";
-                                            // budae[i].style.display = "-webkit-inline-box";
-                                            // budae[i].style.width = "75%"
+                                    //         console.log("정답아니야")
+                                              
+                                    //         alert(text + "가 검색되었습니다")
 
 
-                                            // budae[i].style.border = "1px, solid, red"
-                                            nabe[i].style.display = "none";  // 이것들은 안으로 넣고
-                                            }
-                                            // budae[i].style.display = "block";
+
+
+                                    //         // for(i=0; i<budae.length; i++){
+                                    //         // console.log(budae[i])
+
+                                    //         // budae[i].style.display = "block";
+                                    //         // budae.style.display = "block";
+                                    //         // budae[i].style.display = "-webkit-inline-box";
+                                    //         // td.style.width = "500px"
+
+
+                                    //         // budae[i].style.border = "1px, solid, red"
+                                    //         // nabe.style.display = "none";  // 이것들은 안으로 넣고
+                                            
+                                    //         // budae[i].style.display = "block";
                                            
-                                            // console.log(nabe[i])
-                                            break;
+                                    //         // console.log(nabe[i])
+                                    //         break;
 
 
 
-                                            case "밀푀유나베":
+                                    //         case "밀푀유나베":
 
-                                            console.log("정답아니야")
-                                            // let nabe = document.querySelectorAll(".nabe")
-                                            // let budae = document.querySelectorAll(".budae")
-                                            for(i=0; i<nabe.length; i++){
-                                            console.log(nabe[i])
-                                            // nabe[i].style.display = "block";
-                                            nabe[i].style.display = "inline";
-                                            // nabe[i].style.width = "7500px"
-                                            // nabe[i].style.border = "1px, solid, red"
-                                            budae[i].style.display = "none";        // 쌓이게 하려면 none block 조절
-                                            }
+                                    //         console.log("정답아니야")
+                                    //         alert(text + "가 검색되었습니다")
+                                    //         // let nabe = document.querySelectorAll(".nabe")
+                                    //         // let budae = document.querySelectorAll(".budae")
+                                    //         // for(i=0; i<nabe.length; i++){
+                                    //         // console.log(nabe[i])
+                                    //         // nabe[i].style.display = "block";
+                                    //         // nabe.style.display = "inline";
+                                    //         // nabe[i].style.width = "7500px"
+                                    //         // nabe[i].style.border = "1px, solid, red"
+                                    //         // budae.style.display = "none";        // 쌓이게 하려면 none block 조절
+                                            
                                            
-                                            // console.log(budae[i])
-                                            // nabe[i].style.display = "block";
-                                            break;
+                                    //         // console.log(budae[i])
+                                    //         // nabe[i].style.display = "block";
+                                    //         break;
+
+                                    //         case "김치찌개":
+
+                                    //         console.log("정답아니야")
+                                    //         alert(text + "가 검색되었습니다")
+                                    //         // let nabe = document.querySelectorAll(".nabe")
+                                    //         // let budae = document.querySelectorAll(".budae")
+                                    //         // for(i=0; i<nabe.length; i++){
+                                    //         // console.log(nabe[i])
+                                    //         // nabe[i].style.display = "block";
+                                    //         // nabe.style.display = "inline";
+                                    //         // nabe[i].style.width = "7500px"
+                                    //         // nabe[i].style.border = "1px, solid, red"
+                                    //         // budae.style.display = "none";        // 쌓이게 하려면 none block 조절
+                                            
+                                           
+                                    //         // console.log(budae[i])
+                                    //         // nabe[i].style.display = "block";
+                                    //         break;
+
+                                            
+                                    //         case "떡볶이":
+
+                                    //         console.log("정답아니야")
+                                              
+                                    //         alert(text + "가 검색되었습니다")
 
 
-                                            // switch의 else값
-                                            default :    
-                                            alert("조회된 내용이 없습니다");
+
+
+                                    //         // for(i=0; i<budae.length; i++){
+                                    //         // console.log(budae[i])
+
+                                    //         // budae[i].style.display = "block";
+                                    //         // budae.style.display = "block";
+                                    //         // budae[i].style.display = "-webkit-inline-box";
+                                    //         // td.style.width = "500px"
+
+
+                                    //         // budae[i].style.border = "1px, solid, red"
+                                    //         // nabe.style.display = "none";  // 이것들은 안으로 넣고
+                                            
+                                    //         // budae[i].style.display = "block";
+                                           
+                                    //         // console.log(nabe[i])
+                                    //         break;
+
+                                            
+                                    //         case "곱창전골":
+
+                                    //         console.log("정답아니야")
+                                              
+                                    //         alert(text + "가 검색되었습니다")
+
+
+
+
+                                    //         // for(i=0; i<budae.length; i++){
+                                    //         // console.log(budae[i])
+
+                                    //         // budae[i].style.display = "block";
+                                    //         // budae.style.display = "block";
+                                    //         // budae[i].style.display = "-webkit-inline-box";
+                                    //         // td.style.width = "500px"
+
+
+                                    //         // budae[i].style.border = "1px, solid, red"
+                                    //         // nabe.style.display = "none";  // 이것들은 안으로 넣고
+                                            
+                                    //         // budae[i].style.display = "block";
+                                           
+                                    //         // console.log(nabe[i])
+                                    //         break;
+
+
+                                    //         // switch의 else값
+                                    //         default :    
+                                    //         alert("조회된 내용이 없습니다");
      
-                                       } 
+                                    //    } 
 
 
 
@@ -871,13 +981,160 @@ op1.addEventListener("change", function() {
 
 
 
+
+
+
+
+
+                                     // 공백 검색시 알림창 표시
+                                     if(text == "") {
+                                        alert("검색어를 입력해주세요");
+                                        sp.innerHTML = ""
+
+                                            }
+
+
+// 이걸 밖으로 빼야함
+let nabe = document.getElementById("nabe3")
+let budae = document.getElementById("budae3")
+let td = document.querySelector("td")
+
+   switch(text) {
+
+
+        case "부대찌개":
+
+        console.log("정답아니야")
+          
+        alert(text + "가 검색되었습니다")
+
+
+
+
+        // for(i=0; i<budae.length; i++){
+        // console.log(budae[i])
+
+        // budae[i].style.display = "block";
+        // budae.style.display = "block";
+        // budae[i].style.display = "-webkit-inline-box";
+        // td.style.width = "500px"
+
+
+        // budae[i].style.border = "1px, solid, red"
+        // nabe.style.display = "none";  // 이것들은 안으로 넣고
+        
+        // budae[i].style.display = "block";
+       
+        // console.log(nabe[i])
+        break;
+
+
+
+        case "밀푀유나베":
+
+        console.log("정답아니야")
+        alert(text + "가 검색되었습니다")
+        // let nabe = document.querySelectorAll(".nabe")
+        // let budae = document.querySelectorAll(".budae")
+        // for(i=0; i<nabe.length; i++){
+        // console.log(nabe[i])
+        // nabe[i].style.display = "block";
+        // nabe.style.display = "inline";
+        // nabe[i].style.width = "7500px"
+        // nabe[i].style.border = "1px, solid, red"
+        // budae.style.display = "none";        // 쌓이게 하려면 none block 조절
+        
+       
+        // console.log(budae[i])
+        // nabe[i].style.display = "block";
+        break;
+
+        case "김치찌개":
+
+        console.log("정답아니야")
+        alert(text + "가 검색되었습니다")
+        // let nabe = document.querySelectorAll(".nabe")
+        // let budae = document.querySelectorAll(".budae")
+        // for(i=0; i<nabe.length; i++){
+        // console.log(nabe[i])
+        // nabe[i].style.display = "block";
+        // nabe.style.display = "inline";
+        // nabe[i].style.width = "7500px"
+        // nabe[i].style.border = "1px, solid, red"
+        // budae.style.display = "none";        // 쌓이게 하려면 none block 조절
+        
+       
+        // console.log(budae[i])
+        // nabe[i].style.display = "block";
+        break;
+
+        
+        case "떡볶이":
+
+        console.log("정답아니야")
+          
+        alert(text + "가 검색되었습니다")
+
+
+
+
+        // for(i=0; i<budae.length; i++){
+        // console.log(budae[i])
+
+        // budae[i].style.display = "block";
+        // budae.style.display = "block";
+        // budae[i].style.display = "-webkit-inline-box";
+        // td.style.width = "500px"
+
+
+        // budae[i].style.border = "1px, solid, red"
+        // nabe.style.display = "none";  // 이것들은 안으로 넣고
+        
+        // budae[i].style.display = "block";
+       
+        // console.log(nabe[i])
+        break;
+
+        
+        case "곱창전골":
+
+        console.log("정답아니야")
+          
+        alert(text + "가 검색되었습니다")
+
+
+
+
+        // for(i=0; i<budae.length; i++){
+        // console.log(budae[i])
+
+        // budae[i].style.display = "block";
+        // budae.style.display = "block";
+        // budae[i].style.display = "-webkit-inline-box";
+        // td.style.width = "500px"
+
+
+        // budae[i].style.border = "1px, solid, red"
+        // nabe.style.display = "none";  // 이것들은 안으로 넣고
+        
+        // budae[i].style.display = "block";
+       
+        // console.log(nabe[i])
+        break;
+
+
+        // switch의 else값
+        default :    
+        alert("조회된 내용이 없습니다");
+
+   } 
+
+
                                         
 
 
                                         
                 }) 
                 // 조회
-
-
 
 
