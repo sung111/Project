@@ -49,6 +49,9 @@
             width: 100px;
             height: 100px;
         }
+        .none{
+            display: none;
+        }
 
         @media screen and (max-width: 600px) {
 
@@ -76,6 +79,7 @@
             <th>완제품:이름</th>
             <th>규격</th>
             <th>완제품 이미지</th>
+            <th>수정 / 삭제</th>
         </tr>
 
         <tr class="list" data-vlaue="1">
@@ -84,6 +88,12 @@
             <td>부대찌개</td>
             <td>미지정</td>
             <td><img src="/img/Budae-Jjigae.png" class="imge"></td>
+            <td>
+                <input type="button" class="u" value="수정">
+                <input type="button" class="d"value="삭제">
+                <input type="button" class="ok" value="확인">
+                <input type="button" class="can"value="취소">
+            </td>
         </tr>
 
         <tr class="list" data-vlaue="2">
@@ -92,6 +102,12 @@
             <td>김치찌개</td>
             <td>미지정</td>
             <td><img src="/img/kimchisoup.png" class="imge"></td>
+            <td>
+                <input type="button" class="u" value="수정">
+                <input type="button" class="d"value="삭제">
+                <input type="button" class="ok" value="확인">
+                <input type="button" class="can"value="취소">
+            </td>
         </tr>
 
         <tr class="list" data-vlaue="3">
@@ -100,6 +116,12 @@
             <td>밀푀유나베</td>
             <td>미지정</td>
             <td><img src="/img/Millefeuille.png" class="imge"></td>
+            <td>
+                <input type="button" class="u" value="수정">
+                <input type="button" class="d"value="삭제">
+                <input type="button" class="ok" value="확인">
+                <input type="button" class="can"value="취소">
+            </td>
         </tr>
 
         <tr class="list" data-vlaue="4">
@@ -108,6 +130,12 @@
             <td>떡볶이</td>
             <td>미지정</td>
             <td><img src="/img/tteokbokki.png" class="imge"></td>
+            <td>
+                <input type="button" class="u" value="수정">
+                <input type="button" class="d"value="삭제">
+                <input type="button" class="ok" value="확인">
+                <input type="button" class="can"value="취소">
+            </td>
         </tr>
 
         <tr class="list" data-vlaue="5">
@@ -116,17 +144,20 @@
             <td>곱창전골</td>
             <td>미지정</td>
             <td><img src="/img/Gopchanghotpot.png" class="imge"></td>
+            <td>
+                <input type="button" class="u" value="수정">
+                <input type="button" class="d"value="삭제">
+                <input type="button" class="ok" value="확인">
+                <input type="button" class="can"value="취소">
+            </td>
         </tr>
 
-        <tr>
-            <td>6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+     
 
     </table>
-
+    <div>
+        <input type="button"value="+" style="width: 100%;height: 50px; border-radius: 50px; border: 0px solid black; background-color: #007bff;">
+    </div>
 
 
 
@@ -148,8 +179,15 @@
 
                 })
             }
-            
-
+            //---------------------------
+            //------------확인 취소 숨김 -----------
+            let oks = document.querySelectorAll(".ok")
+            let cans = document.querySelectorAll(".can")
+            for(let i = 0; i < oks.length; i++ ){
+                oks[i].classList.add("none")
+                cans[i].classList.add("none")
+            }
+            //----------------
 
 
 
