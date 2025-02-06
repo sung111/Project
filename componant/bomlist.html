@@ -321,7 +321,9 @@
                         e.target.parentNode.querySelector(".ok").classList.add("none")
                         e.target.parentNode.querySelector(".can").classList.add("none")
                         e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".check-option").classList.add("none")
+                        for (let a = 0; a < new_chop.length; a++) {
+                        new_chop[a].classList.add("none")
+                        }
                         for (let aa = 1; aa < new_texs.length; aa++) {
                             new_spans[0].innerText = new_chop.value
                             new_spans[aa].innerText = new_texs[aa].value
