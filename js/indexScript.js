@@ -21,62 +21,64 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-    // mobile Version
-    document.addEventListener("DOMContentLoaded", function () {
-        const mobileNavButton = document.querySelector(".mobnav-bar");
-        const navMenu = document.querySelector("nav");
-        const navShadow = document.querySelector(".navopen-shadow");
-    
-        if (mobileNavButton && navMenu) {
-            mobileNavButton.addEventListener("click", function () {
-                navMenu.classList.toggle("open");
-    
-                // 그림자 배경 처리
-                if (navShadow) {
-                    navShadow.style.display = navMenu.classList.contains("open") ? "block" : "none";
+// mobile Version
+document.addEventListener("DOMContentLoaded", function () {
+    const mobileNavButton = document.querySelector(".mobnav-bar");
+    const navMenu = document.querySelector("nav");
+    const navShadow = document.querySelector(".navopen-shadow");
+
+    if (mobileNavButton && navMenu) {
+        mobileNavButton.addEventListener("click", function () {
+            navMenu.classList.toggle("open");
+
+            // 그림자 배경 처리
+            if (navShadow) {
+                navShadow.style.display = navMenu.classList.contains("open") ? "block" : "none";
+            }
+
+            // X 버튼 애니메이션 적용
+            const bars = document.querySelectorAll('.mobnav');
+            if (bars.length === 3) {
+                if (navMenu.classList.contains('open')) {
+                    bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                    bars[1].style.opacity = '0';
+                    bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                } else {
+                    bars[0].style.transform = 'rotate(0deg) translate(0, 0)';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'rotate(0deg) translate(0, 0)';
                 }
-    
-                // X 버튼 애니메이션 적용
+            }
+        });
+
+        // 모바일 메뉴 그림자 클릭시 닫기
+        if (navShadow) {
+            navShadow.addEventListener("click", function () {
+                navMenu.classList.remove("open");
+                navShadow.style.display = "none";
+
+                //  X 버튼
                 const bars = document.querySelectorAll('.mobnav');
                 if (bars.length === 3) {
-                    if (navMenu.classList.contains('open')) {
-                        bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
-                        bars[1].style.opacity = '0';
-                        bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
-                    } else {
-                        bars[0].style.transform = 'rotate(0deg) translate(0, 0)';
-                        bars[1].style.opacity = '1';
-                        bars[2].style.transform = 'rotate(0deg) translate(0, 0)';
-                    }
+                    bars[0].style.transform = 'rotate(0deg) translate(0, 0)';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'rotate(0deg) translate(0, 0)';
                 }
             });
-    
-            // 모바일 메뉴 그림자 클릭시 닫기
-            if (navShadow) {
-                navShadow.addEventListener("click", function () {
-                    navMenu.classList.remove("open");
-                    navShadow.style.display = "none";
-    
-                    //  X 버튼
-                    const bars = document.querySelectorAll('.mobnav');
-                    if (bars.length === 3) {
-                        bars[0].style.transform = 'rotate(0deg) translate(0, 0)';
-                        bars[1].style.opacity = '1';
-                        bars[2].style.transform = 'rotate(0deg) translate(0, 0)';
-                    }
-                });
-            }
         }
-    });
+    }
+});
 
 
-// 로그인
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    // 로그인
     const LoginWellpaper = document.querySelector(".login-wallpaper");
     const LoginPage = document.querySelector(".login-container");
     const LoginButton = document.getElementById("login-button");
     const LoginSignin = document.querySelector(".login-button");
-    LoginSignin.addEventListener("click", function(){
+    LoginSignin.addEventListener("click", function () {
         LoginWellpaper.style.display = "flex";
         LoginPage.style.display = "flex";
     })
@@ -92,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             LoginWellpaper.style.display = "none";
             LoginPage.style.display = "none";
-                        LoginSignin.style.display = "none"
+            LoginSignin.style.display = "none"
             LoginUser.style.display = "block";
         } else if (username == "admin" && password == "admin") {
             alert(username + "님, 로그인 성공!");
@@ -106,6 +108,47 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("아이디 또는 비밀번호가 잘못되었습니다.");
         }
     });
+    const MypageButton = document.querySelector(".my-page");
+    const MypagePopup = document.querySelector(".my-pagelayer");
+
+    function MyPopup() {
+        const userRole = sessionStorage.getItem("userRole");
+        if (userRole == "user"){
+            MypagePopup.innerHTML = `
+            <div class="mypage-popuppage">
+                <h4>안녕하세요. ${userRole}님</h4>
+                <p>현재 유저 권한 계정으로 <br/>등록되어 있습니다.</p>
+                <span class="logout-btn">로그아웃</span>
+            </div>`;
+        }else if(userRole == "admin"){
+            MypagePopup.innerHTML = `
+            <div class="mypage-popuppage">
+                <h4>안녕하세요. ${userRole}님</h4>
+                <p>현재 관리자 권한 계정으로 <br/>등록되어 있습니다.</p>
+                <span class="logout-btn">로그아웃</span>
+            </div>`;
+        } else {
+            MypagePopup.innerHTML = `<h4>로그인이 필요합니다.</h4>`;
+        }
+                    // 로그아웃 버튼
+                    document.querySelector(".logout-btn").addEventListener("click", function () {
+                        sessionStorage.removeItem("userRole");
+                        alert("로그아웃 되었습니다.");
+                        MyPopup(); 
+                        MypagePopup.style.display = "none"; 
+                    });
+    }
+    
+    MypageButton.addEventListener("click", function () {
+        const currentDisplay = window.getComputedStyle(MypagePopup).display;
+        if (currentDisplay === "none") {
+            MyPopup();
+            MypagePopup.style.display = "flex";
+        } else {
+            MypagePopup.style.display = "none";
+        }
+    });
+    MyPopup(); 
 });
 
 // 네비게이션 버튼 클릭 시, iframe 이동 스크립트 + 로컬 네비게이션
@@ -187,12 +230,12 @@ document.addEventListener("DOMContentLoaded", function () {
         LocalNavigationbar("게시판", "공지사항");
     })
     const 사내복지menu = document.querySelector("#nav-사내복지");
-    사내복지menu.addEventListener("click", function(){
+    사내복지menu.addEventListener("click", function () {
         iframe.src = "componant/03_사내복지.html"
         LocalNavigationbar("게시판", "사내복지");
     })
     const 일반게시판menu = document.querySelector("#nav-일반게시판");
-    일반게시판menu.addEventListener("click", function(){
+    일반게시판menu.addEventListener("click", function () {
         iframe.src = "componant/04_일반게시판.html"
         LocalNavigationbar("게시판", "일반게시판");
     })
