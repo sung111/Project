@@ -156,6 +156,7 @@
             <th>입고일자</th>
             <th>유효기간</th>
             <th>수정/삭제</th>
+           
         </tr>
         <br>
     </table>
@@ -247,11 +248,11 @@
             if (value == 1 || value == 3 || value == 5) {
 
                 bj.forEach(function (v, i) {
-                    let options = bj.map(item => `<option value="${item.제품명}">${item.제품명}</option>`).join("");
+                    let options = bj.map(v => `<option value="${v.제품명}">${v.제품명}</option>`).join("");
                     budae = document.createElement("tr")
                     budae.innerHTML = `
                         <td><span class="new-span">${v.제품명}</span>
-                        <select name="option" class="check-option">${options}<select></td>
+                        <select name="option" class="check-option" value="${v.제품명}">${options}</select></td>
                         <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
                         <td><span class="new-span">${v.규격}</span><input type="text" class="new-text" value="${v.규격}"></td>
                         <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
@@ -261,7 +262,7 @@
                         <td><span class="new-span">${v.창고위치}</span><input type="text" class="new-text" value="${v.창고위치}"></td>
                         <td><span class="new-span">${v.품번}</span><input type="text" class="new-text" value="${v.품번}"></td>
                         <td><span class="new-span">${v.입고일자}</span><input type="date" class="new-text" value="${v.입고일자}"></td>
-                        <td><span class="new-span">${v.유효기간}</span><input type="date" class="new-text"value="${v.유효기간}"></td>
+                        <td><span class="new-span">${v.유효기간}</span><input type="date" class="new-text" value="${v.유효기간}"></td>
                         <td class="buttontd">
                         <input type="button" value="수정" class="u">
                         <input type="button" value="삭제" class="d">
@@ -289,9 +290,10 @@
                         cans[a].classList.add("none")
                     }
                     budae.querySelector(".u").addEventListener("click", function (e) {
+                        
                         for (let a = 0; a < new_texs.length; a++) {
-                            // console.log(new_texs[a])
-                            // console.log(new_span[a])
+                            console.log(new_texs[a])
+                            console.log(new_spans[a])
                             new_texs[a].classList.remove("none")
                             new_spans[a].classList.add("none")
                             // console.log(e.target.parentNode)
@@ -300,6 +302,9 @@
                             e.target.parentNode.querySelector(".ok").classList.remove("none")
                             e.target.parentNode.querySelector(".can").classList.remove("none")
                         }
+                        for (let a = 0; a < new_chop.length; a++) {
+                        new_chop[a].classList.remove("none")
+                    }
                     })
 
                     budae.querySelector(".ok").addEventListener("click", function (e) {
@@ -310,15 +315,24 @@
                             new_spans[a].classList.remove("none")
                             // console.log(e.target.parentNode)    
                         }
+                        console.log(e)
                         e.target.parentNode.querySelector(".u").classList.remove("none")
                         e.target.parentNode.querySelector(".d").classList.remove("none")
                         e.target.parentNode.querySelector(".ok").classList.add("none")
                         e.target.parentNode.querySelector(".can").classList.add("none")
-                        console.log(e.target.parentNode.parentNode)
-                        for (let aa = 0; aa < new_texs.length; aa++) {
+                        e.target.parentNode.querySelector(".can").classList.add("none")
+                        e.target.parentNode.querySelector(".check-option").classList.add("none")
+                        for (let aa = 1; aa < new_texs.length; aa++) {
+                            new_spans[0].innerText = new_chop.value
                             new_spans[aa].innerText = new_texs[aa].value
                         }
-
+                        console.log(e.target.parentNode.parentNode)
+                        
+                    })
+                    budae.querySelector(".check-option").addEventListener("change",function(e){
+                        console.log(e.target.value)
+                        console.log(e.target.parentNode.parentNode.querySelectorAll(".new-span")[0])
+                        e.target.parentNode.parentNode.querySelectorAll(".new-span")[0].innerText = e.target.value
                     })
 
                     budae.querySelector(".can").addEventListener("click", function (e) {
