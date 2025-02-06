@@ -31,9 +31,9 @@
             height: 250px;
         }
 
-        table {
-            width: 100%;
-        }
+
+
+
 
         table,
         th,
@@ -48,6 +48,17 @@
             text-align: center;
         }
 
+        table {
+            width: 100%;
+        }
+
+        th {
+            width: 50px;
+            height: 20px;
+            font-size: 14px;
+        }
+
+
         .navigation {
             /* border: 1px solid black; */
             width: 100%;
@@ -61,15 +72,46 @@
             width: 270px;
             display: flex;
             margin: 0 40px 10px 20px;
-            
+
         }
 
         .buttontd {
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: 50px;
         }
-        .none{
+
+        .none {
             display: none;
+        }
+
+        .new-text {
+            text-align: center;
+            width: 99px;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            #back-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .article {
+                margin: 0 0 20px 0;
+            }
+
+            .mid-data {
+                width: 60px;
+                height: 20px;
+            }
+
+            th,
+            td {
+                font-size: 12px;
+            }
+
         }
     </style>
 </head>
@@ -77,22 +119,25 @@
 <body>
     <div id="mid-contain">
         <div>
-            <input type="button" value="뒤로가기" class="button" id="back-button">
+            <input type="button" value="목록이동" class="button" id="back-button">
         </div>
+
         <div class="navigation">
             <div class="article"> 제품명<input type="text" class="mid-data"> </div>
-            <div class="article"> 품명<input type="text" class="mid-data"> </div>
-            <div class="article"> Lot.NO<input type="text" class="mid-data"> </div>
-            <div class="article"> 단위<input type="text" class="mid-data"> </div>
-        </div>
-        <div class="navigation">
-            <div class="article"> 단위<input type="text" class="mid-data"> </div>
+            <div class="article"> 가격<input type="text" class="mid-data"> </div>
             <div class="article"> 규격<input type="text" class="mid-data"> </div>
-            <div class="article"> 창고위치<input type="text" class="mid-data"> </div>
-            <div class="article"> 단위가격<input type="text" class="mid-data"> </div>
+            <div class="article"> 재고수량<input type="text" class="mid-data"> </div>
         </div>
         <div class="navigation">
-            <div class="article"> 공급업체정보<input type="text" class="mid-data"> </div>
+            <div class="article"> 단위<input type="text" class="mid-data"> </div>
+            <div class="article"> 공급업체<input type="text" class="mid-data"> </div>
+            <div class="article"> Lotno<input type="text" class="mid-data"> </div>
+            <div class="article"> 장고위치<input type="text" class="mid-data"> </div>
+        </div>
+        <div class="navigation">
+            <div class="article"> 품번<input type="text" class="mid-data"> </div>
+            <div class="article"> 입고일자<input type="date" class="mid-data"> </div>
+            <div class="article"> 유효기간<input type="date" class="mid-data"> </div>
             <div class="article"> <input type="button" value="확인" id="mid-contain-check"> </div>
         </div>
 
@@ -101,9 +146,9 @@
         <tr>
             <th>제품명</th>
             <th>가격</th>
-            <th>규격</th>
-            <th>재고수량</th>
             <th>단위</th>
+            <th>재고수량</th>
+            <th>규격</th>
             <th>공급업체</th>
             <th>LotNo</th>
             <th>창고위치</th>
@@ -111,10 +156,11 @@
             <th>입고일자</th>
             <th>유효기간</th>
             <th>수정/삭제</th>
+           
         </tr>
         <br>
     </table>
-    
+
 
     <script>
         window.addEventListener("load", function () {
@@ -180,10 +226,7 @@
                 { 제품명: "곱창 전골 용기", 가격: 500, 규격: 1, 재고수량: 200, 단위: "개", 공급업체: "에코컨테이너", LotNo: "PKG-20250124-004", 창고위치: "상온", 품번: "P046", 입고일자: "2025-01-24", 유효기간: "2026-01-24" },
             ]
 
-
-
-
-
+            const new1 = [];
 
 
 
@@ -192,7 +235,7 @@
             // URL에서 ?value=값 부분 가져오기
             let params = new URLSearchParams(window.location.search);
             let value = params.get("value"); // 'value' 값 가져오기
-            console.log("넘어온 값:", value);
+            // console.log("넘어온 값:", value);
 
             //뒤로가기버튼
             document.querySelector("#back-button").addEventListener("click", function () {
@@ -200,29 +243,252 @@
             })
 
 
+
             let starttablebody = document.querySelector("#maintable")
-            if (value == value) {
+            if (value == 1 || value == 3 || value == 5) {
+
                 bj.forEach(function (v, i) {
+                    let options = bj.map(v => `<option value="${v.제품명}">${v.제품명}</option>`).join("");
                     budae = document.createElement("tr")
                     budae.innerHTML = `
-                <td><span class="new-span">${v.제품명}</span> <input type="text" class="new-text" value="${v.제품명}"></td>
-                <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
-                <td><span class="new-span">${v.규격}</span><input type="text" class="new-text" value="${v.규격}"></td>
-                <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
-                <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
-                <td><span class="new-span">${v.공급업체}</span><input type="text" class="new-text" value="${v.공급업체}"></td>
-                <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
-                <td><span class="new-span">${v.창고위치}</span><input type="text" class="new-text" value="${v.창고위치}"></td>
-                <td><span class="new-span">${v.품번}</span><input type="text" class="new-text" value="${v.품번}"></td>
-                <td><span class="new-span">${v.입고일자}</span><input type="text" class="new-text" value="${v.입고일자}"></td>
-                <td><span class="new-span">${v.유효기간}</span><input type="text" class="new-text"value="${v.유효기간}"></td>
-                <td class="buttontd">
+                        <td><span class="new-span">${v.제품명}</span>
+                        <select name="option" class="check-option" value="${v.제품명}">${options}</select></td>
+                        <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
+                        <td><span class="new-span">${v.규격}</span><input type="text" class="new-text" value="${v.규격}"></td>
+                        <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
+                        <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
+                        <td><span class="new-span">${v.공급업체}</span><input type="text" class="new-text" value="${v.공급업체}"></td>
+                        <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
+                        <td><span class="new-span">${v.창고위치}</span><input type="text" class="new-text" value="${v.창고위치}"></td>
+                        <td><span class="new-span">${v.품번}</span><input type="text" class="new-text" value="${v.품번}"></td>
+                        <td><span class="new-span">${v.입고일자}</span><input type="date" class="new-text" value="${v.입고일자}"></td>
+                        <td><span class="new-span">${v.유효기간}</span><input type="date" class="new-text" value="${v.유효기간}"></td>
+                        <td class="buttontd">
+                        <input type="button" value="수정" class="u">
+                        <input type="button" value="삭제" class="d">
+                        <input type="button" value="확인" class="ok">
+                        <input type="button" value="취소" class="can">
+                        </td>`
+
+                    // <input type="text" class="new-text" value="${v.제품명}"></td>
+                    starttablebody.append(budae)
+                    let new_texs = budae.querySelectorAll(".new-text")
+                    let new_spans = budae.querySelectorAll(".new-span")
+                    let new_chop = budae.querySelectorAll(".check-option")
+                    let oks = budae.querySelectorAll(".ok")
+                    let cans = budae.querySelectorAll(".can")
+                    let us = budae.querySelectorAll(".u")
+                    let ds = budae.querySelectorAll(".d")
+                    for (let a = 0; a < new_texs.length; a++) {
+                        new_texs[a].classList.add("none")
+                    }
+                    for (let a = 0; a < new_chop.length; a++) {
+                        new_chop[a].classList.add("none")
+                    }
+                    for (let a = 0; a < oks.length; a++) {
+                        oks[a].classList.add("none")
+                        cans[a].classList.add("none")
+                    }
+                    budae.querySelector(".u").addEventListener("click", function (e) {
+                        
+                        for (let a = 0; a < new_texs.length; a++) {
+                            console.log(new_texs[a])
+                            console.log(new_spans[a])
+                            new_texs[a].classList.remove("none")
+                            new_spans[a].classList.add("none")
+                            // console.log(e.target.parentNode)
+                            e.target.parentNode.querySelector(".u").classList.add("none")
+                            e.target.parentNode.querySelector(".d").classList.add("none")
+                            e.target.parentNode.querySelector(".ok").classList.remove("none")
+                            e.target.parentNode.querySelector(".can").classList.remove("none")
+                        }
+                        for (let a = 0; a < new_chop.length; a++) {
+                        new_chop[a].classList.remove("none")
+                    }
+                    })
+
+                    budae.querySelector(".ok").addEventListener("click", function (e) {
+                        for (let a = 0; a < new_texs.length; a++) {
+                            // console.log(new_texs[a])
+                            // console.log(new_span[a])
+                            new_texs[a].classList.add("none")
+                            new_spans[a].classList.remove("none")
+                            // console.log(e.target.parentNode)    
+                        }
+                        console.log(e)
+                        e.target.parentNode.querySelector(".u").classList.remove("none")
+                        e.target.parentNode.querySelector(".d").classList.remove("none")
+                        e.target.parentNode.querySelector(".ok").classList.add("none")
+                        e.target.parentNode.querySelector(".can").classList.add("none")
+                        e.target.parentNode.querySelector(".can").classList.add("none")
+                        e.target.parentNode.querySelector(".check-option").classList.add("none")
+                        for (let aa = 1; aa < new_texs.length; aa++) {
+                            new_spans[0].innerText = new_chop.value
+                            new_spans[aa].innerText = new_texs[aa].value
+                        }
+                        console.log(e.target.parentNode.parentNode)
+                        
+                    })
+                    budae.querySelector(".check-option").addEventListener("change",function(e){
+                        console.log(e.target.value)
+                        console.log(e.target.parentNode.parentNode.querySelectorAll(".new-span")[0])
+                        e.target.parentNode.parentNode.querySelectorAll(".new-span")[0].innerText = e.target.value
+                    })
+
+                    budae.querySelector(".can").addEventListener("click", function (e) {
+                        for (let ai = 0; ai < new_texs.length; ai++) {
+                            console.log("포문돔")
+                            new_texs[ai].classList.add("none")
+                            new_spans[ai].classList.remove("none")
+                        }
+                        e.target.parentNode.querySelector(".u").classList.remove("none")
+                        e.target.parentNode.querySelector(".d").classList.remove("none")
+                        e.target.parentNode.querySelector(".ok").classList.add("none")
+                        e.target.parentNode.querySelector(".can").classList.add("none")
+                    })
+
+
+                    budae.querySelector(".d").addEventListener("click", function (e) {
+                        // console.log(e.target.parentNode.parentNode)
+                        e.target.parentNode.parentNode.remove()
+                    })
+
+
+                })
+
+
+
+
+                document.querySelector("#mid-contain-check").addEventListener("click", function (e) {
+
+                    plus();
+                })
+
+
+                function plus() {
+                    // console.log("zzzz")
+                    let middatas = document.querySelectorAll(".mid-data")
+                    for (let i = 0; i < middatas.length; i++) {
+                        console.log(middatas[i].value)
+                    }
+
+                    new1.push({
+                        제품명: middatas[0].value, 가격: middatas[1].value, 규격: middatas[2].value,
+                        재고수량: middatas[3].value, 단위: middatas[4].value, 공급업체: middatas[5].value,
+                        LotNo: middatas[6].value, 창고위치: middatas[7].value, 품번: middatas[8].value,
+                        입고일자: middatas[9].value, 유효기간: middatas[10].value
+                    })
+                    // console.log(bj)
+                    new1.forEach(function (v, i) {
+                        newstart1 = document.createElement("tr")
+                        newstart1.innerHTML = `
+                    <td><span class="new-span">${v.제품명}</span> <input type="text" class="new-text" value="${v.제품명}"></td>
+                    <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
+                    <td><span class="new-span">${v.규격}</span><input type="text" class="new-text" value="${v.규격}"></td>
+                    <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
+                    <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
+                    <td><span class="new-span">${v.공급업체}</span><input type="text" class="new-text" value="${v.공급업체}"></td>
+                    <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
+                    <td><span class="new-span">${v.창고위치}</span><input type="text" class="new-text" value="${v.창고위치}"></td>
+                    <td><span class="new-span">${v.품번}</span><input type="text" class="new-text" value="${v.품번}"></td>
+                    <td><span class="new-span">${v.입고일자}</span><input type="date" class="new-text" value="${v.입고일자}"></td>
+                    <td><span class="new-span">${v.유효기간}</span><input type="date" class="new-text"value="${v.유효기간}"></td>
+                    <td class="buttontd">
                     <input type="button" value="수정" class="u">
                     <input type="button" value="삭제" class="d">
                     <input type="button" value="확인" class="ok">
                     <input type="button" value="취소" class="can">
                     </td>
-                `
+                    `
+                        starttablebody.append(newstart1)
+                        let new_texs = newstart1.querySelectorAll(".new-text")
+                        let new_spans = newstart1.querySelectorAll(".new-span")
+                        let oks = newstart1.querySelectorAll(".ok")
+                        let cans = newstart1.querySelectorAll(".can")
+                        let us = newstart1.querySelectorAll(".u")
+                        let ds = newstart1.querySelectorAll(".d")
+                        for (let a = 0; a < new_texs.length; a++) {
+                            new_texs[a].classList.add("none")
+                        }
+                        for (let a = 0; a < oks.length; a++) {
+                            oks[a].classList.add("none")
+                            cans[a].classList.add("none")
+                        }
+                        newstart1.querySelector(".u").addEventListener("click", function (e) {
+                            for (let a = 0; a < new_texs.length; a++) {
+                                // console.log(new_texs[a])
+                                // console.log(new_span[a])
+                                new_texs[a].classList.remove("none")
+                                new_spans[a].classList.add("none")
+                                // console.log(e.target.parentNode)
+                                e.target.parentNode.querySelector(".u").classList.add("none")
+                                e.target.parentNode.querySelector(".d").classList.add("none")
+                                e.target.parentNode.querySelector(".ok").classList.remove("none")
+                                e.target.parentNode.querySelector(".can").classList.remove("none")
+                            }
+                        })
+
+                        newstart1.querySelector(".ok").addEventListener("click", function (e) {
+                            for (let a = 0; a < new_texs.length; a++) {
+                                // console.log(new_texs[a])
+                                // console.log(new_span[a])
+                                new_texs[a].classList.add("none")
+                                new_spans[a].classList.remove("none")
+                                // console.log(e.target.parentNode)    
+                            }
+                            e.target.parentNode.querySelector(".u").classList.remove("none")
+                            e.target.parentNode.querySelector(".d").classList.remove("none")
+                            e.target.parentNode.querySelector(".ok").classList.add("none")
+                            e.target.parentNode.querySelector(".can").classList.add("none")
+                            console.log(e.target.parentNode.parentNode)
+                            for (let aa = 0; aa < new_texs.length; aa++) {
+                                new_spans[aa].innerText = new_texs[aa].value
+                            }
+
+                        })
+                        newstart1.querySelector(".can").addEventListener("click", function (e) {
+                            for (let ai = 0; ai < new_texs.length; ai++) {
+                                console.log("포문돔")
+                                new_texs[ai].classList.add("none")
+                                new_spans[ai].classList.remove("none")
+                            }
+                            e.target.parentNode.querySelector(".u").classList.remove("none")
+                            e.target.parentNode.querySelector(".d").classList.remove("none")
+                            e.target.parentNode.querySelector(".ok").classList.add("none")
+                            e.target.parentNode.querySelector(".can").classList.add("none")
+                        })
+
+                        newstart1.querySelector(".d").addEventListener("click", function (e) {
+                            // console.log(e.target.parentNode.parentNode)
+                            e.target.parentNode.parentNode.remove()
+                        })
+                    })
+
+
+                }
+
+            } else if (value == 2 || value == 4) {
+                kj.forEach(function (v, i) {
+                    budae = document.createElement("tr")
+                    budae.innerHTML = `
+                    <td><span class="new-span">${v.제품명}</span> <input type="text" class="new-text" value="${v.제품명}"></td>
+                    <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
+                    <td><span class="new-span">${v.규격}</span><input type="text" class="new-text" value="${v.규격}"></td>
+                    <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
+                    <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
+                    <td><span class="new-span">${v.공급업체}</span><input type="text" class="new-text" value="${v.공급업체}"></td>
+                    <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
+                    <td><span class="new-span">${v.창고위치}</span><input type="text" class="new-text" value="${v.창고위치}"></td>
+                    <td><span class="new-span">${v.품번}</span><input type="text" class="new-text" value="${v.품번}"></td>
+                    <td><span class="new-span">${v.입고일자}</span><input type="date" class="new-text" value="${v.입고일자}"></td>
+                    <td><span class="new-span">${v.유효기간}</span><input type="date" class="new-text"value="${v.유효기간}"></td>
+                    <td class="buttontd">
+                    <input type="button" value="수정" class="u">
+                    <input type="button" value="삭제" class="d">
+                    <input type="button" value="확인" class="ok">
+                    <input type="button" value="취소" class="can">
+                    </td>
+                    `
                     starttablebody.append(budae)
                     let new_texs = budae.querySelectorAll(".new-text")
                     let new_spans = budae.querySelectorAll(".new-span")
@@ -230,35 +496,176 @@
                     let cans = budae.querySelectorAll(".can")
                     let us = budae.querySelectorAll(".u")
                     let ds = budae.querySelectorAll(".d")
-                    for(let a = 0; a < new_texs.length; a++){
+                    for (let a = 0; a < new_texs.length; a++) {
                         new_texs[a].classList.add("none")
                     }
-                    for(let a = 0; a < oks.length; a++){
+                    for (let a = 0; a < oks.length; a++) {
                         oks[a].classList.add("none")
                         cans[a].classList.add("none")
                     }
-                    budae.querySelector(".u").addEventListener("click",function(e){
-                        for(let a = 0; a < new_texs.length; a++){
+                    budae.querySelector(".u").addEventListener("click", function (e) {
+                        for (let a = 0; a < new_texs.length; a++) {
                             // console.log(new_texs[a])
                             // console.log(new_span[a])
                             new_texs[a].classList.remove("none")
                             new_spans[a].classList.add("none")
-                            console.log(e.target.parentNode)
+                            // console.log(e.target.parentNode)
                             e.target.parentNode.querySelector(".u").classList.add("none")
                             e.target.parentNode.querySelector(".d").classList.add("none")
                             e.target.parentNode.querySelector(".ok").classList.remove("none")
                             e.target.parentNode.querySelector(".can").classList.remove("none")
-                          
-                    }
-                        
-                        
+                        }
                     })
+
+                    budae.querySelector(".ok").addEventListener("click", function (e) {
+                        for (let a = 0; a < new_texs.length; a++) {
+                            // console.log(new_texs[a])
+                            // console.log(new_span[a])
+                            new_texs[a].classList.add("none")
+                            new_spans[a].classList.remove("none")
+                            // console.log(e.target.parentNode)    
+                        }
+                        e.target.parentNode.querySelector(".u").classList.remove("none")
+                        e.target.parentNode.querySelector(".d").classList.remove("none")
+                        e.target.parentNode.querySelector(".ok").classList.add("none")
+                        e.target.parentNode.querySelector(".can").classList.add("none")
+                        console.log(e.target.parentNode.parentNode)
+                        for (let aa = 0; aa < new_texs.length; aa++) {
+                            new_spans[aa].innerText = new_texs[aa].value
+                        }
+
+                    })
+                    budae.querySelector(".can").addEventListener("click", function (e) {
+                        for (let ai = 0; ai < new_texs.length; ai++) {
+                            console.log("포문돔")
+                            new_texs[ai].classList.add("none")
+                            new_spans[ai].classList.remove("none")
+                        }
+                        e.target.parentNode.querySelector(".u").classList.remove("none")
+                        e.target.parentNode.querySelector(".d").classList.remove("none")
+                        e.target.parentNode.querySelector(".ok").classList.add("none")
+                        e.target.parentNode.querySelector(".can").classList.add("none")
+                    })
+
+
+                    budae.querySelector(".d").addEventListener("click", function (e) {
+                        // console.log(e.target.parentNode.parentNode)
+                        e.target.parentNode.parentNode.remove()
+                    })
+
 
                 })
 
 
 
-            } else if (value == 2) {
+
+                document.querySelector("#mid-contain-check").addEventListener("click", function (e) {
+
+                    plus();
+                })
+
+
+                function plus() {
+                    // console.log("zzzz")
+                    let middatas = document.querySelectorAll(".mid-data")
+                    for (let i = 0; i < middatas.length; i++) {
+                        console.log(middatas[i].value)
+                    }
+
+                    new1.push({
+                        제품명: middatas[0].value, 가격: middatas[1].value, 규격: middatas[2].value,
+                        재고수량: middatas[3].value, 단위: middatas[4].value, 공급업체: middatas[5].value,
+                        LotNo: middatas[6].value, 창고위치: middatas[7].value, 품번: middatas[8].value,
+                        입고일자: middatas[9].value, 유효기간: middatas[10].value
+                    })
+                    // console.log(bj)
+                    new1.forEach(function (v, i) {
+                        newstart1 = document.createElement("tr")
+                        newstart1.innerHTML = `
+                    <td><span class="new-span">${v.제품명}</span> <input type="text" class="new-text" value="${v.제품명}"></td>
+                    <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
+                    <td><span class="new-span">${v.규격}</span><input type="text" class="new-text" value="${v.규격}"></td>
+                    <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
+                    <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
+                    <td><span class="new-span">${v.공급업체}</span><input type="text" class="new-text" value="${v.공급업체}"></td>
+                    <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
+                    <td><span class="new-span">${v.창고위치}</span><input type="text" class="new-text" value="${v.창고위치}"></td>
+                    <td><span class="new-span">${v.품번}</span><input type="text" class="new-text" value="${v.품번}"></td>
+                    <td><span class="new-span">${v.입고일자}</span><input type="date" class="new-text" value="${v.입고일자}"></td>
+                    <td><span class="new-span">${v.유효기간}</span><input type="date" class="new-text"value="${v.유효기간}"></td>
+                    <td class="buttontd">
+                    <input type="button" value="수정" class="u">
+                    <input type="button" value="삭제" class="d">
+                    <input type="button" value="확인" class="ok">
+                    <input type="button" value="취소" class="can">
+                    </td>
+                    `
+                        starttablebody.append(newstart1)
+                        let new_texs = newstart1.querySelectorAll(".new-text")
+                        let new_spans = newstart1.querySelectorAll(".new-span")
+                        let oks = newstart1.querySelectorAll(".ok")
+                        let cans = newstart1.querySelectorAll(".can")
+                        let us = newstart1.querySelectorAll(".u")
+                        let ds = newstart1.querySelectorAll(".d")
+                        for (let a = 0; a < new_texs.length; a++) {
+                            new_texs[a].classList.add("none")
+                        }
+                        for (let a = 0; a < oks.length; a++) {
+                            oks[a].classList.add("none")
+                            cans[a].classList.add("none")
+                        }
+                        newstart1.querySelector(".u").addEventListener("click", function (e) {
+                            for (let a = 0; a < new_texs.length; a++) {
+                                // console.log(new_texs[a])
+                                // console.log(new_span[a])
+                                new_texs[a].classList.remove("none")
+                                new_spans[a].classList.add("none")
+                                // console.log(e.target.parentNode)
+                                e.target.parentNode.querySelector(".u").classList.add("none")
+                                e.target.parentNode.querySelector(".d").classList.add("none")
+                                e.target.parentNode.querySelector(".ok").classList.remove("none")
+                                e.target.parentNode.querySelector(".can").classList.remove("none")
+                            }
+                        })
+
+                        newstart1.querySelector(".ok").addEventListener("click", function (e) {
+                            for (let a = 0; a < new_texs.length; a++) {
+                                // console.log(new_texs[a])
+                                // console.log(new_span[a])
+                                new_texs[a].classList.add("none")
+                                new_spans[a].classList.remove("none")
+                                // console.log(e.target.parentNode)    
+                            }
+                            e.target.parentNode.querySelector(".u").classList.remove("none")
+                            e.target.parentNode.querySelector(".d").classList.remove("none")
+                            e.target.parentNode.querySelector(".ok").classList.add("none")
+                            e.target.parentNode.querySelector(".can").classList.add("none")
+                            console.log(e.target.parentNode.parentNode)
+                            for (let aa = 0; aa < new_texs.length; aa++) {
+                                new_spans[aa].innerText = new_texs[aa].value
+                            }
+
+                        })
+                        newstart1.querySelector(".can").addEventListener("click", function (e) {
+                            for (let ai = 0; ai < new_texs.length; ai++) {
+                                console.log("포문돔")
+                                new_texs[ai].classList.add("none")
+                                new_spans[ai].classList.remove("none")
+                            }
+                            e.target.parentNode.querySelector(".u").classList.remove("none")
+                            e.target.parentNode.querySelector(".d").classList.remove("none")
+                            e.target.parentNode.querySelector(".ok").classList.add("none")
+                            e.target.parentNode.querySelector(".can").classList.add("none")
+                        })
+
+                        newstart1.querySelector(".d").addEventListener("click", function (e) {
+                            // console.log(e.target.parentNode.parentNode)
+                            e.target.parentNode.parentNode.remove()
+                        })
+                    })
+
+
+                }
 
             }
 
