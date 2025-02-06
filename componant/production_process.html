@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
         #header-bacor {
             background-color: #007bff;
             border-radius: 20px;
@@ -33,12 +37,14 @@
 
         td,
         th {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             border-collapse: collapse;
         }
 
         th {
             background-color: #007bff;
+            color: #ffffff;
+           
 
         }
 
@@ -55,6 +61,8 @@
         table {
             width: 100%;
             height: 300px;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
 
@@ -64,9 +72,15 @@
 
         #c_container {
             border: 1px solid rebeccapurple;
-            margin: 30px 0 0 20px;
-            width: 300px;
+            width: 100%;
+           
+          
+        }
+        #c_container2{
+            width: 25%;
             display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
         }
 
         .texttotal {
@@ -76,20 +90,56 @@
         }
 
         .table-wid {
-            width: 150px;
+            width: 10%;
+        }
+
+        .table-wid2 {
+            width: 30%;
+        }
+
+        .table-wid3 {
+            width: 15%;
+        }
+
+        .table-wid4 {
+            width: 30%;
+        }
+
+        .table-wid5 {
+            width: 15%;
+        }
+
+        #title {
+            width: 100%;
+            text-align: center;
+        }
+
+        #title h2 {
+            font-weight: bold;
+        }
+
+        .btn {
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
         }
 
         .table-button {
             height: 94%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-align: center;
+            
         }
-        @media screen and (max-width: 600px){
-            td{
+
+        @media screen and (max-width: 600px) {
+            td {
                 font-size: 12px;
             }
-            .table-wid{
+
+            .table-wid {
                 width: 70px;
             }
         }
@@ -97,18 +147,20 @@
 </head>
 
 <body>
-    <h1>생산공정</h1>
+    <div id="title">
+        <h2>생산공정</h2>
+    </div>
     <div id="total">
-        <div id="header-bacor">
-            <div id="header-name">밀키트 제품</div>
-            <div id="header">
+
+
+        <div id="c_container">
+            <div id="c_container2">
                 <select name="milkits" id="milkit">
                 </select>
-            </div>
-            <div id="c_container">
-                <input type="button" id="c1" value="공정 생성">
-                <input type="button" id="c2" value="공정 생성">
-
+                <div>
+                    <input type="button" class="btn" id="c1" value="공정 생성">
+                    <input type="button" class="btn" id="c2" value="공정 생성">
+                </div>
             </div>
         </div>
         <!-- 부대찌개 밀키트  -->
@@ -117,10 +169,10 @@
                 <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
                 <tr>
                     <th class="table-wid">공정단계</th>
-                    <th>설명</th>
-                    <th>사용장비</th>
-                    <th>위생 기준</th>
-                    <th>수정/삭제</th>
+                    <th class="table-wid2">설명</th>
+                    <th class="table-wid3">사용장비</th>
+                    <th class="table-wid4">위생 기준</th>
+                    <th class="table-wid5">수정/삭제</th>
                 </tr>
                 <tr>
                     <td><span class="spantotal">원재료 입고</span><textarea class="texttotal">원재료 입고</textarea></td>
@@ -131,9 +183,9 @@
                             class="texttotal">입고 검수대, 온도계</textarea></td>
                     <td><span class="spantotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</span><textarea name=""
                             id="" class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                    <td class="table-button">
-                        <input type="button" value="수정" class="du"><input type="button" value="삭제" class="dd"><input
-                            type="button" value="확인" class="uok"><input type="button" value="취소" class="ucan">
+                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                                class="ucan btn"></td>
                     </td>
                 </tr>
                 <tr>
@@ -147,9 +199,9 @@
                             class="texttotal">세척기, 칼, 도마</textarea></td>
                     <td><span class="spantotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</span><textarea name=""
                             id="" class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                    <td class="table-button">
-                        <input type="button" value="수정" class="du"><input type="button" value="삭제" class="dd"><input
-                            type="button" value="확인" class="uok"><input type="button" value="취소" class="ucan">
+                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                                class="ucan btn"></td>
                     </td>
                 </tr>
                 <tr>
@@ -163,9 +215,9 @@
                             class="texttotal">포장기계, 진공포장기</textarea></td>
                     <td><span class="spantotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</span><textarea name="" id=""
                             class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"><input type="button" value="확인" class="uok"><input type="button" value="취소"
-                            class="ucan"></td>
+                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                                class="ucan btn"></td>
                 </tr>
                 <tr>
                     <td><span class="spantotal">검사 및 출하</span><textarea class="texttotal">검사 및 출하</textarea></td>
@@ -176,19 +228,19 @@
                             class="texttotal">검사기계, 스캐너</textarea></td>
                     <td><span class="spantotal">출하 전 최종 품질 검사, 포장 상태 확인.</span><textarea name="" id=""
                             class="texttotal">출하 전 최종 품질 검사, 포장 상태 확인.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"><input type="button" value="확인" class="uok"><input type="button" value="취소"
-                            class="ucan"></td>
+                    <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                            class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                            class="ucan btn"></td>
                 </tr>
             </table>
             <table class="tableall" id="kimchi-soup">
                 <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
                 <tr>
                     <th class="table-wid">공정단계</th>
-                    <th>설명</th>
-                    <th>사용장비</th>
-                    <th>위생 기준</th>
-                    <th>수정/삭제</th>
+                    <th class="table-wid2">설명</th>
+                    <th class="table-wid3">사용장비</th>
+                    <th class="table-wid4">위생 기준</th>
+                    <th class="table-wid5">수정/삭제</th>
                 </tr>
                 <tr>
                     <td><span class="spantotal">원재료 입고</span><textarea class="texttotal">원재료 입고</textarea></td>
@@ -201,9 +253,9 @@
                             class="texttotal">입고 검수대, 온도계</textarea></td>
                     <td><span class="spantotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</span><textarea name=""
                             id="" class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"><input type="button" value="확인" class="uok"><input type="button" value="취소"
-                            class="ucan"></td>
+                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                                class="ucan btn"></td>
                 </tr>
                 <tr>
                     <td><span class="spantotal">세척 및 손질</span><textarea class="texttotal">세척 및 손질</textarea></td>
@@ -216,9 +268,9 @@
                             class="texttotal">세척기, 칼, 도마</textarea></td>
                     <td><span class="spantotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</span><textarea name=""
                             id="" class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"><input type="button" value="확인" class="uok"><input type="button" value="취소"
-                            class="ucan"></td>
+                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                                class="ucan btn"></td>
                 </tr>
                 <tr>
                     <td><span class="spantotal">채소별,소스별 포장</span><textarea class="texttotal">채소별,소스별 포장</textarea></td>
@@ -231,9 +283,9 @@
                             class="texttotal">포장기계, 진공포장기</textarea></td>
                     <td><span class="spantotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</span><textarea name="" id=""
                             class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"><input type="button" value="확인" class="uok"><input type="button" value="취소"
-                            class="ucan"></td>
+                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
+                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
+                                class="ucan btn"></td>
                 </tr>
                 <tr>
                     <td><span class="spantotal">검사 및 출하</span><textarea class="texttotal">검사 및 출하</textarea></td>
@@ -599,9 +651,9 @@
                     })
 
                     newbudea.querySelector(".correction").addEventListener("click", function (e) {
-                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
                         e.target.parentNode.querySelector(".delete").classList.add("none")
-                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
                         let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
                         let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
                         e.target.classList.add("none")
@@ -630,7 +682,7 @@
                                 e.target.classList.add("none")
                                 // console.log(e.target.parentNode)
                                 e.target.parentNode.querySelector(".correction").classList.remove("none")
-                               
+
                             }
                         })
 
@@ -702,9 +754,9 @@
                     })
 
                     newkimchi.querySelector(".correction").addEventListener("click", function (e) {
-                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
                         e.target.parentNode.querySelector(".delete").classList.add("none")
-                        console.log("수정전",e.target.parentNode.querySelector(".delete"))
+                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
                         let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
                         let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
                         e.target.classList.add("none")
@@ -733,7 +785,7 @@
                                 e.target.classList.add("none")
                                 // console.log(e.target.parentNode)
                                 e.target.parentNode.querySelector(".correction").classList.remove("none")
-                               
+
                             }
                         })
 

@@ -158,6 +158,11 @@
             text-align: center;
             width: 80%;
         }
+        #boodea{
+            text-align: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
 
 
         @media screen and (max-width: 600px) {
@@ -176,7 +181,7 @@
             td {
                 font-size: 12px;
             }
-           
+
 
         }
     </style>
@@ -232,9 +237,10 @@
                 <input type="button" class="button" value="목록이동" id="back-button">
             </div>
         </div>
-       
     </div>
-    부대찌개
+    <div id="boodea">
+        <div><h2>부대찌개</h2></div>
+    </div>
     <table id="maintable">
         <tr>
             <th>제품명</th>
@@ -331,7 +337,7 @@
             console.log(document.querySelector("#mid-contain-check"))
             //뒤로가기버튼
             document.querySelector("#back-button").addEventListener("click", function () {
-                window.location.href = "bom.html"
+                window.location.href = "bom_v2.html"
             })
 
 
@@ -578,7 +584,7 @@
                             e.target.parentNode.querySelector(".ok").classList.add("none")
                             e.target.parentNode.querySelector(".can").classList.add("none")
                             console.log(e.target.parentNode.parentNode)
-                          
+
                             new_spans[0].innerText = new_chop.value
                             for (let aa = 1; aa < new_texs.length; aa++) {
                                 new_spans[aa + 1].innerText = new_texs[aa].value
@@ -848,7 +854,7 @@
                             e.target.parentNode.querySelector(".ok").classList.add("none")
                             e.target.parentNode.querySelector(".can").classList.add("none")
                             console.log(e.target.parentNode.parentNode)
-                          
+
                             new_spans[0].innerText = new_chop.value
                             for (let aa = 1; aa < new_texs.length; aa++) {
                                 new_spans[aa + 1].innerText = new_texs[aa].value
@@ -878,7 +884,7 @@
 
                 }
 
-            } else{
+            } else {
 
                 mu.forEach(function (v, i) {
                     let options = bj.map(v => `<option value="${v.제품명}">${v.제품명}</option>`).join("");
@@ -1119,7 +1125,7 @@
                             e.target.parentNode.querySelector(".ok").classList.add("none")
                             e.target.parentNode.querySelector(".can").classList.add("none")
                             console.log(e.target.parentNode.parentNode)
-                          
+
                             new_spans[0].innerText = new_chop.value
                             for (let aa = 1; aa < new_texs.length; aa++) {
                                 new_spans[aa + 1].innerText = new_texs[aa].value
