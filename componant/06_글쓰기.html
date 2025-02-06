@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>document</title>
+    <title>게시판 글쓰기</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/06_글쓰기.css">
 </head>
@@ -15,7 +15,7 @@
             <select id="category">
                 <option value="1">선택</option>
                 <option value="2">공지사항</option>
-                <option value="3">사내 특지</option>
+                <option value="3">사내복지</option>
                 <option value="4">일반 게시판</option>
             </select>
         </div>
@@ -24,22 +24,82 @@
             <input type="text" id="title" placeholder="제목을 입력하세요" />
         </div>
         <div class="post">
-            
-        
-        </div>
-        <div class="post">
-            
             <label for="content">내용</label>
             <div class="button-container">
-                <button type="filebutton">파일 첨부</button>
-                <button type="linkbutton">링크 첨부</button>
-                <button type="Calendarbutton">일정</button>
+                <input type="file" id="file-input" style="display:none;" />
+                <label for="file-input" class="file-label">파일 첨부</label>
+                <button type="button" class="link-button" id="link-button">링크 첨부</button>
+                <button type="button" class="schedule-button" id="schedule-button">일정</button>
             </div>
             <textarea id="content" rows="5" placeholder="내용을 입력하세요."></textarea>
+            
+            <div id="link-input-container" style="display:none; margin-top: 10px;">
+                <label for="link">링크 입력</label>
+                <input type="text" id="link" placeholder="링크를 입력하세요" />
+            </div>
+
+            <div id="schedule-input-container" style="display:none; margin-top: 10px;">
+                <label for="schedule-date">일정</label>
+                <input type="date" id="schedule-date" />
+            </div>
         </div>
         <div class="button-post">
-            <button type="submit">게시하기</button>
+            <button type="button">게시하기</button>
+        </div>
+        <div id="notification" style="display:none; color: green; margin-top: 10px;"></div>
+    </div>
+
+    <div id="popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" id="close-popup">&times;</span>
+            <p>게시글이 등록 되었습니다.</p>
         </div>
     </div>
+
+    <script>
+        document.getElementById('link-button').addEventListener('click', function() {
+            const linkInputContainer = document.getElementById('link-input-container');
+            linkInputContainer.style.display = (linkInputContainer.style.display === 'none' || linkInputContainer.style.display === '') ? 'block' : 'none';
+        });
+
+        document.getElementById('schedule-button').addEventListener('click', function() {
+            const scheduleInputContainer = document.getElementById('schedule-input-container');
+            scheduleInputContainer.style.display = (scheduleInputContainer.style.display === 'none' || scheduleInputContainer.style.display === '') ? 'block' : 'none';
+        });
+
+        document.querySelector('.button-post button').addEventListener('click', function() {
+            const title = document.getElementById('title').value.trim();
+            const content = document.getElementById('content').value.trim();
+
+            if (!title || !content) {
+                alert('제목과 내용을 입력해 주세요.'); // 입력 검증
+                return; // 함수 종료
+            }
+
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block'; // 팝업을 표시
+            setTimeout(() => {
+                popup.classList.add('show'); // 팝업 열기
+            }, 10); // 약간의 지연 후 클래스를 추가
+        });
+
+        document.getElementById('close-popup').addEventListener('click', function() {
+            const popup = document.getElementById('popup');
+            popup.classList.remove('show'); // 팝업 닫기
+            setTimeout(() => {
+                popup.style.display = 'none'; // 팝업 숨기기
+            }, 300); // 애니메이션 시간과 동일하게 설정
+        });
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('popup')) {
+                const popup = document.getElementById('popup');
+                popup.classList.remove('show'); // 팝업 외부 클릭 시 닫기
+                setTimeout(() => {
+                    popup.style.display = 'none'; // 팝업 숨기기
+                }, 300); // 애니메이션 시간과 동일하게 설정
+            }
+        }
+    </script>
 </body>
 </html>

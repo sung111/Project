@@ -6,16 +6,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/01_재고조사현황.css">
+    <script src="../data/material.js"></script>
 </head>
 <body>
     <div class="box"> <!--제목 -->
         <h1>재고 현황 조회</h1>
     </div>
 
-    <div class = "box">
+    <div class="box">
         <div class="container">
             <label for="재고 유형">재고 유형
-                <select id ="재고 유형">
+                <select id="재고 유형">
                     <option>선택</option>
                     <option>원자재</option>
                     <option>완제품</option>
@@ -28,7 +29,7 @@
             </label>
 
             <label for="공급 업체">공급 업체
-                <select id = "공급 업체">
+                <select id="공급 업체">
                     <option>선택</option>
                     <option>육수 정원</option>
                     <option>미트 하모니</option>
@@ -52,147 +53,228 @@
                 <input type="text" id="search" placeholder="검색어를 입력하세요.">
             </div>
 
-            <label for = "재고 유무">재고 유무
-                <select id ="재고 유무">
+            <label for="재고 유무">재고 유무
+                <select id="재고 유무">
                     <option>선택</option>
                     <option>유</option>
                     <option>무</option>
                     <option>0 이하</option>
                 </select>
             </label>
-            <div class = "item">
-                <button type = "button">조회</button>
+            <div class="item">
+                <button type="button">조회</button>
             </div>
         </div>
     </div>
-    <!-- <div class="barcode-container">
-        <input type="text" id="barcode" placeholder="제품 바코드 스캔">
-        <button type="button" class="barcode-scan-button">조회</button>
-    </div> -->
-    </div>
-    <div>
-        <div class="Details">
-            <table> 
-                <thead> 
-                    <tr>
-                        <th>제품 명</th>
-                        <th>구분</th>
-                        <th>제품 그룹</th>
-                        <th>대분류</th>
-                        <th>단종 여부</th>
-                        <th>사용 여부</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>내용 1</td>
-                        <td>내용 2</td>
-                        <td>내용 3</td>
-                        <td>내용 4</td>
-                        <td>내용 5</td>
-                        <td>내용 6</td>
 
-                    </tr>
-                </tbody>
-            </table>
-            <div class="list">
-                <table>
+    <div class="list"> 
+        <div class="listbtn">
+            <button type="button" id="addinven">재고 등록</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>LOT NO</th>
+                    <th>품목</th>
+                    <th>품번</th>
+                    <th>재고 수량</th>
+                    <th>단위</th>
+                    <th>입고일</th>
+                    <th>유효기간</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryTableBody"></tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
+        <button onclick="changePage(1)">1</button>
+        <button onclick="changePage(2)">2</button>
+        <button onclick="changePage(3)">3</button>
+        <button onclick="changePage(4)">4</button>
+        <button onclick="changePage(5)">5</button>
+        <button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>재고 등록</h2>
+            <form>
+                <table class="addtable">
                     <thead>
-                    <tr>
-                        <th>LOT NO</th>
-                        <th>품목</th>
-                        <th>품번</th>
-                        <th>재고 수량</th>
-                        <th>단위</th>
-                        <th>입고일</th>
-                        <th>유효기간</th>
-                        <th>관리</th>
-                    </tr>
+                        <tr>
+                            <th>항목</th>
+                            <th>내용</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>내용 1</td>
-                            <td>내용 2</td>
-                            <td>내용 3</td>
-                            <td>내용 4</td>
-                            <td>내용 5</td>
-                            <td>내용 6</td>
-                            <td>내용 7</td>
+                            <td>LOT NO</td>
+                            <td><input type="text" id="addlotno" placeholder="LOT NO를 입력하세요."></td>
+                        </tr>
+                        <tr>
+                            <td>품목</td>
+                            <td><input type="text" id="additem" placeholder="품목을 입력하세요."></td>
+                        </tr>
+                        <tr>
+                            <td>품번</td>
+                            <td><input type="text" id="additemno" placeholder="품번을 입력하세요."></td>
+                        </tr>
+                        <tr>
+                            <td>재고 수량</td>
+                            <td><input type="text" id="addquantity" placeholder="재고 수량을 입력하세요."></td>
+                        </tr>
+                        <tr>
+                            <td>단위</td>
                             <td>
-                                <button type="button">수정</button>
-                                <button type="button">삭제</button>
+                                <div class="unit-container">
+                                    <input type="text" id="addunit" placeholder="단위를 입력하세요." class="unit-input">
+                                    <select id="unitDropdown" class="unit-dropdown">
+                                        <option value="g">g</option>
+                                        <option value="kg">kg</option>
+                                        <option value="ml">ml</option>
+                                        <option value="캔">캔</option>
+                                        <option value="개">개</option>
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>내용 1</td>
-                            <td>내용 2</td>
-                            <td>내용 3</td>
-                            <td>내용 4</td>
-                            <td>내용 5</td>
-                            <td>내용 6</td>
-                            <td>내용 7</td>
-                            <td>
-                                <button type="button">수정</button>
-                                <button type="button">삭제</button>
-                            </td>
+                            <td>입고일</td>
+                            <td><input type="date" id="addin_date" name="in_date"></td>
                         </tr>
                         <tr>
-                            <td>내용 1</td>
-                            <td>내용 2</td>
-                            <td>내용 3</td>
-                            <td>내용 4</td>
-                            <td>내용 5</td>
-                            <td>내용 6</td>
-                            <td>내용 7</td>
-                            <td>
-                                <button type="button">수정</button>
-                                <button type="button">삭제</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>내용 1</td>
-                            <td>내용 2</td>
-                            <td>내용 3</td>
-                            <td>내용 4</td>
-                            <td>내용 5</td>
-                            <td>내용 6</td>
-                            <td>내용 7</td>
-                            <td>
-                                <button type="button">수정</button>
-                                <button type="button">삭제</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>내용 1</td>
-                            <td>내용 2</td>
-                            <td>내용 3</td>
-                            <td>내용 4</td>
-                            <td>내용 5</td>
-                            <td>내용 6</td>
-                            <td>내용 7</td>
-                            <td>
-                                <button type="button">수정</button>
-                                <button type="button">삭제</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>내용 1</td>
-                            <td>내용 2</td>
-                            <td>내용 3</td>
-                            <td>내용 4</td>
-                            <td>내용 5</td>
-                            <td>내용 6</td>
-                            <td>내용 7</td>
-                            <td>
-                                <button type="button">수정</button>
-                                <button type="button">삭제</button>
-                            </td>
-                            
+                            <td>유효기간</td>
+                            <td><input type="date" id="addexp_date" name="exp_date"></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+                <div class="addbtn">
+                    <button type="button">등록</button>
+                </div>
+            </form>
         </div>
     </div>
+
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 10;
+
+        start.push(...finishe);
+
+        function loadData() {
+            const inventoryTableBody = document.getElementById('inventoryTableBody');
+            inventoryTableBody.innerHTML = ''; // 테이블 초기화
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+
+            const currentItems = start.slice(startIndex, endIndex);
+
+            currentItems.forEach(item => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${item.LotNo}</td>
+                    <td>${item.제품명}</td>
+                    <td>${item.품번}</td>
+                    <td>${item.재고수량}</td> <!-- 재고 수량 -->
+                    <td>${item.단위}</td>
+                    <td>${item.입고일자}</td>
+                    <td>${item.유효기간}</td>
+                    <td>
+                        <button type="button" class="editButton">수정</button>
+                        <button type="button">삭제</button>
+                    </td>
+                `;
+                
+                inventoryTableBody.appendChild(row);
+            });
+
+            setupEditButtons();
+        }
+
+        function changePage(pageNumber) {
+            if (pageNumber < 1) return;
+
+            const totalPages = Math.ceil(start.length / itemsPerPage);
+            if (pageNumber > totalPages) return;
+
+            currentPage = pageNumber;
+            loadData();
+        }
+
+        // 페이지 변경 버튼 이벤트 설정
+        document.getElementById('prevButton').onclick = function() {
+            changePage(currentPage - 1);
+        };
+
+        document.getElementById('nextButton').onclick = function() {
+            changePage(currentPage + 1);
+        };
+
+        // 각 페이지 버튼 클릭 시 페이지 변경
+        const pageButtons = document.querySelectorAll('.pagination button:not(#prevButton):not(#nextButton)');
+        pageButtons.forEach((button, index) => {
+            button.onclick = function() {
+                changePage(index + 1); // 1부터 시작
+            };
+        });
+
+        // 팝업 열기 (재고 등록)
+        document.getElementById('addinven').onclick = function() {
+            // 모든 입력 칸 비우기
+            document.getElementById('addlotno').value = '';
+            document.getElementById('additem').value = '';
+            document.getElementById('additemno').value = '';
+            document.getElementById('addquantity').value = '';
+            document.getElementById('addunit').value = '';
+            document.getElementById('addin_date').value = '';
+            document.getElementById('addexp_date').value = '';
+
+            document.getElementById('popup').style.display = 'block';
+        };
+
+        // 수정 버튼 클릭 시 팝업 열기
+        function setupEditButtons() {
+            const editButtons = document.querySelectorAll('.editButton');
+            editButtons.forEach(button => {
+                button.onclick = function() {
+                    const row = this.closest('tr'); // 수정 버튼이 있는 행을 찾음
+                    const lotNo = row.cells[0].innerText;
+                    const item = row.cells[1].innerText;
+                    const itemNo = row.cells[2].innerText;
+                    const quantity = row.cells[3].innerText;
+                    const unit = row.cells[4].innerText;
+                    const inDate = row.cells[5].innerText;
+                    const expDate = row.cells[6].innerText;
+
+                    // 팝업에 데이터 채우기
+                    document.getElementById('addlotno').value = lotNo;
+                    document.getElementById('additem').value = item;
+                    document.getElementById('additemno').value = itemNo;
+                    document.getElementById('addquantity').value = quantity;
+                    document.getElementById('addunit').value = unit;
+                    document.getElementById('addin_date').value = inDate;
+                    document.getElementById('addexp_date').value = expDate;
+
+                    // 팝업 열기
+                    document.getElementById('popup').style.display = 'block';
+                };
+            });
+        }
+
+        // 팝업 닫기
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // 페이지가 로드될 때 데이터 로드
+        window.onload = loadData;
+    </script>    
 </body>
 </html>
+
