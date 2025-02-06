@@ -99,7 +99,7 @@ function init() {
 
   //등록버튼
   document.querySelector('.btn3').addEventListener('click', (e) => {
-    const intd = document.querySelector('.registrationView').innerHTML
+    const intd = document.querySelector('.textarea1').value
     const view = document.querySelector('.box3View')
     const date = document.querySelector('.date1')
     const wpName = document.querySelector('.wp2')
@@ -112,7 +112,11 @@ function init() {
                         <div class="emdwp">${wpName.innerHTML}</div>
                         <div class="emdtn">10pack</div>
                         <div>생산완료</div>
-                        <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                        <div class="text1">${intd}</div>
+                        <div>
+                          <button class="tn">수정</button>
+                          <button class="tkr">삭제</button>
+                        </div>
                       </div>` + view.innerHTML
     alert('실적등록을 완료했습니다.')
     renderPagination();
@@ -125,9 +129,9 @@ function init() {
     if (e.target.innerText == '완료') {
       const tarG = e.target.parentNode.parentNode
       const date = tarG.querySelector('.emdskf').value
-      const wp = tarG.querySelector('.emdwp').value
+      const wp = tarG.querySelector('.emdwp').innerText
       const tn = tarG.querySelector('.emdtn').value
-      const tarGe = tarG.querySelectorAll('.input')
+      const tT = tarG.querySelector('.text1').value
       tarG.innerHTML = "";
       // for (let i = 0; i < tarGe.length; i++) {
       //   console.log(tarGe[i].value);
@@ -138,9 +142,14 @@ function init() {
                           <div class="emdwp">${wp}</div>
                           <div class="emdtn">${tn}</div>
                           <div>생산완료</div>
-                          <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                          <div class="text1">${tT}</div>
+                          <div>
+                            <button class="tn">수정</button>
+                            <button class="tkr">삭제</button>
+                          </div>
                           </div>
                         `
+      alert("수정되었습니다.")
     }
 
     //수정버튼
@@ -159,14 +168,20 @@ function init() {
 
       const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
       const emdtn = e.target.parentNode.parentNode.querySelector('.emdtn').innerText
+      const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
       e.target.parentNode.parentNode.innerHTML =
-        `
+      `
       <div><input type="datetime-local" class="emdskf" value="${date}"></div>
-      <div><input type="text" class="emdwp" value="${emdwp}"></div>
+      <div class="emdwp">${emdwp}</div>
       <div><input type="text" class="emdtn" value="${emdtn}"></div>
       <div>생산완료</div>
-      <div><button class="dhks">완료</button><button class="cnl">취소</button></div>
+      <div><input type="text" class="text1" value="${text}"></div>
+      <div>
+        <button class="dhks">완료</button>
+        <button class="cnl">취소</button>
+      </div>
       `
+      
     }
 
     if (e.target.innerText === "취소") {

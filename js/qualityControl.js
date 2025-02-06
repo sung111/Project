@@ -19,7 +19,7 @@ function init() {
 
   document.querySelector('.wkrView').addEventListener('click', (e) => {
     // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
-    if(e.target.innerText == '수정'){
+    if (e.target.innerText == '수정') {
       const wkrView = document.querySelector('.wkrView')
       const a = wkrView.querySelector('.workorder-tag')
       const b = wkrView.querySelectorAll('.workorderlist')
@@ -27,10 +27,10 @@ function init() {
       const c = wkrView.querySelector('.new-workorder')
       const d = wkrView.querySelector('.order-buttonlayer')
       a.style.display = "none"
-      for(let i = 0 ; i<b.length ; i++){
+      for (let i = 0; i < b.length; i++) {
         b[i].style.display = "none"
       }
-      for(let i = 0 ; i<b2.length ; i++){
+      for (let i = 0; i < b2.length; i++) {
         b2[i].style.display = "none"
         // console.log(b2[i])
       }
@@ -39,12 +39,12 @@ function init() {
     }
 
     const z = e.target.parentNode.classList.contains("order-info-content")
-    if(z){
+    if (z) {
       document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
       document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
     }
-    
-    if(e.target.innerText == "삭제하기"){
+
+    if (e.target.innerText == "삭제하기") {
       alert("현재 페이지에서 삭제하실수없습니다.")
     }
 
@@ -68,7 +68,7 @@ function init() {
         const targetBox3 = doc.querySelector('.sample');
 
         const SampleClick = doc.querySelector(".workorderlist-sample")
-        
+
         if (targetBox) {
           document.querySelector('.wkrView').innerHTML = targetBox.innerHTML
           document.querySelector('.wkrView').innerHTML += targetBox2.innerHTML
@@ -88,7 +88,7 @@ function init() {
         console.error('페이지를 불러오는 도중 에러 발생:', error);
       });
 
-    
+
 
   })
 
@@ -105,8 +105,10 @@ function init() {
         ss = rad[i].value
         if (ss == "불합격") {
           document.querySelector('.dropBox').classList.remove('hide')
+          document.querySelector('.BB2').classList.remove('hide')
         } else {
           document.querySelector('.dropBox').classList.add('hide')
+          document.querySelector('.BB2').classList.add('hide')
         }
       }
     })
@@ -140,23 +142,29 @@ function init() {
     if (ss == "합격") {
       box3.innerHTML = `
                         <div class="dex">
-                          <div>${date}</div>
-                          <div>${wp2.innerText}</div>
-                          <div>${ss}</div>
-                          <div></div>
-                          <div>${textB}</div>
-                          <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                          <div class="dateB">${date}</div>
+                          <div class="emdwp">${wp2.innerText}</div>
+                          <div class="emdgkq">${ss}</div>
+                          <div class="tkdb"></div>
+                          <div class="text1">${textB}</div>
+                          <div>
+                            <button class="tn">수정</button>
+                            <button class="tkr">삭제</button>
+                          </div>
                         </div>
                       `+ box3.innerHTML;
     } else {
       box3.innerHTML = `
                         <div class="dex">
-                          <div>${date}</div>
-                          <div>${wp2.innerText}</div>
-                          <div>${ss}</div>
-                          <div>${drop}</div>
-                          <div>${textB}</div>
-                          <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                          <div class="dateB">${date}</div>
+                          <div class="emdwp">${wp2.innerText}</div>
+                          <div class="emdgkq">${ss}</div>
+                          <div class="tkdb">${drop}</div>
+                          <div class="text1">${textB}</div>
+                          <div>
+                            <button class="tn">수정</button>
+                            <button class="tkr">삭제</button>
+                          </div>
                         </div>
                       `+ box3.innerHTML;
 
@@ -171,38 +179,75 @@ function init() {
     // console.log(e.target);
     if (e.target.innerText == "삭제") {
       e.target.parentNode.parentNode.remove();
+      alert("삭제되었습니다.")
     }
 
     //수정
     if (e.target.innerText == "수정") {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = ("0" + (now.getMonth() + 1)).slice(-2);
+      const day = ("0" + now.getDate()).slice(-2);
+      const hour = ("0" + now.getHours()).slice(-2);
+      const minute = ("0" + now.getMinutes()).slice(-2);
+
+      const date = `${year}-${month}-${day}T${hour}:${minute}`;
+
+      const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
+      const tkdb = e.target.parentNode.parentNode.querySelector('.tkdb').innerText
+      const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
+
 
       const row = e.target.parentNode.parentNode;
       row.dataset.original = row.innerHTML
 
       e.target.parentNode.parentNode.innerHTML =
         `
-        <div><input type="datetime-local" class="inputT"></div>
-        <div><input type="text" class="inputT"></div>
-        <div><input type="text" class="inputT"></div>
-        <div><input type="text" class="inputT"></div>
-        <div><input type="text" class="inputT"></div>
-        <div><button class="tn">완료</button><button class="tkr">취소</button></div>
+        <div>
+          <input type="datetime-local" class="inputT dateB" value="${date}">
+        </div>
+        <div class="emdwp">${emdwp}</div>
+        <div>
+          <select name="" id="" class="emdgkq">
+            <option value="합격">합격</option>
+            <option value="불합격">불합격</option>
+          </select>
+        </div>
+        <div class="">
+          <input type="text" class="inputT tkdb" value="${tkdb}">
+        </div>
+        <div>
+          <input type="text" class="inputT text1" value="${text}">
+        </div>
+        <div>
+          <button class="tn">완료</button>
+          <button class="tkr">취소</button>
+        </div>
       `
     }
 
     // 수정완료
     if (e.target.innerText == "완료") {
-      const inP = document.querySelectorAll('.inputT')
       const view = e.target.parentNode.parentNode
+      const tarG = e.target.parentNode.parentNode
+      const date = tarG.querySelector('.dateB').value
+      const wp = tarG.querySelector('.emdwp').innerText
+      const gkq = tarG.querySelector('.emdgkq').value
+      const tk = tarG.querySelector('.tkdb').value
+      const tT = tarG.querySelector('.text1').value
       view.innerHTML = ""
-      for (let i = 0; i < inP.length; i++) {
-        // console.log(inP.value)
-        view.innerHTML += `<div>${inP[i].value}</div>`
-      }
       view.innerHTML += `
-                        <div><button class="tn">수정</button><button class="tkr">삭제</button></div>
+                        <div class="dateB">${date}</div>
+                        <div class="emdwp">${wp}</div>
+                        <div class="emdgkq">${gkq}</div>
+                        <div class="tkdb">${tk}</div>
+                        <div class="text1">${tT}</div>
+                        <div>
+                          <button class="tn">수정</button>
+                          <button class="tkr">삭제</button>
                         </div>
                       `
+      alert("수정되었습니다.")
     }
 
     if (e.target.innerText === "취소") {

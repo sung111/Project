@@ -133,11 +133,11 @@ body {
     /* border-radius: 5px; */
     margin: 5px;
   }
-
-  .registrationView {
-    margin: 5px;
+  .textarea1{
+    margin: 5px 0px 0px 9px;
     border: 1px solid rgb(199, 196, 196);
-    height: 180px;
+    width: 97%;
+    height: 75%;
     background-color: white;
     color: black;
     overflow-y: scroll;
@@ -495,5 +495,14 @@ body {
     font-size: 15px;
     background-color: #d9d9d9;
     border-radius: 5px;
+  }
+  .textarea1{
+    margin: 5px 0px 0px 9px;
+    border: 1px solid rgb(199, 196, 196);
+    width: 97%;
+    height: 75%;
+    background-color: white;
+    color: black;
+    overflow-y: scroll;
   }
 }
