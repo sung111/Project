@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>완제품 관리</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            color: #ffffff;
+            background-color: #f4f4f4;
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .btn {
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        th {
+            background-color: #007bff;
+        }
+
+        .move {
+            text-decoration: underline;
+        }
+
+        .move:hover {
+            font-size: 18px;
+        }
+        .none{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>완제품 관리</h2>
+
+        <div class="form-group">
+            <label for="search">완제품 이름</label>
+            <input type="text" id="search-text" placeholder="검색할 완제품 입력">
+            <button class="btn" id="search-button">검색</button>
+            <button class="btn" id="add">등록</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>완제품 이름</th>
+                    <th>품번</th>
+                    <th>유통기한</th>
+                    <th>보관 조건</th>
+                    <th>완제품 이미지</th>
+                    <th>수정 / 삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="move">부대찌개</td>
+                    <td>P001</td>
+                    <td>포장후 30일이내</td>
+                    <td> 0~10℃</td>
+                    <td><img src="/img/Budae-Jjigae.png" alt="부대찌개"></td>
+                    <td>
+                        <button class="btn btn-edit">수정</button>
+                        <button class="btn btn-delete">삭제</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="move">김치찌개</td>
+                    <td>P002</td>
+                    <td>포장후 15일이내</td>
+                    <td> 0~10℃</td>
+                    <td><img src="/img/kimchisoup.png" alt="김치찌개"></td>
+                    <td>
+                        <button class="btn btn-edit">수정</button>
+                        <button class="btn btn-delete">삭제</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="move">밀푀유나배</td>
+                    <td>P003</td>
+                    <td>포장후 20일이내</td>
+                    <td> 0~10℃</td>
+                    <td><img src="/img/Millefeuille.png" alt="밀푀유나베"></td>
+                    <td>
+                        <button class="btn btn-edit">수정</button>
+                        <button class="btn btn-delete">삭제</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="move">떡볶이</td>
+                    <td>P004</td>
+                    <td>포장후 60일이내</td>
+                    <td> 0~10℃</td>
+                    <td><img src="/img/tteokbokki.png" alt="떡볶이"></td>
+                    <td>
+                        <button class="btn btn-edit">수정</button>
+                        <button class="btn btn-delete">삭제</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="move">곱창전골</td>
+                    <td>P005</td>
+                    <td>포장후 25일이내</td>
+                    <td> 0~10℃</td>
+                    <td><img src="/img/Gopchanghotpot.png" alt="곱창전골"></td>
+                    <td>
+                        <button class="btn btn-edit">수정</button>
+                        <button class="btn btn-delete">삭제</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        window.addEventListener("load", function () {
+            //각리스트클레스에서
+            let moves = document.querySelectorAll("td.move");
+            // console.log(moves[0].innerText);
+            for (let i = 0; i < moves.length; i++) {
+
+                // console.log(moves[i].innerText)
+                moves[i].addEventListener("click", function (e) {
+                    let value = e.target.innerText
+                    window.location.href = "bomlist.html";
+                    window.location.href = `bomlist.html?value=${value}`;
+
+                })
+            }
+            //------검색기능
+            document.querySelector("#search-button").addEventListener("click", function () {
+                // console.log(moves[0].innerText);
+                 let stvalue = document.querySelector("#search-text").value
+                for (let a = 0; a < moves.length; a++) {
+                    // console.log(moves[a].innerText)
+                    if(stvalue != moves[a].innerText){
+                        console.log(moves[a].parentNode)
+                        // moves[0].parentNode.clasList.add("none")
+                    }
+                }
+                })
+            //----수정버튼 
+                let edits = document.querySelectorAll(".btn-edit")
+                for(let i = 0; i < edits.length ; i++){
+                    edits[i].addEventListener("click",function(e){
+                        console.log(e.target.parentNode.parentNode)
+                    })
+                }
+            //----------------
+
+
+            //---등록버튼누르면 dom넣는 함수
+            function newpush(){
+                let newmaue = document.getElementById("tr")
+                newmaue.innerHTML = `
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><input type="button" class="u" value="수정"><input type="button" class="d" value="삭제"></td>
+                                    `
+            
+                                }
+            //-----------------------------
+            //-------등록버튼
+            document.querySelector("#add").addEventListener("click",function(){
+
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+        })
+    </script>
+
+
+
+</body>
+
+</html>
