@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/02_공지사항.css">
 </head>
+
 <body>
     <div class="box">
         <h1>공지사항</h1>
         <div class="postbtn">
-            <button type="button">글 쓰기</button>
+            <button type="button" class="newpost">글 쓰기</button>
         </div>
         <div class="post">
             <span class="content">시스템 업데이트가 완료되었습니다.</span>
@@ -48,5 +50,25 @@
             <button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // userRole = 로그인한 사람이 user인지 admin인지 구분하기위한 선언
+            const userRole = window.parent.sessionStorage.getItem("userRole");
+            const NewWorkorderbutton = document.querySelector(".newpost");
+            NewWorkorderbutton.addEventListener("click", function () {
+                // user권한은 생성 불가
+                if (userRole == "user") {
+                    alert("권한이 없습니다.");
+                    // admin권한 생성
+                } else if (userRole == "admin") {
+                    const iframe = parent.document.querySelector("iframe");
+                    iframe.src = "componant/06_글쓰기.html";
+                } else {
+                    alert("로그인이 필요합니다.");
+                }
+            })
+        })
+    </script>
 </body>
+
 </html>

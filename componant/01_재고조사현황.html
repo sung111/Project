@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/01_재고조사현황.css">
     <script src="../data/material.js"></script>
+    <script src="../data/productdata.js"></script>
 </head>
+
 <body>
     <div class="box"> <!--제목 -->
         <h1>재고 현황 조회</h1>
@@ -67,7 +70,7 @@
         </div>
     </div>
 
-    <div class="list"> 
+    <div class="list">
         <div class="listbtn">
             <button type="button" id="addinven">재고 등록</button>
         </div>
@@ -163,8 +166,8 @@
         let currentPage = 1;
         const itemsPerPage = 10;
 
-        start.push(...finishe);
-
+        start.push(...product);
+        start.push(...start);
         function loadData() {
             const inventoryTableBody = document.getElementById('inventoryTableBody');
             inventoryTableBody.innerHTML = ''; // 테이블 초기화
@@ -176,7 +179,7 @@
 
             currentItems.forEach(item => {
                 const row = document.createElement('tr');
-                
+
                 row.innerHTML = `
                     <td>${item.LotNo}</td>
                     <td>${item.제품명}</td>
@@ -187,10 +190,10 @@
                     <td>${item.유효기간}</td>
                     <td>
                         <button type="button" class="editButton">수정</button>
-                        <button type="button">삭제</button>
+                        <button type="button" class="del">삭제</button>
                     </td>
                 `;
-                
+
                 inventoryTableBody.appendChild(row);
             });
 
@@ -208,24 +211,24 @@
         }
 
         // 페이지 변경 버튼 이벤트 설정
-        document.getElementById('prevButton').onclick = function() {
+        document.getElementById('prevButton').onclick = function () {
             changePage(currentPage - 1);
         };
 
-        document.getElementById('nextButton').onclick = function() {
+        document.getElementById('nextButton').onclick = function () {
             changePage(currentPage + 1);
         };
 
         // 각 페이지 버튼 클릭 시 페이지 변경
         const pageButtons = document.querySelectorAll('.pagination button:not(#prevButton):not(#nextButton)');
         pageButtons.forEach((button, index) => {
-            button.onclick = function() {
+            button.onclick = function () {
                 changePage(index + 1); // 1부터 시작
             };
-        });
+        }); 
 
         // 팝업 열기 (재고 등록)
-        document.getElementById('addinven').onclick = function() {
+        document.getElementById('addinven').onclick = function () {
             // 모든 입력 칸 비우기
             document.getElementById('addlotno').value = '';
             document.getElementById('additem').value = '';
@@ -242,7 +245,7 @@
         function setupEditButtons() {
             const editButtons = document.querySelectorAll('.editButton');
             editButtons.forEach(button => {
-                button.onclick = function() {
+                button.onclick = function () {
                     const row = this.closest('tr'); // 수정 버튼이 있는 행을 찾음
                     const lotNo = row.cells[0].innerText;
                     const item = row.cells[1].innerText;
@@ -272,9 +275,164 @@
             document.getElementById('popup').style.display = 'none';
         }
 
+        //수정 버튼 클릭 시 데이터 로드
+        function setupEditButtons() {
+            const editButtons = document.querySelectorAll('.editButton');
+            editButtons.forEach((button, index) => {
+                button.onclick = function () {
+                    const row = this.closest('tr');
+                    const lotNo = row.cells[0].innerText;
+                    const item = row.cells[1].innerText;
+                    const itemNo = row.cells[2].innerText;
+                    const quantity = row.cells[3].innerText;
+                    const unit = row.cells[4].innerText;
+                    const inDate = row.cells[5].innerText;
+                    const expDate = row.cells[6].innerText;
+
+                    // 팝업에 데이터 채우기
+                    document.getElementById('addlotno').value = lotNo;
+                    document.getElementById('additem').value = item;
+                    document.getElementById('additemno').value = itemNo;
+                    document.getElementById('addquantity').value = quantity;
+                    document.getElementById('addunit').value = unit;
+                    document.getElementById('addin_date').value = inDate;
+                    document.getElementById('addexp_date').value = expDate;
+
+                    // 수정할 항목의 인덱스 저장
+                    editingIndex = Array.from(editButtons).indexOf(button); // 인덱스 저장
+
+                    // 팝업 열기
+                    document.getElementById('popup').style.display = 'block';
+                };
+            });
+        }
+        document.querySelector('.addbtn button').onclick = function () {
+            const lotNo = document.getElementById('addlotno').value;
+            const item = document.getElementById('additem').value;
+            const itemNo = document.getElementById('additemno').value;
+            const quantity = document.getElementById('addquantity').value;
+            const unit = document.getElementById('addunit').value;
+            const inDate = document.getElementById('addin_date').value;
+            const expDate = document.getElementById('addexp_date').value;
+
+            if (editingIndex !== null) {
+                // 수정 모드: 기존 항목 업데이트
+                start[editingIndex] = {
+                    LotNo: lotNo,
+                    제품명: item,
+                    품번: itemNo,
+                    재고수량: quantity,
+                    단위: unit,
+                    입고일자: inDate,
+                    유효기간: expDate
+                };
+                editingIndex = null; // 수정 모드 초기화
+            } else {
+                // 신규 등록 모드: 새로운 항목 추가
+                const newItem = {
+                    LotNo: lotNo,
+                    제품명: item,
+                    품번: itemNo,
+                    재고수량: quantity,
+                    단위: unit,
+                    입고일자: inDate,
+                    유효기간: expDate
+                };
+                start.push(newItem);
+            }
+
+            loadData(); // 테이블 데이터 다시 로드
+            closePopup(); // 팝업 닫기
+        };
+
+
         // 페이지가 로드될 때 데이터 로드
         window.onload = loadData;
-    </script>    
-</body>
-</html>
 
+        // 등록 버튼 클릭 시 이벤트 처리 추가
+        document.querySelector('.addbtn button').onclick = function () {
+            // 입력 필드에서 데이터 가져오기
+            const lotNo = document.getElementById('addlotno').value;
+            const item = document.getElementById('additem').value;
+            const itemNo = document.getElementById('additemno').value;
+            const quantity = document.getElementById('addquantity').value;
+            const unit = document.getElementById('addunit').value;
+            const inDate = document.getElementById('addin_date').value;
+            const expDate = document.getElementById('addexp_date').value;
+
+            // 새로운 항목 객체 생성
+            const newItem = {
+                LotNo: lotNo,
+                제품명: item,
+                품번: itemNo,
+                재고수량: quantity,
+                단위: unit,
+                입고일자: inDate,
+                유효기간: expDate
+            };
+
+            // start 배열에 새로운 항목 추가
+            start.push(newItem);
+
+            // 테이블 데이터 다시 로드
+            loadData();
+
+            // 팝업 닫기
+            closePopup();
+        };
+
+        // 페이지네이션 관련 전역 변수
+        let Page = 1;
+        const itemsPage = 7;  // 한 페이지에 표시할 항목 수
+
+
+
+        // 페이지네이션을 적용하는 함수
+        function renderPagination() {
+            // 모든 등록된 항목 선택 (.item 클래스 사용)
+            const view = document.querySelector('.box3View');
+            const items = Array.from(view.querySelectorAll('.item'));
+            const totalItems = items.length;
+            const totalPages = Math.ceil(totalItems / itemsPage);
+
+            // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
+            items.forEach((item, index) => {
+                if (index >= (Page - 1) * itemsPage && index < Page * itemsPage) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // pagination 컨테이너 업데이트
+            let paginationContainer = document.querySelector('.pagination');
+            if (!paginationContainer) {
+                // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
+                paginationContainer = document.createElement('div');
+                paginationContainer.classList.add('pagination');
+                // box3 하단에 추가
+                document.querySelector('.box3').appendChild(paginationContainer);
+            }
+
+            // 기존 페이지네이션 버튼 초기화
+            paginationContainer.innerHTML = '';
+
+            // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
+            for (let page = 1; page <= totalPages; page++) {
+                const btn = document.createElement('button');
+                btn.textContent = page;
+                if (page === Page) {
+                    btn.disabled = true;
+                }
+                btn.addEventListener('click', () => {
+                    Page = page;
+                    renderPagination();
+                });
+                paginationContainer.appendChild(btn);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
