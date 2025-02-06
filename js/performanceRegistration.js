@@ -17,13 +17,48 @@ function init() {
   document.querySelector('.indate2').value = date;
 
 
+
+  document.querySelector('.instView').addEventListener('click', (e) => {
+    // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
+    if(e.target.innerText == '수정'){
+      const instView = document.querySelector('.instView')
+      const a = instView.querySelector('.workorder-tag')
+      const b = instView.querySelectorAll('.workorderlist')
+      const b2 = instView.querySelectorAll('a')
+      const c = instView.querySelector('.new-workorder')
+      const d = instView.querySelector('.order-buttonlayer')
+      a.style.display = "none"
+      for(let i = 0 ; i<b.length ; i++){
+        b[i].style.display = "none"
+      }
+      for(let i = 0 ; i<b2.length ; i++){
+        b2[i].style.display = "none"
+        // console.log(b2[i])
+      }
+      c.style.display = "block"
+      d.style.display = "none"
+    }
+
+    const z = e.target.parentNode.classList.contains("order-info-content")
+    if(z){
+      document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
+      document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
+    }
+
+    if(e.target.innerText == "삭제하기"){
+      alert("현재 페이지에서 삭제하실수없습니다.")
+    }
+
+  });
+
+
+
   // 작지
   document.querySelector('.btn1').addEventListener('click', (e) => {
-    console.log(e.target);
-
     fetch('WorkOrder.html')
       .then(response => {
         return response.text();
+
       })
       .then(html => {
         const parser = new DOMParser();
@@ -31,17 +66,35 @@ function init() {
 
         const targetBox = doc.querySelector('.workorder-layer');
         const targetBox2 = doc.querySelector('.workorder-pagenation');
+        const targetBox3 = doc.querySelector('.sample');
+
+        const SampleClick = doc.querySelector(".workorderlist-sample")
+        
         if (targetBox) {
           document.querySelector('.instView').innerHTML = targetBox.innerHTML
           document.querySelector('.instView').innerHTML += targetBox2.innerHTML
+          document.querySelector('.instView').innerHTML += targetBox3.innerHTML
+          SampleClick.addEventListener('click', (e) => {
+            e.target.parentNode.parentNode.classList.add('hide')
+            targetBox2.style.display = "none"
+            targetBox3.style.display = "block"
+          })
         } else {
           document.querySelector('.instView').innerHTML = "불로오는도중 오류가발생했습니다."
         }
+
+
       })
       .catch(error => {
         console.error('페이지를 불러오는 도중 에러 발생:', error);
       });
+
+    
+
   })
+
+
+
 
 
   //등록버튼
@@ -120,7 +173,7 @@ function init() {
       const row = e.target.parentNode.parentNode;
       if (row.dataset.original) {
         row.innerHTML = row.dataset.original;
-      } 
+      }
     }
 
 
@@ -228,5 +281,8 @@ function init() {
 
   // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
   window.addEventListener('DOMContentLoaded', renderPagination);
+
+
+
 
 }

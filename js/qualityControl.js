@@ -1,7 +1,9 @@
 window.addEventListener('load', init)
-window.addEventListener('load', time)
 
-function time() {
+
+
+function init() {
+
   const now = new Date();
   const year = now.getFullYear();
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -13,22 +15,49 @@ function time() {
   document.querySelector('.indate1').value = date;
   document.querySelector('.indate2').value = date;
   document.querySelector('.date2').value = date;
-}
 
-function openPop() {
-  const options = 'width=700, heigth=600, top=50, left=50,scrollbars=yes'
 
-  window.open('http://127.0.0.1:5500/componant/process.html?targe=standards-contain', '_blank', options);
-}
+  document.querySelector('.wkrView').addEventListener('click', (e) => {
+    // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
+    if(e.target.innerText == '수정'){
+      const wkrView = document.querySelector('.wkrView')
+      const a = wkrView.querySelector('.workorder-tag')
+      const b = wkrView.querySelectorAll('.workorderlist')
+      const b2 = wkrView.querySelectorAll('a')
+      const c = wkrView.querySelector('.new-workorder')
+      const d = wkrView.querySelector('.order-buttonlayer')
+      a.style.display = "none"
+      for(let i = 0 ; i<b.length ; i++){
+        b[i].style.display = "none"
+      }
+      for(let i = 0 ; i<b2.length ; i++){
+        b2[i].style.display = "none"
+        // console.log(b2[i])
+      }
+      c.style.display = "block"
+      d.style.display = "none"
+    }
 
-function init() {
+    const z = e.target.parentNode.classList.contains("order-info-content")
+    if(z){
+      document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
+      document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
+    }
+    
+    if(e.target.innerText == "삭제하기"){
+      alert("현재 페이지에서 삭제하실수없습니다.")
+    }
 
+  });
+
+
+
+  // 작지
   document.querySelector('.btn1').addEventListener('click', (e) => {
-    console.log(e.target);
-
     fetch('WorkOrder.html')
       .then(response => {
         return response.text();
+
       })
       .then(html => {
         const parser = new DOMParser();
@@ -36,21 +65,33 @@ function init() {
 
         const targetBox = doc.querySelector('.workorder-layer');
         const targetBox2 = doc.querySelector('.workorder-pagenation');
+        const targetBox3 = doc.querySelector('.sample');
+
+        const SampleClick = doc.querySelector(".workorderlist-sample")
+        
         if (targetBox) {
           document.querySelector('.wkrView').innerHTML = targetBox.innerHTML
           document.querySelector('.wkrView').innerHTML += targetBox2.innerHTML
+          document.querySelector('.wkrView').innerHTML += targetBox3.innerHTML
+          SampleClick.addEventListener('click', (e) => {
+            e.target.parentNode.parentNode.classList.add('hide')
+            targetBox2.style.display = "none"
+            targetBox3.style.display = "block"
+          })
         } else {
           document.querySelector('.wkrView').innerHTML = "불로오는도중 오류가발생했습니다."
         }
+
+
       })
       .catch(error => {
         console.error('페이지를 불러오는 도중 에러 발생:', error);
       });
+
+    
+
   })
 
-  document.querySelector('.btn2').addEventListener('click', (e) => {
-
-  })
 
 
 
@@ -174,56 +215,56 @@ function init() {
 
   })
 
-document.querySelector('.btn4').addEventListener('click', function() {
+  document.querySelector('.btn4').addEventListener('click', function () {
 
-  const productSearch = document.querySelector('.wp3').value.trim().toLowerCase();
-  const startD = document.querySelector('.indate1').value;
-  const endD = document.querySelector('.indate2').value;
-  
-  const dropBoxes = document.querySelectorAll('.dropBox2');
-  const resultSearch = dropBoxes[0] ? dropBoxes[0].value : "";      // 결과 (합격/불합격)
-  const failReasonSearch = dropBoxes[1] ? dropBoxes[1].value : "";    // 불합격 사유
-  
-  const items = document.querySelectorAll('.box3View .dex');
-  
-  items.forEach(item => {
-    let match = true;
-    
-    const itemDateText = item.children[0] ? item.children[0].innerText.trim() : "";
-    const itemProductText = item.children[1] ? item.children[1].innerText.trim().toLowerCase() : "";
-    const itemResultText = item.children[2] ? item.children[2].innerText.trim() : "";
-    const itemFailReasonText = item.children[3] ? item.children[3].innerText.trim() : "";
-    
-    if (productSearch && !itemProductText.includes(productSearch)) {
-      match = false;
-    }
-    
-    if (startD) {
-      const startDate = new Date(startD);
-      const itemDate = new Date(itemDateText);
-      if (itemDate < startDate) {
+    const productSearch = document.querySelector('.wp3').value.trim().toLowerCase();
+    const startD = document.querySelector('.indate1').value;
+    const endD = document.querySelector('.indate2').value;
+
+    const dropBoxes = document.querySelectorAll('.dropBox2');
+    const resultSearch = dropBoxes[0] ? dropBoxes[0].value : "";      // 결과 (합격/불합격)
+    const failReasonSearch = dropBoxes[1] ? dropBoxes[1].value : "";    // 불합격 사유
+
+    const items = document.querySelectorAll('.box3View .dex');
+
+    items.forEach(item => {
+      let match = true;
+
+      const itemDateText = item.children[0] ? item.children[0].innerText.trim() : "";
+      const itemProductText = item.children[1] ? item.children[1].innerText.trim().toLowerCase() : "";
+      const itemResultText = item.children[2] ? item.children[2].innerText.trim() : "";
+      const itemFailReasonText = item.children[3] ? item.children[3].innerText.trim() : "";
+
+      if (productSearch && !itemProductText.includes(productSearch)) {
         match = false;
       }
-    }
-    if (endD) {
-      const endDate = new Date(endD);
-      const itemDate = new Date(itemDateText);
-      if (itemDate > endDate) {
+
+      if (startD) {
+        const startDate = new Date(startD);
+        const itemDate = new Date(itemDateText);
+        if (itemDate < startDate) {
+          match = false;
+        }
+      }
+      if (endD) {
+        const endDate = new Date(endD);
+        const itemDate = new Date(itemDateText);
+        if (itemDate > endDate) {
+          match = false;
+        }
+      }
+
+      if (resultSearch && itemResultText !== resultSearch) {
         match = false;
       }
-    }
-    
-    if (resultSearch && itemResultText !== resultSearch) {
-      match = false;
-    }
-    
-    if (failReasonSearch && itemFailReasonText !== failReasonSearch) {
-      match = false;
-    }
-    
-    item.style.display = match ? '' : 'none';
+
+      if (failReasonSearch && itemFailReasonText !== failReasonSearch) {
+        match = false;
+      }
+
+      item.style.display = match ? '' : 'none';
+    });
   });
-});
 
 
 

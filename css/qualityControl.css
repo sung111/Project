@@ -52,7 +52,7 @@ body {
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 130px;
+    height: 250px;
     overflow-y: scroll;
     margin: 10px;
     background-color: white;
@@ -106,7 +106,7 @@ body {
   .wp {
     font-size: 15px;
     border: 1px solid rgb(199, 196, 196);
-    width: 80px;
+    width: 30%;
     text-align: center;
     /* margin: 8px; */
     font-size: 20px;
@@ -313,7 +313,7 @@ body {
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 130px;
+    height: 250px;
     overflow-y: scroll;
     margin: 10px;
     background-color: white;
@@ -365,7 +365,7 @@ body {
   .wp {
     font-size: 15px;
     border: 1px solid rgb(199, 196, 196);
-    width: 80px;
+    width: 30%;
     text-align: center;
     /* margin: 8px; */
     font-size: 20px;

@@ -98,3 +98,12 @@ h1 {
 .pagination button:hover {
     background-color: #0056b3; /* 호버 시 색상 */
 }
+.post {
+    margin-bottom: 20px; /* 각 게시글 사이의 간격 */
+}
+.hidden {
+    display: none; /* 숨기기 위한 클래스 */
+}
+.iframe-container {
+    display: none; /* 기본적으로 아이프레임 숨기기 */
+}

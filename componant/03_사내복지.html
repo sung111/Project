@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +9,35 @@
     <link rel="stylesheet" href="../css/03_사내복지.css">
 
 </head>
+
 <body>
     <div class="box">
         <h1>사내 복지</h1>
         <div class="postbtn">
-            <button type="button">글 쓰기</button>
+            <button type="button" class="newpost">글 쓰기</button>
         </div>
-        <div class="post">
+
+        <div class="post" onclick="showPost('../componant/05_글내용.html')">
             <span class="content">사내 복지 제도 개선 안내입니다.</span>
             <span class="date">2025-01-20</span>
             <span class="author">안혜리</span>
         </div>
-        <div class="post">
+
+        <div class="post" onclick="showPost('other_post_url.html')">
             <span class="content">근무 환경 개선을 위한 설문 조사 실시.</span>
             <span class="date">2025-01-18</span>
             <span class="author">채민병</span>
         </div>
-        <div class="post">
+
+        <div class="post" onclick="showPost('another_post_url.html')">
             <span class="content">신규 복지 프로그램 도입 안내.</span>
             <span class="date">2025-01-15</span>
             <span class="author">김경민</span>
         </div>
-        <div class="post">
-            <span class="content">사내 교육 프로그램 신청 안내.</span>
-            <span class="date">2025-01-12</span>
-            <span class="author">서영석</span>
-        </div>
-        <div class="post">
-            <span class="content">직원 건강 검진 일정 안내.</span>
-            <span class="date">2025-01-10</span>
-            <span class="author">박혜성</span>
-        </div>
+
+        <!-- 아이프레임은 모든 게시글 아래에 위치 -->
+        <iframe id="postdetail" src="" width="100%" height="600px" frameborder="0"></iframe>
+
         <div class="pagination">
             <button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
             <button onclick="changePage(1)">1</button>
@@ -48,7 +47,29 @@
             <button onclick="changePage(5)">5</button>
             <button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
         </div>
-        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userRole = window.parent.sessionStorage.getItem("userRole");
+            const NewWorkorderbutton = document.querySelector(".newpost");
+            NewWorkorderbutton.addEventListener("click", function () {
+                if (userRole == "user") {
+                    alert("권한이 없습니다.");
+                } else if (userRole == "admin") {
+                    const iframe = parent.document.querySelector("iframe");
+                    iframe.src = "componant/06_글쓰기.html";
+                } else {
+                    alert("로그인이 필요합니다.");
+                }
+            });
+        });
+
+        function showPost(postUrl) {
+            const iframe = document.getElementById('postdetail');
+            iframe.src = postUrl;
+        }
+    </script>
 </body>
+
 </html>
