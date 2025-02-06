@@ -72,26 +72,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // 로그인
 document.addEventListener("DOMContentLoaded", function () {
+    const LoginWellpaper = document.querySelector(".login-wallpaper");
+    const LoginPage = document.querySelector(".login-container");
     const LoginButton = document.getElementById("login-button");
+    const LoginSignin = document.querySelector(".login-button");
+    LoginSignin.addEventListener("click", function(){
+        LoginWellpaper.style.display = "flex";
+        LoginPage.style.display = "flex";
+    })
 
     LoginButton.addEventListener("click", function () {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        const LoginWellpaper = document.querySelector(".login-wallpaper");
-        const LoginPage = document.querySelector(".login-container");
         const LoginUser = document.querySelector(".login-user");
         const LoginAdmin = document.querySelector(".login-admin");
         if (username == "user" && password == "user") {
             alert(username + "님, 로그인 성공!");
             sessionStorage.setItem("userRole", "user");
+
             LoginWellpaper.style.display = "none";
             LoginPage.style.display = "none";
+                        LoginSignin.style.display = "none"
             LoginUser.style.display = "block";
         } else if (username == "admin" && password == "admin") {
             alert(username + "님, 로그인 성공!");
             sessionStorage.setItem("userRole", "admin");
             LoginWellpaper.style.display = "none";
             LoginPage.style.display = "none";
+            LoginSignin.style.display = "none"
             LoginAdmin.style.display = "block";
         }
         else {
