@@ -5,39 +5,65 @@ body {
 
 .box {
     margin: 10px;
-    border: 1px solid #007bff; /* 테두리 색상 */
-    padding: 20px; /* 내부 여백 */
-    margin-bottom: 20px; /* 아래 여백 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    background-color: #f8f9fa; /* 배경 색상 */
-    text-align: center; /* 텍스트 중앙 정렬 */
+    border: 1px solid #007bff;
+    /* 테두리 색상 */
+    padding: 20px;
+    /* 내부 여백 */
+    margin-bottom: 20px;
+    /* 아래 여백 */
+    border-radius: 5px;
+    /* 모서리 둥글게 */
+    background-color: #f8f9fa;
+    /* 배경 색상 */
+    text-align: center;
+    /* 텍스트 중앙 정렬 */
+}
+
+.item button {
+    margin-left: 10px;
 }
 
 .container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* 요소들 사이의 공간을 균등하게 배분 */
-    flex-wrap: wrap; 
+    /* 수직 정렬 */
+    justify-content: center;
+
 }
 
-.container label, .container .item {
-    flex: 1; /* 각 요소가 동일한 너비를 가지도록 설정 */
+.search {
+    align-items: center;
+    width: 100px;
+}
+
+.container label,
+.container .item {
+    margin-right: 10px;
+    /* 요소 간 간격 추가 */
 }
 
 .container .item {
-    display: flex; /* flexbox 사용 */
-    align-items: center; /* 수직 정렬 */
-    flex-direction: row;
+    display: flex;
+    /* flexbox 사용 */
+    align-items: center;
+    /* 수직 정렬 */
 }
 
 .container .item button {
-    padding: 10px 15px; /* 여백 조정 */
-    font-size: 16px; /* 글자 크기 조정 */
-    border: none; /* 기본 테두리 제거 */
-    border-radius: 5px; /* 둥근 모서리 */
-    background-color: #007bff; /* 배경 색상 */
-    color: white; /* 글자 색상 */
-    cursor: pointer; /* 커서 모양 변경 */
+    padding: 10px 15px;
+    /* 여백 조정 */
+    font-size: 16px;
+    /* 글자 크기 조정 */
+    border: none;
+    /* 기본 테두리 제거 */
+    border-radius: 5px;
+    /* 둥근 모서리 */
+    background-color: #007bff;
+    /* 배경 색상 */
+    color: white;
+    /* 글자 색상 */
+    cursor: pointer;
+    /* 커서 모양 변경 */
 }
 
 .container .item label {
@@ -46,45 +72,67 @@ body {
 }
 
 .container select {
-    font-size: 16px; /* 글자 크기 조정 */
-    padding: 5px; /* 내부 여백 조정 */
-    border-radius: 5px; /* 둥근 모서리 */
-    border: 1px solid #007bff; /* 테두리 색상 */
+    font-size: 16px;
+    /* 글자 크기 조정 */
+    padding: 5px;
+    /* 내부 여백 조정 */
+    border-radius: 5px;
+    /* 둥근 모서리 */
+    border: 1px solid #007bff;
+    /* 테두리 색상 */
     margin-left: 10px;
 }
 
 .container input[type="text"] {
-    font-size: 16px; /* 글자 크기 조정 */
-    padding: 10px 5px; /* 내부 여백 조정 */
-    border-radius: 5px; /* 둥근 모서리 */
-    border: 1px solid #007bff; /* 테두리 색상 */
-    width: 100%; /* 가로 길이 조정 */
-    box-sizing: border-box; /* 패딩과 테두리를 포함한 박스 모델 설정 */
+    font-size: 16px;
+    /* 글자 크기 조정 */
+    padding: 10px 5px;
+    /* 내부 여백 조정 */
+    border-radius: 5px;
+    /* 둥근 모서리 */
+    border: 1px solid #007bff;
+    /* 테두리 색상 */
+    width: 100%;
+    /* 가로 길이 조정 */
+    box-sizing: border-box;
+    /* 패딩과 테두리를 포함한 박스 모델 설정 */
 }
 
 .barcode-container {
-    display: flex; /* flexbox 사용 */
-    justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
-    margin-top: 10px; /* 위쪽 여백 추가 */
+    display: flex;
+    /* flexbox 사용 */
+    justify-content: flex-end;
+    /* 오른쪽 끝으로 정렬 */
+    margin-top: 10px;
+    /* 위쪽 여백 추가 */
     margin-right: 30px;
     margin-bottom: 15px;
 }
 
 table {
-    width: 98%; /* 테이블 너비 98% */
-    border-collapse: collapse; /* 경계선 겹침 방지 */
-    margin: 50px auto 0; /* 위쪽 여백 추가 */
+    width: 98%;
+    /* 테이블 너비 98% */
+    border-collapse: collapse;
+    /* 경계선 겹침 방지 */
+    margin: 50px auto 0;
+    /* 위쪽 여백 추가 */
 }
 
-th, td {
-    border: 1px solid #15579e; /* 테두리 색상 */
-    padding: 10px; /* 내부 여백 */
-    text-align: center; /* 텍스트 중앙 정렬 */
+th,
+td {
+    border: 1px solid #15579e;
+    /* 테두리 색상 */
+    padding: 10px;
+    /* 내부 여백 */
+    text-align: center;
+    /* 텍스트 중앙 정렬 */
 }
 
 th {
-    background-color: #007bff; /* 헤더 배경색 */
-    color: white; /* 헤더 글자색 */
+    background-color: #007bff;
+    /* 헤더 배경색 */
+    color: white;
+    /* 헤더 글자색 */
 }
 
 .list {
@@ -95,7 +143,7 @@ th {
     padding: 5px 10px;
     border: 1px solid #007BFF;
     background-color: #ccc;
-    border-radius: 5px;    
+    border-radius: 5px;
 }
 
 .pagination {
@@ -106,17 +154,20 @@ th {
 .pagination button {
     padding: 10px 15px;
     border: 1px solid #007BFF;
-    background-color: #ccc; /* 기본 배경색: 회색 */
+    background-color: #ccc;
+    /* 기본 배경색: 회색 */
     cursor: pointer;
     border-radius: 5px;
 }
 
 .pagination button.active {
-    background-color: #007BFF; /* 활성화된 버튼: 파란색 */
+    background-color: #007BFF;
+    /* 활성화된 버튼: 파란색 */
 }
 
 .pagination button:hover {
-    background-color: #0056b3; /* 호버 시 색상 */
+    background-color: #0056b3;
+    /* 호버 시 색상 */
 }
 
 .listbtn {
@@ -126,22 +177,27 @@ th {
 }
 
 .popup {
-    display: none; 
-    position: fixed; /* 고정 위치 */
-    z-index: 1; /* 가장 위에 나타나도록 */
+    display: none;
+    position: fixed;
+    /* 고정 위치 */
+    z-index: 1;
+    /* 가장 위에 나타나도록 */
     left: 0;
     top: 0;
-    width: 100%; /* 전체 화면 */
-    height: 100%; /* 전체 화면 */
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    width: 100%;
+    /* 전체 화면 */
+    height: 100%;
+    /* 전체 화면 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 반투명 배경 */
 }
 
 .popup-content {
     background-color: #fefefe;
-    margin: 15% auto; 
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 80%;
 }
 
 .close {
@@ -181,56 +237,64 @@ h2 {
 
 input[type="text"],
 input[type="date"] {
-    width: 100%; 
-    padding: 5px; 
-    box-sizing: border-box; 
-    text-align: center; 
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .addtable {
-    width: 100%; 
+    width: 100%;
 }
 
 .unit-container {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
 }
 
 /* 단위 입력칸 스타일 */
 .unit-input {
-    width: calc(70% - 10px); 
-    padding: 5px; 
-    box-sizing: border-box; 
-    text-align: center; 
-    margin-right: 5px; 
+    width: calc(70% - 10px);
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-right: 5px;
 }
 
 /* 드롭다운 스타일 */
 .unit-dropdown {
-    width: 25%; 
-    padding: 5px; 
-    box-sizing: border-box; 
+    width: 25%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
-/* 반응형 스타일 */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* 세로로 쌓기 */
+        flex-direction: column;
+        /* 세로 방향으로 정렬 */
     }
 
-    .container .item {
-        width: 100%; /* 전체 너비 */
+    .search,
+    .container input[type="text"],
+    .container select {
+        width: 100%;
+        /* 전체 너비로 설정 */
+        margin-bottom: 10px;
+        /* 아래 여백 추가 */
     }
 
-    .container input[type="text"] {
-        width: 100%; /* 전체 너비 */
-    }
+    /* @media (max-width: 768px) {
+        table {
+            font-size: 14px;
+            /* 글자 크기 조정 */
+        /* }
 
-    .pagination {
-        flex-direction: column; /* 세로로 쌓기 */
-    }
-
-    .popup-content {
-        width: 90%; /* 팝업 너비 조정 */
-    }
-}
+        th,
+        td {
+            padding: 5px;
+            /* 여백 축소 */
+        }
+        /* .item {
+            width: 100%;
+        }
+    } */ 

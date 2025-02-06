@@ -24,7 +24,7 @@
             여러분의 많은 참여 바랍니다!
         </div>
         <div class="button-container">
-            <button type="button">목록으로</button>
+            <button type="button" id ="list">목록으로</button>
             <button type="button">수정</button>
             <button type="button">삭제</button>
         </div>
@@ -52,12 +52,20 @@
                     <button class="commentbtn" type="button">삭제</button>
                 </div>
             </div>
-            <div class="comment-section">
-                <textarea placeholder="댓글을 입력하세요..."></textarea>
-                <button type="button">등록</button>
+            <div class="comment-section abc" >
+                <textarea placeholder="댓글을 입력하세요."></textarea>
+                <button type="button" class="ok">등록</button>
             </div>
         </div>
 
+        <script>
+            
+            const list = document.querySelector('#list')
+            const iframe = parent.document.querySelector("iframe")
+            list.addEventListener('click', function () {
+                iframe.src = "../componant/03_사내복지.html";
+            })
+        </script>
 </body>
 
 </html>
