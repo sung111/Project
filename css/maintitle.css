@@ -3,9 +3,11 @@
     width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-around; align-items: center;
 }
 .noticelayer{
-    width: 90%; height: 300px; padding: 10px 20px; display: flex; flex-direction: column; justify-content: space-around;
+    width: 90%; height: 300px; padding: 10px 20px; display: flex; flex-direction: column; justify-content: center;
 }
-
+.noticelayer-title{
+    width: 100%; display: flex; justify-content: space-between;
+}
 .notice{
     width: 100% ; height: 70%; border-top: 2px solid #007bff; margin-top: 10px;display: flex; flex-direction: column; justify-content: space-around; align-items: center;
 }
@@ -21,18 +23,16 @@
 .notice-latestlist div a{
     font-size: 18px; color: #000000;
 }
-.Notice-more{
-    text-align: end;
-}
+
 /* 페이지들 태그 CSS */
 .tagtitlecontainer{
     width: 90%; height: 600px; display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center;
 }
 .taglayer{
-    width: 45%; height: 50%; display: flex; flex-direction: column; align-items: center;
+    width: 45%; height: 50%; display: flex; flex-direction: column; justify-content: center;align-items: center;
 }
 .noticelayer h2, .taglayer h2{
-    align-self: start; 
+    float: left; align-self: start; 
 }
  .taglayer a{
 align-self: end; 
@@ -50,7 +50,8 @@ align-self: end;
 .taglist li div{
      width: 30%; color: #555555; text-align: end;
 }
-.more{
-    width: 100%; text-align: end;
+.Notice-more{
+    display: flex; align-items: end;
 }
+
 

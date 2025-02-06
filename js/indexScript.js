@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const inspection = document.querySelector("#nav-inspection")
     inspection.addEventListener("click", function () {
         iframe.src = "componant/Inspection_standards.html"
-        LocalNavigationbar("기준관리", "성분지표/검사기준");
+        LocalNavigationbar("기준관리", "검사기준");
     })
     const bommenu = document.querySelector("#nav-bom")
     bommenu.addEventListener("click", function () {
