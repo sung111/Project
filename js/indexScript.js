@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     const bommenu = document.querySelector("#nav-bom")
     bommenu.addEventListener("click", function () {
-        iframe.src = "componant/bom.html"
+        iframe.src = "componant/bom_v2.html"
         LocalNavigationbar("기준관리", "BOM");
     })
     // 생산관리 탭
