@@ -93,6 +93,75 @@ function init() {
   })
 
 
+  document.querySelector('.btn2').addEventListener('click', (e) => {
+    const modal = document.querySelector('#myModal')
+    const content = document.querySelector('.modal-content')
+
+
+
+    fetch('Inspection_standards.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('에러발쌩!');
+        }
+        return response.text();
+      })
+      .then(htmlString => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        const sel = doc.querySelectorAll('.standards-contain')
+        const wp = document.querySelector('.wp')
+        for (let i = 0; i < sel.length; i++) {
+          if (wp.innerText == "부대찌개") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[0].cloneNode(true));
+            modal.style.display = 'block';
+          } else if (wp.innerText == "김치찌개") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[1].cloneNode(true));
+            modal.style.display = 'block';
+
+          } else if (wp.innerText == "밀푀유나베") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[2].cloneNode(true));
+            modal.style.display = 'block';
+
+          } else if (wp.innerText == "떡볶이") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[3].cloneNode(true));
+            modal.style.display = 'block';
+          } else if (wp.innerText == "곱창전골") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[4].cloneNode(true));
+            modal.style.display = 'block';
+          }
+        }
+
+      })
+
+
+  })
+
+  document.querySelector('.modal').addEventListener('click', (e) => {
+    const closeBtn = document.querySelector(".close");
+    const modal = document.querySelector('#myModal')
+    if (e.target === closeBtn) {
+      modal.style.display = "none";
+    }
+  })
+  window.addEventListener("click", (event) => {
+    const modal = document.querySelector('#myModal')
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+
 
 
 

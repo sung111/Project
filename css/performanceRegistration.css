@@ -133,7 +133,8 @@ body {
     /* border-radius: 5px; */
     margin: 5px;
   }
-  .textarea1{
+
+  .textarea1 {
     margin: 5px 0px 0px 9px;
     border: 1px solid rgb(199, 196, 196);
     width: 97%;
@@ -239,16 +240,64 @@ body {
     text-align: center;
     width: 95%;
   }
-  .pagination{
+
+  .pagination {
     display: flex;
     justify-content: center;
   }
-  .pagination > button{
+
+  .pagination>button {
     width: 20px;
     padding: 5px;
     font-size: 15px;
     background-color: #d9d9d9;
     border-radius: 5px;
+  }
+
+  /* 모달 전체 배경 스타일 */
+  .modal {
+    display: none;
+    /* 기본적으로 숨김 */
+    position: fixed;
+    /* 화면 전체에 고정 */
+    z-index: 1000;
+    /* 다른 요소보다 위에 위치 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 반투명 검정 배경 */
+  }
+
+  /* 모달 콘텐츠 영역 스타일 */
+  .modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    /* 화면 중앙에 위치 (위쪽 여백 15%) */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  /* 닫기 버튼 스타일 */
+  .close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
   }
 }
 
@@ -478,25 +527,30 @@ body {
   .indexBox {
     text-align: center;
   }
-  .new-workorder{
+
+  .new-workorder {
     display: none;
     margin-top: -300px;
   }
-  .hide{
+
+  .hide {
     display: none;
   }
-  .pagination{
+
+  .pagination {
     display: flex;
     justify-content: center;
   }
-  .pagination > button{
+
+  .pagination>button {
     width: 20px;
     padding: 5px;
     font-size: 15px;
     background-color: #d9d9d9;
     border-radius: 5px;
   }
-  .textarea1{
+
+  .textarea1 {
     margin: 5px 0px 0px 9px;
     border: 1px solid rgb(199, 196, 196);
     width: 97%;
@@ -505,4 +559,53 @@ body {
     color: black;
     overflow-y: scroll;
   }
+
+
+  /* 모달 전체 배경 스타일 */
+  .modal {
+    display: none;
+    /* 기본적으로 숨김 */
+    position: fixed;
+    /* 화면 전체에 고정 */
+    z-index: 1000;
+    /* 다른 요소보다 위에 위치 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 반투명 검정 배경 */
+  }
+  
+  /* 모달 콘텐츠 영역 스타일 */
+  .modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    /* 화면 중앙에 위치 (위쪽 여백 15%) */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+  }
+
+  /* 닫기 버튼 스타일 */
+  .close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+  }
+
 }

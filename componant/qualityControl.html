@@ -10,9 +10,48 @@
   <link rel="stylesheet" href="../css/newworkorder.css">
   <script src="../js/qualityControl.js"></script>
   <link rel="stylesheet" href="">
+  <style>
+    .manu-name {
+      font-size: 35px;
+      margin: 5px;
+    }
+
+    .standards-contain {
+      border: 1px solid #007bff;
+      border-radius: 20px;
+      margin: 10px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .standards-imege {
+      width: 95%;
+      border-radius: 20px;
+    }
+
+    .standards-font-charild {
+      text-align: left;
+      margin: 10px;
+    }
+
+    .standards-font-parent {
+      text-align: left;
+      margin: 10px;
+    }
+
+    .btn {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>여기는 모달창 내용 영역입니다.</p>
+    </div>
+  </div>
   <div class="warrap">
     <div class="wkr">
       <div class="wkrTop">
@@ -68,7 +107,7 @@
         </div>
         <div class="BB">
           <div class="BB2 hide">
-            불합격 사유 : 
+            불합격 사유 :
           </div>
           <select class="dropBox hide">
             <option value="무게 미달">무게 미달</option>
