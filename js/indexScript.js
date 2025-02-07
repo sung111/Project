@@ -72,7 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-
+    // 새로고침하면 초기화
+    localStorage.removeItem("userRole");
     // 로그인
     const LoginWellpaper = document.querySelector(".login-wallpaper");
     const LoginPage = document.querySelector(".login-container");
@@ -83,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 로그인 저장
     const userRole = localStorage.getItem("userRole");
-
+    
     // 로그인 페이지 열기
     LoginSignin.addEventListener("click", function () {
         LoginWellpaper.style.display = "flex";
