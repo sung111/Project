@@ -167,6 +167,9 @@
         }
 
         .standards-contain {
+            border: 1px solid #007bff;;
+            border-radius: 20px;
+            margin: 10px;
             width: 48%;
 
         }
@@ -227,20 +230,42 @@
             display: flex;
             justify-content: space-around;
         }
-        .navigation-title-article{
+
+        .navigation-title-article {
             width: 50%;
             display: flex;
             justify-content: space-around;
             margin-left: 10%;
+
+            align-items: center;
         }
-        .navigation-title-article2{
+
+        .navigation-title-article2 {
             width: 50%;
             display: flex;
-            
+
+
         }
-        .navigation-title-button-parent{
+
+        .navigation-title-button-parent {
+
             margin-left: 20px;
-            
+            align-items: center;
+
+        }
+
+        .btn {
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btncenter{
+            text-align: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -258,7 +283,7 @@
     <div id="navigation-title-parent">
         <div id="navigation-title">
             <div class="navigation-title-article">
-                <div >
+                <div>
                     밀키트 검색
                 </div>
                 <div>
@@ -267,10 +292,10 @@
             </div>
             <div class="navigation-title-article2">
                 <div class="navigation-title-button-parent">
-                    <input type="button" value="확인" class="">
+                    <input type="button" value="확인" class="btn">
                 </div>
                 <div class="navigation-title-button-parent">
-                    <input type="button" value="생성">
+                    <input type="button" value="생성" class="btn">
                 </div>
             </div>
         </div>
@@ -309,7 +334,12 @@
                 </div>
             </div>
             <div>
-                <input type="button" value="버튼">
+            </div>
+            <div class="btncenter">
+                <input type="button" value="수정" class="btn u">
+                <input type="button" value="삭제" class="btn d">
+                <input type="button" value="확인" class="btn ok">
+                <input type="button" value="취소" class="btn can">
             </div>
         </div>
 
@@ -343,6 +373,13 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="btncenter">
+                <input type="button" value="수정" class="btn u">
+                <input type="button" value="삭제" class="btn d">
+                <input type="button" value="확인" class="btn ok">
+                <input type="button" value="취소" class="btn can">
             </div>
         </div>
 
@@ -378,6 +415,12 @@
                     </div>
                 </div>
             </div>
+            <div class="btncenter">
+                <input type="button" value="수정" class="btn u">
+                <input type="button" value="삭제" class="btn d">
+                <input type="button" value="확인" class="btn ok">
+                <input type="button" value="취소" class="btn can">
+            </div>
         </div>
 
 
@@ -412,6 +455,12 @@
                     </div>
                 </div>
             </div>
+            <div class="btncenter">
+                <input type="button" value="수정" class="btn u">
+                <input type="button" value="삭제" class="btn d">
+                <input type="button" value="확인" class="btn ok">
+                <input type="button" value="취소" class="btn can">
+            </div>
         </div>
 
 
@@ -444,6 +493,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="btncenter">
+                <input type="button" value="수정" class="btn u">
+                <input type="button" value="삭제" class="btn d">
+                <input type="button" value="확인" class="btn ok">
+                <input type="button" value="취소" class="btn can">
             </div>
         </div>
 
