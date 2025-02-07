@@ -142,6 +142,12 @@ const config = (ctx, {
 
 
 
+
+
+
+
+
+
 document.getElementById('reData').onclick = function(){
 		
     //데이터셋 수 만큼 반복
@@ -157,16 +163,6 @@ document.getElementById('reData').onclick = function(){
     
     myChart.update();	//차트 업데이트
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

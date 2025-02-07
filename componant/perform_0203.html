@@ -39,10 +39,19 @@
             
                     
                     <div id="cal">
-                    <input type="date" id="date" value="2025-02-03" name="날짜선택">
-                    <input type="week" id="weeks" value="2025-02-03" name="날짜선택">
-                    <input type="month" id="months" value="2025-02-03" name="날짜선택">
+                    <input type="date" id="date" value="yyyy-mm-dd" name="날짜선택">
+                    <input type="week" id="weeks" value="yyyy-mm-dd"  name="날짜선택">
+                    <input type="month" id="months" value="yyyy-mm-dd"  name="날짜선택">
                     </div>  
+
+                        <div id="set">
+                        <input type="text" id="text">
+                        <button id="sele">조회</button>
+                        </div>
+    
+                    
+                       
+
                     </div>
                 
 
@@ -60,23 +69,266 @@
 
 
 
-
-                    <div id="set">
-                    <input type="text" id="text">
-                    <button id="sele">조회</button>
-                    </div>
 
 
                 </div>
 
-
+                <div style="overflow-x:auto;" id="tableall">
+                    <br><br><br>
+                    <table border="1" id="first">
+                        <thead>
+                            <tr>
+                                <th class="daytime">완제품명</th>
+                                <th class="daytime">06:00~08:00</th>
+                                <th class="daytime">08:00~10:00</th>
+                                <th class="daytime">10:00~12:00</th>
+                                <th class="daytime">12:00~14:00</th>
+                                <th class="daytime">14:00~16:00</th>
+                                <th class="daytime">16:00~18:00</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                         
+    
+    
+    
+                                <tr id="budae1">
+                                    <td class="name">부대찌개</td>
+                                    <td>100</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td> 
+                                </tr>
+    
+                                <tr id="nabe1">
+                                    <td class="name">밀푀유 나베</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                   
+                                </tr>
+    
+                                <tr id="kimchi1">
+                                    <td class="name">김치찌개</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                  
+                                </tr>
+    
+                                <tr id="ttuk1">
+                                    <td class="name">떡볶이</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                 
+                                </tr>
+    
+                                <tr id="ggop1">
+                                    <td class="name">곱창전골</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                   
+                                </tr>
+                             
+                        </tbody>
+    
+                       </table>
+    
+    
+    
+    
+                       <!-- <table border=1>" 
+                                            
+                        + "<thead>"
+                           
+                            +"<tr>"
+                                +"<th>" + day + "</th>"
+                                +"<th>06:00~08:00</th>"
+                                +"<th>08:00~10:00</th>"
+                                +"<th>10:00~12:00</th>"
+                                +"<th>12:00~14:00</th>"
+                                +"<th>14:00~16:00</th>"
+                                +"<th>16:00~18:00</th>"
+                            
+                            +"</tr>"
+                          +"</thead>" -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                       <br>
+                       <table border=1 id="second">
+                        <thead>
+                  <tr>
+                      <th class="wektime">완제품명</th>
+                      <th class="wektime">월요일</th>
+                      <th class="wektime">화요일</th>
+                      <th class="wektime">수요일</th>
+                      <th class="wektime">목요일</th>
+                      <th class="wektime">금요일</th>
+                      <th class="wektime">토요일</th>
+                      <th class="wektime">일요일</th>
+                  </tr>
+                       </thead>
+                       <tbody>
+                        <tr id="budae2">
+                            <td class="name">부대찌개</td>
+                            <td >200</td>
+                            <td >835</td>
+                            <td >445</td>
+                            <td >366</td>
+                            <td >366</td>
+                            <td >366</td>
+                            <td >366</td>
+                            
+                    </tr>
+                    <tr id="nabe2">
+                        <td class="name">밀푀유나베</td>
+                        <td >626</td>
+                        <td >835</td>
+                        <td >445</td>
+                        <td >366</td>
+                        <td >366</td>
+                        <td >366</td>
+                        <td >366</td>
+                        
+                </tr>
+                <tr id="kimchi2">
+                    <td class="name">김치찌개</td>
+                    <td >626</td>
+                    <td >835</td>
+                    <td >445</td>
+                    <td >366</td>
+                    <td >366</td>
+                    <td >366</td>
+                    <td >366</td>
+                    
+            </tr>
+            <tr id="ttuk2">
+                <td class="name">떡볶이</td>
+                <td >626</td>
+                <td >835</td>
+                <td >445</td>
+                <td >366</td>
+                <td >366</td>
+                <td >366</td>
+                <td >366</td>
+                
+        </tr>
+        <tr id="ggop2">
+            <td class="name">곱창전골</td>
+            <td >626</td>
+            <td >835</td>
+            <td >445</td>
+            <td >366</td>
+            <td >366</td>
+            <td >366</td>
+            <td >366</td>
+            
+    </tr>
+                       </tbody>
+                        </table>
+    
+    
+    
+    
+    
+    
+                        <br>
+                       <table border="1" id="third">
+                        <thead>
+                            <tr>
+                                <th class="montime">완제품명</th>
+                                <th class="montime">1주차</th>
+                                <th class="montime">2주차</th>
+                                <th class="montime">3주차</th>
+                                <th class="montime">4주차</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="budae3">
+                                    <td class="name">부대찌개</td>
+                                    <td >400</td>
+                                    <td >835</td>
+                                    <td >445</td>
+                                    <td >366</td>
+                                    
+                            </tr>
+                            <tr id="nabe3">
+                                <td class="name">밀푀유나베</td>
+                                <td >626</td>
+                                <td >835</td>
+                                <td >445</td>
+                                <td >366</td>
+                                
+                        </tr>
+                        <tr id="kimchi3">
+                            <td class="name">김치찌개</td>
+                            <td >626</td>
+                            <td >835</td>
+                            <td >445</td>
+                            <td >366</td>
+                            
+                    </tr>
+                    <tr id="ttuk3">
+                        <td class="name">떡볶이</td>
+                        <td >626</td>
+                        <td >835</td>
+                        <td >445</td>
+                        <td >366</td>
+                        
+                </tr>
+                <tr id="ggop3">
+                    <td class="name">곱창전골</td>
+                    <td >626</td>
+                    <td >835</td>
+                    <td >445</td>
+                    <td >366</td>
+                    
+            </tr>
+                        </tbody>
+                       </table>
+                       
+                       
+                </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
             
                 
 
-
-
+           <div id="Chartall">
                 
-           <!-- 일간 차트 -->
+      
            <div id="Chart1">
 
                    
@@ -115,278 +367,36 @@
             <canvas id="myChart3" width="1120%" height="450%"></canvas>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div style="overflow-x:auto;">
-                <br><br><br>
-                <table border="1" id="first">
-                    <thead>
-                        <tr>
-                            <th class="daytime">완제품명</th>
-                            <th class="daytime">06:00~08:00</th>
-                            <th class="daytime">08:00~10:00</th>
-                            <th class="daytime">10:00~12:00</th>
-                            <th class="daytime">12:00~14:00</th>
-                            <th class="daytime">14:00~16:00</th>
-                            <th class="daytime">16:00~18:00</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                     
-
-
-
-                            <tr id="budae1">
-                                <td class="name">부대찌개</td>
-                                <td>100</td>
-                                <td>835</td>
-                                <td>445</td>
-                                <td>366</td>
-                                <td>351</td>
-                                <td>923</td> 
-                            </tr>
-
-                            <tr id="nabe1">
-                                <td class="name">밀푀유 나베</td>
-                                <td>626</td>
-                                <td>835</td>
-                                <td>445</td>
-                                <td>366</td>
-                                <td>351</td>
-                                <td>923</td>
-                               
-                            </tr>
-
-                            <tr id="kimchi1">
-                                <td class="name">김치찌개</td>
-                                <td>626</td>
-                                <td>835</td>
-                                <td>445</td>
-                                <td>366</td>
-                                <td>351</td>
-                                <td>923</td>
-                              
-                            </tr>
-
-                            <tr id="ttuk1">
-                                <td class="name">떡볶이</td>
-                                <td>626</td>
-                                <td>835</td>
-                                <td>445</td>
-                                <td>366</td>
-                                <td>351</td>
-                                <td>923</td>
-                             
-                            </tr>
-
-                            <tr id="ggop1">
-                                <td class="name">곱창전골</td>
-                                <td>626</td>
-                                <td>835</td>
-                                <td>445</td>
-                                <td>366</td>
-                                <td>351</td>
-                                <td>923</td>
-                               
-                            </tr>
-                         
-                    </tbody>
-
-                   </table>
-
-
-
-
-                   <!-- <table border=1>" 
-                                        
-                    + "<thead>"
-                       
-                        +"<tr>"
-                            +"<th>" + day + "</th>"
-                            +"<th>06:00~08:00</th>"
-                            +"<th>08:00~10:00</th>"
-                            +"<th>10:00~12:00</th>"
-                            +"<th>12:00~14:00</th>"
-                            +"<th>14:00~16:00</th>"
-                            +"<th>16:00~18:00</th>"
-                        
-                        +"</tr>"
-                      +"</thead>" -->
-
-
-
-
-
-
-
-
-
-
-                   <br>
-                   <table border=1 id="second">
-                    <thead>
-              <tr>
-                  <th class="wektime">완제품명</th>
-                  <th class="wektime">월요일</th>
-                  <th class="wektime">화요일</th>
-                  <th class="wektime">수요일</th>
-                  <th class="wektime">목요일</th>
-                  <th class="wektime">금요일</th>
-                  <th class="wektime">토요일</th>
-                  <th class="wektime">일요일</th>
-              </tr>
-                   </thead>
-                   <tbody>
-                    <tr id="budae2">
-                        <td class="name">부대찌개</td>
-                        <td >200</td>
-                        <td >835</td>
-                        <td >445</td>
-                        <td >366</td>
-                        <td >366</td>
-                        <td >366</td>
-                        <td >366</td>
-                        
-                </tr>
-                <tr id="nabe2">
-                    <td class="name">밀푀유나베</td>
-                    <td >626</td>
-                    <td >835</td>
-                    <td >445</td>
-                    <td >366</td>
-                    <td >366</td>
-                    <td >366</td>
-                    <td >366</td>
-                    
-            </tr>
-            <tr id="kimchi2">
-                <td class="name">김치찌개</td>
-                <td >626</td>
-                <td >835</td>
-                <td >445</td>
-                <td >366</td>
-                <td >366</td>
-                <td >366</td>
-                <td >366</td>
-                
-        </tr>
-        <tr id="ttuk2">
-            <td class="name">떡볶이</td>
-            <td >626</td>
-            <td >835</td>
-            <td >445</td>
-            <td >366</td>
-            <td >366</td>
-            <td >366</td>
-            <td >366</td>
-            
-    </tr>
-    <tr id="ggop2">
-        <td class="name">곱창전골</td>
-        <td >626</td>
-        <td >835</td>
-        <td >445</td>
-        <td >366</td>
-        <td >366</td>
-        <td >366</td>
-        <td >366</td>
-        
-</tr>
-                   </tbody>
-                    </table>
-
-
-
-
-
-
-                    <br>
-                   <table border="1" id="third">
-                    <thead>
-                        <tr>
-                            <th class="montime">완제품명</th>
-                            <th class="montime">1주차</th>
-                            <th class="montime">2주차</th>
-                            <th class="montime">3주차</th>
-                            <th class="montime">4주차</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="budae3">
-                                <td class="name">부대찌개</td>
-                                <td >400</td>
-                                <td >835</td>
-                                <td >445</td>
-                                <td >366</td>
-                                
-                        </tr>
-                        <tr id="nabe3">
-                            <td class="name">밀푀유나베</td>
-                            <td >626</td>
-                            <td >835</td>
-                            <td >445</td>
-                            <td >366</td>
-                            
-                    </tr>
-                    <tr id="kimchi3">
-                        <td class="name">김치찌개</td>
-                        <td >626</td>
-                        <td >835</td>
-                        <td >445</td>
-                        <td >366</td>
-                        
-                </tr>
-                <tr id="ttuk3">
-                    <td class="name">떡볶이</td>
-                    <td >626</td>
-                    <td >835</td>
-                    <td >445</td>
-                    <td >366</td>
-                    
-            </tr>
-            <tr id="ggop3">
-                <td class="name">곱창전골</td>
-                <td >626</td>
-                <td >835</td>
-                <td >445</td>
-                <td >366</td>
-                
-        </tr>
-                    </tbody>
-                   </table>
-                   
-                   
             </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
         
             <!-- <br><br><br>
             <input type="text" id="comm" placeholder="댓글을 입력하세요">

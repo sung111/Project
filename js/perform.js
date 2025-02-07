@@ -635,88 +635,88 @@ op1.addEventListener("change", function() {
 
 
 
-const pie = document.getElementById('myChart4').getContext('2d');
-const pieChart = new Chart(pie, {
+// const pie = document.getElementById('myChart4').getContext('2d');
+// const pieChart = new Chart(pie, {
     
-    data: {
+//     data: {
        
-        labels: ['생산율', '불량율'],
-        datasets: [
-            {
-            type: 'pie',
-            // select 값이 부대찌개라면
-            label: '부대찌개',
-            data: [20, 30],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+//         labels: ['생산율', '불량율'],
+//         datasets: [
+//             {
+//             type: 'pie',
+//             // select 값이 부대찌개라면
+//             label: '부대찌개',
+//             data: [20, 30],
+//             backgroundColor: [
+//                 'rgba(54, 162, 235, 0.2)',
              
              
              
                 
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
+//             ],
+//             borderColor: [
+//                 'rgba(54, 162, 235, 1)',
                
              
               
                 
-            ],
-            borderWidth: 1
-        },
+//             ],
+//             borderWidth: 1
+//         },
 
-        {
-            type: 'pie',
-            // select 값이 부대찌개라면
-            label: '밀푀유 나베',
-            data: [40, 50],
-            backgroundColor: [
-                'rgb(93, 201, 178)',
+//         {
+//             type: 'pie',
+//             // select 값이 부대찌개라면
+//             label: '밀푀유 나베',
+//             data: [40, 50],
+//             backgroundColor: [
+//                 'rgb(93, 201, 178)',
                 
              
              
                 
-            ],
-            borderColor: [
-                'black',
+//             ],
+//             borderColor: [
+//                 'black',
                
              
               
                 
-            ],
-            borderWidth: 1
-        },
+//             ],
+//             borderWidth: 1
+//         },
 
-        {
-            type: 'pie',
-            // select 값이 부대찌개라면
-            label: '김치찌개',
-            data: [40, 50],
-            backgroundColor: [
-                'rgb(255, 0, 0)',
+//         {
+//             type: 'pie',
+//             // select 값이 부대찌개라면
+//             label: '김치찌개',
+//             data: [40, 50],
+//             backgroundColor: [
+//                 'rgb(255, 0, 0)',
                 
              
              
                 
-            ],
-            borderColor: [
-                'black',
+//             ],
+//             borderColor: [
+//                 'black',
                
              
               
                 
-            ],
-            borderWidth: 1
-        },
-    ]
-    },
-    options: {responsive: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+//             ],
+//             borderWidth: 1
+//         },
+//     ]
+//     },
+//     options: {responsive: false,
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         }
+//     }
+// });
 
 
 
@@ -727,37 +727,37 @@ const pieChart = new Chart(pie, {
 
 
 
-const doughnut = document.getElementById('myChart7').getContext('2d');
-const doughnutChart = new Chart(doughnut, {
-    type: 'doughnut',
-    data: {
-        labels: ['부대찌개', '밀푀유나베', '김치찌개', '떡볶이', '곱창전골'],
-        datasets: [{
-            label: '# of Votes',
-            data: [20, 30, 50, 25, 40],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+// const doughnut = document.getElementById('myChart7').getContext('2d');
+// const doughnutChart = new Chart(doughnut, {
+//     type: 'doughnut',
+//     data: {
+//         labels: ['부대찌개', '밀푀유나베', '김치찌개', '떡볶이', '곱창전골'],
+//         datasets: [{
+//             label: '# of Votes',
+//             data: [20, 30, 50, 25, 40],
+//             backgroundColor: [
+//                 'rgba(54, 162, 235, 0.2)',
                
            
                 
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
+//             ],
+//             borderColor: [
+//                 'rgba(54, 162, 235, 1)',
                 
                
                 
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {responsive: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {responsive: false,
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         }
+//     }
+// });
 
 
 
