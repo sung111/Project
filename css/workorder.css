@@ -63,3 +63,15 @@
 .workorder-MRPcalc{
     width: 70%; height: 80%; position: absolute; top: 80px; background-color: #ffffff; z-index: 15; 
 }
+.workorder-MRPcalc-page{
+    width: 100%; height: 95%; 
+}
+.workorder-MRPcalc-close{
+    width: 100%; height: 5%;color: #222222; background-color: #888888; display: flex; flex-direction: row-reverse; align-items: center;
+}
+.workorder-MRPcalc-close span{
+    cursor: pointer; padding: 0 10px;
+}
+.workorder-MRPcalc-page-title{
+    width: 100%; height: 100px;
+}
