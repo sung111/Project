@@ -1,7 +1,7 @@
 // 신규 작업지시서 생성
 document.addEventListener("DOMContentLoaded", function () {
     // userRole = 로그인한 사람이 user인지 admin인지 구분하기위한 선언
-    const userRole = window.parent.sessionStorage.getItem("userRole");
+    const userRole = window.parent.localStorage.getItem("userRole");
     const NewWorkorderbutton = document.querySelector(".new-workorder-button");
     NewWorkorderbutton.addEventListener("click", function () {
         // user권한은 생성 불가
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    let workOrders = JSON.parse(localStorage.getItem("workOrders")) || [];
     console.log("✅ 불러온 작업 지시서:", workOrders); // 로그 확인
 
     workOrderList.innerHTML = "";
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".edit-workorder").forEach(button => {
         button.addEventListener("click", function () {
             const index = this.getAttribute("data-index");
-            sessionStorage.setItem("editWorkOrder", index);
+            localStorage.setItem("editWorkOrder", index);
             window.location.href = "NewWorkorder.html";
         });
     });

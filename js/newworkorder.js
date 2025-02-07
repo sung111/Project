@@ -1,6 +1,6 @@
     // 추가 생성 버튼으로 새로운 상품 제조작업 지시
     document.addEventListener("DOMContentLoaded", function () {
-        const userRole = window.parent.sessionStorage.getItem("userRole");
+        const userRole = window.parent.localStorage.getItem("userRole");
         const NewProductioninfo = document.querySelector(".workorder-add")
         NewProductioninfo.addEventListener("click", function () {
             if (userRole == "admin") {
@@ -17,7 +17,7 @@
     })
 
     document.addEventListener("DOMContentLoaded", function () {
-        const userRole = window.parent.sessionStorage.getItem("userRole");
+        const userRole = window.parent.localStorage.getItem("userRole");
         const addButton = document.querySelector(".workorder-add"); // 추가 생성 버튼
         const tbody = document.querySelector(".new-workorder tbody"); // 테이블 본문
     
@@ -57,7 +57,7 @@
     // 상품 선택을 불러온다.
     document.addEventListener("DOMContentLoaded", function () {
         const tbody = document.querySelector(".new-workorder tbody");
-        let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || []; // 기존 데이터 불러오기
+        let workOrders = JSON.parse(localStorage.getItem("workOrders")) || []; // 기존 데이터 불러오기
     
         // 📌 테이블에 데이터 추가하는 함수
         function renderTable() {
@@ -97,7 +97,7 @@
                 button.addEventListener("click", function () {
                     const index = this.getAttribute("data-index"); // 삭제할 데이터의 인덱스 가져오기
                     workOrders.splice(index, 1); // 배열에서 해당 데이터 삭제
-                    sessionStorage.setItem("workOrders", JSON.stringify(workOrders)); // 변경된 데이터 저장
+                    localStorage.setItem("workOrders", JSON.stringify(workOrders)); // 변경된 데이터 저장
                     renderTable(); // 테이블 다시 렌더링
                 });
             });
@@ -123,9 +123,9 @@
         endDate: "2025-02-10"
     };
 
-    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    let workOrders = JSON.parse(localStorage.getItem("workOrders")) || [];
     workOrders.push(newWorkOrder);
-    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+    localStorage.setItem("workOrders", JSON.stringify(workOrders));
 
     alert("작업 지시서가 저장되었습니다!");
     window.location.href = "WorkOrder.html"; 
@@ -153,9 +153,9 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
 
     console.log("✅ 저장될 작업 지시서:", newWorkOrder); // 로그 확인
 
-    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+    let workOrders = JSON.parse(localStorage.getItem("workOrders")) || [];
     workOrders.push(newWorkOrder);
-    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+    localStorage.setItem("workOrders", JSON.stringify(workOrders));
 
     alert("작업 지시서가 저장되었습니다!");
     window.location.href = "WorkOrder.html"; 
@@ -182,7 +182,7 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
             };
     
             workOrders.push(newWorkOrder);
-            sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+            localStorage.setItem("workOrders", JSON.stringify(workOrders));
     
             alert("작업 지시서가 저장되었습니다!");
             window.location.href = "WorkOrder.html"; // 목록 페이지로 이동
@@ -243,14 +243,14 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
                     }
             
                     // ✅ 기존 작업 지시서 목록 불러오기
-                    let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+                    let workOrders = JSON.parse(localStorage.getItem("workOrders")) || [];
             
                     // ✅ 새로운 작업 지시서 추가
                     let newOrder = {  delivery, writer, createDate, dueDate };
                     workOrders.push(newOrder);
             
                     // ✅ 업데이트된 데이터 저장
-                    sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+                    localStorage.setItem("workOrders", JSON.stringify(workOrders));
             
                     console.log("✅ 작업 지시서 저장 완료:", workOrders);
             
@@ -263,7 +263,7 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
             document.addEventListener("DOMContentLoaded", function () {
                 const workOrderList = document.querySelector(".workorderlist");
             
-                let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+                let workOrders = JSON.parse(localStorage.getItem("workOrders")) || [];
                 
                 console.log("✅ 불러온 작업 지시서:", workOrders);
             
@@ -297,7 +297,7 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
                     document.querySelectorAll(".edit-workorder").forEach(button => {
                         button.addEventListener("click", function () {
                             const index = this.getAttribute("data-index");
-                            sessionStorage.setItem("editWorkOrder", index);
+                            localStorage.setItem("editWorkOrder", index);
                             window.location.href = "NewWorkorder.html";
                         });
                     });
