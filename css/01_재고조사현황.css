@@ -230,7 +230,10 @@ th {
 
 .popup-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    position: absolute; /* 위치를 절대적으로 설정 */
+    top: 50%; /* 화면의 세로 중앙 */
+    left: 50%; /* 화면의 가로 중앙 */
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -273,15 +276,22 @@ h2 {
 
 input[type="text"],
 input[type="date"] {
-    width: 100%;
+    width: 90%;
     padding: 5px;
     box-sizing: border-box;
     text-align: center;
 }
 
 .addtable {
-    width: 100%;
+    border-collapse: collapse; /* 경계선 겹침 방지 */
 }
+
+.addtable th, .addtable td {
+    height: 70px; /* 각 셀의 높이 설정 */ 
+    vertical-align: middle; /* 세로 정렬 */
+    padding: 10px; /* 여백 추가 */
+}
+
 
 .unit-container {
     display: flex;
@@ -304,6 +314,11 @@ input[type="date"] {
     box-sizing: border-box;
 }
 
+.itemtype {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
 
 
 

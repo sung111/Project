@@ -71,6 +71,7 @@
                     <th>단위</th>
                     <th>입고일</th>
                     <th>유효기간</th>
+                    <th>제품 유형</th>
                     <th>관리</th>
                     <!-- <th>제품 유형</th> -->
                 </tr>
@@ -134,6 +135,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>제품 유형</td>
+                            <td>
+                                <div class="unit-container">
+                                    <select id="itemtype" class="itemtype">
+                                        <option value="완제품">완제품</option>
+                                        <option value="원자재">원자재</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>입고일</td>
                             <td><input type="date" id="addin_date" name="in_date"></td>
                         </tr>
@@ -156,7 +168,6 @@
         let editingIndex = null; // 수정할 항목의 인덱스를 저장하는 변수
 
         start.push(...product);
-        start.push(...start);
 
         function loadData() {
             const inventoryTableBody = document.getElementById('inventoryTableBody');
@@ -176,8 +187,9 @@
             <td>${item.품번}</td>
             <td>${item.재고수량}</td>
             <td>${item.단위}</td>
-            <td>${item.입고일자}</td>
+            <td>${item.입고일}</td>
             <td>${item.유효기간}</td>
+            <td>${item.제품유형}</td>
             <td>
                 <button type="button" class="editButton">수정</button>
                 <button type="button" class="del">삭제</button>
@@ -239,6 +251,7 @@
             document.getElementById('addunit').value = '';
             document.getElementById('addin_date').value = '';
             document.getElementById('addexp_date').value = '';
+            document.getElementById('itemtype').value = '';
 
             editingIndex = null; // 수정 모드 초기화
 
@@ -258,6 +271,7 @@
                     const unit = row.cells[4].innerText;
                     const inDate = row.cells[5].innerText;
                     const expDate = row.cells[6].innerText;
+                    const type = row.cells[7].innerText;
 
                     // 팝업에 데이터 채우기
                     document.getElementById('addlotno').value = lotNo;
@@ -267,6 +281,7 @@
                     document.getElementById('addunit').value = unit;
                     document.getElementById('addin_date').value = inDate;
                     document.getElementById('addexp_date').value = expDate;
+                    document.getElementById('itemtype').value = type;
 
                     // 수정할 항목의 인덱스 저장
                     editingIndex = Array.from(editButtons).indexOf(button);
@@ -291,6 +306,7 @@
             const unit = document.getElementById('addunit').value;
             const inDate = document.getElementById('addin_date').value;
             const expDate = document.getElementById('addexp_date').value;
+            const type = document.getElementById('itemtype').value;
 
             if (editingIndex !== null) {
                 // 수정 모드: 기존 항목 업데이트
@@ -301,7 +317,8 @@
                     재고수량: quantity,
                     단위: unit,
                     입고일자: inDate,
-                    유효기간: expDate
+                    유효기간: expDate,
+                    제품유형: type
                 };
                 editingIndex = null; // 수정 모드 초기화
             } else {
@@ -313,7 +330,8 @@
                     재고수량: quantity,
                     단위: unit,
                     입고일자: inDate,
-                    유효기간: expDate
+                    유효기간: expDate,
+                    제품유형: type
                 };
                 start.push(newItem);
             }
@@ -335,6 +353,7 @@
             const unit = document.getElementById('addunit').value;
             const inDate = document.getElementById('addin_date').value;
             const expDate = document.getElementById('addexp_date').value;
+            const type = document.getElementById('itemtype').value;
 
             // 새로운 항목 객체 생성
             const newItem = {
@@ -344,7 +363,8 @@
                 재고수량: quantity,
                 단위: unit,
                 입고일자: inDate,
-                유효기간: expDate
+                유효기간: expDate,
+                재고유형: type
             };
 
             // start 배열에 새로운 항목 추가
