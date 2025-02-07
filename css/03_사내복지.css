@@ -65,8 +65,9 @@ h1 {
 }
 
 .postbtn {
-    margin-bottom: 10px; /* 글쓰기 버튼과 목록 간의 여백 */
-    text-align: right; /* 오른쪽 정렬 */
+    margin-bottom: 20px; /* 글쓰기 버튼과 목록 간의 여백 */
+    display: flex;
+    justify-content: flex-end;
 }
 
 .postbtn button {
@@ -78,6 +79,7 @@ h1 {
     color: white; /* 글자 색상 */
     cursor: pointer; /* 커서 모양 변경 */
 }
+
 .pagination {
     margin-top: 20px;
     text-align: center;
@@ -101,9 +103,7 @@ h1 {
 .post {
     margin-bottom: 20px; /* 각 게시글 사이의 간격 */
 }
-.hidden {
-    display: none; /* 숨기기 위한 클래스 */
-}
+
 .iframe-container {
     display: none; /* 기본적으로 아이프레임 숨기기 */
 }

@@ -102,6 +102,23 @@
                 }, 300); // 애니메이션 시간과 동일하게 설정
             }
         }
+
+        //글 내용에서 수정 버튼 클릭 시
+        // 페이지 로드 시 기존 내용 채우기
+        document.addEventListener("DOMContentLoaded", function () {
+            const title = sessionStorage.getItem('postTitle');
+            const content = sessionStorage.getItem('postContent');
+
+            if (title) {
+                document.getElementById('title').value = title;
+                sessionStorage.removeItem('postTitle'); // 저장된 데이터 삭제
+            }
+
+            if (content) {
+                document.getElementById('content').value = content;
+                sessionStorage.removeItem('postContent'); // 저장된 데이터 삭제
+            }
+        });
     </script>
 </body>
 
