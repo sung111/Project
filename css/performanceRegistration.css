@@ -528,11 +528,6 @@ body {
     text-align: center;
   }
 
-  .new-workorder {
-    display: none;
-    margin-top: -300px;
-  }
-
   .hide {
     display: none;
   }

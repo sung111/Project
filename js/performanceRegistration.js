@@ -42,8 +42,8 @@ function init() {
         b2[i].style.display = "none"
         // console.log(b2[i])
       }
-      c.style.display = "block"
       d.style.display = "none"
+      c.style.display = ""
     }
 
     const z = e.target.parentNode.classList.contains("order-info-content")

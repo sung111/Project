@@ -54,7 +54,7 @@ function init() {
         b2[i].style.display = "none"
         // console.log(b2[i])
       }
-      c.style.display = "block"
+      c.style.display = ""
       d.style.display = "none"
     }
 
