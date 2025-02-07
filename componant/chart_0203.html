@@ -5,28 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/chart.css">
     
 </head>
 <body>
-    <select id="Data">
-            <option id="reData">부대찌개</option>
-            <option id="ocu2">밀푀유나베</option>
-            <option id="ocu3">김치찌개</option>
-            <option id="ocu3">떡볶이</option>
-            <option id="ocu3">곱창전골</option>
-       </select>
+    <div id="indi">
 
-    <div id="sch">
+     
+    
         <select id="sel">
         <option id="choi1">생산율과 불량율 : 부대찌개</option>
         <option id="choi2">생산율과 불량율 : 밀푀유나베</option>
@@ -35,46 +23,50 @@
         <option id="choi5">생산율과 불량율 : 곱창전골</option>
         </select>
 
-    <div id="cal">
+    
         <select id="day">
-        <option id="choi1">일간 실적 상승률</option>
-        <option id="choi2">주간 실적 상승률</option>
-        <option id="choi3">월간 실적 상승률</option>
+        <option id="choi1">일간 실적 지분</option>
+        <option id="choi2">주간 실적 지분</option>
+        <option id="choi3">월간 실적 지분</option>
         </select>
 
-        <div id="take">
-            <select id="ocu">
-            <option id="ocu1">일간 실적 지분율</option>
-            <option id="ocu2">주간 실적 지분율</option>
-            <option id="ocu3">월간 실적 지분율</option>
-            </select>
+        <select id="reData">
+            <option id="ocu1">전일 대비 생산율</option>
+            <option id="ocu2">전주 대비 생산율</option>
+            <option id="ocu3">전월 대비 생산율</option>
+           
+       </select>
+
+            
+        </div>
 
 
 
-<div id="charset">
+
+
+
+<div id="chartset">
     
-    <canvas id="Pie" width="400" height="400"></canvas>
-     <div id="pieset">
+    <canvas id="Pie" width="350" height="350"></canvas>
+     <!-- <div id="pieset">
     <canvas id="Pie2" width="400" height="400"></canvas>
     <canvas id="Pie3" width="400" height="400"></canvas>
     <canvas id="Pie4" width="400" height="400"></canvas>
     <canvas id="Pie5" width="400" height="400"></canvas>
-    </div>
+    </div> -->
 
-    <canvas id="doughnut" width="400" height="400"></canvas>
-    <canvas id="doughnut2" width="400" height="400"></canvas>
-    <canvas id="doughnut3" width="400" height="400"></canvas>
-요녀석
-    <canvas id="myChart" width="400" height="400"></canvas>
-    <canvas id="myChart2" width="400" height="400"></canvas>
-    <canvas id="myChart3" width="400" height="400"></canvas>
+    <canvas id="doughnut" width="350" height="350"></canvas>
+   
 
-	<canvas id="myChart88"></canvas>
+    <canvas id="myChart" width="350" height="350"></canvas>
+    
+
+	<!-- <canvas id="myChart88"></canvas>
     <div id="count" >
             <div id="number">
             772,224,168 / 800000000
             <br>(96.53%)
-            </div>
+            </div> -->
     </div>
 
     

@@ -1,227 +1,89 @@
+/* 기본 세팅 */
+body {
+
+
+    margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
+    height: 900px;
+       
+    border: 3px solid #007bff;
+    }
+
+
+
+
+    .perform {
 
 
 
 
 
+        padding: 10px;
+        }
+
+        
+#chartset {
 
 
-
-
-
-/* bar모양 차트 */
-#myChart {
-
-
-    position: relative;
-    left: 100px;
-border: 1px solid gray;
-display: block;
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-
+margin: 15%;
+margin-top: -1%;
+/* margin-right: 50%; */
+    /* display: flex; */
 }
 
-#myChart2 {
+#indi {
 
 
-    position: relative;
-    left: 100px;
-border: 1px solid gray;
-display: none;
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-
-}
-
-#myChart3 {
-
-
-    position: relative;
-    left: 100px;
-border: 1px solid gray;
-display: none;
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* pie모양 차트 */
-#Pie {
-
-
-position: relative;
-left: 100px;
-border: 1px solid gray;
-/* display: inline-block; */
-/* width: 100%; */
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-
-}
-
-
-#Pie2, #Pie3, #Pie4, #Pie5{
-
-    border: 1px solid gray;
-    position: relative;
-    left: 100px;
-    display: none;
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 도넛모양 차트 */
-#doughnut {
-
-
-    position: relative;
-left: 100px;
-border: 1px solid gray;
-/* width: 75%; */
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-
-
-}
-
-/* 도넛모양 차트 */
-#doughnut2 {
-
-
-    position: relative;
-left: 100px;
-border: 1px solid gray;
-/* width: 75%; */
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-        display: none;
-
-}
-
-
-/* 도넛모양 차트 */
-#doughnut3 {
-
-
-    position: relative;
-left: 100px;
-border: 1px solid gray;
-/* width: 75%; */
-padding: 3%;
-
-font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
-        display: none;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* 차트 - 부모요소 */
-#charset {
-
-
+    padding: 2%;
     display: flex;
-    /* flex-wrap: wrap;
-	align-content: stretch; */
-    flex-wrap: wrap;
-    width: 75%;
+    margin-left: 15%;
+    margin-top: 10%;
 }
 
+#ocu {
 
+    padding: 1%;
+}
 
-
-/* 월간 목표 실적(숫자) - 부모요소 */
-#count {
-
-    border: 1px solid gray;
-    width: 400px;
-    height: 400px;
-
-    position: relative;
-    left: 100px;
+#myChart {
     
-   
-
     
 }
 
-/* 월간 목표 실적(숫자) */
-#number {
+#Pie {
+    
+padding: 3%;
+/* display: none; */
 
 
-    position: relative;
-    text-align: center;
-    top: 150px;
+}
 
-    font-family: 'Apple SD Gothic Neo', serif;
-        font-size: 20px;
-        font-weight: 400;
+.Pie {
+
+margin-left: 20%;
+/* width: 100%; */
+
+}
+
+#doughnut {
+    
+    padding: 3%;
+    /* background-color: lightgray; */
+    margin-left: 3%;
+}
+
+#sel {
+
+    padding: 3%;
 }
 
 
-/* 폰트 */
-@font-face {
-    font-family: 'Apple SD Gothic Neo';
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-    src: url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype');
+#day {
+    padding: 3%;
+    
+}
+
+
+#reData {
+    padding: 3%;
+    
 }
