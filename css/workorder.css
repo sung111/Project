@@ -58,20 +58,39 @@
 }
 
 .workorder-shadowwallpaper{
-    width: 100%; height: 100vh; position: absolute; background-color: #000000 ;opacity: 70%; z-index: 10; 
+    width: 100%; height: 100vh; position: absolute; background-color: #000000 ;opacity: 70%; z-index: 10; display: none;
 }
 .workorder-MRPcalc{
-    width: 70%; height: 80%; position: absolute; top: 80px; background-color: #ffffff; z-index: 15; 
+    width: 70%; height: 80%; position: absolute; top: 80px; background-color: #ffffff; z-index: 15;display: none;
 }
 .workorder-MRPcalc-page{
-    width: 100%; height: 95%; 
+    width: 100%; height: 95%; border-spacing: 0; border-collapse: collapse; overflow-x: auto; text-align: center;
+}
+.workorder-MRPcalc-page th, .workorder-MRPcalc-page td{
+    border: 1px solid #d9d9d9;
 }
 .workorder-MRPcalc-close{
-    width: 100%; height: 5%;color: #222222; background-color: #888888; display: flex; flex-direction: row-reverse; align-items: center;
+    width: 100%; height: 5%; color: #222222; background-color: #888888; display: flex; flex-direction: row-reverse; align-items: center;
 }
 .workorder-MRPcalc-close span{
-    cursor: pointer; padding: 0 10px;
+    cursor: pointer; padding: 0 10px; 
 }
 .workorder-MRPcalc-page-title{
     width: 100%; height: 10%; background-color: #007bff;
+}
+.workorder-MRPcalc-page-list{
+    width: 100%; 
+}
+.workorder-MRPcalc-page-content{
+    width: 100%; height: 200px;  
+}
+.workorder-MRPcalc-page-content-sortation {
+    display: flex; /* 가로 배치 */
+    flex-direction: column;
+    justify-content: space-between; /* 요소 간 간격 분배 */
+    align-items: center; /* 세로 정렬 중앙 */
+    gap: 10px; /* 요소 간 간격 */
+}
+.workorder-MRPcalc-page-content-sortation th{
+    flex: 1; align-items: center;
 }

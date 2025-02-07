@@ -78,19 +78,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const LoginPage = document.querySelector(".login-container");
     const LoginButton = document.getElementById("login-button");
     const LoginSignin = document.querySelector(".login-button");
+    const LoginUser = document.querySelector(".login-user");
+    const LoginAdmin = document.querySelector(".login-admin");
+
+    // 로그인 저장
+    const userRole = localStorage.getItem("userRole");
+
+    // 로그인 페이지 열기
     LoginSignin.addEventListener("click", function () {
         LoginWellpaper.style.display = "flex";
         LoginPage.style.display = "flex";
     })
-
+    // 정해진 계정들로 로그인하기
     LoginButton.addEventListener("click", function () {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        const LoginUser = document.querySelector(".login-user");
-        const LoginAdmin = document.querySelector(".login-admin");
         if (username == "user" && password == "user") {
             alert(username + "님, 로그인 성공!");
-            sessionStorage.setItem("userRole", "user");
+            localStorage.setItem("userRole", "user");
 
             LoginWellpaper.style.display = "none";
             LoginPage.style.display = "none";
@@ -98,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             LoginUser.style.display = "block";
         } else if (username == "admin" && password == "admin") {
             alert(username + "님, 로그인 성공!");
-            sessionStorage.setItem("userRole", "admin");
+            localStorage.setItem("userRole", "admin");
             LoginWellpaper.style.display = "none";
             LoginPage.style.display = "none";
             LoginSignin.style.display = "none"
@@ -112,15 +117,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const MypagePopup = document.querySelector(".my-pagelayer");
 
     function MyPopup() {
-        const userRole = sessionStorage.getItem("userRole");
-        if (userRole == "user"){
+        const userRole = localStorage.getItem("userRole");
+        if (userRole == "user") {
             MypagePopup.innerHTML = `
             <div class="mypage-popuppage">
                 <h4>안녕하세요. ${userRole}님</h4>
                 <p>현재 유저 권한 계정으로 <br/>등록되어 있습니다.</p>
                 <span class="logout-btn">로그아웃</span>
             </div>`;
-        }else if(userRole == "admin"){
+        } else if (userRole == "admin") {
             MypagePopup.innerHTML = `
             <div class="mypage-popuppage">
                 <h4>안녕하세요. ${userRole}님</h4>
@@ -128,17 +133,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 <span class="logout-btn">로그아웃</span>
             </div>`;
         } else {
-            MypagePopup.innerHTML = `<h4>로그인이 필요합니다.</h4>`;
+            MypagePopup.innerHTML = `
+                        <div class="mypage-popuppage">
+                        <h4>로그인이 필요합니다.</h4>
+                        </div>`;
         }
-                    // 로그아웃 버튼
-                    document.querySelector(".logout-btn").addEventListener("click", function () {
-                        sessionStorage.removeItem("userRole");
-                        alert("로그아웃 되었습니다.");
-                        MyPopup(); 
-                        MypagePopup.style.display = "none"; 
-                    });
+        // 로그아웃 버튼
+        const logoutButton = document.querySelector(".logout-btn");
+        if (logoutButton) {
+            logoutButton.addEventListener("click", function () {
+                localStorage.removeItem("userRole"); // 세션에서 유저 정보 제거
+                alert("로그아웃 되었습니다."); 
+                MyPopup(); // 팝업 내용 업데이트
+                MypagePopup.style.display = "none"; // 팝업 닫기
+                LoginWellpaper.style.display = "none"; // 로그인 페이지 닫기
+                LoginPage.style.display = "none";
+                LoginSignin.style.display = "block"; // 로그인 버튼 표시
+                LoginUser.style.display = "none"; // 유저 전용 버튼 숨기기
+                LoginAdmin.style.display = "none"; // 관리자 전용 버튼 숨기기
+            });
+        }
     }
-    
+
     MypageButton.addEventListener("click", function () {
         const currentDisplay = window.getComputedStyle(MypagePopup).display;
         if (currentDisplay === "none") {
@@ -148,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
             MypagePopup.style.display = "none";
         }
     });
-    MyPopup(); 
+    MyPopup();
 });
 
 // 네비게이션 버튼 클릭 시, iframe 이동 스크립트 + 로컬 네비게이션

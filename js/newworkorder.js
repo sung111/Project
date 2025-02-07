@@ -219,29 +219,25 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
                     console.log("✅ 등록 버튼 클릭됨!");
             
                     // ✅ 여기에서 입력 필드 가져오기
-                    const companyInput = document.querySelector('[name="company"]');
                     const deliveryInput = document.querySelector('[name="delivery"]');
-                    const docNumberInput = document.querySelector('[name="docNumber"]');
                     const writerInput = document.querySelector('[name="writer"]');
                     const createDateInput = document.querySelector('[name="createDate"]');
                     const dueDateInput = document.querySelector('[name="dueDate"]');
             
                     // ✅ 요소가 존재하는지 확인
-                    if (!companyInput || !deliveryInput || !docNumberInput || !writerInput || !createDateInput || !dueDateInput) {
+                    if ( !deliveryInput || !writerInput || !createDateInput || !dueDateInput) {
                         console.error("❌ 필수 입력 필드 중 하나를 찾을 수 없습니다.");
                         alert("⚠️ 모든 필수 정보를 입력해주세요.");
                         return;
                     }
             
                     // ✅ 입력값 가져오기
-                    const company = companyInput.value.trim();
                     const delivery = deliveryInput.value.trim();
-                    const docNumber = docNumberInput.value.trim();
                     const writer = writerInput.value.trim();
                     const createDate = createDateInput.value.trim();
                     const dueDate = dueDateInput.value.trim();
             
-                    if (!company || !delivery || !docNumber || !writer || !createDate || !dueDate) {
+                    if ( !delivery || !writer || !createDate || !dueDate) {
                         alert("⚠️ 모든 필수 정보를 입력해주세요.");
                         return;
                     }
@@ -250,7 +246,7 @@ document.getElementById("saveWorkOrder").addEventListener("click", function () {
                     let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
             
                     // ✅ 새로운 작업 지시서 추가
-                    let newOrder = { company, delivery, docNumber, writer, createDate, dueDate };
+                    let newOrder = {  delivery, writer, createDate, dueDate };
                     workOrders.push(newOrder);
             
                     // ✅ 업데이트된 데이터 저장

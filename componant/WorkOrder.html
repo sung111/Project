@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="../css/workorder.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/newworkorder.css">
-    <style>.sample{display: none;}</style>
+    <style>
+        .sample {
+            display: none;
+        }
+    </style>
     <script src="../js/workorder.js"></script>
 
 </head>
@@ -46,7 +50,7 @@
                 <li class="workorderlist-productplandate">2025-02-03<br />~<br />2025-02-05</li>
                 <li class="workorderlist-productplancalc"><button class="workorderlist-sample">수정</a></li>
                 <li class="workorderlist-MRPcalc"><a>생성</a></li>
-                <li class="workorderlist-productplanstatus"><a href="">생산계획현황</a></li>
+                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">박혜성</li>
                 <style>
 
@@ -58,7 +62,7 @@
                 <li class="workorderlist-productplandate">2025-01-30<br />~<br />2025-02-31</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
                 <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a href="">생산계획현황</a></li>
+                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">김경민</li>
             </ul>
             <ul class="workorderlist-content2">
@@ -66,7 +70,7 @@
                 <li class="workorderlist-productplandate">2025-01-28<br />~<br />2025-02-29</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
                 <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a href="">생산계획현황</a></li>
+                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">서영석</li>
             </ul>
             <ul class="workorderlist-content2">
@@ -74,7 +78,7 @@
                 <li class="workorderlist-productplandate">2025-01-26<br />~<br />2025-02-27</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
                 <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a href="">생산계획현황</a></li>
+                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">안혜리</li>
             </ul>
             <ul class="workorderlist-content2">
@@ -82,7 +86,7 @@
                 <li class="workorderlist-productplandate">2025-01-20<br />~<br />2025-01~21</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
                 <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a href="">생산계획현황</a></li>
+                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">채민병</li>
             </ul>
         </ol>
@@ -123,8 +127,8 @@
                     <th>02-03</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody class="workorder-MRPcalc-page-list">
+                <tr class="workorder-MRPcalc-page-content">
                     <td>WPD-20250124-001</td>
                     <td>부대찌개</td>
                     <td>팩</td>
@@ -132,109 +136,151 @@
                     <td>50</td>
                     <td></td>
                     <td>1일</td>
+                    <td>50</td>
+                    <div class="workorder-MRPcalc-page-content-sortation">
+                        <th>기초재고</th>
+                        <th>생산예정량</th>
+                        <th>소모예정량</th>
+                        <th>예상재고</th>
+                        <th>생산필요수량</th>
+                        <th>생산계획수량</th>
+                        <td></td>
+                        <td></td>
+                    </div>
+                </tr>
+                <tr class="workorder-MRPcalc-page-content">
+                    <td>WPD-20250124-002</td>
+                    <td>김치찌개</td>
+                    <td>팩</td>
+                    <td>냉장보관</td>
                     <td>20</td>
-                    <div>
+                    <td>10</td>
+                    <td>1일</td>
+                    <td>30</td>
+                    <td colspan="6">
+                        <div class="workorder-MRPcalc-page-content-sortation">
                     <th>기초재고</th>
                     <th>생산예정량</th>
                     <th>소모예정량</th>
                     <th>예상재고</th>
                     <th>생산필요수량</th>
                     <th>생산계획수량</th>
+                    </td>
                     <td></td>
                     <td></td>
-                </div>
-                </tr>
-            </tbody>
-        </table>
-        <div class="workorder-MRPcalc-close">
-            <span>[닫기]</span>
+    </div>
+    </tr>
+    <tr class="workorder-MRPcalc-page-content">
+        <td>WPD-20250124-003</td>
+        <td>밀푀유나베</td>
+        <td>세트</td>
+        <td>냉장보관</td>
+        <td>20</td>
+        <td></td>
+        <td>2일</td>
+        <td>20</td>
+        <div class="workorder-MRPcalc-page-content-sortation">
+            <th>기초재고</th>
+            <th>생산예정량</th>
+            <th>소모예정량</th>
+            <th>예상재고</th>
+            <th>생산필요수량</th>
+            <th>생산계획수량</th>
+            <td></td>
+            <td></td>
         </div>
+    </tr>
+    </tbody>
+    </table>
+    <div class="workorder-MRPcalc-close">
+        <span>[닫기]</span>
+    </div>
     </div>
     <!-- Samplepage -->
-     <div class="sample">
-    <table class="new-workorder">
-        <thead>
-            <tr class="menufacturer-info">
-                <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">회사명</div>
-                    <input type="text" name="company" class="menufacturer-info-completion"  value="HHMES">
-                </td>
-                <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">납품처</div>
-                    <input type="text" name="delivery" class="menufacturer-info-completion" value="*운맛상회">
-                </td>
-                <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">번호</div>
-                    <input type="text" name="docNumber" class="menufacturer-info-completion" value="00005">
-                </td>
-                <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">작성자</div>
-                    <input type="text" name="writer" class="menufacturer-info-completion" value="박혜성">
-                </td>
-                <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">작성일자</div>
-                    <input type="date" name="createDate" class="menufacturer-info-completion" value="2025-02-03">
-                </td>
-                <td class="menufacturer-info-list">
-                    <div class="menufacturer-info-name">납품기간</div>
-                    <input type="date" name="dueDate" class="menufacturer-info-completion" value="2025-02-05">
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="order-info-list">
-                <th>
-                    <ol class="order-info-title">
-                        <li>품명[규격]</li>
-                        <li>품목코드</li>
-                        <li>단위</li>
-                        <li>제작수량</li>
-                        <li>생산시작일</li>
-                        <li>생산종료일</li>
-                        <li>등록삭제</li>
-                    </ol>
-                </th>
-            </tr>
-            <tr class="order-info-content">
-                <td>부대찌개</td>
-                <td>WPD-20250124-001</td>
-                <td>팩</td>
-                <td>50</td>
-                <td>2025-02-03</td>
-                <td>2025-02-04</td>
-                <td class="order-info-content-delete">삭제하기</td>
-            </tr>
-            <tr class="order-info-content">
-                <td>김치찌개</td>
-                <td>WPD-20250124-002</td>
-                <td>팩</td>
-                <td>30</td>
-                <td>2025-02-03</td>
-                <td>2025-02-04</td>
-                <td class="order-info-content-delete">삭제하기</td>
-            </tr>
-            <tr class="order-info-content">
-                <td>밀푀유나베</td>
-                <td>WPD-20250124-003</td>
-                <td>세트</td>
-                <td>20</td>
-                <td>2025-02-03</td>
-                <td>2025-02-04</td>
-                <td class="order-info-content-delete">삭제하기</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td class="order-buttonlayer">
-                    <button type="button" class="workorder-add">추가 생성</button>
-                    <button type="button" class="workorder-registration">등록</button>
-                    <button type="button" class="workorder-delete">삭제</button>
-                    <button type="button" class="workorder-cancel">취소</button>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+    <div class="sample">
+        <table class="new-workorder">
+            <thead>
+                <tr class="menufacturer-info">
+                    <!-- <td class="menufacturer-info-list">
+                        <div class="menufacturer-info-name">회사명</div>
+                        <input type="text" name="company" class="menufacturer-info-completion" value="HHMES">
+                    </td> -->
+                    <td class="menufacturer-info-list">
+                        <div class="menufacturer-info-name">납품처</div>
+                        <input type="text" name="delivery" class="menufacturer-info-completion" value="*운맛상회">
+                    </td>
+                    <!-- <td class="menufacturer-info-list">
+                        <div class="menufacturer-info-name">번호</div>
+                        <input type="text" name="docNumber" class="menufacturer-info-completion" value="00005">
+                    </td> -->
+                    <td class="menufacturer-info-list">
+                        <div class="menufacturer-info-name">작성자</div>
+                        <input type="text" name="writer" class="menufacturer-info-completion" value="박혜성">
+                    </td>
+                    <td class="menufacturer-info-list">
+                        <div class="menufacturer-info-name">작성일자</div>
+                        <input type="date" name="createDate" class="menufacturer-info-completion" value="2025-02-03">
+                    </td>
+                    <td class="menufacturer-info-list">
+                        <div class="menufacturer-info-name">납품기간</div>
+                        <input type="date" name="dueDate" class="menufacturer-info-completion" value="2025-02-05">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="order-info-list">
+                    <th>
+                        <ol class="order-info-title">
+                            <li>품명[규격]</li>
+                            <li>품목코드</li>
+                            <li>단위</li>
+                            <li>제작수량</li>
+                            <li>생산시작일</li>
+                            <li>생산종료일</li>
+                            <li>등록삭제</li>
+                        </ol>
+                    </th>
+                </tr>
+                <tr class="order-info-content">
+                    <td>부대찌개</td>
+                    <td>WPD-20250124-001</td>
+                    <td>팩</td>
+                    <td>50</td>
+                    <td>2025-02-03</td>
+                    <td>2025-02-04</td>
+                    <td class="order-info-content-delete">삭제하기</td>
+                </tr>
+                <tr class="order-info-content">
+                    <td>김치찌개</td>
+                    <td>WPD-20250124-002</td>
+                    <td>팩</td>
+                    <td>30</td>
+                    <td>2025-02-03</td>
+                    <td>2025-02-04</td>
+                    <td class="order-info-content-delete">삭제하기</td>
+                </tr>
+                <tr class="order-info-content">
+                    <td>밀푀유나베</td>
+                    <td>WPD-20250124-003</td>
+                    <td>세트</td>
+                    <td>20</td>
+                    <td>2025-02-03</td>
+                    <td>2025-02-04</td>
+                    <td class="order-info-content-delete">삭제하기</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="order-buttonlayer">
+                        <button type="button" class="workorder-add">추가 생성</button>
+                        <button type="button" class="workorder-registration">등록</button>
+                        <button type="button" class="workorder-delete">삭제</button>
+                        <button type="button" class="workorder-cancel">취소</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -252,8 +298,9 @@
     })
 </script>
 <style>
-    a{
+    a {
         color: #007bff
     }
 </style>
+
 </html>
