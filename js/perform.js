@@ -39,20 +39,20 @@
 
 
 
-let del = document.querySelector("#del")
+// let del = document.querySelector("#del")
                                      
-del.addEventListener("click", function() {
-alert("표가 삭제되었습니다")
-    })
+// del.addEventListener("click", function() {
+// alert("표가 삭제되었습니다")
+//     })
 
 
 
     
-    let fix = document.querySelector("#fix")
+//     let fix = document.querySelector("#fix")
                                   
-    fix.addEventListener("click", function() {
-    alert("표가 수정되었습니다")
-        })
+//     fix.addEventListener("click", function() {
+//     alert("표가 수정되었습니다")
+//         })
 
 
 let first = document.querySelector("#first")
@@ -75,132 +75,611 @@ let months = document.querySelector("#months")
 
 
 
-//select값이 바뀔때마다
-// change 이벤트를 준다
-// 달력이 바뀐다
+
+
+
+
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+   
+    data: {
+        labels: ['06:00~08:00', '08:00~10:00', '10:00~12:00', '12:00~14:00	', '14:00~16:00', '16:00~18:00',],
+        datasets: [
+            {
+            type: 'bar',
+            // select 값이 부대찌개라면
+            label: '부대찌개',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+            // borderWidth: 1
+           
+           
+        },
+
+        {
+            type: 'bar',
+            // select 값이 부대찌개라면
+            label: '밀푀유나베',
+            data: [10, 14, 11, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+            // borderWidth: 1
+           
+        
+        },
+
+        {
+            type: 'bar',
+            // select 값이 부대찌개라면
+            label: '김치찌개',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+            // borderWidth: 1
+           
+            label: '김치찌개',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+        },
+
+        {
+            type: 'bar',
+            // select 값이 부대찌개라면
+            label: '떡볶이',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+            // borderWidth: 1
+           
+            label: '떡볶이',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+        },
+
+        {
+            type: 'bar',
+            // select 값이 부대찌개라면
+            label: '곱창전골',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+            // borderWidth: 1
+           
+            label: '곱창전골',
+            data: [100, 140, 110, 90, 25, 50],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 0.2)',
+   
+            ],
+        },
+
+
+
+    ]
+       
+    },
+    options: {responsive: false, responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const ctx2 = document.getElementById('myChart2').getContext('2d');
+const myChart2 = new Chart(ctx2, {
+    
+    data: {
+        labels: ['월요일', '08:00~10:00', '10:00~12:00', '12:00~14:00	', '14:00~16:00', '16:00~18:00','금요일'],
+        datasets: [
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '부대찌개',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '부대찌개',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '밀푀유나베',
+                data: [10, 14, 11, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '밀푀유나베',
+                data: [10, 14, 11, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '김치찌개',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '김치찌개',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '떡볶이',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '떡볶이',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '곱창전골',
+                data: [100, 140, 110, 90, 25, 50, 50],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '곱창전골',
+                data: [100, 140, 110, 90, 25, 50, 60],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    ]
+       
+    },
+    options: {responsive: false, responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const ctx3 = document.getElementById('myChart3').getContext('2d');
+const myChart3 = new Chart(ctx3, {
+   
+    data: {
+        labels: ['1주차', '08:00~10:00', '10:00~12:00', '4주차',],
+        datasets: [
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '부대찌개',
+                data: [100, 140, 110, 90,],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '부대찌개',
+                data: [100, 140, 110, 90,],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '밀푀유나베',
+                data: [10, 14, 11, 90,],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '밀푀유나베',
+                data: [10, 14, 11, 90,],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '김치찌개',
+                data: [100, 140, 110, 90,],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '김치찌개',
+                data: [100, 140, 110, 90,],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '떡볶이',
+                data: [100, 140, 110, 90, ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '떡볶이',
+                data: [100, 140, 110, 90, ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    
+            {
+                type: 'bar',
+                // select 값이 부대찌개라면
+                label: '곱창전골',
+                data: [100, 140, 110, 90, ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+                // borderWidth: 1
+               
+                label: '곱창전골',
+                data: [100, 140, 110, 90, ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.2)',
+       
+                ],
+            },
+    ]
+       
+    },
+    options: {responsive: false, responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+let bar1 = document.querySelector("#Chart1") 
+let bar2 = document.querySelector("#Chart2") 
+let bar3 = document.querySelector("#Chart3") 
+
+
+
+
 op1.addEventListener("change", function() {
-                console.log("바뀜확인")
-
-                // days.style.display ="none"
-                // months.style.display = "none"
-                // weeks.style.display = "block"
-                 
+    console.log("바뀜확인")
 
 
+    switch(this.value) {
 
-                switch(this.value) {
 
+   
         case "일간":
-            // 달력
-            days.style.display = "block";
-            weeks.style.display = "none";
-            months.style.display = "none";
-            // nextSibling.remove();
-            // def.innerHTML = "<br> <table border=1 id=first>"
+            
+        console.log("일간")
+        first.style.display = "block"
+        second.style.display = "none"
+        third.style.display = "none"
+     
+        bar1.style.display = "block"
+        bar2.style.display = "none"
+        bar3.style.display = "none"
+        
+        days.style.display = "block";
+        weeks.style.display = "none";
+        months.style.display = "none";
+        // but1.style.display = "block"
+        // but2.style.display = "none"
+        // but3.style.display = "none"
 
-            //                 + "<thead id=one>"
-            //                     +"<tr>"
-            //                         +"<th ></th>"
-            //                         +"<th>06:00~08:00</th>"
-            //                         +"<th>08:00~10:00</th>"
-            //                         +"<th>10:00~12:00</th>"
-            //                         +"<th>12:00~14:00</th>"
-            //                         +"<th>14:00~16:00</th>"
-            //                         +"<th>16:00~18:00</th>"
-            //                         +"</tr>"
-            //                 +"</thead>"
-            // 표 윗부분
-            first.style.display = "block"
-            second.style.display = "none"
-            third.style.display = "none"
-            console.log("일간확인용")
-            // console.log(one)
             break;
-
-
-
+        
         case "주간":
+            
+        console.log("주간")
+        first.style.display = "none"
+        second.style.display = "block"
+        third.style.display = "none"
+
+        bar1.style.display = "none"
+        bar2.style.display = "block"
+        bar3.style.display = "none"
+
             days.style.display = "none";
             weeks.style.display = "block"
             weeks.value = " 2025-02-03 ";
             months.style.display = "none"
             weeks.valueAsDate = new Date("2025-02-03");
-            // one.style.display ="none"
-
-            // def.innerHTML = "<br> <table border=1>" 
-
-            //                                      + "<thead id=two>"
-                                           
-            //                                +"<tr>"
-            //                                    +"<th class=item>" + weeks.value + "</th>"
-            //                                    +"<th>월요일</th>"
-            //                                    +"<th>화요일</th>"
-            //                                    +"<th>수요일</th>"
-            //                                    +"<th>목요일</th>"
-            //                                    +"<th>금요일</th>"
-            //                                    +"<th>토요일</th>"
-            //                                    +"<th>일요일</th>"
-                                           
-            //                                +"</tr>"
-
-            //                                     +"</thead>"
-            first.style.display = "none"
-            second.style.display = "block"
-            third.style.display = "none"
-
-
-
-
-                                         
-
+        // but1.style.display = "none"
+        // but2.style.display = "block"
+        // but3.style.display = "none"
             break;
-            
             // 월간 . 주간. 일간으로 바꿨을때도 표 사라지게 하기
+
+
         case "월간":
+            
+        console.log("월간")
+
+        first.style.display = "none"
+        second.style.display = "none"
+        third.style.display = "block"
+
+        bar1.style.display = "none"
+        bar2.style.display = "none"
+        bar3.style.display = "block"
+
             days.style.display = "none";
             weeks.style.display = "none"
             months.style.display = "block"
             months.valueAsDate = new Date("2025-02-03");
-            // def.innerHTML = "<br> <table border=1 id=t>" 
-
-            //                                     + "<thead>"
-            //                                         +"<tr>"
-            //                                             +"<th class=item>" + months.value + "</th>"
-            //                                             +"<th>1주차</th>"
-            //                                             +"<th>2주차</th>"
-            //                                             +"<th>3주차</th>"
-            //                                             +"<th>4주차</th>"
-            //                                         +"</tr>"
-            //                                     +"</thead>"
-
-            first.style.display = "none"
-            second.style.display = "none"
-            third.style.display = "block"
-
+        
+        // but1.style.display = "none"
+        // but2.style.display = "none"
+        // but3.style.display = "block"
+       
             break;
-                                }
-
-
-
-                // if(op1 = "일간") {
-                // days.style.display ="none"
-                // months.style.display = "none"
-                // weeks.style.display = "block"
-                // console.log("오늘")
-                // }    else if (op1 = "주간") {
-                //     days.style.display ="none"
-                // months.style.display = "block"
-                // weeks.style.display = "none"
-                // console.log("주일")
-                // } else {
-                //     days.style.display ="block"
-                // months.style.display = "none"
-                // weeks.style.display = "none"
-                // console.log("월간")
-                // }
-                
     
+    }
 })
+
+
+
+
+
+
+
+
+let page2 = document.querySelector("#page2")
+page2.addEventListener("click", function() {
+
+
+
+    bar1.style.display = "none"
+    bar2.style.display = "none"
+    bar3.style.display = "none"
+
+
+
+
+
+})
+
+
+
 
 
 
@@ -245,6 +724,19 @@ op1.addEventListener("change", function() {
                     
 
                     
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 let sele = document.querySelector("#sele")
@@ -1009,6 +1501,31 @@ op1.addEventListener("change", function() {
                                         //     items.addEventListener("click", function() {
                                         //     items.classList.add("item")
                                         //     })    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
