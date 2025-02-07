@@ -278,7 +278,7 @@ body {
     /* 화면 중앙에 위치 (위쪽 여백 15%) */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 100%;
     max-width: 600px;
     border-radius: 5px;
     position: relative;

@@ -19,6 +19,13 @@ function init() {
 
 
   document.querySelector('.instView').addEventListener('click', (e) => {
+
+    if (e.target.parentNode.parentNode.classList.contains('menufacturer-info')) {
+      e.preventDefault();
+      e.target.blur();
+      alert("현재 페이지에서 수정하실수없습니다.")
+    }
+
     // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
     if (e.target.innerText == '수정') {
       const instView = document.querySelector('.instView')
@@ -170,22 +177,27 @@ function init() {
     const date = document.querySelector('.date1')
     const wpName = document.querySelector('.wp2')
 
-    const index = document.querySelector('.index');
     // bom 불러와서 저장하기
     // 날짜, 제품명, LotNo, 코멘트, 수/삭but
-    view.innerHTML = `<div class="dex item">
-                        <div class="dateB">${date.value}</div>
-                        <div class="emdwp">${wpName.innerHTML}</div>
-                        <div class="emdtn">10pack</div>
-                        <div>생산완료</div>
-                        <div class="text1">${intd}</div>
-                        <div>
-                          <button class="tn">수정</button>
-                          <button class="tkr">삭제</button>
-                        </div>
-                      </div>` + view.innerHTML
-    alert('실적등록을 완료했습니다.')
-    renderPagination();
+    if(wpName.innerText == "제품명"){
+      alert("제품이 선택되지않았습니다.")
+    }else{
+      view.innerHTML = `<div class="dex item">
+                          <div class="dateB">${date.value}</div>
+                          <div class="emdwp">${wpName.innerHTML}</div>
+                          <div class="emdtn">10pack</div>
+                          <div>생산완료</div>
+                          <div class="text1">${intd}</div>
+                          <div>
+                            <button class="tn">수정</button>
+                            <button class="tkr">삭제</button>
+                          </div>
+                        </div>` + view.innerHTML
+      alert('실적등록을 완료했습니다.')
+      renderPagination();
+
+    }
+
   })
 
 
