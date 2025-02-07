@@ -20,18 +20,35 @@ body {
 .item button {
     margin-left: 10px;
 }
+.item {
+    display: flex;
+    align-items: center;  /* 수직 중앙 정렬 */
+}
 
 .container {
     display: flex;
     align-items: center;
     /* 수직 정렬 */
     justify-content: center;
+    flex-wrap: wrap; 
 
+}
+label {
+    margin: 10px;  /* 레이블 간 간격 */
+
+}
+
+select, input {
+    margin: 10px;  /* 선택 박스와 입력 박스 간 간격 */
+    padding: 5px;  /* 내부 여백 */
+    border-radius: 5px;
+    border: 1px solid #ced4da;
 }
 
 .search {
     align-items: center;
     width: 100px;
+    
 }
 
 .container label,
@@ -117,26 +134,33 @@ table {
     table-layout: fixed;
 }
 
-.itemlist th:nth-child(5), /* "단위" 열의 헤더 */
-.itemlist td:nth-child(5) { /* "단위" 열의 데이터 셀 */
-    width: 50px; /* 원하는 너비로 설정 */
+.itemlist th:nth-child(5),
+/* "단위" 열의 헤더 */
+.itemlist td:nth-child(5) {
+    /* "단위" 열의 데이터 셀 */
+    width: 50px;
+    /* 원하는 너비로 설정 */
 
 }
+
 th,
 td {
 
-        border: 1px solid #15579e;
-        /* 테두리 색상 */
-        padding: 10px;
-        /* 내부 여백 */
-        text-align: center;
-        /* 텍스트 중앙 정렬 */
-        height: 50px; /* 원하는 높이로 설정 */
-        /* 필요에 따라 높이를 조정하세요 */
-        overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
-        text-overflow: ellipsis; /* 넘치는 텍스트에 대해 생략 부호 표시 */
-        white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
-    }
+    border: 1px solid #15579e;
+    /* 테두리 색상 */
+    padding: 10px;
+    /* 내부 여백 */
+    text-align: center;
+    /* 텍스트 중앙 정렬 */
+    height: 50px;
+    /* 원하는 높이로 설정 */
+    white-space: nowrap;
+    /* 텍스트 줄 바꿈 방지 */
+    overflow-x: auto;
+    /* 가로 스크롤 추가 */
+    -webkit-overflow-scrolling: touch;
+    /* 터치 스크롤링 지원 */
+}
 
 th {
     background-color: #007bff;
@@ -144,6 +168,7 @@ th {
     color: white;
     /* 헤더 글자색 */
 }
+
 
 /* .list {
     margin-top: 30px;
@@ -169,7 +194,7 @@ th {
     cursor: pointer;
     border-radius: 5px;
     margin-bottom: 10px;
-    
+
 }
 
 .pagination button.active {
@@ -283,11 +308,10 @@ input[type="date"] {
 
 @media (max-width: 768px) {
     .container {
-        flex-direction: column;
-        /* 세로 방향으로 정렬 */
+        flex-direction: column;  /* 세로 방향으로 정렬 */
+        align-items: center;  /* 중앙 정렬 */
     }
 
-    .search,
     .container input[type="text"],
     .container select {
         width: 100%;
@@ -295,19 +319,18 @@ input[type="date"] {
         margin-bottom: 10px;
         /* 아래 여백 추가 */
     }
-
-    /* @media (max-width: 768px) {
-        table {
-            font-size: 14px;
-            /* 글자 크기 조정 */
-        /* }
-
-        th,
-        td {
-            padding: 5px;
-            /* 여백 축소 */
-        }
-        /* .item {
-            width: 100%;
-        }
-    } */ 
+    .box {
+        padding: 15px;
+    }
+    .item {
+        /* display: block;
+        margin-bottom: 15px; */
+        width: 100%;
+        justify-content: center;
+    }
+    select, input {
+        width: 100%;  /* 전체 너비 사용 */
+        max-width: 300px;  /* 최대 너비 제한 */
+    }
+    
+}
