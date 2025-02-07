@@ -1,18 +1,19 @@
 const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
+const config = (ctx, {
     type: 'line',
     data: {
         labels: ['06:00~08:00', '08:00~10:00', '10:00~12:00', '12:00~14:00', '14:00~16:00', '16:00~18:00',],
         datasets: [{
 
             // select 값이 부대찌개라면
-            label: '부대찌개',
-            data: [Math.random()*10000, 
-                   Math.random()*10000,
-                   Math.random()*10000,
-                   Math.random()*10000,
-                   Math.random()*10000,
-                   Math.random()*10000,
+            label: '일별 상승률',
+            fill: false,
+            data: [30, 
+                   40,
+                   50,
+                   60,
+                   70,
+                   80,
                   
             ],
             backgroundColor: [
@@ -30,13 +31,14 @@ const myChart = new Chart(ctx, {
         {
 
             // select 값이 부대찌개라면
-            label: '밀푀유나베',
-            data: [Math.random()*10000, 
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
+            label: '주간 상승율',
+            fill: false,
+            data: [63, 
+                36,
+                25,
+                64,
+                97,
+                16,
                 ],
             backgroundColor: [
                 'rgb(255, 165, 0)',
@@ -53,13 +55,14 @@ const myChart = new Chart(ctx, {
         {
 
             // select 값이 부대찌개라면
-            label: '김치찌개',
-            data: [Math.random()*10000, 
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
+            label: '월간 상승율',
+            fill: false,
+            data: [82, 
+                22,
+                55,
+                74,
+                85,
+                25,
                ],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
@@ -73,55 +76,60 @@ const myChart = new Chart(ctx, {
             ],
             borderWidth: 1
         },
-        {
+        // {
 
-            // select 값이 부대찌개라면
-            label: '떡볶이',
-            data: [Math.random()*10000, 
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                ],
-            backgroundColor: [
-                'rgb(238, 130, 238)',
+        //     // select 값이 부대찌개라면
+        //     label: '떡볶이',
+        //     fill: false,
+        //     data: [Math.random()*10000, 
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         ],
+        //     backgroundColor: [
+        //         'rgb(238, 130, 238)',
                 
                 
-            ],
-            borderColor: [
-                'rgb(238, 130, 238)',
+        //     ],
+        //     borderColor: [
+        //         'rgb(238, 130, 238)',
                
                 
-            ],
-            borderWidth: 1
-        },
-        {
+        //     ],
+        //     borderWidth: 1
+        // },
+        // {
 
-            // select 값이 부대찌개라면
-            label: '곱창전골',
-            data: [Math.random()*10000, 
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                Math.random()*10000,
-                ],
-            backgroundColor: [
-                'rgb(106, 90, 205)',
+        //     // select 값이 부대찌개라면
+        //     label: '곱창전골',
+        //     fill: false,
+        //     data: [Math.random()*10000, 
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         Math.random()*10000,
+        //         ],
+        //     backgroundColor: [
+        //         'rgb(106, 90, 205)',
                 
                 
-            ],
-            borderColor: [
-                'rgb(106, 90, 205)',
+        //     ],
+        //     borderColor: [
+        //         'rgb(106, 90, 205)',
                
                 
-            ],
-            borderWidth: 1
-        },
+        //     ],
+        //     borderWidth: 1
+        // },
     ]
        
     },
+
+
+    
     options: {responsive: false,
         scales: {
             y: {
@@ -130,8 +138,36 @@ const myChart = new Chart(ctx, {
         }
     }
 
-    
 });
+
+
+
+document.getElementById('reData').onclick = function(){
+		
+    //데이터셋 수 만큼 반복
+    var dataset = config.data.datasets;
+    for(var i=0; i<dataset.length; i++){
+        console.log(dataset);
+        //데이터 갯수 만큼 반복
+        var data = dataset[i].data;
+        for(var j=0 ; j < data.length ; j++){
+            data[j] = Math.floor(Math.random() * 50);
+        }
+    }
+    
+    myChart.update();	//차트 업데이트
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -954,6 +990,40 @@ const doughnutChart3 = new Chart(doughnut3, {
         }
     }
 });
+
+
+var myChart = new Chart(ctx, config);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

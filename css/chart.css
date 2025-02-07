@@ -15,7 +15,7 @@
 
     position: relative;
     left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 display: block;
 padding: 3%;
 
@@ -30,7 +30,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
     position: relative;
     left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 display: none;
 padding: 3%;
 
@@ -45,7 +45,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
     position: relative;
     left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 display: none;
 padding: 3%;
 
@@ -67,7 +67,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
 position: relative;
 left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 /* display: inline-block; */
 /* width: 100%; */
 padding: 3%;
@@ -81,7 +81,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
 #Pie2, #Pie3, #Pie4, #Pie5{
 
-    border: 1px solid red;
+    border: 1px solid gray;
     position: relative;
     left: 100px;
     display: none;
@@ -107,7 +107,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
     position: relative;
 left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 /* width: 75%; */
 padding: 3%;
 
@@ -124,7 +124,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
     position: relative;
 left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 /* width: 75%; */
 padding: 3%;
 
@@ -142,7 +142,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 
     position: relative;
 left: 100px;
-border: 1px solid red;
+border: 1px solid gray;
 /* width: 75%; */
 padding: 3%;
 
@@ -181,7 +181,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 /* 월간 목표 실적(숫자) - 부모요소 */
 #count {
 
-    border: 1px solid red;
+    border: 1px solid gray;
     width: 400px;
     height: 400px;
 
