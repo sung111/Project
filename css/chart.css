@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 /* bar모양 차트 */
 #myChart {
 
@@ -14,6 +25,42 @@ font-family: 'Apple SD Gothic Neo', serif;
 
 }
 
+#myChart2 {
+
+
+    position: relative;
+    left: 100px;
+border: 1px solid red;
+display: none;
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+
+}
+
+#myChart3 {
+
+
+    position: relative;
+    left: 100px;
+border: 1px solid red;
+display: none;
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+
+}
+
+
+
+
+
+
+
 /* pie모양 차트 */
 #Pie {
 
@@ -21,7 +68,7 @@ font-family: 'Apple SD Gothic Neo', serif;
 position: relative;
 left: 100px;
 border: 1px solid red;
-display: inline-block;
+/* display: inline-block; */
 /* width: 100%; */
 padding: 3%;
 
@@ -30,6 +77,29 @@ font-family: 'Apple SD Gothic Neo', serif;
         font-weight: 400;
 
 }
+
+
+#Pie2, #Pie3, #Pie4, #Pie5{
+
+    border: 1px solid red;
+    position: relative;
+    left: 100px;
+    display: none;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 도넛모양 차트 */
 #doughnut {
@@ -47,6 +117,52 @@ font-family: 'Apple SD Gothic Neo', serif;
 
 
 }
+
+/* 도넛모양 차트 */
+#doughnut2 {
+
+
+    position: relative;
+left: 100px;
+border: 1px solid red;
+/* width: 75%; */
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+        display: none;
+
+}
+
+
+/* 도넛모양 차트 */
+#doughnut3 {
+
+
+    position: relative;
+left: 100px;
+border: 1px solid red;
+/* width: 75%; */
+padding: 3%;
+
+font-family: 'Apple SD Gothic Neo', serif;
+        font-size: 20px;
+        font-weight: 400;
+        display: none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /* 차트 - 부모요소 */
 #charset {

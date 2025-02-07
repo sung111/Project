@@ -90,7 +90,7 @@ const myChart = new Chart(ctx, {
             type: 'bar',
             // select 값이 부대찌개라면
             label: '부대찌개',
-            data: [100, 140, 110, 90, 25, 50],
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 
@@ -108,13 +108,13 @@ const myChart = new Chart(ctx, {
             type: 'bar',
             // select 값이 부대찌개라면
             label: '밀푀유나베',
-            data: [10, 14, 11, 90, 25, 50],
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 178, 0.33)',
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 178, 0.33)',
    
             ],
             // borderWidth: 1
@@ -126,25 +126,25 @@ const myChart = new Chart(ctx, {
             type: 'bar',
             // select 값이 부대찌개라면
             label: '김치찌개',
-            data: [100, 140, 110, 90, 25, 50],
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 217, 0.59)',
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 217, 0.59)',
    
             ],
             // borderWidth: 1
            
             label: '김치찌개',
-            data: [100, 140, 110, 90, 25, 50],
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 217, 0.42)',
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 217, 0.42)',
    
             ],
         },
@@ -153,7 +153,34 @@ const myChart = new Chart(ctx, {
             type: 'bar',
             // select 값이 부대찌개라면
             label: '떡볶이',
-            data: [100, 140, 110, 90, 25, 50],
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
+            backgroundColor: [
+                'rgba(54, 121, 188, 0.75)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 121, 188, 0.75)',
+   
+            ],
+            // borderWidth: 1
+           
+            label: '떡볶이',
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
+            backgroundColor: [
+                'rgba(54, 121, 188, 0.38)',
+                
+            ],
+            borderColor: [
+                'rgba(54, 121, 188, 0.38)',
+   
+            ],
+        },
+
+        {
+            type: 'bar',
+            // select 값이 부대찌개라면
+            label: '곱창전골',
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 
@@ -164,41 +191,14 @@ const myChart = new Chart(ctx, {
             ],
             // borderWidth: 1
            
-            label: '떡볶이',
-            data: [100, 140, 110, 90, 25, 50],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
-                
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 0.2)',
-   
-            ],
-        },
-
-        {
-            type: 'bar',
-            // select 값이 부대찌개라면
             label: '곱창전골',
-            data: [100, 140, 110, 90, 25, 50],
+            data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 178, 0.79)',
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
-   
-            ],
-            // borderWidth: 1
-           
-            label: '곱창전골',
-            data: [100, 140, 110, 90, 25, 50],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
-                
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 121, 178, 0.79)',
    
             ],
         },
@@ -239,13 +239,13 @@ const ctx2 = document.getElementById('myChart2').getContext('2d');
 const myChart2 = new Chart(ctx2, {
     
     data: {
-        labels: ['월요일', '08:00~10:00', '10:00~12:00', '12:00~14:00	', '14:00~16:00', '16:00~18:00','금요일'],
+        labels: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일','금요일'],
         datasets: [
             {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '부대찌개',
-                data: [100, 140, 110, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     
@@ -256,68 +256,50 @@ const myChart2 = new Chart(ctx2, {
                 ],
                 // borderWidth: 1
                
-                label: '부대찌개',
-                data: [100, 140, 110, 90, 25, 50, 50],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-       
-                ],
+               
             },
     
             {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '밀푀유나베',
-                data: [10, 14, 11, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.33)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.33)',
        
                 ],
                 // borderWidth: 1
                
-                label: '밀푀유나베',
-                data: [10, 14, 11, 90, 25, 50, 50],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-       
-                ],
+            
             },
     
             {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '김치찌개',
-                data: [100, 140, 110, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.59)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.59)',
        
                 ],
                 // borderWidth: 1
                
                 label: '김치찌개',
-                data: [100, 140, 110, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.42)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.42)',
        
                 ],
             },
@@ -326,25 +308,25 @@ const myChart2 = new Chart(ctx2, {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '떡볶이',
-                data: [100, 140, 110, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.75)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.75)',
        
                 ],
                 // borderWidth: 1
                
                 label: '떡볶이',
-                data: [100, 140, 110, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000] ,
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.38)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.38)',
        
                 ],
             },
@@ -353,7 +335,7 @@ const myChart2 = new Chart(ctx2, {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '곱창전골',
-                data: [100, 140, 110, 90, 25, 50, 50],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     
@@ -365,13 +347,13 @@ const myChart2 = new Chart(ctx2, {
                 // borderWidth: 1
                
                 label: '곱창전골',
-                data: [100, 140, 110, 90, 25, 50, 60],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.79)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.79)',
        
                 ],
             },
@@ -410,13 +392,13 @@ const ctx3 = document.getElementById('myChart3').getContext('2d');
 const myChart3 = new Chart(ctx3, {
    
     data: {
-        labels: ['1주차', '08:00~10:00', '10:00~12:00', '4주차',],
+        labels: ['1주차', '2주차', '3주차', '4주차',],
         datasets: [
             {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '부대찌개',
-                data: [100, 140, 110, 90,],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     
@@ -427,68 +409,50 @@ const myChart3 = new Chart(ctx3, {
                 ],
                 // borderWidth: 1
                
-                label: '부대찌개',
-                data: [100, 140, 110, 90,],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-       
-                ],
+               
             },
     
             {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '밀푀유나베',
-                data: [10, 14, 11, 90,],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.33)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.33)',
        
                 ],
                 // borderWidth: 1
                
-                label: '밀푀유나베',
-                data: [10, 14, 11, 90,],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-       
-                ],
+            
             },
     
             {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '김치찌개',
-                data: [100, 140, 110, 90,],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.59)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.59)',
        
                 ],
                 // borderWidth: 1
                
                 label: '김치찌개',
-                data: [100, 140, 110, 90,],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.42)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 217, 0.42)',
        
                 ],
             },
@@ -497,25 +461,25 @@ const myChart3 = new Chart(ctx3, {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '떡볶이',
-                data: [100, 140, 110, 90, ],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.75)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.75)',
        
                 ],
                 // borderWidth: 1
                
                 label: '떡볶이',
-                data: [100, 140, 110, 90, ],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.38)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 188, 0.38)',
        
                 ],
             },
@@ -524,7 +488,7 @@ const myChart3 = new Chart(ctx3, {
                 type: 'bar',
                 // select 값이 부대찌개라면
                 label: '곱창전골',
-                data: [100, 140, 110, 90, ],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     
@@ -536,13 +500,13 @@ const myChart3 = new Chart(ctx3, {
                 // borderWidth: 1
                
                 label: '곱창전골',
-                data: [100, 140, 110, 90, ],
+                data: [Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000, Math.random()*10000,],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.79)',
                     
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 121, 178, 0.79)',
        
                 ],
             },
@@ -663,20 +627,235 @@ op1.addEventListener("change", function() {
 
 
 
-let page2 = document.querySelector("#page2")
-page2.addEventListener("click", function() {
-
-
-
-    bar1.style.display = "none"
-    bar2.style.display = "none"
-    bar3.style.display = "none"
 
 
 
 
 
-})
+
+
+
+const pie = document.getElementById('myChart4').getContext('2d');
+const pieChart = new Chart(pie, {
+    
+    data: {
+       
+        labels: ['생산율', '불량율'],
+        datasets: [
+            {
+            type: 'pie',
+            // select 값이 부대찌개라면
+            label: '부대찌개',
+            data: [20, 30],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+             
+             
+             
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+               
+             
+              
+                
+            ],
+            borderWidth: 1
+        },
+
+        {
+            type: 'pie',
+            // select 값이 부대찌개라면
+            label: '밀푀유 나베',
+            data: [40, 50],
+            backgroundColor: [
+                'rgb(93, 201, 178)',
+                
+             
+             
+                
+            ],
+            borderColor: [
+                'black',
+               
+             
+              
+                
+            ],
+            borderWidth: 1
+        },
+
+        {
+            type: 'pie',
+            // select 값이 부대찌개라면
+            label: '김치찌개',
+            data: [40, 50],
+            backgroundColor: [
+                'rgb(255, 0, 0)',
+                
+             
+             
+                
+            ],
+            borderColor: [
+                'black',
+               
+             
+              
+                
+            ],
+            borderWidth: 1
+        },
+    ]
+    },
+    options: {responsive: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+
+const doughnut = document.getElementById('myChart7').getContext('2d');
+const doughnutChart = new Chart(doughnut, {
+    type: 'doughnut',
+    data: {
+        labels: ['부대찌개', '밀푀유나베', '김치찌개', '떡볶이', '곱창전골'],
+        datasets: [{
+            label: '# of Votes',
+            data: [20, 30, 50, 25, 40],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+               
+           
+                
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                
+               
+                
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {responsive: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let bar4 = document.querySelector("#Chart4")
+let bar7 = document.querySelector("#Chart7")
+
+// let page1 = document.querySelector("#page")
+// page1.addEventListener("click", function() {
+
+
+//     bar1.style.display = "block"
+//     bar2.style.display = "none"
+//     bar3.style.display = "none"
+//     bar4.style.display = "none"
+//     bar7.style.display = "none"
+// console.log("입력")
+
+
+
+
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+// let page2 = document.querySelector("#page2")
+// page2.addEventListener("click", function() {
+
+
+
+//     bar1.style.display = "none"
+//     bar2.style.display = "none"
+//     bar3.style.display = "none"
+
+
+//     bar4.style.display = "block"
+//     bar7.style.display = "none"
+//     console.log("입력2")
+
+// })
+
+
+// let page3 = document.querySelector("#page3")
+// page3.addEventListener("click", function() {
+
+
+
+//     bar1.style.display = "none"
+//     bar2.style.display = "none"
+//     bar3.style.display = "none"
+
+
+//     bar4.style.display = "none"
+//     bar7.style.display = "block"
+
+
+// console.log("입력2")
+
+// })
+
+
+
+
+
+
+
+
+
+
+
 
 
 

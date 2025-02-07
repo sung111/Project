@@ -235,7 +235,7 @@ font-family: 'Apple SD Gothic Neo', serif;
     padding: 1%;
     position: relative;
   
-    bottom: -7%;
+    bottom: 5%;
 
 
 } 
@@ -247,13 +247,36 @@ font-family: 'Apple SD Gothic Neo', serif;
 padding: 1%;
 position: relative;
   
-bottom: -7%;
-
+bottom: 5%;
 display: none;
 
 
 } 
 
+/* #Chart4 {
+
+
+    padding: 1%;
+    position: relative;
+    left: 30%;
+    bottom: -7%;
+    display: none;
+
+}
+
+
+
+#Chart7 {
+
+
+    padding: 1%;
+    position: relative;
+    left: 30%;
+    bottom: -7%;
+    display: none;
+
+}
+ */
 
 
 
@@ -280,9 +303,9 @@ display: none;
 #set {
 
        
-    position: absolute;
-    top: -115px;
-    left: 115%;
+    position: relative;
+    top: 420px;
+    left: 1%;
     /* align-items: center; */
 
     /* display: flex; */
@@ -402,7 +425,7 @@ width: 100%;
 
 
     position: absolute;
-    bottom: 60%;
+    bottom: -20%;
 
 }
 /* 가장 맨 윗표 가리기 */
@@ -410,7 +433,7 @@ width: 100%;
 
 display: none;
 position: absolute;
-    bottom: 60%;
+    bottom: -20%;
 
 /* border: 5px solid red; */
 /* width: 500px; */
@@ -421,7 +444,7 @@ position: absolute;
 
     display: none;
     position: absolute;
-    bottom: 60%;
+    bottom: -20%;
 
     /* border: 5px solid red; */
     /* width: 500px; */
