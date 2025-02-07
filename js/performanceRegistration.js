@@ -20,7 +20,7 @@ function init() {
 
   document.querySelector('.instView').addEventListener('click', (e) => {
     // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
-    if(e.target.innerText == '수정'){
+    if (e.target.innerText == '수정') {
       const instView = document.querySelector('.instView')
       const a = instView.querySelector('.workorder-tag')
       const b = instView.querySelectorAll('.workorderlist')
@@ -28,10 +28,10 @@ function init() {
       const c = instView.querySelector('.new-workorder')
       const d = instView.querySelector('.order-buttonlayer')
       a.style.display = "none"
-      for(let i = 0 ; i<b.length ; i++){
+      for (let i = 0; i < b.length; i++) {
         b[i].style.display = "none"
       }
-      for(let i = 0 ; i<b2.length ; i++){
+      for (let i = 0; i < b2.length; i++) {
         b2[i].style.display = "none"
         // console.log(b2[i])
       }
@@ -40,12 +40,12 @@ function init() {
     }
 
     const z = e.target.parentNode.classList.contains("order-info-content")
-    if(z){
+    if (z) {
       document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
       document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
     }
 
-    if(e.target.innerText == "삭제하기"){
+    if (e.target.innerText == "삭제하기") {
       alert("현재 페이지에서 삭제하실수없습니다.")
     }
 
@@ -69,7 +69,7 @@ function init() {
         const targetBox3 = doc.querySelector('.sample');
 
         const SampleClick = doc.querySelector(".workorderlist-sample")
-        
+
         if (targetBox) {
           document.querySelector('.instView').innerHTML = targetBox.innerHTML
           document.querySelector('.instView').innerHTML += targetBox2.innerHTML
@@ -89,11 +89,77 @@ function init() {
         console.error('페이지를 불러오는 도중 에러 발생:', error);
       });
 
-    
+
 
   })
 
+  document.querySelector('.btn2').addEventListener('click', (e) => {
+    const modal = document.querySelector('#myModal')
+    const content = document.querySelector('.modal-content')
 
+
+
+    fetch('Inspection_standards.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('에러발쌩!');
+        }
+        return response.text();
+      })
+      .then(htmlString => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        const sel = doc.querySelectorAll('.standards-contain')
+        const wp = document.querySelector('.wp')
+        for (let i = 0; i < sel.length; i++) {
+          if (wp.innerText == "부대찌개") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[0].cloneNode(true));
+            modal.style.display = 'block';
+          } else if (wp.innerText == "김치찌개") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[1].cloneNode(true));
+            modal.style.display = 'block';
+
+          } else if (wp.innerText == "밀푀유나베") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[2].cloneNode(true));
+            modal.style.display = 'block';
+
+          } else if (wp.innerText == "떡볶이") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[3].cloneNode(true));
+            modal.style.display = 'block';
+          } else if (wp.innerText == "곱창전골") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[4].cloneNode(true));
+            modal.style.display = 'block';
+          }
+        }
+
+      })
+
+
+  })
+
+  document.querySelector('.modal').addEventListener('click', (e) => {
+    const closeBtn = document.querySelector(".close");
+    const modal = document.querySelector('#myModal')
+    if (e.target === closeBtn) {
+      modal.style.display = "none";
+    }
+  })
+  window.addEventListener("click", (event) => {
+    const modal = document.querySelector('#myModal')
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
 
 
@@ -170,7 +236,7 @@ function init() {
       const emdtn = e.target.parentNode.parentNode.querySelector('.emdtn').innerText
       const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
       e.target.parentNode.parentNode.innerHTML =
-      `
+        `
       <div><input type="datetime-local" class="emdskf" value="${date}"></div>
       <div class="emdwp">${emdwp}</div>
       <div><input type="text" class="emdtn" value="${emdtn}"></div>
@@ -181,7 +247,7 @@ function init() {
         <button class="cnl">취소</button>
       </div>
       `
-      
+
     }
 
     if (e.target.innerText === "취소") {

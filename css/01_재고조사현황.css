@@ -306,6 +306,8 @@ input[type="date"] {
 
 
 
+
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;  /* 세로 방향으로 정렬 */
