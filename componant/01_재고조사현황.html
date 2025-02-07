@@ -188,6 +188,18 @@
             });
 
             setupEditButtons();
+            updateActivePageButton();
+        }
+
+        function updateActivePageButton() {
+            const pageButtons = document.querySelectorAll('.pagination button:not(#prevButton):not(#nextButton)');
+            pageButtons.forEach((button, index) => {
+                if (index + 1 === currentPage) {
+                    button.classList.add('active'); // 현재 페이지에 active 클래스 추가
+                } else {
+                    button.classList.remove('active'); // 다른 페이지는 active 클래스 제거
+                }
+            });
         }
 
         function changePage(pageNumber) {
@@ -395,6 +407,23 @@
                 paginationContainer.appendChild(btn);
             }
         }
+
+        // 삭제 스크립트
+        document.addEventListener('DOMContentLoaded', function () {
+            const inventoryTableBody = document.getElementById('inventoryTableBody'); // 공백 제거
+
+            inventoryTableBody.addEventListener('click', function (event) {
+                if (event.target.classList.contains('del')) {
+                    const row = event.target.closest('tr');
+                    const confirmation = confirm('삭제 하시겠습니까?'); //확인창
+
+                    if (confirmation) {
+                        row.remove(); // 예 누르면 행 삭제
+                    }
+                    // 아니오 누르면 삭제 안 됨
+                }
+            });
+        });
 
     </script>
 </body>
