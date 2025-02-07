@@ -24,8 +24,8 @@
             여러분의 많은 참여 바랍니다!
         </div>
         <div class="button-container">
-            <button type="button" id ="list">목록으로</button>
-            <button type="button">수정</button>
+            <button type="button" id="list">목록으로</button>
+            <button type="button" id="modify">수정</button>
             <button type="button">삭제</button>
         </div>
         <div class="comment-section">
@@ -52,20 +52,49 @@
                     <button class="commentbtn" type="button">삭제</button>
                 </div>
             </div>
-            <div class="comment-section abc" >
+            <div class="comment-section abc">
                 <textarea placeholder="댓글을 입력하세요."></textarea>
                 <button type="button" class="ok">등록</button>
             </div>
         </div>
 
         <script>
-            
-            const list = document.querySelector('#list')
-            const iframe = parent.document.querySelector("iframe")
+            const list = document.querySelector('#list');
+            const iframe = parent.document.querySelector("iframe");
+
             list.addEventListener('click', function () {
                 iframe.src = "../componant/03_사내복지.html";
-            })
+            });
+
+            // 권한 확인을 위한 변수
+            const userRole = window.parent.localStorage.getItem("userRole");
+
+            // 수정 버튼 클릭 시
+            document.addEventListener("DOMContentLoaded", function () {
+                const modifyButton = document.querySelector('#modify');
+
+                // 권한이 'admin'인 경우에만 수정 가능
+                if (userRole === 'admin') {
+                    modifyButton.addEventListener('click', function () {
+                        const title = document.querySelector('.post-title').textContent;
+                        const content = document.querySelector('.post-content').textContent;
+
+                        // localStorage에 저장
+                        localStorage.setItem('postTitle', title);
+                        localStorage.setItem('postContent', content);
+
+                        // 글쓰기 페이지로 이동
+                        iframe.src = "../componant/06_글쓰기.html";
+                    });
+                } else {
+                    modifyButton.addEventListener('click', function () {
+                        alert("권한이 없습니다."); // 권한이 없을 때 경고 메시지
+                    });
+                }
+            });
+
         </script>
+    </div>
 </body>
 
 </html>

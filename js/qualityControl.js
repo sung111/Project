@@ -18,7 +18,24 @@ function init() {
 
 
   document.querySelector('.wkrView').addEventListener('click', (e) => {
+
+    const B = document.querySelectorAll('.menufacturer-info-list')
+    for(let i = 0 ; i < B.length ; i++){
+      if(e.target.parentNode.classList.contains('menufacturer-info-list')){
+        e.preventDefault();
+        e.target.blur();
+      }
+    }
+    // console.log(e.target.parentNode.parentNode)
+    if(e.target.parentNode.parentNode.classList.contains('menufacturer-info')){
+      e.preventDefault();
+      e.target.blur();
+      alert("현재 페이지에서 수정하실수없습니다.")
+    }
+
     // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
+    // e.style.display = "none"
+
     if (e.target.innerText == '수정') {
       const wkrView = document.querySelector('.wkrView')
       const a = wkrView.querySelector('.workorder-tag')
@@ -26,6 +43,9 @@ function init() {
       const b2 = wkrView.querySelectorAll('a')
       const c = wkrView.querySelector('.new-workorder')
       const d = wkrView.querySelector('.order-buttonlayer')
+
+
+
       a.style.display = "none"
       for (let i = 0; i < b.length; i++) {
         b[i].style.display = "none"
@@ -34,7 +54,7 @@ function init() {
         b2[i].style.display = "none"
         // console.log(b2[i])
       }
-      c.style.display = "block"
+      c.style.display = ""
       d.style.display = "none"
     }
 
@@ -52,6 +72,8 @@ function init() {
 
 
 
+
+
   // 작지
   document.querySelector('.btn1').addEventListener('click', (e) => {
     fetch('WorkOrder.html')
@@ -66,9 +88,7 @@ function init() {
         const targetBox = doc.querySelector('.workorder-layer');
         const targetBox2 = doc.querySelector('.workorder-pagenation');
         const targetBox3 = doc.querySelector('.sample');
-
         const SampleClick = doc.querySelector(".workorderlist-sample")
-
         if (targetBox) {
           document.querySelector('.wkrView').innerHTML = targetBox.innerHTML
           document.querySelector('.wkrView').innerHTML += targetBox2.innerHTML
@@ -78,11 +98,7 @@ function init() {
             targetBox2.style.display = "none"
             targetBox3.style.display = "block"
           })
-        } else {
-          document.querySelector('.wkrView').innerHTML = "불로오는도중 오류가발생했습니다."
         }
-
-
       })
       .catch(error => {
         console.error('페이지를 불러오는 도중 에러 발생:', error);
@@ -91,6 +107,70 @@ function init() {
 
 
   })
+
+
+  document.querySelector('.btn2').addEventListener('click', (e) => {
+    const modal = document.querySelector('#myModal')
+    const content = document.querySelector('.modal-content')
+
+    fetch('Inspection_standards.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('에러발쌩!');
+        }
+        return response.text();
+      })
+      .then(htmlString => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        const sel = doc.querySelectorAll('.standards-contain')
+        const wp = document.querySelector('.wp')
+        for (let i = 0; i < sel.length; i++) {
+          if (wp.innerText == "부대찌개") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[0].cloneNode(true));
+            modal.style.display = 'block';
+          } else if (wp.innerText == "김치찌개") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[1].cloneNode(true));
+            modal.style.display = 'block';
+
+          } else if (wp.innerText == "밀푀유나베") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[2].cloneNode(true));
+            modal.style.display = 'block';
+
+          } else if (wp.innerText == "떡볶이") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[3].cloneNode(true));
+            modal.style.display = 'block';
+          } else if (wp.innerText == "곱창전골") {
+            content.innerHTML = '';
+            content.innerHTML = '<span class="close">&times;</span>'
+            content.appendChild(sel[4].cloneNode(true));
+            modal.style.display = 'block';
+          }
+        }
+      })
+  })
+
+  document.querySelector('.modal').addEventListener('click', (e) => {
+    const closeBtn = document.querySelector(".close");
+    const modal = document.querySelector('#myModal')
+    if (e.target === closeBtn) {
+      modal.style.display = "none";
+    }
+  })
+  window.addEventListener("click", (event) => {
+    const modal = document.querySelector('#myModal')
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
 
 
@@ -139,37 +219,44 @@ function init() {
     console.log(date)
     const wp2 = document.querySelector('.wp2')
     const box3 = document.querySelector('.box3View')
-    if (ss == "합격") {
-      box3.innerHTML = `
-                        <div class="dex">
-                          <div class="dateB">${date}</div>
-                          <div class="emdwp">${wp2.innerText}</div>
-                          <div class="emdgkq">${ss}</div>
-                          <div class="tkdb"></div>
-                          <div class="text1">${textB}</div>
-                          <div>
-                            <button class="tn">수정</button>
-                            <button class="tkr">삭제</button>
+    if(wp2.innerText == "제품명"){
+      alert('제품이 선택되어있지않습니다.')
+    } else{
+      if (ss == "합격") {
+        box3.innerHTML = `
+                          <div class="dex item">
+                            <div class="dateB">${date}</div>
+                            <div class="emdwp">${wp2.innerText}</div>
+                            <div class="emdgkq">${ss}</div>
+                            <div class="tkdb"></div>
+                            <div class="text1">${textB}</div>
+                            <div>
+                              <button class="tn">수정</button>
+                              <button class="tkr">삭제</button>
+                            </div>
                           </div>
-                        </div>
-                      `+ box3.innerHTML;
-    } else {
-      box3.innerHTML = `
-                        <div class="dex">
-                          <div class="dateB">${date}</div>
-                          <div class="emdwp">${wp2.innerText}</div>
-                          <div class="emdgkq">${ss}</div>
-                          <div class="tkdb">${drop}</div>
-                          <div class="text1">${textB}</div>
-                          <div>
-                            <button class="tn">수정</button>
-                            <button class="tkr">삭제</button>
+                        `+ box3.innerHTML;
+                        renderPagination();  // 페이지네이션 업데이트
+      } else {
+        box3.innerHTML = `
+                          <div class="dex item">
+                            <div class="dateB">${date}</div>
+                            <div class="emdwp">${wp2.innerText}</div>
+                            <div class="emdgkq">${ss}</div>
+                            <div class="tkdb">${drop}</div>
+                            <div class="text1">${textB}</div>
+                            <div>
+                              <button class="tn">수정</button>
+                              <button class="tkr">삭제</button>
+                            </div>
                           </div>
-                        </div>
-                      `+ box3.innerHTML;
-
+                        `+ box3.innerHTML;
+                        renderPagination();  // 페이지네이션 업데이트
+  
+      }
+      alert("품질등록을 완료했습니다.")
     }
-    alert("품질등록을 완료했습니다.")
+    
 
   })
 
@@ -256,22 +343,17 @@ function init() {
         row.innerHTML = row.dataset.original;
       }
     }
-
-
   })
 
-  document.querySelector('.btn4').addEventListener('click', function () {
 
+  document.querySelector('.btn4').addEventListener('click', function () {
     const productSearch = document.querySelector('.wp3').value.trim().toLowerCase();
     const startD = document.querySelector('.indate1').value;
     const endD = document.querySelector('.indate2').value;
-
     const dropBoxes = document.querySelectorAll('.dropBox2');
     const resultSearch = dropBoxes[0] ? dropBoxes[0].value : "";      // 결과 (합격/불합격)
     const failReasonSearch = dropBoxes[1] ? dropBoxes[1].value : "";    // 불합격 사유
-
     const items = document.querySelectorAll('.box3View .dex');
-
     items.forEach(item => {
       let match = true;
 
@@ -322,7 +404,7 @@ function init() {
   function renderPagination() {
     // 모든 등록된 항목 선택 (.item 클래스 사용)
     const view = document.querySelector('.box3View');
-    const items = Array.from(view.querySelectorAll('.item'));
+    const items = Array.from(view.querySelectorAll('.dex'));
     const totalItems = items.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 

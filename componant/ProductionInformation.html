@@ -19,11 +19,11 @@
             <tr class="productinfo-info">
                 <td class="productinfo-info-list">
                     <div class="productinfo-info-name">LOTNO.</div>
-                    <p class="productinfo-info-completion" alt="productinfo-LOTNO"></p>
+                    <input type="text" class="productinfo-info-completion" id="lotno" alt="productinfo-LOTNO">
                 </td>
                 <td class="productinfo-info-list">
                     <div class="productinfo-info-name">단위</div>
-                    <p class="productinfo-info-completion" alt="productinfo-단위"></p>
+                    <input type="text" class="productinfo-info-completion" id="danwi" alt="productinfo-단위">
                 </td>
                 <td class="productinfo-info-list">
                     <div class="productinfo-info-name">품명[규격]</div>
@@ -72,7 +72,7 @@
             <tr class="check-info-buttoncontainer">
                 <td class="check-info-buttonlayer">
                     <input type="submit" class="check-info-registration" value="등록">
-                    <button type="button" class="check-info-delete">삭제</button>
+                    <!-- <button type="button" class="check-info-delete">삭제</button> -->
                     <button type="button" class="check-info-close">취소</button>
                 </td>
             </tr>
@@ -154,10 +154,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let foundItem = product.find(item => item.제품명 === query);
 
         if (foundItem) {
-            lotnoField.textContent = foundItem.LotNo; // LOTNO 업데이트
-            unitField.textContent = foundItem.단위; // 단위 업데이트
+            lotnoField.value = foundItem.LotNo; 
+            unitField.value = foundItem.단위; 
         } else {
-            alert("해당 제품을 찾을 수 없습니다."); // 제품이 없을 경우 경고
+            alert("해당 제품을 찾을 수 없습니다."); 
         }
     });
 
@@ -190,8 +190,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     registerButton.addEventListener("click", function () {
         // 입력된 데이터 가져오기
-        const lotno = document.querySelector('[alt="productinfo-LOTNO"]').textContent.trim();
-        const unit = document.querySelector('[alt="productinfo-단위"]').textContent.trim();
+        const lotno = document.querySelector('[alt="productinfo-LOTNO"]').value.trim();
+        const unit = document.querySelector('[alt="productinfo-단위"]').value.trim();
         const productName = document.querySelector(".productinfo-info-productname").value.trim();
         const quantity = document.querySelector('[alt="productinfo-제작수량"]').value.trim();
         const startDate = document.querySelector('[alt="productinfo-입고날짜"]').value.trim();
@@ -204,13 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // 기존 데이터 불러오기
-        let workOrders = JSON.parse(sessionStorage.getItem("workOrders")) || [];
+        let workOrders = JSON.parse(localStorage.getItem("workOrders")) || [];
 
         // 새로운 데이터 추가
         workOrders.push({ lotno, unit, productName, quantity, startDate, endDate });
 
         // 업데이트된 데이터 저장
-        sessionStorage.setItem("workOrders", JSON.stringify(workOrders));
+        localStorage.setItem("workOrders", JSON.stringify(workOrders));
 
         // NewWorkorder.html로 이동
         window.parent.document.querySelector("iframe").src = "componant/NewWorkorder.html";

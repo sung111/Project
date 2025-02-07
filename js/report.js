@@ -2,23 +2,23 @@
 let second = document.querySelector("#second")
 let third = document.querySelector("#third")
 
-let fix = document.querySelector("#fix")
-let regi = document.querySelector("#regi")
-let del = document.querySelector("#del")
-del.addEventListener("click", function() {
- alert("보고서가 삭제되었습니다")
+// let fix = document.querySelector("#fix")
+// let regi = document.querySelector("#regi")
+// let del = document.querySelector("#del")
+// del.addEventListener("click", function() {
+//  alert("보고서가 삭제되었습니다")
 
-})
+// })
 
-regi.addEventListener("click", function() {
-    alert("보고서가 등록되었습니다")
+// regi.addEventListener("click", function() {
+//     alert("보고서가 등록되었습니다")
    
-   })
+//    })
 
-   fix.addEventListener("click", function() {
-    alert("보고서가 수정되었습니다")
+//    fix.addEventListener("click", function() {
+//     alert("보고서가 수정되었습니다")
    
-   })
+//    })
 
    
    
@@ -187,23 +187,23 @@ let but1 = document.querySelector("#dadd")
 let but2 = document.querySelector("#but2") 
 let but3 = document.querySelector("#but3") 
 
-but1.addEventListener("click", function() {
+// but1.addEventListener("click", function() {
 
 
-console.log("차트추가")
-//라벨추가
-config.data.labels.push('밀푀유나베'+config.data.labels.length)
+// console.log("차트추가")
+// //라벨추가
+// config.data.labels.push('밀푀유나베'+config.data.labels.length)
 		
-//데이터셋 수 만큼 반복
-var dataset = config.data.datasets;
-for(var i=0; i<dataset.length; i++){
-    //데이터셋의 데이터 추가
-    dataset[i].data.push(100, 140, 110, 90, 25, 50);
-}
-myChart.update();	//차트 업데이트
+// //데이터셋 수 만큼 반복
+// var dataset = config.data.datasets;
+// for(var i=0; i<dataset.length; i++){
+//     //데이터셋의 데이터 추가
+//     dataset[i].data.push(100, 140, 110, 90, 25, 50);
+// }
+// myChart.update();	//차트 업데이트
 
 
-})
+// })
 
 
 
@@ -243,9 +243,9 @@ op1.addEventListener("change", function() {
         bar2.style.display = "none"
         bar3.style.display = "none"
         
-        but1.style.display = "block"
-        but2.style.display = "none"
-        but3.style.display = "none"
+        // but1.style.display = "block"
+        // but2.style.display = "none"
+        // but3.style.display = "none"
 
             break;
         
@@ -260,9 +260,9 @@ op1.addEventListener("change", function() {
         bar2.style.display = "block"
         bar3.style.display = "none"
 
-        but1.style.display = "none"
-        but2.style.display = "block"
-        but3.style.display = "none"
+        // but1.style.display = "none"
+        // but2.style.display = "block"
+        // but3.style.display = "none"
             break;
             // 월간 . 주간. 일간으로 바꿨을때도 표 사라지게 하기
 
@@ -279,9 +279,9 @@ op1.addEventListener("change", function() {
         bar2.style.display = "none"
         bar3.style.display = "block"
         
-        but1.style.display = "none"
-        but2.style.display = "none"
-        but3.style.display = "block"
+        // but1.style.display = "none"
+        // but2.style.display = "none"
+        // but3.style.display = "block"
         console.log(but3)
             break;
     

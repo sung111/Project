@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/perform.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </head>
 <body class="perform">
     
@@ -19,53 +16,140 @@
         <option>주간</option>
         <option>월간</option> -->
     
-            <div id="sch">
-            <select id="sel">
-            <option id="daily">일간</option>
-            <option id="week">주간</option>
-            <option id="month">월간</option>
-            </select>
-    
-            
-            <div id="cal">
-            <input type="date" id="date" value="2025-02-03" name="날짜선택">
-            <input type="week" id="weeks" value="2025-02-03" name="날짜선택">
-            <input type="month" id="months" value="2025-02-03" name="날짜선택">
-            <!-- <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> -->
-            </div>    
-            </div>
+         
 
             
-            <li>실적 확인표</li>
+            <!-- <li>실적 확인표</li> -->
 
             </nav>
 
 
                 
 
-            <div id="cor">
-                <button id="del">삭제</button>
-                <button id="fix">수정</button>
+                <div id="cor">
+                <!-- <button id="del">삭제</button>
+                <button id="fix">수정</button> -->
                 <!-- <button id="join">등록</button> -->
+                    <div id="sch">
+                    <select id="sel">
+                    <option id="daily">일간</option>
+                    <option id="week">주간</option>
+                    <option id="month">월간</option>
+                    </select>
+            
+                    
+                    <div id="cal">
+                    <input type="date" id="date" value="2025-02-03" name="날짜선택">
+                    <input type="week" id="weeks" value="2025-02-03" name="날짜선택">
+                    <input type="month" id="months" value="2025-02-03" name="날짜선택">
+                    </div>  
+                    </div>
+                
+
+
+
+
+
+
+
+
 
                 
-                <div id="set">
+
+
+
+
+
+
+                    <div id="set">
                     <input type="text" id="text">
                     <button id="sele">조회</button>
                     </div>
+
+
                 </div>
 
 
-                    
-          
+            
+                
+
+
+
+                
+           <!-- 일간 차트 -->
+           <div id="Chart1">
+
+                   
+
+            <canvas id="myChart" width="1120%" height="450%"></canvas>
+            </div>
+
+
+
+
+            
+             <!-- 주간 차트 -->
+            <div id="Chart2">
+
+                <!-- <div id="but2">
+                <button id="dadd2">데이터 추가</button>
+                <button id="ddel2">데이터 삭제</button>
+                </div> -->
+
+            <canvas id="myChart2" width="1120%" height="450%"></canvas>
+            </div>
+
+
+
+
+            
+             <!-- 월간 차트 -->
+            <div id="Chart3">
+
+            <!-- <div id="but3">
+                <button id="dadd3">데이터 추가</button>
+                <button id="ddel3">데이터 삭제</button>
+            </div> -->
+
+            
+            <canvas id="myChart3" width="1120%" height="450%"></canvas>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             <div style="overflow-x:auto;">
                 <br><br><br>
-                <table border="1" id="first" 
+                <table border="1" id="first">
                     <thead>
                         <tr>
-                            <th class="daytime"></th>
+                            <th class="daytime">완제품명</th>
                             <th class="daytime">06:00~08:00</th>
                             <th class="daytime">08:00~10:00</th>
                             <th class="daytime">10:00~12:00</th>
@@ -81,7 +165,7 @@
 
 
                             <tr id="budae1">
-                                <td>부대찌개</td>
+                                <td class="name">부대찌개</td>
                                 <td>100</td>
                                 <td>835</td>
                                 <td>445</td>
@@ -91,7 +175,7 @@
                             </tr>
 
                             <tr id="nabe1">
-                                <td >밀푀유 나베</td>
+                                <td class="name">밀푀유 나베</td>
                                 <td>626</td>
                                 <td>835</td>
                                 <td>445</td>
@@ -102,7 +186,7 @@
                             </tr>
 
                             <tr id="kimchi1">
-                                <td>김치찌개</td>
+                                <td class="name">김치찌개</td>
                                 <td>626</td>
                                 <td>835</td>
                                 <td>445</td>
@@ -113,7 +197,7 @@
                             </tr>
 
                             <tr id="ttuk1">
-                                <td>떡볶이</td>
+                                <td class="name">떡볶이</td>
                                 <td>626</td>
                                 <td>835</td>
                                 <td>445</td>
@@ -124,7 +208,7 @@
                             </tr>
 
                             <tr id="ggop1">
-                                <td>곱창전골</td>
+                                <td class="name">곱창전골</td>
                                 <td>626</td>
                                 <td>835</td>
                                 <td>445</td>
@@ -170,7 +254,7 @@
                    <table border=1 id="second">
                     <thead>
               <tr>
-                  <th class="wektime"></th>
+                  <th class="wektime">완제품명</th>
                   <th class="wektime">월요일</th>
                   <th class="wektime">화요일</th>
                   <th class="wektime">수요일</th>
@@ -182,7 +266,7 @@
                    </thead>
                    <tbody>
                     <tr id="budae2">
-                        <td >부대찌개</td>
+                        <td class="name">부대찌개</td>
                         <td >200</td>
                         <td >835</td>
                         <td >445</td>
@@ -193,7 +277,7 @@
                         
                 </tr>
                 <tr id="nabe2">
-                    <td >밀푀유나베</td>
+                    <td class="name">밀푀유나베</td>
                     <td >626</td>
                     <td >835</td>
                     <td >445</td>
@@ -204,7 +288,7 @@
                     
             </tr>
             <tr id="kimchi2">
-                <td >김치찌개</td>
+                <td class="name">김치찌개</td>
                 <td >626</td>
                 <td >835</td>
                 <td >445</td>
@@ -215,7 +299,7 @@
                 
         </tr>
         <tr id="ttuk2">
-            <td >떡볶이</td>
+            <td class="name">떡볶이</td>
             <td >626</td>
             <td >835</td>
             <td >445</td>
@@ -226,7 +310,7 @@
             
     </tr>
     <tr id="ggop2">
-        <td >곱창전골</td>
+        <td class="name">곱창전골</td>
         <td >626</td>
         <td >835</td>
         <td >445</td>
@@ -248,7 +332,7 @@
                    <table border="1" id="third">
                     <thead>
                         <tr>
-                            <th class="montime"></th>
+                            <th class="montime">완제품명</th>
                             <th class="montime">1주차</th>
                             <th class="montime">2주차</th>
                             <th class="montime">3주차</th>
@@ -257,7 +341,7 @@
                     </thead>
                     <tbody>
                         <tr id="budae3">
-                                <td >부대찌개</td>
+                                <td class="name">부대찌개</td>
                                 <td >400</td>
                                 <td >835</td>
                                 <td >445</td>
@@ -265,7 +349,7 @@
                                 
                         </tr>
                         <tr id="nabe3">
-                            <td >밀푀유나베</td>
+                            <td class="name">밀푀유나베</td>
                             <td >626</td>
                             <td >835</td>
                             <td >445</td>
@@ -273,7 +357,7 @@
                             
                     </tr>
                     <tr id="kimchi3">
-                        <td >김치찌개</td>
+                        <td class="name">김치찌개</td>
                         <td >626</td>
                         <td >835</td>
                         <td >445</td>
@@ -281,7 +365,7 @@
                         
                 </tr>
                 <tr id="ttuk3">
-                    <td >떡볶이</td>
+                    <td class="name">떡볶이</td>
                     <td >626</td>
                     <td >835</td>
                     <td >445</td>
@@ -289,7 +373,7 @@
                     
             </tr>
             <tr id="ggop3">
-                <td >곱창전골</td>
+                <td class="name">곱창전골</td>
                 <td >626</td>
                 <td >835</td>
                 <td >445</td>
@@ -310,7 +394,14 @@
             <button>등록</button> -->
 </body>
 <footer>
-          <div id="page">1 &nbsp; 2</div>
+          <!-- <button id="page">1</button> &nbsp; <button id="page2">2</a></button> &nbsp; <button id="page3">3</a></button>
+          &nbsp; <button id="page4">4</a></button>  -->
+
+
+
+         
+
+
 </footer>
 <script src="../js/perform.js"></script>
 
