@@ -31,7 +31,7 @@
 }
 /* 리스트 CSS */
 .workorderlist-content{
-    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #d9d9d9; text-align: center;
+    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #dcdcdc; text-align: center;
 }
 .workorderlist-productplancalc, .workorderlist-name{
     width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
@@ -43,7 +43,7 @@
     color: #007bff;
 }
 .workorderlist-content2{
-    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #d9d9d9; text-align: center;
+    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #dcdcdc; text-align: center;
 }
 /* 하단 레이어 */
 .workorder-page{
