@@ -109,7 +109,7 @@
 
             th,
             td {
-                font-size: 12px;
+                font-size: 10px;
             }
             .btn-parent{
                 display: flex;
@@ -119,8 +119,32 @@
                 height: 30px;
                 font-size: 5px;
             }
-
-
+          .ctext{
+            width: 60px;
+            font-size: 8px;
+          }
+          .cfile{
+           
+            margin: 0;
+            /* width: 20px; */
+            font-size: 6px;
+          }
+          #jeapoom{
+            width: 20px;
+          }
+          .cselct{
+            width: 20px;
+          }
+          table{
+            width: 100%;
+          }
+          body{
+            margin: 0px;
+          }
+          #chang{
+            width: 50px;
+          }
+        
         }
     </style>
 </head>
@@ -142,8 +166,8 @@
                     <th id="name">완제품 이름</th>
                     <th>품번</th>
                     <th>유통기한</th>
-                    <th>보관 창고</th>
-                    <th>완제품 이미지</th>
+                    <th id="chang">보관 창고</th>
+                    <th id="jeapoom">완제품 이미지</th>
                     <th>수정 / 삭제</th>
                 </tr>
             </thead>
@@ -277,7 +301,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="value move">곱창전골</div>
+                        <div class="value move">떡볶이</div>
                         <select name="" class="cselct on ">
                             <option value="부대찌개">부대찌개</option>
                             <option value="김치찌개">김치찌개</option>
@@ -287,18 +311,16 @@
                         </select>
                     </td>
                     <td>
-                        <div>P005</div>
+                        <div>P004</div>
                     </td>
                     <td>
-                        <div class="value hide">포장후 10일이내</div><input type="text" value="포장후 10일이내"
-                            class="ctext show on ">
+                        <div class="value hide">포장후 15일이내</div><input type="text" value="포장후 15일이내"
+                            class="ctext on show">
                     </td>
                     <td>
-                        <div class="value hide">상온</div> <input type="text" value="상온" class="ctext show on show">
+                        <div class="value hide">냉장</div> <input type="text" value="냉장" class="ctext on show">
                     </td>
-                    <td><img src="/img/Gopchanghotpot.png" alt="곱창전골" class="hide"><input type="file"
-                            class="cfile on show">
-                    </td>
+                    <td><img src="/img/tteokbokki.png" alt="떡볶이" class="imgg"><input type="file" class="cfile on "></td>
                     <td>
                         <div class="btn-parent">
                             <button class="btn btn-edit">수정</button>
@@ -394,17 +416,17 @@
             let edits = document.querySelectorAll(".btn-edit")
             for (let i = 0; i < edits.length; i++) {
                 edits[i].addEventListener("click", function (e) {
-                    console.log(e.target.parentNode.parentNode.querySelectorAll(".on"))
-                    let ons = e.target.parentNode.parentNode.querySelectorAll(".on")
-                    let values = e.target.parentNode.parentNode.querySelectorAll(".value")
-                    let imgg = e.target.parentNode.parentNode.querySelector(".imgg")
-                    let show = e.target.parentNode.parentNode.querySelectorAll(".show")
+                    console.log(e.target.parentNode.parentNode.parentNode.querySelectorAll(".on"))
+                    let ons = e.target.parentNode.parentNode.parentNode.querySelectorAll(".on")
+                    let values = e.target.parentNode.parentNode.parentNode.querySelectorAll(".value")
+                    let imgg = e.target.parentNode.parentNode.parentNode.querySelectorAll(".imgg")
+                    console.log(e.target.parentNode.parentNode.parentNode.querySelectorAll(".imgg"))
+                    let show = e.target.parentNode.parentNode.parentNode.querySelectorAll(".show")
                     // console.log(e.target.parentNode.parentNode.querySelectorAll(".show"))
                     // console.log(e.target.parentNode.parentNode.querySelectorAll(".hide"))
-                    let hide = e.target.parentNode.parentNode.querySelectorAll(".hide")
-                    let cselct = e.target.parentNode.parentNode.querySelector(".cselct")
-                    let move = e.target.parentNode.parentNode.querySelector(".move")
-                    console.log(e.target.parentNode.parentNode.querySelector(".imgg"))
+                    let hide = e.target.parentNode.parentNode.parentNode.querySelectorAll(".hide")
+                    let cselct = e.target.parentNode.parentNode.parentNode.querySelector(".cselct")
+                    let move = e.target.parentNode.parentNode.parentNode.querySelector(".move")
                     for (let a = 0; a < ons.length; a++) {
                         ons[a].classList.remove("none")
                     }
@@ -412,16 +434,19 @@
 
                         values[a].classList.add("nonemove")
                     }
-                    imgg.classList.add("none")
+                    for (let a = 0; a < imgg.length; a++) {
+                        imgg[a].classList.add("none")
+                        
+                    }
                     // console.log(e.target)
                     // console.log(e.target.parentNode.querySelector(".btn-delete"))
 
                     e.target.classList.add("none")
-                    e.target.parentNode.querySelector(".btn-delete").classList.add("none")
-                    e.target.parentNode.querySelector(".btn-ok").classList.remove("none")
-                    e.target.parentNode.querySelector(".btn-del").classList.remove("none")
+                    e.target.parentNode.parentNode.parentNode.querySelector(".btn-delete").classList.add("none")
+                    e.target.parentNode.parentNode.parentNode.querySelector(".btn-ok").classList.remove("none")
+                    e.target.parentNode.parentNode.parentNode.querySelector(".btn-del").classList.remove("none")
                     //-----------------------확인버튼-------------------
-                    e.target.parentNode.querySelector(".btn-ok").addEventListener("click", function () {
+                    e.target.parentNode.parentNode.querySelector(".btn-ok").addEventListener("click", function () {
 
                         for (let a = 0; a < ons.length; a++) {
                             ons[a].classList.add("none")
@@ -436,9 +461,10 @@
                         }
                         move.innerText = cselct.value
                         e.target.classList.remove("none")
-                        e.target.parentNode.querySelector(".btn-delete").classList.remove("none")
-                        e.target.parentNode.querySelector(".btn-ok").classList.add("none")
-                        e.target.parentNode.querySelector(".btn-del").classList.add("none")
+                        e.target.parentNode.parentNode.parentNode.querySelector(".cfile").classList.remove("none")
+                        e.target.parentNode.parentNode.querySelector(".btn-delete").classList.remove("none")
+                        e.target.parentNode.parentNode.querySelector(".btn-ok").classList.add("none")
+                        e.target.parentNode.parentNode.querySelector(".btn-del").classList.add("none")
 
                     })
                     e.target.parentNode.querySelector(".btn-del").addEventListener("click", function () {
@@ -449,11 +475,15 @@
 
                             values[a].classList.remove("nonemove")
                         }
-                        imgg.classList.remove("none")
+                        for (let a = 0; a < imgg.length; a++) {
+
+                            imgg[a].classList.add("none")
+                        }
+                        console.log()
                         e.target.classList.remove("none")
-                        e.target.parentNode.querySelector(".btn-delete").classList.remove("none")
-                        e.target.parentNode.querySelector(".btn-ok").classList.add("none")
-                        e.target.parentNode.querySelector(".btn-del").classList.add("none")
+                        e.target.parentNode.parentNode.parentNode.querySelector(".btn-delete").classList.remove("none")
+                        e.target.parentNode.parentNode.parentNode.querySelector(".btn-ok").classList.add("none")
+                        e.target.parentNode.parentNode.parentNode.querySelector(".btn-del").classList.add("none")
                     })
 
                 })
@@ -463,7 +493,7 @@
             for (let i = 0; i < dels.length; i++) {
                 dels[i].addEventListener("click", function (e) {
                     console.log(e.target.parentNode.parentNode)
-                    e.target.parentNode.parentNode.remove();
+                    e.target.parentNode.parentNode.parentNode.remove();
                 })
             }
             //----------------
