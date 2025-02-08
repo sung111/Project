@@ -69,6 +69,7 @@ margin-left: 20%;
     padding: 3%;
     /* background-color: lightgray; */
     margin-left: 3%;
+   
 }
 
 #sel {
@@ -87,3 +88,49 @@ margin-left: 20%;
     padding: 3%;
     
 }
+
+#mcset {
+
+    display: none;
+}
+
+#mcset2 {
+
+    display: none;
+}
+
+#pieset {
+
+    display: none;
+}
+
+#pieset2 {
+
+    display: none;
+}
+
+#pieset3 {
+
+    display: none;
+}
+
+#pieset4 {
+
+    display: none;
+}
+
+#doughset {
+
+    display: none;
+}
+
+#doughset2 {
+
+    display: none;
+}
+
+/* #setting {
+
+     width: 90%;
+    height: 10px;
+} */
