@@ -52,8 +52,9 @@ margin-top: -1%;
 #Pie {
     
 padding: 3%;
+margin-left: -2%;
 /* display: none; */
-
+margin-top: -4%;
 
 }
 
@@ -68,6 +69,19 @@ margin-left: 20%;
     
     padding: 3%;
     /* background-color: lightgray; */
+    margin-left: 1%;
+    margin-top: -4%;
+   
+}
+
+#doughnut2 {
+    
+ 
+    margin-left: 3%;
+}
+
+#doughnut3 {
+    
     margin-left: 3%;
    
 }
