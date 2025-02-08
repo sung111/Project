@@ -10,7 +10,7 @@
             margin: 0 auto;
             padding: 0;
             width: 95vw;
-            background-color: #d9d9d9;
+  
         }
 
         .de {
@@ -135,7 +135,7 @@
             }
         }
         #header-bacor{
-            background-color: #007bff;
+            /* background-color: #007bff; */
             border-radius: 20px;
             padding-top: 1px;
             height: 150px;
@@ -170,7 +170,7 @@
     <style>
         #standards-top {
 
-            border: 1px solid red;
+          
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -180,7 +180,7 @@
         .standards-contain {
 
             border: 1px solid #007bff;
-            ;
+            
             border-radius: 20px;
             margin: 10px;
             width: 45%;
@@ -190,7 +190,7 @@
 
         .standards-imege-contain {
             width: 100%;
-            border: 1px solid blue;
+            /* border: 1px solid blue; */
             text-align: center;
 
         }
@@ -210,7 +210,7 @@
 
         .standards-font-charild {
             padding: 2px;
-            border: 1px solid black;
+          
             width:95%;
             height: 220px;
             text-align: start;
@@ -366,7 +366,7 @@
     </div>
     </div>
 
-    <h1>검사기준</h1>
+
 
     <div id="standards-top">
 
@@ -416,6 +416,12 @@
                     </div>
                 </div>
             </div>
+            <div class="btncenter">
+                <input type="button" value="수정"class="btn u">
+                <input type="button" value="삭제"class="btn d">
+                <input type="button" value="확인"class="btn ok">
+                <input type="button" value="취소"class="btn can">
+            </div>
         </div>
 
 
@@ -463,6 +469,12 @@
 
                     </div>
                 </div>
+            </div>
+            <div class="btncenter">
+                <input type="button" value="수정"class="btn u">
+                <input type="button" value="삭제"class="btn d">
+                <input type="button" value="확인"class="btn ok">
+                <input type="button" value="취소"class="btn can">
             </div>
         </div>
 
@@ -512,6 +524,12 @@
 
                     </div>
                 </div>
+            </div>
+            <div class="btncenter">
+                <input type="button" value="수정"class="btn u">
+                <input type="button" value="삭제"class="btn d">
+                <input type="button" value="확인"class="btn ok">
+                <input type="button" value="취소"class="btn can">
             </div>
         </div>
 
@@ -563,6 +581,12 @@
                     </div>
                 </div>
             </div>
+            <div class="btncenter">
+                <input type="button" value="수정"class="btn u">
+                <input type="button" value="삭제"class="btn d">
+                <input type="button" value="확인"class="btn ok">
+                <input type="button" value="취소"class="btn can">
+            </div>
         </div>
 
 
@@ -612,6 +636,12 @@
                     </div>
                 </div>
             </div>
+            <div class="btncenter">
+                <input type="button" value="수정"class="btn u">
+                <input type="button" value="삭제"class="btn d">
+                <input type="button" value="확인"class="btn ok">
+                <input type="button" value="취소"class="btn can">
+            </div>
         </div>
 
 
@@ -649,8 +679,8 @@
 
             })
 
-            let btnok = document.querySelectorAll(".btn.ok")
-            let btncan = document.querySelectorAll(".btn.can")
+            let btnok = document.querySelectorAll(" .ok")
+            let btncan = document.querySelectorAll(".can")
             for (let i = 0; i < btnok.length; i++) {
                 btnok[i].classList.add("none")
                 btncan[i].classList.add("none")
