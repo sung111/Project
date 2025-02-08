@@ -10,7 +10,6 @@ body {
 
 
 
-
     .perform {
 
 
@@ -36,7 +35,7 @@ margin-top: -1%;
     padding: 2%;
     display: flex;
     margin-left: 15%;
-    margin-top: 10%;
+    margin-top: 8%;
 }
 
 #ocu {
@@ -48,6 +47,8 @@ margin-top: -1%;
     
     
 }
+
+
 
 #Pie {
     
@@ -64,6 +65,10 @@ margin-left: 20%;
 /* width: 100%; */
 
 }
+
+
+
+
 
 #doughnut {
     
@@ -103,6 +108,13 @@ margin-left: 20%;
     
 }
 
+
+
+
+
+
+
+
 #mcset {
 
     display: none;
@@ -113,6 +125,12 @@ margin-left: 20%;
     display: none;
 }
 
+
+
+#piesets {
+
+    display: none;
+}
 #pieset {
 
     display: none;
@@ -132,6 +150,13 @@ margin-left: 20%;
 
     display: none;
 }
+
+
+
+
+
+
+
 
 #doughset {
 

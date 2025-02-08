@@ -65,12 +65,12 @@ const config = (ctx, {
                 25,
                ],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                '#9A2EFE',
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                '#9A2EFE',
                
                 
             ],
@@ -89,12 +89,12 @@ const config = (ctx, {
                 89,
                ],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
                
                 
             ],
@@ -113,12 +113,12 @@ const config = (ctx, {
                 67,
                ],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 99, 132)',
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 99, 132)',
                
                 
             ],
@@ -202,28 +202,48 @@ const config = (ctx, {
 
 
 
-
-document.getElementById('doughnut').style.display = 'none';
-document.getElementById('Pie').style.display = 'none';
-let Pies= document.querySelector('#Pie')
-Pies.classList.add("Pie")
-
+let donut = document.getElementById('doughsets')
+donut.style.display = 'none';
+let doh2 = document.getElementById('doughset')
+let doh3 = document.getElementById('doughset2')
 
 
 
-let donut = document.getElementById('doughnut')
+
 let sel = document.getElementById('sel')
 
 
 
 
+// document.getElementById('Pie').style.display = 'none';
+// document.getElementById('Pie2').style.display = 'none';
+// document.getElementById('Pie3').style.display = 'none';
+// document.getElementById('Pie4').style.display = 'none';
+// document.getElementById('Pie5').style.display = 'none';
+
+
+// let Pies= document.querySelector('#Pie')
+// Pies.classList.add("Pie")
+
+// let Pies2 = document.querySelector("#Pie2")
+// let Pies3 = document.querySelector("#Pie3")
+// let Pies4 = document.querySelector("#Pie4")
+// let Pies5 = document.querySelector("#Pie5")
+
+let setpies = document.getElementById('piesets')
+let setpie = document.getElementById('pieset')
+let setpie2 = document.getElementById('pieset2')
+let setpie3 = document.getElementById('pieset3')
+let setpie4 = document.getElementById('pieset4')
 
 
 
 
-let mineChart = document.querySelector("#myChart")
+let mineChart = document.querySelector("#setting")
 let mineChart2 = document.querySelector("#mcset")
 let mineChart3 = document.querySelector("#mcset2")
+
+
 
 // sel.addEventListener("change", function(){
 
@@ -320,12 +340,14 @@ const config2 = (ctx2, {
                 76,
                 24,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                '#9A2EFE',
+                
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                '#9A2EFE',
+                
                
                 
             ],
@@ -343,12 +365,12 @@ const config2 = (ctx2, {
                 76,
                 48,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
                
                 
             ],
@@ -366,12 +388,12 @@ const config2 = (ctx2, {
                 48,
                 24,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 99, 132)'
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 99, 132)'
                
                 
             ],
@@ -386,7 +408,7 @@ const config2 = (ctx2, {
     
 
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
             y: {
                 beginAtZero: true
@@ -463,12 +485,12 @@ const config3 = (ctx3, {
                 
                 ],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                '#9A2EFE',
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                '#9A2EFE',
                
                 
             ],
@@ -486,12 +508,12 @@ const config3 = (ctx3, {
               
                 ],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+               'rgb(54, 162, 235)'
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
                
                 
             ],
@@ -510,12 +532,12 @@ const config3 = (ctx3, {
                 
                 ],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 99, 132)',
                 
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 99, 132)',
                
                 
             ],
@@ -530,7 +552,7 @@ const config3 = (ctx3, {
     
 
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
             y: {
                 beginAtZero: true
@@ -585,12 +607,17 @@ reData.addEventListener("change", function(){
     myChart2.update();
     myChart3.update();
     
-    document.getElementById('doughnut').style.display = 'none';
-    mineChart.style.display = 'block'
-      
-    document.getElementById('Pie').style.display = 'none';
-    
 
+
+
+
+    // document.getElementById('doughnut').style.display = 'none';
+    // mineChart.style.display = 'block'
+    // document.getElementById('Pie').style.display = 'none';
+    
+    // donut.style.display = 'none'
+    // doh2.style.display = 'none'
+    // doh3.style.display = 'none'
 
 
     // const selectValue = reData.value;
@@ -598,10 +625,14 @@ reData.addEventListener("change", function(){
     // updateChart(selectValue);
 
 
+     // pies로 해야함
+    
 
-
-
-
+    //  pies.style.display = 'none'
+    //  document.querySelector("#Pie2").style.display = 'block'
+    //  document.querySelector("#Pie3").style.display = 'block'
+    //  document.querySelector("#Pie4").style.display = 'block'
+    //  document.querySelector("#Pie5").style.display = 'block'
 
 
     switch(this.value) {
@@ -613,8 +644,19 @@ reData.addEventListener("change", function(){
           mineChart2.style.display = 'none'
            mineChart3.style.display = 'none'
 
-             setpie.style.display = 'none'
-          setpie2.style.display = 'none'
+
+           donut.style.display = 'none'
+           doh2.style.display = 'none'
+         doh3.style.display = 'none'
+
+
+
+           setpies.style.display = 'none'
+           setpie.style.display = 'none'
+           setpie2.style.display =  'none'
+           setpie3.style.display = 'none'
+         setpie4.style.display = 'none'
+            
         break;
 
 
@@ -630,9 +672,19 @@ reData.addEventListener("change", function(){
             mineChart2.style.display = 'block'
              mineChart3.style.display = 'none'
 
-               setpie.style.display = 'none'
-          setpie2.style.display = 'none'
-        
+
+             donut.style.display = 'none'
+             doh2.style.display = 'none'
+           doh3.style.display = 'none'
+
+
+           setpies.style.display = 'none'
+           setpie.style.display = 'none'
+           setpie2.style.display =  'none'
+           setpie3.style.display = 'none'
+         setpie4.style.display = 'none'
+            
+            
         break;
 
 
@@ -649,8 +701,17 @@ reData.addEventListener("change", function(){
             mineChart2.style.display = 'none'
              mineChart3.style.display = 'block'
 
-               setpie.style.display = 'none'
-          setpie2.style.display = 'none'
+             donut.style.display = 'none'
+             doh2.style.display = 'none'
+           doh3.style.display = 'none'
+
+           setpies.style.display = 'none'
+           setpie.style.display = 'none'
+           setpie2.style.display =  'none'
+           setpie3.style.display = 'none'
+         setpie4.style.display = 'none'
+            
+            
         break;
 
 
@@ -802,7 +863,8 @@ const pieChart = new Chart(pie, {
             label: '부대찌개',
             data: [95, 5,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
              
              
              
@@ -843,7 +905,8 @@ const pieChart2 = new Chart(pie2, {
             label: '밀푀유나베',
             data: [90, 10,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
              
              
              
@@ -884,7 +947,8 @@ const pieChart3 = new Chart(pie3, {
             label: '김치찌개',
             data: [80, 20,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
              
              
              
@@ -925,7 +989,8 @@ const pieChart4 = new Chart(pie4, {
             label: '떡볶이',
             data: [50, 50,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
              
              
              
@@ -963,17 +1028,18 @@ const pieChart5 = new Chart(pie5, {
             {
             type: 'pie',
             // select 값이 부대찌개라면
-            label: '곱창전골',
+            label: ['생산율'],
             data: [70, 30,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
-             
-             
+                
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
              
                 
             ],
             borderColor: [
-                'rgba(54, 162, 235, 1)',
+                'rgba(0, 105, 155, 0.29)',
+              
                
              
               
@@ -996,18 +1062,17 @@ const pieChart5 = new Chart(pie5, {
 
 
 
-let setpie = document.getElementById('pieset')
-let setpie2 = document.getElementById('pieset2')
-let setpie3 = document.getElementById('pieset3')
-let setpie4 = document.getElementById('pieset4')
+
 sel.addEventListener("change", function(){
 
     console.log("확인과 연락")
-    let pies = document.getElementById('Pie')
-    pies.style.display = 'block';
-    
-    mineChart.style.display = 'none'
-    document.getElementById('doughnut').style.display = 'none';
+    // let pies = document.getElementById('Pie')
+    // pies.style.display = 'block';
+    //  document.querySelector("#Pie2").style.display = 'block'
+    //  document.querySelector("#Pie3").style.display = 'block'
+    //  document.querySelector("#Pie4").style.display = 'block'
+    //  document.querySelector("#Pie5").style.display = 'block'
+  
 
 
 
@@ -1017,11 +1082,19 @@ sel.addEventListener("change", function(){
 
         case "월별 생산율과 불량율 : 부대찌개":
         console.log("안녕하세요")
-        pies.style.display = 'block'
+          setpies.style.display = 'block'
           setpie.style.display = 'none'
           setpie2.style.display = 'none'
           setpie3.style.display = 'none'
           setpie4.style.display = 'none'
+
+          donut.style.display = 'none'
+          doh2.style.display = 'none'
+        doh3.style.display = 'none'
+
+          mineChart.style.display = 'none'
+          mineChart2.style.display = 'none'
+          mineChart3.style.display = 'none'
         break;
 
 
@@ -1033,11 +1106,21 @@ sel.addEventListener("change", function(){
 
 
         case "월별 생산율과 불량율 : 밀푀유나베":
-            pies.style.display = 'none'
-          setpie.style.display = 'block'
-          setpie2.style.display = 'none'
-        setpie3.style.display = 'none'
-          setpie4.style.display = 'none'
+            setpies.style.display = 'none'
+            setpie.style.display = 'block'
+            setpie2.style.display = 'none'
+            setpie3.style.display = 'none'
+            setpie4.style.display = 'none'
+
+            donut.style.display = 'none'
+            doh2.style.display = 'none'
+          doh3.style.display = 'none'
+
+
+            
+            mineChart.style.display = 'none'
+            mineChart2.style.display = 'none'
+             mineChart3.style.display = 'none'
         break;
 
 
@@ -1050,11 +1133,21 @@ sel.addEventListener("change", function(){
 
 
         case "월별 생산율과 불량율 : 김치찌개":
-            pies.style.display = 'none'
+            setpies.style.display = 'none'
             setpie.style.display = 'none'
             setpie2.style.display =  'block'
             setpie3.style.display = 'none'
           setpie4.style.display = 'none'
+
+          donut.style.display = 'none'
+          doh2.style.display = 'none'
+        doh3.style.display = 'none'
+
+
+
+          mineChart.style.display = 'none'
+          mineChart2.style.display = 'none'
+           mineChart3.style.display = 'none'
         break;
 
 
@@ -1063,11 +1156,22 @@ sel.addEventListener("change", function(){
 
 
         case "월별 생산율과 불량율 : 떡볶이":
-            pies.style.display = 'none'
+            setpies.style.display = 'none'
             setpie.style.display = 'none'
             setpie2.style.display =  'none'
             setpie3.style.display = 'block'
           setpie4.style.display = 'none'
+
+
+          donut.style.display = 'none'
+          doh2.style.display = 'none'
+        doh3.style.display = 'none'
+
+
+
+          mineChart.style.display = 'none'
+          mineChart2.style.display = 'none'
+           mineChart3.style.display = 'none'
         break;
 
 
@@ -1077,11 +1181,24 @@ sel.addEventListener("change", function(){
 
 
         case "월별 생산율과 불량율 : 곱창전골":
-            pies.style.display = 'none'
+            setpies.style.display = 'none'
             setpie.style.display = 'none'
             setpie2.style.display =  'none'
             setpie3.style.display = 'none'
           setpie4.style.display = 'block'
+
+
+          donut.style.display = 'none'
+          doh2.style.display = 'none'
+        doh3.style.display = 'none'
+
+
+
+
+
+          mineChart.style.display = 'none'
+          mineChart2.style.display = 'none'
+           mineChart3.style.display = 'none'
         break;
 
        
@@ -1386,7 +1503,11 @@ const doughnutChart = new Chart(doughnut, {
             label: '# of Votes',
             data: [20, 30, 10, 25, 15,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 205, 86)',
+               ' rgba(0, 129, 0, 0.29)',
+               'rgba(49, 47, 217, 0.27)',
                 
            
                 
@@ -1418,7 +1539,11 @@ const doughnutChart2 = new Chart(doughnut2, {
             label: '# of Votes',
             data: [30, 20, 5, 40, 5,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
+               'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 205, 86)',
+               ' rgba(0, 129, 0, 0.29)',
+               'rgba(49, 47, 217, 0.27)',
                 
            
                 
@@ -1450,8 +1575,12 @@ const doughnutChart3 = new Chart(doughnut3, {
             label: '# of Votes',
             data: [20, 5, 40, 25, 10,],
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
                 
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 205, 86)',
+               ' rgba(0, 129, 0, 0.29)',
+               'rgba(49, 47, 217, 0.27)',
            
                 
             ],
@@ -1482,37 +1611,36 @@ let day = document.querySelector("#day")
     day.addEventListener("change", function(){
     
         console.log("확인과 연락")
-        document.getElementById('doughnut').style.display = 'block';
-        mineChart.style.display = 'none'
-        document.getElementById('Pie').style.display = 'none';
-    
+        // document.getElementById('doughnut').style.display = 'block';
+        // mineChart.style.display = 'none'
+        // document.getElementById('Pie').style.display = 'none';
+        // document.getElementById('myChart').style.display = 'none';
 
 
 
 
 
 
-    let doh = document.getElementById('doughnut')
-    let doh2 = document.getElementById('doughset')
-    let doh3 = document.getElementById('doughset2')
+    // let doh = document.getElementById('doughnut')
+   
         
     switch(this.value) {
 
 
         case "일간 실적 지분":
-            doh.style.display = 'block'
+            donut.style.display = 'block'
             doh2.style.display = 'none'
             doh3.style.display = 'none'
 
-            pies.style.display = 'none'
-          setpie.style.display = 'none'
-          setpie2.style.display = 'none'
-            setpie3.style.display = 'none'
-          setpie4.style.display = 'none'
-
-          mineChart.style.display = 'none'
-          mineChart2.style.display = 'none'
-           mineChart3.style.display = 'none'
+            mineChart.style.display = 'none'
+            mineChart2.style.display = 'none'
+             mineChart3.style.display = 'none'
+            
+              setpies.style.display = 'none'
+              setpie.style.display = 'none'
+              setpie2.style.display =  'none'
+              setpie3.style.display = 'none'
+            setpie4.style.display = 'none'
 
              
         console.log("안녕하세요")
@@ -1528,19 +1656,20 @@ let day = document.querySelector("#day")
 
         case "주간 실적 지분":
 
-        doh.style.display = 'none'
+        donut.style.display = 'none'
         doh2.style.display = 'block'
         doh3.style.display = 'none'
 
-        pies.style.display = 'none'
-          setpie.style.display = 'none'
-          setpie2.style.display = 'none'
-            setpie3.style.display = 'none'
-          setpie4.style.display = 'none'
+        mineChart.style.display = 'none'
+            mineChart2.style.display = 'none'
+             mineChart3.style.display = 'none'
+            
+              setpies.style.display = 'none'
+              setpie.style.display = 'none'
+              setpie2.style.display =  'none'
+              setpie3.style.display = 'none'
+            setpie4.style.display = 'none'
 
-           mineChart.style.display = 'none'
-          mineChart2.style.display = 'none'
-           mineChart3.style.display = 'none'
         break;
 
 
@@ -1553,15 +1682,20 @@ let day = document.querySelector("#day")
 
 
         case "월간 실적 지분":
-            doh.style.display = 'none'
+            donut.style.display = 'none'
             doh2.style.display = 'none'
             doh3.style.display = 'block'
 
-            pies.style.display = 'none'
-          setpie.style.display = 'none'
-          setpie2.style.display = 'none'
-            setpie3.style.display = 'none'
-          setpie4.style.display = 'none'
+            mineChart.style.display = 'none'
+            mineChart2.style.display = 'none'
+             mineChart3.style.display = 'none'
+            
+              setpies.style.display = 'none'
+              setpie.style.display = 'none'
+              setpie2.style.display =  'none'
+              setpie3.style.display = 'none'
+            setpie4.style.display = 'none'
+
         break;
 
 

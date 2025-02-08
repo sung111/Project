@@ -2,7 +2,7 @@
    /* 기본 세팅 */
    body {
 
-
+    /* background-color: lisht; */
     margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo'; list-style: none;
     height: 900px;
        
@@ -35,7 +35,7 @@ padding: 10px;
     #nav {
 
 width: 100%;
-height: 140px;
+height: 10px;
 /* border: 5px solid lightgray; */
 /* display: flex;
 justify-content: space-evenly; */
@@ -57,7 +57,7 @@ justify-content: space-evenly; */
     /* position:absolute; */
     /* margin-top: 20%; */
     color: #000000 ; cursor: pointer;
-    
+    margin-bottom: 50%;
 
 }
 
@@ -270,7 +270,7 @@ width: 80%;
  margin-left: 10%;
 
 
-margin-bottom: -50%; 
+margin-top: -1%; 
 
 
 }
@@ -437,7 +437,7 @@ height: 29%;
 width: 80%;
 /* margin-bottom: 0%; */
 margin-left: 10%;
-margin-top: -5.6%;
+margin-top: -55.6%;
 /* right: 100%; */
 /* border: 5px solid gray; */
 border-collapse: collapse;
