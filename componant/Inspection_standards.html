@@ -654,7 +654,8 @@
             function hide() {
                 let textserchs = document.querySelectorAll(".text-serch")
                 for (let i = 0; i < textserchs.length; i++) {
-                    textserchs[i].parentNode.parentNode.classList.add("none")
+                    textserchs[i].parentNode.parentNode.parentNode.classList.add("none")
+                    console.log(textserchs[i].parentNode.parentNode.parentNode)
                 }
             }
             // ----검색코드
@@ -665,12 +666,12 @@
                 let search = document.querySelector("#navigation-title-search").value
                 for (let i = 0; i < textserchs.length; i++) {
                     //    console.log(textserchs[i].innerText)
-                    //    console.log(textserchs[i].innerText.indexOf("찌개")!=-1)
+                       console.log(textserchs[i].innerText.indexOf("부대")!=-1)
                     // console.log(search)
                     console.log("안바꿀거", textserchs[i].innerText.indexOf(search) != -1)
                     if (textserchs[i].innerText.indexOf(search) != -1) {
                         // console.log(textserchs[i])
-                        textserchs[i].parentNode.parentNode.classList.remove("none")
+                        textserchs[i].parentNode.parentNode.parentNode.classList.remove("none")
                         console.log("바꿀거", textserchs[i].parentNode.parentNode)
 
                     }
