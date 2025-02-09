@@ -860,7 +860,7 @@ const pieChart = new Chart(pie, {
             {
             type: 'pie',
             // select 값이 부대찌개라면
-            label: '부대찌개',
+            label: '생산율', 
             data: [95, 5,],
             backgroundColor: [
                 'rgb(54, 162, 235)',
@@ -902,7 +902,7 @@ const pieChart2 = new Chart(pie2, {
             {
             type: 'pie',
             // select 값이 부대찌개라면
-            label: '밀푀유나베',
+            label: '생산율',
             data: [90, 10,],
             backgroundColor: [
                 'rgb(54, 162, 235)',
@@ -944,7 +944,7 @@ const pieChart3 = new Chart(pie3, {
             {
             type: 'pie',
             // select 값이 부대찌개라면
-            label: '김치찌개',
+            label: '생산율',
             data: [80, 20,],
             backgroundColor: [
                 'rgb(54, 162, 235)',
@@ -986,7 +986,7 @@ const pieChart4 = new Chart(pie4, {
             {
             type: 'pie',
             // select 값이 부대찌개라면
-            label: '떡볶이',
+            label: '생산율',
             data: [50, 50,],
             backgroundColor: [
                 'rgb(54, 162, 235)',
