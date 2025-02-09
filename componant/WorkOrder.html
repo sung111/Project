@@ -20,10 +20,16 @@
 <body class="workorder">
 
     <form class="workorder-search-layer">
-        <h4>생산계획서 조회</h4><button class="workorder-inquiry">일간</button><button
-            class="workorder-inquiry">주간</button><button class="workorder-inquiry">월간</button>
+<div class="workorder-inquirylayer">
+        <h4>생산계획서 조회</h4>
+        <button class="workorder-inquiry workorder-inquiry-daily">일간</button>
+        <button class="workorder-inquiry workorder-inquiry-week">주간</button>
+        <button class="workorder-inquiry workorder-inquiry-month">월간</button>
+    </div>
+    <div class="workorder-searchlayer">
         <input type="text" class="workorder-search">
         <input type="submit" class="workorder-search-button" value="Search...">
+    </div>
     </form>
     <div class="workorder-layer">
         <ul class="workorder-tag">
@@ -35,17 +41,9 @@
             <li class="workorder-tag-name">생성인</li>
         </ul>
         <ol class="workorderlist">
-            <!-- <ul class="workorderlist-content">
-        <li class="workorderlist-createdate">2025-01-31</li>
-        <li class="workorderlist-productplandate">2025-01-31<br/>~<br/>2025-02-05</li>
-        <li class="workorderlist-productplancalc"><a href="">수정</a></li>
-        <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-        <li class="workorderlist-productplanstatus"><a href="">생산계획현황</a></li>
-        <li class="workorderlist-etc"></li>
-    </ul> -->
         </ol>
         <ol class="workorderlist">
-            <ul class="workorderlist-content2">
+            <ul class="workorderlist-content2" data-createdate="2025-02-03" data-productplandate="2025-02-05">
                 <li class="workorderlist-createdate">2025-02-03</li>
                 <li class="workorderlist-productplandate">2025-02-03<br />~<br />2025-02-05</li>
                 <li class="workorderlist-productplancalc"><button class="workorderlist-sample">수정</a></li>
@@ -57,7 +55,7 @@
                 </style>
 
             </ul>
-            <ul class="workorderlist-content2">
+            <ul class="workorderlist-content2" data-createdate="2025-01-30" data-productplandate="2025-01-31">
                 <li class="workorderlist-createdate">2025-01-30</li>
                 <li class="workorderlist-productplandate">2025-01-30<br />~<br />2025-02-31</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
@@ -65,7 +63,7 @@
                 <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">김경민</li>
             </ul>
-            <ul class="workorderlist-content2">
+            <ul class="workorderlist-content2" data-createdate="2025-01-28" data-productplandate="2025-02-29">
                 <li class="workorderlist-createdate">2025-01-28</li>
                 <li class="workorderlist-productplandate">2025-01-28<br />~<br />2025-02-29</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
@@ -73,7 +71,7 @@
                 <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">서영석</li>
             </ul>
-            <ul class="workorderlist-content2">
+            <ul class="workorderlist-content2" data-createdate="2025-01-26" data-productplandate="2025-02-27">
                 <li class="workorderlist-createdate">2025-01-26</li>
                 <li class="workorderlist-productplandate">2025-01-26<br />~<br />2025-02-27</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>
@@ -81,7 +79,7 @@
                 <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
                 <li class="workorderlist-name">안혜리</li>
             </ul>
-            <ul class="workorderlist-content2">
+            <ul class="workorderlist-content2" data-createdate="2025-01-20" data-productplandate="2025-01-21">
                 <li class="workorderlist-createdate">2025-01-20</li>
                 <li class="workorderlist-productplandate">2025-01-20<br />~<br />2025-01~21</li>
                 <li class="workorderlist-productplancalc"><button>수정</button></li>

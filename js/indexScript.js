@@ -257,3 +257,14 @@ document.addEventListener("DOMContentLoaded", function () {
         LocalNavigationbar("게시판", "일반게시판");
     })
 })
+
+// 로그인 창 닫기
+document.addEventListener("DOMContentLoaded", function () {
+    const loginWallpaper = document.querySelector(".login-wallpaper");
+    const loginContainer = document.querySelector(".login-container");
+
+    loginWallpaper.addEventListener("click", function () {
+        loginWallpaper.style.display = "none";
+        loginContainer.style.display = "none"; 
+    });
+});
