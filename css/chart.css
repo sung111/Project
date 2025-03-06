@@ -10,6 +10,14 @@ body {
 
 
 
+    #whole2 {
+
+
+
+
+        display: flex;
+    }
+
     .perform {
 
 
@@ -20,6 +28,9 @@ body {
         }
 
         
+
+
+      /* 전체 차트의 부모요소 */  
 #chartset {
 
 
@@ -29,24 +40,42 @@ margin-top: -1%;
     /* display: flex; */
 }
 
+
+
+/* select 박스의 부모요소 */  
 #indi {
 
-
+    border: 1px red solid;
     padding: 2%;
-    display: flex;
-    margin-left: 15%;
-    margin-top: 8%;
+    width: 45%;
+    height: 20%;
+
 }
 
-#ocu {
+#indi2 {
 
-    padding: 1%;
+
+   
+    border: 1px red solid;
+    height: 100%;
+    width: 50%;
 }
 
-#myChart {
-    
-    
+#indi3 {
+
+    border: 1px red solid;
+   
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -56,6 +85,7 @@ padding: 3%;
 margin-left: -2%;
 /* display: none; */
 margin-top: -4%;
+width: 10%;
 
 }
 
@@ -74,8 +104,8 @@ margin-left: 20%;
     
     padding: 3%;
     /* background-color: lightgray; */
-    margin-left: 1%;
-    margin-top: -4%;
+    /* margin-left: 1%;
+    margin-top: -4%; */
    
 }
 
@@ -91,21 +121,27 @@ margin-left: 20%;
    
 }
 
+
+
+
+
+/* select `1의 부모요소 */  
 #sel {
-
-    padding: 3%;
+    width: 40%;
+    /* margin-bottom: 150%; */
+    padding: 1%;
 }
 
-
+/* select `2의 부모요소 */ 
 #day {
-    padding: 3%;
+    padding: 1%;
     
 }
 
-
+/* select `3의 부모요소 */ 
 #reData {
-    padding: 3%;
-    
+    padding: 1%;
+    margin-left: 2%;
 }
 
 
@@ -114,7 +150,7 @@ margin-left: 20%;
 
 
 
-
+/* line차트의 부모요소 */ 
 #mcset {
 
     display: none;
@@ -125,12 +161,32 @@ margin-left: 20%;
     display: none;
 }
 
+/* #setting {
+
+     
+    display: none;
+
+} */
 
 
-#piesets {
+
+
+/* Pie chart의 부모요소 */ 
+#piewhole {
+    /* border: 1px red solid; */
+    margin-top: 5%; 
+    width: 100%;  
+   
+
+}
+
+
+/* #piesets {
 
     display: none;
-}
+} */
+
+
 #pieset {
 
     display: none;
@@ -138,6 +194,7 @@ margin-left: 20%;
 
 #pieset2 {
 
+    
     display: none;
 }
 
@@ -157,19 +214,25 @@ margin-left: 20%;
 
 
 
+/* doughnut 차트의 부모요소 */ 
+
 
 #doughset {
 
+    
     display: none;
 }
+
+#doughsets {
+    
+
+    
+    display: none;
+}
+
 
 #doughset2 {
 
     display: none;
 }
 
-/* #setting {
-
-     width: 90%;
-    height: 10px;
-} */

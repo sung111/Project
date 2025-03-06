@@ -9,10 +9,13 @@
     /* border: 3px solid #007bff; */
     }
 
+
+
+
     li {
 
-              /*  */
-                /* left: 57%; */
+              
+                
                 top: 30%;
                 font-size: 35px;
                 text-align: center;
@@ -30,6 +33,9 @@
 
 padding: 10px;
 }
+
+
+
 
     /* 메뉴 세팅 */
     #nav {
@@ -49,7 +55,7 @@ justify-content: space-evenly; */
 
 
 
-
+/* 검색 달력 조회 Div */
 #cor {
 
     margin-left: 10%;
@@ -61,7 +67,7 @@ justify-content: space-evenly; */
 
 }
 
-
+/* sel 부모요소 */
 #sch {
 
 /* display: flex; */
@@ -107,6 +113,8 @@ display: flex;
     /* width: 70%;  */
     
     }
+
+
 
 
 /* 일간 */
@@ -260,6 +268,8 @@ display: none;
 
 } 
 
+
+/* 차트 부모요소 */
 #Chartall {
 
 
@@ -456,11 +466,17 @@ width: 100%;
     /* position: absolute;
     bottom: -20%; */
 
+
+
+
 }
+
+
 /* 가장 맨 윗표 가리기 */
 #second {
 
 display: none;
+margin-top: -2%;
 /* position: absolute;
     bottom: -20%; */
 
@@ -472,6 +488,7 @@ display: none;
 #third {
 
     display: none;
+    margin-top: -5%;
     /* position: absolute;
     bottom: -20%; */
 
@@ -480,19 +497,23 @@ display: none;
     
     }
 
+
+
+/* 일간 표 td 넓이 */    
 .daytime {
 
     background-color: skyblue;
     width: 176px;
 }
 
-
+/* 주간 표 td 넓이 */ 
 .wektime {
 
     background-color: skyblue;
     width: 160px;
 }
 
+/* 월간 표 td 넓이 */ 
 .montime {
     background-color: skyblue;
     width: 250px;
@@ -783,14 +804,12 @@ top: 150px;
 
    
 
-/* 1번 2번 버튼 */
 
+/* 
 #page {
 
 
 
-/* align-items: center;
-text-align: center; */
 
 
     background-color: #4CAF50;
@@ -800,12 +819,12 @@ text-align: center; */
     font-size: 16px;
     border-radius: 5px;
 
- /* position: relative; */
+ 
 left: 47%; 
 top: 100px;
    
    
-} 
+}  */
 
 
 /* #page2 {
@@ -823,7 +842,7 @@ top: 100px;
 
 
 
-
+ /* 폰트 */
     @font-face {
     font-family: 'Apple SD Gothic Neo';
     font-weight: 900;

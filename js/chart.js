@@ -1,3 +1,5 @@
+
+/* line차트 */ 
 const ctx = document.getElementById('myChart').getContext('2d');
 const config = (ctx, {
     type: 'line',
@@ -201,7 +203,7 @@ const config = (ctx, {
 
 
 
-
+// doughnut차트 끌어오기
 let donut = document.getElementById('doughsets')
 donut.style.display = 'none';
 let doh2 = document.getElementById('doughset')
@@ -230,6 +232,10 @@ let sel = document.getElementById('sel')
 // let Pies4 = document.querySelector("#Pie4")
 // let Pies5 = document.querySelector("#Pie5")
 
+
+
+
+// Pie차트 끌어오기
 let setpies = document.getElementById('piesets')
 let setpie = document.getElementById('pieset')
 let setpie2 = document.getElementById('pieset2')
@@ -238,7 +244,7 @@ let setpie4 = document.getElementById('pieset4')
 
 
 
-
+// line차트 끌어오기
 let mineChart = document.querySelector("#setting")
 let mineChart2 = document.querySelector("#mcset")
 let mineChart3 = document.querySelector("#mcset2")
@@ -568,7 +574,7 @@ const config3 = (ctx3, {
 
 
 
-// 차트 손쉽게 변경
+// 생산율 버튼
 let reData = document.getElementById('reData')
 reData.addEventListener("change", function(){
 		
@@ -645,17 +651,17 @@ reData.addEventListener("change", function(){
            mineChart3.style.display = 'none'
 
 
-           donut.style.display = 'none'
-           doh2.style.display = 'none'
-         doh3.style.display = 'none'
+        //    donut.style.display = 'none'
+        //    doh2.style.display = 'none'
+        //  doh3.style.display = 'none'
 
 
 
-           setpies.style.display = 'none'
-           setpie.style.display = 'none'
-           setpie2.style.display =  'none'
-           setpie3.style.display = 'none'
-         setpie4.style.display = 'none'
+        //    setpies.style.display = 'none'
+        //    setpie.style.display = 'none'
+        //    setpie2.style.display =  'none'
+        //    setpie3.style.display = 'none'
+        //  setpie4.style.display = 'none'
             
         break;
 
@@ -673,16 +679,16 @@ reData.addEventListener("change", function(){
              mineChart3.style.display = 'none'
 
 
-             donut.style.display = 'none'
-             doh2.style.display = 'none'
-           doh3.style.display = 'none'
+        //      donut.style.display = 'none'
+        //      doh2.style.display = 'none'
+        //    doh3.style.display = 'none'
 
 
-           setpies.style.display = 'none'
-           setpie.style.display = 'none'
-           setpie2.style.display =  'none'
-           setpie3.style.display = 'none'
-         setpie4.style.display = 'none'
+        //    setpies.style.display = 'none'
+        //    setpie.style.display = 'none'
+        //    setpie2.style.display =  'none'
+        //    setpie3.style.display = 'none'
+        //  setpie4.style.display = 'none'
             
             
         break;
@@ -701,15 +707,15 @@ reData.addEventListener("change", function(){
             mineChart2.style.display = 'none'
              mineChart3.style.display = 'block'
 
-             donut.style.display = 'none'
-             doh2.style.display = 'none'
-           doh3.style.display = 'none'
+        //      donut.style.display = 'none'
+        //      doh2.style.display = 'none'
+        //    doh3.style.display = 'none'
 
-           setpies.style.display = 'none'
-           setpie.style.display = 'none'
-           setpie2.style.display =  'none'
-           setpie3.style.display = 'none'
-         setpie4.style.display = 'none'
+        //    setpies.style.display = 'none'
+        //    setpie.style.display = 'none'
+        //    setpie2.style.display =  'none'
+        //    setpie3.style.display = 'none'
+        //  setpie4.style.display = 'none'
             
             
         break;
@@ -849,18 +855,18 @@ reData.addEventListener("change", function(){
 
 
 
-
+/* Pie 차트 */ 
 const pie = document.getElementById('Pie').getContext('2d');
 const pieChart = new Chart(pie, {
     
     data: {
        
-        labels: ['생산율', '불량율'],
-        datasets: [
-            {
-            type: 'pie',
+        labels: ['생산율1', '불량율2'],
+        datasets: [{
+            type: 'pie', 
             // select 값이 부대찌개라면
-            label: '생산율', 
+            label: '생산율3',
+            fill: false,
             data: [95, 5,],
             backgroundColor: [
                 'rgb(54, 162, 235)',
@@ -878,16 +884,24 @@ const pieChart = new Chart(pie, {
                 
             ],
             borderWidth: 1
-        },
-
-       
-    ]
+        }],
     },
-    options: {responsive: false,
-        scales: {
+    options: {responsive: true,
+        legend: {
+            display: false,
+            position: 'top',
+            
+        },
+        
+        scales: { 
+            x: {
+            
+            display : false
+            },
             y: {
-                beginAtZero: true
-            }
+                
+                display : false
+            },
         }
     }
 });
@@ -925,11 +939,16 @@ const pieChart2 = new Chart(pie2, {
        
     ]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -967,11 +986,16 @@ const pieChart3 = new Chart(pie3, {
        
     ]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -1009,11 +1033,16 @@ const pieChart4 = new Chart(pie4, {
        
     ]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -1051,11 +1080,16 @@ const pieChart5 = new Chart(pie5, {
        
     ]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -1063,6 +1097,9 @@ const pieChart5 = new Chart(pie5, {
 
 
 
+
+
+// 생산율 불량율 버튼
 sel.addEventListener("change", function(){
 
     console.log("확인과 연락")
@@ -1088,13 +1125,13 @@ sel.addEventListener("change", function(){
           setpie3.style.display = 'none'
           setpie4.style.display = 'none'
 
-          donut.style.display = 'none'
-          doh2.style.display = 'none'
-        doh3.style.display = 'none'
+        //   donut.style.display = 'none'
+        //   doh2.style.display = 'none'
+        //   doh3.style.display = 'none'
 
-          mineChart.style.display = 'none'
-          mineChart2.style.display = 'none'
-          mineChart3.style.display = 'none'
+        //   mineChart.style.display = 'none'
+        //   mineChart2.style.display = 'none'
+        //   mineChart3.style.display = 'none'
         break;
 
 
@@ -1112,15 +1149,15 @@ sel.addEventListener("change", function(){
             setpie3.style.display = 'none'
             setpie4.style.display = 'none'
 
-            donut.style.display = 'none'
-            doh2.style.display = 'none'
-          doh3.style.display = 'none'
+        //     donut.style.display = 'none'
+        //     doh2.style.display = 'none'
+        //   doh3.style.display = 'none'
 
 
             
-            mineChart.style.display = 'none'
-            mineChart2.style.display = 'none'
-             mineChart3.style.display = 'none'
+        //     mineChart.style.display = 'none'
+        //     mineChart2.style.display = 'none'
+        //      mineChart3.style.display = 'none'
         break;
 
 
@@ -1139,15 +1176,15 @@ sel.addEventListener("change", function(){
             setpie3.style.display = 'none'
           setpie4.style.display = 'none'
 
-          donut.style.display = 'none'
-          doh2.style.display = 'none'
-        doh3.style.display = 'none'
+        //   donut.style.display = 'none'
+        //   doh2.style.display = 'none'
+        // doh3.style.display = 'none'
 
 
 
-          mineChart.style.display = 'none'
-          mineChart2.style.display = 'none'
-           mineChart3.style.display = 'none'
+        //   mineChart.style.display = 'none'
+        //   mineChart2.style.display = 'none'
+        //    mineChart3.style.display = 'none'
         break;
 
 
@@ -1163,15 +1200,15 @@ sel.addEventListener("change", function(){
           setpie4.style.display = 'none'
 
 
-          donut.style.display = 'none'
-          doh2.style.display = 'none'
-        doh3.style.display = 'none'
+        //   donut.style.display = 'none'
+        //   doh2.style.display = 'none'
+        // doh3.style.display = 'none'
 
 
 
-          mineChart.style.display = 'none'
-          mineChart2.style.display = 'none'
-           mineChart3.style.display = 'none'
+        //   mineChart.style.display = 'none'
+        //   mineChart2.style.display = 'none'
+        //    mineChart3.style.display = 'none'
         break;
 
 
@@ -1188,17 +1225,17 @@ sel.addEventListener("change", function(){
           setpie4.style.display = 'block'
 
 
-          donut.style.display = 'none'
-          doh2.style.display = 'none'
-        doh3.style.display = 'none'
+        //   donut.style.display = 'none'
+        //   doh2.style.display = 'none'
+        // doh3.style.display = 'none'
 
 
 
 
 
-          mineChart.style.display = 'none'
-          mineChart2.style.display = 'none'
-           mineChart3.style.display = 'none'
+        //   mineChart.style.display = 'none'
+        //   mineChart2.style.display = 'none'
+        //    mineChart3.style.display = 'none'
         break;
 
        
@@ -1493,7 +1530,7 @@ sel.addEventListener("change", function(){
 
 
 
-
+// 도넛차트
 const doughnut = document.getElementById('doughnut').getContext('2d');
 const doughnutChart = new Chart(doughnut, {
     type: 'doughnut',
@@ -1521,11 +1558,16 @@ const doughnutChart = new Chart(doughnut, {
             borderWidth: 1
         }]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -1557,11 +1599,16 @@ const doughnutChart2 = new Chart(doughnut2, {
             borderWidth: 1
         }]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -1593,11 +1640,16 @@ const doughnutChart3 = new Chart(doughnut3, {
             borderWidth: 1
         }]
     },
-    options: {responsive: false,
+    options: {responsive: true,
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            x: {
+            
+                display : false
+                },
+                y: {
+                    
+                    display : false
+                },
         }
     }
 });
@@ -1606,7 +1658,7 @@ const doughnutChart3 = new Chart(doughnut3, {
 
 
 
-
+// 실적지분 버튼
 let day = document.querySelector("#day")
     day.addEventListener("change", function(){
     
@@ -1632,15 +1684,15 @@ let day = document.querySelector("#day")
             doh2.style.display = 'none'
             doh3.style.display = 'none'
 
-            mineChart.style.display = 'none'
-            mineChart2.style.display = 'none'
-             mineChart3.style.display = 'none'
+            // mineChart.style.display = 'none'
+            // mineChart2.style.display = 'none'
+            //  mineChart3.style.display = 'none'
             
-              setpies.style.display = 'none'
-              setpie.style.display = 'none'
-              setpie2.style.display =  'none'
-              setpie3.style.display = 'none'
-            setpie4.style.display = 'none'
+            //   setpies.style.display = 'none'
+            //   setpie.style.display = 'none'
+            //   setpie2.style.display =  'none'
+            //   setpie3.style.display = 'none'
+            // setpie4.style.display = 'none'
 
              
         console.log("안녕하세요")
@@ -1660,15 +1712,15 @@ let day = document.querySelector("#day")
         doh2.style.display = 'block'
         doh3.style.display = 'none'
 
-        mineChart.style.display = 'none'
-            mineChart2.style.display = 'none'
-             mineChart3.style.display = 'none'
+        // mineChart.style.display = 'none'
+        //     mineChart2.style.display = 'none'
+        //      mineChart3.style.display = 'none'
             
-              setpies.style.display = 'none'
-              setpie.style.display = 'none'
-              setpie2.style.display =  'none'
-              setpie3.style.display = 'none'
-            setpie4.style.display = 'none'
+        //       setpies.style.display = 'none'
+        //       setpie.style.display = 'none'
+        //       setpie2.style.display =  'none'
+        //       setpie3.style.display = 'none'
+        //     setpie4.style.display = 'none'
 
         break;
 
@@ -1686,15 +1738,15 @@ let day = document.querySelector("#day")
             doh2.style.display = 'none'
             doh3.style.display = 'block'
 
-            mineChart.style.display = 'none'
-            mineChart2.style.display = 'none'
-             mineChart3.style.display = 'none'
+            // mineChart.style.display = 'none'
+            // mineChart2.style.display = 'none'
+            //  mineChart3.style.display = 'none'
             
-              setpies.style.display = 'none'
-              setpie.style.display = 'none'
-              setpie2.style.display =  'none'
-              setpie3.style.display = 'none'
-            setpie4.style.display = 'none'
+            //   setpies.style.display = 'none'
+            //   setpie.style.display = 'none'
+            //   setpie2.style.display =  'none'
+            //   setpie3.style.display = 'none'
+            // setpie4.style.display = 'none'
 
         break;
 
@@ -1773,7 +1825,14 @@ var myChart = new Chart(ctx, config);
 var myChart2 = new Chart(ctx2, config2);
 var myChart3 = new Chart(ctx3, config3);
 
+
+
 var chartpie = new Chart(pie, pieChart);
+
+if (chartpie) {
+    chartpie.destroy();
+}
+
 var chartpie2 = new Chart(pie2, pieChart2);
 var chartpie3 = new Chart(pie3, pieChart3);
 var chartpie4 = new Chart(pie4, pieChart4);
@@ -1782,6 +1841,7 @@ var chartpie5 = new Chart(pie5, pieChart5);
 var douchart = new Chart(doughnut, doughnutChart);
 var douchart2 = new Chart(doughnut2, doughnutChart2);
 var douchart3 = new Chart(doughnut3, doughnutChart3);
+
 
 
 

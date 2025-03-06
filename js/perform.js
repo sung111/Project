@@ -79,7 +79,7 @@ let months = document.querySelector("#months")
 
 
 
-
+// 바 그래프
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
    
@@ -234,7 +234,7 @@ const myChart = new Chart(ctx, {
 
 
 
-
+// 주간 바 그래프
 const ctx2 = document.getElementById('myChart2').getContext('2d');
 const myChart2 = new Chart(ctx2, {
     
@@ -387,7 +387,7 @@ const myChart2 = new Chart(ctx2, {
 
 
 
-
+// 월간 바 그래프
 const ctx3 = document.getElementById('myChart3').getContext('2d');
 const myChart3 = new Chart(ctx3, {
    
@@ -535,14 +535,14 @@ const myChart3 = new Chart(ctx3, {
 
 
 
-
+// 바 그래프 끌어오기
 let bar1 = document.querySelector("#Chart1") 
 let bar2 = document.querySelector("#Chart2") 
 let bar3 = document.querySelector("#Chart3") 
 
 
 
-
+// select change 이벤트
 op1.addEventListener("change", function() {
     console.log("바뀜확인")
 
@@ -781,8 +781,8 @@ op1.addEventListener("change", function() {
 
 
 
-let bar4 = document.querySelector("#Chart4")
-let bar7 = document.querySelector("#Chart7")
+// let bar4 = document.querySelector("#Chart4")
+// let bar7 = document.querySelector("#Chart7")
 
 // let page1 = document.querySelector("#page")
 // page1.addEventListener("click", function() {
@@ -917,7 +917,7 @@ let bar7 = document.querySelector("#Chart7")
 
 
 
-
+                // 조회버튼
                 let sele = document.querySelector("#sele")
                 sele.addEventListener("click", function() {
                     // console.log("안녕하세요")
@@ -927,10 +927,12 @@ let bar7 = document.querySelector("#Chart7")
 
 
 
-
+                    // 일간 월간 주간 선택 끌어오기
                     let day = document.querySelector("#date").value
                     let weeks = document.querySelector("#weeks").value
                     let months = document.querySelector("#months").value
+
+                    // 일간 월간 주간 달력 끌어오기
                     let op1 = document.querySelector("#sel").value
                     let op2 = document.querySelector("#daily").value
                     let op3 = document.querySelector("#week").value
@@ -957,7 +959,7 @@ let bar7 = document.querySelector("#Chart7")
 
 
                        
-                        // 검색
+                        // 검색 끌어오기
                    let text = document.querySelector("#text").value
                 //    let sp = document.querySelector("#space")
 
