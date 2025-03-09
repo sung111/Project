@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>process</title>
+    <title>검사기준</title>
     <style>
-        body {
-            margin: 0 auto;
+        *{
+            margin: 0;
             padding: 0;
-            width: 95vw;
-
+        }
+        body {
+            width: 100%;
+            padding: 20px;
         }
 
         .de {
@@ -36,9 +38,9 @@
         }
 
         .contain-child {
-            height: 500px;
+            /* height: 500px; */
             text-align: center;
-            width: 100%;
+            /* width: 100%; */
 
             border: 1px solid black;
         }
@@ -176,7 +178,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 100px;
+           
 
         }
 
@@ -258,7 +260,7 @@
             margin-left: 10%;
             align-items: center;
             height: 40px;
-            border: 1px solid black;
+         
         }
 
         .navigation-title-article2 {
@@ -294,10 +296,12 @@
         #navigation-title-text {
             /* border: 1px solid black; */
             width: 130px;
-
+            
         }
-
+        
         #navigation-title-search {
+            padding: 5px;
+          
             width: 100px;
         }
 
@@ -329,6 +333,10 @@
         .titlecenter{
             text-align: center;
         }
+        #top-border{
+            border: 1px solid #007bff;
+            border-radius: 20px;
+        }
 
 
 
@@ -347,31 +355,32 @@
 
 
     <body>
-
-        <div id="title">
-            <h2>검사기준</h2>
-        </div>
-        <div id="navigation-title-parent">
-            <div id="navigation-title">
-                <div class="navigation-title-article">
-                    <div id="navigation-title-text">
-                        밀키트 검색
+        <div id="top-border">
+            <div id="title">
+                <h2>검사기준</h2>
+            </div>
+            <div id="navigation-title-parent">
+                <div id="navigation-title">
+                    <div class="navigation-title-article">
+                        <div id="navigation-title-text">
+                            밀키트 검색
+                        </div>
+                        <div>
+                            <input type="text" id="navigation-title-search" >
+                        </div>
                     </div>
-                    <div>
-                        <input type="text" id="navigation-title-search">
-                    </div>
-                </div>
-                <div class="navigation-title-article2">
-                    <div class="navigation-title-button-parent">
-                        <input type="button" value="검색" class="btn search">
-                    </div>
-                    <div class="navigation-title-button-parent">
-                        <input type="button" value="생성" class="btn creat">
+                    <div class="navigation-title-article2">
+                        <div class="navigation-title-button-parent">
+                            <input type="button" value="검색" class="btn search">
+                        </div>
+                        <div class="navigation-title-button-parent">
+                            <input type="button" value="생성" class="btn creat">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+      
 
 
 
