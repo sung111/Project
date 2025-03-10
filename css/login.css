@@ -1,46 +1,63 @@
-/* 로그인 페이지 */
-
 .login-container {
-    width: 40%;
-    height: 40%;
-    padding: 20px;
-    background-color: #ffffff;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 13;
-    position: fixed;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 80%; height: 80%; padding: 20px; background-color: #ffffff; border: 1px solid #007bff; border-radius: 5px; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; display: flex; flex-direction: column; justify-content: space-between;
 }
 
+.mainlayer{
+    height: 80%; display: flex; justify-content: space-around; align-items: center;
+}
+
+/* 로그인 화면 영역 */
+
+.login-layer{
+    width: 60%; height: 70%; display: none; flex-direction: column; align-items: center; justify-content: space-around;
+    }
+
+    .signup-layer{
+        width: 50%; padding: 20px; text-align: start; font-size: 24px; display: none;
+    }
+
+.find-layer{
+    width: 50%; height: 70%; text-align: start; display: flex; flex-direction: column; justify-content: space-around;
+}
+
+.sign-up, .findid_password{
+    display: none;
+}
+
+.writing_layer{
+    width: 100%;
+}
+.sign-up-completed{
+    display: none;
+}
+
+.certified{
+    width: 100%; height: 70%; display: flex; flex-direction: column; justify-content: space-around;
+}
+
+.certified li{
+    display: flex; align-items: center;
+}
+.certified p{
+    margin-left: 5px;
+}
+.certified img{
+    width: 30px; height: 30px;
+}
+
+/* 로그인 개체 영역 */
+
+
 .login-container h1 {
-    color: #007bff;
-    margin-bottom: 20px;
+    color: #007bff; margin-bottom: 20px; 
 }
 
 .login-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
+    padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; outline: none;
 }
 
 .login-container button {
-    width: 50%;
-    padding: 10px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    width: 50%; padding: 10px; color: #fff; background-color: #007bff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;
 }
 
 .login-container button:hover {
@@ -53,4 +70,15 @@
 
 #password {
     width: 50%;
+}
+.sublayer{
+width: 100%; display: flex; flex-direction: row-reverse;justify-content: space-between;
+}
+
+.sublayer button{
+    width: 80px; height: 40px;
+}
+
+.users{
+     margin-right: 5%; margin-left: 2px; font-size: 16px;
 }
