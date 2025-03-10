@@ -258,7 +258,7 @@
 
     </div>
     <div id="mid-contain">
-        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data" name="productname"> </div>
+        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data" name="productname" value="asdasd"> </div>
         <div class="mid-contain-article" id="materials_id2"> 가격:<input type="text" class="mid-data" name="price"> </div>
         <div class="mid-contain-article" id="materials_id3"> 규격:<input type="text" class="mid-data" name="standard"> </div>
         <div class="mid-contain-article" id="materials_id4"> 단위:<input type="text" class="mid-data" name="unit"> </div>
@@ -269,7 +269,7 @@
         <div class="mid-contain-article" id="materials_id8"> 창고위치:<input type="text" class="mid-data" name="location"> </div>
         
         <div class="mid-contain-article " id="materials_id9">
-        <form method="get" action="Part_code">
+        <form method="get" action="controller/Part_code">
             <input type="submit" value="생성" id="materials_c">
         </form>
             <input type="button" value="확인" id="materials_u">
@@ -323,9 +323,6 @@
 				<td>aaa</td>
 				<td>aaa</td>
 				<td>
-					<form method="post" action="controller">
-						<!-- <input type="summit" -->
-					</form>
 				</td>
 			</tr>
 			
