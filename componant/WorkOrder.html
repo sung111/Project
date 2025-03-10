@@ -4,301 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HHMES 작업지시서</title>
-    <link rel="stylesheet" href="../css/workorder.css">
+    <title>HHMES 생산관리</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/newworkorder.css">
-    <style>
-        .sample {
-            display: none;
-        }
-    </style>
-    <script src="../js/workorder.js"></script>
-
+    <!-- <script src="../js/newworkorder.js"></script> -->
 </head>
 
-<body class="workorder">
-
-    <form class="workorder-search-layer">
-<div class="workorder-inquirylayer">
-        <h4>생산계획서 조회</h4>
-        <button class="workorder-inquiry workorder-inquiry-daily">일간</button>
-        <button class="workorder-inquiry workorder-inquiry-week">주간</button>
-        <button class="workorder-inquiry workorder-inquiry-month">월간</button>
-    </div>
-    <div class="workorder-searchlayer">
-        <input type="text" class="workorder-search">
-        <input type="submit" class="workorder-search-button" value="Search...">
-    </div>
-    </form>
-    <div class="workorder-layer">
-        <ul class="workorder-tag">
-            <li class="workorder-tag-createDate">생성일자</li>
-            <li class="workorder-tag-productionPeriod">생산계획기간</li>
-            <li class="workorder-tag-productionCalculation">생산계획서수정</li>
-            <li class="workorder-tag-MRPCalculation">MRP계산</li>
-            <li class="workorder-tag-productionPlan">생산계획서열람</li>
-            <li class="workorder-tag-name">생성인</li>
-        </ul>
-        <ol class="workorderlist">
-        </ol>
-        <ol class="workorderlist">
-            <ul class="workorderlist-content2" data-createdate="2025-02-03" data-productplandate="2025-02-05">
-                <li class="workorderlist-createdate">2025-02-03</li>
-                <li class="workorderlist-productplandate">2025-02-03<br />~<br />2025-02-05</li>
-                <li class="workorderlist-productplancalc"><button class="workorderlist-sample">수정</a></li>
-                <li class="workorderlist-MRPcalc"><a>생성</a></li>
-                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
-                <li class="workorderlist-name">박혜성</li>
-                <style>
-
-                </style>
-
-            </ul>
-            <ul class="workorderlist-content2" data-createdate="2025-01-30" data-productplandate="2025-01-31">
-                <li class="workorderlist-createdate">2025-01-30</li>
-                <li class="workorderlist-productplandate">2025-01-30<br />~<br />2025-02-31</li>
-                <li class="workorderlist-productplancalc"><button>수정</button></li>
-                <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
-                <li class="workorderlist-name">김경민</li>
-            </ul>
-            <ul class="workorderlist-content2" data-createdate="2025-01-28" data-productplandate="2025-02-29">
-                <li class="workorderlist-createdate">2025-01-28</li>
-                <li class="workorderlist-productplandate">2025-01-28<br />~<br />2025-02-29</li>
-                <li class="workorderlist-productplancalc"><button>수정</button></li>
-                <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
-                <li class="workorderlist-name">서영석</li>
-            </ul>
-            <ul class="workorderlist-content2" data-createdate="2025-01-26" data-productplandate="2025-02-27">
-                <li class="workorderlist-createdate">2025-01-26</li>
-                <li class="workorderlist-productplandate">2025-01-26<br />~<br />2025-02-27</li>
-                <li class="workorderlist-productplancalc"><button>수정</button></li>
-                <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
-                <li class="workorderlist-name">안혜리</li>
-            </ul>
-            <ul class="workorderlist-content2" data-createdate="2025-01-20" data-productplandate="2025-01-21">
-                <li class="workorderlist-createdate">2025-01-20</li>
-                <li class="workorderlist-productplandate">2025-01-20<br />~<br />2025-01~21</li>
-                <li class="workorderlist-productplancalc"><button>수정</button></li>
-                <li class="workorderlist-MRPcalc"><a href="">생성</a></li>
-                <li class="workorderlist-productplanstatus"><a>생산계획현황</a></li>
-                <li class="workorderlist-name">채민병</li>
-            </ul>
-        </ol>
-    </div>
-
-    <div class="workorder-page">
-        <ol class="workorder-pagenation">
-            <a>이전</a>
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a href="">4</a>
-            <a href="">5</a>
-            <a href="">6</a>
-            <a href="">7</a>
-            <a href="">8</a>
-            <a href="">9</a>
-            <a href="">10</a>
-            <a>다음</a>
-        </ol>
-        <button type="button" class="new-workorder-button" alt="신규">신규(F2)</button>
-    </div>
-    <div class="workorder-shadowwallpaper"></div>
-    <div class="workorder-MRPcalc">
-        <table class="workorder-MRPcalc-page">
+<body>
+        <table class="search-container">
             <thead>
-                <tr class="workorder-MRPcalc-page-title">
-                    <th>품목코드</th>
-                    <th>품목명[규격]</th>
-                    <th>단위</th>
-                    <th>보관</th>
-                    <th>안전재고단위</th>
-                    <th>최소증가단위</th>
-                    <th>조달기간</th>
-                    <th>전입재고</th>
-                    <!-- <th>구분</th>
-                    <th>계획기간이전</th>
-                    <th>02-03</th> -->
-                </tr>
-            </thead>
-            <tbody class="workorder-MRPcalc-page-list">
-                <tr class="workorder-MRPcalc-page-content">
-                    <td>WPD-20250124-001</td>
-                    <td>부대찌개</td>
-                    <td>팩</td>
-                    <td>냉장보관</td>
-                    <td>50</td>
-                    <td></td>
-                    <td>1일</td>
-                    <td>50</td>
-                    <!-- <div class="workorder-MRPcalc-page-content-sortation">
-                        <th>기초재고</th>
-                        <th>생산예정량</th>
-                        <th>소모예정량</th>
-                        <th>예상재고</th>
-                        <th>생산필요수량</th>
-                        <th>생산계획수량</th>
-                        <td></td>
-                        <td></td>
-                    </div> -->
-                </tr>
-                <tr class="workorder-MRPcalc-page-content">
-                    <td>WPD-20250124-002</td>
-                    <td>김치찌개</td>
-                    <td>팩</td>
-                    <td>냉장보관</td>
-                    <td>20</td>
-                    <td>10</td>
-                    <td>1일</td>
-                    <td>30</td>
-                    <!-- <td colspan="6">
-                        <div class="workorder-MRPcalc-page-content-sortation">
-                    <th>기초재고</th>
-                    <th>생산예정량</th>
-                    <th>소모예정량</th>
-                    <th>예상재고</th>
-                    <th>생산필요수량</th>
-                    <th>생산계획수량</th>
-                    </td> -->
-                    <!-- <td></td>
-                    <td></td> -->
-    </div>
-    </tr>
-    <tr class="workorder-MRPcalc-page-content">
-        <td>WPD-20250124-003</td>
-        <td>밀푀유나베</td>
-        <td>세트</td>
-        <td>냉장보관</td>
-        <td>20</td>
-        <td></td>
-        <td>2일</td>
-        <td>20</td>
-        <!-- <div class="workorder-MRPcalc-page-content-sortation">
-            <th>기초재고</th>
-            <th>생산예정량</th>
-            <th>소모예정량</th>
-            <th>예상재고</th>
-            <th>생산필요수량</th>
-            <th>생산계획수량</th>
-            <td></td>
-            <td></td>
-        </div> -->
-    </tr>
-    </tbody>
-    </table>
-    <div class="workorder-MRPcalc-close">
-        <span>[닫기]</span>
-    </div>
-    </div>
-    <!-- Samplepage -->
-    <div class="sample">
-        <table class="new-workorder">
-            <thead>
-                <tr class="menufacturer-info">
-                    <!-- <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">회사명</div>
-                        <input type="text" name="company" class="menufacturer-info-completion" value="HHMES">
-                    </td> -->
-                    <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">납품처</div>
-                        <input type="text" name="delivery" class="menufacturer-info-completion" value="*운맛상회">
-                    </td>
-                    <!-- <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">번호</div>
-                        <input type="text" name="docNumber" class="menufacturer-info-completion" value="00005">
-                    </td> -->
-                    <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">작성자</div>
-                        <input type="text" name="writer" class="menufacturer-info-completion" value="박혜성">
-                    </td>
-                    <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">작성일자</div>
-                        <input type="date" name="createDate" class="menufacturer-info-completion" value="2025-02-03">
-                    </td>
-                    <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">납품기간</div>
-                        <input type="date" name="dueDate" class="menufacturer-info-completion" value="2025-02-05">
-                    </td>
+                <tr>
+                    <td class="search-contaoner-name">전체 상품 생성계획</td>
+                    <td class="search-contaoner-name">일정별 상품 생산계획</td>
                 </tr>
             </thead>
             <tbody>
-                <tr class="order-info-list">
-                    <th>
-                        <ol class="order-info-title">
-                            <li>품명[규격]</li>
-                            <li>품목코드</li>
-                            <li>단위</li>
-                            <li>제작수량</li>
-                            <li>생산시작일</li>
-                            <li>생산종료일</li>
-                            <li>등록삭제</li>
-                        </ol>
-                    </th>
-                </tr>
-                <tr class="order-info-content">
-                    <td>부대찌개</td>
-                    <td>WPD-20250124-001</td>
-                    <td>팩</td>
-                    <td>50</td>
-                    <td>2025-02-03</td>
-                    <td>2025-02-04</td>
-                    <td class="order-info-content-delete">삭제하기</td>
-                </tr>
-                <tr class="order-info-content">
-                    <td>김치찌개</td>
-                    <td>WPD-20250124-002</td>
-                    <td>팩</td>
-                    <td>30</td>
-                    <td>2025-02-03</td>
-                    <td>2025-02-04</td>
-                    <td class="order-info-content-delete">삭제하기</td>
-                </tr>
-                <tr class="order-info-content">
-                    <td>밀푀유나베</td>
-                    <td>WPD-20250124-003</td>
-                    <td>세트</td>
-                    <td>20</td>
-                    <td>2025-02-03</td>
-                    <td>2025-02-04</td>
-                    <td class="order-info-content-delete">삭제하기</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td class="order-buttonlayer">
-                        <button type="button" class="workorder-add">추가 생성</button>
-                        <button type="button" class="workorder-registration">등록</button>
-                        <button type="button" class="workorder-delete">삭제</button>
-                        <button type="button" class="workorder-cancel">취소</button>
+                <tr class="search-table">
+                    <td>
+                        <button>일간</button>
+                        <button>주간</button>
+                        <button>월간</button>
+                        </td>
+                        <td>
+                            <button>일간</button>
+                            <button>주간</button>
+                            <button>월간</button>
                     </td>
                 </tr>
-            </tfoot>
+                <tr class="submitcontainer">
+                    <td>
+                        <input type="text" name="Prodsearch" class="searchlayer">
+                        <input type="submit" class="submitlayer" value="Search">
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
         </table>
-    </div>
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const SampleClick = document.querySelector(".workorderlist-sample")
-        const samplelayerdelete = document.querySelector(".workorder-search-layer")
-        const samplelayercomit = document.querySelector(".workorder-layer")
-        const samplelayercomit2 = document.querySelector(".workorder-page")
-        const samplelayeron = document.querySelector(".sample")
-        SampleClick.addEventListener("click", function () {
-            samplelayerdelete.style.display = "none";
-            samplelayercomit.style.display = "none";
-            samplelayercomit2.style.display = "none";
-            samplelayeron.style.display = "block";
-        })
-    })
-</script>
-<style>
-    a {
-        color: #007bff
-    }
-</style>
+<table class="name-layer">
+            <tr class="menufacturer-info">
+                <td class="menufacturer-info-list">
+                    <div class="menufacturer-info-name">생성인</div>
+                    <input type="text" name="delivery" class="menufacturer-info-completion">
+                </td>
+                <td class="menufacturer-info-list">
+                    <div class="menufacturer-info-name">생산기간</div>
+                    <input type="text" name="writer" class="menufacturer-info-completion">
+                </td>
+            </tr>
+        </table>
+    <table class="new-workorder">
 
+        <tbody>
+            <tr class="order-info-list">
+                        <td>품목코드</td>
+                        <td>품명[규격]</td>
+                        <td>단위</td>
+                        <td>생산수량</td>
+                        <td>보관</td>
+                        <td>납품업체</td>
+                        <td>창고위치</td>
+                        <td>작업계획생성일</td>
+                        <td>생산시작일</td>
+                        <td>생산종료일</td>
+                        <td>MRP계산</td>
+                        <td>생산계획현황</td>
+                        <td>생산사유</td>
+                        <td>비고</td>
+            </tr>
+            <tr class="order-info-content">
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+                <td>샘플</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="13">
+                    <div class="order-buttonlayer-pagenation">
+                        <a><img src="../img/lefticon.png" alt="pagenationleft" class="pagenationicon"></a>
+<a>1</a>
+<a>2</a>
+<a>3</a>
+<a>4</a>
+<a>5</a>
+<a>6</a>
+<a>7</a>
+<a>8</a>
+<a>9</a>
+<a>10</a>
+<a><img src="../img/righticon.png" alt="pagenationright" class="pagenationicon"></a>
+                    </div>
+                </td>
+                <td colspan="13" class="order-buttonlayer">
+                    <button type="button" class="workorder-add">수정</button>
+                    <button type="button" class="workorder-registration">삭제</button>
+                    <button type="button" class="workorder-delete" id="deleteWorkOrder">상품계획생성</button>
+                    <button type="button" class="workorder-cancel" id="cancelWorkOrder">작업지시서</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
 </html>
