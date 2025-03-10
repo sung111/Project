@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 부품 코드 컨트롤러입니다
  */
-@WebServlet("/controller")
+@WebServlet("/Part_code")
 public class PartCode_controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
