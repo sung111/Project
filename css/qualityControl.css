@@ -13,7 +13,7 @@ body {
 @media screen and (max-width: 767px) {
   .warrap {
     width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
   }
 
   .wkr {
@@ -343,7 +343,7 @@ body {
 @media screen and (min-width:768px) {
   .warrap {
     width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
   }
 
   .wkr {
@@ -401,7 +401,7 @@ body {
 
   .inBord {
     border: 1px solid rgb(199, 196, 196);
-    width: 350px;
+    width: 400px;
     text-align: center;
     display: inline-block;
     background-color: #63adfc;
@@ -448,8 +448,8 @@ body {
   }
 
   .btn2 {
-    width: 80%;
-    height: 100px;
+    width: 85%;
+    height: 130px;
     font-size: 25px;
   }
 
@@ -576,7 +576,7 @@ body {
   .wkrwl,
   .wp,
   .wp2 {
-    background-color: aliceblue;
+    background-color: white;
     color: black;
   }
 
@@ -668,6 +668,12 @@ body {
   .close:hover,
   .close:focus {
     color: #000;
+  }
+  .myInput{
+    width: 50px;
+    height: 18px;
+    font-size: 15px;
+    
   }
 
 }
