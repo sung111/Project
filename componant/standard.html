@@ -14,14 +14,14 @@
 
         body {
             width: 100%;
-            padding: 20px;
+           
           
         }
 
         #top-contain {
           
             display: flex;
-            justify-content: start;
+            justify-content: end;
             align-items: center;
             
         }
@@ -37,6 +37,11 @@
         }
 
         #mid-contain {
+            border: 1px solid  #007bff;
+            border-radius: 20px;
+         
+        }
+        #mid-contain2 {
             border: 1px solid  #007bff;
             border-radius: 20px;
          
@@ -106,9 +111,9 @@
 
         #check-option {
             border: 1px solid #007bff;
-            border-radius: 20px;
+            /* border-radius: 20px; */
             width: 100px;
-            height: 50px;
+            height: 30px;
         }
 
         .none {
@@ -217,21 +222,32 @@
 
 
         }
+        #title{
+            text-align: center;
+        }
+       
+        #materials_hide:hover{
+            background-color: #d9d9d9;
+        }
+        #finished_hide:hover{
+            background-color: #d9d9d9;
+        }
     </style>
 </head>
 
 <body>
-    
+    <div id="title">
+    <h1>원재료/완제품 조회</h1>
+    </div>
     <div id="top-contain">
-        
         <select name="option" id="check-option">
             <option value="1">원재료 조회</option>
             <option value="2">완재품 조회</option>
             <option value="3">전체 조회 </option>
             
         </select>
-        <input type="radio" name="create" value="finished" id="radios"/>원재료 생성
-        <input type="radio" name="create" value="material"/>완재품 생성
+        <input type="button" value="원재료생성" id="materials_hide" >
+        <input type="button" value="완제품생성" id="finished_hide" >
         
         <!-- <input type="button" value="생성" class="button" id="c"> -->
 
@@ -255,6 +271,25 @@
             <input type="button" value="취소" id="ud2">
         </div>
     </div>
+    <div id="mid-contain2">
+        <div class="mid-contain-article" id="id1"> 완제품명:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id2"> 품번:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id4"> 보관창고위치:<input type="text" class="mid-data"> </div>
+        <br>
+        <div class="mid-contain-article" id="id5"> 가격:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id6"> 규격:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id7"> 단위:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="id8"> LotNo:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article " id="id9">
+            <input type="button" value="생성" id="c">
+            <input type="button" value="확인" id="u">
+            <input type="button" value="취소" id="ud">
+            <input type="button" value="생성" id="c2">
+            <input type="button" value="확인" id="u2">
+            <input type="button" value="취소" id="ud2">
+        </div>
+    </div>
+
 
 
     <div id="main-contain">
@@ -310,6 +345,23 @@
             document.querySelector("#c2").classList.add("none")
             document.querySelector("#u2").classList.add("none")
             document.querySelector("#ud2").classList.add("none")
+            document.querySelector("#mid-contain").classList.add("none")
+            document.querySelector("#mid-contain2").classList.add("none")
+
+            document.querySelector("#materials_hide").addEventListener("click", function () {
+                document.querySelector("#mid-contain").classList.remove("none")
+                document.querySelector("#mid-contain2").classList.add("none")
+               
+
+            })
+
+          
+
+            document.querySelector("#finished_hide").addEventListener("click", function () {
+               
+                document.querySelector("#mid-contain").classList.add("none")
+                document.querySelector("#mid-contain2").classList.remove("none")
+            })
 
 
 
