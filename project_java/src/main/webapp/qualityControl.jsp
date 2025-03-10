@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +7,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>품질관리</title>
-  <link rel="stylesheet" href="../css/qualityControl.css">
-  <script src="../js/qualityControl.js"></script>
+  <link rel="stylesheet" href="C:\Users\admin\Desktop\Project\css\qualityControl.css">
+  <script src="C:\Users\admin\Desktop\Project\js\qualityControl.js"></script>
   <link rel="stylesheet" href="">
   <style>
     .manu-name {
