@@ -258,19 +258,19 @@
 
     </div>
     <div id="mid-contain">
-        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="materials_id2"> 가격:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="materials_id3"> 규격:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="materials_id4"> 단위:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data" name="productname"> </div>
+        <div class="mid-contain-article" id="materials_id2"> 가격:<input type="text" class="mid-data" name="price"> </div>
+        <div class="mid-contain-article" id="materials_id3"> 규격:<input type="text" class="mid-data name="standard"> </div>
+        <div class="mid-contain-article" id="materials_id4"> 단위:<input type="text" class="mid-data name="unit"> </div>
         <br>
-        <div class="mid-contain-article" id="materials_id5"> 공급업체:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="materials_id6"> 품번:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="materials_id7"> LotNo:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="materials_id8"> 창고위치:<input type="text" class="mid-data"> </div>
+        <div class="mid-contain-article" id="materials_id5"> 공급업체:<input type="text" class="mid-data name="supplier"> </div>
+        <div class="mid-contain-article" id="materials_id6"> 품번:<input type="text" class="mid-data name="Product number"> </div>
+        <div class="mid-contain-article" id="materials_id7"> LotNo:<input type="text" class="mid-data name="LotNo"> </div>
+        <div class="mid-contain-article" id="materials_id8"> 창고위치:<input type="text" class="mid-data name="location"> </div>
         
         <div class="mid-contain-article " id="materials_id9">
         <form method="get" action="Part_code">
-            <input type="button" value="생성" id="materials_c">
+            <input type="submit" value="생성" id="materials_c">
         </from>
             <input type="button" value="확인" id="materials_u">
             <input type="button" value="취소" id="materials_ud">
@@ -299,9 +299,6 @@
         </div>
     </div>
 
-
-<<<<<<< HEAD
-=======
 	<div id="main-contain">
 		<!-- 원재료 테이블 -->
 		<table class="start-table">
@@ -342,7 +339,7 @@
 		document.querySelector("#u2").classList.add("none")
 		document.querySelector("#ud2").classList.add("none")
 	</script>
->>>>>>> 9e8693dc538b17500a8d7acb21ddf0d717aa56ee
+
 
     <div id="main-contain">
         <!-- 원재료 테이블 -->
@@ -360,16 +357,16 @@
             </tr>
             <tr>
                 <td></td>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
 <!--                     <input type="button" value="수정" > -->
-                </th>
+                </td>
             </tr>
             <br>
         </table>

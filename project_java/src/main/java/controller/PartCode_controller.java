@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class PartCode_controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String productname = request.getParameter("productname");
+		System.out.println("productname"+productname);
 	}
 
 
