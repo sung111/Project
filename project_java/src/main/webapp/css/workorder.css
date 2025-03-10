@@ -1,0 +1,104 @@
+.workorder{
+    width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+}
+/* 상단 레이어 */
+.workorder-search-layer{
+    width: 100%; height: 60px; background-color: #d9d9d9; display: flex; align-items: center; justify-content: space-between; padding: 0 100px;
+}
+.workorder-searchlayer{
+    width: 60%; display: flex; justify-content: flex-end;
+}
+.workorder-search{
+    width: 40%; height: 40px; margin-left: 1%; 
+}
+
+.workorder-search-button{
+    width: 100px; height: 40px; margin-left: 1%; font-size: 18px;color: #ffffff;background-color: #007bff; border: none; 
+}
+/* 중단 레이어 */
+.workorder-layer{
+    width: 85%; height: 80%; 
+}
+.workorder-tag{
+    width: 100%; height: 40px;  display: flex; justify-content: space-around; color: #ffffff; background-color: #007bff; font-size: 14px;
+}
+.workorder-tag-productionCalculation, .workorder-tag-name{
+    width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+.workorder-tag-createDate, .workorder-tag-productionPeriod, .workorder-tag-MRPCalculation, .workorder-tag-productionPlan{
+    width: 20%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+.workorder-inquirylayer{
+display: flex; align-items: center;
+}
+.workorder-inquiry{
+    width: 50px; height: 30px; margin-left: 5px; color: #007bff ;background-color: transparent; border: none; font-size: 16px;font-weight: 500; letter-spacing: 1px; 
+}
+/* 리스트 CSS */
+.workorderlist-content{
+    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #dcdcdc; text-align: center;
+}
+.workorderlist-productplancalc, .workorderlist-name{
+    width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+.workorderlist-createdate, .workorderlist-productplandate, .workorderlist-MRPcalc, .workorderlist-productplanstatus{
+    width: 20%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
+}
+.workorderlist-content a{
+    color: #007bff;
+}
+.workorderlist-content2{
+    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #dcdcdc; text-align: center;
+}
+/* 하단 레이어 */
+.workorder-page{
+    width: 85%; height: 50px; margin-bottom: 30px; padding: 0 10px; border: 2px solid #999999; display: flex; justify-content: space-between; align-items: center;
+}
+
+.workorder-pagenation{
+    width: 60%; height: 40px; display: flex; justify-content: space-around; align-items: center;
+}
+.workorder-pagenation button{
+    background-color: transparent; border: none;
+}
+.new-workorder-button{
+    width: 100px; height: 40px; color: #ffffff; background-color: #007bff; border: none; font-size: 16px; letter-spacing: 1px;
+}
+
+.workorder-shadowwallpaper{
+    width: 100%; height: 100vh; position: absolute; background-color: #000000 ;opacity: 70%; z-index: 10; display: none;
+}
+.workorder-MRPcalc{
+    width: 70%; height: 80%; position: absolute; top: 80px; background-color: #ffffff; z-index: 15;display: none;
+}
+.workorder-MRPcalc-page{
+    width: 100%; height: 95%; border-spacing: 0; border-collapse: collapse; overflow-x: auto; text-align: center;
+}
+.workorder-MRPcalc-page th, .workorder-MRPcalc-page td{
+    border: 1px solid #d9d9d9;
+}
+.workorder-MRPcalc-close{
+    width: 100%; height: 5%; color: #222222; background-color: #888888; display: flex; flex-direction: row-reverse; align-items: center;
+}
+.workorder-MRPcalc-close span{
+    cursor: pointer; padding: 0 10px; 
+}
+.workorder-MRPcalc-page-title{
+    width: 100%; height: 10%; background-color: #007bff;
+}
+.workorder-MRPcalc-page-list{
+    width: 100%; 
+}
+.workorder-MRPcalc-page-content{
+    width: 100%; height: 200px;  
+}
+.workorder-MRPcalc-page-content-sortation {
+    display: flex; /* 가로 배치 */
+    flex-direction: column;
+    justify-content: space-between; /* 요소 간 간격 분배 */
+    align-items: center; /* 세로 정렬 중앙 */
+    gap: 10px; /* 요소 간 간격 */
+}
+.workorder-MRPcalc-page-content-sortation th{
+    flex: 1; align-items: center;
+}

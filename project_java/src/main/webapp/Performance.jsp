@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +7,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>실적등록</title>
-  <link rel="stylesheet" href="../css/performanceRegistration.css">
-  <script src="../js/performanceRegistration.js"></script>
+  <link rel="stylesheet" href="css\performanceRegistration.css">
+  <script src="js\performanceRegistration.js"></script>
   <style>
     .manu-name {
       font-size: 35px;

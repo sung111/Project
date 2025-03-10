@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -300,6 +300,49 @@
     </div>
 
 
+<<<<<<< HEAD
+=======
+	<div id="main-contain">
+		<!-- 원재료 테이블 -->
+		<table class="start-table">
+			<tr>
+				<th class="manu-name poom">제품명</th>
+				<th>가격</th>
+				<th>규격</th>
+				<th>단위</th>
+				<th>공급업체</th>
+				<th>품번</th>
+				<th class="lotno">LotNo</th>
+				<th>창고위치</th>
+				<th class="ud">수정/삭제</th>
+			</tr>
+			<tr>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>
+					<form method="post" action="controller">
+						<!-- 			<input type="summit" -->
+					</form>
+				</td>
+			</tr>
+			<br>
+		</table>
+	</div>
+	<script>
+		document.querySelector("#c").classList.remove("none")
+		document.querySelector("#u").classList.add("none")
+		document.querySelector("#ud").classList.add("none")
+		document.querySelector("#c2").classList.add("none")
+		document.querySelector("#u2").classList.add("none")
+		document.querySelector("#ud2").classList.add("none")
+	</script>
+>>>>>>> 9e8693dc538b17500a8d7acb21ddf0d717aa56ee
 
     <div id="main-contain">
         <!-- 원재료 테이블 -->
