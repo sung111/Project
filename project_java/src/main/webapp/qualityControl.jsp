@@ -7,46 +7,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>품질관리</title>
-  <link rel="stylesheet" href="C:\Users\admin\Desktop\Project\css\qualityControl.css">
-  <script src="C:\Users\admin\Desktop\Project\js\qualityControl.js"></script>
+  <link rel="stylesheet" href="css\qualityControl.css">
+  <script src="js\qualityControl.js"></script>
   <link rel="stylesheet" href="">
-  <style>
-    .manu-name {
-      font-size: 35px;
-      margin: 5px;
-    }
 
-    .standards-contain {
-      border: 1px solid #007bff;
-      border-radius: 20px;
-      margin: 10px;
-      width: 90%;
-      text-align: center;
-    }
-
-    .standards-imege {
-      width: 95%;
-      border-radius: 20px;
-    }
-
-    .standards-font-charild {
-      text-align: left;
-      margin: 10px;
-    }
-
-    .standards-font-parent {
-      text-align: left;
-      margin: 10px;
-    }
-
-    .btn {
-      display: none;
-    }
-
-    .new-workorder {
-      margin-top: 0;
-    }
-  </style>
 </head>
 
 <body>

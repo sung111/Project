@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 실적등록 컨트롤러
  */
-@WebServlet("/PerformanceRegistration_controller")
-public class PerformanceRegistration_controller extends HttpServlet {
+@WebServlet("/Performance")
+public class Performance extends HttpServlet {
 
 
 
