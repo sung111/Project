@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" />
+    <title>HHMES:Login</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <!-- 로그인 페이지 -->
+    <div class="login-container">
+        <div class="mainlayer">
+            <img src="img/icon.png" alt="loginlogo">
+            <form class="login-layer">
+                <h1>Login</h1>
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button type="submit" id="login-button">Login</button>
+            </form>
+            <form class="signup-layer">
+                <h6>이름</h6>
+                <input type="text" name="user_name" class="writing_layer" placeholder="이름을 입력해주세요.">
+                <h6>아이디</h6>
+                <input type="text" name="user_id" class="writing_layer" placeholder="사용하실 아이디를 입력해주세요.">
+                <h6>비밀번호</h6>
+                <input type="password" name="user_password" class="writing_layer" placeholder="비밀번호를 입력해주세요.">
+                <h6>비밀번호 재확인</h6>
+                <input type="password" name="user_password2" class="writing_layer" placeholder="비밀번호 재확인이 필요합니다.">
+                <h6>가입 권한</h6>
+                <div class="users">
+                    <input type="radio" name="users" id="user" value="user" checked><label for="user"
+                        class="users">사용자</label>
+                    <input type="radio" name="users" id="admin" value="admin"><label for="admin"
+                        class="users">관리자</label>
+                    <input type="radio" name="users" id="high-admin" value="high-admin"><label for="high-admin"
+                        class="users">상위 관리자</label>
+                </div>
+                <h6>이메일</h6>
+                <input type="email" name="user_email" class="writing_layer" placeholder="이메일을 입력해주세요.">
+                <h6>전화전호</h6>
+                <input type="tel" name="user_tel" class="writing_layer" placeholder="전화번호를 입력해주세요.">
+            </form>
+            <form class="find-layer">
+                <h6>이메일 또는 전화번호로 인증하기</h6>
+                <input type="text" name="find_Account_textarea" class="writing_layer find_account" placeholder="이메일 혹은 전화번호를 입력해주세요.">
+                <ul class="certified">
+                    <h4>인증 수단을 클릭해주세요.</h4>
+                    <li><img src="img/phone.png"><p>휴대폰으로 본인인증</p></li>
+                    <li><img src="img/email.png"><p>이메일로 본인인증</p></li>
+                    <li><img src="img/card.png"><p>신용카드로 본인인증</p></li>
+                </ul>
+            </form>
+        </div>
+        <form class="sublayer">
+            <button class="sign-up">Sign Up</button>
+            <a class="findid_password">아이디 혹은 비밀번호를 잊으셨나요?</a>
+            <button class="sign-up-completed">가입 완료</button>
+            <button class="find-account">인증번호</button>
+            <button class="cancel">뒤로 가기</button>
+        </form>
+    </div>
+
+</body>
+<script src="js/login.js"></script>
+
+</html>
