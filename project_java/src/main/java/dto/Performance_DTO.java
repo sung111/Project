@@ -10,7 +10,9 @@ public class Performance_DTO {
 	String ProductName;
 	int PlanId;
 	int UserId;
-	Timestamp ReportTime;
+	Timestamp ReportTime1;
+	Date ReportTime;
+	
 	String PerformanceComment;
 	int ProductionCount;
 
@@ -51,6 +53,18 @@ public class Performance_DTO {
 	}
 
 	public void setReportTime(Timestamp reportTime) {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public Date getReportTime() {
+		return ReportTime;
+	}
+
+	public void setReportTime(Date reportTime) {
 		ReportTime = reportTime;
 	}
 
