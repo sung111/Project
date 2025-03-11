@@ -249,6 +249,7 @@
         }
         #edit_delete_box{
         display: flex;
+        justify-content: center;
         }
     </style>
 </head>
@@ -399,8 +400,11 @@
             for(let i =0; i<hides.length ; i++){
             	hides[i].classList.add("none")
             }
+            for(let i =0; i<hides.length ; i++){
             	 oks[i].classList.add("none")
-            	cancels[i].classList.add("none")
+             	cancels[i].classList.add("none")
+            }
+            
             
             
           
