@@ -10,7 +10,7 @@
     <title>HHMES 생산관리</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/newworkorder.css">
-    <!-- <script src="../js/newworkorder.js"></script> -->
+    <!-- <script src="js/newworkorder.js"></script> -->
 </head>
 
 <body>
@@ -95,7 +95,7 @@
             <tr>
                 <td colspan="13">
                     <div class="order-buttonlayer-pagenation">
-                        <a><img src="../img/lefticon.png" alt="pagenationleft" class="pagenationicon"></a>
+                        <a><img src="img/lefticon.png" alt="pagenationleft" class="pagenationicon"></a>
 <a>1</a>
 <a>2</a>
 <a>3</a>
@@ -106,7 +106,7 @@
 <a>8</a>
 <a>9</a>
 <a>10</a>
-<a><img src="../img/righticon.png" alt="pagenationright" class="pagenationicon"></a>
+<a><img src="img/righticon.png" alt="pagenationright" class="pagenationicon"></a>
                     </div>
                 </td>
                 <td colspan="13" class="order-buttonlayer">
