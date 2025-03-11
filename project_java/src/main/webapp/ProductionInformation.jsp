@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OOOOO 생산 정보</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/productinfo.css">
-    <script src="../data/material.js"></script>
-    <script src="../data/productdata.js"></script>
-    <script src="../data/productinmaterialdata.js"></script>
-    <script src="../data/start.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/productinfo.css">
+    <script src="data/material.js"></script>
+    <script src="data/productdata.js"></script>
+    <script src="data/productinmaterialdata.js"></script>
+    <script src="data/start.js"></script>
 </head>
 
 <body>
