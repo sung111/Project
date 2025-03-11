@@ -7,314 +7,313 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>원재료/완제품조회</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>원재료/완제품조회</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
 
-        body {
-            width: 100%;
-           
-          
-        }
+body {
+	width: 100%;
+}
 
-        #top-contain {
-          
-            display: flex;
-            justify-content: end;
-            align-items: center;
-            
-        }
+#top-contain {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
 
-        .crud,
-        .button {
-   
-            border-radius: 10px;
-            height: 50px;
-            width: 80px;
-            background-color: #0056b3;
-            color: white;
-        }
+.crud, .button {
+	border-radius: 10px;
+	height: 50px;
+	width: 80px;
+	background-color: #0056b3;
+	color: white;
+}
 
-        #mid-contain {
-            border: 1px solid  #007bff;
-            border-radius: 20px;
-         
-        }
-        #mid-contain2 {
-            border: 1px solid  #007bff;
-            border-radius: 20px;
-         
-        }
+#mid-contain {
+	border: 1px solid #007bff;
+	border-radius: 20px;
+}
 
-        .mid-contain-article {
+#mid-contain2 {
+	border: 1px solid #007bff;
+	border-radius: 20px;
+}
 
-            display: inline-block;
-            margin: 10px;
+.mid-contain-article {
+	display: inline-block;
+	margin: 10px;
+}
 
-        }
+#check {
+	border-radius: 10px;
+	width: 50px;
+	height: 30px;
+}
 
+#main-contain {
+	margin-top: 20px;
+}
 
+table, tr, th, td {
+	/* 중복 테두리 제거 코드 */
+	border-collapse: collapse;
+	border: 1px solid #007bff;
+}
 
-        #check {
-            border-radius: 10px;
-            width: 50px;
-            height: 30px;
-        }
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
 
-        #main-contain {
-            margin-top: 20px;
+th, td {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	text-align: center;
+}
 
+th {
+	background-color: #007bff;
+}
 
-        }
+.manu-name {
+	width: 25%;
+}
 
-        table,
-        tr,
-        th,
-        td {
-            /* 중복 테두리 제거 코드 */
-            border-collapse: collapse;
-            border: 1px solid #007bff;
+.lotno {
+	width: 20%;
+}
 
-        }
+.ud {
+	width: 15%;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.button:hover {
+	background-color: rgb(149, 149, 155);
+}
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        th{
-            background-color: #007bff;
-        }
-        .manu-name {
-            width: 25%;
-        }
+#check-option {
+	border: 1px solid #007bff;
+	/* border-radius: 20px; */
+	width: 100px;
+	height: 30px;
+}
 
-        .lotno {
-            width: 20%;
-        }
+.none {
+	display: none;
+}
 
-        .ud {
-            width: 15%;
-        }
+#page-container {
+	/* border: 1px solid rebeccapurple; */
+	margin: 0 auto;
+	width: 200px;
+	display: flex;
+	justify-content: space-between;
+}
 
+.page-none {
+	display: none;
+}
 
-        .button:hover {
-            background-color: rgb(149, 149, 155);
-        }
+.page1 {
+	color: blueviolet;
+	font-weight: 900;
+	font-size: 20px;
+}
 
-        #check-option {
-            border: 1px solid #007bff;
-            /* border-radius: 20px; */
-            width: 100px;
-            height: 30px;
-        }
+.page-number:hover {
+	font-weight: 900;
+	font-size: 20px;
+	color: blueviolet;
+}
 
-        .none {
-            display: none;
-        }
+input[type=button] {
+	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+	padding: 6px 15px;
+	border: none;
+	cursor: pointer;
+	margin: 5px;
+}
 
-        #page-container {
-            /* border: 1px solid rebeccapurple; */
-            margin: 0 auto;
-            width: 200px;
-            display: flex;
-            justify-content: space-between;
+input[type=submit] {
+	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+	width: 60px;
+	height: 30px;
+	border: none;
+	cursor: pointer;
+	margin: 5px;
+}
 
+.poom {
+	width: 10%;
+}
 
-        }
+#radios {
+	margin-left: 20px;
+}
 
-        .page-none {
-            display: none;
-        }
+/* 넓이에따른 if문 0~600px까지만 적용  */
+@media screen and (max-width: 600px) {
+	.crud, .button {
+		height: 30px;
+		width: 30px;
+	}
+	#check-option- {
+		width: 100px;
+		height: 20px;
+	}
+	#check-option-button {
+		width: 50px;
+		height: 50px;
+	}
+	.mid-contain-article {
+		font-size: 10px;
+	}
+	#id3 {
+		margin-left: 10px;
+	}
+	#id4 {
+		margin-left: 35px;
+	}
+	#id6 {
+		margin-left: 15px;
+	}
+	#id7 {
+		margin-left: 10px;
+	}
+	#id8 {
+		margin-left: 15px;
+	}
+	table {
+		width: 100%;
+	}
+	th {
+		font-size: 11px;
+	}
+	td {
+		font-size: 10px;
+	}
+}
 
-        .page1 {
-            color: blueviolet;
-            font-weight: 900;
-            font-size: 20px;
-        }
+#title {
+	text-align: center;
+}
 
-        .page-number:hover {
-            font-weight: 900;
-            font-size: 20px;
-            color: blueviolet;
-        }
-        input[type=button]{
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            padding: 6px 15px;
-            border: none;
-            cursor: pointer;
-            margin: 5px;
-        }
-        input[type=submit]{
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            width: 60px;
-            height: 30px;
-            border: none;
-            cursor: pointer;
-            margin: 5px;
-        }
-        .poom{
-            width: 10%;
-        }
-        #radios{
-            margin-left: 20px;
-        }
-       
+#materials_hide:hover {
+	background-color: #d9d9d9;
+}
 
+#finished_hide:hover {
+	background-color: #d9d9d9;
+}
 
-
-
-        /* 넓이에따른 if문 0~600px까지만 적용  */
-        @media screen and (max-width: 600px) {
-
-            .crud,
-            .button {
-                height: 30px;
-                width: 30px;
-            }
-
-            #check-option- {
-                width: 100px;
-                height: 20px;
-            }
-
-            #check-option-button {
-                width: 50px;
-                height: 50px;
-            }
-
-            .mid-contain-article {
-                font-size: 10px;
-            }
-
-            #id3 {
-                margin-left: 10px;
-            }
-
-            #id4 {
-                margin-left: 35px;
-            }
-
-            #id6 {
-                margin-left: 15px;
-            }
-
-            #id7 {
-                margin-left: 10px;
-            }
-
-            #id8 {
-                margin-left: 15px;
-            }
-
-            table {
-                width: 100%;
-            }
-
-            th {
-                font-size: 11px;
-            }
-
-            td {
-                font-size: 10px;
-            }
-
-
-        }
-        #title{
-            text-align: center;
-        }
-       
-        #materials_hide:hover{
-            background-color: #d9d9d9;
-        }
-        #finished_hide:hover{
-            background-color: #d9d9d9;
-        }
-        #edit_delete_box{
-        display: flex;
-        justify-content: center;
-        }
-    </style>
+#edit_delete_box {
+	display: flex;
+	justify-content: center;
+}
+</style>
 </head>
 
 <body>
-    <div id="title">
-    <h1>원재료/완제품 조회</h1>
-    </div>
-    <div id="top-contain">
-         <form method="get" action="part_code">
-        	<select name="option" id="check-option" name="view_value">
-            <option value="1">원재료 조회</option>
-            <option value="2">완재품 조회</option>
-            <option value="3">전체 조회 </option>
-       		 </select>
-       		  <input type="submit" value="조회" class="button">
-            </form>
-            
-   
-        	<input type="button" value="원재료생성" id="materials_hide" name="generation">
-        	<input type="button" value="완제품생성" id="finished_hide" name="generation">
-      
+	<div id="title">
+		<h1>원재료/완제품 조회</h1>
+	</div>
+	<div id="top-contain">
+		<form method="get" action="part_code">
+			<select name="option" id="check-option" name="view_value">
+				<option value="1">원재료 조회</option>
+				<option value="2">완재품 조회</option>
+				<option value="3">전체 조회</option>
+			</select> <input type="submit" value="조회" class="button">
+		</form>
 
-    </div>
-        <form method="post" action="part_code">
-    <div id="mid-contain">
-        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data" name="materialname"> </div>
-        <div class="mid-contain-article" id="materials_id2"> 가격:<input type="text" class="mid-data" name="price"> </div>
-        <div class="mid-contain-article" id="materials_id3"> 규격:<input type="text" class="mid-data" name="spec"> </div>
-        <div class="mid-contain-article" id="materials_id4"> 단위:<input type="text" class="mid-data" name="unit"> </div>
-        <br>
-        <div class="mid-contain-article" id="materials_id5"> 공급업체:<input type="text" class="mid-data" name="supplier"> </div>
-        <div class="mid-contain-article" id="materials_id6"> 품번:<input type="text" class="mid-data" name="partNumber"> </div>
-        <div class="mid-contain-article" id="materials_id7"> LotNo:<input type="text" class="mid-data" name="lotnumber"> </div>
-        <div class="mid-contain-article" id="materials_id8"> 창고위치:<input type="text" class="mid-data" name="warehouse"> </div>
-        
-        <div class="mid-contain-article " id="materials_id9">
-            <input type="submit" value="생성" id="materials_c" class="button">
-        </form>
-            <input type="button" value="확인" id="materials_u">
-            <input type="button" value="취소" id="materials_ud">
-            <input type="button" value="생성" id="materials_c2">
-            <input type="button" value="확인" id="materials_u2">
-            <input type="button" value="취소" id="materials_ud2">
-        </div>
-    </div>
-    
-    <div id="mid-contain2">
-        <div class="mid-contain-article" id="finished_id1"> 완제품명:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="finished_id2"> 품번:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="finished_id4"> 보관창고위치:<input type="text" class="mid-data"> </div>
-        <br>
-        <div class="mid-contain-article" id="finished_id5"> 가격:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="finished_id6"> 규격:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="finished_id7"> 단위:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article" id="finished_id8"> LotNo:<input type="text" class="mid-data"> </div>
-        <div class="mid-contain-article " id="finished_id9">
-            <input type="button" value="생성" id="finished_c">
-            <input type="button" value="확인" id="finished_u">
-            <input type="button" value="취소" id="finished_ud">
-            <input type="button" value="생성" id="finished_c2">
-            <input type="button" value="확인" id="finished_u2">
-            <input type="button" value="취소" id="finished_ud2">
-        </div>
-    </div>
+
+		<input type="button" value="원재료생성" id="materials_hide" name="generation"> 
+		<input type="button" value="완제품생성" id="finished_hide" name="generation">
+
+
+	</div>
+	<form method="post" action="part_code">
+		<div id="mid-contain">
+			<div class="mid-contain-article" id="materials_id1">
+				제품명:<input type="text" class="mid-data" name="materialname">
+			</div>
+			<div class="mid-contain-article" id="materials_id2">
+				가격:<input type="text" class="mid-data" name="price">
+			</div>
+			<div class="mid-contain-article" id="materials_id3">
+				규격:<input type="text" class="mid-data" name="spec">
+			</div>
+			<div class="mid-contain-article" id="materials_id4">
+				단위:<input type="text" class="mid-data" name="unit">
+			</div>
+			<br>
+			<div class="mid-contain-article" id="materials_id5">
+				공급업체:<input type="text" class="mid-data" name="supplier">
+			</div>
+			<div class="mid-contain-article" id="materials_id6">
+				품번:<input type="text" class="mid-data" name="partNumber">
+			</div>
+			<div class="mid-contain-article" id="materials_id7">
+				LotNo:<input type="text" class="mid-data" name="lotnumber">
+			</div>
+			<div class="mid-contain-article" id="materials_id8">
+				창고위치:<input type="text" class="mid-data" name="warehouse">
+			</div>
+
+			<div class="mid-contain-article " id="materials_id9">
+				<input type="hidden" name="type" value="creat">
+				<input type="submit" value="생성" id="materials_c" class="button">
+	</form>
+	<input type="button" value="확인" id="materials_u">
+	<input type="button" value="취소" id="materials_ud">
+	<input type="button" value="생성" id="materials_c2">
+	<input type="button" value="확인" id="materials_u2">
+	<input type="button" value="취소" id="materials_ud2">
+	</div>
+	</div>
+
+	<div id="mid-contain2">
+		<div class="mid-contain-article" id="finished_id1">
+			완제품명:<input type="text" class="mid-data">
+		</div>
+		<div class="mid-contain-article" id="finished_id2">
+			품번:<input type="text" class="mid-data">
+		</div>
+		<div class="mid-contain-article" id="finished_id4">
+			보관창고위치:<input type="text" class="mid-data">
+		</div>
+		<br>
+		<div class="mid-contain-article" id="finished_id5">
+			가격:<input type="text" class="mid-data">
+		</div>
+		<div class="mid-contain-article" id="finished_id6">
+			규격:<input type="text" class="mid-data">
+		</div>
+		<div class="mid-contain-article" id="finished_id7">
+			단위:<input type="text" class="mid-data">
+		</div>
+		<div class="mid-contain-article" id="finished_id8">
+			LotNo:<input type="text" class="mid-data">
+		</div>
+		<div class="mid-contain-article " id="finished_id9">
+			<input type="button" value="생성" id="finished_c"> <input
+				type="button" value="확인" id="finished_u"> <input
+				type="button" value="취소" id="finished_ud"> <input
+				type="button" value="생성" id="finished_c2"> <input
+				type="button" value="확인" id="finished_u2"> <input
+				type="button" value="취소" id="finished_ud2">
+		</div>
+	</div>
 
 	<div id="main-contain">
 		<!-- 원재료 테이블 -->
@@ -330,88 +329,139 @@
 				<th>창고위치</th>
 				<th class="ud">수정/삭제</th>
 			</tr>
-			
-<c:forEach var="dto" items="${resultList}">
-			<tr class="table_tr">
-			<form>
-				<td><span class="text_view">${dto.materialname}</span><input type="text" value="${dto.materialname}" class="text_hide"></td>
-				<td><span class="text_view">${dto.price}</span><input type="text" value="${dto.price}" class="text_hide"></td>
-				<td><span class="text_view">${dto.spec}</span><input type="text" value="${dto.spec}" class="text_hide"></td>
-				<td><span class="text_view">${dto.unit}</span><input type="text" value="${dto.unit}" class="text_hide"></td>
-				<td><span class="text_view">${dto.supplier}</span><input type="text" value="${dto.supplier}" class="text_hide"></td>
-				<td><span class="text_view">${dto.partNumber}</span><input type="text" value="${dto.partNumber}" class="text_hide"></td>
-				<td><span class="text_view">${dto.lotnumber}</span><input type="text" value="${dto.lotnumber}" class="text_hide"></td>
-				<td><span class="text_view">${dto.warehouse}</span><input type="text" value="${dto.warehouse}" class="text_hide"></td>
-				<td>
-					<div id="edit_delete_box">
-						<input type="button" value="수정">
-						<input type="submit" value="확인" class="ok">
-						<input type="button" value="취소" class="cancel">
-				</form>
-						<form>
-							<input type="hidden" value="update1" name="update">
-							<input type="button" value="삭제">				
-						</form>
+
+			<c:forEach var="dto" items="${resultList}">
+				<tr class="table_tr">
+					<form method="post" action="part_code">
+						<td><span class="text_view">${dto.materialname}</span>
+						<input type="text" value="${dto.materialname}" class="text_hide" name="materialname2"></td>
+						<td><span class="text_view">${dto.price}</span>
+						<input type="text" value="${dto.price}" class="text_hide" name="price2"></td>
+						
+						<td><span class="text_view">${dto.spec}</span>
+						<input type="text" value="${dto.spec}" class="text_hide" name="spec2"></td>
+						<td><span class="text_view">${dto.unit}</span><input
+							type="text" value="${dto.unit}" class="text_hide" name="unit2"></td>
+						<td><span class="text_view">${dto.supplier}</span><input
+							type="text" value="${dto.supplier}" class="text_hide" name="supplier2"></td>
+						<td><span class="text_view">${dto.partNumber}</span><input
+							type="text" value="${dto.partNumber}" class="text_hide" name="partNumber2"></td>
+						<td><span class="text_view">${dto.lotnumber}</span><input
+							type="text" value="${dto.lotnumber}" class="text_hide" name="lotnumber2"></td>
+						<td><span class="text_view">${dto.warehouse}</span><input
+							type="text" value="${dto.warehouse}" class="text_hide" name="warehouse2"></td>
+						<td>
+							<div id="edit_delete_box">
+								<input type="button" value="수정" class="update" > 
+								<input type="hidden" name="type" value="update">
+								<input type="submit" value="확인" class="ok">
+								 <input type="button" value="취소" class="cancel">
+					</form>
+					<form>
+						<input type="hidden" value="del" name="del"> <input
+							type="button" value="삭제" class="delet">
+					</form>
 					</div>
-				</td>
-				
-			</tr>
-</c:forEach>
+					</td>
+
+				</tr>
+			</c:forEach>
 
 		</table>
 	</div>
-    
-      
-    </div>
-    <script>
-        window.addEventListener("load", function () {
 
-            //처음 항목 출력 
-            document.querySelector("#materials_c").classList.remove("none")
-            document.querySelector("#materials_u").classList.add("none")
-            document.querySelector("#materials_ud").classList.add("none")
-            document.querySelector("#materials_c2").classList.add("none")
-            document.querySelector("#materials_u2").classList.add("none")
-            document.querySelector("#materials_ud2").classList.add("none")
-            
-            document.querySelector("#finished_c").classList.remove("none")
-            document.querySelector("#finished_u").classList.add("none")
-            document.querySelector("#finished_ud").classList.add("none")
-            document.querySelector("#finished_c2").classList.add("none")
-            document.querySelector("#finished_u2").classList.add("none")
-            document.querySelector("#finished_ud2").classList.add("none")
-            
-            document.querySelector("#mid-contain").classList.add("none")
-            document.querySelector("#mid-contain2").classList.add("none")
 
-            document.querySelector("#materials_hide").addEventListener("click", function () {
-                document.querySelector("#mid-contain").classList.remove("none")
-                document.querySelector("#mid-contain2").classList.add("none")
-            })
-              document.querySelector("#finished_hide").addEventListener("click", function () {
-                document.querySelector("#mid-contain").classList.add("none")
-                document.querySelector("#mid-contain2").classList.remove("none")
-               
+	</div>
+	<script>
+		window.addEventListener("load", function() {
 
-            })
-            let oks = document.querySelectorAll(".ok")
-            let cancels = document.querySelectorAll(".cancel")
-            let hides = document.querySelectorAll(".text_hide")
-            for(let i =0; i<hides.length ; i++){
-            	hides[i].classList.add("none")
-            }
-            for(let i =0; i<hides.length ; i++){
-            	 oks[i].classList.add("none")
-             	cancels[i].classList.add("none")
-            }
-            
-            
-            
-          
+			//처음 항목 출력 
+			document.querySelector("#materials_c").classList.remove("none")
+			document.querySelector("#materials_u").classList.add("none")
+			document.querySelector("#materials_ud").classList.add("none")
+			document.querySelector("#materials_c2").classList.add("none")
+			document.querySelector("#materials_u2").classList.add("none")
+			document.querySelector("#materials_ud2").classList.add("none")
 
-        
-        })
-    </script>
+			document.querySelector("#finished_c").classList.remove("none")
+			document.querySelector("#finished_u").classList.add("none")
+			document.querySelector("#finished_ud").classList.add("none")
+			document.querySelector("#finished_c2").classList.add("none")
+			document.querySelector("#finished_u2").classList.add("none")
+			document.querySelector("#finished_ud2").classList.add("none")
+
+			document.querySelector("#mid-contain").classList.add("none")
+			document.querySelector("#mid-contain2").classList.add("none")
+
+			document.querySelector("#materials_hide").addEventListener(
+					"click",
+					function() {
+						document.querySelector("#mid-contain").classList
+								.remove("none")
+						document.querySelector("#mid-contain2").classList
+								.add("none")
+					})
+			document.querySelector("#finished_hide").addEventListener(
+					"click",
+					function() {
+						document.querySelector("#mid-contain").classList
+								.add("none")
+						document.querySelector("#mid-contain2").classList
+								.remove("none")
+
+					})
+			let oks = document.querySelectorAll(".ok")
+			let cancels = document.querySelectorAll(".cancel")
+			let hides = document.querySelectorAll(".text_hide")
+			for (let i = 0; i < hides.length; i++) {
+				hides[i].classList.add("none")
+			}
+			for (let i = 0; i < cancels.length; i++) {
+				cancels[i].classList.add("none")
+			}
+			for (let i = 0; i < oks.length; i++) {
+				oks[i].classList.add("none")
+			}
+			let updates = document.querySelectorAll(".update")
+			for (let i = 0; i < updates.length; i++) {
+				//수정이벤트
+				updates[i].addEventListener("click", function(e) {
+					console.log(e.target.parentNode.parentNode.parentNode)
+					let update = e.target.parentNode.parentNode.parentNode
+					let textHides = update.querySelectorAll(".text_hide")
+					let textViews = update.querySelectorAll(".text_view")
+
+					for (let y = 0; y < textHides.length; y++) {
+						textHides[y].classList.remove("none")
+						textViews[y].classList.add("none")
+					}
+					console.log(e.target.parentNode)
+					//확인버튼 보이기
+					e.target.parentNode.querySelector(".ok").classList
+							.remove("none")
+					//취소보튼 보이기
+					e.target.parentNode.querySelector(".cancel").classList
+							.remove("none")
+					//수정 삭제버튼 안보이기
+					e.target.parentNode.querySelector(".delet").classList
+							.add("none")
+					e.target.classList.add("none")
+					//             		
+					//확인클릭 이벤트
+// 					e.target.parentNode.querySelector(".ok").addEventListener(
+// 							"clikc", function(ev) {
+// 								for (let y = 0; y < textHides.length; y++) {
+// 									textHides[y].classList.add("none")
+// 									textViews[y].classList.remove("none")
+// 								}
+
+// 							})
+
+				})
+			}
+
+		})
+	</script>
 </body>
 
 </html>

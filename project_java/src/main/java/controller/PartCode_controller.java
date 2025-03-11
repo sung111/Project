@@ -60,35 +60,67 @@ public class PartCode_controller extends HttpServlet {
 		
 		try {
 			
-			if("generation".equals("원재료생성")) {
-				String materialname = request.getParameter("materialname");
-				String price = request.getParameter("price");
-				String spec = request.getParameter("spec");
-				String unit = request.getParameter("unit");
-				String supplier = request.getParameter("supplier");
-				String partNumber = request.getParameter("partNumber");
-				String lotnumber = request.getParameter("lotnumber");
-				String warehouse = request.getParameter("warehouse");
-				
-				materials_DTO.setMaterialname(materialname);
-				materials_DTO.setPrice(Integer.parseInt(price));
-				materials_DTO.setSpec(spec);
-				materials_DTO.setUnit(unit);
-				materials_DTO.setSupplier(supplier);
-				materials_DTO.setPartNumber(partNumber);
-				materials_DTO.setLotnumber(lotnumber);
-				materials_DTO.setWarehouse(warehouse);
-				int result = materials_DAO.insertMaterials(materials_DTO);
-			}
+			String type = request.getParameter("type");
 			
-//			System.out.println("materialname :"+ materialname );
-//			System.out.println("price :"+price);
-//			System.out.println("spec :"+spec);
-//			System.out.println("unit :"+unit);
-//			System.out.println("supplier :"+supplier);
-//			System.out.println("partNumber :"+partNumber);
-//			System.out.println("lotnumber :"+lotnumber);
-//			System.out.println("warehouse :"+warehouse);			
+			
+				if(type.equals("creat")) {
+					System.out.println("원재료생성됨");
+					String materialname = request.getParameter("materialname");
+					String price = request.getParameter("price");
+					String spec = request.getParameter("spec");
+					String unit = request.getParameter("unit");
+					String supplier = request.getParameter("supplier");
+					String partNumber = request.getParameter("partNumber");
+					String lotnumber = request.getParameter("lotnumber");
+					String warehouse = request.getParameter("warehouse");
+					
+					materials_DTO.setMaterialname(materialname);
+					materials_DTO.setPrice(Integer.parseInt(price));
+					materials_DTO.setSpec(spec);
+					materials_DTO.setUnit(unit);
+					materials_DTO.setSupplier(supplier);
+					materials_DTO.setPartNumber(partNumber);
+					materials_DTO.setLotnumber(lotnumber);
+					materials_DTO.setWarehouse(warehouse);
+					int result = materials_DAO.insertMaterials(materials_DTO);
+					
+				}else if (type.equals("update")){
+					String materialname2 = request.getParameter("materialname2");
+					String price2 = request.getParameter("price2");
+					String spec2 = request.getParameter("spec2");
+					String unit2= request.getParameter("unit2");
+					String supplier2 = request.getParameter("supplier2");
+					String partNumber2 = request.getParameter("partNumber2");
+					String lotnumber2 = request.getParameter("lotnumber2");
+					String warehouse2 = request.getParameter("warehouse2");
+					
+					System.out.println(materialname2);
+					System.out.println(price2);
+					System.out.println(spec2);
+					System.out.println(unit2);
+					System.out.println(supplier2);
+					System.out.println(partNumber2);
+					System.out.println(lotnumber2);
+					System.out.println(warehouse2);
+					
+					
+					
+					materials_DTO.setMaterialname(materialname2);
+					materials_DTO.setPrice(Integer.parseInt(price2));
+					materials_DTO.setSpec(spec2);
+					materials_DTO.setUnit(unit2);
+					materials_DTO.setSupplier(supplier2);
+					materials_DTO.setPartNumber(partNumber2);
+					materials_DTO.setLotnumber(lotnumber2);
+					materials_DTO.setWarehouse(warehouse2);
+					materials_DAO.updateMaterials(materials_DTO);
+					
+				}
+				
+		
+			
+			
+		
 			
 		}catch (Exception e) {
 			System.err.println("버그발생 doPost");
