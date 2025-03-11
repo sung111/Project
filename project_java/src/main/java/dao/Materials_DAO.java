@@ -132,29 +132,37 @@ public class Materials_DAO {
 
 			// [SQL 준비]
 			String 	query =  " update MATERIALS ";
-					query += " set MATERIALNAME  = ? ";
-					query += " set price  = ? ";
-					query += " set spec  = ? ";
-					query += " set unit  = ? ";
-					query += " set supplier  = ? ";
-					query += " set partNumber  = ? ";
-					query += " set lotnumber  = ? ";
-					query += " set warehouse  = ? ";
-					query += " where MATERIALNAME = ? ";
+					query += " set price  = ?,";
+					query += " spec  = ?,";
+					query += " unit  = ?,";
+					query += " supplier  = ?,";
+					query += " partNumber  = ?,";
+					query += " lotnumber  = ?,";
+					query += " warehouse  = ?";
+					query += " where MATERIALNAME = ?";
 					
 			
 					
 			PreparedStatement ps = con.prepareStatement(query);
 			
-			ps.setString(1, materials_DTO.getMaterialname());
-			ps.setInt(2, materials_DTO.getPrice());
-			ps.setString(3, materials_DTO.getSpec());
-			ps.setString(4, materials_DTO.getUnit());
-			ps.setString(5, materials_DTO.getSupplier());
-			ps.setString(6, materials_DTO.getPartNumber());
-			ps.setString(7, materials_DTO.getLotnumber());
-			ps.setString(8, materials_DTO.getWarehouse());
+			ps.setInt(1, materials_DTO.getPrice());
+			ps.setString(2, materials_DTO.getSpec());
+			ps.setString(3, materials_DTO.getUnit());
+			ps.setString(4, materials_DTO.getSupplier());
+			ps.setString(5, materials_DTO.getPartNumber());
+			ps.setString(6, materials_DTO.getLotnumber());
+			ps.setString(7, materials_DTO.getWarehouse());
+			ps.setString(8, materials_DTO.getMaterialname());
 			
+			System.out.println("----------여기는 DAO입니다");
+			System.out.println(materials_DTO.getPrice());
+			System.out.println(materials_DTO.getSpec());
+			System.out.println(materials_DTO.getUnit());
+			System.out.println(materials_DTO.getSupplier());
+			System.out.println(materials_DTO.getPartNumber());
+			System.out.println(materials_DTO.getLotnumber());
+			System.out.println(materials_DTO.getWarehouse());
+			System.out.println(materials_DTO.getMaterialname());
 			
 			
 			// 왼쪽 : prepareStatement = SQL실행을 위한 객체
@@ -165,6 +173,36 @@ public class Materials_DAO {
 			// ResultSet executeQuery : SQL중 select 실행
 			// int executeUpdate() : select 외 모든것
 			// 
+			result = ps.executeUpdate();
+
+		
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteMaterials(Materials_DTO materials_DTO) {
+		System.out.println("Materials_DTO deleteMaterials 실행");
+		
+		int result = -1;
+		try {
+			// [db 접속 시작]
+			Context ctx = new InitialContext(); // JNDI 컨텍스트 생성
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");// 오라클 이라는 이름에 DataSource 찾기
+			// 커넥션 풀에서 접속 정보를 가져오기
+			// 접속이 안되면 null
+			Connection con = ds.getConnection(); // DB 연결
+			// DB 접속 완
+
+			// [SQL 준비]
+			String 	query =  " DELETE FROM MATERIALS ";
+					query += " WHERE MATERIALNAME  = ?";
+					
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, materials_DTO.getMaterialname());
+			System.out.println("materials_DTO.getMaterialname() :"+materials_DTO.getMaterialname());
 			result = ps.executeUpdate();
 
 		

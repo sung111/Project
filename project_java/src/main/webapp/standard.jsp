@@ -229,11 +229,12 @@ input[type=submit] {
 	</div>
 	<div id="top-contain">
 		<form method="get" action="part_code">
-			<select name="option" id="check-option" name="view_value">
+			<select name="view_value" id="check-option" >
 				<option value="1">원재료 조회</option>
 				<option value="2">완재품 조회</option>
 				<option value="3">전체 조회</option>
-			</select> <input type="submit" value="조회" class="button">
+			</select> 
+			<input type="submit" value="조회" class="button">
 		</form>
 
 
@@ -274,45 +275,41 @@ input[type=submit] {
 				<input type="hidden" name="type" value="creat">
 				<input type="submit" value="생성" id="materials_c" class="button">
 	</form>
-	<input type="button" value="확인" id="materials_u">
-	<input type="button" value="취소" id="materials_ud">
-	<input type="button" value="생성" id="materials_c2">
-	<input type="button" value="확인" id="materials_u2">
-	<input type="button" value="취소" id="materials_ud2">
-	</div>
-	</div>
+	
+	
 
-	<div id="mid-contain2">
-		<div class="mid-contain-article" id="finished_id1">
-			완제품명:<input type="text" class="mid-data">
+	</div>
+	</div>
+	<form method="post" action="part_code">
+		<div id="mid-contain2">
+			<div class="mid-contain-article" id="finished_id1">
+				완제품명:<input type="text" class="mid-data" name="productname">
+			</div>
+			<div class="mid-contain-article" id="finished_id2">
+				품번:<input type="text" class="mid-data" name="partnumber">
+			</div>
+			<div class="mid-contain-article" id="finished_id4">
+				보관창고위치:<input type="text" class="mid-data" name="warehouse">
+			</div>
+			<br>
+			<div class="mid-contain-article" id="finished_id5" >
+				가격:<input type="text" class="mid-data" name="price">
+			</div>
+			<div class="mid-contain-article" id="finished_id6" >
+				규격:<input type="text" class="mid-data" name="spec">
+			</div>
+			<div class="mid-contain-article" id="finished_id7" >
+				단위:<input type="text" class="mid-data" name="unit">
+			</div>
+			<div class="mid-contain-article" id="finished_id8" >
+				LotNo:<input type="text" class="mid-data" name="lotnumber">
+			</div>
+			<div class="mid-contain-article " id="finished_id9">
+				<input type="hidden" value="finished_creat" name="type">
+				<input type="submit" value="생성" id="finished_c">
+	</form>
 		</div>
-		<div class="mid-contain-article" id="finished_id2">
-			품번:<input type="text" class="mid-data">
-		</div>
-		<div class="mid-contain-article" id="finished_id4">
-			보관창고위치:<input type="text" class="mid-data">
-		</div>
-		<br>
-		<div class="mid-contain-article" id="finished_id5">
-			가격:<input type="text" class="mid-data">
-		</div>
-		<div class="mid-contain-article" id="finished_id6">
-			규격:<input type="text" class="mid-data">
-		</div>
-		<div class="mid-contain-article" id="finished_id7">
-			단위:<input type="text" class="mid-data">
-		</div>
-		<div class="mid-contain-article" id="finished_id8">
-			LotNo:<input type="text" class="mid-data">
-		</div>
-		<div class="mid-contain-article " id="finished_id9">
-			<input type="button" value="생성" id="finished_c"> <input
-				type="button" value="확인" id="finished_u"> <input
-				type="button" value="취소" id="finished_ud"> <input
-				type="button" value="생성" id="finished_c2"> <input
-				type="button" value="확인" id="finished_u2"> <input
-				type="button" value="취소" id="finished_ud2">
-		</div>
+	
 	</div>
 
 	<div id="main-contain">
@@ -357,10 +354,77 @@ input[type=submit] {
 								<input type="submit" value="확인" class="ok">
 								 <input type="button" value="취소" class="cancel">
 					</form>
-					<form>
-						<input type="hidden" value="del" name="del"> <input
-							type="button" value="삭제" class="delet">
+					
+					<form method="post" action="part_code">
+						<input type="text" value="${dto.materialname}" name="delvalue" class="delvalue">
+						<input type="hidden" value="del" name="type"> 
+						<input type="submit" value="삭제" class="delet">
 					</form>
+					
+					</div>
+					</td>
+
+				</tr>
+			</c:forEach>
+
+		</table>
+	</div>
+	
+	<div id="finish-contain">
+		<!-- 원재료 테이블 -->
+		<table class="start-table">
+			<tr>
+				<th class="manu-name poom">완제품명</th>
+				<th>품번</th>
+				<th>유통기한 설명</th>
+				<th>보관창고 위치</th>
+				<th>가격</th>
+				<th>규격</th>
+				<th>단위</th>
+				<th class="lotno">LotNo</th>
+				<th class="ud">수정/삭제</th>
+			</tr>
+
+			<c:forEach var="dto" items="${resultList}">
+				<tr class="table_tr">
+					<form method="post" action="part_code">
+						<td><span class="text_view">${dto.materialname}</span>
+						<input type="text" value="${dto.materialname}" class="text_hide" name="materialname2"></td>
+						
+						<td><span class="text_view">${dto.price}</span>
+						<input type="text" value="${dto.price}" class="text_hide" name="price2"></td>
+						
+						<td><span class="text_view">${dto.spec}</span>
+						<input type="text" value="${dto.spec}" class="text_hide" name="spec2"></td>
+						
+						<td><span class="text_view">${dto.unit}</span><input
+							type="text" value="${dto.unit}" class="text_hide" name="unit2"></td>
+						
+						<td><span class="text_view">${dto.supplier}</span><input
+							type="text" value="${dto.supplier}" class="text_hide" name="supplier2"></td>
+						
+						<td><span class="text_view">${dto.partNumber}</span><input
+							type="text" value="${dto.partNumber}" class="text_hide" name="partNumber2"></td>
+						
+						<td><span class="text_view">${dto.lotnumber}</span><input
+							type="text" value="${dto.lotnumber}" class="text_hide" name="lotnumber2"></td>
+						
+						<td><span class="text_view">${dto.warehouse}</span><input
+							type="text" value="${dto.warehouse}" class="text_hide" name="warehouse2"></td>
+						<td>
+							<div id="edit_delete_box">
+								<input type="button" value="수정" class="update" > 
+								<input type="hidden" name="type" value="update">
+								<input type="submit" value="확인" class="ok">
+								 <input type="button" value="취소" class="cancel">
+					</form>
+					
+					<form method="post" action="part_code">
+						<input type="text" value="${dto.materialname}" name="delvalue" class="delvalue">
+						<input type="hidden" value="del" name="type"> 
+						<input type="submit" value="삭제" class="delet">
+					</form>
+					
 					</div>
 					</td>
 
@@ -376,19 +440,11 @@ input[type=submit] {
 		window.addEventListener("load", function() {
 
 			//처음 항목 출력 
-			document.querySelector("#materials_c").classList.remove("none")
-			document.querySelector("#materials_u").classList.add("none")
-			document.querySelector("#materials_ud").classList.add("none")
-			document.querySelector("#materials_c2").classList.add("none")
-			document.querySelector("#materials_u2").classList.add("none")
-			document.querySelector("#materials_ud2").classList.add("none")
+		
 
 			document.querySelector("#finished_c").classList.remove("none")
-			document.querySelector("#finished_u").classList.add("none")
-			document.querySelector("#finished_ud").classList.add("none")
-			document.querySelector("#finished_c2").classList.add("none")
-			document.querySelector("#finished_u2").classList.add("none")
-			document.querySelector("#finished_ud2").classList.add("none")
+			
+			
 
 			document.querySelector("#mid-contain").classList.add("none")
 			document.querySelector("#mid-contain2").classList.add("none")
@@ -413,6 +469,7 @@ input[type=submit] {
 			let oks = document.querySelectorAll(".ok")
 			let cancels = document.querySelectorAll(".cancel")
 			let hides = document.querySelectorAll(".text_hide")
+			let delvalues = document.querySelectorAll(".delvalue")
 			for (let i = 0; i < hides.length; i++) {
 				hides[i].classList.add("none")
 			}
@@ -421,6 +478,9 @@ input[type=submit] {
 			}
 			for (let i = 0; i < oks.length; i++) {
 				oks[i].classList.add("none")
+			}
+			for (let i = 0; i < oks.length; i++) {
+				delvalues[i].classList.add("none")
 			}
 			let updates = document.querySelectorAll(".update")
 			for (let i = 0; i < updates.length; i++) {
@@ -431,8 +491,10 @@ input[type=submit] {
 					let textHides = update.querySelectorAll(".text_hide")
 					let textViews = update.querySelectorAll(".text_view")
 
-					for (let y = 0; y < textHides.length; y++) {
+					for (let y = 1; y < textHides.length; y++) {
 						textHides[y].classList.remove("none")
+					}
+					for (let y = 1; y < textHides.length; y++) {
 						textViews[y].classList.add("none")
 					}
 					console.log(e.target.parentNode)
