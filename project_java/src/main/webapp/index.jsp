@@ -74,7 +74,7 @@
             </ol>
         </div>
         <div class="navopen-shadow"></div>
-        <iframe src="componant/MainTitle.jsp"></iframe>
+        <iframe src="MainTitle.jsp"></iframe>
     </div>
 
 <script>
