@@ -5,13 +5,13 @@ import java.sql.Timestamp;
 //실적테이블
 public class Performance_DTO {
 
-	int PerformanceId;
-	String ProductName;
-	int PlanId;
-	int UserId;
-	Timestamp ReportTime;
-	String PerformanceComment;
-	int ProductionCount;
+	int PerformanceId;			// 실적 시퀀스 번호
+	String ProductName;			// 완제품명
+	int PlanId;					// 생산계획 시퀀스번호
+	int UserId;					// 유저 id
+	Timestamp ReportTime;		// 실적등록 시간
+	String PerformanceComment;	// 코멘트
+	int ProductionCount;		// 생산수량
 	
 	public int getPerformanceId() {
 		return PerformanceId;

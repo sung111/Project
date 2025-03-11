@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -30,9 +33,9 @@ public class Performance_DAO {
 //			ps.setString( 몇번째 ? , value );
 			ps.setString(1, performDTO.getProductName());
 //			Timestamp 어떻게 뽑아낼지 공부하기.
-			ps.setTimestamp(1, performDTO.getReportTime());
-			ps.setString(1, performDTO.getPerformanceComment());
-			ps.setInt(1, performDTO.getProductionCount());
+			ps.setTimestamp(2, performDTO.getReportTime());
+			ps.setString(3, performDTO.getPerformanceComment());
+			ps.setInt(4, performDTO.getProductionCount());
 			
 			result = ps.executeUpdate();
 			
@@ -44,6 +47,40 @@ public class Performance_DAO {
 		return result;
 		
 		
+	}
+	
+	public List selectWorkOrder() {
+		
+		System.out.println("List 타입 selectWorkOrder 실행");
+		
+		List list = new ArrayList();
+		
+		Context ctx;
+		try {
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			
+			Connection con = ds.getConnection();
+			
+			String query = " select * from productionplans ";
+			PreparedStatement ps = con.prepareStatement(query);
+			
+//			excuteQuery : SQL 중 select 실행
+//			executeUpdate : select 외 모든것
+//			ResultSet : select 조호 ㅣ결과 전체 : 엑셀 테이블 느낌
+			ResultSet rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				Performance_DTO dto = new Performance_DTO();
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
 	}
 	
 	

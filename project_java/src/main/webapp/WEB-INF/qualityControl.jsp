@@ -50,7 +50,7 @@
 					<button class="btn2">제품 합격 / 불합격 기준</button>
 				</div>
 			</div>
-			<form method="post" action="qualityControl">						<!-- form 여기있어요 -->
+			<form method="post" action="qualityControl">							<!-- form n여기있어요 -->
 				<div class="right">
 					<div class="rightTop">
 						<div class="wp2">제품명</div>
@@ -65,17 +65,19 @@
 							<input type="datetime-local" class="date2" name="date">
 							<div>
 								합격 갯수입력 : <input type="number" class="myInput" min="1" max="100"
-									oninput="validity.valid||(value='')" placeholder="0" name="passPack"> pack
+									oninput="validity.valid||(value='')" placeholder="0"
+									name="passPack"> pack
 							</div>
 							<div>
 								불합 개수입력 : <input type="number" class="myInput" min="1" max="100"
-									oninput="validity.valid||(value='')" placeholder="0" name="failPack">
-								pack
+									oninput="validity.valid||(value='')" placeholder="0"
+									name="failPack"> pack
 							</div>
 						</div>
 					</div>
 					<div class="insert">
-						<textarea name="" id="" placeholder="기타사항" class="textBox"	rows="2" name=""></textarea>
+						<textarea name="" id="" placeholder="기타사항" class="textBox"
+							rows="2" name=""></textarea>
 						<button class="btn3">등록</button>
 					</div>
 					<div class="BB">

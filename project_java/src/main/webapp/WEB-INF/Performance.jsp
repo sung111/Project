@@ -27,7 +27,11 @@
 					<button class="btn1">조회</button>
 				</div>
 			</div>
-			<div class="instView"></div>
+			<div class="instView">
+			<%-- <%@ page include  %> --%>
+			<jsp:include page="../WorkOrder.jsp"></jsp:include>
+				<!-- <iframe src="WorkOrder.jsp" style="width:100%; hieght:100%"></iframe> -->
+			</div>
 		</div>
 		<div>
 
@@ -100,8 +104,7 @@
 		</div>
 	</div>
 	<script>
-		document.querySelector('#wpvnaaud').value = document
-				.querySelector(".wp2").innerText;
+		document.querySelector('#wpvnaaud').value = document.querySelector(".wp2").innerText;
 	</script>
 </body>
 

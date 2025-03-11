@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,12 @@ public class Performance_controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet으로 입장(/Performance)");
+		
+		Performance_DAO performance_DAO = new Performance_DAO();
+//		List resultList = performance_DAO.selectWorkOrder();
+		
+//		request.setAttribute("resulteList", resultList);
+		
 		String url = "/WEB-INF/Performance.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -53,16 +60,18 @@ public class Performance_controller extends HttpServlet {
 		java.sql.Timestamp sqlTime = Timestamp.valueOf(reportTime);
 		
 		Performance_DTO performDTO = new Performance_DTO();
-		performDTO.setProductName(ProductName); // 제품명 설정
-		performDTO.setProductionCount(ea1); // 갯수 설정
-		performDTO.setPerformanceComment(comment); // 제품명 설정
-		performDTO.setReportTime(sqlTime); // 날짜 설정
+		performDTO.setProductName(ProductName); 	// 제품명 설정
+		performDTO.setProductionCount(ea1); 		// 갯수 설정
+		performDTO.setPerformanceComment(comment);  // 제품명 설정
+		performDTO.setReportTime(sqlTime); 			// 날짜 설정
 		
 		Performance_DAO performDAO = new Performance_DAO();
 		int result = performDAO.insertPerform(performDTO);
 		System.out.println("result :" + result);
 		
 		
+		String url = "Performance";
+		response.sendRedirect(url);
 	}
 
 }
