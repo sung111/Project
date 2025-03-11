@@ -27,14 +27,16 @@ public class Performance_controller extends HttpServlet {
 		System.out.println("doGet으로 입장(/Performance)");
 		
 		Performance_DAO performance_DAO = new Performance_DAO();
-//		List resultList = performance_DAO.selectWorkOrder();
+		List<Performance_DTO> resultList = performance_DAO.selectPerform();
 		
-//		request.setAttribute("resulteList", resultList);
-		
+		request.setAttribute("resultList", resultList);
+//		System.out.println("resultList : " + resultList);			// null 인지 확인함.
 		String url = "/WEB-INF/Performance.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -42,32 +44,46 @@ public class Performance_controller extends HttpServlet {
 
 		System.out.println("doPost 실행");
 		
-		String ProductName = request.getParameter("wpvnaaud");  // 제품명
-		String ea = request.getParameter("ea");					//갯수 입력
-		String comment = request.getParameter("comment");		//코멘트 입력
-
+		String command = request.getParameter("command");
+		System.out.println("command :" + command);
+		if( "inset".equals(command) ) {
+			String ProductName = request.getParameter("wpvnaaud");  // 제품명
+			String ea = request.getParameter("ea");					//갯수 입력
+			String comment = request.getParameter("comment");		//코멘트 입력
+			
 //		date타입은 String에서 만 받을수있음
-		String ReportTime = request.getParameter("date");		//날짜 입력.
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-		LocalDateTime reportTime = LocalDateTime.parse(ReportTime, formatter);  // 변환
-		
+			String ReportTime = request.getParameter("date");		//날짜 입력.
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+			LocalDateTime reportTime = LocalDateTime.parse(ReportTime, formatter);  // 변환
+			
 //		String 으로 받은 ea를 int 타입으로 변환호 set(ea1) 전달인자가 int 인것을 변환하기위해 작성
-		int ea1 = Integer.parseInt(ea);
-		
+			int ea1 = Integer.parseInt(ea);
+			
 //		Oracle의 DATE 타입은 사실상 TIMESTAMP와 같기 때문에 java.sql.Timestamp 사용
 //		DTO 에서 전달인자값도 Timestamp 으로 변경함.
-		java.sql.Timestamp sqlTime = Timestamp.valueOf(reportTime);
+			java.sql.Timestamp sqlTime = Timestamp.valueOf(reportTime);
+			
+			Performance_DTO performDTO = new Performance_DTO();
+			performDTO.setProductName(ProductName); 	// 제품명 설정
+			performDTO.setProductionCount(ea1); 		// 갯수 설정
+			performDTO.setPerformanceComment(comment);  // 제품명 설정
+			performDTO.setReportTime(sqlTime); 			// 날짜 설정
+			
+			Performance_DAO performDAO = new Performance_DAO();
+			int result = performDAO.insertPerform(performDTO);
+			System.out.println("result :" + result);
+			
+		} else if ( "update".equals(command) ) {
+			
+			
+			
+			
+			
+		} else if ( "delete".equals(command) ) {
+			
+		}
 		
-		Performance_DTO performDTO = new Performance_DTO();
-		performDTO.setProductName(ProductName); 	// 제품명 설정
-		performDTO.setProductionCount(ea1); 		// 갯수 설정
-		performDTO.setPerformanceComment(comment);  // 제품명 설정
-		performDTO.setReportTime(sqlTime); 			// 날짜 설정
-		
-		Performance_DAO performDAO = new Performance_DAO();
-		int result = performDAO.insertPerform(performDTO);
-		System.out.println("result :" + result);
 		
 		
 		String url = "Performance";

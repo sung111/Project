@@ -2,58 +2,59 @@ package dto;
 //품질관리 테이블
 public class QualityControl_DTO {
 	
-	int QualityControlId;	// 품질관리 시퀀스번호
-	int PerformanceId;		// 실적 시퀀스번호
-	String UserId;			// 유저 id
-	String ProductName;		// 완제품명
-	String Result;			// 합/불
-	String Failreason;		// 불합격사유
-	String Comments;		// 코멘트
+	int qualityControlId;	// 품질관리 시퀀스번호
+	int performanceId;		// 실적 시퀀스번호
+	String userId;			// 유저 id
+	String productName;		// 완제품명
+	String result;			// 합/불
+	String failreason;		// 불합격사유
+	String comments;		// 코멘트
 	
 	
 	public int getQualityControlId() {
-		return QualityControlId;
+		return qualityControlId;
 	}
 	public void setQualityControlId(int qualityControlId) {
-		QualityControlId = qualityControlId;
+		this.qualityControlId = qualityControlId;
 	}
 	public int getPerformanceId() {
-		return PerformanceId;
+		return performanceId;
 	}
 	public void setPerformanceId(int performanceId) {
-		PerformanceId = performanceId;
+		this.performanceId = performanceId;
 	}
 	public String getUserId() {
-		return UserId;
+		return userId;
 	}
 	public void setUserId(String userId) {
-		UserId = userId;
+		this.userId = userId;
 	}
 	public String getProductName() {
-		return ProductName;
+		return productName;
 	}
 	public void setProductName(String productName) {
-		ProductName = productName;
+		this.productName = productName;
 	}
 	public String getResult() {
-		return Result;
+		return result;
 	}
 	public void setResult(String result) {
-		Result = result;
+		this.result = result;
 	}
 	public String getFailreason() {
-		return Failreason;
+		return failreason;
 	}
 	public void setFailreason(String failreason) {
-		Failreason = failreason;
+		this.failreason = failreason;
 	}
 	public String getComments() {
-		return Comments;
+		return comments;
 	}
 	public void setComments(String comments) {
-		Comments = comments;
+		this.comments = comments;
 	}
-
+	
+	
 	
 
 }

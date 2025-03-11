@@ -8,11 +8,10 @@ public class Performance_DTO {
 	int PerformanceId;			// 실적 시퀀스 번호
 	String ProductName;			// 완제품명
 	int PlanId;					// 생산계획 시퀀스번호
-	int UserId;					// 유저 id
+	String UserId;					// 유저 id
 	Timestamp ReportTime;		// 실적등록 시간
 	String PerformanceComment;	// 코멘트
 	int ProductionCount;		// 생산수량
-	
 	public int getPerformanceId() {
 		return PerformanceId;
 	}
@@ -31,10 +30,10 @@ public class Performance_DTO {
 	public void setPlanId(int planId) {
 		PlanId = planId;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return UserId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		UserId = userId;
 	}
 	public Timestamp getReportTime() {
@@ -55,6 +54,8 @@ public class Performance_DTO {
 	public void setProductionCount(int productionCount) {
 		ProductionCount = productionCount;
 	}
+	
+	
 
 	
 
