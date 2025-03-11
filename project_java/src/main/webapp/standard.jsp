@@ -154,7 +154,17 @@
             border-radius: 5px;
             background-color: #007bff;
             color: white;
-            padding: 5px 10px;
+            padding: 6px 15px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        input[type=submit]{
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            width: 60px;
+            height: 30px;
             border: none;
             cursor: pointer;
             margin: 5px;
@@ -237,6 +247,9 @@
         #finished_hide:hover{
             background-color: #d9d9d9;
         }
+        #edit_delete_box{
+        display: flex;
+        }
     </style>
 </head>
 
@@ -245,32 +258,35 @@
     <h1>원재료/완제품 조회</h1>
     </div>
     <div id="top-contain">
-        <select name="option" id="check-option">
+         <form method="get" action="part_code">
+        	<select name="option" id="check-option" name="view_value">
             <option value="1">원재료 조회</option>
             <option value="2">완재품 조회</option>
             <option value="3">전체 조회 </option>
+       		 </select>
+       		  <input type="submit" value="조회" class="button">
+            </form>
             
-        </select>
-        <input type="button" value="원재료생성" id="materials_hide" >
-        <input type="button" value="완제품생성" id="finished_hide" >
-        
-        <!-- <input type="button" value="생성" class="button" id="c"> -->
+   
+        	<input type="button" value="원재료생성" id="materials_hide" name="generation">
+        	<input type="button" value="완제품생성" id="finished_hide" name="generation">
+      
 
     </div>
+        <form method="post" action="part_code">
     <div id="mid-contain">
-        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data" name="productname" value="asdasd"> </div>
+        <div class="mid-contain-article" id="materials_id1"> 제품명:<input type="text" class="mid-data" name="materialname"> </div>
         <div class="mid-contain-article" id="materials_id2"> 가격:<input type="text" class="mid-data" name="price"> </div>
-        <div class="mid-contain-article" id="materials_id3"> 규격:<input type="text" class="mid-data" name="standard"> </div>
+        <div class="mid-contain-article" id="materials_id3"> 규격:<input type="text" class="mid-data" name="spec"> </div>
         <div class="mid-contain-article" id="materials_id4"> 단위:<input type="text" class="mid-data" name="unit"> </div>
         <br>
         <div class="mid-contain-article" id="materials_id5"> 공급업체:<input type="text" class="mid-data" name="supplier"> </div>
-        <div class="mid-contain-article" id="materials_id6"> 품번:<input type="text" class="mid-data" name="Product number"> </div>
-        <div class="mid-contain-article" id="materials_id7"> LotNo:<input type="text" class="mid-data" name="LotNo"> </div>
-        <div class="mid-contain-article" id="materials_id8"> 창고위치:<input type="text" class="mid-data" name="location"> </div>
+        <div class="mid-contain-article" id="materials_id6"> 품번:<input type="text" class="mid-data" name="partNumber"> </div>
+        <div class="mid-contain-article" id="materials_id7"> LotNo:<input type="text" class="mid-data" name="lotnumber"> </div>
+        <div class="mid-contain-article" id="materials_id8"> 창고위치:<input type="text" class="mid-data" name="warehouse"> </div>
         
         <div class="mid-contain-article " id="materials_id9">
-        <form method="get" action="controller/Part_code">
-            <input type="submit" value="생성" id="materials_c">
+            <input type="submit" value="생성" id="materials_c" class="button">
         </form>
             <input type="button" value="확인" id="materials_u">
             <input type="button" value="취소" id="materials_ud">
@@ -313,19 +329,34 @@
 				<th>창고위치</th>
 				<th class="ud">수정/삭제</th>
 			</tr>
-			<tr>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>aaa</td>
-				<td>
-				</td>
-			</tr>
 			
+<c:forEach var="dto" items="${resultList}">
+			<tr class="table_tr">
+			<form>
+				<td><span class="text_view">${dto.materialname}</span><input type="text" value="${dto.materialname}" class="text_hide"></td>
+				<td><span class="text_view">${dto.price}</span><input type="text" value="${dto.price}" class="text_hide"></td>
+				<td><span class="text_view">${dto.spec}</span><input type="text" value="${dto.spec}" class="text_hide"></td>
+				<td><span class="text_view">${dto.unit}</span><input type="text" value="${dto.unit}" class="text_hide"></td>
+				<td><span class="text_view">${dto.supplier}</span><input type="text" value="${dto.supplier}" class="text_hide"></td>
+				<td><span class="text_view">${dto.partNumber}</span><input type="text" value="${dto.partNumber}" class="text_hide"></td>
+				<td><span class="text_view">${dto.lotnumber}</span><input type="text" value="${dto.lotnumber}" class="text_hide"></td>
+				<td><span class="text_view">${dto.warehouse}</span><input type="text" value="${dto.warehouse}" class="text_hide"></td>
+				<td>
+					<div id="edit_delete_box">
+						<input type="button" value="수정">
+						<input type="submit" value="확인" class="ok">
+						<input type="button" value="취소" class="cancel">
+				</form>
+						<form>
+							<input type="hidden" value="update1" name="update">
+							<input type="button" value="삭제">				
+						</form>
+					</div>
+				</td>
+				
+			</tr>
+</c:forEach>
+
 		</table>
 	</div>
     
@@ -362,7 +393,16 @@
                
 
             })
-
+            let oks = document.querySelectorAll(".ok")
+            let cancels = document.querySelectorAll(".cancel")
+            let hides = document.querySelectorAll(".text_hide")
+            for(let i =0; i<hides.length ; i++){
+            	hides[i].classList.add("none")
+            }
+            	 oks[i].classList.add("none")
+            	cancels[i].classList.add("none")
+            
+            
           
 
         
