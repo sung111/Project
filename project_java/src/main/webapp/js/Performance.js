@@ -158,7 +158,7 @@ function init() {
 
 
   })
-  // 제품합불기준 모달창 생성시 클릭이벤트트
+  // 제품합불기준 모달창 생성시 클릭이벤트
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
     const modal = document.querySelector('#myModal')
@@ -241,7 +241,7 @@ function init() {
   //   if (e.target.innerText == '수정') {
 
   //     const row = e.target.parentNode.parentNode;
-  //     row.dataset.original = row.innerHTML
+      // row.dataset.original = row.innerHTML
 
   //     const now = new Date();
   //     const year = now.getFullYear();
@@ -287,6 +287,9 @@ function init() {
   //     }
   //   }
   // })
+  document.querySelector('#yes').addEventListener('click', (e)=>{
+    
+  })
 
   document.querySelector('.btn4').addEventListener('click', () => {
 

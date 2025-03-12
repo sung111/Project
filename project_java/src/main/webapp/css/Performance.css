@@ -227,7 +227,7 @@ body {
     justify-content: space-around;
   }
 
-  .dex>div {
+  .dex>form {
     width: 70%;
     flex-grow: 1;
     border: 1px solid #c9c9c9;
@@ -586,11 +586,22 @@ body {
     border: 1px solid #c2c2c2
   }
 
+
   .index {
     margin: 8px;
     width: 97%;
     display: flex;
     justify-content: space-around;
+  }
+  form>div{
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  .kk{
+    display: flex;
+    flex-grow: 1;
   }
 
   .dex>div {
@@ -599,7 +610,6 @@ body {
     border: 1px solid #d9d9d9;
     text-align: center;
     /* justify-content: space-around; */
-
   }
 
   .indexBox {

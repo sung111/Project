@@ -46,7 +46,8 @@ public class Performance_controller extends HttpServlet {
 		
 		String command = request.getParameter("command");
 		System.out.println("command :" + command);
-		if( "inset".equals(command) ) {
+		
+		if( "insert".equals(command) ) {
 			String ProductName = request.getParameter("wpvnaaud");  // 제품명
 			String ea = request.getParameter("ea");					//갯수 입력
 			String comment = request.getParameter("comment");		//코멘트 입력
@@ -72,22 +73,52 @@ public class Performance_controller extends HttpServlet {
 			
 			Performance_DAO performDAO = new Performance_DAO();
 			int result = performDAO.insertPerform(performDTO);
-			System.out.println("result :" + result);
+			System.out.println("inset result :" + result);
 			
 		} else if ( "update".equals(command) ) {
 			
+			Performance_DTO performDTO = new Performance_DTO();
+			String performanceId = request.getParameter("performanceId2");
+			int performanceId1 = Integer.parseInt(performanceId);
+			String date = request.getParameter("date2");
 			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+			LocalDateTime reportTime = LocalDateTime.parse(date, formatter);  // 변환
+			java.sql.Timestamp date1 = Timestamp.valueOf(reportTime);
 			
+			String wpvnaaud = request.getParameter("wpvnaaud2");
+			String number = request.getParameter("number2");
+			int number1 = Integer.parseInt(number);
+			String text = request.getParameter("comment2");
 			
+			performDTO.setPerformanceId(performanceId1);
+			performDTO.setReportTime(date1);
+			performDTO.setProductName(wpvnaaud);
+			performDTO.setProductionCount(number1);
+			performDTO.setPerformanceComment(text);
+//			System.out.println(text);
+			Performance_DAO performDAO = new Performance_DAO();
+			int result = performDAO.updatePerform(performDTO);
+			System.out.println("update result :" + result);
 			
 		} else if ( "delete".equals(command) ) {
 			
+			Performance_DTO performDTO = new Performance_DTO();
+			String performanceId = request.getParameter("performanceId");
+			int performanceId1 = Integer.parseInt(performanceId);
+			
+			performDTO.setPerformanceId(performanceId1);
+			
+			Performance_DAO performDAO = new Performance_DAO();
+			int result = performDAO.deletePerform(performDTO);
+			System.out.println("delete result :" + result);
+			
 		}
-		
-		
 		
 		String url = "Performance";
 		response.sendRedirect(url);
 	}
+	
+	
 
 }
