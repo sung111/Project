@@ -8,7 +8,14 @@ public class Products_DTO {
 	String spec;
 	String unit;
 	String lotnumber;
+	String originname;
 	
+	public String getOriginname() {
+		return originname;
+	}
+	public void setOriginname(String originname) {
+		this.originname = originname;
+	}
 	public String getProductname() {
 		return productname;
 	}

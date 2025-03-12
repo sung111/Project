@@ -97,7 +97,7 @@ th {
 	background-color: rgb(149, 149, 155);
 }
 
-#check-option {
+#check_option {
 	border: 1px solid #007bff;
 	/* border-radius: 20px; */
 	width: 100px;
@@ -167,11 +167,11 @@ input[type=submit] {
 		height: 30px;
 		width: 30px;
 	}
-	#check-option- {
+	#check_option {
 		width: 100px;
 		height: 20px;
 	}
-	#check-option-button {
+	#check_option_button {
 		width: 50px;
 		height: 50px;
 	}
@@ -229,12 +229,13 @@ input[type=submit] {
 	</div>
 	<div id="top-contain">
 		<form method="get" action="part_code">
-			<select name="view_value" id="check-option" >
+			
+			<select name="view_value" id="check_option" >
 				<option value="1">원재료 조회</option>
 				<option value="2">완재품 조회</option>
 				<option value="3">전체 조회</option>
 			</select> 
-			<input type="submit" value="조회" class="button">
+			<input type="submit" value="조회" class="button" id="check_view">
 		</form>
 
 
@@ -311,10 +312,11 @@ input[type=submit] {
 		</div>
 	
 	</div>
+	
 
-	<div id="main-contain">
+	<div id="main_contain">
 		<!-- 원재료 테이블 -->
-		<table class="start-table">
+		<table id="start_table">
 			<tr>
 				<th class="manu-name poom">제품명</th>
 				<th>가격</th>
@@ -331,7 +333,9 @@ input[type=submit] {
 				<tr class="table_tr">
 					<form method="post" action="part_code">
 						<td><span class="text_view">${dto.materialname}</span>
-						<input type="text" value="${dto.materialname}" class="text_hide" name="materialname2"></td>
+						<input type="text" value="${dto.materialname}" class="text_hide" name="materialname2">
+						<input type="hidden" value="${dto.materialname}" name="origin">
+						</td>
 						<td><span class="text_view">${dto.price}</span>
 						<input type="text" value="${dto.price}" class="text_hide" name="price2"></td>
 						
@@ -370,13 +374,12 @@ input[type=submit] {
 		</table>
 	</div>
 	
-	<div id="finish-contain">
-		<!-- 원재료 테이블 -->
-		<table class="start-table">
-			<tr>
+	<div id="finish_contain">
+		<!-- 완제품 테이블 -->
+		<table id="finish_table">
+			<tr id="finish=tr">
 				<th class="manu-name poom">완제품명</th>
 				<th>품번</th>
-				<th>유통기한 설명</th>
 				<th>보관창고 위치</th>
 				<th>가격</th>
 				<th>규격</th>
@@ -385,43 +388,42 @@ input[type=submit] {
 				<th class="ud">수정/삭제</th>
 			</tr>
 
-			<c:forEach var="dto" items="${resultList}">
+			<c:forEach var="dto" items="${finishiList}">
 				<tr class="table_tr">
 					<form method="post" action="part_code">
-						<td><span class="text_view">${dto.materialname}</span>
-						<input type="text" value="${dto.materialname}" class="text_hide" name="materialname2"></td>
+						<td><span class="text_view">${dto.productname}</span>
+						<input type="text" value="${dto.productname}" class="text_hide" name="productname">
+						<input type="hidden" value="${dto.productname}" name="origin">
+						</td>
 						
-						<td><span class="text_view">${dto.price}</span>
-						<input type="text" value="${dto.price}" class="text_hide" name="price2"></td>
+						<td><span class="text_view">${dto.partnumber}</span>
+						<input type="text" value="${dto.partnumber}" class="text_hide" name="partnumber"></td>
 						
-						<td><span class="text_view">${dto.spec}</span>
-						<input type="text" value="${dto.spec}" class="text_hide" name="spec2"></td>
+						<td><span class="text_view">${dto.warehouse}</span>
+						<input type="text" value="${dto.warehouse}" class="text_hide" name="warehouse"></td>
+						
+						<td><span class="text_view">${dto.price}</span><input
+							type="text" value="${dto.price}" class="text_hide" name="price"></td>
+						
+						<td><span class="text_view">${dto.spec}</span><input
+							type="text" value="${dto.spec}" class="text_hide" name="spec"></td>
 						
 						<td><span class="text_view">${dto.unit}</span><input
-							type="text" value="${dto.unit}" class="text_hide" name="unit2"></td>
-						
-						<td><span class="text_view">${dto.supplier}</span><input
-							type="text" value="${dto.supplier}" class="text_hide" name="supplier2"></td>
-						
-						<td><span class="text_view">${dto.partNumber}</span><input
-							type="text" value="${dto.partNumber}" class="text_hide" name="partNumber2"></td>
+							type="text" value="${dto.unit}" class="text_hide" name="unit"></td>
 						
 						<td><span class="text_view">${dto.lotnumber}</span><input
-							type="text" value="${dto.lotnumber}" class="text_hide" name="lotnumber2"></td>
-						
-						<td><span class="text_view">${dto.warehouse}</span><input
-							type="text" value="${dto.warehouse}" class="text_hide" name="warehouse2"></td>
-						<td>
+							type="text" value="${dto.lotnumber}" class="text_hide" name="lotnumber"></td>
+								<td>
 							<div id="edit_delete_box">
 								<input type="button" value="수정" class="update" > 
-								<input type="hidden" name="type" value="update">
+								<input type="hidden" name="type" value="finish_update">
 								<input type="submit" value="확인" class="ok">
 								 <input type="button" value="취소" class="cancel">
 					</form>
 					
 					<form method="post" action="part_code">
-						<input type="text" value="${dto.materialname}" name="delvalue" class="delvalue">
-						<input type="hidden" value="del" name="type"> 
+						<input type="text" value="${dto.productname}" name="delvalue" class="delvalue">
+						<input type="hidden" value="finish_del" name="type"> 
 						<input type="submit" value="삭제" class="delet">
 					</form>
 					
@@ -438,17 +440,26 @@ input[type=submit] {
 	</div>
 	<script>
 		window.addEventListener("load", function() {
-
+			document.querySelector("#finish_table").classList.add("none")
+			
+			let vv='${viewValue}'
+			
+			
+			if(vv == 1 || vv==''){
+				document.querySelector("#start_table").classList.remove("none");
+		       	document.querySelector("#finish_table").classList.add("none");
+			}else if(vv == 2){
+				document.querySelector("#start_table").classList.add("none");
+		       	document.querySelector("#finish_table").classList.remove("none");
+			}
+			
+			
+			
 			//처음 항목 출력 
-		
-
 			document.querySelector("#finished_c").classList.remove("none")
-			
-			
-
 			document.querySelector("#mid-contain").classList.add("none")
 			document.querySelector("#mid-contain2").classList.add("none")
-
+//  			document.querySelector("#finish_table").classList.add("none")
 			document.querySelector("#materials_hide").addEventListener(
 					"click",
 					function() {
@@ -491,13 +502,13 @@ input[type=submit] {
 					let textHides = update.querySelectorAll(".text_hide")
 					let textViews = update.querySelectorAll(".text_view")
 
-					for (let y = 1; y < textHides.length; y++) {
+					for (let y = 0; y < textHides.length; y++) {
 						textHides[y].classList.remove("none")
 					}
-					for (let y = 1; y < textHides.length; y++) {
+					for (let y = 0; y < textHides.length; y++) {
 						textViews[y].classList.add("none")
 					}
-					console.log(e.target.parentNode)
+					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
 					//확인버튼 보이기
 					e.target.parentNode.querySelector(".ok").classList
 							.remove("none")
@@ -508,19 +519,57 @@ input[type=submit] {
 					e.target.parentNode.querySelector(".delet").classList
 							.add("none")
 					e.target.classList.add("none")
-					//             		
-					//확인클릭 이벤트
-// 					e.target.parentNode.querySelector(".ok").addEventListener(
-// 							"clikc", function(ev) {
-// 								for (let y = 0; y < textHides.length; y++) {
-// 									textHides[y].classList.add("none")
-// 									textViews[y].classList.remove("none")
-// 								}
+					console.log("테스트")
+					//취소 누를시 하이드 텍스트 안보이게하기
+// 					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
+// 					console.log("취소버튼",e.target.parentNode)
+					e.target.parentNode.querySelector(".cancel").addEventListener("click", function(e) {
+// 						console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
+						for (let y = 0; y < textHides.length; y++) {
+						textHides[y].classList.add("none")
+						}
+						for (let y = 0; y < textHides.length; y++) {
+						textViews[y].classList.remove("none")
+						
+						//확인버튼 보이기
+						e.target.parentNode.querySelector(".ok").classList.add("none")
 
-// 							})
+						//취소보튼 보이기
+						e.target.parentNode.querySelector(".cancel").classList
+								.remove("none")
+						//수정 삭제버튼 안보이기
+						e.target.parentNode.querySelector(".update").classList
+								.remove("none")
+						e.target.parentNode.querySelector(".delet").classList
+								.remove("none")
+						e.target.classList.add("none")
+						
+						
+					}
+						
+					})
+					
+					
+	
 
 				})
 			}
+			
+			
+// 			 document.querySelector("#check_option").addEventListener("change", function (e) {
+// 			        if (e.target.value == 1) {
+// 			            console.log("e.target.value"+ e.target.value)
+// 			            document.querySelector("#start_table").classList.remove("none")
+// 			            document.querySelector("#finish_table").classList.add("none")
+			    
+// 			        }else if (e.target.value == 2) {
+// 			            console.log("e.target.value"+ e.target.value)
+// 			            document.querySelector("#start_table").classList.add("none")
+// 			            document.querySelector("#finish_table").classList.remove("none")
+			           
+// 			        }
+			
+// 			 })
 
 		})
 	</script>

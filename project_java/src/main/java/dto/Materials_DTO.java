@@ -13,7 +13,14 @@ public class Materials_DTO {
 	String partNumber;
 	String lotnumber;
 	String warehouse;
+	String origin;
 	
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
 	public String getMaterialname() {
 		return materialname;
 	}

@@ -475,6 +475,40 @@ window.addEventListener("load", function () {
                     document.querySelector("#ud").classList.add("none")
                     document.querySelector("#c").classList.remove("none")
                 }
+                let checkvlaue = document.querySelector("#check-option")
+                if (checkvlaue.value == 1) {
+                    document.querySelector("#main_contain").classList.remove("none")
+                    document.querySelector("#finish_contain").classList.add("none")
+                }else if(checkvlaue.value == 2){
+                    document.querySelector("#main_contain").classList.add("none")
+                    document.querySelector("#finish_contain").classList.remove("none")
+                }
+
+
+
+
+          
+                Insert into (PRODUCTNAME,PARTNUMBER,EXPDATEDESC,WAREHOUSE,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRICE,SPEC,UNIT,LOTNUMBER,PRODUCTDEL) values ('부대찌개','P047','포장 후 30일 이내','냉장','Budae-Jjigae.png','1. 햄, 소시지, 베이크드빈스, 라면사리 등이 신선하고 유통기한 내 포함됨 2. 육수(또는 육수 베이스)가 새지 않고 정상 포장됨 3. 채소(양배추, 파, 양파 등)가 신선하며 변색이나 이물질 없음','1. 햄, 소시지가 변색되었거나 냄새가 남 2. 육수가 새거나 포장이 터짐 3. 채소가 시들거나 부패, 이물질 발견',30000,'600','g','WPD-20250124-001','n');
+                Insert into (PRODUCTNAME,PARTNUMBER,EXPDATEDESC,WAREHOUSE,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRICE,SPEC,UNIT,LOTNUMBER,PRODUCTDEL) values ('김치찌개','P048','포장 후 30일 이내','냉장','kimchisoup.png','1.숙성된 김치가 적당히 신맛을 유지하며 유통기한 내 포함됨2.돼지고기(또는 대체 단백질)가 신선하고 변질되지 않음3.국물 베이스(육수, 양념)가 정량으로 들어 있음','1.김치가 부패 냄새가 나거나 너무 묽어짐2.돼지고기가 색이 변했거나 냄새가 남3.양념이 새거나 육수 포장이 불량',25000,'550','g','WPD-20250124-002','n');
+                Insert into (PRODUCTNAME,PARTNUMBER,EXPDATEDESC,WAREHOUSE,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRICE,SPEC,UNIT,LOTNUMBER,PRODUCTDEL) values ('밀푀유나베','P049','포장 후 30일 이내','냉장','Millefeuille.png','1. 배추, 깻잎, 버섯 등 채소가 신선하고 시들거나 변색되지 않음 2. 소고기(또는 대체 단백질)가 신선하고 변질되지 않음 3. 육수와 소스가 밀봉되어 있고 누수 없음','1. 채소가 시들거나 갈변, 물러짐 2. 소고기에서 냄새가 나거나 색이 변함 3. 육수가 새거나 소스가 누락됨',35000,'700','g','WPD-20250124-003','n');
+                Insert into (PRODUCTNAME,PARTNUMBER,EXPDATEDESC,WAREHOUSE,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRICE,SPEC,UNIT,LOTNUMBER,PRODUCTDEL) values ('떡볶이','P050','포장 후 30일 이내','냉장','tteokbokki.png','1. 떡이 적절한 수분을 유지하고 딱딱하지 않음 2. 고추장 베이스 양념이 정량으로 포함되고 밀봉 유지 3. 어묵, 야채가 신선하고 이물질 없음','1. 떡이 지나치게 딱딱하거나 상함 2. 양념이 새거나 포장이 터짐 3. 어묵이 상하거나 냄새가 남',20000,'500','g','WPD-20250124-004','n');
+                Insert into (PRODUCTNAME,PARTNUMBER,EXPDATEDESC,WAREHOUSE,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRICE,SPEC,UNIT,LOTNUMBER,PRODUCTDEL) values ('곱창전골','P051','포장 후 30일 이내','냉장','Gopchanghotpot.png','1. 곱창이 신선하고 특유의 냄새가 심하지 않음 2. 각종 채소(부추, 양파, 깻잎 등)가 신선함 3. 국물 베이스가 밀봉되어 새지 않음','1. 곱창에서 심한 악취가 나거나 색이 변함 2. 채소가 시들거나 갈변 3. 육수가 새거나 포장이 손상됨',40000,'750','g','WPD-20250124-005','n');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             })
         })
