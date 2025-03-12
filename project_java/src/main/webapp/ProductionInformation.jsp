@@ -13,6 +13,7 @@
     <script src="data/productdata.js"></script>
     <script src="data/productinmaterialdata.js"></script>
     <script src="data/start.js"></script>
+    <script src="js/performanceRegistration.js"></script>
 </head>
 
 <body>

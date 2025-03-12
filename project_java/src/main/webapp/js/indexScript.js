@@ -70,6 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".mypage-img").addEventListener("click", function () {
+        const iframe = parent.document.querySelector("iframe");
+        iframe.src = "login.jsp";
+    })
 // 로그인이 안되있으면 index로 들어갈 수 없는 스크립트인데 이건 페이지가 완성되면 붙이기!(중요)
 
 
@@ -90,75 +94,75 @@ document.addEventListener("DOMContentLoaded", function () {
     // 기준관리 탭
     const bomlistmenu = document.querySelector("#nav-bomlist")
     bomlistmenu.addEventListener("click", function () {
-        iframe.src = "componant/standard.html"
+        iframe.src = "standard.jsp"
         LocalNavigationbar("기준관리", "부품코드");
     })
     const processmenu = document.querySelector("#nav-process")
     processmenu.addEventListener("click", function () {
-        iframe.src = "componant/production_process.html"
+        iframe.src = "production_process.jsp"
         LocalNavigationbar("기준관리", "생산공정");
     })
     const inspection = document.querySelector("#nav-inspection")
     inspection.addEventListener("click", function () {
-        iframe.src = "componant/Inspection_standards.html"
+        iframe.src = "Inspection_standards.jsp"
         LocalNavigationbar("기준관리", "검사기준");
     })
     const bommenu = document.querySelector("#nav-bom")
     bommenu.addEventListener("click", function () {
-        iframe.src = "componant/bom_v2.html"
+        iframe.src = "bom_v2.jsp"
         LocalNavigationbar("기준관리", "BOM");
     })
     // 생산관리 탭
     const workOrdermenu = document.querySelector("#nav-workorder");
     workOrdermenu.addEventListener("click", function () {
-        iframe.src = "componant/WorkOrder.html"
+        iframe.src = "WorkOrder.jsp"
         LocalNavigationbar("생산관리", "생산계획");
     })
     const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");
     perfomanceRegistrationmenu.addEventListener("click", function () {
-        iframe.src = "componant/performanceRegistration.html"
+        iframe.src = "performanceRegistration.jsp"
         LocalNavigationbar("생산관리", "실적등록");
     })
     const qualityControlmenu = document.querySelector("#nav-qualityControl");
     qualityControlmenu.addEventListener("click", function () {
-        iframe.src = "componant/qualityControl.html"
+        iframe.src = "qualityControl.jsp"
         LocalNavigationbar("생산관리", "품질관리");
     })
     const 재고조사현황menu = document.querySelector("#nav-inventory");
     재고조사현황menu.addEventListener("click", function () {
-        iframe.src = "componant/01_재고조사현황.html"
+        iframe.src = "01_재고조사현황.jsp"
         LocalNavigationbar("생산관리", "재고현황조회");
     })
     // 실적 보고서
     const performmenu = document.querySelector("#nav-perform");
     performmenu.addEventListener("click", function () {
-        iframe.src = "componant/perform_0203.html"
+        iframe.src = "perform_0203.jsp"
         LocalNavigationbar("실적보고서", "실적보고서");
     })
     const reportmenu = document.querySelector("#nav-report");
     reportmenu.addEventListener("click", function () {
-        iframe.src = "componant/report.html"
+        iframe.src = "report.jsp"
         LocalNavigationbar("실적보고서", "주요지표");
     })
     const chartmenu = document.querySelector("#nav-chart");
     chartmenu.addEventListener("click", function () {
-        iframe.src = "componant/chart_0203.html"
+        iframe.src = "chart_0203.jsp"
         LocalNavigationbar("실적보고서", "대시보드");
     })
     // 게시판
     const 공지사항menu = document.querySelector("#nav-공지사항");
     공지사항menu.addEventListener("click", function () {
-        iframe.src = "componant/02_공지사항.html";
+        iframe.src = "02_공지사항.jsp";
         LocalNavigationbar("게시판", "공지사항");
     })
     const 사내복지menu = document.querySelector("#nav-사내복지");
     사내복지menu.addEventListener("click", function () {
-        iframe.src = "componant/03_사내복지.html"
+        iframe.src = "03_사내복지.jsp"
         LocalNavigationbar("게시판", "사내복지");
     })
     const 일반게시판menu = document.querySelector("#nav-일반게시판");
     일반게시판menu.addEventListener("click", function () {
-        iframe.src = "componant/04_일반게시판.html"
+        iframe.src = "04_일반게시판.jsp"
         LocalNavigationbar("게시판", "일반게시판");
     })
 })

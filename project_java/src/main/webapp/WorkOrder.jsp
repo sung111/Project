@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HHMES 생산관리</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/newworkorder.css">
-    <!-- <script src="js/newworkorder.js"></script> -->
+    <link rel="stylesheet" href="css/workorder.css">
+    <script src="js/workorder.js"></script>
 </head>
 
 <body>
@@ -59,13 +59,13 @@
 
         <tbody>
             <tr class="order-info-list">
+                <td>품명[규격]</td>
                         <td>품목코드</td>
-                        <td>품명[규격]</td>
                         <td>단위</td>
-                        <td>생산수량</td>
                         <td>보관</td>
                         <td>납품업체</td>
                         <td>창고위치</td>
+                        <td>생산수량</td>
                         <td>작업계획생성일</td>
                         <td>생산시작일</td>
                         <td>생산종료일</td>
@@ -74,21 +74,21 @@
                         <td>생산사유</td>
                         <td>비고</td>
             </tr>
-            <tr class="order-info-content">
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
-                <td>샘플</td>
+            <tr name="WorkOrder" class="order-info-content wolist">
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="number"class="wo-input" ></td>
+                <td><input type="date"class="wo-input" ></td>
+                <td><input type="date"class="wo-input" ></td>
+                <td><input type="date"class="wo-input" ></td>
+                <td><button class="MRPCal"class="wo-input" >MRP계산</button></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
+                <td><input type="text" class="wo-input" value="샘플"></td>
             </tr>
         </tbody>
         <tfoot>
@@ -110,10 +110,10 @@
                     </div>
                 </td>
                 <td colspan="13" class="order-buttonlayer">
-                    <button type="button" class="workorder-add">수정</button>
-                    <button type="button" class="workorder-registration">삭제</button>
-                    <button type="button" class="workorder-delete" id="deleteWorkOrder">상품계획생성</button>
-                    <button type="button" class="workorder-cancel" id="cancelWorkOrder">작업지시서</button>
+                    <button type="button" name="prodPlan-Modify" id="prodPlan-Modify" class="WO-buttonlist">수정</button>
+                    <button type="button" name="prodPlan-delete" id="prodPlan-delete" class="WO-buttonlist">삭제</button>
+                    <button type="button" name="new-ProdPlan" id="new-ProdPlan" class="WO-buttonlist" >상품계획생성</button>
+                    <button type="button" name="WO-select" id="WO-select" class="WO-buttonlist" >작업지시서</button>
                 </td>
             </tr>
         </tfoot>

@@ -9,7 +9,7 @@
 /* 로그인 화면 영역 */
 
 .login-layer{
-    width: 60%; height: 70%; display: none; flex-direction: column; align-items: center; justify-content: space-around;
+    width: 60%; height: 70%;  flex-direction: column; align-items: center; justify-content: space-around;
     }
 
     .signup-layer{
@@ -20,7 +20,7 @@
     width: 50%; height: 70%; text-align: start; display: flex; flex-direction: column; justify-content: space-around;
 }
 
-.sign-up, .findid_password{
+.sign-up, .findid_password, .find-layer, .find-account, .cancel{
     display: none;
 }
 

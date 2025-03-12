@@ -8,11 +8,11 @@
     <link rel="icon" href="img/icon.png" />
     <title>혁신적인 밀키트 생산관리, HHMES</title>
 
-    <!-- javascript link -->
-    <script src="js/indexScript.js"></script>
     <!-- css link -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
+        <!-- javascript link -->
+        <script src="js/indexScript.js"></script>
 </head>
 
 <body class="index">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="login-user">환영합니다! user님!</div>
                 <div class="login-admin">환영합니다! admin님!</div>
-                <button class="login-button">로그인</button>
+                <h6 class="login-button">로그인이 필요한 서비스입니다.</h6>
             </div>
                 <!-- mobile version nav bar -->
                 <button type="button" class="mobnav-bar">
@@ -74,7 +74,7 @@
             </ol>
         </div>
         <div class="navopen-shadow"></div>
-        <iframe src="MainTitle.jsp"></iframe>
+        <iframe src="MainTitle.jsp" id="Mainiframe"></iframe>
     </div>
 
 <script>

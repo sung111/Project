@@ -1,104 +1,130 @@
-.workorder{
-    width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
-}
-/* 상단 레이어 */
-.workorder-search-layer{
-    width: 100%; height: 60px; background-color: #d9d9d9; display: flex; align-items: center; justify-content: space-between; padding: 0 100px;
-}
-.workorder-searchlayer{
-    width: 60%; display: flex; justify-content: flex-end;
-}
-.workorder-search{
-    width: 40%; height: 40px; margin-left: 1%; 
+
+
+
+thead{
+     all:unset; display: table-header-group;
 }
 
-.workorder-search-button{
-    width: 100px; height: 40px; margin-left: 1%; font-size: 18px;color: #ffffff;background-color: #007bff; border: none; 
-}
-/* 중단 레이어 */
-.workorder-layer{
-    width: 85%; height: 80%; 
-}
-.workorder-tag{
-    width: 100%; height: 40px;  display: flex; justify-content: space-around; color: #ffffff; background-color: #007bff; font-size: 14px;
-}
-.workorder-tag-productionCalculation, .workorder-tag-name{
-    width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
-}
-.workorder-tag-createDate, .workorder-tag-productionPeriod, .workorder-tag-MRPCalculation, .workorder-tag-productionPlan{
-    width: 20%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
-}
-.workorder-inquirylayer{
-display: flex; align-items: center;
-}
-.workorder-inquiry{
-    width: 50px; height: 30px; margin-left: 5px; color: #007bff ;background-color: transparent; border: none; font-size: 16px;font-weight: 500; letter-spacing: 1px; 
-}
-/* 리스트 CSS */
-.workorderlist-content{
-    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #dcdcdc; text-align: center;
-}
-.workorderlist-productplancalc, .workorderlist-name{
-    width: 10%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
-}
-.workorderlist-createdate, .workorderlist-productplandate, .workorderlist-MRPcalc, .workorderlist-productplanstatus{
-    width: 20%; height: 100%; display: flex; justify-content: center; align-items: center; border: 1px solid #999999;
-}
-.workorderlist-content a{
-    color: #007bff;
-}
-.workorderlist-content2{
-    width: 100%; height: 80px;  display: flex; justify-content: space-around; background-color: #dcdcdc; text-align: center;
-}
-/* 하단 레이어 */
-.workorder-page{
-    width: 85%; height: 50px; margin-bottom: 30px; padding: 0 10px; border: 2px solid #999999; display: flex; justify-content: space-between; align-items: center;
+tbody{
+    width: 100%;
 }
 
-.workorder-pagenation{
-    width: 60%; height: 40px; display: flex; justify-content: space-around; align-items: center;
+.new-workorder{
+    width: 100%;    table-layout: fixed; border-collapse: collapse;
+    
 }
-.workorder-pagenation button{
-    background-color: transparent; border: none;
+/* 작성주 위치 CSS */
+.menufacturer-info{
+    width: 100%; height: 40px; 
 }
-.new-workorder-button{
-    width: 100px; height: 40px; color: #ffffff; background-color: #007bff; border: none; font-size: 16px; letter-spacing: 1px;
+.menufacturer-info-list{
+    width: 50%; height: 40px; border: 1px solid #999999;
+}
+.menufacturer-info-name{
+    width: 30%; height: 100%; color: #ffffff; background-color: #007bff; float: left; display: flex; justify-content: center;align-items: center;
+}
+.menufacturer-info-completion{
+    width: 70%; height: 100%; float: right;  outline: none; text-align: center; border: 0;
+}
+ 
+/* 작성품목 위치 CSS */
+
+.order-info-list{
+    width: 100%; height: 40px; color: #ffffff; background-color: #007bff; border: 1px solid #999999; font-weight: 300; 
 }
 
-.workorder-shadowwallpaper{
-    width: 100%; height: 100vh; position: absolute; background-color: #000000 ;opacity: 70%; z-index: 10; display: none;
+.order-info-list:hover{
+    cursor: default;
 }
-.workorder-MRPcalc{
-    width: 70%; height: 80%; position: absolute; top: 80px; background-color: #ffffff; z-index: 15;display: none;
+
+.order-info-content{
+cursor: default;
 }
-.workorder-MRPcalc-page{
-    width: 100%; height: 95%; border-spacing: 0; border-collapse: collapse; overflow-x: auto; text-align: center;
+
+.MRPCal{
+    width: 40px; height: 20px;  color: #007bff; background-color: transparent; border: none;
 }
-.workorder-MRPcalc-page th, .workorder-MRPcalc-page td{
-    border: 1px solid #d9d9d9;
+
+.order-info-content{
+    width: 100%; height: 40px; border: 1px solid #999999; font-weight: 300; font-size: 12px; text-align: center; 
 }
-.workorder-MRPcalc-close{
-    width: 100%; height: 5%; color: #222222; background-color: #888888; display: flex; flex-direction: row-reverse; align-items: center;
+.order-info-content td{
+    width: 100%; height: 100%; border-right: 1px solid #999999; 
 }
-.workorder-MRPcalc-close span{
-    cursor: pointer; padding: 0 10px; 
+.order-info-content-delete{
+ color: #F44336; font-weight: 800; cursor: pointer;
 }
-.workorder-MRPcalc-page-title{
-    width: 100%; height: 10%; background-color: #007bff;
+
+.order-info-list td {
+    width: auto;  text-align: center;  border: 1px solid #ffffff;
 }
-.workorder-MRPcalc-page-list{
-    width: 100%; 
+
+.wo-input{
+     width: 100%; height: 100%; border: none; text-align: center;
 }
-.workorder-MRPcalc-page-content{
-    width: 100%; height: 200px;  
+
+/* 버튼 위치 CSS */
+
+.order-buttonlayer{
+    display: flex; float: right; margin-top: 20px;
 }
-.workorder-MRPcalc-page-content-sortation {
-    display: flex; /* 가로 배치 */
-    flex-direction: column;
-    justify-content: space-between; /* 요소 간 간격 분배 */
-    align-items: center; /* 세로 정렬 중앙 */
-    gap: 10px; /* 요소 간 간격 */
+.WO-buttonlist{
+    width: 100px; height: 40px; color: #ffffff; background-color: #007bff; margin-right: 10px; font-size: 18px; border: 0.5px solid #000000;
 }
-.workorder-MRPcalc-page-content-sortation th{
-    flex: 1; align-items: center;
+#prodPlan-Modify{
+    background-color: #4CAF50;
+}
+#prodPlan-delete{
+    background-color: #F44336;
+}
+
+.order-buttonlayer-pagenation{
+    width: 40%; height: 40px; border: 1px solid #000000; display: flex; justify-content: space-around; align-items: center;
+}
+
+.search-container{
+    width: 100%;
+}
+
+.search-container tr{
+width: 100%; display: flex; justify-content: space-between;
+}
+
+.search-container thead tr{
+    width: 100%;
+}
+
+.submitcontainer{
+    margin: 30px 0;
+}
+
+ .search-table td{
+width: 30%; 
+}
+.search-table button{
+    width: 80px; height: 30px; background-color: #ffffff; border: 1px solid #000000; margin-top: 3%; margin-right: 1%;
+}
+.submitcontainer td{
+    width: 100%; display: flex; justify-content: flex-end;
+}
+.searchlayer{
+    width: 30%; height: 40px; margin-right: 20px;
+}
+
+.submitlayer{
+    width: 150px; height: 40px; color: #ffffff; background-color: #007bff; border: none;
+}
+.search-contaoner-name{
+    width: 30%;
+}
+
+.name-layer{
+    width: 100%;
+}
+.prod-title-layer{
+    background-color: #999999;
+}
+
+.pagenationicon{
+    width:10px; height: 10px;
 }
