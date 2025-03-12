@@ -108,28 +108,30 @@
 				<div class="box3View">
 					<c:forEach var="dto" items="${resultList}">
 						<div class="dex item">
-							<div class="dateB">
-								<fmt:formatDate value="${dto.reportTime}"
-									pattern="yyyy-MM-dd HH:mm:ss" />
-								<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
-							</div>
-							<div class="emdwp">${dto.productName}</div>
-							<div class="emdtn">${dto.productionCount}</div>
-							<div class="text1">${dto.performanceComment}</div>
-							<div class="emdId">${dto.userId}</div>
-							<div style="display: flex; justify-content: center;">
-								<!-- css안먹어서 그냥박아버림 -->
-								<button class="tn">수정</button>
-								<!-- <form method="post" action="Performance">
+							<form method="post" action="Performance" class="kk deleteForm">
+								<div class="dateB">
+									<fmt:formatDate value="${dto.reportTime}"
+										pattern="yyyy-MM-dd HH:mm:ss" />
+									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
+								</div>
+								<div class="emdwp">${dto.productName}</div>
+								<div class="emdtn">${dto.productionCount}</div>
+								<div class="text1">${dto.performanceComment}</div>
+								<div class="emdId">${dto.userId}</div>
+								<input type="hidden" name="performanceId"
+									value="${dto.performanceId}" class="performId">
+								<div style="display: flex; justify-content: center;">
+									<!-- css안먹어서 그냥박아버림 -->
+									<button class="tn">수정</button>
+									<!-- <form method="post" action="Performance">
 									<input type="hidden" name="command" value="update">
 									<input type="submit" value="수정">
 								</form>-->
-								<form method="post" action="Performance">
 									<input type="hidden" name="command" value="delete"> <input
-										type="submit" value="삭제" style="height: 26px;">
-								</form>
-								<!-- 	<button class="tkr">삭제</button> -->
-							</div>
+										type="submit" value="삭제" style="height: 26px;" class="delete">
+									<!-- 	<button class="tkr">삭제</button> -->
+								</div>
+							</form>
 						</div>
 					</c:forEach>
 				</div>
@@ -142,43 +144,66 @@
 				
 				
 				
-	  document.querySelector('.tn').addEventListener('click', (e)=>{
-		  	/* 출력해봄 */
-		    console.log(e.target.parentNode.parentNode);
-		    const tarGet = e.target.parentNode.parentNode;
-		    const date = tarGet.querySelector('.dateB').innerText;
-		    const emdwp = tarGet.querySelector('.emdwp').innerText;
-		    const emdtn = tarGet.querySelector('.emdtn').innerText;
-		    const text1 = tarGet.querySelector('.text1').innerText;
-		    const emdId = tarGet.querySelector('.emdId').innerText;
-		    console.log(date, emdwp, emdtn, text1, emdId);
-		    
-		    tarGet.innerHTML = `
-							 <form method="post" action="Performance">
-		    					<div class="dateB">
-		    						<input type="datetime-local" class="date1" name="date" value="\${date}">
-									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
-								</div>
-								<div class="emdwp"><input type="text" value="\${emdwp}"></div>
-								<div class="emdtn"><input type="text" value="\${emdtn}"></div>
-								<div class="text1"><input type="text" value="\${text1}"></div>
-								<div class="emdId">\${emdId}</div>
-								<div style="display: flex; justify-content: center;">
-									<!-- css안먹어서 그냥박아버림 -->
-									<!-- <button class="tn">수정</button> -->
-										<input type="hidden" name="command" value="update">
-										<input type="submit" value="수정" style="
-										    height: 26px;
-										">
-									<!-- <form method="post" action="Performance">
-										<input type="hidden" name="command" value="delete">
-										<input type="submit" value="삭제">
-									</form> -->
-									<button class="cnlth">취소</button>
-								</div>
-							</form>
-							`
-		  })
+		//수정 버튼클릭.
+		const tn = document.querySelectorAll('.tn')
+		for(let tn1 of tn){
+			tn1.addEventListener('click', (e)=>{
+			  	/* 출력해봄 */
+			    console.log(e.target.parentNode.parentNode);
+			    const tarGet = e.target.parentNode.parentNode;
+			    const date = tarGet.querySelector('.dateB').innerText;
+			    const emdwp = tarGet.querySelector('.emdwp').innerText;
+			    const emdtn = tarGet.querySelector('.emdtn').innerText;
+			    const text1 = tarGet.querySelector('.text1').innerText;
+			    const emdId = tarGet.querySelector('.emdId').innerText;
+			    const performId1 = tarGet.querySelector('.performId').value;
+			    console.log(date, emdwp, emdtn, text1, emdId, performId1);
+			    
+			    tarGet.innerHTML = `
+									<form method="post" action="Performance" class="kk">
+									<input type="hidden" name="command" value="update">
+			    					<div class="dateB">
+			    						<input type="datetime-local" class="date1" name="date2" value="\${date}" style="font-size:15px">
+										<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
+									</div>
+									<div class="emdwp"><input type="text" name="wpvnaaud2" value="\${emdwp}" style="font-size:15px"></div>
+									<div class="emdtn"><input type="text" name="number2" value="\${emdtn}" style="font-size:15px"></div>
+									<div class="text1"><input type="text" name="comment2" value="\${text1}" style="font-size:15px"></div>
+									<div class="emdId">\${emdId}</div>
+									<div style="display: flex; justify-content: center;">
+										<!-- css안먹어서 그냥 박아버림 -->
+										<!-- <button class="tn">수정</button> -->
+										<input type="hidden" name="performanceId2" value="\${performId1}">
+										<input type="submit" value="확인" style="height: 26px;" id="yes">
+										<!-- <form method="post" action="Performance">
+											<input type="hidden" name="command" value="delete">
+											<input type="submit" value="삭제">
+										</form> -->
+										<button class="cnlth">취소</button>
+									</div>
+									</form>
+								`
+			  	document.querySelector('#yes').addEventListener('click', (e)=>{
+					alert("수정되었습니다.")
+				})
+			})
+			
+		}
+
+		// 삭제 버튼
+		const del = document.querySelectorAll('.delete')
+		const deleteF = document.querySelectorAll('.deleteForm')
+		for(let i = 0; i < del.length; i++){
+			del[i].addEventListener('click', (e)=>{
+				e.preventDefault()
+				const tt = confirm("정말로 삭제하시겠습니까?")
+				if(tt){
+					deleteF[i].submit();
+				}
+			})
+		}
+		
+		
 	</script>
 </body>
 

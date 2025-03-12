@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import dto.Performance_DTO;
@@ -15,6 +16,7 @@ import dto.Performance_DTO;
 //실적테이블
 public class Performance_DAO {
 	
+//	등록 메소드
 	public int insertPerform(Performance_DTO performDTO) {
 		System.out.println("insertPerform 실행");
 		
@@ -27,7 +29,7 @@ public class Performance_DAO {
 			Connection con = ds.getConnection();
 //			테이블 시퀀스값, 제품명, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
 			String query = " insert into performances "
-					+ " values ('', '김치찌개', '1', 'admin1', ? , ? , ?) ";
+					+ " values ('김치찌개', '1', 'admin1', ? , ? , ?) ";
 			
 			PreparedStatement ps = con.prepareStatement(query);
 //			ps.setString( 몇번째 ? , value );
@@ -52,6 +54,9 @@ public class Performance_DAO {
 		
 	}
 	
+	
+	
+//	db 보여주기 메소드
 	public List<Performance_DTO> selectPerform() {
 		
 		System.out.println("List 타입 selectWorkOrder 실행");
@@ -75,7 +80,7 @@ public class Performance_DAO {
 			
 			while( rs.next() ) {
 				Performance_DTO dto = new Performance_DTO();
-				dto.setPerformanceId(rs.getInt("PerformanceId"));
+				dto.setPerformanceId(rs.getInt("performanceid"));
 				dto.setProductName(rs.getString("ProductName"));
 				dto.setPlanId(rs.getInt("PlanId"));
 				dto.setUserId(rs.getString("UserId"));
@@ -94,6 +99,82 @@ public class Performance_DAO {
 		
 		
 		return list;
+	}
+	
+	
+	
+	// 수정메소드
+	public int updatePerform(Performance_DTO performDTO) {
+		
+		int result = -1;
+		
+		Context ctx;
+		try {
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			
+			Connection con = ds.getConnection();
+			
+			String query = " UPDATE performances "
+					+ " SET "
+					+ "    productname = ? , "
+					+ "    reporttime = ? , "
+					+ "    performancecomment = ? , "
+					+ "    productioncount = ? "
+					+ " WHERE "
+					+ "    performanceid = ? ";
+			PreparedStatement ps = con.prepareStatement(query);
+			
+			ps.setString(1, performDTO.getProductName());
+			ps.setTimestamp(2, performDTO.getReportTime());
+			ps.setString(3, performDTO.getPerformanceComment());
+			ps.setInt(4, performDTO.getProductionCount());
+			ps.setInt(5, performDTO.getPerformanceId());
+			
+			System.out.println(performDTO.getProductName());
+			System.out.println(performDTO.getReportTime());
+			System.out.println(performDTO.getPerformanceComment());
+			System.out.println(performDTO.getProductionCount());
+			System.out.println(performDTO.getPerformanceId());
+			result = ps.executeUpdate();
+			
+			
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+//	삭제메소드
+	public int deletePerform( Performance_DTO performDTO ) {
+		
+		int result = -1;
+		
+		Context ctx;
+		try {
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			
+			Connection con = ds.getConnection();
+			
+			String query = " delete from performances "
+					+ " where performanceid = ? ";
+			PreparedStatement ps = con.prepareStatement(query);
+
+			ps.setInt( 1, performDTO.getPerformanceId() );
+			
+			result = ps.executeUpdate();
+			
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
 	}
 	
 	
