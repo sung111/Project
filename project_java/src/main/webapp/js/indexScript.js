@@ -113,9 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
         LocalNavigationbar("기준관리", "BOM");
     })
     // 생산관리 탭
-    const workOrdermenu = document.querySelector("#nav-workorder");
-    workOrdermenu.addEventListener("click", function () {
-        iframe.src = "WorkOrder.jsp"
+    const prodPlanmenu = document.querySelector("#nav-workorder");
+    prodPlanmenu.addEventListener("click", function () {
+        iframe.src = "ProdPlan.jsp"
         LocalNavigationbar("생산관리", "생산계획");
     })
     const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");

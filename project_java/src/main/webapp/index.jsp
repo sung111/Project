@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.sql.*, javax.servlet.http.*, javax.servlet.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +14,13 @@
     <link rel="stylesheet" href="css/common.css">
         <!-- javascript link -->
         <script src="js/indexScript.js"></script>
+        <%
+        
+        String DB_URL = "jdbc:oracle:thin:@125.181.132.133:51521:xe"; 
+        //ㅈㅁㅈㅁ
+        
+        
+        %>
 </head>
 
 <body class="index">
