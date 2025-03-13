@@ -10,9 +10,10 @@ tbody{
 }
 
 .new-workorder{
-    width: 100%;    table-layout: fixed; border-collapse: collapse;
-    
+    width: 100%;    table-layout: auto; border-collapse: collapse;
+    /* table-layout: fixed; */
 }
+
 /* 작성주 위치 CSS */
 .menufacturer-info{
     width: 100%; height: 40px; 
@@ -30,7 +31,7 @@ tbody{
 /* 작성품목 위치 CSS */
 
 .order-info-list{
-    width: 100%; height: 40px; color: #ffffff; background-color: #007bff; border: 1px solid #999999; font-weight: 300; 
+    width: auto; height: 40px; color: #ffffff; background-color: #007bff; border: 1px solid #999999; font-weight: 300; 
 }
 
 .order-info-list:hover{
@@ -66,9 +67,9 @@ cursor: default;
 .wo-input{
      width: 100%; height: 100%; border: none; text-align: center;
 }
-.wo-input:focus(
-outline: none;
-)
+.wo-input:focus{
+    outline: none;
+}
 
 /* 버튼 위치 CSS */
 
