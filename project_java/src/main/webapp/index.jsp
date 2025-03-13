@@ -19,7 +19,6 @@
         String DB_URL = "jdbc:oracle:thin:@125.181.132.133:51521:xe"; 
         //ㅈㅁㅈㅁ
         
-        
         %>
 </head>
 
