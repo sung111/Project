@@ -14,7 +14,32 @@ public class Materials_DTO {
 	String lotnumber;
 	String warehouse;
 	String origin;
+	String materiaid;
+	String materiadel;
 	
+	
+
+	public String getMateriadel() {
+		return materiadel;
+	}
+	public void setMateriadel(String materiadel) {
+		this.materiadel = materiadel;
+	}
+
+	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getMateriaid() {
+		return materiaid;
+	}
+	public void setMateriaid(String materiaid) {
+		this.materiaid = materiaid;
+	}
 	public String getOrigin() {
 		return origin;
 	}

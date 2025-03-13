@@ -34,7 +34,7 @@ public class Products_DAO {
 //					방법 1: sql string을 그냥 만들기
 //					query += " values (seq_todo.nextval, '"+ todoDTO.getTodo() +"', sysdate, null,'N')";
 //					방법 2: ? 활용하기
-					query += " values (?,?,null,?,null,null,null,?,?,?,?)";
+					query += " values ('',?,?,null,?,null,null,null,?,?,?,'n',?)";
 					
 			PreparedStatement ps = con.prepareStatement(query);
 			
@@ -55,7 +55,7 @@ public class Products_DAO {
 			// int executeUpdate() : select 외 모든것
 			// 
 			result = ps.executeUpdate();
-
+			
 		
 			con.close();
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ public class Products_DAO {
 			// DB 접속 완
 
 			// [SQL 준비]
-			String 	query =  " select * from products";
+			String 	query = " select * from products  WHERE productdel = 'n'";
 			PreparedStatement ps = con.prepareStatement(query);
 					
 
@@ -101,6 +101,8 @@ public class Products_DAO {
 				products_DTO.setSpec(rs.getString("SPEC"));
 				products_DTO.setUnit(rs.getString("UNIT"));
 				products_DTO.setLotnumber(rs.getString("LotNumber"));
+				products_DTO.setProductid(rs.getString("productID"));
+			
 			
 				System.out.println("1"+products_DTO.getProductname());
 				System.out.println("2"+products_DTO.getPartnumber());
@@ -212,11 +214,13 @@ public class Products_DAO {
 			// DB 접속 완
 
 			// [SQL 준비]
-			String 	query =  " DELETE FROM products ";
-					query += " WHERE Productname  = ?";
+
+					String 	query =  " update products ";
+					query += " set productdel  = 'y'";
+					query += " where productID = ?";
 					
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, products_DTO.getProductname());
+			ps.setString(1, products_DTO.getProductid());
 			System.out.println("products_DTO.getProductname() :"+products_DTO.getProductname());
 			result = ps.executeUpdate();
 
