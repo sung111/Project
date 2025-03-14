@@ -16,6 +16,8 @@ public class Materials_DTO {
 	String origin;
 	String materiaid;
 	String materiadel;
+	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
+
 	
 	
 
@@ -26,7 +28,6 @@ public class Materials_DTO {
 		this.materiadel = materiadel;
 	}
 
-	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
 	
 	public String getType() {
 		return type;

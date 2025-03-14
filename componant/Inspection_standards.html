@@ -254,10 +254,11 @@
         }
 
         .navigation-title-article {
+            border: 1px solid blue;
             width: 300px;
             display: flex;
             justify-content: space-around;
-            margin-left: 10%;
+        
             align-items: center;
             height: 40px;
          
@@ -294,7 +295,9 @@
         }
 
         #navigation-title-text {
+
             /* border: 1px solid black; */
+            
             width: 130px;
             
         }
@@ -362,20 +365,20 @@
             <div id="navigation-title-parent">
                 <div id="navigation-title">
                     <div class="navigation-title-article">
+
                         <div id="navigation-title-text">
                             밀키트 검색
                         </div>
-                        <div>
-                            <input type="text" id="navigation-title-search" >
-                        </div>
-                    </div>
-                    <div class="navigation-title-article2">
+
+                            <div>
+                                <input type="text" id="navigation-title-search" >
+                            </div>
+                      
+                   
                         <div class="navigation-title-button-parent">
                             <input type="button" value="검색" class="btn search">
                         </div>
-                        <div class="navigation-title-button-parent">
-                            <input type="button" value="생성" class="btn creat">
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -808,67 +811,6 @@
 
                 //-----생성 코드
                 document.querySelector(".creat").addEventListener("click", function () {
-                    //dom 생성
-                    let uppandtarget = document.querySelector("#standards-top")
-
-                    let uppand_chaild = document.createElement("div")
-                    uppand_chaild.classList = "standards-contain"
-
-                    uppand_chaild.innerHTML = `
-               <div class="standards-imege-contain">
-                    <div class="center">
-                        <div class="manu-name text-serch">곱창전골 밀키트 </div>
-                        <select name="" id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
-                        </select>
-                    </div>
-                    <img src="/img/Gopchanghotpot.png" class="standards-imege"><input type="file" class="file files ">
-                </div>
-                <div class="standards-font-contain">
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"> <h2 >정상제품기준</h2></div>
-                            <div class="hidetext">
-                                1.곱창이 신선하고 특유의 냄새가 심하지 않음<br>
-                                2.각종 채소(부추, 양파, 깻잎 등)가 신선함<br>
-                                3.국물 베이스가 밀봉되어 새지 않음<br>
-                            </div>
-                            <textarea name="" class="showtext"></textarea>
-
-                        </div>
-
-                    </div>
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                           <div class="titlecenter"><h2>비정상제품기준</h2></div>
-                            <div class="hidetext2">
-                                1.곱창에서 심한 악취가 나거나 색이 변함<br>
-                                2.채소가 시들거나 갈변<br>
-                                3.육수가 새거나 포장이 손상됨<br>
-                            </div>
-                            <textarea name="" class="showtext2"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="btncenter">
-                    <input type="button" value="수정" class="btn u">
-                    <input type="button" value="확인" class="btn ok">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="취소" class="btn can">
-                </div>
-    `
-
-                    uppandtarget.append(uppand_chaild)
-
                     uppand_chaild.querySelector(".standards-imege").classList.add("none")
                     uppand_chaild.querySelector(".u").classList.add("none")
                     uppand_chaild.querySelector(".can").classList.add("none")

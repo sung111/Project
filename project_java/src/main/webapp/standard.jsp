@@ -220,8 +220,9 @@ input[type=submit] {
 	display: flex;
 	justify-content: center;
 }
-.margin{
-	margin-top:100px;
+
+.margin {
+	margin-top: 100px;
 }
 </style>
 </head>
@@ -232,18 +233,18 @@ input[type=submit] {
 	</div>
 	<div id="top-contain">
 		<form method="get" action="part_code">
-			
-			<select name="view_value" id="check_option" >
+
+			<select name="view_value" id="check_option">
 				<option value="1">원재료 조회</option>
 				<option value="2">완재품 조회</option>
 				<option value="3">전체 조회</option>
-			</select> 
-			<input type="submit" value="조회" class="button" id="check_view">
+			</select> <input type="submit" value="조회" class="button" id="check_view">
 		</form>
 
 
-		<input type="button" value="원재료생성" id="materials_hide" name="generation"> 
-		<input type="button" value="완제품생성" id="finished_hide" name="generation">
+		<input type="button" value="원재료생성" id="materials_hide"
+			name="generation"> <input type="button" value="완제품생성"
+			id="finished_hide" name="generation">
 
 
 	</div>
@@ -276,11 +277,11 @@ input[type=submit] {
 			</div>
 
 			<div class="mid-contain-article " id="materials_id9">
-				<input type="hidden" name="type" value="creat">
-				<input type="submit" value="생성" id="materials_c" class="button">
+				<input type="hidden" name="type" value="creat"> <input
+					type="submit" value="생성" id="materials_c" class="button">
 	</form>
-	
-	
+
+
 
 	</div>
 	</div>
@@ -296,26 +297,26 @@ input[type=submit] {
 				보관창고위치:<input type="text" class="mid-data" name="warehouse">
 			</div>
 			<br>
-			<div class="mid-contain-article" id="finished_id5" >
+			<div class="mid-contain-article" id="finished_id5">
 				가격:<input type="text" class="mid-data" name="price">
 			</div>
-			<div class="mid-contain-article" id="finished_id6" >
+			<div class="mid-contain-article" id="finished_id6">
 				규격:<input type="text" class="mid-data" name="spec">
 			</div>
-			<div class="mid-contain-article" id="finished_id7" >
+			<div class="mid-contain-article" id="finished_id7">
 				단위:<input type="text" class="mid-data" name="unit">
 			</div>
-			<div class="mid-contain-article" id="finished_id8" >
+			<div class="mid-contain-article" id="finished_id8">
 				LotNo:<input type="text" class="mid-data" name="lotnumber">
 			</div>
 			<div class="mid-contain-article " id="finished_id9">
-				<input type="hidden" value="finished_creat" name="type">
-				<input type="submit" value="생성" id="finished_c">
+				<input type="hidden" value="finished_creat" name="type"> <input
+					type="submit" value="생성" id="finished_c">
 	</form>
-		</div>
-	
 	</div>
-	
+
+	</div>
+
 
 	<div id="main_contain">
 		<!-- 원재료 테이블 -->
@@ -335,52 +336,60 @@ input[type=submit] {
 			<c:forEach var="dto" items="${resultList}">
 				<tr class="table_tr">
 					<form method="post" action="part_code">
-						<td><span class="text_view">${dto.materialname}</span>
-						<input type="text" value="${dto.materialname}" class="text_hide" name="materialname2">
-						<input type="hidden" value="${dto.materialname}" name="origin">
-						</td>
-						<td><span class="text_view">${dto.price}</span>
-						<input type="text" value="${dto.price}" class="text_hide" name="price2"></td>
-						
-						<td><span class="text_view">${dto.spec}</span>
-						<input type="text" value="${dto.spec}" class="text_hide" name="spec2"></td>
+						<td><span class="text_view">${dto.materialname}</span> <input
+							type="text" value="${dto.materialname}" class="text_hide"
+							name="materialname2"> <input type="hidden"
+							value="${dto.materialname}" name="origin"></td>
+						<td><span class="text_view">${dto.price}</span> <input
+							type="text" value="${dto.price}" class="text_hide" name="price2"></td>
+
+						<td><span class="text_view">${dto.spec}</span> <input
+							type="text" value="${dto.spec}" class="text_hide" name="spec2"></td>
 						<td><span class="text_view">${dto.unit}</span><input
 							type="text" value="${dto.unit}" class="text_hide" name="unit2"></td>
 						<td><span class="text_view">${dto.supplier}</span><input
-							type="text" value="${dto.supplier}" class="text_hide" name="supplier2"></td>
+							type="text" value="${dto.supplier}" class="text_hide"
+							name="supplier2"></td>
 						<td><span class="text_view">${dto.partNumber}</span><input
-							type="text" value="${dto.partNumber}" class="text_hide" name="partNumber2"></td>
+							type="text" value="${dto.partNumber}" class="text_hide"
+							name="partNumber2"></td>
 						<td><span class="text_view">${dto.lotnumber}</span><input
-							type="text" value="${dto.lotnumber}" class="text_hide" name="lotnumber2"></td>
+							type="text" value="${dto.lotnumber}" class="text_hide"
+							name="lotnumber2"></td>
 						<td><span class="text_view">${dto.warehouse}</span><input
-							type="text" value="${dto.warehouse}" class="text_hide" name="warehouse2"></td>
+							type="text" value="${dto.warehouse}" class="text_hide"
+							name="warehouse2"></td>
 						<td>
 							<div id="edit_delete_box">
-								<input type="button" value="수정" class="update" > 
-								<input type="hidden" name="type" value="update">
-								<input type="submit" value="확인" class="ok">
-								 <input type="button" value="취소" class="cancel">
+								<input type="hidden" value="${dto.materiaid}" name="materiaid">
+								<input type="hidden" value="${dto.type}" name="matetype">
+								<input type="button" value="수정" class="update"> <input
+									type="hidden" name="type" value="update"> <input
+									type="submit" value="확인" class="ok"> <input
+									type="button" value="취소" class="cancel">
 					</form>
-					
+
 					<form method="post" action="part_code">
-						<input type="text" value="${dto.materialname}" name="delvalue" class="delvalue">
-						<input type="hidden" value="del" name="type"> 
-						<input type="hidden" value="${dto.materiaid}" name="materiaidValue">
-						<input type="hidden" value="typeValue" name="type">
-						<input type="submit" value="삭제" class="delet">
+						<input type="text" value="${dto.materialname}" name="delvalue"
+							class="delvalue"> <input type="hidden" value="del"
+							name="type"> <input type="hidden"
+							value="${dto.materiaid}" name="materiaidValue"> <input
+							type="hidden" value="typeValue" name="type"> <input
+							type="submit" value="삭제" class="delet">
 					</form>
-						
-						<form method="post" action="part_code">
-						<!--전체조회 삭제 -->
-						
-						<input type="hidden" value="${dto.type}" name="viewall">
-						<input type="hidden" value="${dto.type}" name="viewall">
-						<input type="hidden" value="viewall" name="type">
-						<input type="submit" value="삭제" class="delet" id="viewall">
-						</form>
+
+
+					<!--전체조회 삭제 -->
+					<form method="post" action="part_code">
+
+						<input type="hidden" value="${dto.materiaid}" name="materiaid">
+						<input type="hidden" value="${dto.type}" name="matetype">
+						<input type="hidden" value="viewall_del" name="type"> 
+						<input type="submit" value="삭제" class="total" id="viewall">
+					</form>
 					</div>
-					
-					
+
+
 					</td>
 
 				</tr>
@@ -388,7 +397,7 @@ input[type=submit] {
 
 		</table>
 	</div>
-	
+
 	<div id="finish_contain">
 		<!-- 완제품 테이블 -->
 		<table id="finish_table">
@@ -406,44 +415,47 @@ input[type=submit] {
 			<c:forEach var="dto" items="${finishiList}">
 				<tr class="table_tr">
 					<form method="post" action="part_code">
-						<td><span class="text_view">${dto.productname}</span>
-						<input type="text" value="${dto.productname}" class="text_hide" name="productname">
-						<input type="hidden" value="${dto.productname}" name="origin">
-						</td>
-						
-						<td><span class="text_view">${dto.partnumber}</span>
-						<input type="text" value="${dto.partnumber}" class="text_hide" name="partnumber"></td>
-						
-						<td><span class="text_view">${dto.warehouse}</span>
-						<input type="text" value="${dto.warehouse}" class="text_hide" name="warehouse"></td>
-						
+						<td><span class="text_view">${dto.productname}</span> <input
+							type="text" value="${dto.productname}" class="text_hide"
+							name="productname"> <input type="hidden"
+							value="${dto.productname}" name="origin"></td>
+
+						<td><span class="text_view">${dto.partnumber}</span> <input
+							type="text" value="${dto.partnumber}" class="text_hide"
+							name="partnumber"></td>
+
+						<td><span class="text_view">${dto.warehouse}</span> <input
+							type="text" value="${dto.warehouse}" class="text_hide"
+							name="warehouse"></td>
+
 						<td><span class="text_view">${dto.price}</span><input
 							type="text" value="${dto.price}" class="text_hide" name="price"></td>
-						
+
 						<td><span class="text_view">${dto.spec}</span><input
 							type="text" value="${dto.spec}" class="text_hide" name="spec"></td>
-						
+
 						<td><span class="text_view">${dto.unit}</span><input
 							type="text" value="${dto.unit}" class="text_hide" name="unit"></td>
-						
+
 						<td><span class="text_view">${dto.lotnumber}</span><input
-							type="text" value="${dto.lotnumber}" class="text_hide" name="lotnumber"></td>
-								<td>
+							type="text" value="${dto.lotnumber}" class="text_hide"
+							name="lotnumber"></td>
+						<td>
 							<div id="edit_delete_box">
-								<input type="button" value="수정" class="update" > 
-								<input type="hidden" name="type" value="finish_update">
-								<input type="submit" value="확인" class="ok">
-								 <input type="button" value="취소" class="cancel">
+								<input type="button" value="수정" class="update"> <input
+									type="hidden" name="type" value="finish_update"> <input
+									type="submit" value="확인" class="ok"> <input
+									type="button" value="취소" class="cancel">
 					</form>
-					
+
 					<form method="post" action="part_code">
-						<input type="text" value="${dto.productname}" name="delvalue" class="delvalue">
-						<input type="hidden" value="finish_del" name="type"> 
-						<input type="hidden" value="${dto.productid}" name="materiaidValue">
-						
-						<input type="submit" value="삭제" class="delet">
+						<input type="text" value="${dto.productname}" name="delvalue"
+							class="delvalue"> <input type="hidden" value="finish_del"
+							name="type"> <input type="hidden"
+							value="${dto.productid}" name="materiaidValue"> <input
+							type="submit" value="삭제" class="delet">
 					</form>
-					
+
 					</div>
 					</td>
 
@@ -456,147 +468,208 @@ input[type=submit] {
 
 	</div>
 	<script>
-		window.addEventListener("load", function() {
-			document.querySelector("#finish_table").classList.add("none")
-			
-			let vv='${viewValue}'
-			
-			
-			if(vv == 1 || vv==''){
-				document.querySelector("#start_table").classList.remove("none");
-		       	document.querySelector("#finish_table").classList.add("none");
-			}else if(vv == 2){
-				document.querySelector("#start_table").classList.add("none");
-		       	document.querySelector("#finish_table").classList.remove("none");
-			}else if(vv == 3){
-				document.querySelector("#start_table").classList.remove("none");
-		       	document.querySelector("#finish_table").classList.add("none");
-		    }
-			
-			
-			
-			//처음 항목 출력 
-			document.querySelector("#finished_c").classList.remove("none")
-			document.querySelector("#mid-contain").classList.add("none")
-			document.querySelector("#mid-contain2").classList.add("none")
-//  			document.querySelector("#finish_table").classList.add("none")
-			document.querySelector("#materials_hide").addEventListener(
-					"click",
-					function() {
-						document.querySelector("#mid-contain").classList
-								.remove("none")
-						document.querySelector("#mid-contain2").classList
-								.add("none")
-					})
-			document.querySelector("#finished_hide").addEventListener(
-					"click",
-					function() {
-						document.querySelector("#mid-contain").classList
-								.add("none")
-						document.querySelector("#mid-contain2").classList
-								.remove("none")
+		window
+				.addEventListener(
+						"load",
+						function() {
+							document.querySelector("#finish_table").classList
+									.add("none")
 
-					})
-			let oks = document.querySelectorAll(".ok")
-			let cancels = document.querySelectorAll(".cancel")
-			let hides = document.querySelectorAll(".text_hide")
-			let delvalues = document.querySelectorAll(".delvalue")
-			for (let i = 0; i < hides.length; i++) {
-				hides[i].classList.add("none")
-			}
-			for (let i = 0; i < cancels.length; i++) {
-				cancels[i].classList.add("none")
-			}
-			for (let i = 0; i < oks.length; i++) {
-				oks[i].classList.add("none")
-			}
-			for (let i = 0; i < oks.length; i++) {
-				delvalues[i].classList.add("none")
-			}
-			let updates = document.querySelectorAll(".update")
-			for (let i = 0; i < updates.length; i++) {
-				//수정이벤트
-				updates[i].addEventListener("click", function(e) {
-					console.log(e.target.parentNode.parentNode.parentNode)
-					let update = e.target.parentNode.parentNode.parentNode
-					let textHides = update.querySelectorAll(".text_hide")
-					let textViews = update.querySelectorAll(".text_view")
+							let vv = '${viewValue}'
 
-					for (let y = 0; y < textHides.length; y++) {
-						textHides[y].classList.remove("none")
-					}
-					for (let y = 0; y < textHides.length; y++) {
-						textViews[y].classList.add("none")
-					}
-					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
-					//확인버튼 보이기
-					e.target.parentNode.querySelector(".ok").classList
-							.remove("none")
-					//취소보튼 보이기
-					e.target.parentNode.querySelector(".cancel").classList
-							.remove("none")
-					//수정 삭제버튼 안보이기
-					e.target.parentNode.querySelector(".delet").classList
-							.add("none")
-					e.target.classList.add("none")
-					console.log("테스트")
-					
-					//확인버튼 클릭시 수정알람
-					e.target.parentNode.querySelector(".ok").addEventListener("click", function(e) {
-					alert("수정이되었습니다")
-					})
-					//취소 누를시 하이드 텍스트 안보이게하기
-// 					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
-// 					console.log("취소버튼",e.target.parentNode)
-					e.target.parentNode.querySelector(".cancel").addEventListener("click", function(e) {
-// 						console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
-						for (let y = 0; y < textHides.length; y++) {
-						textHides[y].classList.add("none")
-						}
-						for (let y = 0; y < textHides.length; y++) {
-						textViews[y].classList.remove("none")
+							if (vv == 1 || vv == '') {
+								document.querySelector("#start_table").classList
+										.remove("none");
+								document.querySelector("#finish_table").classList
+										.add("none");
+							    let totals = document.querySelectorAll(".total");
+				                for(let i = 0; i<totals.length ; i++){
+				                    totals[i].classList.add("none");
+				                }
 						
-						//확인버튼 보이기
-						e.target.parentNode.querySelector(".ok").classList.add("none")
+							} else if (vv == 2) {
+								document.querySelector("#start_table").classList
+										.add("none");
+								document.querySelector("#finish_table").classList
+										.remove("none");
+							} else if (vv == 3) {
+								document.querySelector("#start_table").classList
+										.remove("none");
+								document.querySelector("#finish_table").classList
+										.add("none");
+							    let delets = document.querySelectorAll(".delet");
+				                for(let i = 0; i<delets.length ; i++){
+				                	delets[i].classList.add("none");
+				                }
+							}
 
-						//취소보튼 보이기
-						e.target.parentNode.querySelector(".cancel").classList
-								.remove("none")
-						//수정 삭제버튼 안보이기
-						e.target.parentNode.querySelector(".update").classList
-								.remove("none")
-						e.target.parentNode.querySelector(".delet").classList
-								.remove("none")
-						e.target.classList.add("none")
-						
-						
-					}
-						
-					})
-					
-					
-	
+							//처음 항목 출력 
+							document.querySelector("#finished_c").classList
+									.remove("none")
+							document.querySelector("#mid-contain").classList
+									.add("none")
+							document.querySelector("#mid-contain2").classList
+									.add("none")
+							//  			document.querySelector("#finish_table").classList.add("none")
+							document
+									.querySelector("#materials_hide")
+									.addEventListener(
+											"click",
+											function() {
+												document
+														.querySelector("#mid-contain").classList
+														.remove("none")
+												document
+														.querySelector("#mid-contain2").classList
+														.add("none")
+											})
+							document
+									.querySelector("#finished_hide")
+									.addEventListener(
+											"click",
+											function() {
+												document
+														.querySelector("#mid-contain").classList
+														.add("none")
+												document
+														.querySelector("#mid-contain2").classList
+														.remove("none")
 
-				})
-			}
-			
-			
-// 			 document.querySelector("#check_option").addEventListener("change", function (e) {
-// 			        if (e.target.value == 1) {
-// 			            console.log("e.target.value"+ e.target.value)
-// 			            document.querySelector("#start_table").classList.remove("none")
-// 			            document.querySelector("#finish_table").classList.add("none")
-			    
-// 			        }else if (e.target.value == 2) {
-// 			            console.log("e.target.value"+ e.target.value)
-// 			            document.querySelector("#start_table").classList.add("none")
-// 			            document.querySelector("#finish_table").classList.remove("none")
-			           
-// 			        }
-			
-// 			 })
+											})
+							let oks = document.querySelectorAll(".ok")
+							let cancels = document.querySelectorAll(".cancel")
+							let hides = document.querySelectorAll(".text_hide")
+							let delvalues = document
+									.querySelectorAll(".delvalue")
+							for (let i = 0; i < hides.length; i++) {
+								hides[i].classList.add("none")
+							}
+							for (let i = 0; i < cancels.length; i++) {
+								cancels[i].classList.add("none")
+							}
+							for (let i = 0; i < oks.length; i++) {
+								oks[i].classList.add("none")
+							}
+							for (let i = 0; i < oks.length; i++) {
+								delvalues[i].classList.add("none")
+							}
+							let updates = document.querySelectorAll(".update")
+							for (let i = 0; i < updates.length; i++) {
+								//수정이벤트
+								updates[i]
+										.addEventListener(
+												"click",
+												function(e) {
+													console
+															.log(e.target.parentNode.parentNode.parentNode)
+													let update = e.target.parentNode.parentNode.parentNode
+													let textHides = update
+															.querySelectorAll(".text_hide")
+													let textViews = update
+															.querySelectorAll(".text_view")
 
-		})
+													for (let y = 0; y < textHides.length; y++) {
+														textHides[y].classList
+																.remove("none")
+													}
+													for (let y = 0; y < textHides.length; y++) {
+														textViews[y].classList
+																.add("none")
+													}
+													console
+															.log(
+																	"하이드텍스트",
+																	e.target.parentNode.parentNode.parentNode)
+													//확인버튼 보이기
+													e.target.parentNode
+															.querySelector(".ok").classList
+															.remove("none")
+													//취소보튼 보이기
+													e.target.parentNode
+															.querySelector(".cancel").classList
+															.remove("none")
+													//수정 삭제버튼 안보이기
+													e.target.parentNode
+															.querySelector(".delet").classList
+															.add("none")
+													e.target.classList
+															.add("none")
+													console.log("테스트")
+													//전체 삭제버튼 안보이게하기
+												    let totals = document.querySelectorAll(".total");
+									                for(let i = 0; i<totals.length ; i++){
+									                    totals[i].classList.add("none");
+									                }
+
+													//확인버튼 클릭시 수정알람
+													e.target.parentNode
+															.querySelector(
+																	".ok")
+															.addEventListener(
+																	"click",
+																	function(e) {
+																		alert("수정이되었습니다")
+																	})
+													//취소 누를시 하이드 텍스트 안보이게하기
+													// 					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
+													// 					console.log("취소버튼",e.target.parentNode)
+													e.target.parentNode
+															.querySelector(
+																	".cancel")
+															.addEventListener(
+																	"click",
+																	function(e) {
+																		// 						console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
+																		for (let y = 0; y < textHides.length; y++) {
+																			textHides[y].classList
+																					.add("none")
+																		}
+																		for (let y = 0; y < textHides.length; y++) {
+																			textViews[y].classList
+																					.remove("none")
+
+																			//확인버튼 보이기
+																			e.target.parentNode
+																					.querySelector(".ok").classList
+																					.add("none")
+
+																			//취소보튼 보이기
+																			e.target.parentNode
+																					.querySelector(".cancel").classList
+																					.remove("none")
+																			//수정 삭제버튼 안보이기
+																			e.target.parentNode
+																					.querySelector(".update").classList
+																					.remove("none")
+																			e.target.parentNode
+																					.querySelector(".delet").classList
+																					.remove("none")
+																			e.target.classList
+																					.add("none")
+
+																		}
+
+																	})
+
+												})
+							}
+
+							// 			 document.querySelector("#check_option").addEventListener("change", function (e) {
+							// 			        if (e.target.value == 1) {
+							// 			            console.log("e.target.value"+ e.target.value)
+							// 			            document.querySelector("#start_table").classList.remove("none")
+							// 			            document.querySelector("#finish_table").classList.add("none")
+
+							// 			        }else if (e.target.value == 2) {
+							// 			            console.log("e.target.value"+ e.target.value)
+							// 			            document.querySelector("#start_table").classList.add("none")
+							// 			            document.querySelector("#finish_table").classList.remove("none")
+
+							// 			        }
+
+							// 			 })
+
+						})
 	</script>
 </body>
 
