@@ -142,7 +142,7 @@ public class Materials_DAO {
 					query += " partNumber  = ?,";
 					query += " lotnumber  = ?,";
 					query += " warehouse  = ?";
-					query += " where MATERIALNAME = ?";
+					query += " where MATERIALid = ?";
 					
 			
 					
@@ -156,7 +156,7 @@ public class Materials_DAO {
 			ps.setString(6, materials_DTO.getPartNumber());
 			ps.setString(7, materials_DTO.getLotnumber());
 			ps.setString(8, materials_DTO.getWarehouse());
-			ps.setString(9, materials_DTO.getOrigin());
+			ps.setString(9, materials_DTO.getMateriaid());
 			
 			System.out.println("----------여기는 DAO입니다");
 			System.out.println(materials_DTO.getPrice());
@@ -167,7 +167,7 @@ public class Materials_DAO {
 			System.out.println(materials_DTO.getLotnumber());
 			System.out.println(materials_DTO.getWarehouse());
 			System.out.println(materials_DTO.getMaterialname());
-			System.out.println(materials_DTO.getOrigin());
+			System.out.println(materials_DTO.getMateriaid());
 			
 			
 			// 왼쪽 : prepareStatement = SQL실행을 위한 객체
