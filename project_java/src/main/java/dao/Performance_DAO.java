@@ -30,11 +30,7 @@ public class Performance_DAO {
 			Connection con = ds.getConnection();
 //			테이블 시퀀스값, 제품명, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
 			String query = " insert into performances "
-<<<<<<< HEAD
-					+ " values ('','김치찌개', '1', 'admin1', ? , ? , ?) ";
-=======
 					+ " values ( null, 1, 14, 'adminid1', ? , ? , ?)";
->>>>>>> 19d9b6f760910d6a21cd5cdb43f638cf7dc4a013
 			
 			PreparedStatement ps = con.prepareStatement(query);
 //			ps.setString( 몇번째 ? , value );

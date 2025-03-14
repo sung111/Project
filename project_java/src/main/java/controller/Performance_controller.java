@@ -147,6 +147,9 @@ public class Performance_controller extends HttpServlet {
 		    request.getRequestDispatcher(url).forward(request, response);
 			
 			
+		} else {
+			String url = "Performance";
+			response.sendRedirect(url);
 		}
 		
 		

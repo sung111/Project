@@ -32,7 +32,7 @@
 			</div>
 			<div class="instView">
 				<%-- <%@ page include  %> --%>
-				<jsp:include page="../ProdPlan.jsp"></jsp:include>
+				<%-- <jsp:include page="../ProdPlan.jsp"></jsp:include> --%>
 				<!-- <iframe src="WorkOrder.jsp" style="width:100%; hieght:100%"></iframe> -->
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 					<form method="post" action="Performance">
 						<!-- insert 폼인지 확인 -->
 						<input type="hidden" name="command" value="insert">
-						<div class="rightTop">
+						<div class="rightTop" style="width: 100%;">
 							<div class="wp2">제품명</div>
 							<!-- 제품명 들어갈자리 hidden -->
 							<input type="hidden" name="wpvnaaud" id="wpvnaaud">
@@ -84,11 +84,12 @@
 				</div>
 			</div>
 			<div class="box3">
-				<div>
-					<form method="post" action="Performance" class="box3Top"
-						style="padding: 8px 10px 0 10px;">
+				<div style="display: flex;">
+					<form method="post" class="box3Top"
+						style="padding: 8px 10px 0 10px; width: 95%;">
 						<div style="display: flex; flex-grow: 0.1; width: 26%;">
-							<input type="text" class="wp3" name="searchName" placeholder="제품명">
+							<input type="text" class="wp3" name="searchName"
+								placeholder="제품명">
 						</div>
 						<div class="date2" style="display: flex; flex-grow: 0.1;">
 							<input type="datetime-local" class="indate1" name="startDate">
@@ -99,6 +100,13 @@
 								type="submit" value="조회" class="btn4">
 						</div>
 					</form>
+					<div style="display: flex; align-items: center;">
+						<form name="command" action="Performance"
+							style="padding: 5px 5px 0 0;">
+							<input type="hidden" name="command" value="reset"> <input
+								type="submit" value="초기화" class="btn4">
+						</form>
+					</div>
 				</div>
 				<div class="indexBox">
 					<div class="index" style="">
@@ -143,8 +151,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<script>
 		/* document.querySelector('#wpvnaaud').value = document
 				.querySelector(".wp2").innerText;                   등록 버튼을 눌렀을때 값을넣고 전송하기위함. */
