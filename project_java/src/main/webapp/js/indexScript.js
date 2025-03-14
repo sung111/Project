@@ -70,10 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector(".mypage-img").addEventListener("click", function () {
-        const iframe = parent.document.querySelector("iframe");
-        iframe.src = "login.jsp";
-    })
+document.querySelector(".mypage-img").addEventListener("click", function () {
+    window.location.href = "login.jsp"; // 전체 페이지 이동
+});
 // 로그인이 안되있으면 index로 들어갈 수 없는 스크립트인데 이건 페이지가 완성되면 붙이기!(중요)
 
 

@@ -3,30 +3,30 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import dto.ProductionPlan_DTO;
 
 public class ProductionPlan_DAO {
-    private final String DB_URL = "jdbc:oracle:thin:@125.181.132.133:51521:xe";
 
+    private DataSource dataSource;
 
-    // DB 연결 메서드
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL);
+    public ProductionPlan_DAO() {
+        try {
+            Context initContext = new InitialContext();
+            Context envContext = (Context) initContext.lookup("java:/comp/env");
+            dataSource = (DataSource) envContext.lookup("jdbc/oracle");  // 데이터베이스 설정에 맞게 수정
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    // 전체 생산 계획 목록을 가져오는 메서드
     public List<ProductionPlan_DTO> getAllProductionPlans() {
         List<ProductionPlan_DTO> planList = new ArrayList<>();
         String sql = "SELECT * FROM productionplans"; // 실제 테이블명 적용
 
-        try (Connection conn = getConnection()) {
-            System.out.println(" DB 연결 성공");
-        } catch (SQLException e) {
-            System.out.println(" DB 연결 실패");
-            e.printStackTrace();
-        }
-        
-        try (Connection conn = getConnection();
+        try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
