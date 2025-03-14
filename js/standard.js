@@ -514,8 +514,11 @@ window.addEventListener("load", function () {
 
 
 
-
-
+                let totals = document.querySelectorAll(".total");
+                for(let i = 0; i<totals.length ; i++){
+                    totals[i].classList.add("none");
+                }
+                let totalsa = document.querySelectorAll 
 
 
 

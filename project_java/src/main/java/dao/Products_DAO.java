@@ -94,23 +94,34 @@ public class Products_DAO {
 				Products_DTO products_DTO = new Products_DTO();
 //				System.out.println(rs.next());
 				
+				products_DTO.setProductid(rs.getString("productID"));
 				products_DTO.setProductname(rs.getString("PRODUCTNAME"));
 				products_DTO.setPartnumber(rs.getString("PARTNUMBER"));
+				products_DTO.setExpdatedesc(rs.getString("expdatedesc"));
 				products_DTO.setWarehouse(rs.getString("WAREHOUSE"));
+				products_DTO.setProductimage(rs.getString("productimage"));
+				products_DTO.setNormalcriteria(rs.getString("normalcriteria"));
+				products_DTO.setAbnormalcriteria(rs.getString("abnormalcriteria"));
 				products_DTO.setPrice(rs.getInt("PRICE"));
 				products_DTO.setSpec(rs.getString("SPEC"));
 				products_DTO.setUnit(rs.getString("UNIT"));
+				products_DTO.setProductdel(rs.getString("productdel"));
 				products_DTO.setLotnumber(rs.getString("LotNumber"));
-				products_DTO.setProductid(rs.getString("productID"));
 			
-			
-				System.out.println("1"+products_DTO.getProductname());
-				System.out.println("2"+products_DTO.getPartnumber());
-				System.out.println("3"+products_DTO.getWarehouse());
-				System.out.println("4"+products_DTO.getPrice());
-				System.out.println("5"+products_DTO.getSpec());
-				System.out.println("6"+products_DTO.getUnit());
-				System.out.println("7"+products_DTO.getLotnumber());
+				
+				System.out.println("1"+products_DTO.getProductid());
+				System.out.println("2"+products_DTO.getProductname());
+				System.out.println("3"+products_DTO.getPartnumber());
+				System.out.println("4"+products_DTO.getExpdatedesc());
+				System.out.println("5"+products_DTO.getWarehouse());
+				System.out.println("6"+products_DTO.getProductimage());
+				System.out.println("7"+products_DTO.getNormalcriteria());
+				System.out.println("8"+products_DTO.getAbnormalcriteria());
+				System.out.println("9"+products_DTO.getPrice());
+				System.out.println("10"+products_DTO.getSpec());
+				System.out.println("11"+products_DTO.getUnit());
+				System.out.println("12"+products_DTO.getProductdel());
+				System.out.println("13"+products_DTO.getLotnumber());
 			
 				
 			
