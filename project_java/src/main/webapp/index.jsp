@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="java.sql.*, javax.servlet.http.*, javax.servlet.*" %>
+	<%@ page import="java.sql.*, javax.servlet.http.*, javax.servlet.*" session="true"%>
+<%
+/* 로그인이 안되있으면 강제로 login.js[p로 이동하게 된다. */
+    String userId = (String) session.getAttribute("userId");
+    if (userId == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+    %>
+ <%--     <%
+    /* 로그인을 성공했다면 index.html에 들어갈 수 있다. */
+    String userId = request.getParameter("userId"); // 로그인 성공한 userId
+    session.setAttribute("userId", userId); // 세션에 저장됨
+    response.sendRedirect("index.jsp"); // 메인 페이지 이동함
+%> --%> 
 <!DOCTYPE html>
 <html>
 

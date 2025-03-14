@@ -19,12 +19,12 @@
                 <div class="imglayer">
                     <img src="img/icon.png" alt="loginlogo" >
                 </div>
-                <form class="login-layer" id="login-layer">
-                    <h1>Login</h1>
-                    <input type="text" id="username" placeholder="Username">
-                    <input type="password" id="password" placeholder="Password">
-                    <button type="submit" id="login-button">Login</button>
-                </form>
+<form class="login-layer" id="login-layer" action="Login_controller" method="post">
+    <h1>Login</h1>
+    <input type="text" name="userId" id="username" placeholder="Username" required>
+    <input type="password" name="userPw" id="password" placeholder="Password" required>
+    <button type="submit" id="login-button">Login</button>
+</form>
                 <form class="signup-layer" id="signup-layer">
                     <h6>이름</h6>
                     <input type="text" name="user_name" class="writing_layer" placeholder="이름을 입력해주세요.">
@@ -40,8 +40,8 @@
                             class="users">사용자</label>
                         <input type="radio" name="users" id="admin" value="admin"><label for="admin"
                             class="users">관리자</label>
-                        <input type="radio" name="users" id="high-admin" value="high-admin"><label for="high-admin"
-                            class="users">상위 관리자</label>
+                       <!--  <input type="radio" name="users" id="high-admin" value="high-admin"><label for="high-admin"
+                            class="users">상위 관리자</label> -->
                     </div>
                     <h6>이메일</h6>
                     <input type="email" name="user_email" class="writing_layer" placeholder="이메일을 입력해주세요.">

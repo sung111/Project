@@ -12,20 +12,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const signUpConpleteButton = document.getElementById("sign-up-completed-button");
     const findAccountButton = document.getElementById("find-account-button");
     const cencelButton = document.getElementById("cancel-button");
+
     // 회원가입 버튼을 누르면 회원가입 창으로 바뀐다.
-    signUpbutton.addEventListener("click", function () {
-        // 상단
-        loginLayer.style.display = "none";
-        findLayer.style.display = "none";
-        signUpLayer.style.display = "flex";
-        // 하단
-        findNickNameLink.style.display = "none";
-        signUpConpleteButton.style.display = "flex";
-        findAccountButton.style.display = "none";
-        cencelButton.style.display = "flex";
-    })
+    const loginContainer = document.querySelector(".login-container");
+    const signUpButton = document.getElementById("sign-up-button");
+    const cancelButton = document.getElementById("cancel-button");
 
+    // 화원가입 버튼 클릭 시, 효과
+    signUpButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 기본 행동 방지 (form 제출 방지)
+    
+        // 로그인 숨기고, 잠시 후 회원가입 보이기
+        loginLayer.classList.add("hidden");
+        setTimeout(function() {
+            signUpLayer.classList.add("active");
+        }, 100); // 100ms 후에 전환
+    });
+    
+    cancelButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 기본 행동 방지 (form 제출 방지)
+    
+        // 회원가입 숨기고, 로그인 보이기
+        signUpLayer.classList.remove("active");
+        setTimeout(function() {
+            loginLayer.classList.remove("hidden");
+        }, 100); // 100ms 후에 전환
+    });
 
+// 로그인 버튼 클릭 시 페이지가 새로 고침되는 것 방지
+loginButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 기본 동작 방지
+    // 로그인 처리 함수 호출
+});
 
     function LocalNavigationbar(tagname, componantname) {
         localBar.innerHTML = `<li>Home</li> <li>> ${tagname}</li> <li>> ${componantname}</li>`;
@@ -59,4 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
+
+    //키보드연결
+    let loginButton = document.getElementById("login-layer");
+    loginButton.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 기본 엔터 동작 방지
+            document.getElementById("login-button").click(); // 로그인 버튼 클릭 실행
+        }
+    });
+
 });
