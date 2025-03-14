@@ -220,6 +220,9 @@ input[type=submit] {
 	display: flex;
 	justify-content: center;
 }
+.margin{
+	margin-top:100px;
+}
 </style>
 </head>
 
@@ -362,10 +365,22 @@ input[type=submit] {
 					<form method="post" action="part_code">
 						<input type="text" value="${dto.materialname}" name="delvalue" class="delvalue">
 						<input type="hidden" value="del" name="type"> 
+						<input type="hidden" value="${dto.materiaid}" name="materiaidValue">
+						<input type="hidden" value="typeValue" name="type">
 						<input type="submit" value="삭제" class="delet">
 					</form>
-					
+						
+						<form method="post" action="part_code">
+						<!--전체조회 삭제 -->
+						
+						<input type="hidden" value="${dto.type}" name="viewall">
+						<input type="hidden" value="${dto.type}" name="viewall">
+						<input type="hidden" value="viewall" name="type">
+						<input type="submit" value="삭제" class="delet" id="viewall">
+						</form>
 					</div>
+					
+					
 					</td>
 
 				</tr>
@@ -424,6 +439,8 @@ input[type=submit] {
 					<form method="post" action="part_code">
 						<input type="text" value="${dto.productname}" name="delvalue" class="delvalue">
 						<input type="hidden" value="finish_del" name="type"> 
+						<input type="hidden" value="${dto.productid}" name="materiaidValue">
+						
 						<input type="submit" value="삭제" class="delet">
 					</form>
 					
@@ -451,7 +468,10 @@ input[type=submit] {
 			}else if(vv == 2){
 				document.querySelector("#start_table").classList.add("none");
 		       	document.querySelector("#finish_table").classList.remove("none");
-			}
+			}else if(vv == 3){
+				document.querySelector("#start_table").classList.remove("none");
+		       	document.querySelector("#finish_table").classList.add("none");
+		    }
 			
 			
 			
@@ -520,6 +540,11 @@ input[type=submit] {
 							.add("none")
 					e.target.classList.add("none")
 					console.log("테스트")
+					
+					//확인버튼 클릭시 수정알람
+					e.target.parentNode.querySelector(".ok").addEventListener("click", function(e) {
+					alert("수정이되었습니다")
+					})
 					//취소 누를시 하이드 텍스트 안보이게하기
 // 					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
 // 					console.log("취소버튼",e.target.parentNode)

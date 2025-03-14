@@ -9,7 +9,14 @@ public class Products_DTO {
 	String unit;
 	String lotnumber;
 	String originname;
+	String productid;
 	
+	public String getProductid() {
+		return productid;
+	}
+	public void setProductid(String productid) {
+		this.productid = productid;
+	}
 	public String getOriginname() {
 		return originname;
 	}

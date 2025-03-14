@@ -22,7 +22,6 @@ import dto.Performance_DTO;
 public class Performance_controller extends HttpServlet {
 
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet으로 입장(/Performance)");
 		
@@ -75,6 +74,9 @@ public class Performance_controller extends HttpServlet {
 			int result = performDAO.insertPerform(performDTO);
 			System.out.println("inset result :" + result);
 			
+			String url = "Performance";
+			response.sendRedirect(url);
+			
 		} else if ( "update".equals(command) ) {
 			
 			Performance_DTO performDTO = new Performance_DTO();
@@ -101,6 +103,9 @@ public class Performance_controller extends HttpServlet {
 			int result = performDAO.updatePerform(performDTO);
 			System.out.println("update result :" + result);
 			
+			String url = "Performance";
+			response.sendRedirect(url);
+			
 		} else if ( "delete".equals(command) ) {
 			
 			Performance_DTO performDTO = new Performance_DTO();
@@ -113,12 +118,42 @@ public class Performance_controller extends HttpServlet {
 			int result = performDAO.deletePerform(performDTO);
 			System.out.println("delete result :" + result);
 			
+			String url = "Performance";
+			response.sendRedirect(url);
+			
+		} else if( "search".equals(command) ) {
+			
+			Performance_DTO performDTO = new Performance_DTO();
+			String performanceName = request.getParameter("searchName");
+			String startDate = request.getParameter("startDate");
+			String endDate = request.getParameter("endDate");
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+			LocalDateTime startDate1 = LocalDateTime.parse(startDate, formatter);
+			LocalDateTime endDate1 = LocalDateTime.parse(endDate, formatter);
+			java.sql.Timestamp startDate2 = Timestamp.valueOf(startDate1);
+			java.sql.Timestamp endDate2 = Timestamp.valueOf(endDate1);
+			
+			performDTO.setProductName(performanceName);
+			performDTO.setReportTime(startDate2);
+			performDTO.setReportTime2(endDate2);
+			
+			Performance_DAO performDAO = new Performance_DAO();
+			List<Performance_DTO> resultList = performDAO.searchPerform(performDTO);
+			
+			request.setAttribute("resultList", resultList);
+			
+		    String url = "/WEB-INF/Performance.jsp";
+		    request.getRequestDispatcher(url).forward(request, response);
+			
+			
 		}
 		
-		String url = "Performance";
-		response.sendRedirect(url);
+		
+		
 	}
 	
 	
-
+	
+	
 }

@@ -344,6 +344,19 @@ body {
 
   }
 
+  form>div{
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .kk{
+    display: flex;
+    flex-grow: 1;
+  }
+
 
 }
 
@@ -592,6 +605,7 @@ body {
     width: 97%;
     display: flex;
     justify-content: space-around;
+
   }
   form>div{
     width: 70%;

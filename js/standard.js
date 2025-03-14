@@ -495,6 +495,21 @@ window.addEventListener("load", function () {
                 Insert into (PRODUCTNAME,PARTNUMBER,EXPDATEDESC,WAREHOUSE,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRICE,SPEC,UNIT,LOTNUMBER,PRODUCTDEL) values ('곱창전골','P051','포장 후 30일 이내','냉장','Gopchanghotpot.png','1. 곱창이 신선하고 특유의 냄새가 심하지 않음 2. 각종 채소(부추, 양파, 깻잎 등)가 신선함 3. 국물 베이스가 밀봉되어 새지 않음','1. 곱창에서 심한 악취가 나거나 색이 변함 2. 채소가 시들거나 갈변 3. 육수가 새거나 포장이 손상됨',40000,'750','g','WPD-20250124-005','n');
 
 
+                
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL,LotNumber) values ('부대찌개', 'P047', '포장 후 30일 이내', '냉장', 'Budae-Jjigae.png', '1. 햄, 소시지, 베이크드빈스, 라면사리 등이 신선하고 유통기한 내 포함됨 2. 육수(또는 육수 베이스)가 새지 않고 정상 포장됨 3. 채소(양배추, 파, 양파 등)가 신선하며 변색이나 이물질 없음','1. 햄, 소시지가 변색되었거나 냄새가 남 2. 육수가 새거나 포장이 터짐 3. 채소가 시들거나 부패, 이물질 발견', 30000, 600, 'g', 'n','WPD-20250124-005');
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL,LotNumber) values ('김치찌개', 'P048', '포장 후 30일 이내', '냉장', 'kimchisoup.png', '1.숙성된 김치가 적당히 신맛을 유지하며 유통기한 내 포함됨2.돼지고기(또는 대체 단백질)가 신선하고 변질되지 않음3.국물 베이스(육수, 양념)가 정량으로 들어 있음','1.김치가 부패 냄새가 나거나 너무 묽어짐2.돼지고기가 색이 변했거나 냄새가 남3.양념이 새거나 육수 포장이 불량', 25000, 550, 'g', 'n','WPD-20250124-005');
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL,LotNumber) values ('밀푀유나베', 'P049', '포장 후 30일 이내', '냉장', 'Millefeuille.png', '1. 배추, 깻잎, 버섯 등 채소가 신선하고 시들거나 변색되지 않음 2. 소고기(또는 대체 단백질)가 신선하고 변질되지 않음 3. 육수와 소스가 밀봉되어 있고 누수 없음','1. 채소가 시들거나 갈변, 물러짐 2. 소고기에서 냄새가 나거나 색이 변함 3. 육수가 새거나 소스가 누락됨', 35000, 700, 'g', 'n','WPD-20250124-005');
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL,LotNumber) values ('떡볶이', 'P050', '포장 후 30일 이내', '냉장', 'tteokbokki.png', '1. 배추, 깻잎, 버섯 등 채소가 신선하고 시들거나 변색되지 않음 2. 소고기(또는 대체 단백질)가 신선하고 변질되지 않음 3. 육수와 소스가 밀봉되어 있고 누수 없음','1. 채소가 시들거나 갈변, 물러짐 2. 소고기에서 냄새가 나거나 색이 변함 3. 육수가 새거나 소스가 누락됨', 20000, 500, 'g', 'n','WPD-20250124-005');
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL,LotNumber) values ('곱창전골', 'P051','포장 후 30일 이내', '냉장', 'Gopchanghotpot.png', '1. 배추, 깻잎, 버섯 등 채소가 신선하고 시들거나 변색되지 않음 2. 소고기(또는 대체 단백질)가 신선하고 변질되지 않음 3. 육수와 소스가 밀봉되어 있고 누수 없음','1. 채소가 시들거나 갈변, 물러짐 2. 소고기에서 냄새가 나거나 색이 변함 3. 육수가 새거나 소스가 누락됨', 40000, 750, 'g', 'n','WPD-20250124-005');
+
+
+
+
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL) values ('부대찌개')
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL) values ('김치찌개')
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL) values ('밀푀유나베')
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL) values ('떡볶이')
+                Insert into products (PRODUCTNAME, PARTNUMBER, EXPDATEDESC, WAREHOUSE, PRODUCTIMAGE, NORMALCRITERIA, ABNORMALCRITERIA, PRICE, SPEC, UNIT, PRODUCTDEL) values ('곱창전골')
 
 
 

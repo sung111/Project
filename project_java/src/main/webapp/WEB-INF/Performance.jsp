@@ -78,22 +78,27 @@
 								pack
 							</div>
 						</div>
-						<textarea name="comment" class="textarea1" rows="5"></textarea>
+						<textarea name="comment" class="textarea1" rows="3"
+							style="font-size: 15px;"></textarea>
 					</form>
 				</div>
 			</div>
 			<div class="box3">
-				<div class="box3Top">
-					<div>
-						<input type="text" class="wp3" placeholder="제품명">
-					</div>
-					<div class="date2">
-						<input type="datetime-local" class="indate1"> ~ <input
-							type="datetime-local" class="indate2">
-					</div>
-					<div>
-						<button class="btn4">조회</button>
-					</div>
+				<div>
+					<form method="post" action="Performance" class="box3Top"
+						style="padding: 8px 10px 0 10px;">
+						<div style="display: flex; flex-grow: 0.1; width: 26%;">
+							<input type="text" class="wp3" name="searchName" placeholder="제품명">
+						</div>
+						<div class="date2" style="display: flex; flex-grow: 0.1;">
+							<input type="datetime-local" class="indate1" name="startDate">
+							~ <input type="datetime-local" class="indate2" name="endDate">
+						</div>
+						<div style="text-align: end;">
+							<input type="hidden" name="command" value="search"> <input
+								type="submit" value="조회" class="btn4">
+						</div>
+					</form>
 				</div>
 				<div class="indexBox">
 					<div class="index" style="">
@@ -122,7 +127,7 @@
 									value="${dto.performanceId}" class="performId">
 								<div style="display: flex; justify-content: center;">
 									<!-- css안먹어서 그냥박아버림 -->
-									<button class="tn">수정</button>
+									<button class="tn" style="height: 26px;">수정</button>
 									<!-- <form method="post" action="Performance">
 									<input type="hidden" name="command" value="update">
 									<input type="submit" value="수정">
@@ -138,6 +143,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
 	<script>
 		/* document.querySelector('#wpvnaaud').value = document
 				.querySelector(".wp2").innerText;                   등록 버튼을 눌렀을때 값을넣고 전송하기위함. */
@@ -145,65 +152,77 @@
 				
 				
 		//수정 버튼클릭.
-		const tn = document.querySelectorAll('.tn')
-		for(let tn1 of tn){
-			tn1.addEventListener('click', (e)=>{
-			  	/* 출력해봄 */
-			    console.log(e.target.parentNode.parentNode);
-			    const tarGet = e.target.parentNode.parentNode;
-			    const date = tarGet.querySelector('.dateB').innerText;
-			    const emdwp = tarGet.querySelector('.emdwp').innerText;
-			    const emdtn = tarGet.querySelector('.emdtn').innerText;
-			    const text1 = tarGet.querySelector('.text1').innerText;
-			    const emdId = tarGet.querySelector('.emdId').innerText;
-			    const performId1 = tarGet.querySelector('.performId').value;
-			    console.log(date, emdwp, emdtn, text1, emdId, performId1);
-			    
-			    tarGet.innerHTML = `
-									<form method="post" action="Performance" class="kk">
-									<input type="hidden" name="command" value="update">
-			    					<div class="dateB">
-			    						<input type="datetime-local" class="date1" name="date2" value="\${date}" style="font-size:15px">
-										<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
-									</div>
-									<div class="emdwp"><input type="text" name="wpvnaaud2" value="\${emdwp}" style="font-size:15px"></div>
-									<div class="emdtn"><input type="text" name="number2" value="\${emdtn}" style="font-size:15px"></div>
-									<div class="text1"><input type="text" name="comment2" value="\${text1}" style="font-size:15px"></div>
-									<div class="emdId">\${emdId}</div>
-									<div style="display: flex; justify-content: center;">
-										<!-- css안먹어서 그냥 박아버림 -->
-										<!-- <button class="tn">수정</button> -->
-										<input type="hidden" name="performanceId2" value="\${performId1}">
-										<input type="submit" value="확인" style="height: 26px;" id="yes">
-										<!-- <form method="post" action="Performance">
-											<input type="hidden" name="command" value="delete">
-											<input type="submit" value="삭제">
-										</form> -->
-										<button class="cnlth">취소</button>
-									</div>
-									</form>
-								`
-			  	document.querySelector('#yes').addEventListener('click', (e)=>{
-					alert("수정되었습니다.")
-				})
+	const tn = document.querySelectorAll('.tn')
+	for(let tn1 of tn){
+		tn1.addEventListener('click', (e)=>{
+		  	/* 출력해봄 */
+		    console.log(e.target.parentNode.parentNode);
+		    const tarGet = e.target.parentNode.parentNode;
+		    const date = tarGet.querySelector('.dateB').innerText;
+		    const emdwp = tarGet.querySelector('.emdwp').innerText;
+		    const emdtn = tarGet.querySelector('.emdtn').innerText;
+		    const text1 = tarGet.querySelector('.text1').innerText;
+		    const emdId = tarGet.querySelector('.emdId').innerText;
+		    const performId1 = tarGet.querySelector('.performId').value;
+		    console.log(date, emdwp, emdtn, text1, emdId, performId1);
+		    
+		    tarGet.innerHTML = `
+								<form method="post" action="Performance" class="kk">
+								<input type="hidden" name="command" value="update">
+		    					<div class="dateB">
+		    						<input type="datetime-local" class="date1" name="date2" value="\${date}" style="font-size:15px">
+									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
+								</div>
+								<div class="emdwp">\${emdwp}</div>
+								<div class="emdtn"><input type="text" name="number2" value="\${emdtn}" style="font-size:15px"></div>
+								<div class="text1"><input type="text" name="comment2" value="\${text1}" style="font-size:15px"></div>
+								<div class="emdId">\${emdId}</div>
+								<div style="display: flex; justify-content: center;">
+									<!-- css안먹어서 그냥 박아버림 -->
+									<!-- <button class="tn">수정</button> -->
+									<input type="hidden" name="performanceId2" value="\${performId1}">
+									<input type="submit" value="확인" style="height: 26px;" id="yes">
+									<!-- <form method="post" action="Performance">
+										<input type="hidden" name="command" value="delete">
+										<input type="submit" value="삭제">
+									</form> -->
+									<button class="cnlth">취소</button>
+								</div>
+								</form>
+							`
+		  	document.querySelector('#yes').addEventListener('click', (e)=>{
+				alert("수정되었습니다.")
 			})
-			
-		}
+		})
+		
+	}
 
 		// 삭제 버튼
-		const del = document.querySelectorAll('.delete')
-		const deleteF = document.querySelectorAll('.deleteForm')
-		for(let i = 0; i < del.length; i++){
-			del[i].addEventListener('click', (e)=>{
-				e.preventDefault()
-				const tt = confirm("정말로 삭제하시겠습니까?")
-				if(tt){
-					deleteF[i].submit();
-				}
-			})
-		}
+	const del = document.querySelectorAll('.delete')
+	const deleteF = document.querySelectorAll('.deleteForm')
+	for(let i = 0; i < del.length; i++){
+		del[i].addEventListener('click', (e)=>{
+			e.preventDefault()
+			const tt = confirm("정말로 삭제하시겠습니까?")
+			if(tt){
+				deleteF[i].submit();
+			}
+		})
+	}
+	
+	
+	
+	document.querySelector('.btn4').addEventListener('click', () => {
+		const searchName = document.querySelector('.wp3').value;
+		const startDate = document.querySelector('.indate1').value;
+	    const endDate = document.querySelector('.indate2').value;
 		
-		
+	    
+	    
+	    
+	})
+	
+
 	</script>
 </body>
 

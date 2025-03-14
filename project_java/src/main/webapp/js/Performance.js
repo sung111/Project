@@ -287,48 +287,46 @@ function init() {
   //     }
   //   }
   // })
-  document.querySelector('#yes').addEventListener('click', (e)=>{
-    
-  })
 
-  document.querySelector('.btn4').addEventListener('click', () => {
 
-    const productFilter = document.querySelector('.wp3').value.trim().toLowerCase();
-    const startD = document.querySelector('.indate1').value;
-    const endD = document.querySelector('.indate2').value;
+  // document.querySelector('.btn4').addEventListener('click', () => {
 
-    const startDate = startD ? new Date(startD) : null;
-    const endDate = endD ? new Date(endD) : null;
+  //   const productFilter = document.querySelector('.wp3').value.trim().toLowerCase();
+  //   const startD = document.querySelector('.indate1').value;
+  //   const endD = document.querySelector('.indate2').value;
 
-    const items = document.querySelectorAll('.box3View .item');
+  //   const startDate = startD ? new Date(startD) : null;
+  //   const endDate = endD ? new Date(endD) : null;
 
-    items.forEach(item => {
-      const dateElem = item.querySelector('.dateB');
-      const emdwp = item.querySelector('.emdwp');
+  //   const items = document.querySelectorAll('.box3View .item');
 
-      const dateText = dateElem ? dateElem.textContent.trim() : "";
-      const productText = emdwp ? emdwp.textContent.trim().toLowerCase() : "";
+  //   items.forEach(item => {
+  //     const dateElem = item.querySelector('.dateB');
+  //     const emdwp = item.querySelector('.emdwp');
 
-      const itemDate = new Date(dateText);
+  //     const dateText = dateElem ? dateElem.textContent.trim() : "";
+  //     const productText = emdwp ? emdwp.textContent.trim().toLowerCase() : "";
 
-      let match = true;
+  //     const itemDate = new Date(dateText);
 
-      // 제품명 필터 (입력한 텍스트가 항목의 제품명에 포함되어 있어야 함)
-      if (productFilter && !productText.includes(productFilter)) {
-        match = false;
-      }
+  //     let match = true;
 
-      if (startDate && itemDate < startDate) {
-        match = false;
-      }
+  //     // 제품명 필터 (입력한 텍스트가 항목의 제품명에 포함되어 있어야 함)
+  //     if (productFilter && !productText.includes(productFilter)) {
+  //       match = false;
+  //     }
 
-      if (endDate && itemDate > endDate) {
-        match = false;
-      }
+  //     if (startDate && itemDate < startDate) {
+  //       match = false;
+  //     }
 
-      item.style.display = match ? "" : "none";
-    });
-  });
+  //     if (endDate && itemDate > endDate) {
+  //       match = false;
+  //     }
+
+  //     item.style.display = match ? "" : "none";
+  //   });
+  // });
 
 
 

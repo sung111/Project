@@ -10,8 +10,10 @@ public class Performance_DTO {
 	int PlanId;					// 생산계획 시퀀스번호
 	String UserId;					// 유저 id
 	Timestamp ReportTime;		// 실적등록 시간
+	Timestamp ReportTime2;		// 조회때 사용
 	String PerformanceComment;	// 코멘트
 	int ProductionCount;		// 생산수량
+	
 	public int getPerformanceId() {
 		return PerformanceId;
 	}
@@ -41,6 +43,12 @@ public class Performance_DTO {
 	}
 	public void setReportTime(Timestamp reportTime) {
 		ReportTime = reportTime;
+	}
+	public Timestamp getReportTime2() {
+		return ReportTime2;
+	}
+	public void setReportTime2(Timestamp reportTime2) {
+		ReportTime2 = reportTime2;
 	}
 	public String getPerformanceComment() {
 		return PerformanceComment;
