@@ -14,99 +14,100 @@ function init() {
   const date = `${year}-${month}-${day}T${hour}:${minute}`;
   document.querySelector('.indate1').value = date;
   document.querySelector('.indate2').value = date;
-  document.querySelector('.date2').value = date;
+  document.querySelector('.insertDate').value = date;
+  
 
 
-  document.querySelector('.wkrView').addEventListener('click', (e) => {
+  // document.querySelector('.wkrView').addEventListener('click', (e) => {
 
-    const B = document.querySelectorAll('.menufacturer-info-list')
-    for(let i = 0 ; i < B.length ; i++){
-      if(e.target.parentNode.classList.contains('menufacturer-info-list')){
-        e.preventDefault();
-        e.target.blur();
-      }
-    }
-    // console.log(e.target.parentNode.parentNode)
-    if(e.target.parentNode.parentNode.classList.contains('menufacturer-info')){
-      e.preventDefault();
-      e.target.blur();
-      alert("현재 페이지에서 수정하실수없습니다.")
-    }
+  //   const B = document.querySelectorAll('.menufacturer-info-list')
+  //   for(let i = 0 ; i < B.length ; i++){
+  //     if(e.target.parentNode.classList.contains('menufacturer-info-list')){
+  //       e.preventDefault();
+  //       e.target.blur();
+  //     }
+  //   }
+  //   // console.log(e.target.parentNode.parentNode)
+  //   if(e.target.parentNode.parentNode.classList.contains('menufacturer-info')){
+  //     e.preventDefault();
+  //     e.target.blur();
+  //     alert("현재 페이지에서 수정하실수없습니다.")
+  //   }
 
     // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
     // e.style.display = "none"
 
-    if (e.target.innerText == '수정') {
-      const wkrView = document.querySelector('.wkrView')
-      const a = wkrView.querySelector('.workorder-tag')
-      const b = wkrView.querySelectorAll('.workorderlist')
-      const b2 = wkrView.querySelectorAll('a')
-      const c = wkrView.querySelector('.new-workorder')
-      const d = wkrView.querySelector('.order-buttonlayer')
+    // if (e.target.innerText == '수정') {
+    //   const wkrView = document.querySelector('.wkrView')
+    //   const a = wkrView.querySelector('.workorder-tag')
+    //   const b = wkrView.querySelectorAll('.workorderlist')
+    //   const b2 = wkrView.querySelectorAll('a')
+    //   const c = wkrView.querySelector('.new-workorder')
+    //   const d = wkrView.querySelector('.order-buttonlayer')
 
 
 
-      a.style.display = "none"
-      for (let i = 0; i < b.length; i++) {
-        b[i].style.display = "none"
-      }
-      for (let i = 0; i < b2.length; i++) {
-        b2[i].style.display = "none"
-        // console.log(b2[i])
-      }
-      c.style.display = ""
-      d.style.display = "none"
-    }
+    //   a.style.display = "none"
+    //   for (let i = 0; i < b.length; i++) {
+    //     b[i].style.display = "none"
+    //   }
+    //   for (let i = 0; i < b2.length; i++) {
+    //     b2[i].style.display = "none"
+    //     // console.log(b2[i])
+    //   }
+    //   c.style.display = ""
+    //   d.style.display = "none"
+    // }
 
-    const z = e.target.parentNode.classList.contains("order-info-content")
-    if (z) {
-      document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
-      document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
-    }
+    // const z = e.target.parentNode.classList.contains("order-info-content")
+    // if (z) {
+    //   document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
+    //   document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
+    // }
 
-    if (e.target.innerText == "삭제하기") {
-      alert("현재 페이지에서 삭제하실수없습니다.")
-    }
+    // if (e.target.innerText == "삭제하기") {
+    //   alert("현재 페이지에서 삭제하실수없습니다.")
+    // }
 
-  });
+  // });
 
 
 
 
 
   // 작지
-  document.querySelector('.btn1').addEventListener('click', (e) => {
-    fetch('WorkOrder.html')
-      .then(response => {
-        return response.text();
+  // document.querySelector('.btn1').addEventListener('click', (e) => {
+  //   fetch('WorkOrder.html')
+  //     .then(response => {
+  //       return response.text();
 
-      })
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
+  //     })
+  //     .then(html => {
+  //       const parser = new DOMParser();
+  //       const doc = parser.parseFromString(html, 'text/html');
 
-        const targetBox = doc.querySelector('.workorder-layer');
-        const targetBox2 = doc.querySelector('.workorder-pagenation');
-        const targetBox3 = doc.querySelector('.sample');
-        const SampleClick = doc.querySelector(".workorderlist-sample")
-        if (targetBox) {
-          document.querySelector('.wkrView').innerHTML = targetBox.innerHTML
-          document.querySelector('.wkrView').innerHTML += targetBox2.innerHTML
-          document.querySelector('.wkrView').innerHTML += targetBox3.innerHTML
-          SampleClick.addEventListener('click', (e) => {
-            e.target.parentNode.parentNode.classList.add('hide')
-            targetBox2.style.display = "none"
-            targetBox3.style.display = "block"
-          })
-        }
-      })
-      .catch(error => {
-        console.error('페이지를 불러오는 도중 에러 발생:', error);
-      });
+  //       const targetBox = doc.querySelector('.workorder-layer');
+  //       const targetBox2 = doc.querySelector('.workorder-pagenation');
+  //       const targetBox3 = doc.querySelector('.sample');
+  //       const SampleClick = doc.querySelector(".workorderlist-sample")
+  //       if (targetBox) {
+  //         document.querySelector('.wkrView').innerHTML = targetBox.innerHTML
+  //         document.querySelector('.wkrView').innerHTML += targetBox2.innerHTML
+  //         document.querySelector('.wkrView').innerHTML += targetBox3.innerHTML
+  //         SampleClick.addEventListener('click', (e) => {
+  //           e.target.parentNode.parentNode.classList.add('hide')
+  //           targetBox2.style.display = "none"
+  //           targetBox3.style.display = "block"
+  //         })
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('페이지를 불러오는 도중 에러 발생:', error);
+  //     });
 
 
 
-  })
+  // })
 
 
   document.querySelector('.btn2').addEventListener('click', (e) => {
@@ -158,6 +159,9 @@ function init() {
       })
   })
 
+  
+
+  // 모달창
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
     const modal = document.querySelector('#myModal')
@@ -196,69 +200,69 @@ function init() {
 
 
   //등록버튼
-  document.querySelector('.btn3').addEventListener('click', (e) => {
-    const rad = document.querySelectorAll('.rad')
-    let ss
-    for (let i = 0; i < rad.length; i++) {
-      // console.log(rad[i].checked);
-      // console.log(rad[i].value);
-      if (rad[i].checked) {
-        ss = rad[i].value;
-      }
-    }
+  // document.querySelector('.btn3').addEventListener('click', (e) => {
+  //   const rad = document.querySelectorAll('.rad')
+  //   let ss
+  //   for (let i = 0; i < rad.length; i++) {
+  //     // console.log(rad[i].checked);
+  //     // console.log(rad[i].value);
+  //     if (rad[i].checked) {
+  //       ss = rad[i].value;
+  //     }
+  //   }
 
-    // ss=합불
-    // drop = 불합일때 드랍메뉴 벨류
-    console.log(ss)
-    const drop = document.querySelector('.dropBox').value
-    console.log(drop);
-    // 텍스트박스 값
-    const textB = document.querySelector('.textBox').value
-    console.log(textB)
-    const date = document.querySelector('.date2').value
-    console.log(date)
-    const wp2 = document.querySelector('.wp2')
-    const box3 = document.querySelector('.box3View')
-    if(wp2.innerText == "제품명"){
-      alert('제품이 선택되어있지않습니다.')
-    } else{
-      if (ss == "합격") {
-        box3.innerHTML = `
-                          <div class="dex item">
-                            <div class="dateB">${date}</div>
-                            <div class="emdwp">${wp2.innerText}</div>
-                            <div class="emdgkq">${ss}</div>
-                            <div class="tkdb"></div>
-                            <div class="text1">${textB}</div>
-                            <div>
-                              <button class="tn">수정</button>
-                              <button class="tkr">삭제</button>
-                            </div>
-                          </div>
-                        `+ box3.innerHTML;
-                        renderPagination();  // 페이지네이션 업데이트
-      } else {
-        box3.innerHTML = `
-                          <div class="dex item">
-                            <div class="dateB">${date}</div>
-                            <div class="emdwp">${wp2.innerText}</div>
-                            <div class="emdgkq">${ss}</div>
-                            <div class="tkdb">${drop}</div>
-                            <div class="text1">${textB}</div>
-                            <div>
-                              <button class="tn">수정</button>
-                              <button class="tkr">삭제</button>
-                            </div>
-                          </div>
-                        `+ box3.innerHTML;
-                        renderPagination();  // 페이지네이션 업데이트
+  //   // ss=합불
+  //   // drop = 불합일때 드랍메뉴 벨류
+  //   console.log(ss)
+  //   const drop = document.querySelector('.dropBox').value
+  //   console.log(drop);
+  //   // 텍스트박스 값
+  //   const textB = document.querySelector('.textBox').value
+  //   console.log(textB)
+  //   const date = document.querySelector('.date2').value
+  //   console.log(date)
+  //   const wp2 = document.querySelector('.wp2')
+  //   const box3 = document.querySelector('.box3View')
+  //   if(wp2.innerText == "제품명"){
+  //     alert('제품이 선택되어있지않습니다.')
+  //   } else{
+  //     if (ss == "합격") {
+  //       box3.innerHTML = `
+  //                         <div class="dex item">
+  //                           <div class="dateB">${date}</div>
+  //                           <div class="emdwp">${wp2.innerText}</div>
+  //                           <div class="emdgkq">${ss}</div>
+  //                           <div class="tkdb"></div>
+  //                           <div class="text1">${textB}</div>
+  //                           <div>
+  //                             <button class="tn">수정</button>
+  //                             <button class="tkr">삭제</button>
+  //                           </div>
+  //                         </div>
+  //                       `+ box3.innerHTML;
+  //                       renderPagination();  // 페이지네이션 업데이트
+  //     } else {
+  //       box3.innerHTML = `
+  //                         <div class="dex item">
+  //                           <div class="dateB">${date}</div>
+  //                           <div class="emdwp">${wp2.innerText}</div>
+  //                           <div class="emdgkq">${ss}</div>
+  //                           <div class="tkdb">${drop}</div>
+  //                           <div class="text1">${textB}</div>
+  //                           <div>
+  //                             <button class="tn">수정</button>
+  //                             <button class="tkr">삭제</button>
+  //                           </div>
+  //                         </div>
+  //                       `+ box3.innerHTML;
+  //                       renderPagination();  // 페이지네이션 업데이트
   
-      }
-      alert("품질등록을 완료했습니다.")
-    }
+  //     }
+  //     alert("품질등록을 완료했습니다.")
+  //   }
     
 
-  })
+  // })
 
   document.querySelector('.box3View').addEventListener('click', (e) => {
 
@@ -344,6 +348,9 @@ function init() {
       }
     }
   })
+
+
+  
 
 
   document.querySelector('.btn4').addEventListener('click', function () {

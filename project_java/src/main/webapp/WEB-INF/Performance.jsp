@@ -32,7 +32,7 @@
 			</div>
 			<div class="instView">
 				<%-- <%@ page include  %> --%>
-				<%-- <jsp:include page="../ProdPlan.jsp"></jsp:include> --%>
+				<jsp:include page="../ProdPlan.jsp"></jsp:include>
 				<!-- <iframe src="WorkOrder.jsp" style="width:100%; hieght:100%"></iframe> -->
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 							</div>
 							<input type="submit" class="btn3" value="등록">
 						</div>
-						<div>
+						<div style="width: 100%;">
 							<div id="ea">
 								생산갯수 : <input type="number" id="myInput" min="1" max="100"
 									oninput="validity.valid||(value='')" value="10" name="ea">
@@ -109,7 +109,7 @@
 					</div>
 				</div>
 				<div class="indexBox">
-					<div class="index" style="">
+					<div class="index">
 						<div>등록시간</div>
 						<div>제품명</div>
 						<div>수량</div>
@@ -127,7 +127,7 @@
 										pattern="yyyy-MM-dd HH:mm:ss" />
 									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
 								</div>
-								<div class="emdwp">${dto.productName}</div>
+								<div class="emdwp">${dto.productNameST}</div>
 								<div class="emdtn">${dto.productionCount}</div>
 								<div class="text1">${dto.performanceComment}</div>
 								<div class="emdId">${dto.userId}</div>
@@ -154,12 +154,8 @@
 
 
 	<script>
-		/* document.querySelector('#wpvnaaud').value = document
-				.querySelector(".wp2").innerText;                   등록 버튼을 눌렀을때 값을넣고 전송하기위함. */
-				
-				
-				
-		//수정 버튼클릭.
+	
+	// 수정
 	const tn = document.querySelectorAll('.tn')
 	for(let tn1 of tn){
 		tn1.addEventListener('click', (e)=>{
@@ -220,16 +216,7 @@
 	
 	
 	
-	document.querySelector('.btn4').addEventListener('click', () => {
-		const searchName = document.querySelector('.wp3').value;
-		const startDate = document.querySelector('.indate1').value;
-	    const endDate = document.querySelector('.indate2').value;
-		
-	    
-	    
-	    
-	})
-	
+
 
 	</script>
 </body>
