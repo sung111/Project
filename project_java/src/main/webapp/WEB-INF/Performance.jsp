@@ -32,7 +32,7 @@
 			</div>
 			<div class="instView">
 				<%-- <%@ page include  %> --%>
-				<jsp:include page="../WorkOrder.jsp"></jsp:include>
+				<jsp:include page="../ProdPlan.jsp"></jsp:include>
 				<!-- <iframe src="WorkOrder.jsp" style="width:100%; hieght:100%"></iframe> -->
 			</div>
 		</div>
