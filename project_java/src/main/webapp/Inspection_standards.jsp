@@ -391,24 +391,25 @@
 
 
         <div id="standards-top">
-
            <c:forEach var="dto" items="${selectval}">
+		
            
             <div class="standards-contain">
                 <div class="standards-imege-contain">
                     <div class="center">
+	<form action="InspectionS" method="post">
                         <div class="manu-name text-serch">${dto.productname} 밀키트</div>
-                        <select id="select" class="selects" style="margin-bottom:80px;">
                         
+                        <select id="select" class="selects" style="margin-bottom:80px;" name="product_select">
                           <c:forEach var="dto1" items="${selectval}">
-                            <option value="${dto1.productname}">${dto1.productname}</option>
+                            <option value="${dto1.productid}">${dto1.productname}</option>
                             </c:forEach>
-                            
                         </select>
+                        
                        
                     </div>
                     <img src="img/${dto.productimage}" class="standards-imege">
-                    <input type="file" class="file files ">
+                    <input type="file" class="file files" name="file_value">
                 </div>
                 <div class="standards-font-contain">
                     <div class="standards-font-parent">
@@ -417,9 +418,9 @@
 
                            <div class="titlecenter"><h2>정상제품기준</h2></div> 
                             <div class="hidetext">
-                               1.${dto.normalcriteria}
+                               ${dto.normalcriteria}
                             </div>
-                            <textarea name="" class="showtext" value="${dto.normalcriteria}"></textarea>
+                            <textarea name="normalcriteria_value" class="showtext" value="${dto.normalcriteria}">${dto.normalcriteria}</textarea>
                         </div>
 
                     </div>
@@ -431,26 +432,28 @@
                             <div class="hidetext2">
                             ${dto.abnormalcriteria}
                             </div>
-                            <textarea  name="" class="showtext2" value="${dto.abnormalcriteria}"></textarea>
+                            <textarea  name="abnormalcriteria_value" class="showtext2" value="${dto.abnormalcriteria}">${dto.abnormalcriteria}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="btncenter">
-                	for
+                	
                     <input type="hidden" value="update" name="type">
-                    <input type="submit" value="수정" class="btn u">
+                    <input type="button" value="수정" class="btn u">
 <!--                     삭제 보류 선생님이 말해줄거임 -->
 <!--                             DB에 데이터 \t? 였나 넣어서 줄바꿔서 만든다음에 서블릿에서 \t?를 \n으로 바꿔라-->
 <!--                     <input type="button" value="삭제" class="btn d"> -->
-                    <input type="button" value="확인" class="btn ok">
+                    <input type="submit" value="확인" class="btn ok">
                     <input type="button" value="취소" class="btn can">
+     </form>
                 </div>
             </div>
-            
 		</c:forEach>
 
-
         </div>
+        
+        
+        
         <script>
             window.addEventListener("load", function () {
                 function hide() {
@@ -475,11 +478,8 @@
                             // console.log(textserchs[i])
                             textserchs[i].parentNode.parentNode.parentNode.classList.remove("none")
                             console.log("바꿀거", textserchs[i].parentNode.parentNode)
-
                         }
-
                     }
-
                 })
 
                 let btnok = document.querySelectorAll(" .ok")
@@ -497,206 +497,41 @@
                 document.querySelectorAll(".hidetext").forEach(el => el.classList.remove("none"));
                 document.querySelectorAll(".hidetext2").forEach(el => el.classList.remove("none"));
 
-                //--확인
-
-                let bntok = document.querySelectorAll(".btn.ok")
-                for (let i = 0; i < bntok.length; i++) {
-                    bntok[i].addEventListener("click", function (e) {
-                        console.log("된다고")
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-                        e.target.parentNode.parentNode.querySelector(".text-serch").innerText = e.target.parentNode.parentNode.querySelector(".selects").value
-                        let hidetext = e.target.parentNode.parentNode.querySelector(".hidetext")
-                        let hidetext2 = e.target.parentNode.parentNode.querySelector(".hidetext2")
-                        let showtext = e.target.parentNode.parentNode.querySelector(".showtext")
-                        let showtext2 = e.target.parentNode.parentNode.querySelector(".showtext2")
-                        hidetext.innerText = showtext.value;
-                        hidetext2.innerText = showtext2.value;
-
-
-
-                    })
-                }
-
-
-
-
-
-                //---취소
-                let can = document.querySelectorAll(".btn.can")
-                for (let i = 0; i < can.length; i++) {
-                    can[i].addEventListener("click", function (e) {
-
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-                    })
-                }
-
-
-
-                //수정-------------------
-                let us = document.querySelectorAll(".u")
-                for (let i = 0; i < us.length; i++) {
-                    us[i].addEventListener("click", function (e) {
-                        console.log(e.target.parentNode.parentNode.querySelector(".selects"))
-                        e.target.parentNode.querySelector(".ok").classList.remove("none")
-                        e.target.parentNode.querySelector(".can").classList.remove("none")
-                        e.target.parentNode.querySelector(".u").classList.add("none")
-                        e.target.parentNode.querySelector(".d").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none")
-
-                        e.target.parentNode.parentNode.querySelector(".showtext").value = e.target.parentNode.parentNode.querySelector(".hidetext").innerText
-                        e.target.parentNode.parentNode.querySelector(".showtext2").value = e.target.parentNode.parentNode.querySelector(".hidetext2").innerText
-                    })
-                }
-                //삭제----
-                let btnd = document.querySelectorAll(".d")
-                for (let i = 0; i < btnd.length; i++) {
-                    btnd[i].addEventListener("click", function (e) {
-                        console.log("됨")
-                        console.log(e.target.parentNode.parentNode)
-                        e.target.parentNode.parentNode.remove()
-                    })
-                }
-
-
-                //수정-------------------
-
-                //-----생성 코드
-                document.querySelector(".creat").addEventListener("click", function () {
-                    //dom 생성
-                  
-                    uppand_chaild.querySelector(".standards-imege").classList.add("none")
-                    uppand_chaild.querySelector(".u").classList.add("none")
-                    uppand_chaild.querySelector(".can").classList.add("none")
-                    uppand_chaild.querySelector(".hidetext").classList.add("none")
-                    uppand_chaild.querySelector(".hidetext2").classList.add("none")
-                    uppand_chaild.querySelector(".text-serch").classList.add("none")
-
-                  
-
-                    uppand_chaild.querySelector(".ok").addEventListener("click", function (e) {
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-                        e.target.parentNode.parentNode.querySelector(".text-serch").innerText = e.target.parentNode.parentNode.querySelector(".selects").value
-                        let hidetext = e.target.parentNode.parentNode.querySelector(".hidetext")
-                        let hidetext2 = e.target.parentNode.parentNode.querySelector(".hidetext2")
-                        let showtext = e.target.parentNode.parentNode.querySelector(".showtext")
-                        let showtext2 = e.target.parentNode.parentNode.querySelector(".showtext2")
-                        hidetext.innerText = showtext.value;
-                        hidetext2.innerText = showtext2.value;
-
-
-                        uppand_chaild.querySelector(".u").addEventListener("click", function (e) {
-                            console.log(e.target.parentNode.parentNode.querySelector(".selects"))
-                            e.target.parentNode.querySelector(".ok").classList.remove("none")
-                            e.target.parentNode.querySelector(".can").classList.remove("none")
-                            e.target.parentNode.querySelector(".u").classList.add("none")
-                            e.target.parentNode.querySelector(".d").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".file").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none")
-
-                            e.target.parentNode.parentNode.querySelector(".showtext").value = e.target.parentNode.parentNode.querySelector(".hidetext").innerText
-                            e.target.parentNode.parentNode.querySelector(".showtext2").value = e.target.parentNode.parentNode.querySelector(".hidetext2").innerText
-
-                        })
-                        uppand_chaild.querySelector(".can").addEventListener("click", function (e) {
-
-                            e.target.parentNode.querySelector(".ok").classList.add("none")
-                            e.target.parentNode.querySelector(".can").classList.add("none")
-                            e.target.parentNode.querySelector(".u").classList.remove("none")
-                            e.target.parentNode.querySelector(".d").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-
-
-
-                        })
-                        
-                    })
-                    uppand_chaild.querySelector(".d").addEventListener("click", function (e) {
-                        e.target.parentNode.parentNode.remove()
-                    })
-
-                })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				let us = document.querySelectorAll(".u");
+				for(let i = 0; i<us.length; i++){
+					us[i].addEventListener("click", function (e) {
+						
+// 						console.log("e타겟",e.target.parentNode)
+// 						console.log("e타겟",e.target.parentNode.parentNode)
+						e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".file").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none");
+						e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none");
+						e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none");
+						
+						e.target.classList.add("none");
+						e.target.parentNode.querySelector(".ok").classList.remove("none");
+						e.target.parentNode.querySelector(".can").classList.remove("none");
+						
+						e.target.parentNode.querySelector(".can").addEventListener("click", function (e) {
+							console.log("e타겟",e.target.parentNode.parentNode)
+							e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".file").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".selects").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none");
+							e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none");
+							e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none");
+							
+							
+							e.target.classList.add("none");
+							e.target.parentNode.querySelector(".ok").classList.add("none");
+							e.target.parentNode.querySelector(".u").classList.remove("none");
+						})
+					})
+				}
 
 
             })

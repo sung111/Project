@@ -43,15 +43,30 @@ public class InspectionStandards_controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		
-		String type = request.getParameter("type");
 		Products_DAO products_DAO = new Products_DAO();
 		Products_DTO products_DTO = new Products_DTO();
-		if(type.equals("creat")) {
 		
-			
-		}
+		System.out.println("InspectionS doPost실행중");
 		
+		String product_select = request.getParameter("product_select");
+		String file_value = request.getParameter("file_value");
+		String normalcriteria_value = request.getParameter("normalcriteria_value");
+		String abnormalcriteria_value = request.getParameter("abnormalcriteria_value");
+		
+		products_DTO.setProductid(product_select);
+		products_DTO.setProductimage(file_value);
+		products_DTO.setNormalcriteria(normalcriteria_value);
+		products_DTO.setAbnormalcriteria(abnormalcriteria_value);
+		
+//		System.out.println("product_select :"+product_select);
+//		System.out.println("file_value :"+file_value);
+//		System.out.println("normalcriteria_value :"+normalcriteria_value);
+//		System.out.println("abnormalcriteria_value :"+abnormalcriteria_value);
+		
+		products_DAO.updateProductsInspection(products_DTO);
+		
+		String url = "InspectionS";
+		response.sendRedirect(url);
 		
 	}
 
