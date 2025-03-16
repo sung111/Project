@@ -7,6 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import dto.ProductionPlan_DTO;
+import dto.Products_DTO;
 
 public class ProductionPlan_DAO {
 
@@ -24,8 +25,16 @@ public class ProductionPlan_DAO {
 
     public List<ProductionPlan_DTO> getAllProductionPlans() {
         List<ProductionPlan_DTO> planList = new ArrayList<>();
-        String sql = "SELECT * FROM productionplans"; // 실제 테이블명 적용
-
+        String sql = "SELECT p.*, pr.productname, pr.partnumber, pr.unit, pr.warehouse "
+                + "FROM productionplans p "
+                + "LEFT JOIN products pr ON p.productId = pr.productid";
+        
+		/*
+		 * String sql =
+		 * "SELECT p.*, pr.productname, pr.partnumber, pr.unit, pr.warehouse" +
+		 * "FROM productionplans p" +
+		 * "LEFT JOIN products pr ON p.productId = pr.productid";//실제 테이블명 적용
+		 */
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
@@ -46,7 +55,17 @@ public class ProductionPlan_DAO {
                 plan.setPlanStatus(rs.getString("planStatus"));
                 plan.setPlanCause(rs.getString("planCause"));
                 plan.setPlanNotes(rs.getString("planNotes"));
+                
+                // 🔹 Products_DTO 객체 생성 및 상품 정보 저장
+				/*
+				 * Products_DTO product = new Products_DTO();
+				 * product.setProductname(rs.getString("productname"));
+				 * product.setPartnumber(rs.getString("partnumber"));
+				 * product.setUnit(rs.getString("unit"));
+				 */
 
+                // 🔹 생산계획 DTO에 상품 정보 추가
+				/* plan.setProduct(product); */
                 planList.add(plan);
             }
 

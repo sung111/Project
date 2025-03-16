@@ -70,11 +70,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-document.querySelector(".mypage-img").addEventListener("click", function () {
-    window.location.href = "login.jsp"; // 전체 페이지 이동
-});
-// 로그인이 안되있으면 index로 들어갈 수 없는 스크립트인데 이건 페이지가 완성되면 붙이기!(중요)
+    const myPageImg = document.getElementById("mypage-img");
+    const popup = document.getElementById("popup");
+    const closePopupBtn = document.getElementById("closePopupBtn");
 
+    // 팝업창을 기본적으로 숨김
+    popup.style.display = "none";
+
+    // 이미지 클릭 시 팝업 토글
+    myPageImg.addEventListener("click", function () {
+        popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
+    });
+
+    // 닫기 버튼 클릭 시 팝업 숨기기
+    closePopupBtn.addEventListener("click", function () {
+        popup.style.display = "none";
+    });
 
 // 네비게이션 버튼 클릭 시, iframe 이동 스크립트 + 로컬 네비게이션
 
@@ -176,4 +187,3 @@ document.addEventListener("DOMContentLoaded", function () {
         loginContainer.style.display = "none"; 
     });
 });
-

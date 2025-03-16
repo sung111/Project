@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="java.sql.*, java.util.List, dao.ProductionPlan_DAO, dto.ProductionPlan_DTO"%>
+	import="java.sql.*, java.util.List, dao.ProductionPlan_DAO, dto.ProductionPlan_DTO "%>
+	<!-- , dto.Products_DTO -->
 <%
 ProductionPlan_DAO dao = new ProductionPlan_DAO();
 List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
@@ -59,18 +60,6 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 		</tr>
 	</table>
 	<table class="new-workorder">
-<%
-if (planList == null) {
-    out.println("<p style='color:red;'>planList가 null 입니다.</p>");
-} else if (planList.isEmpty()) {
-    out.println("<p style='color:red;'>조회된 데이터가 없습니다.</p>");
-} else {
-    out.println("<p>총 " + planList.size() + "개의 데이터가 조회됨</p>");
-    for (ProductionPlan_DTO plan : planList) {
-        out.println("<p>Plan ID: " + plan.getPlanId() + ", User ID: " + plan.getUserId() + "</p>");
-    }
-}
-%>
 		<tbody>
 
 			<tr class="order-info-list">
@@ -93,60 +82,28 @@ if (planList == null) {
 			for (ProductionPlan_DTO plan : planList) {
 			%>
 			<tr name="prodPlanList" class="order-info-content wolist">
-				<%--                 <td><input type="text" class="wo-input" value="${PlanId}"></td>
-                <td><input type="text" class="wo-input" value="${UserId}"></td>
-                <td><input type="text" class="wo-input" value="${ProductId}"></td>
-                <td><input type="text" class="wo-input" value=""></td>
-                <td><input type="text" class="wo-input" value=""></td>
-                <td><input type="text" class="wo-input" value=""></td>
-                <td><input type="number"class="wo-input" ></td>
-                <td><input type="date"class="wo-input" value="${CreateDate}"></td>
-                <td><input type="date"class="wo-input" value="${StartDate}"></td>
-                <td><input type="date"class="wo-input" value="${EndDate}"></td>
-                <td><button class="MRPCal"class="wo-input" >MRP계산</button></td>
-                <td><input type="text" class="wo-input" value="${PlanStatus}"></td>
-                <td><input type="text" class="wo-input" value="${PlanCause}"></td>
-                <td><input type="text" class="wo-input" value="${PlanNotes}"></td>  --%>
 				<td>
-					<%
-					plan.getPlanId();
-					%>
+				<%-- <%= (plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음" %> --%>
+				</td>
+				<td><%=plan.getUserId()%></td>
+				<td>
+				<%-- <%= (plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음" %> --%>
 				</td>
 				<td>
-					<%
-					plan.getUserId();
-					%>
+				<%-- <%= (plan.getProduct() != null) ? plan.getProduct().getWarehouse() : "데이터 없음" %> --%>
 				</td>
+				 <td>
+				 <%-- <%=plan.getDeliveryDest()%> --%>
+				 </td> 
 				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>
-					<%
-					plan.getStartDate();
-					%>
-				</td>
-				<td>
-					<%
-					plan.getEndDate();
-					%>
-				</td>
-				<td></td>
-				<td>
-					<%
-					plan.getPlanStatus();
-					%>
-				</td>
-				<td>
-					<%
-					plan.getPlanCause();
-					%>
-				</td>
-				<td>
-					<%
-					plan.getPlanNotes();
-					%>
-				</td>
+				<td><%=plan.getTotalqty()%></td>
+				<td><%=plan.getCreateDate()%></td>
+				<td><%=plan.getStartDate()%></td>
+				<td><%=plan.getEndDate()%></td>
+				<td><a>MRP 계산</a></td>
+				<td><%=plan.getPlanStatus()%></td>
+				<td><%=plan.getPlanCause()%></td>
+				<td><%=plan.getPlanNotes()%></td>
 			</tr>
 			<%
 			}
@@ -155,12 +112,13 @@ if (planList == null) {
 		<tfoot>
 			<tr>
 				<td colspan="13">
-					<div class="order-buttonlayer-pagenation">
-						<a><img src="img/lefticon.png" alt="pagenationleft"
+					<div class="order-buttonlayer-pagenation" id="pagination-container">
+						<!-- 원래 정적으로 동작한 pagenation -->
+						<!-- <a><img src="img/lefticon.png" alt="pagenationleft"
 							class="pagenationicon"></a> <a>1</a> <a>2</a> <a>3</a> <a>4</a>
 						<a>5</a> <a>6</a> <a>7</a> <a>8</a> <a>9</a> <a>10</a> <a><img
 							src="img/righticon.png" alt="pagenationright"
-							class="pagenationicon"></a>
+							class="pagenationicon"></a> -->
 					</div>
 				</td>
 				<td colspan="13" class="order-buttonlayer">
