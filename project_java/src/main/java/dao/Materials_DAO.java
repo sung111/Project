@@ -99,7 +99,7 @@ public class Materials_DAO {
 				materials_DTO.setPartNumber(rs.getString("partNumber"));
 				materials_DTO.setLotnumber(rs.getString("lotnumber"));
 				materials_DTO.setWarehouse(rs.getString("warehouse"));
-				materials_DTO.setMateriaid(rs.getString("materialid"));
+				materials_DTO.setMateriaid(rs.getInt("materialid"));
 				
 //				System.out.println(rs.getString("materialname")+","+rs.getString("materialdel"));
 				System.out.println(rs.getString("materialid"));
@@ -156,7 +156,7 @@ public class Materials_DAO {
 			ps.setString(6, materials_DTO.getPartNumber());
 			ps.setString(7, materials_DTO.getLotnumber());
 			ps.setString(8, materials_DTO.getWarehouse());
-			ps.setString(9, materials_DTO.getMateriaid());
+			ps.setInt(9, materials_DTO.getMateriaid());
 			
 			System.out.println("----------여기는 DAO입니다");
 			System.out.println(materials_DTO.getPrice());
@@ -210,7 +210,7 @@ public class Materials_DAO {
 					
 			PreparedStatement ps = con.prepareStatement(query);
 			
-			ps.setString(1, materials_DTO.getMateriaid());
+			ps.setInt(1, materials_DTO.getMateriaid());
 		
 			System.out.println("메테리얼아이디"+materials_DTO.getMateriaid());
 			result = ps.executeUpdate();

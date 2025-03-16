@@ -78,6 +78,7 @@ th, td {
 }
 
 th {
+	color:white;
 	background-color: #007bff;
 }
 

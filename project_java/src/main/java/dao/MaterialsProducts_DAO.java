@@ -56,7 +56,7 @@ public class MaterialsProducts_DAO {
 				materials_DTO.setLotnumber(rs.getString("lotnumber"));
 				materials_DTO.setWarehouse(rs.getString("warehouse"));
 				materials_DTO.setType(rs.getString("type"));
-				materials_DTO.setMateriaid(rs.getString("materialid"));
+				materials_DTO.setMateriaid(rs.getInt("materialid"));
 
 				list.add(materials_DTO);
 			}
@@ -92,7 +92,7 @@ public class MaterialsProducts_DAO {
 
 				PreparedStatement ps = con.prepareStatement(query);
 
-				ps.setString(1, materials_DTO.getMateriaid());
+				ps.setInt(1, materials_DTO.getMateriaid());
 
 				result = ps.executeUpdate();
 
@@ -106,7 +106,7 @@ public class MaterialsProducts_DAO {
 
 				PreparedStatement ps = con.prepareStatement(query);
 
-				ps.setString(1, materials_DTO.getMateriaid());
+				ps.setInt(1, materials_DTO.getMateriaid());
 
 				result = ps.executeUpdate();
 				System.out.println("프러덕트" + materials_DTO.getMateriaid());
@@ -155,7 +155,7 @@ public class MaterialsProducts_DAO {
 				ps.setString(6, materials_DTO.getPartNumber());
 				ps.setString(7, materials_DTO.getLotnumber());
 				ps.setString(8, materials_DTO.getWarehouse());
-				ps.setString(9, materials_DTO.getMateriaid());
+				ps.setInt(9, materials_DTO.getMateriaid());
 				result = ps.executeUpdate();
 
 			} else if (materials_DTO.getType().equals("p")) {
@@ -180,7 +180,7 @@ public class MaterialsProducts_DAO {
 				ps.setString(5, materials_DTO.getSpec());
 				ps.setString(6, materials_DTO.getUnit());
 				ps.setString(7, materials_DTO.getLotnumber());
-				ps.setString(8, materials_DTO.getMateriaid());
+				ps.setInt(8, materials_DTO.getMateriaid());
 				result = ps.executeUpdate();
 
 	

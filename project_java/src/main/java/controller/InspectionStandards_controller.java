@@ -48,7 +48,7 @@ public class InspectionStandards_controller extends HttpServlet {
 		
 		System.out.println("InspectionS doPost실행중");
 		
-		String product_select = request.getParameter("product_select");
+		int product_select = Integer.parseInt(request.getParameter("product_select"));
 		String file_value = request.getParameter("file_value");
 		String normalcriteria_value = request.getParameter("normalcriteria_value");
 		String abnormalcriteria_value = request.getParameter("abnormalcriteria_value");

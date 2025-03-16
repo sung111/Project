@@ -143,7 +143,7 @@ public class PartCode_controller extends HttpServlet {
 					materials_DTO.setLotnumber(lotnumber2);
 					materials_DTO.setWarehouse(warehouse2);
 					materials_DTO.setOrigin(originname);
-					materials_DTO.setMateriaid(materiaid);
+					materials_DTO.setMateriaid(Integer.parseInt(materiaid));
 					materials_DTO.setType(matetype);
 					
 					if(matetype.equals("p") || matetype.equals("m")) {
@@ -159,7 +159,7 @@ public class PartCode_controller extends HttpServlet {
 					System.out.println("--원재료삭제됨--");
 					String materiaidValue = request.getParameter("materiaidValue");
 //					System.out.println("delvalue :"+ delvalue);
-					materials_DTO.setMateriaid(materiaidValue);
+					materials_DTO.setMateriaid(Integer.parseInt(materiaidValue));
 					System.out.println("삭제된 머터리얼 아이디"+materiaidValue);
 					materials_DAO.deleteMaterials(materials_DTO);
 					
@@ -193,7 +193,7 @@ public class PartCode_controller extends HttpServlet {
 					System.out.println("--완재료업삭제--");
 					String materiaidValue = request.getParameter("materiaidValue");
 //					System.out.println("delvalue :"+ delvalue);
-					products_DTO.setProductid(materiaidValue);
+					products_DTO.setProductid(Integer.parseInt(materiaidValue));
 					products_DAO.deleteProducts(products_DTO);
 
 				}else if (type.equals("finish_update")){
@@ -227,7 +227,7 @@ public class PartCode_controller extends HttpServlet {
 					String materiaid = request.getParameter("materiaid");
 					String matetype = request.getParameter("matetype");
 					
-					materials_DTO.setMateriaid(materiaid);
+					materials_DTO.setMateriaid(Integer.parseInt(materiaid));
 					materials_DTO.setType(matetype);
 					
 					System.out.println("materiaid :"+materiaid);

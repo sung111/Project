@@ -1,7 +1,7 @@
 package dto;
 //완제품 테이블
 public class Products_DTO {
-	String productid;
+	int productid;
 	String productname;
 	String partnumber;
 	String expdatedesc; //유통기한
@@ -48,10 +48,10 @@ public class Products_DTO {
 
 	String originname;
 	
-	public String getProductid() {
+	public	int getProductid() {
 		return productid;
 	}
-	public void setProductid(String productid) {
+	public void setProductid(int productid) {
 		this.productid = productid;
 	}
 	public String getOriginname() {

@@ -10,7 +10,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.Materials_DTO;
 import dto.*;
 
 //완제품 테이블
@@ -94,7 +93,7 @@ public class Products_DAO {
 				Products_DTO products_DTO = new Products_DTO();
 //				System.out.println(rs.next());
 				
-				products_DTO.setProductid(rs.getString("productID"));
+				products_DTO.setProductid(rs.getInt("productID"));
 				products_DTO.setProductname(rs.getString("PRODUCTNAME"));
 				products_DTO.setPartnumber(rs.getString("PARTNUMBER"));
 				products_DTO.setExpdatedesc(rs.getString("expdatedesc"));
@@ -139,7 +138,53 @@ public class Products_DAO {
 	}
 	
 	
-	
+	public List selectProductname(){
+		System.out.println("selectProductname 실행");
+		List list = new ArrayList();
+		
+		try {
+			// [db 접속 시작]
+			Context ctx = new InitialContext(); // JNDI 컨텍스트 생성
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");// 오라클 이라는 이름에 DataSource 찾기
+			// 커넥션 풀에서 접속 정보를 가져오기
+			// 접속이 안되면 null
+			Connection con = ds.getConnection(); // DB 연결
+			// DB 접속 완
+
+			// [SQL 준비]
+			String 	query = " select * from products  WHERE productdel = 'n'";
+			PreparedStatement ps = con.prepareStatement(query);
+					
+
+			// [SQL 실행] 및 [결과 확보]
+			// ResultSet executeQuery : SQL중 select 실행
+			// int executeUpdate() : select 외 모든것
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Products_DTO products_DTO = new Products_DTO();
+//				System.out.println(rs.next());
+				
+				products_DTO.setProductid(rs.getInt("productID"));
+				products_DTO.setProductname(rs.getString("PRODUCTNAME"));
+				
+				
+				System.out.println("1 : "+products_DTO.getProductid());
+				System.out.println("2 : "+products_DTO.getProductname());
+
+
+				list.add(products_DTO);
+			}
+
+		
+			con.close();
+		} catch (Exception e) {
+			System.err.println("버그발생 셀렉트");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 	
 	public int updateProducts(Products_DTO products_DTO) {
 		System.out.println("Products_DAO updateProducts 실행");
@@ -237,7 +282,7 @@ public class Products_DAO {
 			ps.setString(1, products_DTO.getProductimage());
 			ps.setString(2, products_DTO.getNormalcriteria());
 			ps.setString(3, products_DTO.getAbnormalcriteria());
-			ps.setString(4, products_DTO.getProductid());
+			ps.setInt(4, products_DTO.getProductid());
 	
 			
 			System.out.println("1"+products_DTO.getProductimage());
@@ -288,7 +333,7 @@ public class Products_DAO {
 					query += " where productID = ?";
 					
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, products_DTO.getProductid());
+			ps.setInt(1, products_DTO.getProductid());
 			System.out.println("products_DTO.getProductname() :"+products_DTO.getProductname());
 			result = ps.executeUpdate();
 

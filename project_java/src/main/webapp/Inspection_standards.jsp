@@ -500,7 +500,7 @@
 				let us = document.querySelectorAll(".u");
 				for(let i = 0; i<us.length; i++){
 					us[i].addEventListener("click", function (e) {
-						
+						console.log(e.target.parentNode.parentNode);
 // 						console.log("e타겟",e.target.parentNode)
 // 						console.log("e타겟",e.target.parentNode.parentNode)
 						e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none");
@@ -510,6 +510,7 @@
 						e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none");
 						e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none");
 						e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none");
+						e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none");
 						
 						e.target.classList.add("none");
 						e.target.parentNode.querySelector(".ok").classList.remove("none");
@@ -524,6 +525,7 @@
 							e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none");
 							e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none");
 							e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none");
+							e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none");
 							
 							
 							e.target.classList.add("none");
