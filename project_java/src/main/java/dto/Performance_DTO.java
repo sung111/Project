@@ -6,8 +6,8 @@ import java.sql.Timestamp;
 public class Performance_DTO {
 
 	int PerformanceId;			// 실적 시퀀스 번호
-	int ProductName;			// 완제품명
-	String ProductNameST;			// 완제품명
+	int ProductId;			// 완제품 시퀀스
+	String ProductName;		// 완제품명
 	int PlanId;					// 생산계획 시퀀스번호
 	String UserId;				// 유저 id
 	Timestamp ReportTime;		// 실적등록 시간
@@ -15,23 +15,24 @@ public class Performance_DTO {
 	String PerformanceComment;	// 코멘트
 	int ProductionCount;		// 생산수량
 	
+	
 	public int getPerformanceId() {
 		return PerformanceId;
 	}
 	public void setPerformanceId(int performanceId) {
 		PerformanceId = performanceId;
 	}
-	public int getProductName() {
+	public int getProductId() {
+		return ProductId;
+	}
+	public void setProductId(int productId) {
+		ProductId = productId;
+	}
+	public String getProductName() {
 		return ProductName;
 	}
-	public void setProductName(int productName) {
+	public void setProductName(String productName) {
 		ProductName = productName;
-	}
-	public String getProductNameST() {
-		return ProductNameST;
-	}
-	public void setProductNameST(String productNameST) {
-		ProductNameST = productNameST;
 	}
 	public int getPlanId() {
 		return PlanId;
@@ -69,6 +70,7 @@ public class Performance_DTO {
 	public void setProductionCount(int productionCount) {
 		ProductionCount = productionCount;
 	}
+	
 	
 	
 

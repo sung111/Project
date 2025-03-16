@@ -66,7 +66,7 @@ public class Performance_controller extends HttpServlet {
 			int ProductName1 = Integer.parseInt(ProductName);
 			
 			Performance_DTO performDTO = new Performance_DTO();
-			performDTO.setProductName(ProductName1); 	// 제품명 설정
+			performDTO.setProductId(ProductName1); 	// 제품명 설정
 			performDTO.setProductionCount(ea1); 		// 갯수 설정
 			performDTO.setPerformanceComment(comment);  // 코멘트 설정
 			performDTO.setReportTime(sqlTime); 			// 날짜 설정
@@ -96,7 +96,7 @@ public class Performance_controller extends HttpServlet {
 			
 			performDTO.setPerformanceId(performanceId1);
 			performDTO.setReportTime(date1);
-			performDTO.setProductNameST(wpvnaaud);
+			performDTO.setProductName(wpvnaaud);
 			performDTO.setProductionCount(number1);
 			performDTO.setPerformanceComment(text);
 //			System.out.println(text);
@@ -135,7 +135,7 @@ public class Performance_controller extends HttpServlet {
 			java.sql.Timestamp startDate2 = Timestamp.valueOf(startDate1);
 			java.sql.Timestamp endDate2 = Timestamp.valueOf(endDate1);
 			
-			performDTO.setProductNameST(performanceName);
+			performDTO.setProductName(performanceName);
 			performDTO.setReportTime(startDate2);
 			performDTO.setReportTime2(endDate2);
 			

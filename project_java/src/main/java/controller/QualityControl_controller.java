@@ -83,7 +83,7 @@ public class QualityControl_controller extends HttpServlet {
 			
 		}
 
-		String url = "Performance";
+		String url = "qualityControl";
 		response.sendRedirect(url);
 
 		

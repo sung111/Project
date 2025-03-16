@@ -54,10 +54,12 @@
 									pattern="yyyy-MM-dd HH:mm:ss" />
 								<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
 							</div>
-							<div class="emdwp">${dto.productNameST}</div>
+							<div class="emdwp">${dto.productName}</div>
 							<div class="emdtn">${dto.productionCount}</div>
 							<div class="text1">${dto.performanceComment}</div>
 							<div class="emdId">${dto.userId}</div>
+							<input type="hidden" name="productid"
+								value="${dto.productId}" class="productid">
 							<input type="hidden" name="performanceId"
 								value="${dto.performanceId}" class="performId">
 							<div>
@@ -89,7 +91,7 @@
 				</div>
 			</div>
 			<form method="post" action="qualityControl" class="right"
-				style="border: 1px solid rgb(199, 196, 196);">
+				style="border: 1px solid rgb(199, 196, 196);" id="formK">
 				<!-- form 여기있어요 -->
 				<input type="hidden" name="command" value="insert">
 				<input type="hidden" name="performanceId" class="performId" id="performId1">
@@ -125,7 +127,7 @@
 					</div>
 					<div class="BB">
 						<div class="BB2 hide">불합격 사유 :</div>
-						<select class="dropBox hide" name="failreason">
+						<select class="dropBox hide" name="failreason" disabled>
 							<option value="무게 미달">무게 미달</option>
 							<option value="외관 불량">외관 불량</option>
 							<option value="자재 불량">자재 불량</option>
@@ -198,7 +200,8 @@
 				
 			    console.log(e.target.parentNode.parentNode);
 				const idValue = e.target.parentNode.parentNode.querySelector('.performId').value;
-			    document.querySelector('#wpvnaaud').value = idValue;
+				const idValue2 = e.target.parentNode.parentNode.querySelector('.productid').value;
+			    document.querySelector('#wpvnaaud').value = idValue2;
 			    document.querySelector('#performId1').value = idValue;
 			    
 			    document.querySelector('.wp').innerText = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
@@ -210,11 +213,15 @@
 	
 		
 		document.querySelector('.btn3').addEventListener('click', (e) => {
+			e.preventDefault()
 			if( document.querySelector('.wp2').innerText == "제품명" ){
 				alert("제품이 선택되지않았습니다.");
 				return;
+			} else {
+				document.querySelector('#formK').submit();
+				alert("품질등록이 완료되었습니다.")
+				
 			}
-			alert("품질등록이 완료되었습니다.")
 		})
 	
 	</script>

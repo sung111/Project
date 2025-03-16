@@ -185,12 +185,15 @@ function init() {
   let ss
   for (let i = 0; i < rad.length; i++) {
     rad[i].addEventListener('click', (e) => {
+      
       if (rad[i].checked) {
         ss = rad[i].value
         if (ss == "불합격") {
+          document.querySelector('.dropBox').disabled = false;
           document.querySelector('.dropBox').classList.remove('hide')
           document.querySelector('.BB2').classList.remove('hide')
         } else {
+          document.querySelector('.dropBox').disabled = true;
           document.querySelector('.dropBox').classList.add('hide')
           document.querySelector('.BB2').classList.add('hide')
         }

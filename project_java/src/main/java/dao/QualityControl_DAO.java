@@ -41,8 +41,9 @@ public class QualityControl_DAO {
 			while (rs.next()) {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
+				dto.setProductId(rs.getInt("productid"));
 				dto.setPerformanceId(rs.getInt("performanceid"));
-				dto.setProductNameST(rs.getString("productname"));
+				dto.setProductName(rs.getString("productname"));
 				dto.setPlanId(rs.getInt("PlanId"));
 				dto.setUserId(rs.getString("UserId"));
 				dto.setReportTime(rs.getTimestamp("ReportTime"));

@@ -85,8 +85,9 @@ public class Performance_DAO {
 			while( rs.next() ) {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
+				dto.setProductId(rs.getInt("productid"));
 				dto.setPerformanceId(rs.getInt("performanceid"));
-				dto.setProductNameST(rs.getString("productname"));
+				dto.setProductName(rs.getString("productname"));
 				dto.setPlanId(rs.getInt("PlanId"));
 				dto.setUserId(rs.getString("UserId"));
 				dto.setReportTime(rs.getTimestamp("ReportTime"));
@@ -206,8 +207,8 @@ public class Performance_DAO {
 			
 			ps.setTimestamp( 1, performDTO.getReportTime() );
 			ps.setTimestamp( 2, performDTO.getReportTime2() );
-			ps.setString( 3, performDTO.getProductNameST() );
-			ps.setString( 4, performDTO.getProductNameST() );
+			ps.setString( 3, performDTO.getProductName() );
+			ps.setString( 4, performDTO.getProductName() );
 //			ps.setInt( 3, performDTO.getProductName() );
 //			ps.setInt( 4, performDTO.getProductName() );
 			
@@ -220,7 +221,7 @@ public class Performance_DAO {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
 				dto.setPerformanceId(rs.getInt("performanceid"));
-				dto.setProductNameST(rs.getString("productname"));
+				dto.setProductName(rs.getString("productname"));
 				dto.setPlanId(rs.getInt("PlanId"));
 				dto.setUserId(rs.getString("UserId"));
 				dto.setReportTime(rs.getTimestamp("ReportTime"));
