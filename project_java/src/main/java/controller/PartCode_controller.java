@@ -8,12 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.MaterialsProducts_DAO;
 import dao.Materials_DAO;
 import dao.Products_DAO;
 import dto.Materials_DTO;
-import dao.*;
-import dto.*;
+import dto.Products_DTO;
 /**
  * 부품 코드 컨트롤러입니다
  */
@@ -24,6 +25,14 @@ public class PartCode_controller extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		System.out.println("part_code doGet 페이지가 실행중입니다");
+		
+		//로그인	세션정보 넘어온거 보고 일반사용자 , 관리자 에따라 페이지 표시
+		//일반사용자 view만 가능 관리자 수정/삭제/추가 버튼 보임
+//		HttpSession session = request.getSession();
+//		Boolean isLogon = (Boolean)session.getAttribute("isLogon");
+//		String id = (String)session.getAttribute("id");
+//		int id = (int)session.getAttribute("id");
+		
 		
 		try {
 			Materials_DAO materials_DAO = new Materials_DAO();
@@ -83,6 +92,7 @@ public class PartCode_controller extends HttpServlet {
 		Materials_DAO materials_DAO = new Materials_DAO();
 		Products_DTO products_DTO = new Products_DTO();
 		Products_DAO products_DAO = new Products_DAO();
+		MaterialsProducts_DAO materialsProducts_DAO = new MaterialsProducts_DAO();
 		
 		try {
 			
@@ -121,6 +131,8 @@ public class PartCode_controller extends HttpServlet {
 					String partNumber2 = request.getParameter("partNumber2");
 					String lotnumber2 = request.getParameter("lotnumber2");
 					String warehouse2 = request.getParameter("warehouse2");
+					String materiaid = request.getParameter("materiaid");
+					String matetype = request.getParameter("matetype");
 				
 					materials_DTO.setMaterialname(materialname2);
 					materials_DTO.setPrice(Integer.parseInt(price2));
@@ -131,14 +143,23 @@ public class PartCode_controller extends HttpServlet {
 					materials_DTO.setLotnumber(lotnumber2);
 					materials_DTO.setWarehouse(warehouse2);
 					materials_DTO.setOrigin(originname);
+					materials_DTO.setMateriaid(Integer.parseInt(materiaid));
+					materials_DTO.setType(matetype);
 					
-					materials_DAO.updateMaterials(materials_DTO);
+					if(matetype.equals("p") || matetype.equals("m")) {
+						System.out.println("partcode에서 전체수정 DAO이동");
+						materialsProducts_DAO.updateMaterialsProducts(materials_DTO);						
+					}else {
+						System.out.println("partcode에서 원재료수정 DAO이동");
+						materials_DAO.updateMaterials(materials_DTO);						
+					}
+				
 					
 				}else if (type.equals("del")){
 					System.out.println("--원재료삭제됨--");
 					String materiaidValue = request.getParameter("materiaidValue");
 //					System.out.println("delvalue :"+ delvalue);
-					materials_DTO.setMateriaid(materiaidValue);
+					materials_DTO.setMateriaid(Integer.parseInt(materiaidValue));
 					System.out.println("삭제된 머터리얼 아이디"+materiaidValue);
 					materials_DAO.deleteMaterials(materials_DTO);
 					
@@ -172,7 +193,7 @@ public class PartCode_controller extends HttpServlet {
 					System.out.println("--완재료업삭제--");
 					String materiaidValue = request.getParameter("materiaidValue");
 //					System.out.println("delvalue :"+ delvalue);
-					products_DTO.setProductid(materiaidValue);
+					products_DTO.setProductid(Integer.parseInt(materiaidValue));
 					products_DAO.deleteProducts(products_DTO);
 
 				}else if (type.equals("finish_update")){
@@ -201,15 +222,25 @@ public class PartCode_controller extends HttpServlet {
 					System.out.println("--"+products_DAO.updateProducts(products_DTO));
 				
 					
-				}else if (type.equals("viewall") ){
+				}else if (type.equals("viewall_del") ){
 					System.out.println("--전체조회에서 선택삭제--");
-					String viewall = request.getParameter("viewall");
-					String materiaidValue = request.getParameter("materiaidValue");
-					materials_DTO.setMateriaid(materiaidValue);
-					materials_DTO.setType(type);
+					String materiaid = request.getParameter("materiaid");
+					String matetype = request.getParameter("matetype");
 					
-					MaterialsProducts_DAO materialsProducts_DAO = new MaterialsProducts_DAO();
+					materials_DTO.setMateriaid(Integer.parseInt(materiaid));
+					materials_DTO.setType(matetype);
+					
+					System.out.println("materiaid :"+materiaid);
+					System.out.println("matetype :"+matetype);
+					
+				
+					
 					materialsProducts_DAO.deleteMaterialsProducts(materials_DTO);
+					
+				}else if (type.equals("viewall_update") ){
+					
+					
+					
 					
 				}
 				

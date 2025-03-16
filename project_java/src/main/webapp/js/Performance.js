@@ -15,6 +15,8 @@ function init() {
   document.querySelector('.date1').value = date;
   document.querySelector('.indate1').value = date;
   document.querySelector('.indate2').value = date;
+  
+  
 
 
 
@@ -100,7 +102,7 @@ function init() {
   //     });
 
 
-
+  
   // })
 
 
@@ -331,57 +333,57 @@ function init() {
 
 
 
-  // 페이지네이션 관련 전역 변수
-  let currentPage = 1;
-  const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
+  // // 페이지네이션 관련 전역 변수
+  // let currentPage = 1;
+  // const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
 
-  // 페이지네이션을 적용하는 함수
-  function renderPagination() {
-    // 모든 등록된 항목 선택 (.item 클래스 사용)
-    const view = document.querySelector('.box3View');
-    const items = Array.from(view.querySelectorAll('.item'));
-    const totalItems = items.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+  // // 페이지네이션을 적용하는 함수
+  // function renderPagination() {
+  //   // 모든 등록된 항목 선택 (.item 클래스 사용)
+  //   const view = document.querySelector('.box3View');
+  //   const items = Array.from(view.querySelectorAll('.item'));
+  //   const totalItems = items.length;
+  //   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
-    items.forEach((item, index) => {
-      if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
-        item.style.display = '';
-      } else {
-        item.style.display = 'none';
-      }
-    });
+  //   // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
+  //   items.forEach((item, index) => {
+  //     if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
+  //       item.style.display = '';
+  //     } else {
+  //       item.style.display = 'none';
+  //     }
+  //   });
 
-    // pagination 컨테이너 업데이트
-    let paginationContainer = document.querySelector('.pagination');
-    if (!paginationContainer) {
-      // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
-      paginationContainer = document.createElement('div');
-      paginationContainer.classList.add('pagination');
-      // box3 하단에 추가
-      document.querySelector('.box3').appendChild(paginationContainer);
-    }
+  //   // pagination 컨테이너 업데이트
+  //   let paginationContainer = document.querySelector('.pagination');
+  //   if (!paginationContainer) {
+  //     // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
+  //     paginationContainer = document.createElement('div');
+  //     paginationContainer.classList.add('pagination');
+  //     // box3 하단에 추가
+  //     document.querySelector('.box3').appendChild(paginationContainer);
+  //   }
 
-    // 기존 페이지네이션 버튼 초기화
-    paginationContainer.innerHTML = '';
+  //   // 기존 페이지네이션 버튼 초기화
+  //   paginationContainer.innerHTML = '';
 
-    // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
-    for (let page = 1; page <= totalPages; page++) {
-      const btn = document.createElement('button');
-      btn.textContent = page;
-      if (page === currentPage) {
-        btn.disabled = true;
-      }
-      btn.addEventListener('click', () => {
-        currentPage = page;
-        renderPagination();
-      });
-      paginationContainer.appendChild(btn);
-    }
-  }
+  //   // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
+  //   for (let page = 1; page <= totalPages; page++) {
+  //     const btn = document.createElement('button');
+  //     btn.textContent = page;
+  //     if (page === currentPage) {
+  //       btn.disabled = true;
+  //     }
+  //     btn.addEventListener('click', () => {
+  //       currentPage = page;
+  //       renderPagination();
+  //     });
+  //     paginationContainer.appendChild(btn);
+  //   }
+  // }
 
-  // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
-  window.addEventListener('DOMContentLoaded', renderPagination);
+  // // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
+  // window.addEventListener('DOMContentLoaded', renderPagination);
 
 
 

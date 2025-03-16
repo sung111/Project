@@ -1,20 +1,57 @@
 package dto;
 //완제품 테이블
 public class Products_DTO {
+	int productid;
 	String productname;
 	String partnumber;
+	String expdatedesc; //유통기한
 	String warehouse;
+	String productimage; //이미지링크
+	String normalcriteria; // 정상제품기준
+	String abnormalcriteria; //비정상제품기준
 	int price;
 	String spec;
 	String unit;
+	String productdel; //삭제유무
 	String lotnumber;
-	String originname;
-	String productid;
 	
-	public String getProductid() {
+	public String getExpdatedesc() {
+		return expdatedesc;
+	}
+	public void setExpdatedesc(String expdatedesc) {
+		this.expdatedesc = expdatedesc;
+	}
+	public String getProductimage() {
+		return productimage;
+	}
+	public void setProductimage(String productimage) {
+		this.productimage = productimage;
+	}
+	public String getNormalcriteria() {
+		return normalcriteria;
+	}
+	public void setNormalcriteria(String normalcriteria) {
+		this.normalcriteria = normalcriteria;
+	}
+	public String getAbnormalcriteria() {
+		return abnormalcriteria;
+	}
+	public void setAbnormalcriteria(String abnormalcriteria) {
+		this.abnormalcriteria = abnormalcriteria;
+	}
+	public String getProductdel() {
+		return productdel;
+	}
+	public void setProductdel(String productdel) {
+		this.productdel = productdel;
+	}
+
+	String originname;
+	
+	public	int getProductid() {
 		return productid;
 	}
-	public void setProductid(String productid) {
+	public void setProductid(int productid) {
 		this.productid = productid;
 	}
 	public String getOriginname() {

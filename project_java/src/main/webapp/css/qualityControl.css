@@ -127,7 +127,6 @@ body {
 
   .right {
     width: 100%;
-    border: 1px solid rgb(199, 196, 196);
     margin-left: 5px;
     padding: 8px;
   }
@@ -170,7 +169,6 @@ body {
   }
 
   .box3 {
-    border: 1px solid rgb(199, 196, 196);
     align-items: center;
     background-color: #d9d9d9;
     color: black;
@@ -279,7 +277,7 @@ body {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    padding: 5px;
+    margin: 5px;
   }
 
   .dex>div {
@@ -335,12 +333,54 @@ body {
   .close:focus {
     color: #000;
   }
+  
+  .kk{
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+  }
+  .kk>div{
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  #index>div{
+    background-color: #c7c7c7;
+  }
+  #index>div>div{
+    border: 1px solid;
+  }
 
+  .viewSelect{
+    background-color: #f5ebeb;
+  }
 }
 
 
 /* 데탑 */
 @media screen and (min-width:768px) {
+  .viewSelect{
+    background-color: #f5ebeb;
+  }
+  .kk{
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+  }
+  .kk>div{
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  #index>div{
+    background-color: #c7c7c7;
+  }
+  #index>div>div{
+    border: 1px solid;
+  }
+
   .warrap {
     width: 100%;
     /* padding: 10px; */
@@ -455,7 +495,6 @@ body {
 
   .right {
     width: 50%;
-    border: 1px solid rgb(199, 196, 196);
     margin-left: 5px;
     padding: 5px;
   }
@@ -493,7 +532,6 @@ body {
   }
 
   .box3 {
-    border: 1px solid rgb(199, 196, 196);
     align-items: center;
     background-color: #d9d9d9;
     color: black;
@@ -604,7 +642,7 @@ body {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    padding: 5px;
+    margin: 5px;
   }
 
   .dex>div {

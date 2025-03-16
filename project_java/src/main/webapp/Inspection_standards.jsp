@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -257,7 +262,7 @@
             width: 300px;
             display: flex;
             justify-content: space-around;
-            margin-left: 10%;
+           
             align-items: center;
             height: 40px;
          
@@ -323,12 +328,12 @@
 
         .showtext {
             height: 150px;
-            width: 200px;
+            width: 320px;
         }
 
         .showtext2 {
             height: 150px;
-            width: 200px;
+            width: 320px;
         }
         .titlecenter{
             text-align: center;
@@ -337,6 +342,7 @@
             border: 1px solid #007bff;
          
         }
+        
 
 
 
@@ -362,20 +368,20 @@
             <div id="navigation-title-parent">
                 <div id="navigation-title">
                     <div class="navigation-title-article">
+
                         <div id="navigation-title-text">
                             밀키트 검색
                         </div>
-                        <div>
-                            <input type="text" id="navigation-title-search" >
-                        </div>
-                    </div>
-                    <div class="navigation-title-article2">
+
+                            <div>
+                                <input type="text" id="navigation-title-search" >
+                            </div>
+                      
+                   
                         <div class="navigation-title-button-parent">
                             <input type="button" value="검색" class="btn search">
                         </div>
-                        <div class="navigation-title-button-parent">
-                            <input type="button" value="생성" class="btn creat">
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -385,20 +391,25 @@
 
 
         <div id="standards-top">
-
+           <c:forEach var="dto" items="${selectval}">
+		
+           
             <div class="standards-contain">
                 <div class="standards-imege-contain">
                     <div class="center">
-                        <div class="manu-name text-serch">부대찌개 밀키트</div>
-                        <select id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
+	<form action="InspectionS" method="post">
+                        <div class="manu-name text-serch">${dto.productname} 밀키트</div>
+                        
+                        <select id="select" class="selects" style="margin-bottom:80px;" name="product_select">
+                          <c:forEach var="dto1" items="${selectval}">
+                            <option value="${dto1.productid}">${dto1.productname}</option>
+                            </c:forEach>
                         </select>
+                        
+                       
                     </div>
-                    <img src="/img/Budae-Jjigae.png" class="standards-imege"><input type="file" class="file files ">
+                    <img src="img/${dto.productimage}" class="standards-imege">
+                    <input type="file" class="file files" name="file_value">
                 </div>
                 <div class="standards-font-contain">
                     <div class="standards-font-parent">
@@ -407,14 +418,9 @@
 
                            <div class="titlecenter"><h2>정상제품기준</h2></div> 
                             <div class="hidetext">
-                                1.햄, 소시지, 베이크드빈스, 라면사리 등이 신선하고 유통기한 내 포함됨<br>
-                                2.육수(또는 육수 베이스)가 새지 않고 정상 포장됨<br>
-                                3.채소(양배추, 파, 양파 등)가 신선하며 변색이나 이물질 없음<br>
+                               ${dto.normalcriteria}
                             </div>
-
-                            <textarea name="" class="showtext"></textarea>
-
-
+                            <textarea name="normalcriteria_value" class="showtext" value="${dto.normalcriteria}">${dto.normalcriteria}</textarea>
                         </div>
 
                     </div>
@@ -424,248 +430,30 @@
 
                             <div class="titlecenter"><h2>비정상제품기준</h2></div>
                             <div class="hidetext2">
-                                1.햄, 소시지가 변색되었거나 냄새가 남<br>
-                                2.육수가 새거나 포장이 터짐<br>
-                                3.채소가 시들거나 부패, 이물질 발견<br>
+                            ${dto.abnormalcriteria}
                             </div>
-                            <textarea name="" class="showtext2"></textarea>
-
+                            <textarea  name="abnormalcriteria_value" class="showtext2" value="${dto.abnormalcriteria}">${dto.abnormalcriteria}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="btncenter">
+                	
+                    <input type="hidden" value="update" name="type">
                     <input type="button" value="수정" class="btn u">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="확인" class="btn ok">
+<!--                     삭제 보류 선생님이 말해줄거임 -->
+<!--                             DB에 데이터 \t? 였나 넣어서 줄바꿔서 만든다음에 서블릿에서 \t?를 \n으로 바꿔라-->
+<!--                     <input type="button" value="삭제" class="btn d"> -->
+                    <input type="submit" value="확인" class="btn ok">
                     <input type="button" value="취소" class="btn can">
+     </form>
                 </div>
             </div>
-
-
-            <div class="standards-contain">
-                <div class="standards-imege-contain">
-                    <div class="center">
-                        <div class="manu-name text-serch">김치찌개 밀키트</div>
-                        <select name="" id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
-                        </select>
-                    </div>
-                    <img src="/img/kimchisoup.png" class="standards-imege"><input type="file" class="file files">
-                </div>
-                <div class="standards-font-contain">
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"><h2>정상제품기준</h2></div>
-                            <div class="hidetext">
-                                1.숙성된 김치가 적당히 신맛을 유지하며 유통기한 내 포함됨<br>
-                                2.돼지고기(또는 대체 단백질)가 신선하고 변질되지 않음<br>
-                                3.국물 베이스(육수, 양념)가 정량으로 들어 있음<br>
-                            </div>
-                            <textarea name="" class="showtext"></textarea>
-
-                        </div>
-
-                    </div>
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                        <div class="titlecenter"><h2>비정상제품기준</h2></div>
-                            <div class="hidetext2">
-                                1.김치가 부패 냄새가 나거나 너무 묽어짐<br>
-                                2.돼지고기가 색이 변했거나 냄새가 남<br>
-                                3.양념이 새거나 육수 포장이 불량<br>
-                            </div>
-                            <textarea name="" class="showtext2"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="btncenter">
-                    <input type="button" value="수정" class="btn u">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="확인" class="btn ok">
-                    <input type="button" value="취소" class="btn can">
-                </div>
-            </div>
-
-
-
-            <div class="standards-contain">
-                <div class="standards-imege-contain">
-                    <div class="center">
-                        <div class="manu-name text-serch">밀푀유나배 밀키트</div>
-                        <select name="" id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
-                        </select>
-                    </div>
-                    <img src="/img/Millefeuille.png" class="standards-imege"><input type="file" class="file files ">
-                </div>
-                <div class="standards-font-contain">
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-                            <div class="titlecenter"><h2>정상제품기준</h2></div>
-                            <div class="hidetext">
-                                1.배추, 깻잎, 버섯 등 채소가 신선하고 시들거나 변색되지 않음<br>
-                                2.소고기(또는 대체 단백질)가 신선하고 변질되지 않음<br>
-                                3.육수와 소스가 밀봉되어 있고 누수 없음<br>
-                            </div>
-                            <textarea name="" class="showtext"></textarea>
-
-
-                        </div>
-
-                    </div>
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"><h2>비정상제품기준</h2></div>
-                            <div class="hidetext2">
-                                1.채소가 시들거나 갈변, 물러짐<br>
-                                2.소고기에서 냄새가 나거나 색이 변함<br>
-                                3.육수가 새거나 소스가 누락됨<br>
-                            </div>
-                            <textarea name="" class="showtext2"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="btncenter">
-                    <input type="button" value="수정" class="btn u">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="확인" class="btn ok">
-                    <input type="button" value="취소" class="btn can">
-                </div>
-            </div>
-
-
-
-            <div class="standards-contain">
-                <div class="standards-imege-contain">
-                    <div class="center">
-                        <div class="manu-name text-serch">떡볶이 밀키트 </div>
-                        <select name="" id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
-                        </select>
-                    </div>
-                    <img src="/img/tteokbokki.png" class="standards-imege"><input type="file" class="file files">
-                </div>
-                <div class="standards-font-contain">
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"><h2>정상제품기준</h2></div>
-                            <div class="hidetext">
-                                1.떡이 적절한 수분을 유지하고 딱딱하지 않음><br>
-                                2.고추장 베이스 양념이 정량으로 포함되고 밀봉 유지<br>
-                                3.어묵, 야채가 신선하고 이물질 없음<br>
-                            </div>
-
-                            <textarea name="" class="showtext"></textarea>
-
-                        </div>
-
-                    </div>
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"><h2>비정상제품기준</h2></div>
-                            <div class="hidetext2">
-                                1.떡이 지나치게 딱딱하거나 상함<br>
-                                2.양념이 새거나 포장이 터짐<br>
-                                3.어묵이 상하거나 냄새가 남<br>
-                            </div>
-                            <textarea name="" class="showtext2"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="btncenter">
-                    <input type="button" value="수정" class="btn u">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="확인" class="btn ok">
-                    <input type="button" value="취소" class="btn can">
-                </div>
-            </div>
-
-
-
-            <div class="standards-contain">
-                <div class="standards-imege-contain">
-                    <div class="center">
-                        <div class="manu-name text-serch">곱창전골 밀키트 </div>
-                        <select name="" id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
-                        </select>
-                    </div>
-                    <img src="/img/Gopchanghotpot.png" class="standards-imege"><input type="file" class="file files ">
-                </div>
-                <div class="standards-font-contain">
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"><h2>정상제품기준</h2></div>
-                            <div class="hidetext">
-                                1.곱창이 신선하고 특유의 냄새가 심하지 않음<br>
-                                2.각종 채소(부추, 양파, 깻잎 등)가 신선함<br>
-                                3.국물 베이스가 밀봉되어 새지 않음<br>
-                            </div>
-                            <textarea name="" class="showtext"></textarea>
-
-                        </div>
-
-                    </div>
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"><h2>비정상제품기준</h2></div>
-                            <div class="hidetext2">
-                                1.곱창에서 심한 악취가 나거나 색이 변함<br>
-                                2.채소가 시들거나 갈변<br>
-                                3.육수가 새거나 포장이 손상됨<br>
-                            </div>
-                            <textarea name="" class="showtext2"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="btncenter">
-                    <input type="button" value="수정" class="btn u">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="확인" class="btn ok">
-                    <input type="button" value="취소" class="btn can">
-                </div>
-            </div>
-
-
-
-
+		</c:forEach>
 
         </div>
+        
+        
+        
         <script>
             window.addEventListener("load", function () {
                 function hide() {
@@ -690,11 +478,8 @@
                             // console.log(textserchs[i])
                             textserchs[i].parentNode.parentNode.parentNode.classList.remove("none")
                             console.log("바꿀거", textserchs[i].parentNode.parentNode)
-
                         }
-
                     }
-
                 })
 
                 let btnok = document.querySelectorAll(" .ok")
@@ -712,265 +497,43 @@
                 document.querySelectorAll(".hidetext").forEach(el => el.classList.remove("none"));
                 document.querySelectorAll(".hidetext2").forEach(el => el.classList.remove("none"));
 
-                //--확인
-
-                let bntok = document.querySelectorAll(".btn.ok")
-                for (let i = 0; i < bntok.length; i++) {
-                    bntok[i].addEventListener("click", function (e) {
-                        console.log("된다고")
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-                        e.target.parentNode.parentNode.querySelector(".text-serch").innerText = e.target.parentNode.parentNode.querySelector(".selects").value
-                        let hidetext = e.target.parentNode.parentNode.querySelector(".hidetext")
-                        let hidetext2 = e.target.parentNode.parentNode.querySelector(".hidetext2")
-                        let showtext = e.target.parentNode.parentNode.querySelector(".showtext")
-                        let showtext2 = e.target.parentNode.parentNode.querySelector(".showtext2")
-                        hidetext.innerText = showtext.value;
-                        hidetext2.innerText = showtext2.value;
-
-
-
-                    })
-                }
-
-
-
-
-
-                //---취소
-                let can = document.querySelectorAll(".btn.can")
-                for (let i = 0; i < can.length; i++) {
-                    can[i].addEventListener("click", function (e) {
-
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-                    })
-                }
-
-
-
-                //수정-------------------
-                let us = document.querySelectorAll(".u")
-                for (let i = 0; i < us.length; i++) {
-                    us[i].addEventListener("click", function (e) {
-                        console.log(e.target.parentNode.parentNode.querySelector(".selects"))
-                        e.target.parentNode.querySelector(".ok").classList.remove("none")
-                        e.target.parentNode.querySelector(".can").classList.remove("none")
-                        e.target.parentNode.querySelector(".u").classList.add("none")
-                        e.target.parentNode.querySelector(".d").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none")
-
-                        e.target.parentNode.parentNode.querySelector(".showtext").value = e.target.parentNode.parentNode.querySelector(".hidetext").innerText
-                        e.target.parentNode.parentNode.querySelector(".showtext2").value = e.target.parentNode.parentNode.querySelector(".hidetext2").innerText
-                    })
-                }
-                //삭제----
-                let btnd = document.querySelectorAll(".d")
-                for (let i = 0; i < btnd.length; i++) {
-                    btnd[i].addEventListener("click", function (e) {
-                        console.log("됨")
-                        console.log(e.target.parentNode.parentNode)
-                        e.target.parentNode.parentNode.remove()
-                    })
-                }
-
-
-                //수정-------------------
-
-                //-----생성 코드
-                document.querySelector(".creat").addEventListener("click", function () {
-                    //dom 생성
-                    let uppandtarget = document.querySelector("#standards-top")
-
-                    let uppand_chaild = document.createElement("div")
-                    uppand_chaild.classList = "standards-contain"
-
-                    uppand_chaild.innerHTML = `
-               <div class="standards-imege-contain">
-                    <div class="center">
-                        <div class="manu-name text-serch">곱창전골 밀키트 </div>
-                        <select name="" id="select" class="selects" style="margin-bottom:80px;">
-                            <option value="부대찌개 밀키트">부대찌개 밀키트</option>
-                            <option value="김치찌개 밀키트">김치찌개 밀키트</option>
-                            <option value="밀푀유나베 밀키트">밀푀유나베 밀키트</option>
-                            <option value="떡볶이 밀키트">떡볶이 밀키트"</option>
-                            <option value="곱창전골 밀키트">곱창전골 밀키트</option>
-                        </select>
-                    </div>
-                    <img src="/img/Gopchanghotpot.png" class="standards-imege"><input type="file" class="file files ">
-                </div>
-                <div class="standards-font-contain">
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                            <div class="titlecenter"> <h2 >정상제품기준</h2></div>
-                            <div class="hidetext">
-                                1.곱창이 신선하고 특유의 냄새가 심하지 않음<br>
-                                2.각종 채소(부추, 양파, 깻잎 등)가 신선함<br>
-                                3.국물 베이스가 밀봉되어 새지 않음<br>
-                            </div>
-                            <textarea name="" class="showtext"></textarea>
-
-                        </div>
-
-                    </div>
-                    <div class="standards-font-parent">
-
-                        <div class="standards-font-charild">
-
-                           <div class="titlecenter"><h2>비정상제품기준</h2></div>
-                            <div class="hidetext2">
-                                1.곱창에서 심한 악취가 나거나 색이 변함<br>
-                                2.채소가 시들거나 갈변<br>
-                                3.육수가 새거나 포장이 손상됨<br>
-                            </div>
-                            <textarea name="" class="showtext2"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="btncenter">
-                    <input type="button" value="수정" class="btn u">
-                    <input type="button" value="확인" class="btn ok">
-                    <input type="button" value="삭제" class="btn d">
-                    <input type="button" value="취소" class="btn can">
-                </div>
-    `
-
-                    uppandtarget.append(uppand_chaild)
-
-                    uppand_chaild.querySelector(".standards-imege").classList.add("none")
-                    uppand_chaild.querySelector(".u").classList.add("none")
-                    uppand_chaild.querySelector(".can").classList.add("none")
-                    uppand_chaild.querySelector(".hidetext").classList.add("none")
-                    uppand_chaild.querySelector(".hidetext2").classList.add("none")
-                    uppand_chaild.querySelector(".text-serch").classList.add("none")
-
-                  
-
-                    uppand_chaild.querySelector(".ok").addEventListener("click", function (e) {
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                        e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-
-                        e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-                        e.target.parentNode.parentNode.querySelector(".text-serch").innerText = e.target.parentNode.parentNode.querySelector(".selects").value
-                        let hidetext = e.target.parentNode.parentNode.querySelector(".hidetext")
-                        let hidetext2 = e.target.parentNode.parentNode.querySelector(".hidetext2")
-                        let showtext = e.target.parentNode.parentNode.querySelector(".showtext")
-                        let showtext2 = e.target.parentNode.parentNode.querySelector(".showtext2")
-                        hidetext.innerText = showtext.value;
-                        hidetext2.innerText = showtext2.value;
-
-
-                        uppand_chaild.querySelector(".u").addEventListener("click", function (e) {
-                            console.log(e.target.parentNode.parentNode.querySelector(".selects"))
-                            e.target.parentNode.querySelector(".ok").classList.remove("none")
-                            e.target.parentNode.querySelector(".can").classList.remove("none")
-                            e.target.parentNode.querySelector(".u").classList.add("none")
-                            e.target.parentNode.querySelector(".d").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".file").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none")
-
-                            e.target.parentNode.parentNode.querySelector(".showtext").value = e.target.parentNode.parentNode.querySelector(".hidetext").innerText
-                            e.target.parentNode.parentNode.querySelector(".showtext2").value = e.target.parentNode.parentNode.querySelector(".hidetext2").innerText
-
-                        })
-                        uppand_chaild.querySelector(".can").addEventListener("click", function (e) {
-
-                            e.target.parentNode.querySelector(".ok").classList.add("none")
-                            e.target.parentNode.querySelector(".can").classList.add("none")
-                            e.target.parentNode.querySelector(".u").classList.remove("none")
-                            e.target.parentNode.querySelector(".d").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".selects").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".file").classList.add("none")
-                            e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none")
-                            e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none")
-
-
-
-
-                        })
-                        
-                    })
-                    uppand_chaild.querySelector(".d").addEventListener("click", function (e) {
-                        e.target.parentNode.parentNode.remove()
-                    })
-
-                })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				let us = document.querySelectorAll(".u");
+				for(let i = 0; i<us.length; i++){
+					us[i].addEventListener("click", function (e) {
+						console.log(e.target.parentNode.parentNode);
+// 						console.log("e타겟",e.target.parentNode)
+// 						console.log("e타겟",e.target.parentNode.parentNode)
+						e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".file").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none");
+						e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none");
+						e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none");
+						e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none");
+						e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none");
+						
+						e.target.classList.add("none");
+						e.target.parentNode.querySelector(".ok").classList.remove("none");
+						e.target.parentNode.querySelector(".can").classList.remove("none");
+						
+						e.target.parentNode.querySelector(".can").addEventListener("click", function (e) {
+							console.log("e타겟",e.target.parentNode.parentNode)
+							e.target.parentNode.parentNode.querySelector(".showtext").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".showtext2").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".file").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".selects").classList.add("none");
+							e.target.parentNode.parentNode.querySelector(".hidetext").classList.remove("none");
+							e.target.parentNode.parentNode.querySelector(".hidetext2").classList.remove("none");
+							e.target.parentNode.parentNode.querySelector(".standards-imege").classList.remove("none");
+							e.target.parentNode.parentNode.querySelector(".text-serch").classList.remove("none");
+							
+							
+							e.target.classList.add("none");
+							e.target.parentNode.querySelector(".ok").classList.add("none");
+							e.target.parentNode.querySelector(".u").classList.remove("none");
+						})
+					})
+				}
 
 
             })

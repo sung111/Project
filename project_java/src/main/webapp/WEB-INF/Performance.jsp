@@ -61,7 +61,7 @@
 					<form method="post" action="Performance">
 						<!-- insert 폼인지 확인 -->
 						<input type="hidden" name="command" value="insert">
-						<div class="rightTop">
+						<div class="rightTop" style="width: 100%;">
 							<div class="wp2">제품명</div>
 							<!-- 제품명 들어갈자리 hidden -->
 							<input type="hidden" name="wpvnaaud" id="wpvnaaud">
@@ -71,7 +71,7 @@
 							</div>
 							<input type="submit" class="btn3" value="등록">
 						</div>
-						<div>
+						<div style="width: 100%;">
 							<div id="ea">
 								생산갯수 : <input type="number" id="myInput" min="1" max="100"
 									oninput="validity.valid||(value='')" value="10" name="ea">
@@ -84,11 +84,12 @@
 				</div>
 			</div>
 			<div class="box3">
-				<div>
-					<form method="post" action="Performance" class="box3Top"
-						style="padding: 8px 10px 0 10px;">
+				<div style="display: flex;">
+					<form method="post" class="box3Top"
+						style="padding: 8px 10px 0 10px; width: 95%;">
 						<div style="display: flex; flex-grow: 0.1; width: 26%;">
-							<input type="text" class="wp3" name="searchName" placeholder="제품명">
+							<input type="text" class="wp3" name="searchName"
+								placeholder="제품명">
 						</div>
 						<div class="date2" style="display: flex; flex-grow: 0.1;">
 							<input type="datetime-local" class="indate1" name="startDate">
@@ -99,9 +100,16 @@
 								type="submit" value="조회" class="btn4">
 						</div>
 					</form>
+					<div style="display: flex; align-items: center;">
+						<form name="command" action="Performance"
+							style="padding: 5px 5px 0 0;">
+							<input type="hidden" name="command" value="reset"> <input
+								type="submit" value="초기화" class="btn4">
+						</form>
+					</div>
 				</div>
 				<div class="indexBox">
-					<div class="index" style="">
+					<div class="index">
 						<div>등록시간</div>
 						<div>제품명</div>
 						<div>수량</div>
@@ -119,7 +127,7 @@
 										pattern="yyyy-MM-dd HH:mm:ss" />
 									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
 								</div>
-								<div class="emdwp">${dto.productName}</div>
+								<div class="emdwp">${dto.productNameST}</div>
 								<div class="emdtn">${dto.productionCount}</div>
 								<div class="text1">${dto.performanceComment}</div>
 								<div class="emdId">${dto.userId}</div>
@@ -143,15 +151,11 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<script>
-		/* document.querySelector('#wpvnaaud').value = document
-				.querySelector(".wp2").innerText;                   등록 버튼을 눌렀을때 값을넣고 전송하기위함. */
-				
-				
-				
-		//수정 버튼클릭.
+	
+	// 수정
 	const tn = document.querySelectorAll('.tn')
 	for(let tn1 of tn){
 		tn1.addEventListener('click', (e)=>{
@@ -212,16 +216,7 @@
 	
 	
 	
-	document.querySelector('.btn4').addEventListener('click', () => {
-		const searchName = document.querySelector('.wp3').value;
-		const startDate = document.querySelector('.indate1').value;
-	    const endDate = document.querySelector('.indate2').value;
-		
-	    
-	    
-	    
-	})
-	
+
 
 	</script>
 </body>

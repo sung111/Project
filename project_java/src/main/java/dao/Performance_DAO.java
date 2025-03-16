@@ -86,7 +86,7 @@ public class Performance_DAO {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
 				dto.setPerformanceId(rs.getInt("performanceid"));
-				dto.setProductName(rs.getString("productname"));
+				dto.setProductNameST(rs.getString("productname"));
 				dto.setPlanId(rs.getInt("PlanId"));
 				dto.setUserId(rs.getString("UserId"));
 				dto.setReportTime(rs.getTimestamp("ReportTime"));
@@ -197,15 +197,19 @@ public class Performance_DAO {
 			String query = " select perf.* , prod.productname "
 					+ " from performances perf "
 					+ " join products prod on perf.productid = prod.productid "
-					+ " where reporttime between ? "
-					+ "                     AND ? "
+					+ " where reporttime between ? AND ? "
+					+ " and ( prod.productname like ? or ? is null ) "
 					+ " order by reporttime desc ";
 			PreparedStatement ps = con.prepareStatement(query);
-			System.out.println(performDTO.getReportTime());
-			System.out.println(performDTO.getReportTime2());
+			System.out.println( performDTO.getReportTime() );
+			System.out.println( performDTO.getReportTime2() );
 			
-			ps.setTimestamp(1, performDTO.getReportTime());
-			ps.setTimestamp(2, performDTO.getReportTime2());
+			ps.setTimestamp( 1, performDTO.getReportTime() );
+			ps.setTimestamp( 2, performDTO.getReportTime2() );
+			ps.setString( 3, performDTO.getProductNameST() );
+			ps.setString( 4, performDTO.getProductNameST() );
+//			ps.setInt( 3, performDTO.getProductName() );
+//			ps.setInt( 4, performDTO.getProductName() );
 			
 //			excuteQuery : SQL 중 select 실행
 //			executeUpdate : select 외 모든것
@@ -216,7 +220,7 @@ public class Performance_DAO {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
 				dto.setPerformanceId(rs.getInt("performanceid"));
-				dto.setProductName(rs.getString("productname"));
+				dto.setProductNameST(rs.getString("productname"));
 				dto.setPlanId(rs.getInt("PlanId"));
 				dto.setUserId(rs.getString("UserId"));
 				dto.setReportTime(rs.getTimestamp("ReportTime"));

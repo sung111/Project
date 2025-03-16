@@ -14,8 +14,10 @@ public class Materials_DTO {
 	String lotnumber;
 	String warehouse;
 	String origin;
-	String materiaid;
+	int materiaid;
 	String materiadel;
+	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
+
 	
 	
 
@@ -26,7 +28,6 @@ public class Materials_DTO {
 		this.materiadel = materiadel;
 	}
 
-	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
 	
 	public String getType() {
 		return type;
@@ -34,10 +35,10 @@ public class Materials_DTO {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getMateriaid() {
+	public int getMateriaid() {
 		return materiaid;
 	}
-	public void setMateriaid(String materiaid) {
+	public void setMateriaid(int materiaid) {
 		this.materiaid = materiaid;
 	}
 	public String getOrigin() {

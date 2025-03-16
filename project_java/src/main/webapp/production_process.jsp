@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +73,7 @@
             width: 100%;
             height: 300px;
             border-collapse: collapse;
-            margin-top: 20px;
+            
         }
 
 
@@ -77,17 +82,18 @@
         }
 
         #c_container {
-          border: 1px solid #007bff ;
-          border-radius: 20px;
+        
+   
             width: 100%;
            
           
         }
         #c_container2{
-            width: 25%;
+        	
+            width: 100%;
             display: flex;
-            justify-content: space-between;
-            margin: 0 auto;
+            justify-content: end;
+         	
         }
 
         .texttotal {
@@ -140,7 +146,12 @@
             text-align: center;
             
         }
-    
+    	#milkit{
+    	 margin: 5px;
+    	width: 100px;
+    	height: 30px;
+    	padding: 5px 10px;
+    	}
         
 
         @media screen and (max-width: 600px) {
@@ -157,25 +168,30 @@
 
 <body>
     <div id="total">
-        
-        
+
         <div id="c_container">
             <div id="title">
                 <h1>생산공정</h1>
             </div>
+            
             <div id="c_container2">
-                <select name="milkits" id="milkit">
+            
+             <form method="post" action="ProductionProcess_controller">   
+                <select name="select_value" id="milkit">    
+                <c:forEach var="dto" items="${productvalue}">             
+                <option value="${dto.productid}">${dto.productname}</option>
+                </c:forEach>
+                
                 </select>
-                <div>
+                    <input type="submit" class="btn" value="조회">
                     <input type="button" class="btn" id="c1" value="공정 생성">
-                    <input type="button" class="btn" id="c2" value="공정 생성">
-                </div>
+                  </form>
             </div>
+            
         </div>
         <!-- 부대찌개 밀키트  -->
         <div id="table-chiled">
             <table class="tableall" id="budae-jjigae">
-                <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
                 <tr>
                     <th class="table-wid">공정단계</th>
                     <th class="table-wid2">설명</th>
@@ -183,674 +199,43 @@
                     <th class="table-wid4">위생 기준</th>
                     <th class="table-wid5">수정/삭제</th>
                 </tr>
+        <c:forEach var="dto" items="${ppdvalue}">
                 <tr>
-                    <td><span class="spantotal">원재료 입고</span><textarea class="texttotal">원재료 입고</textarea></td>
-                    <td><span class="spantotal">부대찌개에 필요한 재료(소시지, 햄, 두부, 양파, 대파, 고추장 등)를 공급업체로부터 입고합니다.</span><textarea
-                            name="" id=""
-                            class="texttotal">부대찌개에 필요한 재료(소시지, 햄, 두부, 양파, 대파, 고추장 등)를 공급업체로부터 입고합니다.</textarea></td>
-                    <td><span class="spantotal">입고 검수대, 온도계</span><textarea name="" id=""
-                            class="texttotal">입고 검수대, 온도계</textarea></td>
-                    <td><span class="spantotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</span><textarea name=""
-                            id="" class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                                class="ucan btn"></td>
+                    <td><span class="spantotal">${dto.processstage}</span>
+                    <input type="text" value="${dto.processid}">
+                     <input type="text" value="${dto.productid}">
+                    <textarea class="texttotal">${dto.processstage}</textarea></td>
+                    
+                    <td><span class="spantotal">${dto.description}</span>
+                    <textarea name="" id="" class="texttotal">${dto.description}</textarea></td>
+                    
+                    <td><span class="spantotal">${dto.equipment}</span><textarea name="" id=""
+                            class="texttotal">${dto.equipment}</textarea></td>
+                            
+                    <td><span class="spantotal">${dto.hygiene}</span><textarea name=""
+                            id="" class="texttotal">${dto.hygiene}</textarea></td>
+                            
+                            <td class="table-button">
+	                            <input type="button" value="수정 " class="du btn">
+	                            <input type="button" value="삭제 " class="dd btn">
+                                <input type="button" value="확인 " class="uok btn">
+                                <input type="button" value="취소 " class="ucan btn">
+                            </td>
                     </td>
                 </tr>
-                <tr>
-                    <td><span class="spantotal">세척 및 손질</span><textarea class="texttotal">세척 및 손질</textarea></td>
-
-                    <td><span class="spantotal">채소(양파, 대파 등)는 깨끗이 세척하고, 두부는 적당한 크기로 자릅니다. 소시지와 햄도 먹기 좋은 크기로
-                            손질합니다.</span><textarea name="" id=""
-                            class="texttotal">채소(양파, 대파 등)는 깨끗이 세척하고, 두부는 적당한 크기로 자릅니다. 소시지와 햄도 먹기 좋은 크기로 손질합니다.</textarea>
-                    </td>
-                    <td><span class="spantotal">세척기, 칼, 도마</span><textarea name="" id=""
-                            class="texttotal">세척기, 칼, 도마</textarea></td>
-                    <td><span class="spantotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</span><textarea name=""
-                            id="" class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                                class="ucan btn"></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="spantotal">채소별,소스별 포장</span><textarea class="texttotal">채소별,소스별 포장</textarea></td>
-
-                    <td><span class="spantotal">손질된 채소와 소스(고추장 등)를 각각 별도의 용기에 포장합니다. 모든 재료는 밀키트 포장재에 담아
-                            밀봉합니다.</span><textarea name="" id=""
-                            class="texttotal">손질된 채소와 소스(고추장 등)를 각각 별도의 용기에 포장합니다. 모든 재료는 밀키트 포장재에 담아 밀봉합니다.</textarea>
-                    </td>
-                    <td><span class="spantotal">포장기계, 진공포장기</span><textarea name="" id=""
-                            class="texttotal">포장기계, 진공포장기</textarea></td>
-                    <td><span class="spantotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</span><textarea name="" id=""
-                            class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                                class="ucan btn"></td>
-                </tr>
-                <tr>
-                    <td><span class="spantotal">검사 및 출하</span><textarea class="texttotal">검사 및 출하</textarea></td>
-
-                    <td><span class="spantotal">포장된 밀키트를 검사하여 품질을 확인한 후, 출하 준비를 합니다.</span><textarea name="" id=""
-                            class="texttotal">포장된 밀키트를 검사하여 품질을 확인한 후, 출하 준비를 합니다.</textarea></td>
-                    <td><span class="spantotal">검사기계, 스캐너</span><textarea name="" id=""
-                            class="texttotal">검사기계, 스캐너</textarea></td>
-                    <td><span class="spantotal">출하 전 최종 품질 검사, 포장 상태 확인.</span><textarea name="" id=""
-                            class="texttotal">출하 전 최종 품질 검사, 포장 상태 확인.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                            class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                            class="ucan btn"></td>
-                </tr>
+           </c:forEach>
             </table>
-            <table class="tableall" id="kimchi-soup">
-                <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
-                <tr>
-                    <th class="table-wid">공정단계</th>
-                    <th class="table-wid2">설명</th>
-                    <th class="table-wid3">사용장비</th>
-                    <th class="table-wid4">위생 기준</th>
-                    <th class="table-wid5">수정/삭제</th>
-                </tr>
-                <tr>
-                    <td><span class="spantotal">원재료 입고</span><textarea class="texttotal">원재료 입고</textarea></td>
-
-                    <td><span class="spantotal">잘 숙성된 김치, 돼지고기(앞다리살 또는 삼겹살), 대파, 양파, 청양고추, 된장, 고춧가루, 다진 마늘, 육수(멸치·다시마
-                            기반) 등이 입고됨.</span><textarea name="" id=""
-                            class="texttotal">잘 숙성된 김치, 돼지고기(앞다리살 또는 삼겹살), 대파, 양파, 청양고추, 된장, 고춧가루, 다진 마늘, 육수(멸치·다시마 기반) 등이 입고됨.</textarea>
-                    </td>
-                    <td><span class="spantotal">입고 검수대, 온도계</span><textarea name="" id=""
-                            class="texttotal">입고 검수대, 온도계</textarea></td>
-                    <td><span class="spantotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</span><textarea name=""
-                            id="" class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                                class="ucan btn"></td>
-                </tr>
-                <tr>
-                    <td><span class="spantotal">세척 및 손질</span><textarea class="texttotal">세척 및 손질</textarea></td>
-
-                    <td><span class="spantotal">돼지고기는 지방과 불순물을 제거한 후 적절한 크기로 절단.대파, 양파, 고추는 깨끗이 세척 후 일정한 크기로 손질.김치는 일정한
-                            길이로 절단 후 포장.</span><textarea name="" id=""
-                            class="texttotal">돼지고기는 지방과 불순물을 제거한 후 적절한 크기로 절단.대파, 양파, 고추는 깨끗이 세척 후 일정한 크기로 손질.김치는 일정한 길이로 절단 후 포장.</textarea>
-                    </td>
-                    <td><span class="spantotal">세척기, 칼, 도마</span><textarea name="" id=""
-                            class="texttotal">세척기, 칼, 도마</textarea></td>
-                    <td><span class="spantotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</span><textarea name=""
-                            id="" class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                                class="ucan btn"></td>
-                </tr>
-                <tr>
-                    <td><span class="spantotal">채소별,소스별 포장</span><textarea class="texttotal">채소별,소스별 포장</textarea></td>
-
-                    <td><span class="spantotal">돼지고기는 위생적으로 진공 포장하여 신선도 유지.김치와 된장, 육수, 양념장은 각각 개별 포장.채소는 물기 제거 후 신선하게
-                            포장.</span><textarea name="" id=""
-                            class="texttotal">돼지고기는 위생적으로 진공 포장하여 신선도 유지.김치와 된장, 육수, 양념장은 각각 개별 포장.채소는 물기 제거 후 신선하게 포장.</textarea>
-                    </td>
-                    <td><span class="spantotal">포장기계, 진공포장기</span><textarea name="" id=""
-                            class="texttotal">포장기계, 진공포장기</textarea></td>
-                    <td><span class="spantotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</span><textarea name="" id=""
-                            class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                            <td class="table-button"><input type="button" value="수정 " class="du btn"><input type="button" value="삭제 "
-                                class="dd btn"><input type="button" value="확인 " class="uok btn"><input type="button" value="취소 "
-                                class="ucan btn"></td>
-                </tr>
-                <tr>
-                    <td><span class="spantotal">검사 및 출하</span><textarea class="texttotal">검사 및 출하</textarea></td>
-
-                    <td><span class="spantotal">김치의 유산균 발효 정도 및 위생 상태를 검사.밀폐 상태 확인 후 냉장 배송 진행.</span><textarea name=""
-                            id="" class="texttotal">김치의 유산균 발효 정도 및 위생 상태를 검사.밀폐 상태 확인 후 냉장 배송 진행.</textarea></td>
-                    <td><span class="spantotal">검사기계, 스캐너</span><textarea name="" id=""
-                            class="texttotal">검사기계, 스캐너</textarea></td>
-                    <td><span class="spantotal">출하 전 최종 품질 검사, 포장 상태 확인.</span><textarea name="" id=""
-                            class="texttotal">출하 전 최종 품질 검사, 포장 상태 확인.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"><input type="button" value="확인" class="uok"><input type="button" value="취소"
-                            class="ucan"></td>
-                </tr>
-            </table>
-            <!-- <table class="tableall" id="millefeuille">
-                <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
-                <tr>
-                    <th class="table-wid">공정단계</th>
-                    <th>설명</th>
-                    <th>사용장비</th>
-                    <th>위생 기준</th>
-                    <th>수정/삭제</th>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">원재료 입고</textarea></td>
-
-                    <td><textarea name="" id=""
-                            class="texttotal">배추잎, 깻잎, 표고버섯, 팽이버섯, 청경채, 소고기 불고기용, 어묵, 육수(다시마·가쓰오부시 기반) 등이 입고됨.신선한 채소를 사용하기 위해 잎 채소의 선도를 철저히 관리.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">입고 검수대, 온도계</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">세척 및 손</textarea></td>
-
-                    <td><textarea name="" id=""
-                            class="texttotal">배추와 깻잎은 깨끗한 물로 세척 후 잔여 수분을 제거.소고기는 지방을 제거한 후 얇게 슬라이스.버섯류는 이물질 제거 후 먹기 좋은 크기로 손질.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">세척기, 칼, 도마</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">채소별,소스별 포장</textarea></td>
-
-                    <td><textarea name="" id=""
-                            class="texttotal">채소는 수분 유지가 중요하므로 개별 포장 후 냉장 보관.육수는 따로 밀폐 용기에 포장하여 흐르지 않도록 처리.소고기는 산소 포장(O₂포장) 기술을 적용해 신선도 유지.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">포장기계, 진공포장기</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">검사 및 출하</textarea></td>
-
-                    <td><textarea name="" id="" class="texttotal">채소 상태 점검 후 신선도 유지 여부 검사.포장 상태 점검 후 냉장 유통</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">검사기계, 스캐너</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">출하 전 최종 품질 검사, 포장 상태 확인.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-            </table> -->
-            <!-- <table class="tableall" id="tteokbokki">
-                <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
-                <tr>
-                    <th class="table-wid">공정단계</th>
-                    <th>설명</th>
-                    <th>사용장비</th>
-                    <th>위생 기준</th>
-                    <th>수정/삭제</th>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">원재료 입고</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">떡(쌀떡 또는 밀떡), 어묵, 대파, 고추장, 설탕, 간장, 다진 마늘, 다시마 육수 등이 입고됨.떡은 제조업체에서 입고되며, 포장 상태 및 신선도를 확인.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">입고 검수대, 온도계</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">세척 및 손질</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">어묵은 물에 한 번 데쳐 기름기를 제거한 후 손질.대파는 씻어서 일정한 길이로 절단.떡은 일정량씩 나누어 포장.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">세척기, 칼, 도마</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">채소별,소스별 포장</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">떡과 어묵은 개별 포장하여 냉장 보관.양념장은 별도 포장하여 변질 방지.육수는 밀폐 포장하여 신선도를 유지.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">포장기계, 진공포장기</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">검사 및 출하</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">떡이 딱딱해지지 않도록 신선도 점검.포장 밀봉 확인 후 냉장 배송 진행.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">검사기계, 스캐너</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">출하 전 최종 품질 검사, 포장 상태 확인.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-            </table>
-            <table class="tableall" id="gopchang-hotpot">
-                <div style="margin-top: 20px; font-weight: 900; font-size: 20px;"></div>
-                <tr>
-                    <th class="table-wid">공정단계</th>
-                    <th>설명</th>
-                    <th>사용장비</th>
-                    <th>위생 기준</th>
-                    <th>수정/삭제</th>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">원재료 입고</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">곱창(소곱창 또는 돼지곱창), 대창, 우거지, 부추, 대파, 양파, 청양고추, 사골 육수, 고춧가루, 된장 등이 입고됨.곱창은 냉동 상태로 입고되며, 신선도를 철저히 검사.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">입고 검수대, 온도계</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">원재료는 신선하고 유통기한이 유효해야 하며, 냉장 또는 냉동 상태로 입고되어야 합니다.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">세척 및 손질</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">곱창은 깨끗이 씻고 기름기와 불순물을 제거한 후 한 번 데쳐 이물질 제거.우거지와 부추는 흐르는 물에 깨끗이 씻은 후 절단.대파, 양파, 고추는 일정한 크기로 손질.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">세척기, 칼, 도마</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">손질 전 손 씻기, 도구 및 작업대 소독, 세척된 채소는 오염되지 않도록 별도 보관</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">채소별,소스별 포장</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">>곱창은 진공 포장 후 냉동 보관.육수는 별도 용기에 밀봉 포장하여 신선도 유지.채소는 물기 제거 후 냉장 포장.</textarea>
-                    </td>
-                    <td><textarea name="" id="" class="texttotal">포장기계, 진공포장기</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">포장 전 손 씻기, 포장재는 식품용으로 인증된 것 사용.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-                <tr>
-                    <td><textarea class="texttotal">검사 및 출하</textarea></td>
-                    <td><textarea name="" id=""
-                            class="texttotal">곱창의 냄새 및 위생 상태를 점검하여 변질 여부 확인.진공 포장 상태 점검 후 냉장·냉동 배송 진행.</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">검사기계, 스캐너</textarea></td>
-                    <td><textarea name="" id="" class="texttotal">출하 전 최종 품질 검사, 포장 상태 확인.</textarea></td>
-                    <td class="table-button"><input type="button" value="수정" class="du"><input type="button" value="삭제"
-                            class="dd"></td>
-                </tr>
-            </table> -->
+   
         </div>
 
 
         <script>
 
             window.addEventListener("load", function () {
-                document.querySelector("#budae-jjigae").classList.remove("none")
-                document.querySelector("#kimchi-soup").classList.add("none")
-                document.querySelector("#c2").classList.add("none")
-                let texttotals = document.querySelectorAll("textarea")
-                for (let i = 0; i < texttotals.length; i++) {
-                    texttotals[i].classList.add("none")
-                }
-                // let dus = document.querySelectorAll(".du")
-                // let dds = document.querySelectorAll(".dd")
-                let uoks = document.querySelectorAll(".uok")
-                let ucans = document.querySelectorAll(".ucan")
-                for (let i = 0; i < uoks.length; i++) {
-                    uoks[i].classList.add("none")
-                    ucans[i].classList.add("none")
-                }
-
-
-
-
-
-                //----------------밀키트 생성 클릭 이벤트----------------
-                let cit = [
-                    { 1: "부대찌개 밀키트" },
-                    { 2: "김치찌개 밀키트" },
-                    { 3: "밀푀유나배 밀키트" },
-                    { 4: "떡볶이 밀키트" },
-                    { 5: "곱창전골 밀키트" }
-                ];
-                console.log(cit)
-                //--------------------------------------
-                // 초기 밀키트 생성 코드
-                function populateSelect() {
-                    // let milkit = document.querySelector("#milkit");
-                    // milkit.innerHTML = ""; // 기존 옵션 비우기
-
-                    for (let i = 0; i < cit.length; i++) {
-                        let milcit = document.createElement("option");
-                        milcit.value = i + 1; // 1부터 시작하는 값을 사용
-                        milcit.innerHTML = Object.values(cit[i])[0]; // 객체의 첫 번째 값을 가져옴
-                        milkit.append(milcit);
-                    }
-                }
-
-                // 초기 옵션을 셀렉션에 추가
-                populateSelect();
-
-                //-----------------------------------------
-                //기존값 수정
-                let dus = document.querySelectorAll(".du")
-                for (let i = 0; i < dus.length; i++) {
-                    dus[i].addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        let spans = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let textareas = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        for (let a = 0; a < spans.length; a++) {
-                            spans[a].classList.add("none")
-                            textareas[a].classList.remove("none")
-                        }
-                        // console.log("e", e.target.parentNode)
-                        e.target.parentNode.querySelector(".uok").classList.remove("none")
-                        e.target.parentNode.querySelector(".ucan").classList.remove("none")
-                        // console.log("e", e.target.parentNode)
-                        e.target.parentNode.querySelector(".du").classList.add("none")
-                        e.target.parentNode.querySelector(".dd").classList.add("none")
-
-                    })
-                }
-
-                let dds = document.querySelectorAll(".dd")
-                for (let i = 0; i < dds.length; i++) {
-                    dds[i].addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        e.target.parentNode.parentNode.remove()
-                    })
-                }
-                for (let i = 0; i < uoks.length; i++) {
-                    uoks[i].addEventListener("click", function (e) {
-                        let spans = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let textareas = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        for (let a = 0; a < spans.length; a++) {
-                            spans[a].classList.remove("none")
-                            textareas[a].classList.add("none")
-                        }
-                        // console.log("e", e.target.parentNode)
-                        e.target.parentNode.querySelector(".uok").classList.add("none")
-                        e.target.parentNode.querySelector(".ucan").classList.add("none")
-                        // console.log("e", e.target.parentNode.parentNode)
-                        e.target.parentNode.querySelector(".du").classList.remove("none")
-                        e.target.parentNode.querySelector(".dd").classList.remove("none")
-
-                        let texts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                        // console.log(spans[0].innerText)
-                        // console.log(texts[0].value)
-                        spans[0].innerText = texts[0].value
-                        spans[1].innerText = texts[1].value
-                        spans[2].innerText = texts[2].value
-                        spans[3].innerText = texts[3].value
-                    })
-
-                }
-                for (let i = 0; i < ucans.length; i++) {
-                    ucans[i].addEventListener("click", function (e) {
-                        console.log("이벤ㄴ트활성")
-                        let spans = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let textareas = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        for (let a = 0; a < spans.length; a++) {
-                            console.log("포문돔")
-                            spans[a].classList.remove("none")
-                            textareas[a].classList.add("none")
-                        }
-                        // console.log("e", e.target.parentNode)
-                        e.target.parentNode.querySelector(".uok").classList.add("none")
-                        e.target.parentNode.querySelector(".ucan").classList.add("none")
-                        // console.log("e", e.target.parentNode.parentNode)
-                        e.target.parentNode.querySelector(".du").classList.remove("none")
-                        e.target.parentNode.querySelector(".dd").classList.remove("none")
-
-                    })
-                }
-
-
-                //기존값 삭제
-                // document.querySelectorAll(".dd")
-                //--------------------------------------------
-                //공정생성 버튼 클릭시 하단에 생성
-                document.querySelector("#c1").addEventListener("click", function () {
-
-                    newbudea = document.createElement("tr")
-                    newbudea.innerHTML = `
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea class="texttotal"></textarea>
-                                        </td>
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea name="" id="" class="texttotal"></textarea>
-                                        </td>
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea name="" id="" class="texttotal"></textarea>
-                                        </td>
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea name="" id="" class="texttotal"></textarea>
-                                        </td>
-                                    <td class="table-button"><input type="button"value= "확인" class="check btn"><input type="button"value= "수정" class="correction btn"><input type="button"value= "수정확인" class="correction2 btn">
-                                        <input type="button"value= "삭제" class="delete btn">
-                                        </td>
-                                    
-                                    `
-                    document.querySelector("#budae-jjigae").append(newbudea)
-                    newbudea.querySelector(".correction").classList.add("none")
-                    newbudea.querySelector(".correction2").classList.add("none")
-                    newbudea.querySelector(".delete").classList.add("none")
-                    newbudea.querySelector(".check").addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                        // console.log("es[0].innnerText",es[0].innnerText)
-                        // console.log("ts[0].value",ts[0].value)
-                        es[0].innerText = ts[0].value
-                        es[1].innerText = ts[1].value
-                        es[2].innerText = ts[2].value
-                        es[3].innerText = ts[3].value
-                        // console.log(ts[0].value)
-                        // console.log(ts[1].value)
-                        // console.log(ts[2].value)
-                        // console.log(ts[3].value)
-                        // console.log(e.target)
-                        e.target.classList.add("none")
-                        e.target.parentNode.querySelector(".correction").classList.remove("none")
-                        e.target.parentNode.querySelector(".delete").classList.remove("none")
-                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        for (let i = 0; i < es.length; i++) {
-                            es[i].classList.remove("none")
-                            texts[i].classList.add("none")
-                        }
-
-
-                    })
-                    newbudea.querySelector(".delete").addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        e.target.parentNode.parentNode.remove()
-                        e.target.classList.add("none")
-                    })
-
-                    newbudea.querySelector(".correction").addEventListener("click", function (e) {
-                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
-                        e.target.parentNode.querySelector(".delete").classList.add("none")
-                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
-                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        e.target.classList.add("none")
-
-
-                        console.log("e.target.parentNode", e.target.parentNode)
-                        e.target.parentNode.querySelector(".correction2").classList.remove("none")
-                        for (let i = 0; i < es.length; i++) {
-                            es[i].classList.add("none")
-                            texts[i].classList.remove("none")
-                        }
-
-                        newbudea.querySelector(".correction2").addEventListener("click", function (e) {
-                            e.target.parentNode.querySelector(".correction2").classList.add("none")
-                            e.target.parentNode.querySelector(".delete").classList.remove("none")
-                            let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                            let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                            let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                            es[0].innerText = ts[0].value
-                            es[1].innerText = ts[1].value
-                            es[2].innerText = ts[2].value
-                            es[3].innerText = ts[3].value
-                            for (let i = 0; i < es.length; i++) {
-                                es[i].classList.remove("none")
-                                texts[i].classList.add("none")
-                                e.target.classList.add("none")
-                                // console.log(e.target.parentNode)
-                                e.target.parentNode.querySelector(".correction").classList.remove("none")
-
-                            }
-                        })
-
-                    })
-
-
-                })
-                //-------------------------------------------------
-                document.querySelector("#c2").addEventListener("click", function () {
-
-                    newkimchi = document.createElement("tr")
-                    newkimchi.innerHTML = `
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea class="texttotal"></textarea>
-                                        </td>
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea name="" id="" class="texttotal"></textarea>
-                                        </td>
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea name="" id="" class="texttotal"></textarea>
-                                        </td>
-                                    <td>
-                                        <span class="spantotal"></span>
-                                        <textarea name="" id="" class="texttotal"></textarea>
-                                        </td>
-                                    <td class="table-button"><input type="button"value= "확인" class="check"><input type="button"value= "수정" class="correction"><input type="button"value= "수정확인" class="correction2">
-                                        <input type="button"value= "삭제" class="delete">
-                                        </td>
-                                    
-                                    `
-
-                    document.querySelector("#kimchi-soup").append(newkimchi)
-                    newkimchi.querySelector(".correction").classList.add("none")
-                    newkimchi.querySelector(".correction2").classList.add("none")
-                    newkimchi.querySelector(".delete").classList.add("none")
-                    newkimchi.querySelector(".check").addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                        // console.log("es[0].innnerText",es[0].innnerText)
-                        // console.log("ts[0].value",ts[0].value)
-                        es[0].innerText = ts[0].value
-                        es[1].innerText = ts[1].value
-                        es[2].innerText = ts[2].value
-                        es[3].innerText = ts[3].value
-                        // console.log(ts[0].value)
-                        // console.log(ts[1].value)
-                        // console.log(ts[2].value)
-                        // console.log(ts[3].value)
-                        // console.log(e.target)
-                        e.target.classList.add("none")
-                        e.target.parentNode.querySelector(".correction").classList.remove("none")
-                        e.target.parentNode.querySelector(".delete").classList.remove("none")
-                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        for (let i = 0; i < es.length; i++) {
-                            es[i].classList.remove("none")
-                            texts[i].classList.add("none")
-                        }
-
-
-                    })
-                    newkimchi.querySelector(".delete").addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        e.target.parentNode.parentNode.remove()
-                        e.target.classList.add("none")
-                    })
-
-                    newkimchi.querySelector(".correction").addEventListener("click", function (e) {
-                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
-                        e.target.parentNode.querySelector(".delete").classList.add("none")
-                        console.log("수정전", e.target.parentNode.querySelector(".delete"))
-                        let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                        let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                        e.target.classList.add("none")
-
-
-                        console.log("e.target.parentNode", e.target.parentNode)
-                        e.target.parentNode.querySelector(".correction2").classList.remove("none")
-                        for (let i = 0; i < es.length; i++) {
-                            es[i].classList.add("none")
-                            texts[i].classList.remove("none")
-                        }
-
-                        newkimchi.querySelector(".correction2").addEventListener("click", function (e) {
-                            e.target.parentNode.querySelector(".correction2").classList.add("none")
-                            e.target.parentNode.querySelector(".delete").classList.remove("none")
-                            let es = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-                            let ts = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-                            let texts = e.target.parentNode.parentNode.querySelectorAll("textarea")
-                            es[0].innerText = ts[0].value
-                            es[1].innerText = ts[1].value
-                            es[2].innerText = ts[2].value
-                            es[3].innerText = ts[3].value
-                            for (let i = 0; i < es.length; i++) {
-                                es[i].classList.remove("none")
-                                texts[i].classList.add("none")
-                                e.target.classList.add("none")
-                                // console.log(e.target.parentNode)
-                                e.target.parentNode.querySelector(".correction").classList.remove("none")
-
-                            }
-                        })
-
-                    })
-                })
-                //-------------------------------------------------
-
-
-
-
-
-
-
-                // 밀키트 선택시 부대찌개 화면on
-                //-----------------------------------------
-
-                document.querySelector("#milkit").addEventListener("change", function (e) {
-                    console.log(e.target.value)
-                    if (e.target.value == 1) {
-                        document.querySelector("#budae-jjigae").classList.remove("none")
-                        document.querySelector("#kimchi-soup").classList.add("none")
-                        document.querySelector("#c1").classList.remove("none")
-                        document.querySelector("#c2").classList.add("none")
-
-                    } else if (e.target.value == 2) {
-                        document.querySelector("#budae-jjigae").classList.add("none")
-                        document.querySelector("#kimchi-soup").classList.remove("none")
-                        document.querySelector("#c1").classList.add("none")
-                        document.querySelector("#c2").classList.remove("none")
-
-
-                    }
-                    else if (e.target.value == 3) {
-                        document.querySelector("#budae-jjigae").classList.remove("none")
-                        document.querySelector("#kimchi-soup").classList.add("none")
-                        document.querySelector("#c1").classList.remove("none")
-                        document.querySelector("#c2").classList.add("none")
-
-
-                    } else if (e.target.value == 4) {
-                        document.querySelector("#budae-jjigae").classList.add("none")
-                        document.querySelector("#kimchi-soup").classList.remove("none")
-                        document.querySelector("#c1").classList.add("none")
-                        document.querySelector("#c2").classList.remove("none")
-
-                    } else if (e.target.value == 5) {
-                        document.querySelector("#budae-jjigae").classList.remove("none")
-                        document.querySelector("#kimchi-soup").classList.add("none")
-                        document.querySelector("#c1").classList.remove("none")
-                        document.querySelector("#c2").classList.add("none")
-                    }
-                })
-                //--------------------------------------------------------------
-
-
-
+            document.querySelectorAll(".texttotal").forEach(el => el.classList.add("none"));
+            document.querySelectorAll(".uok").forEach(el => el.classList.add("none"));
+            document.querySelectorAll(".ucan").forEach(el => el.classList.add("none"));
+        
 
 
 

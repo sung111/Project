@@ -6,9 +6,10 @@ import java.sql.Timestamp;
 public class Performance_DTO {
 
 	int PerformanceId;			// 실적 시퀀스 번호
-	String ProductName;			// 완제품명
+	int ProductName;			// 완제품명
+	String ProductNameST;			// 완제품명
 	int PlanId;					// 생산계획 시퀀스번호
-	String UserId;					// 유저 id
+	String UserId;				// 유저 id
 	Timestamp ReportTime;		// 실적등록 시간
 	Timestamp ReportTime2;		// 조회때 사용
 	String PerformanceComment;	// 코멘트
@@ -20,11 +21,17 @@ public class Performance_DTO {
 	public void setPerformanceId(int performanceId) {
 		PerformanceId = performanceId;
 	}
-	public String getProductName() {
+	public int getProductName() {
 		return ProductName;
 	}
-	public void setProductName(String productName) {
+	public void setProductName(int productName) {
 		ProductName = productName;
+	}
+	public String getProductNameST() {
+		return ProductNameST;
+	}
+	public void setProductNameST(String productNameST) {
+		ProductNameST = productNameST;
 	}
 	public int getPlanId() {
 		return PlanId;
