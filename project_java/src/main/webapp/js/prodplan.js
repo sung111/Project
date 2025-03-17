@@ -1,34 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+
+
     // Search 검색
     const searchButton = document.querySelector('.submitlayer');
     const searchInput = document.querySelector('input[name="Prodsearch"]');
-    
     searchButton.addEventListener('click', function(event) {
-        // 기본 폼 제출 방지
+        // 기본 폼 제출 X
         event.preventDefault(); 
         const searchText = searchInput.value.trim().toLowerCase();
         const rows = document.querySelectorAll('.order-info-content');
-        
         // 검색 텍스트가 없으면 모든 행을 표시
         if (searchText === "") {
             rows.forEach(row => {
                 row.style.display = "";
             });
         } else {
-            // 검색 텍스트가 포함된 행만 표시
+            // 검색 텍스트가 포함된 행만 표시됨
             rows.forEach(row => {
                 const rowText = row.innerText.toLowerCase();
                 if (rowText.includes(searchText)) {
-                    // 텍스트가 포함된 행은 표시
+                    // 텍스트가 포함된 행만 표시한다.
                     row.style.display = ""; 
                 } else {
-                    // 텍스트가 포함되지 않은 행은 숨김
+                    // 텍스트가 포함되지 않은 행은 숨긴다
                     row.style.display = "none"; 
                 }
             });
         }
-
-        // 입력 필드 초기화
+        // 작성하고 검색을 누르면 기존에 input에 썻던 내용은 초기화 된다.
         searchInput.value = "";
     });
 

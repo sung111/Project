@@ -28,15 +28,15 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 		</thead>
 		<tbody>
 			<tr class="search-table">
-				<td>
-					<button>일간</button>
-					<button>주간</button>
-					<button>월간</button>
+				<td name="all-ProdPlan-btnlayer" id="all-ProdPlan-btnlayer" class="ProdPlanbtnList">
+					<button name="all-ProdPlan-Day-btn" id="all-ProdPlan-Day-btn" class="ProdPlanbtn" >일간</button>
+					<button name="all-ProdPlan-Week-btn" id="all-ProdPlan-Week-btn" class="ProdPlanbtn">주간</button>
+					<button name="all-ProdPlan-Month-btn" id="all-ProdPlan-Month-btn" class="ProdPlanbtn">월간</button>
 				</td>
-				<td>
-					<button>일간</button>
-					<button>주간</button>
-					<button>월간</button>
+				<td name="Schedule-ProdPlan-btnlayer" id="Schedule-ProdPlan-btnlayer" class="ProdPlanbtnList">
+					<button name="Schedule-ProdPlan-Day-btn" id="Schedule-ProdPlan-Day-btn" class="ProdPlanbtn">일간</button>
+					<button name="Schedule-ProdPlan-Week-btn" id="Schedule-ProdPlan-Week-btn" class="ProdPlanbtn">주간</button>
+					<button name="Schedule-ProdPlan-Month-btn" id="Schedule-ProdPlan-Month-btn" class="ProdPlanbtn">월간</button>
 				</td>
 			</tr>
 			<tr class="submitcontainer">

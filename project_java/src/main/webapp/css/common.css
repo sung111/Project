@@ -256,7 +256,7 @@ cursor: pointer;
 }
 
 .popup-buttonlayer{
-     bottom: 0; 
+     position: absolute; bottom: 0; 
 }
 
 #mypopup-a{
@@ -268,7 +268,7 @@ cursor: pointer;
 
 /* 닫기 버튼 */
 #closePopupBtn {
-    margin-top: 15px; padding: 5px 10px; color: white; background-color: #f44336; border: none; border-radius: 5px; cursor: pointer;
+    margin-top: 15px; padding: 5px 10px; color: white; background-color: #f44336; border: none; border-radius: 5px; cursor: pointer; position: absolute; right: 0;
 }
 
 #closePopupBtn:hover {
