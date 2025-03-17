@@ -255,10 +255,11 @@ cursor: pointer;
 }
 
 .popup-buttonlayer{
- bottom: 0;
+ display: flex;
 }
+
 #mypopup-a{
-    color: #333333;
+    color: #007bff;
 }
 #logout-a{
     color: #f44336;
@@ -280,4 +281,8 @@ cursor: pointer;
 
 #closePopupBtn:hover {
     background-color: #d32f2f;
+}
+
+#popup-title h2{
+font-size: 24px; margin-bottom: 20px;
 }

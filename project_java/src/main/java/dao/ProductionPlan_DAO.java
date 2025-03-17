@@ -34,7 +34,7 @@ public class ProductionPlan_DAO {
         
 		
 		  String sql =
-		  " SELECT p.*, pr.productname, pr.partnumber, pr.unit, pr.warehouse" +
+		  " SELECT p.*, pr.productname,pr.spec, pr.lotnumber ,pr.partnumber, pr.unit, pr.warehouse " +
 		  " FROM productionplans p" +
 		  " LEFT JOIN products pr ON p.productId = pr.productid";//실제 테이블명 적용
 		 
@@ -63,10 +63,12 @@ public class ProductionPlan_DAO {
 				
 				  Products_DTO product = new Products_DTO();
 				  product.setProductname(rs.getString("productname"));
+				  product.setSpec(rs.getString("spec"));
+				  product.setLotnumber(rs.getString("lotnumber"));
+				  product.setWarehouse(rs.getString("warehouse"));
 				  product.setPartnumber(rs.getString("partnumber"));
 				  product.setUnit(rs.getString("unit"));
-				 
-
+				  
                 // 🔹 생산계획 DTO에 상품 정보 추가
 				 plan.setProduct(product); 
                 planList.add(plan);
@@ -81,4 +83,23 @@ public class ProductionPlan_DAO {
         return planList;
     }
 
+//    생산계획 수정
+    public boolean updateProductionPlan(int planId, String planStatus, String planNotes) {
+        String sql = "UPDATE productionplans SET planStatus = ?, planNotes = ? WHERE planId = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, planStatus);
+            pstmt.setString(2, planNotes);
+            pstmt.setInt(3, planId);
+            
+            int rowsUpdated = pstmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
 }

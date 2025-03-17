@@ -36,5 +36,24 @@ public class ProductionPlan_controller extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // POST 처리 로직 추가 가능
+    	String action = request.getParameter("action");
+        if ("update".equals(action)) {
+            // 폼에서 전달된 데이터 수집
+            int planId = Integer.parseInt(request.getParameter("planId"));
+            String planStatus = request.getParameter("planStatus");
+            String planNotes = request.getParameter("planNotes");
+
+            // DAO를 이용해 업데이트 수행
+            boolean success = productionPlanDAO.updateProductionPlan(planId, planStatus, planNotes);
+
+            if (success) {
+                System.out.println("업데이트 성공: Plan ID " + planId);
+            } else {
+                System.out.println("업데이트 실패: Plan ID " + planId);
+            }
+            
+            // 업데이트 후 목록 페이지로 리디렉트
+            response.sendRedirect("ProductionPlan_controller");
+        }
     }
 }

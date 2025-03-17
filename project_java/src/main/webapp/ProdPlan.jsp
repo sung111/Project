@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="java.sql.*, java.util.List, dao.ProductionPlan_DAO, dto.ProductionPlan_DTO "%>
-	<!-- , dto.Products_DTO -->
+	import="java.sql.*, java.util.List, dao.ProductionPlan_DAO, dto.ProductionPlan_DTO, dto.Products_DTO "%>
 <%
 ProductionPlan_DAO dao = new ProductionPlan_DAO();
 List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
@@ -81,21 +80,20 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 			<%
 			for (ProductionPlan_DTO plan : planList) {
 			%>
-			<tr name="prodPlanList" class="order-info-content wolist">
-				<td>
-				 <%= (plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음" %> 
+			<tr name="prodPlanList" class="order-info-content wolist" data-id="<%= plan.getPlanId() %>">
+				<td><%=(plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음"%>
+				<%= "[" %>
+					<%=(plan.getProduct() != null) ? plan.getProduct().getSpec() : "데이터 없음"%>
+					<%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%>
+					<%= "]" %>
+				<td><%=(plan.getProduct() != null) ? plan.getProduct().getLotnumber() : "데이터 없음"%>
+				<td><%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%>
 				</td>
-				<td><%=plan.getUserId()%></td>
-				<td>
-				 <%= (plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음" %> 
+				<td><%=(plan.getProduct() != null) ? plan.getProduct().getWarehouse() : "데이터 없음"%>
 				</td>
-				<td>
-				 <%= (plan.getProduct() != null) ? plan.getProduct().getWarehouse() : "데이터 없음" %> 
+				<td><%=plan.getDeliveryDest()%></td>
+				<td><%=(plan.getProduct() != null) ? plan.getProduct().getPartnumber() : "데이터 없음"%>
 				</td>
-				 <td>
-				 <%=plan.getDeliveryDest()%>
-				 </td> 
-				<td></td>
 				<td><%=plan.getTotalqty()%></td>
 				<td><%=plan.getCreateDate()%></td>
 				<td><%=plan.getStartDate()%></td>

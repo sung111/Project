@@ -125,7 +125,7 @@ width: 30%;
     width: 150px; height: 40px; color: #ffffff; background-color: #007bff; border: none;
 }
 .search-contaoner-name{
-    width: 30%;
+    width: 30%; font-size: 24px; color:#007bff; 
 }
 
 .name-layer{

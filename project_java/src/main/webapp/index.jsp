@@ -120,7 +120,7 @@ if (user != null) {
 	</div>
 						<!-- 팝업창 -->
 						<div id="popup" class="popup">
-							<div id="popup-title" id="popup-title">
+							<div id="popup-title" class="popup-title">
 							<h2>안녕하세요. <%=userName%> 님!</h2>
 						</div>
 							<p>현재 <%= userName%>님의 권한은 <%= userRole%> 입니다.</p>
