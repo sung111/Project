@@ -28,14 +28,17 @@ public class QualityControl_controller extends HttpServlet {
 
 		QualityControl_DAO quality = new QualityControl_DAO();
 		List<Performance_DTO> resultList = quality.selectPerform();
+		List result = quality.selectQuality();
 
+		request.setAttribute("result", result);
 		request.setAttribute("resultList", resultList);
-		System.out.println("resultList : " + resultList); // null 인지 확인함.
 
 		String url = "/WEB-INF/qualityControl.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 
 	}
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -68,7 +71,7 @@ public class QualityControl_controller extends HttpServlet {
 			int performanceId1 = Integer.parseInt(performanceId);
 
 			qualityDTO.setPerformanceId(performanceId1);
-			qualityDTO.setProductName(productName1);
+			qualityDTO.setProductId(productName1);
 			qualityDTO.setResult(result);
 			qualityDTO.setReportTime(time);
 			qualityDTO.setPasspack(passpack1);
@@ -81,10 +84,73 @@ public class QualityControl_controller extends HttpServlet {
 			int result1 = qualityDAO.insertQuality(qualityDTO);
 			System.out.println("inset result :" + result1);
 			
-		}
+			String url = "qualityControl";
+			response.sendRedirect(url);
+			
+		} else if ( "update".equals(command) ) {
+			
+			String qualityControlId = request.getParameter("qualityControlId");
+			String date = request.getParameter("date22");
+			String qualityResult = request.getParameter("qualityResult22");
+			String failreason2 = request.getParameter("failreason22");
+			String comment = request.getParameter("comment22");
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); // 저장 방식
+			LocalDateTime date1 = LocalDateTime.parse(date, formatter); // 변환
+			java.sql.Timestamp time = Timestamp.valueOf(date1); // sql Timestamp 타입 저장
+			
+			QualityControl_DTO qualityDTO = new QualityControl_DTO();
+			int qualityControlId1 = Integer.parseInt(qualityControlId);
+			
+			qualityDTO.setQualityControlId(qualityControlId1);
+			qualityDTO.setReportTime(time);
+			qualityDTO.setResult(qualityResult);
+			qualityDTO.setFailreason(failreason2);
+			qualityDTO.setComments(comment);
+			
+			QualityControl_DAO qualityDAO = new QualityControl_DAO();
 
-		String url = "qualityControl";
-		response.sendRedirect(url);
+			int result = qualityDAO.updateQuality(qualityDTO);
+			
+			
+			String url = "qualityControl";
+			response.sendRedirect(url);
+			
+		} else if ( "search".equals(command) ) {
+			
+			String productName = request.getParameter("productName");
+			String startDate = request.getParameter("startDate");
+			String endDate = request.getParameter("endDate");
+			String result = request.getParameter("result");
+			String failreason = request.getParameter("failreason");
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); // 저장 방식
+			LocalDateTime startDate1 = LocalDateTime.parse(startDate, formatter); // 변환
+			LocalDateTime endDate1 = LocalDateTime.parse(endDate, formatter); // 변환
+			java.sql.Timestamp startDate2 = Timestamp.valueOf(startDate1); // sql Timestamp 타입 저장
+			java.sql.Timestamp endDate2 = Timestamp.valueOf(endDate1); // sql Timestamp 타입 저장
+			
+			QualityControl_DTO qualityDTO = new QualityControl_DTO();
+			qualityDTO.setProductNameST(productName);
+			qualityDTO.setReportTime(startDate2);
+			qualityDTO.setReportTime2(endDate2);
+			qualityDTO.setResult(result);
+			qualityDTO.setFailreason(failreason);
+			
+			QualityControl_DAO qualityDAO = new QualityControl_DAO();
+			List resultList = qualityDAO.selectPerform();
+			List result1 = qualityDAO.searchQuality(qualityDTO);
+			
+			request.setAttribute("resultList", resultList);
+			request.setAttribute("result", result1);
+			
+			System.out.println("resultList : " + resultList);
+			System.out.println("result : " + result1);
+			
+			String url = "/WEB-INF/qualityControl.jsp";
+		    request.getRequestDispatcher(url).forward(request, response);
+		}
+			
 
 		
 	}

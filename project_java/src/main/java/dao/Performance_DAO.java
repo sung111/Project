@@ -202,8 +202,6 @@ public class Performance_DAO {
 					+ " and ( prod.productname like ? or ? is null ) "
 					+ " order by reporttime desc ";
 			PreparedStatement ps = con.prepareStatement(query);
-			System.out.println( performDTO.getReportTime() );
-			System.out.println( performDTO.getReportTime2() );
 			
 			ps.setTimestamp( 1, performDTO.getReportTime() );
 			ps.setTimestamp( 2, performDTO.getReportTime2() );

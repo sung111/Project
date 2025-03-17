@@ -30,7 +30,7 @@
 				<div>
 					<form action="qualityControl" method="post">
 						<input type="hidden" name="command" value="search"> <input
-							type="datetime-local" class="date2" style="margin: 10px;"><input
+							type="date" class="date2" style="margin: 10px;" id="date3"><input
 							type="submit" class="btn1" value="조회">
 					</form>
 				</div>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="perForm">
 					<c:forEach var="dto" items="${resultList}">
-						<div class="dex item">
+						<div class="dex item" style="width: 99%;">
 							<div class="dateB">
 								<fmt:formatDate value="${dto.reportTime}"
 									pattern="yyyy-MM-dd HH:mm:ss" />
@@ -58,10 +58,10 @@
 							<div class="emdtn">${dto.productionCount}</div>
 							<div class="text1">${dto.performanceComment}</div>
 							<div class="emdId">${dto.userId}</div>
-							<input type="hidden" name="productid"
-								value="${dto.productId}" class="productid">
-							<input type="hidden" name="performanceId"
-								value="${dto.performanceId}" class="performId">
+							<input type="hidden" name="productid" value="${dto.productId}"
+								class="productid"> <input type="hidden"
+								name="performanceId" value="${dto.performanceId}"
+								class="performId">
 							<div>
 								<button class="selectItem">선택</button>
 							</div>
@@ -93,8 +93,9 @@
 			<form method="post" action="qualityControl" class="right"
 				style="border: 1px solid rgb(199, 196, 196);" id="formK">
 				<!-- form 여기있어요 -->
-				<input type="hidden" name="command" value="insert">
-				<input type="hidden" name="performanceId" class="performId" id="performId1">
+				<input type="hidden" name="command" value="insert"> <input
+					type="hidden" name="performanceId" class="performId"
+					id="performId1">
 				<div class="right" style="width: 100%;">
 					<div class="rightTop">
 						<div class="wp2">제품명</div>
@@ -107,16 +108,17 @@
 								value="불합격"> 불합격
 						</div>
 						<div>
-							<input type="datetime-local" class="insertDate" name="date">
+							<input type="datetime-local" class="insertDate" name="date"
+								style="font-size: 15px;">
 							<div>
 								합격 갯수입력 : <input type="number" class="myInput" min="0" max="100"
 									oninput="validity.valid||(value='')" placeholder="0"
-									name="passPack"> pack
+									name="passPack" id="passInput"> pack
 							</div>
 							<div>
 								불합 개수입력 : <input type="number" class="myInput" min="0" max="100"
 									oninput="validity.valid||(value='')" placeholder="0"
-									name="failPack"> pack
+									name="failPack" id="failInput"> pack
 							</div>
 						</div>
 					</div>
@@ -138,36 +140,38 @@
 		</div>
 		<div class="box3">
 			<form action="qualityControl" method="post" class="box3">
+				<input type="hidden" name="command" value="search">
 				<div class="box3Top">
 					<div>
-						<input type="text" placeholder="제품명" class="wp3">
+						<input type="text" placeholder="제품명" class="wp3"
+							name="productName">
 					</div>
 					<div class="date2">
-						날짜 : <input type="datetime-local" class="indate1"> ~ <input
-							type="datetime-local" class="indate2">
+						날짜 : <input type="datetime-local" class="indate1" name="startDate">
+						~ <input type="datetime-local" class="indate2" name="endDate">
 					</div>
 					<div>
-						결과 : <select class="dropBox2">
+						결과 : <select class="dropBox2" name="result">
 							<option value="">전체</option>
-							<option value="">합격</option>
-							<option value="">불합격</option>
+							<option value="합격">합격</option>
+							<option value="불합격">불합격</option>
 						</select>
 					</div>
 					<div>
-						불합격 사유 : <select class="dropBox2">
+						불합격 사유 : <select class="dropBox2" name="failreason">
 							<option value="">전체</option>
-							<option value="">무게 미달</option>
-							<option value="">외관 불량</option>
-							<option value="">자재 불량</option>
+							<option value="무게 미달">무게 미달</option>
+							<option value="외관 불량">외관 불량</option>
+							<option value="자재 불량">자재 불량</option>
 						</select>
 					</div>
 					<div>
-						<button class="btn4">검색</button>
+						<input type="submit" class="btn4" value="검색">
 					</div>
 				</div>
 			</form>
 			<div class="dede">
-				<div class="index">
+				<div class="index" style="margin-left: 6px;">
 					<div>날짜</div>
 					<div>제품명</div>
 					<div>합격/불합격</div>
@@ -177,7 +181,27 @@
 					<div>비고</div>
 				</div>
 			</div>
-			<div class="box3View"></div>
+			<div class="box3View">
+				<c:forEach var="ttT" items="${ result }">
+					<form method="post" action="qualityControl" class="dex item"
+						style="width: 99%;">
+						<input type="hidden" id="qualityControlId" name="qualityControlId"
+							value="${ ttT.qualityControlId }">
+						<div class="dateB" id="qualitydate">${ttT.reportTime}</div>
+						<div class="emdwp" id="qualityName">${ttT.productNameST}</div>
+						<div class="emdgkq" id="qualityResult">${ttT.result}</div>
+						<div class="tkdb" id="qualityFailreason">${ttT.failreason}</div>
+						<div class="text1" id="qualityComments">${ttT.comments}</div>
+						<div class="text1" id="qualityUserId">${ttT.userId}</div>
+						<div
+							style="display: flex; justify-content: center; align-items: center;">
+							<button style="font-size: 12px; height: 25px;" class="modify">수정</button>
+							<input type="submit" name="tn" value="삭제" class="tkr"
+								style="font-size: 12px; height: 25px;">
+						</div>
+					</form>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 
@@ -198,7 +222,6 @@
 			    
 			    e.target.parentNode.parentNode.classList.add('viewSelect');
 				
-			    console.log(e.target.parentNode.parentNode);
 				const idValue = e.target.parentNode.parentNode.querySelector('.performId').value;
 				const idValue2 = e.target.parentNode.parentNode.querySelector('.productid').value;
 			    document.querySelector('#wpvnaaud').value = idValue2;
@@ -213,16 +236,77 @@
 	
 		
 		document.querySelector('.btn3').addEventListener('click', (e) => {
+			
 			e.preventDefault()
+			
+			const pass = document.querySelector('#passInput').value
+			const fail = document.querySelector('#failInput').value
+			
 			if( document.querySelector('.wp2').innerText == "제품명" ){
 				alert("제품이 선택되지않았습니다.");
 				return;
-			} else {
+			} 
+			if ( pass == null || pass == "" || fail == null || fail == "" || (pass < 0 && pass < 100) || (fail < 0 && fail < 100) ) {
+				alert("합격갯수 불합격갯수를 입력해주세요.\n합격 : 0 ~ 100개\n불합격 : 0~100개")
+				return;
+				
+			} else{
+				alert("품질등록이 완료되었습니다.");
 				document.querySelector('#formK').submit();
-				alert("품질등록이 완료되었습니다.")
 				
 			}
 		})
+		
+		
+		
+		const modify = document.querySelectorAll('.modify')
+		 for(let i = 0 ; i < modify.length ; i++){ 
+	 		modify[i].addEventListener('click', (e)=>{
+				const view = e.target.parentNode.parentNode;
+				const ControlId = view.querySelector('#qualityControlId').value
+				const date = view.querySelector('#qualitydate').innerText
+				const name = view.querySelector('#qualityName').innerText
+				const result = view.querySelector('#qualityResult').innerText
+				const failreason = view.querySelector('#qualityFailreason').innerText
+				const comments = view.querySelector('#qualityComments').innerText
+				const userId = view.querySelector('#qualityUserId').innerText
+				
+				view.innerHTML = "";
+			       view.innerHTML += `
+									<form method="post" action="qualityControl" class="dex item">
+							    	    <input type="hidden" name="command" value="update">
+							    	    <input type="hidden" name="qualityControlId" value="\${ ControlId }">
+										<div class="dateB" id="qualitydate">
+					    	  				<input type="datetime-local" class="date1" name="date22" value="\${date}" style="font-size:10px">
+					       				</div>
+										<div class="emdwp" id="qualityName">\${name}</div>
+										<div class="emdgkq" id="qualityResult">
+												<select name="qualityResult22" id="selectPass" class="emdgkq" style="font-size:12px">
+										            <option value="합격">합격</option>
+										            <option value="불합격">불합격</option>
+									           	</select></div>
+										<div class="tkdb" id="qualityFailreason" style="display: flex; justify-content: center;">
+											<select class="dropBox" name="failreason22" style="font-size:12px">
+											<option value="">없음</option>
+											<option value="무게 미달">무게 미달</option>
+											<option value="외관 불량">외관 불량</option>
+											<option value="자재 불량">자재 불량</option>
+											</select>
+										</div>
+										<div class="text1" id="qualityComments"> <input type="text" value="\${comments}" name="comment22" style="font-size:12px"></div>
+										<div class="text1" id="qualityUserId">\${userId}</div>
+										<div
+											style="display: flex; justify-content: center; align-items: center;">
+												<input type="submit" name="tn" value="완료" id="Comple"
+													style="font-size: 12px; height: 25px;">
+											<button style="font-size: 12px; height: 25px;" id="cancel">취소</button>
+										</div>
+									</form>
+			                       `
+			})
+			
+		}
+		
 	
 	</script>
 </body>

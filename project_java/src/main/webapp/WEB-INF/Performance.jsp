@@ -86,27 +86,21 @@
 			<div class="box3">
 				<div style="display: flex;">
 					<form method="post" class="box3Top"
-						style="padding: 8px 10px 0 10px; width: 95%;">
+						style="padding: 8px 10px 0 10px;width: 100%;">
 						<div style="display: flex; flex-grow: 0.1; width: 26%;">
 							<input type="text" class="wp3" name="searchName"
 								placeholder="제품명">
 						</div>
-						<div class="date2" style="display: flex; flex-grow: 0.1;">
+						<div class="date2">
 							<input type="datetime-local" class="indate1" name="startDate">
 							~ <input type="datetime-local" class="indate2" name="endDate">
 						</div>
 						<div style="text-align: end;">
 							<input type="hidden" name="command" value="search"> <input
 								type="submit" value="조회" class="btn4">
+							<button class="btn4">초기화</button>
 						</div>
 					</form>
-					<div style="display: flex; align-items: center;">
-						<form name="command" action="Performance"
-							style="padding: 5px 5px 0 0;">
-							<input type="hidden" name="command" value="reset"> <input
-								type="submit" value="초기화" class="btn4">
-						</form>
-					</div>
 				</div>
 				<div class="indexBox">
 					<div class="index">
@@ -127,7 +121,7 @@
 										pattern="yyyy-MM-dd HH:mm:ss" />
 									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
 								</div>
-								<div class="emdwp">${dto.productNameST}</div>
+								<div class="emdwp">${dto.productName}</div>
 								<div class="emdtn">${dto.productionCount}</div>
 								<div class="text1">${dto.performanceComment}</div>
 								<div class="emdId">${dto.userId}</div>
@@ -213,7 +207,9 @@
 			}
 		})
 	}
-	
+	/* document.querySelector('.box3Top').addEventListener('click', (e)=>{
+		e.target.
+	}) */.
 	
 	
 

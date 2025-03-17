@@ -20,14 +20,14 @@ function init() {
 
 
 
-  document.querySelector('.instView').addEventListener('click', (e) => {
+  // document.querySelector('.instView').addEventListener('click', (e) => {
 
-    // 작지 박스에서 클릭을 할시. menufacturer란 클래스가있다면 포커스 풀기.
-    if (e.target.parentNode.parentNode.classList.contains('menufacturer-info')) {
-      e.preventDefault();
-      e.target.blur();
-      alert("현재 페이지에서 수정하실수없습니다.")
-    }
+  //   // 작지 박스에서 클릭을 할시. menufacturer란 클래스가있다면 포커스 풀기.
+  //   if (e.target.parentNode.parentNode.classList.contains('menufacturer-info')) {
+  //     e.preventDefault();
+  //     e.target.blur();
+  //     alert("현재 페이지에서 수정하실수없습니다.")
+  //   }
 
     // // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
     // if (e.target.innerText == '수정') {
@@ -61,7 +61,7 @@ function init() {
     //   alert("현재 페이지에서 삭제하실수없습니다.")
     // }
 
-  });
+  // });
 
 
 

@@ -182,13 +182,12 @@ function init() {
 
   // 제품 합/불 라디오버튼클릭시 숨기기/나오기
   const rad = document.querySelectorAll('.rad')
-  let ss
   for (let i = 0; i < rad.length; i++) {
     rad[i].addEventListener('click', (e) => {
       
       if (rad[i].checked) {
-        ss = rad[i].value
-        if (ss == "불합격") {
+        let ss = rad[i].value
+        if (ss == '불합격') {
           document.querySelector('.dropBox').disabled = false;
           document.querySelector('.dropBox').classList.remove('hide')
           document.querySelector('.BB2').classList.remove('hide')
@@ -267,193 +266,193 @@ function init() {
 
   // })
 
-  document.querySelector('.box3View').addEventListener('click', (e) => {
+  // document.querySelector('.box3View').addEventListener('click', (e) => {
 
-    //삭제
-    // console.log(e.target);
-    if (e.target.innerText == "삭제") {
-      e.target.parentNode.parentNode.remove();
-      alert("삭제되었습니다.")
-    }
+  //   //삭제
+  //   // console.log(e.target);
+  //   if (e.target.innerText == "삭제") {
+  //     e.target.parentNode.parentNode.remove();
+  //     alert("삭제되었습니다.")
+  //   }
 
     //수정
-    if (e.target.innerText == "수정") {
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = ("0" + (now.getMonth() + 1)).slice(-2);
-      const day = ("0" + now.getDate()).slice(-2);
-      const hour = ("0" + now.getHours()).slice(-2);
-      const minute = ("0" + now.getMinutes()).slice(-2);
+    // if (e.target.innerText == "수정") {
+      // const now = new Date();
+      // const year = now.getFullYear();
+      // const month = ("0" + (now.getMonth() + 1)).slice(-2);
+      // const day = ("0" + now.getDate()).slice(-2);
+      // const hour = ("0" + now.getHours()).slice(-2);
+      // const minute = ("0" + now.getMinutes()).slice(-2);
 
-      const date = `${year}-${month}-${day}T${hour}:${minute}`;
+      // const date = `${year}-${month}-${day}T${hour}:${minute}`;
 
-      const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
-      const tkdb = e.target.parentNode.parentNode.querySelector('.tkdb').innerText
-      const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
+      // const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
+      // const tkdb = e.target.parentNode.parentNode.querySelector('.tkdb').innerText
+      // const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
 
 
-      const row = e.target.parentNode.parentNode;
-      row.dataset.original = row.innerHTML
+      // const row = e.target.parentNode.parentNode;
+      // row.dataset.original = row.innerHTML
 
-      e.target.parentNode.parentNode.innerHTML =
-        `
-        <div>
-          <input type="datetime-local" class="inputT dateB" value="${date}">
-        </div>
-        <div class="emdwp">${emdwp}</div>
-        <div>
-          <select name="" id="" class="emdgkq">
-            <option value="합격">합격</option>
-            <option value="불합격">불합격</option>
-          </select>
-        </div>
-        <div class="">
-          <input type="text" class="inputT tkdb" value="${tkdb}">
-        </div>
-        <div>
-          <input type="text" class="inputT text1" value="${text}">
-        </div>
-        <div>
-          <button class="tn">완료</button>
-          <button class="tkr">취소</button>
-        </div>
-      `
-    }
+      // e.target.parentNode.parentNode.innerHTML =
+      //   `
+      //   <div>
+      //     <input type="datetime-local" class="inputT dateB" value="${date}">
+      //   </div>
+      //   <div class="emdwp">${emdwp}</div>
+      //   <div>
+      //     <select name="" id="" class="emdgkq">
+      //       <option value="합격">합격</option>
+      //       <option value="불합격">불합격</option>
+      //     </select>
+      //   </div>
+      //   <div class="">
+      //     <input type="text" class="inputT tkdb" value="${tkdb}">
+      //   </div>
+      //   <div>
+      //     <input type="text" class="inputT text1" value="${text}">
+      //   </div>
+      //   <div>
+      //     <button class="tn">완료</button>
+      //     <button class="tkr">취소</button>
+      //   </div>
+      // `
+    // }
 
     // 수정완료
-    if (e.target.innerText == "완료") {
-      const view = e.target.parentNode.parentNode
-      const tarG = e.target.parentNode.parentNode
-      const date = tarG.querySelector('.dateB').value
-      const wp = tarG.querySelector('.emdwp').innerText
-      const gkq = tarG.querySelector('.emdgkq').value
-      const tk = tarG.querySelector('.tkdb').value
-      const tT = tarG.querySelector('.text1').value
-      view.innerHTML = ""
-      view.innerHTML += `
-                        <div class="dateB">${date}</div>
-                        <div class="emdwp">${wp}</div>
-                        <div class="emdgkq">${gkq}</div>
-                        <div class="tkdb">${tk}</div>
-                        <div class="text1">${tT}</div>
-                        <div>
-                          <button class="tn">수정</button>
-                          <button class="tkr">삭제</button>
-                        </div>
-                      `
-      alert("수정되었습니다.")
-    }
+    // if (e.target.innerText == "완료") {
+    //   const view = e.target.parentNode.parentNode
+    //   const tarG = e.target.parentNode.parentNode
+    //   const date = tarG.querySelector('.dateB').value
+    //   const wp = tarG.querySelector('.emdwp').innerText
+    //   const gkq = tarG.querySelector('.emdgkq').value
+    //   const tk = tarG.querySelector('.tkdb').value
+    //   const tT = tarG.querySelector('.text1').value
+    //   view.innerHTML = ""
+    //   view.innerHTML += `
+    //                     <div class="dateB">${date}</div>
+    //                     <div class="emdwp">${wp}</div>
+    //                     <div class="emdgkq">${gkq}</div>
+    //                     <div class="tkdb">${tk}</div>
+    //                     <div class="text1">${tT}</div>
+    //                     <div>
+    //                       <button class="tn">수정</button>
+    //                       <button class="tkr">삭제</button>
+    //                     </div>
+    //                   `
+    //   alert("수정되었습니다.")
+    // }
 
-    if (e.target.innerText === "취소") {
-      const row = e.target.parentNode.parentNode;
-      if (row.dataset.original) {
-        row.innerHTML = row.dataset.original;
-      }
-    }
-  })
+  //   if (e.target.innerText === "취소") {
+  //     const row = e.target.parentNode.parentNode;
+  //     if (row.dataset.original) {
+  //       row.innerHTML = row.dataset.original;
+  //     }
+  //   }
+  // })
 
 
   
 
+  // 검색
+  // document.querySelector('.btn4').addEventListener('click', function () {
+  //   const productSearch = document.querySelector('.wp3').value.trim().toLowerCase();
+  //   const startD = document.querySelector('.indate1').value;
+  //   const endD = document.querySelector('.indate2').value;
+  //   const dropBoxes = document.querySelectorAll('.dropBox2');
+  //   const resultSearch = dropBoxes[0] ? dropBoxes[0].value : "";      // 결과 (합격/불합격)
+  //   const failReasonSearch = dropBoxes[1] ? dropBoxes[1].value : "";    // 불합격 사유
+  //   const items = document.querySelectorAll('.box3View .dex');
+  //   items.forEach(item => {
+  //     let match = true;
 
-  document.querySelector('.btn4').addEventListener('click', function () {
-    const productSearch = document.querySelector('.wp3').value.trim().toLowerCase();
-    const startD = document.querySelector('.indate1').value;
-    const endD = document.querySelector('.indate2').value;
-    const dropBoxes = document.querySelectorAll('.dropBox2');
-    const resultSearch = dropBoxes[0] ? dropBoxes[0].value : "";      // 결과 (합격/불합격)
-    const failReasonSearch = dropBoxes[1] ? dropBoxes[1].value : "";    // 불합격 사유
-    const items = document.querySelectorAll('.box3View .dex');
-    items.forEach(item => {
-      let match = true;
+  //     const itemDateText = item.children[0] ? item.children[0].innerText.trim() : "";
+  //     const itemProductText = item.children[1] ? item.children[1].innerText.trim().toLowerCase() : "";
+  //     const itemResultText = item.children[2] ? item.children[2].innerText.trim() : "";
+  //     const itemFailReasonText = item.children[3] ? item.children[3].innerText.trim() : "";
 
-      const itemDateText = item.children[0] ? item.children[0].innerText.trim() : "";
-      const itemProductText = item.children[1] ? item.children[1].innerText.trim().toLowerCase() : "";
-      const itemResultText = item.children[2] ? item.children[2].innerText.trim() : "";
-      const itemFailReasonText = item.children[3] ? item.children[3].innerText.trim() : "";
+  //     if (productSearch && !itemProductText.includes(productSearch)) {
+  //       match = false;
+  //     }
 
-      if (productSearch && !itemProductText.includes(productSearch)) {
-        match = false;
-      }
+  //     if (startD) {
+  //       const startDate = new Date(startD);
+  //       const itemDate = new Date(itemDateText);
+  //       if (itemDate < startDate) {
+  //         match = false;
+  //       }
+  //     }
+  //     if (endD) {
+  //       const endDate = new Date(endD);
+  //       const itemDate = new Date(itemDateText);
+  //       if (itemDate > endDate) {
+  //         match = false;
+  //       }
+  //     }
 
-      if (startD) {
-        const startDate = new Date(startD);
-        const itemDate = new Date(itemDateText);
-        if (itemDate < startDate) {
-          match = false;
-        }
-      }
-      if (endD) {
-        const endDate = new Date(endD);
-        const itemDate = new Date(itemDateText);
-        if (itemDate > endDate) {
-          match = false;
-        }
-      }
+  //     if (resultSearch && itemResultText !== resultSearch) {
+  //       match = false;
+  //     }
 
-      if (resultSearch && itemResultText !== resultSearch) {
-        match = false;
-      }
+  //     if (failReasonSearch && itemFailReasonText !== failReasonSearch) {
+  //       match = false;
+  //     }
 
-      if (failReasonSearch && itemFailReasonText !== failReasonSearch) {
-        match = false;
-      }
-
-      item.style.display = match ? '' : 'none';
-    });
-  });
-
-
+  //     item.style.display = match ? '' : 'none';
+  //   });
+  // });
 
 
-  // 페이지네이션 관련 전역 변수
-  let currentPage = 1;
-  const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
 
-  // 페이지네이션을 적용하는 함수
-  function renderPagination() {
-    // 모든 등록된 항목 선택 (.item 클래스 사용)
-    const view = document.querySelector('.box3View');
-    const items = Array.from(view.querySelectorAll('.dex'));
-    const totalItems = items.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
-    items.forEach((item, index) => {
-      if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
-        item.style.display = '';
-      } else {
-        item.style.display = 'none';
-      }
-    });
+  // // 페이지네이션 관련 전역 변수
+  // let currentPage = 1;
+  // const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
 
-    // pagination 컨테이너 업데이트
-    let paginationContainer = document.querySelector('.pagination');
-    if (!paginationContainer) {
-      // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
-      paginationContainer = document.createElement('div');
-      paginationContainer.classList.add('pagination');
-      // box3 하단에 추가
-      document.querySelector('.box3').appendChild(paginationContainer);
-    }
+  // // 페이지네이션을 적용하는 함수
+  // function renderPagination() {
+  //   // 모든 등록된 항목 선택 (.item 클래스 사용)
+  //   const view = document.querySelector('.box3View');
+  //   const items = Array.from(view.querySelectorAll('.dex'));
+  //   const totalItems = items.length;
+  //   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    // 기존 페이지네이션 버튼 초기화
-    paginationContainer.innerHTML = '';
+  //   // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
+  //   items.forEach((item, index) => {
+  //     if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
+  //       item.style.display = '';
+  //     } else {
+  //       item.style.display = 'none';
+  //     }
+  //   });
 
-    // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
-    for (let page = 1; page <= totalPages; page++) {
-      const btn = document.createElement('button');
-      btn.textContent = page;
-      if (page === currentPage) {
-        btn.disabled = true;
-      }
-      btn.addEventListener('click', () => {
-        currentPage = page;
-        renderPagination();
-      });
-      paginationContainer.appendChild(btn);
-    }
-  }
+  //   // pagination 컨테이너 업데이트
+  //   let paginationContainer = document.querySelector('.pagination');
+  //   if (!paginationContainer) {
+  //     // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
+  //     paginationContainer = document.createElement('div');
+  //     paginationContainer.classList.add('pagination');
+  //     // box3 하단에 추가
+  //     document.querySelector('.box3').appendChild(paginationContainer);
+  //   }
+
+  //   // 기존 페이지네이션 버튼 초기화
+  //   paginationContainer.innerHTML = '';
+
+  //   // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
+  //   for (let page = 1; page <= totalPages; page++) {
+  //     const btn = document.createElement('button');
+  //     btn.textContent = page;
+  //     if (page === currentPage) {
+  //       btn.disabled = true;
+  //     }
+  //     btn.addEventListener('click', () => {
+  //       currentPage = page;
+  //       renderPagination();
+  //     });
+  //     paginationContainer.appendChild(btn);
+  //   }
+  // }
 
   // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
   // window.addEventListener('DOMContentLoaded', renderPagination);

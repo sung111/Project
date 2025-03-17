@@ -9,7 +9,7 @@ public class QualityControl_DTO {
 	int qualityControlId;	// 품질관리 시퀀스번호
 	int performanceId;		// 실적 시퀀스번호
 	String userId;			// 유저 id
-	int productName;		// 완제품 시퀀스
+	int productId;		// 완제품 시퀀스
 	String productNameST;		// 완제품명
 	String result;			// 합/불
 	String failreason;		// 불합격사유
@@ -39,11 +39,11 @@ public class QualityControl_DTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getProductName() {
-		return productName;
+	public int getProductId() {
+		return productId;
 	}
-	public void setProductName(int productName) {
-		this.productName = productName;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public String getProductNameST() {
 		return productNameST;

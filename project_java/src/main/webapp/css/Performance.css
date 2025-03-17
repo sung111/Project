@@ -227,7 +227,7 @@ body {
     justify-content: space-around;
   }
 
-  .dex>form {
+  .dex>.kk {
     width: 70%;
     flex-grow: 1;
     border: 1px solid #c9c9c9;
@@ -344,7 +344,7 @@ body {
 
   }
 
-  form>div{
+  .kk>div{
     width: 70%;
     flex-grow: 1;
     border: 1px solid #d9d9d9;
@@ -535,8 +535,7 @@ body {
 
   .box3Top {
     display: flex;
-    justify-content: space-around;
-    padding: 5px;
+    flex-wrap: wrap;
   }
 
   .wp3 {
@@ -607,7 +606,7 @@ body {
     justify-content: space-around;
 
   }
-  form>div{
+  .kk>div{
     width: 70%;
     flex-grow: 1;
     border: 1px solid #d9d9d9;
