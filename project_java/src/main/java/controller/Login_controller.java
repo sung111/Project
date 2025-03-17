@@ -29,7 +29,12 @@ public class Login_controller extends HttpServlet {
 		    HttpSession session = request.getSession();
 		    session.setAttribute("userId", user.getUserId());
 		    session.setAttribute("userName", user.getUserName());
-
+		    session.setAttribute("userPw", user.getUserPw());
+		    session.setAttribute("Job", user.getJob()); //관리자 권한의 정확한 이름 (사장, 이사, 총괄 등)
+		    session.setAttribute("Email", user.getEmail());
+		    session.setAttribute("CreateDate", user.getCreateDate());
+		    session.setAttribute("Field", user.getField()); //실질적인 관리자 권한 (admin, user)
+		    
 		    System.out.println("로그인 성공 - 세션 저장됨: userId = " + session.getAttribute("userId"));
 
 		    response.sendRedirect("index.jsp"); // 로그인 성공 시 index.jsp로 이동

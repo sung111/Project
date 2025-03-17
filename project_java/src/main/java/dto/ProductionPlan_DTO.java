@@ -115,12 +115,12 @@ public class ProductionPlan_DTO {
 	}
 
 //	products가져옴.
-	/*
-	 * private Products_DTO product;
-	 * 
-	 * public Products_DTO getProduct() { return product; }
-	 * 
-	 * public void setProduct(Products_DTO product) { this.product = product; }
-	 */
+	
+	  private Products_DTO product;
+	  
+	  public Products_DTO getProduct() { return product; }
+	  
+	 public void setProduct(Products_DTO product) { this.product = product; }
+
 
 }
