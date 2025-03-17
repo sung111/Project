@@ -9,8 +9,9 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import dto.*;
 
+import dto.Materials_DTO;
+import dto.*;
 //자재 테이블
 public class Materials_DAO {
 	
@@ -32,7 +33,7 @@ public class Materials_DAO {
 //					방법 1: sql string을 그냥 만들기
 //					query += " values (seq_todo.nextval, '"+ todoDTO.getTodo() +"', sysdate, null,'N')";
 //					방법 2: ? 활용하기
-					query += " values ('',?,?,?,?,?,?,?,?,'n')";
+					query += " values ('',?,?,?,?,?,?,?,?,'n','','')";
 					
 			PreparedStatement ps = con.prepareStatement(query);
 			
@@ -103,6 +104,60 @@ public class Materials_DAO {
 				
 //				System.out.println(rs.getString("materialname")+","+rs.getString("materialdel"));
 				System.out.println(rs.getString("materialid"));
+				list.add(materials_DTO);
+			}
+
+		
+			con.close();
+		} catch (Exception e) {
+			System.err.println("버그발생 셀렉트");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public List selectFM(Materials_DTO materials_DTO){
+		System.out.println("selectFM 실행");
+		List list = new ArrayList();
+		
+		try {
+			// [db 접속 시작]
+			Context ctx = new InitialContext(); // JNDI 컨텍스트 생성
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");// 오라클 이라는 이름에 DataSource 찾기
+			// 커넥션 풀에서 접속 정보를 가져오기
+			// 접속이 안되면 null
+			Connection con = ds.getConnection(); // DB 연결
+			// DB 접속 완
+
+			// [SQL 준비]
+			String 	query =  " SELECT * FROM MATERIALS WHERE materialdel = 'n' AND product_material_id = ?";
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, materials_DTO.getProduct_material_id());
+			System.out.println("getProduct_material_id() ="+ getProduct_material_id());
+					
+
+			// [SQL 실행] 및 [결과 확보]
+			// ResultSet executeQuery : SQL중 select 실행
+			// int executeUpdate() : select 외 모든것
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Materials_DTO DTO = new Materials_DTO();
+				
+				DTO.setMateriaid(rs.getInt("materialid")); //자제 시퀸스값
+				DTO.setMaterialname(rs.getString("materialname")); //이름
+				DTO.setPrice(rs.getInt("price")); //가격
+				DTO.setUnit(rs.getString("unit")); //단위
+				DTO.setStockquantity(rs.getInt("stockquantity")); //재고수량
+				DTO.setSpec(rs.getString("spec")); //규격
+				DTO.setSupplier(rs.getString("supplier")); //공급업체
+				DTO.setLotnumber(rs.getString("lotnumber")); //랏넘버
+				DTO.setWarehouse(rs.getString("warehouse")); //창고위치
+				DTO.setPartNumber(rs.getString("partNumber")); //품번
+				
+				System.out.println("rs.getInt(\"materialid\")"+ rs.getInt("materialid"));
+				System.out.println(rs.getString("materialname")+","+rs.getString("supplier"));
+				System.out.println("값을 못가져옴");
 				list.add(materials_DTO);
 			}
 

@@ -197,32 +197,46 @@
                 
                 </tr>
             </thead>
-            <tbody>
+            <c:forEach var="dto" items="${slectall}">
+          
                 <tr>
                     <td>
-                        <div class="value move">부대찌개</div>
-                        </select>
+                    	<input type="hidden" value="${dto.productid}" class="productid"></input>
+                        <div class="value move">${dto.productname}</div>
+                        
                     </td>
                     <td>
-                        <div>품번넣기</div>
+                        <div>${dto.partnumber}</div>
                     </td>
                     <td>
-                        <div class="value hide">포장후 30일이내</div>
+                        <div class="value hide">${dto.expdatedesc}</div>
                     </td>
                     <td>
-                        <div class="value hide">상온</div> 
+                        <div class="value hide">${dto.warehouse}</div> 
                     </td>
-                    <td><img src="/img/Budae-Jjigae.png" alt="부대찌개" class="imgg">
+                    <td><img src="img/${dto.productimage}" alt="${dto.productname}" class="imgg">
+                
                     </td>
                  
                 </tr>
-               
+              </c:forEach>
 
     <script>
         window.addEventListener("load", function () {
            
+            let moves = document.querySelectorAll(".move")
+            for(let i =0; i<moves.length; i++){
+                moves[i].addEventListener("click",function(e){
+                	
+              		let pvalue = e.target.parentNode.querySelector(".productid").value
+                    let namevalue = this.textContent; 
+                    const encodedNamevalue = encodeURIComponent(namevalue);
+                    const encodedpvalue= encodeURIComponent(pvalue);
+                    window.location.href = "Bom_controller?namevalue=" + encodedNamevalue +"&pvalue="+encodedpvalue;
 
-
+                })
+            }
+	
 
 
 

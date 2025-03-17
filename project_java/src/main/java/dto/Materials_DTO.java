@@ -17,9 +17,23 @@ public class Materials_DTO {
 	int materiaid;
 	String materiadel;
 	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
-
+	int stockquantity;
+	int product_material_id;
 	
 	
+	
+	public int getStockquantity() {
+		return stockquantity;
+	}
+	public void setStockquantity(int stockquantity) {
+		this.stockquantity = stockquantity;
+	}
+	public int getProduct_material_id() {
+		return product_material_id;
+	}
+	public void setProduct_material_id(int product_material_id) {
+		this.product_material_id = product_material_id;
+	}
 
 	public String getMateriadel() {
 		return materiadel;

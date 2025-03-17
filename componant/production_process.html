@@ -629,8 +629,19 @@
 
 
 
+                let moves = document.querySelectorAll(".move")
+                for(let i =0; i<moves.length; i++){
+                    moves[i].addEventListener("click",function(e){
+                  
+                        let namevalue = this.textContent; 
+                        const encodedNamevalue = encodeURIComponent(namevalue);
+                        window.location.href = "Bom_controller?namevalue=" + encodedNamevalue;
+				
+               
+                 
 
-
+                    })
+                }
 
 
 
