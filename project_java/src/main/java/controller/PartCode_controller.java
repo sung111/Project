@@ -29,7 +29,7 @@ public class PartCode_controller extends HttpServlet {
 		//로그인	세션정보 넘어온거 보고 일반사용자 , 관리자 에따라 페이지 표시
 		//일반사용자 view만 가능 관리자 수정/삭제/추가 버튼 보임
 //		HttpSession session = request.getSession();
-//		Boolean isLogon = (Boolean)session.getAttribute("isLogon");
+//		Boolean isLogon = (Boolean)session.getAttribute("userId");
 //		String id = (String)session.getAttribute("id");
 //		int id = (int)session.getAttribute("id");
 		
@@ -176,6 +176,7 @@ public class PartCode_controller extends HttpServlet {
 					String unit = request.getParameter("unit");
 					String lotnumber = request.getParameter("lotnumber");
 					
+					
 					Products_DTO products = new Products_DTO();
 					
 					products.setProductname(productname);
@@ -187,6 +188,7 @@ public class PartCode_controller extends HttpServlet {
 					products.setLotnumber(lotnumber);
 					
 					products_DAO.insertProducts(products);
+					
 					
 					
 				}else if (type.equals("finish_del")){
