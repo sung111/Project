@@ -81,18 +81,48 @@ public class ProductionPlan_DAO {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            System.out.println("[DAO] updateProductionPlan() 실행");
+            System.out.println("SQL: " + sql);
+            System.out.println("파라미터 - planStatus: " + planStatus + ", planNotes: " + planNotes + ", planId: " + planId);
+
             pstmt.setString(1, planStatus);
             pstmt.setString(2, planNotes);
             pstmt.setInt(3, planId);
 
             int rowsUpdated = pstmt.executeUpdate();
+            System.out.println("업데이트된 행 개수: " + rowsUpdated);
+
             return rowsUpdated > 0;
         } catch (SQLException e) {
+            System.out.println("SQL 실행 오류 발생!");
             e.printStackTrace();
             return false;
         }
     }
 
+//    생산계획 삭제
+    public boolean deleteProductionPlan(int planId) {
+        String sql = "DELETE FROM productionplans WHERE planId = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            System.out.println("[DAO] deleteProductionPlan() 실행");
+            System.out.println("SQL: " + sql);
+            System.out.println("파라미터 - planId: " + planId);
+
+            pstmt.setInt(1, planId);
+
+            int rowsDeleted = pstmt.executeUpdate();
+            System.out.println("삭제된 행 개수: " + rowsDeleted);
+
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            System.out.println("SQL 실행 오류 발생!");
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     // 생산계획 추가
     public boolean addProductionPlan(String planName, String planStatus) {
         String sql = "INSERT INTO productionplans (planName, planStatus) VALUES (?, ?)";

@@ -8,12 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OOOOO 생산 정보</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/productinfo.css">
+    <link rel="stylesheet" href="css/workorder.css">
+    <!-- 옛날 데이터들 -->
     <script src="data/material.js"></script>
     <script src="data/productdata.js"></script>
     <script src="data/productinmaterialdata.js"></script>
     <script src="data/start.js"></script>
-    <script src="js/performanceRegistration.js"></script>
+    <!-- js -->
+    <script src="js/workorder.js"></script>
 </head>
 
 <body>
@@ -39,14 +41,14 @@
                     <div class="productinfo-info-name">제작 수량</div><input type="text" class="productinfo-info-completion"
                         alt="productinfo-제작수량">
                 </td>
-                <td class="productinfo-info-list">
+                <!-- <td class="productinfo-info-list">
                     <div class="productinfo-info-name">생산 시작</div><input type="date" class="productinfo-info-completion"
                         alt="productinfo-입고날짜" id="startDate">
                 </td>
                 <td class="productinfo-info-list">
                     <div class="productinfo-info-name">생산 완료</div><input type="date" class="productinfo-info-completion"
                         alt="productinfo-유효기간">
-                </td>
+                </td> -->
             </tr>
         </table>
         <div class="material-info">
@@ -76,9 +78,7 @@
                 </tr>
                 <tr class="check-info-buttoncontainer">
                     <td class="check-info-buttonlayer">
-                        <input type="submit" class="check-info-registration" value="등록">
-                        <!-- <button type="button" class="check-info-delete">삭제</button> -->
-                        <button type="button" class="check-info-close">취소</button>
+                        <button type="button" class="check-info-close">나가기</button>
                     </td>
                 </tr>
             </table>

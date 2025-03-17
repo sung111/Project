@@ -50,11 +50,11 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 		<tr class="menufacturer-info">
 			<td class="menufacturer-info-list">
 				<div class="menufacturer-info-name">생성인</div> <input type="text"
-				name="delivery" class="menufacturer-info-completion">
+				name="delivery" class="menufacturer-info-completion" readonly>
 			</td>
 			<td class="menufacturer-info-list">
 				<div class="menufacturer-info-name">생산기간</div> <input type="text"
-				name="writer" class="menufacturer-info-completion">
+				name="writer" class="menufacturer-info-completion" readonly>
 			</td>
 		</tr>
 	</table>

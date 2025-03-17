@@ -1,7 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.sql.*, javax.servlet.http.*, javax.servlet.*, dao.User_DAO, dto.User_DTO"%>
+<%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, dao.User_DAO, dto.User_DTO" %>
+<%
+/* ========== 1. 세션이 없으면 쿠키 확인 후 자동 로그인 처리 ========== */
+   /*  HttpSession session = request.getSession();  왜 계속 빨간줄나오노!*/
+if (session == null || session.getAttribute("userId") == null) {
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("userId".equals(cookie.getName())) {
+                String savedUserId = cookie.getValue();
+                
+                User_DAO userDAO = new User_DAO();
+                User_DTO user = userDAO.getUserById(savedUserId);
+
+                if (user != null) {
+                    session = request.getSession(); // 새로운 세션 생성
+                    session.setAttribute("userId", user.getUserId());
+                    session.setAttribute("userName", user.getUserName());
+                }
+            }
+        }
+    }
+}
+%>
 
 <%
 /* 유저 ID 디버깅 */
@@ -15,8 +37,6 @@ if (sessionUserId == null) {
 	return;
 }
 %>
-
-
 <%
 /* 로그인이 안되있으면 강제로 login.js[p로 이동하게 된다. */
 String userId = (String) session.getAttribute("userId");

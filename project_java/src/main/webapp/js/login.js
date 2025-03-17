@@ -82,7 +82,8 @@ loginButton.addEventListener("click", function (event) {
     let loginButton = document.getElementById("login-layer");
     loginButton.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
-            event.preventDefault(); // 기본 엔터 동작 방지
+            // 기본되는 엔터 동작을 방지함
+            event.preventDefault(); 
             document.getElementById("login-button").click(); // 로그인 버튼 클릭 실행
         }
     });

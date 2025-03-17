@@ -1,13 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-
-
-
     // Search 검색
     const searchButton = document.querySelector('.submitlayer');
     const searchInput = document.querySelector('input[name="Prodsearch"]');
-    searchButton.addEventListener('click', function(event) {
+    searchButton.addEventListener('click', function (event) {
         // 기본 폼 제출 X
-        event.preventDefault(); 
+        event.preventDefault();
         const searchText = searchInput.value.trim().toLowerCase();
         const rows = document.querySelectorAll('.order-info-content');
         // 검색 텍스트가 없으면 모든 행을 표시
@@ -21,15 +18,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 const rowText = row.innerText.toLowerCase();
                 if (rowText.includes(searchText)) {
                     // 텍스트가 포함된 행만 표시한다.
-                    row.style.display = ""; 
+                    row.style.display = "";
                 } else {
                     // 텍스트가 포함되지 않은 행은 숨긴다
-                    row.style.display = "none"; 
+                    row.style.display = "none";
                 }
             });
         }
         // 작성하고 검색을 누르면 기존에 input에 썻던 내용은 초기화 된다.
         searchInput.value = "";
+    });
+
+    // Search 엔터 연결
+    searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            // 기본되는 엔터 동작을 방지함
+            event.preventDefault();
+            searchButton.click();
+        }
     });
 
 
@@ -44,21 +50,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (clickedRow) {
             if (selectedRow === clickedRow) {
-                // 선택된 행을 다시 클릭하면 색상을 원래대로 복원
+                // 선택된 행을 다시 클릭하면 색상을 원래대로 복원된다.
                 clickedRow.style.backgroundColor = "";
                 selectedRow = null;
             } else {
-                // 이전에 선택된 행이 있다면 색상 제거
+                // 이전에 선택된 행이 있다면 색상 제거한다.
                 if (selectedRow) {
                     selectedRow.style.backgroundColor = "";
                 }
                 // 새로 클릭한 행에 배경색 적용
-                clickedRow.style.backgroundColor = "#999999"; // 선택된 행의 배경색 회색으로 변경
+                clickedRow.style.backgroundColor = "#999999"; // 선택된 행의 변경되는 배경 색
                 selectedRow = clickedRow;
             }
         }
     });
+
+// 행을 선택하면 생성인과 생산기간이 자동으로 나타난다.
+    const table = document.querySelector(".new-workorder tbody");
+    table.addEventListener("click", function (event) {
+        let targetRow = event.target.closest("tr");
     
+        if (targetRow && targetRow.dataset.userid) {
+            let userid = targetRow.dataset.userid;
+            let startDate = targetRow.dataset.startDate;
+            let endDate = targetRow.dataset.endDate;
+    
+            console.log("선택한 생성인:", userid);
+            console.log("선택한 생산기간:", startDate, "~", endDate);
+    
+            // 생성인과 생산기간을 해당 input 필드에 채우기
+            document.querySelector("input[name='delivery']").value = userid;
+            document.querySelector("input[name='writer']").value = startDate + " ~ " + endDate;
+        }
+    });
+
 
     // 페이지네이션 초기화
     updatePagination();
@@ -67,7 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePagination() {
         const rows = document.querySelectorAll(".order-info-content");
         const totalRows = rows.length;
-        const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage)); // 최소 1페이지 보장
+        // 최소 1페이지는 생성이 된다.
+        const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
         const paginationContainer = document.getElementById("pagination-container");
 
         // 페이지네이션 버튼 초기화
@@ -85,16 +111,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         paginationContainer.appendChild(prevButton);
 
-        // 기본 페이지 번호 (1)
-        const pageButton = document.createElement("a");
-        pageButton.textContent = "1";
-        pageButton.style.fontWeight = "bold";
-        pageButton.addEventListener("click", function () {
-            currentPage = 1;
-            displayPage(currentPage);
-            updatePagination();
-        });
-        paginationContainer.appendChild(pageButton);
+        // 페이지 번호 버튼 생성
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPages, currentPage + 2);
+
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement("a");
+            pageButton.textContent = i;
+            if (i === currentPage) {
+                pageButton.style.fontWeight = "bold";
+            }
+            pageButton.addEventListener("click", function () {
+                currentPage = i;
+                displayPage(currentPage);
+                updatePagination();
+            });
+            paginationContainer.appendChild(pageButton);
+        }
 
         // 오른쪽 화살표 (다음 페이지)
         const nextButton = document.createElement("a");
@@ -127,56 +160,113 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         let cells = selectedRow.children;
-        let notesCell = cells[12]; // 비고 칸 (13번째 열, index는 12)
+        let originalValues = [];
 
-        if (notesCell.querySelector("input")) {
-            return; // 이미 수정 중이라면 중복 실행 방지
+        // 모든 td를 input 필드로 변경
+        for (let i = 0; i < cells.length - 1; i++) {
+            let cell = cells[i];
+            let originalText = cell.innerText.trim();
+            originalValues.push(originalText);
+            cell.innerHTML = `<input type="text" value="${originalText}">`;
         }
 
-        let originalNotes = notesCell.innerText.trim();
+        // 확인 & 취소 버튼 추가
+        let actionCell = document.createElement("td");
+        actionCell.innerHTML = `
+                <button id="saveChangesBtn">확인</button>
+                <button id="cancelChangesBtn">취소</button>
+            `;
+        selectedRow.appendChild(actionCell);
 
-        // 기존 텍스트를 숨기고 input 필드로 변경
-        notesCell.innerHTML = `
-            <input type="text" id="editNotesInput" value="${originalNotes}">
-            <button id="saveNotesBtn">수정 완료</button>
-            <button id="cancelNotesBtn">취소</button>
-        `;
+        // 확인 버튼 클릭 이벤트
+        document.getElementById("saveChangesBtn").addEventListener("click", function () {
+            let inputs = selectedRow.querySelectorAll("input");
+            let updatedData = {
+                planId: selectedRow.getAttribute("data-id"),
+                productName: inputs[0].value,
+                lotNumber: inputs[1].value,
+                unit: inputs[2].value,
+                warehouse: inputs[3].value,
+                deliveryDest: inputs[4].value,
+                partNumber: inputs[5].value,
+                totalQty: inputs[6].value,
+                createDate: inputs[7].value,
+                startDate: inputs[8].value,
+                endDate: inputs[9].value,
+                planStatus: inputs[10].value,
+                planCause: inputs[11].value,
+                planNotes: inputs[12].value
+            };
 
-        // 수정 완료 버튼 이벤트
-        document.getElementById("saveNotesBtn").addEventListener("click", function () {
-            let newNotes = document.getElementById("editNotesInput").value;
-
-            // 서버로 데이터 전송
             fetch("UpdateProductionPlan", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    planId: selectedRow.getAttribute("data-id"), // 각 행의 고유 ID 필요
-                    planNotes: newNotes
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedData)
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert("비고 수정 완료!");
-                        notesCell.innerHTML = newNotes; // 수정된 값 적용
+                        alert("수정 완료!");
+                        for (let i = 0; i < inputs.length; i++) {
+                            cells[i].innerText = inputs[i].value;
+                        }
                     } else {
                         alert("수정 실패: " + data.message);
-                        notesCell.innerHTML = originalNotes; // 원래 값 복구
+                        resetRow();
                     }
+
+                    // 확인 버튼 클릭 후 'actionCell' 삭제
+                    resetRow();
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    notesCell.innerHTML = originalNotes; // 오류 발생 시 복구
+                    resetRow();
                 });
         });
 
-        // 수정 중간에 취소 버튼 이벤트
-        document.getElementById("cancelNotesBtn").addEventListener("click", function () {
-            notesCell.innerHTML = originalNotes; // 원래 값으로 복귀
+        // 취소 버튼 클릭 이벤트
+        document.getElementById("cancelChangesBtn").addEventListener("click", function () {
+            resetRow();
         });
+        // 원래 상태로 복구하는 함수
+        function resetRow() {
+            for (let i = 0; i < originalValues.length; i++) {
+                cells[i].innerText = originalValues[i];
+            }
+            selectedRow.removeChild(actionCell); // 'actionCell' 삭제
+        }
+    });
+
+    // 삭제 버튼 클릭 이벤트
+    document.getElementById("prodPlan-delete").addEventListener("click", function () {
+        if (!selectedRow) {
+            alert("삭제할 행을 선택하세요.");
+            return;
+        }
+
+        // 확인 메시지 띄우기
+        if (confirm("정말로 이 행을 삭제하시겠습니까?")) {
+            const planId = selectedRow.getAttribute("data-id");
+
+            // 서버에 삭제 요청 보내기
+            fetch("http://localhost:8081/project_HHMES/ProductionPlan_controller?action=delete", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ planId: 삭제할_아이디 }).toString()
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("삭제 성공!");
+                    // 페이지를 새로고침한다.
+                    location.reload(); 
+                } else {
+                    console.error("삭제 실패");
+                }
+            })
+            .catch(error => console.error("에러 발생:", error));
+        }
     });
 
     // 상품계획 생성 버튼
@@ -211,7 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("WO-select").addEventListener("click", function () {
         const iframe = parent.document.querySelector("iframe");
         if (iframe) {
-            iframe.src = "ProductionInformation.jsp";
+            iframe.src = "WorkOrder.jsp";
         } else {
             console.log("iframe을 찾을 수 없습니다.");
         }
