@@ -34,15 +34,6 @@
                     <input type="password" name="user_password" class="writing_layer" placeholder="비밀번호를 입력해주세요.">
                     <h6>비밀번호 재확인</h6>
                     <input type="password" name="user_password2" class="writing_layer" placeholder="비밀번호 재확인이 필요합니다.">
-                    <h6>가입 권한</h6>
-                    <div class="users">
-                        <input type="radio" name="users" id="user" value="user" checked><label for="user"
-                            class="users">사용자</label>
-                        <input type="radio" name="users" id="admin" value="admin"><label for="admin"
-                            class="users">관리자</label>
-                       <!--  <input type="radio" name="users" id="high-admin" value="high-admin"><label for="high-admin"
-                            class="users">상위 관리자</label> -->
-                    </div>
                     <h6>이메일</h6>
                     <input type="email" name="user_email" class="writing_layer" placeholder="이메일을 입력해주세요.">
                     <h6>전화전호</h6>
