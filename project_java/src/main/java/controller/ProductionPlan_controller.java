@@ -23,37 +23,70 @@ public class ProductionPlan_controller extends HttpServlet {
     
     // GET 요청 처리: 생산 계획 목록을 받아서 JSP에 전달
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // DB에서 prodplan을 가져온다.
-        List<ProductionPlan_DTO> planList = productionPlanDAO.getAllProductionPlans();
-        
-        // 요청 속성에 데이터 저장
-        request.setAttribute("planList", planList);
+        String action = request.getParameter("action");
 
-        // ProdPlan.jsp
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/ProdPlan.jsp");
-        dispatcher.forward(request, response);
+        if (action == null || action.isEmpty()) {
+            // 기본 동작: 전체 목록 가져오기
+            List<ProductionPlan_DTO> planList = productionPlanDAO.getAllProductionPlans();
+            if (planList != null) {
+                request.setAttribute("planList", planList);
+            } else {
+                request.setAttribute("errorMessage", "생산 계획을 불러오는 데 실패했습니다.");
+            }
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/ProdPlan.jsp");
+            dispatcher.forward(request, response);
+        } else if ("view".equals(action)) {
+            // 특정 계획 보기
+            try {
+                int planId = Integer.parseInt(request.getParameter("planId"));
+                ProductionPlan_DTO plan = productionPlanDAO.getProductionPlanById(planId);
+                if (plan != null) {
+                    request.setAttribute("plan", plan);
+                } else {
+                    request.setAttribute("errorMessage", "해당 계획을 찾을 수 없습니다.");
+                }
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewPlan.jsp");
+                dispatcher.forward(request, response);
+            } catch (NumberFormatException e) {
+                request.setAttribute("errorMessage", "유효하지 않은 계획 ID입니다.");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // POST 처리 로직 추가 가능
-    	String action = request.getParameter("action");
-        if ("update".equals(action)) {
-            // 폼에서 전달된 데이터 수집
-            int planId = Integer.parseInt(request.getParameter("planId"));
-            String planStatus = request.getParameter("planStatus");
-            String planNotes = request.getParameter("planNotes");
+        String action = request.getParameter("action");
 
-            // DAO를 이용해 업데이트 수행
-            boolean success = productionPlanDAO.updateProductionPlan(planId, planStatus, planNotes);
+        if ("update".equals(action)) {
+            // 업데이트 처리
+            try {
+                int planId = Integer.parseInt(request.getParameter("planId"));
+                String planStatus = request.getParameter("planStatus");
+                String planNotes = request.getParameter("planNotes");
+
+                boolean success = productionPlanDAO.updateProductionPlan(planId, planStatus, planNotes);
+
+                if (success) {
+                    response.sendRedirect("ProductionPlan_controller");
+                } else {
+                    response.sendRedirect("error.jsp");
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("error.jsp");
+            }
+        } else if ("add".equals(action)) {
+            // 새로운 계획 추가
+            String planName = request.getParameter("planName");
+            String planStatus = request.getParameter("planStatus");
+
+            boolean success = productionPlanDAO.addProductionPlan(planName, planStatus);
 
             if (success) {
-                System.out.println("업데이트 성공: Plan ID " + planId);
+                response.sendRedirect("ProductionPlan_controller");
             } else {
-                System.out.println("업데이트 실패: Plan ID " + planId);
+                response.sendRedirect("error.jsp");
             }
-            
-            // 업데이트 후 목록 페이지로 리디렉트
-            response.sendRedirect("ProductionPlan_controller");
         }
     }
 }

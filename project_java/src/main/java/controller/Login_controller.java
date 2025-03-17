@@ -25,7 +25,7 @@ public class Login_controller extends HttpServlet {
 		User_DTO user = userDAO.getUserById(userId);
 
 		if (user != null && user.getUserPw().equals(userPw)) { // 비밀번호 일치 확인
-		    // 세션 생성
+		    // 세션 생성 
 		    HttpSession session = request.getSession();
 		    session.setAttribute("userId", user.getUserId());
 		    session.setAttribute("userName", user.getUserName());

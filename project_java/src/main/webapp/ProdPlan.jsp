@@ -82,10 +82,7 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 			%>
 			<tr name="prodPlanList" class="order-info-content wolist" data-id="<%= plan.getPlanId() %>">
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음"%>
-				<%= "[" %>
-					<%=(plan.getProduct() != null) ? plan.getProduct().getSpec() : "데이터 없음"%>
-					<%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%>
-					<%= "]" %>
+				<%= "[" %><%=(plan.getProduct() != null) ? plan.getProduct().getSpec() : "데이터 없음"%><%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%><%= "]" %>
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getLotnumber() : "데이터 없음"%>
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%>
 				</td>
@@ -120,12 +117,9 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 					</div>
 				</td>
 				<td colspan="13" class="order-buttonlayer">
-					<button type="button" name="prodPlan-Modify" id="prodPlan-Modify"
-						class="WO-buttonlist">수정</button>
-					<button type="button" name="prodPlan-delete" id="prodPlan-delete"
-						class="WO-buttonlist">삭제</button>
-					<button type="button" name="new-ProdPlan" id="new-ProdPlan"
-						class="WO-buttonlist">상품계획생성</button>
+<button type="button" name="prodPlan-Modify" id="prodPlan-Modify" class="WO-buttonlist">수정</button>
+<button type="button" name="prodPlan-delete" id="prodPlan-delete" class="WO-buttonlist">삭제</button>
+<button type="button" name="new-ProdPlan" id="new-ProdPlan" class="WO-buttonlist">상품계획생성</button>
 					<button type="button" name="WO-select" id="WO-select"
 						class="WO-buttonlist">작업지시서</button>
 				</td>

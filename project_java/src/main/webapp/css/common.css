@@ -247,15 +247,16 @@ cursor: pointer;
 .popup {
     width: 300px;  height: 250px; margin-top: 50px; margin-right: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; right: 0; z-index: 20; display: none;
 }
-.popup h2{
-    font-size: 14px;
-}
+
+#popup-title h2{
+    font-size: 24px; margin-bottom: 20px;
+    }
 .mypage-img {
     cursor: pointer;  /* 마우스를 올렸을 때 클릭 가능하도록 */
 }
 
 .popup-buttonlayer{
- display: flex;
+     bottom: 0; 
 }
 
 #mypopup-a{
@@ -265,24 +266,12 @@ cursor: pointer;
     color: #f44336;
 }
 
-.closebtn{
-    right: 0;
-}
 /* 닫기 버튼 */
 #closePopupBtn {
-    margin-top: 15px;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-top: 15px; padding: 5px 10px; color: white; background-color: #f44336; border: none; border-radius: 5px; cursor: pointer;
 }
 
 #closePopupBtn:hover {
     background-color: #d32f2f;
 }
 
-#popup-title h2{
-font-size: 24px; margin-bottom: 20px;
-}

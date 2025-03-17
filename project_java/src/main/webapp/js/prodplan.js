@@ -1,31 +1,69 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Search 검색
+    const searchButton = document.querySelector('.submitlayer');
+    const searchInput = document.querySelector('input[name="Prodsearch"]');
+    
+    searchButton.addEventListener('click', function(event) {
+        // 기본 폼 제출 방지
+        event.preventDefault(); 
+        const searchText = searchInput.value.trim().toLowerCase();
+        const rows = document.querySelectorAll('.order-info-content');
+        
+        // 검색 텍스트가 없으면 모든 행을 표시
+        if (searchText === "") {
+            rows.forEach(row => {
+                row.style.display = "";
+            });
+        } else {
+            // 검색 텍스트가 포함된 행만 표시
+            rows.forEach(row => {
+                const rowText = row.innerText.toLowerCase();
+                if (rowText.includes(searchText)) {
+                    // 텍스트가 포함된 행은 표시
+                    row.style.display = ""; 
+                } else {
+                    // 텍스트가 포함되지 않은 행은 숨김
+                    row.style.display = "none"; 
+                }
+            });
+        }
+
+        // 입력 필드 초기화
+        searchInput.value = "";
+    });
+
+
     // 생산계획 목록을 누르면 특정한 생산계획을 지정한다.
     let selectedRow = null;
+    const rowsPerPage = 10;
+    let currentPage = 1;
+
     // 생산계획 행 선택
     document.querySelector(".new-workorder tbody").addEventListener("click", function (event) {
         const clickedRow = event.target.closest(".order-info-content");
 
         if (clickedRow) {
             if (selectedRow === clickedRow) {
-                clickedRow.classList.remove("selected-row");
+                // 선택된 행을 다시 클릭하면 색상을 원래대로 복원
+                clickedRow.style.backgroundColor = "";
                 selectedRow = null;
             } else {
+                // 이전에 선택된 행이 있다면 색상 제거
                 if (selectedRow) {
-                    selectedRow.classList.remove("selected-row");
+                    selectedRow.style.backgroundColor = "";
                 }
-                clickedRow.classList.add("selected-row");
+                // 새로 클릭한 행에 배경색 적용
+                clickedRow.style.backgroundColor = "#999999"; // 선택된 행의 배경색 회색으로 변경
                 selectedRow = clickedRow;
             }
         }
     });
+    
 
     // 페이지네이션 초기화
     updatePagination();
 
     // 페이지네이션
-    let currentPage = 1;
-    const rowsPerPage = 10;
-
     function updatePagination() {
         const rows = document.querySelectorAll(".order-info-content");
         const totalRows = rows.length;
@@ -81,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
     // 수정 버튼을 클릭하게 된다면 생성되는 이벤트
     document.getElementById("prodPlan-Modify").addEventListener("click", function () {
         if (!selectedRow) {
@@ -135,60 +172,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     notesCell.innerHTML = originalNotes; // 오류 발생 시 복구
                 });
         });
-        document.head.appendChild(style);
 
         // 수정 중간에 취소 버튼 이벤트
         document.getElementById("cancelNotesBtn").addEventListener("click", function () {
             notesCell.innerHTML = originalNotes; // 원래 값으로 복귀
         });
-
-        // 행 삭제하는 버튼
-        document.getElementById("prodPlan-delete").addEventListener("click", function () {
-            if (!selectedRow) {
-                alert("삭제할 행을 선택하세요.");
-                return;
-            }
-        
-            let planId = selectedRow.getAttribute("data-id"); // 각 행에 `data-id` 속성이 있어야 함
-            if (!planId) {
-                alert("해당 데이터의 ID를 찾을 수 없습니다.");
-                return;
-            }
-        
-            if (!confirm("정말 삭제하시겠습니까?")) {
-                return;
-            }
-        
-            fetch("DeleteProductionPlan", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ planId: planId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("삭제 완료!");
-                    selectedRow.remove(); // 화면에서 행 삭제
-                    selectedRow = null;
-                } else {
-                    alert("삭제 실패: " + data.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("삭제 중 오류 발생.");
-            });
-        });
-        
-        // 행이 지정되었을 때의 CSS
-        const style = document.createElement("style");
-        style.innerHTML = `
-      .selected-row {
-          background-color: #999999 !important;
-      }
-  `;
     });
 
     // 상품계획 생성 버튼
@@ -218,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
         tbody.appendChild(newRow);
         updatePagination(); // 새로 추가된 항목에 대해 페이지네이션 갱신
     });
-
 
     // 작업지시서 버튼 클릭 시 iframe 변경
     document.getElementById("WO-select").addEventListener("click", function () {

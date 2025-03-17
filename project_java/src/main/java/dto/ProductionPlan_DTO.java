@@ -42,6 +42,14 @@ public class ProductionPlan_DTO {
 		this.totalqty = totalqty;
 	}
 
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -56,14 +64,6 @@ public class ProductionPlan_DTO {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	public Date getDeliveryDate() {

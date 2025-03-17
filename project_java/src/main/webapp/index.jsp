@@ -4,7 +4,7 @@
 	import="java.sql.*, javax.servlet.http.*, javax.servlet.*, dao.User_DAO, dto.User_DTO"%>
 
 <%
-/* 유저 ID 디버깅 */ 
+/* 유저 ID 디버깅 */
 String sessionUserId = (String) session.getAttribute("userId");
 String sessionUserName = (String) session.getAttribute("userName");
 System.out.println("index.jsp - 현재 세션 userId: " + sessionUserId);
@@ -118,18 +118,28 @@ if (user != null) {
 		<div class="navopen-shadow"></div>
 		<iframe src="MainTitle.jsp" id="Mainiframe"></iframe>
 	</div>
-						<!-- 팝업창 -->
-						<div id="popup" class="popup">
-							<div id="popup-title" class="popup-title">
-							<h2>안녕하세요. <%=userName%> 님!</h2>
-						</div>
-							<p>현재 <%= userName%>님의 권한은 <%= userRole%> 입니다.</p>
-							<div name="popup-buttonlayer"id="popup-buttonlayer" class="popup-buttonlayer">
-								<a id="mypage-a" class="mypopup-a">마이페이지</a>
-								<a id="logout-a" class="mypopup-a">로그아웃</a>
-							 <button id="closePopupBtn" class="closebtn">닫기</button>
-						</div>
-						</div>
+	<!-- 팝업창 -->
+	<div id="popup" class="popup">
+		<div id="popup-title" class="popup-title">
+			<h2>
+				안녕하세요.
+				<%=userName%>
+				님!
+			</h2>
+		</div>
+		<p>
+			현재
+			<%=userName%>님의 권한은
+			<%=userRole%>
+			입니다.
+		</p>
+		<div name="popup-buttonlayer" id="popup-buttonlayer"
+			class="popup-buttonlayer">
+			<a id="mypage-a" class="mypopup-a">마이페이지</a> <a id="logout-a"
+				class="mypopup-a">로그아웃</a>
+			<button id="closePopupBtn" class="closebtn">닫기</button>
+		</div>
+	</div>
 </body>
 
 </html>
