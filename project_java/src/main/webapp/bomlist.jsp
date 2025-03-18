@@ -208,16 +208,16 @@
 			        <tr>
 			            <td>${dto.materialname}</td>
 			 	<c:choose>
-			   			<c:when test="${dto.quantity == dto.quantity.intValue() }">
-			            <td>${dto.quantity.intValue()}/개</td>
+			   			<c:when test="${dto.bom_quan == dto.bom_quan.intValue() }">
+			            <td>${dto.bom_quan.intValue()}/개</td>
 			            </c:when>
 			            <c:otherwise>
-			            <td>${dto.quantity}/개</td>
+			            <td>${dto.bom_quan}/개</td>
 			            </c:otherwise>
 			   </c:choose>        
 			            <td>${dto.price}</td>
 			            <td>${dto.unit}</td>
-			            <td>${dto.stockquantity}</td>
+			            <td>${dto.inven_quan}</td>
 			            <td>${dto.spec}</td>
 			            <td>${dto.supplier}</td>
 			            <td>${dto.lotnumber}</td>

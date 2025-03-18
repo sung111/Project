@@ -36,7 +36,7 @@ public class Bom_controller extends HttpServlet {
 			
 //			System.out.println("doGet음식이름 ="+namevalue);
 //			System.out.println("doGet음식벨류 ="+pvalue);
-			materials_DTO.setProduct_material_id(Integer.parseInt(pvalue));
+			materials_DTO.setBom_pr_id(Integer.parseInt(pvalue));
 		
 //			System.out.println("materials_DTO.getQuantity()"+materials_DTO.getQuantity());
 		

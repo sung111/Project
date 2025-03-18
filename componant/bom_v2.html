@@ -220,10 +220,29 @@
     <script>
         window.addEventListener("load", function () {
            
-
-
-
-
+            
+            String 	query = " SELECT ";
+            query += " m.MATERIALID, ";
+            query += " m.MATERIALNAME, ";
+            query += " m.PRICE, ";
+            query += " m.SPEC, ";
+            query += " m.UNIT, ";
+            query += " m.SUPPLIER, ";
+            query += " m.PARTNUMBER, ";
+            query += " m.LOTNUMBER, ";
+            query += " m.WAREHOUSE, ";
+            query += " m.MATERIALDEL, ";
+            query += " b.MATERIALID  as bom_ma_id, ";
+            query += " b.PRODUCTID as bom_pr_id, ";
+            query += " b.QUANTITY as 소모계수, ";
+            query += " i.MATERIALID as inven_ma_id, ";
+            query += " i.QUANTITY as 재고수량 ";
+            query += "  FROM  materials m ";
+            query += " left JOIN boms b ON m.MATERIALID = b.MATERIALID  ";
+            query += " left join inventorystatus i on m.MATERIALID = i.MATERIALID ";
+            query += " where  m.materialdel = 'n' ";
+            query += " and b.productid =2 ";
+            query += " order by m.MATERIALID; ";
 
 
 

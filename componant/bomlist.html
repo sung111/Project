@@ -150,8 +150,40 @@
             padding: 5px 10px;
             border: none;
             cursor: pointer;
+            height: 35px;
         }
-
+        .input_field_outrine{
+            border: 1px solid #007bff;
+            border-radius: 20px;
+            width: 90%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0 auto;
+        }
+        #matesel{
+           
+            width: 150px;
+            height: 30px;
+        }
+        .mleft{
+            margin-top: 15px;
+        }
+        .textwithd{
+            width: 60px;
+        }
+        #input_parent{
+            width: 100%;
+            border: 1px solid #007bff;
+            border-radius: 20px;
+          
+            display: flex;
+        }
+        #creatbutton{
+            display: flex;
+            justify-content: end;
+        }
 
         @media screen and (max-width: 600px) {
 
@@ -183,18 +215,91 @@
     <div id="boodea">
         <div><h2>부대찌개</h2></div>
     </div>
+    <div id="creatbutton">
+        <input type="button" value="생성" class="btn">
+    </div>
+        <div id="input_parent">
+
+                    <div class="input_field_outrine">
+                        <div>
+                            <div >
+                                    <span>제품명</span>
+                                    <select name="materials" id="matesel">
+                                        <option value="1" >1번입니다</option>
+                                    </select>
+                            </div>
+                            <div class="mleft">
+                                <span> 규격</span>
+                                <span> ㅇㅇㅇ</span>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div>
+                                <span>투입수량 입력</span>
+                                <input type="text" name="" id="" value="" class="textwithd">
+                            </div>
+                    
+                            <div class="mleft">
+                                <span> 공급업체</span>
+                                <span> ㅇㅇㅇ</span>
+                            </div>
+                        </div>
+
+                            <div>
+                                <div>
+                                    <span> 가격</span>
+                                    <span> ㅇㅇㅇ</span>
+                                </div>
+                                <div class="mleft">
+                                    <span> LotNo</span>
+                                    <span> ㅇㅇㅇ</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <span> 단위</span>
+                                    <span> ㅇㅇㅇ</span>
+                                </div>
+                                <div class="mleft">
+                                    <span> 창고위치</span>
+                                    <span> ㅇㅇㅇ</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <span>재고수량 입력</span>
+                                    <input type="text" name="" id="" value="" class="textwithd">
+                                </div>
+                                <div class="mleft">
+                                    <span> 품번</span>
+                                    <span> ㅇㅇㅇ</span>
+                                </div>
+                            </div>
+                    </div>
+            <div>
+                <input type="button" value="확인" id="insert" class="btn">
+                <input type="button" value="취소" id="insert" class="btn">
+            </div>
+                 
+                
+
+
+        </div>
     <table id="maintable">
         <tr>
             <th>제품명</th>
-            <th>가격</th>
-            <th>단위</th>
-            <th>재고수량</th>
-            <th>규격</th>
-            <th>공급업체</th>
-            <th>LotNo</th>
-            <th>창고위치</th>
-            <th>품번</th>
-            <th>수정/삭제</th>
+			            <th>투입수량</th>
+			            <th>가격</th>
+			            <th>단위</th>
+			            <th>재고수량</th>
+			            <th>규격</th>
+			            <th>공급업체</th>
+			            <th>LotNo</th>
+			            <th>창고위치</th>
+			            <th>품번</th>
+			            <th>수정/삭제</th>
 
         </tr>
         <br>
