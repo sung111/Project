@@ -189,18 +189,45 @@
         <div><h2>${namevalue}</h2></div>
     </div>
     <table id="maintable">
+		  
+			        <tr>
+			            <th>제품명</th>
+			            <th>투입수량</th>
+			            <th>가격</th>
+			            <th>단위</th>
+			            <th>재고수량</th>
+			            <th>규격</th>
+			            <th>공급업체</th>
+			            <th>LotNo</th>
+			            <th>창고위치</th>
+			            <th>품번</th>
+			            <th>수정/삭제</th>
+			        </tr>
+		    
 		       <c:forEach var="dto" items="${total}">
 			        <tr>
-			            <th>${dto.materialname}</th>
-			            <th>${dto.price}</th>
-			            <th>${dto.unit}</th>
-			            <th>${dto.stockquantity}</th>
-			            <th>${dto.spec}</th>
-			            <th>${dto.supplier}</th>
-			            <th>${dto.lotnumber}</th>
-			            <th>${dto.warehouse}</th>
-			            <th>${dto.partNumber}</th>
-			            <th>수정/삭제</th>
+			            <td>${dto.materialname}</td>
+			 	<c:choose>
+			   			<c:when test="${dto.quantity == dto.quantity.intValue() }">
+			            <td>${dto.quantity.intValue()}/개</td>
+			            </c:when>
+			            <c:otherwise>
+			            <td>${dto.quantity}/개</td>
+			            </c:otherwise>
+			   </c:choose>        
+			            <td>${dto.price}</td>
+			            <td>${dto.unit}</td>
+			            <td>${dto.stockquantity}</td>
+			            <td>${dto.spec}</td>
+			            <td>${dto.supplier}</td>
+			            <td>${dto.lotnumber}</td>
+			            <td>${dto.warehouse}</td>
+			            <td>${dto.partNumber}</td>
+			            <td>
+			            <input type="button" value="수정" class="btn">
+			            <input type="button" value="삭제" class="btn">
+
+			            </td>
 			        </tr>
 		     </c:forEach>
         <br>

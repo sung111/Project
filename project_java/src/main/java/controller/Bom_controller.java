@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,8 +19,6 @@ import dto.Materials_DTO;
 @WebServlet("/Bom_controller")
 public class Bom_controller extends HttpServlet {
 
-       
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -28,23 +27,23 @@ public class Bom_controller extends HttpServlet {
 		try {
 			String namevalue = request.getParameter("namevalue");
 			String pvalue = request.getParameter("pvalue");
-			System.out.println("namevalue"+namevalue);
-			System.out.println("pvalue"+pvalue);
+//			System.out.println("namevalue"+namevalue);
+//			System.out.println("pvalue"+pvalue);
 			request.setAttribute("namevalue", namevalue);
 			request.setAttribute("pvalue", pvalue);
 			
 			
-			if(namevalue.equals("부대찌개")) {
-				System.out.println("doGet음식이름 ="+namevalue);
-				System.out.println("doGet음식벨류 ="+pvalue);
-				materials_DTO.setProduct_material_id(Integer.parseInt(pvalue));
-				List total = materials_DAO.selectFM(materials_DTO);
-				request.setAttribute("total", total);
-				
-			}
 			
+//			System.out.println("doGet음식이름 ="+namevalue);
+//			System.out.println("doGet음식벨류 ="+pvalue);
+			materials_DTO.setProduct_material_id(Integer.parseInt(pvalue));
+		
+//			System.out.println("materials_DTO.getQuantity()"+materials_DTO.getQuantity());
+		
+			List total = materials_DAO.selectFM(materials_DTO);
 			
-			
+
+			request.setAttribute("total", total);
 			
 			String url = "bomlist.jsp";
 			request.getRequestDispatcher(url).forward(request, response);

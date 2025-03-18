@@ -19,9 +19,16 @@ public class Materials_DTO {
 	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
 	int stockquantity;
 	int product_material_id;
+	double quantity;
 	
 	
 	
+	public double getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
 	public int getStockquantity() {
 		return stockquantity;
 	}
