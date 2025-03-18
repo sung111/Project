@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+    //전체/일정별 상품 생산계획
+
+
     // Search 검색
     const searchButton = document.querySelector('.submitlayer');
     const searchInput = document.querySelector('input[name="Prodsearch"]');
@@ -37,17 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
             searchButton.click();
         }
     });
-
-
     // 생산계획 목록을 누르면 특정한 생산계획을 지정한다.
-    let selectedRow = null;
-    const rowsPerPage = 10;
-    let currentPage = 1;
+    let selectedRow = null; const rowsPerPage = 10; let currentPage = 1;
 
     // 생산계획 행 선택
     document.querySelector(".new-workorder tbody").addEventListener("click", function (event) {
         const clickedRow = event.target.closest(".order-info-content");
-
         if (clickedRow) {
             if (selectedRow === clickedRow) {
                 // 선택된 행을 다시 클릭하면 색상을 원래대로 복원된다.
@@ -63,26 +61,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedRow = clickedRow;
             }
         }
-    });
-
-// 행을 선택하면 생성인과 생산기간이 자동으로 나타난다.
-    const table = document.querySelector(".new-workorder tbody");
-    table.addEventListener("click", function (event) {
+        // 행을 선택하면 생성인과 생산기간이 자동으로 나타난다.
         let targetRow = event.target.closest("tr");
-    
         if (targetRow && targetRow.dataset.userid) {
             let userid = targetRow.dataset.userid;
             let startDate = targetRow.dataset.startDate;
             let endDate = targetRow.dataset.endDate;
-    
+
             console.log("선택한 생성인:", userid);
             console.log("선택한 생산기간:", startDate, "~", endDate);
-    
+
             // 생성인과 생산기간을 해당 input 필드에 채우기
             document.querySelector("input[name='delivery']").value = userid;
             document.querySelector("input[name='writer']").value = startDate + " ~ " + endDate;
         }
     });
+
+
 
 
     // 페이지네이션 초기화
@@ -92,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePagination() {
         const rows = document.querySelectorAll(".order-info-content");
         const totalRows = rows.length;
+        
         // 최소 1페이지는 생성이 된다.
         const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
         const paginationContainer = document.getElementById("pagination-container");
@@ -256,16 +252,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: new URLSearchParams({ planId: 삭제할_아이디 }).toString()
             })
-            .then(response => {
-                if (response.ok) {
-                    console.log("삭제 성공!");
-                    // 페이지를 새로고침한다.
-                    location.reload(); 
-                } else {
-                    console.error("삭제 실패");
-                }
-            })
-            .catch(error => console.error("에러 발생:", error));
+                .then(response => {
+                    if (response.ok) {
+                        console.log("삭제 성공!");
+                        // 페이지를 새로고침한다.
+                        location.reload();
+                    } else {
+                        console.error("삭제 실패");
+                    }
+                })
+                .catch(error => console.error("에러 발생:", error));
         }
     });
 
