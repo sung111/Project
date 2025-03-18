@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>실적등록</title>
+<link rel="stylesheet" href="css\reset.css">
 <link rel="stylesheet" href="css\Performance.css">
 <script src="js\Performance.js"></script>
 
@@ -26,9 +27,6 @@
 		<div class="instruction">
 			<div class="instTop">
 				<div class="wkr">작업지시서</div>
-				<div>
-					<button class="btn1">조회</button>
-				</div>
 			</div>
 			<div class="instView">
 				<%-- <%@ page include  %> --%>
@@ -67,7 +65,8 @@
 							<input type="hidden" name="wpvnaaud" id="wpvnaaud">
 							<div>
 								<!-- 날짜데이터 삽입 -->
-								<input type="datetime-local" class="date1" name="date" id="date11">
+								<input type="datetime-local" class="date1" name="date"
+									id="date11">
 							</div>
 							<input type="submit" class="btn3" value="등록">
 						</div>
@@ -86,14 +85,17 @@
 			<div class="box3">
 				<div style="display: flex;">
 					<form method="post" class="box3Top"
-						style="padding: 8px 10px 0 10px;width: 100%;">
+						style="padding: 8px 10px 0 10px; width: 100%;">
 						<div style="display: flex; flex-grow: 0.1; width: 26%;">
 							<input type="text" class="wp3" name="searchName"
-								placeholder="제품명" value="<%= request.getParameter("searchName") != null ? request.getParameter("searchName") : "" %>">
+								placeholder="제품명"
+								value="<%=request.getParameter("searchName") != null ? request.getParameter("searchName") : ""%>">
 						</div>
 						<div class="date2">
-							<input type="datetime-local" class="indate1" name="startDate" value="<%= request.getParameter("startDate") != null ? request.getParameter("startDate") : "" %>">
-							~ <input type="datetime-local" class="indate2" name="endDate" value="<%= request.getParameter("endDate") != null ? request.getParameter("endDate") : "" %>">
+							<input type="datetime-local" class="indate1" name="startDate"
+								value="<%=request.getParameter("startDate") != null ? request.getParameter("startDate") : ""%>">
+							~ <input type="datetime-local" class="indate2" name="endDate"
+								value="<%=request.getParameter("endDate") != null ? request.getParameter("endDate") : ""%>">
 						</div>
 						<div style="text-align: end;">
 							<input type="hidden" name="command" value="search"> <input
@@ -148,6 +150,20 @@
 
 
 	<script>
+	
+	document.querySelector('.instView').addEventListener('click', (e)=>{
+		/* console.log(e.target.parentNode.hasAttribute("data-id")); */
+		if(e.target.parentNode.hasAttribute("data-id")){
+			const planId = e.target.parentNode.getAttribute("data-id");
+			document.querySelector('#wpvnaaud').value = planId;
+			console.log(planId);
+		} else {
+			e.preventDefault();
+			e.target.blur();
+			alert("현재 페이지에서 수정하실수없습니다.")
+		}
+	})
+	
 	
 	// 수정
 	const tn = document.querySelectorAll('.tn')
@@ -226,7 +242,17 @@
 	    document.querySelector('.indate2').value = '';
  	})
 	
-
+ 	// 작업지시서 필요없는 table 삭제
+	window.onload = function() {
+		// 상단구역
+	    var table = document.querySelector(".search-container");
+	    // button 구역
+	    var btn = document.querySelector(".order-buttonlayer");
+	    if (table || btn) {
+	        table.remove(); // 테이블 삭제
+	        btn.remove() // 버튼 삭제
+	    }
+	}; 
 
 	</script>
 </body>

@@ -28,8 +28,8 @@ public class Performance_DAO {
 			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
 
 			Connection con = ds.getConnection();
-//			테이블 시퀀스값, 제품명, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
-			String query = " insert into performances " + " values ( null, 1, 14, 'adminid1', ? , ? , ?)";
+//			테이블 시퀀스값, 제품 시퀀스, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
+			String query = " insert into performances " + " values ( null, 1, ?, 'adminid1', ? , ? , ?)";
 
 			PreparedStatement ps = con.prepareStatement(query);
 //			ps.setString( 몇번째 ? , value );
@@ -38,9 +38,10 @@ public class Performance_DAO {
 //			ps.setTimestamp(2, performDTO.getReportTime());
 //			ps.setString(3, performDTO.getPerformanceComment());
 //			ps.setInt(4, performDTO.getProductionCount());
-			ps.setTimestamp(1, performDTO.getReportTime());
-			ps.setString(2, performDTO.getPerformanceComment());
-			ps.setInt(3, performDTO.getProductionCount());
+			ps.setInt(1, performDTO.getPlanId());
+			ps.setTimestamp(2, performDTO.getReportTime());
+			ps.setString(3, performDTO.getPerformanceComment());
+			ps.setInt(4, performDTO.getProductionCount());
 
 			result = ps.executeUpdate();
 

@@ -47,7 +47,7 @@ public class Performance_controller extends HttpServlet {
 		System.out.println("command :" + command);
 		
 		if( "insert".equals(command) ) {
-			String ProductName = request.getParameter("wpvnaaud");  // 제품명
+			String Productplan = request.getParameter("wpvnaaud");  // 제품명
 			String ea = request.getParameter("ea");					//갯수 입력
 			String comment = request.getParameter("comment");		//코멘트 입력
 			
@@ -63,10 +63,10 @@ public class Performance_controller extends HttpServlet {
 //		Oracle의 DATE 타입은 사실상 TIMESTAMP와 같기 때문에 java.sql.Timestamp 사용
 //		DTO 에서 전달인자값도 Timestamp 으로 변경함.
 			java.sql.Timestamp sqlTime = Timestamp.valueOf(reportTime);
-			int ProductName1 = Integer.parseInt(ProductName);
+			int ProductName1 = Integer.parseInt(Productplan);
 			
 			Performance_DTO performDTO = new Performance_DTO();
-			performDTO.setProductId(ProductName1); 	// 제품명 설정
+			performDTO.setPlanId(ProductName1); 	// 제품명 설정
 			performDTO.setProductionCount(ea1); 		// 갯수 설정
 			performDTO.setPerformanceComment(comment);  // 코멘트 설정
 			performDTO.setReportTime(sqlTime); 			// 날짜 설정

@@ -1,12 +1,13 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=9e8693dc538b17500a8d7acb21ddf0d717aa56ee
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/java/controller=UTF-8
-<<<<<<< HEAD
 encoding//src/main/webapp/Inspection_standards.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/Inventorycheck.jsp=UTF-8
 encoding//src/main/webapp/bom_v2.jsp=UTF-8
 encoding//src/main/webapp/bomlist.jsp=UTF-8
 encoding//src/main/webapp/production_process.jsp=UTF-8
-=======
 encoding//src/main/webapp/qualityControl.jsp=UTF-8
 encoding/<project>=UTF-8
->>>>>>> 9e8693dc538b17500a8d7acb21ddf0d717aa56ee

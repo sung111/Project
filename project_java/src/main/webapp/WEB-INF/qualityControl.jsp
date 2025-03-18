@@ -11,9 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>품질관리</title>
 <link rel="stylesheet" href="css\qualityControl.css">
+<link rel="stylesheet" href="css\reset.css">
 <script src="js\qualityControl.js"></script>
-<link rel="stylesheet" href="">
-
 </head>
 
 <body>
@@ -332,7 +331,7 @@
 		document.querySelector('#searchbtn').addEventListener('click',(e)=>{
 		    e.preventDefault()
 		    if( document.querySelector('.indate1').value == '' || document.querySelector('.indate2').value == ''){
-		    	alert("날짜값을 입력해야합니다.")
+		    	alert("날짜를 입력해야합니다.")
 		    } else {
 		    	document.querySelector('#searchForm').submit();
 		    }

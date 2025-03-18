@@ -14,7 +14,7 @@ function init() {
   const date = `${year}-${month}-${day}T${hour}:${minute}`;
   document.querySelector('.insertDate').value = date;
   
-
+  
 
   // document.querySelector('.wkrView').addEventListener('click', (e) => {
 

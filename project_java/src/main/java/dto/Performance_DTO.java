@@ -6,8 +6,8 @@ import java.sql.Timestamp;
 public class Performance_DTO {
 
 	int PerformanceId;			// 실적 시퀀스 번호
-	int ProductId;			// 완제품 시퀀스
-	String ProductName;		// 완제품명
+	int ProductId;				// 완제품 시퀀스
+	String ProductName;			// 완제품명
 	int PlanId;					// 생산계획 시퀀스번호
 	String UserId;				// 유저 id
 	Timestamp ReportTime;		// 실적등록 시간
