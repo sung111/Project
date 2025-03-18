@@ -12,8 +12,6 @@ function init() {
   const minute = ("0" + now.getMinutes()).slice(-2);
 
   const date = `${year}-${month}-${day}T${hour}:${minute}`;
-  document.querySelector('.indate1').value = date;
-  document.querySelector('.indate2').value = date;
   document.querySelector('.insertDate').value = date;
   
 
@@ -456,6 +454,8 @@ function init() {
 
   // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
   // window.addEventListener('DOMContentLoaded', renderPagination);
+
+
 
 
 }

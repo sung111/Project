@@ -29,9 +29,11 @@
 				<div class="wkrwl">실적 조회</div>
 				<div>
 					<form action="qualityControl" method="post">
-						<input type="hidden" name="command" value="search"> <input
-							type="date" class="date2" style="margin: 10px;" id="date3"><input
-							type="submit" class="btn1" value="조회">
+						<input type="hidden" name="command" value="search1"> <input
+							name="date" type="date" class="date2" style="margin: 10px;"
+							id="date3"
+							value="<%=request.getParameter("date") != null ? request.getParameter("date") : ""%>">
+						<input type="submit" class="btn1" value="조회">
 					</form>
 				</div>
 			</div>
@@ -139,34 +141,49 @@
 			</form>
 		</div>
 		<div class="box3">
-			<form action="qualityControl" method="post" class="box3">
+			<form action="qualityControl" method="post" class="box3"
+				id="searchForm">
 				<input type="hidden" name="command" value="search">
 				<div class="box3Top">
 					<div>
 						<input type="text" placeholder="제품명" class="wp3"
-							name="productName">
+							name="productName"
+							value="<%=request.getParameter("productName") != null ? request.getParameter("productName") : ""%>">
 					</div>
 					<div class="date2">
-						날짜 : <input type="datetime-local" class="indate1" name="startDate">
-						~ <input type="datetime-local" class="indate2" name="endDate">
+						날짜 : <input type="datetime-local" class="indate1" name="startDate"
+							value="<%=request.getParameter("startDate") != null ? request.getParameter("startDate") : ""%>">
+						~ <input type="datetime-local" class="indate2" name="endDate"
+							value="<%=request.getParameter("endDate") != null ? request.getParameter("endDate") : ""%>">
 					</div>
 					<div>
 						결과 : <select class="dropBox2" name="result">
-							<option value="">전체</option>
-							<option value="합격">합격</option>
-							<option value="불합격">불합격</option>
+							<option value=""
+								<%="전체".equals(request.getParameter("result")) ? "selected" : ""%>>전체</option>
+							<option value="합격"
+								<%="합격".equals(request.getParameter("result")) ? "selected" : ""%>>합격</option>
+							<option value="불합격"
+								<%="불합격".equals(request.getParameter("result")) ? "selected" : ""%>>불합격</option>
 						</select>
 					</div>
 					<div>
 						불합격 사유 : <select class="dropBox2" name="failreason">
-							<option value="">전체</option>
-							<option value="무게 미달">무게 미달</option>
-							<option value="외관 불량">외관 불량</option>
-							<option value="자재 불량">자재 불량</option>
+							<option value=""
+								<%="전체".equals(request.getParameter("failreason")) ? "selected" : ""%>>전체</option>
+							<option value="무게 미달"
+								<%="무게 미달".equals(request.getParameter("failreason")) ? "selected" : ""%>>무게
+								미달</option>
+							<option value="외관 불량"
+								<%="외관 불량".equals(request.getParameter("failreason")) ? "selected" : ""%>>외관
+								불량</option>
+							<option value="자재 불량"
+								<%="자재 불량".equals(request.getParameter("failreason")) ? "selected" : ""%>>자재
+								불량</option>
 						</select>
 					</div>
 					<div>
-						<input type="submit" class="btn4" value="검색">
+						<input type="submit" class="btn4" value="검색" id="searchbtn">
+						<button class="btn4" id="reset">초기화</button>
 					</div>
 				</div>
 			</form>
@@ -183,11 +200,15 @@
 			</div>
 			<div class="box3View">
 				<c:forEach var="ttT" items="${ result }">
-					<form method="post" action="qualityControl" class="dex item"
-						style="width: 99%;">
-						<input type="hidden" id="qualityControlId" name="qualityControlId"
+					<form method="post" action="qualityControl"
+						class="dex item deleteForm" style="width: 98%;">
+						<input type="hidden" name="command" value="delete"> <input
+							type="hidden" id="qualityControlId" name="qualityControlId"
 							value="${ ttT.qualityControlId }">
-						<div class="dateB" id="qualitydate">${ttT.reportTime}</div>
+						<div class="dateB" id="qualitydate">
+							<fmt:formatDate value="${ttT.reportTime}"
+								pattern="yyyy-MM-dd HH:mm:ss" />
+						</div>
 						<div class="emdwp" id="qualityName">${ttT.productNameST}</div>
 						<div class="emdgkq" id="qualityResult">${ttT.result}</div>
 						<div class="tkdb" id="qualityFailreason">${ttT.failreason}</div>
@@ -198,6 +219,7 @@
 							<button style="font-size: 12px; height: 25px;" class="modify">수정</button>
 							<input type="submit" name="tn" value="삭제" class="tkr"
 								style="font-size: 12px; height: 25px;">
+
 						</div>
 					</form>
 				</c:forEach>
@@ -235,6 +257,7 @@
 		}
 	
 		
+		// 등록 버튼
 		document.querySelector('.btn3').addEventListener('click', (e) => {
 			
 			e.preventDefault()
@@ -249,16 +272,14 @@
 			if ( pass == null || pass == "" || fail == null || fail == "" || (pass < 0 && pass < 100) || (fail < 0 && fail < 100) ) {
 				alert("합격갯수 불합격갯수를 입력해주세요.\n합격 : 0 ~ 100개\n불합격 : 0~100개")
 				return;
-				
 			} else{
 				alert("품질등록이 완료되었습니다.");
 				document.querySelector('#formK').submit();
-				
 			}
 		})
 		
 		
-		
+		// 수정버튼
 		const modify = document.querySelectorAll('.modify')
 		 for(let i = 0 ; i < modify.length ; i++){ 
 	 		modify[i].addEventListener('click', (e)=>{
@@ -307,6 +328,35 @@
 			
 		}
 		
+		// 조회버튼
+		document.querySelector('#searchbtn').addEventListener('click',(e)=>{
+		    e.preventDefault()
+		    if( document.querySelector('.indate1').value == '' || document.querySelector('.indate2').value == ''){
+		    	alert("날짜값을 입력해야합니다.")
+		    } else {
+		    	document.querySelector('#searchForm').submit();
+		    }
+		})
+		
+		const del = document.querySelectorAll('.tkr')
+		const deleteF = document.querySelectorAll('.deleteForm')
+		for(let i = 0; i < del.length; i++){
+			del[i].addEventListener('click', (e)=>{
+				e.preventDefault()
+				const tt = confirm("정말로 삭제하시겠습니까?")
+				if(tt){
+					deleteF[i].submit();
+				}
+			})
+		}
+		
+		// 초기화버튼
+	  	document.querySelector('#reset').addEventListener('click',(e)=>{
+		    e.preventDefault()
+		    document.querySelector('.wp3').value = '';
+		    document.querySelector('.indate1').value = '';
+		    document.querySelector('.indate2').value = '';
+	 	})
 	
 	</script>
 </body>
