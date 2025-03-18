@@ -131,12 +131,35 @@ public class Materials_DAO {
 			// DB 접속 완
 
 			// [SQL 준비]
-			String 	query =  " SELECT * ";
-					query += " FROM  materials m ";
-					query += " JOIN boms b ON m.MATERIALID = b.MATERIALID ";
-					query += " where product_material_id = ? and materialdel = 'n'";
+//			String 	query =  " SELECT * ";
+//					query += " FROM  materials m ";
+//					query += " JOIN boms b ON m.MATERIALID = b.MATERIALID ";
+//					query += " where product_material_id = ? and materialdel = 'n'";
+			
+				String query = " SELECT ";
+	            query += " m.MATERIALID, ";
+	            query += " m.MATERIALNAME, ";
+	            query += " m.PRICE, ";
+	            query += " m.SPEC, ";
+	            query += " m.UNIT, ";
+	            query += " m.SUPPLIER, ";
+	            query += " m.PARTNUMBER, ";
+	            query += " m.LOTNUMBER, ";
+	            query += " m.WAREHOUSE, ";
+	            query += " m.MATERIALDEL, ";
+	            query += " b.MATERIALID  as bom_ma_id, ";
+	            query += " b.PRODUCTID as bom_pr_id, ";
+	            query += " b.QUANTITY as bom_quan, ";
+	            query += " i.MATERIALID as inven_ma_id, ";
+	            query += " i.QUANTITY as inven_quan ";
+	            query += " FROM  materials m ";
+	            query += " left JOIN boms b ON m.MATERIALID = b.MATERIALID  ";
+	            query += " left join inventorystatus i on m.MATERIALID = i.MATERIALID ";
+	            query += " where  m.materialdel = 'n' ";
+	            query += " and b.productid = ? ";
+	            query += " order by m.MATERIALID ";
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setInt(1, materials_DTO.getProduct_material_id());
+			ps.setInt(1, materials_DTO.getBom_pr_id());
 //			System.out.println("getProduct_material_id() ="+ getProduct_material_id());
 					
 
@@ -151,13 +174,14 @@ public class Materials_DAO {
 				DTO.setMaterialname(rs.getString("materialname")); //이름
 				DTO.setPrice(rs.getInt("price")); //가격
 				DTO.setUnit(rs.getString("unit")); //단위
-				DTO.setStockquantity(rs.getInt("stockquantity")); //재고수량
+				DTO.setStockquantity(rs.getInt("inven_quan")); //재고수량
 				DTO.setSpec(rs.getString("spec")); //규격
 				DTO.setSupplier(rs.getString("supplier")); //공급업체
 				DTO.setLotnumber(rs.getString("lotnumber")); //랏넘버
 				DTO.setWarehouse(rs.getString("warehouse")); //창고위치
 				DTO.setPartNumber(rs.getString("partNumber")); //품번
-				DTO.setQuantity(rs.getDouble("quantity")); // 사용수량
+				DTO.setBom_quan(rs.getDouble("bom_quan")); // 사용수량
+				
 				
 				
 				System.out.println("rs.getInt(\"materialid\")"+ rs.getInt("materialid"));

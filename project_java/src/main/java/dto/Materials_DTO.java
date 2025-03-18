@@ -19,15 +19,43 @@ public class Materials_DTO {
 	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
 	int stockquantity;
 	int product_material_id;
-	double quantity;
+	double bom_quan; //bom 투입계수
+	int bom_ma_id; //bom 메터리얼아이디
+	int bom_pr_id; //bom 프로덕트 아이디
+	int inven_ma_id; // 인벤토리 메터리얼아이디
+	int inven_quan;  // 남은 원자재 수량
 	
 	
-	
-	public double getQuantity() {
-		return quantity;
+	public double getBom_quan() {
+		return bom_quan;
 	}
-	public void setQuantity(double quantity) {
-		this.quantity = quantity;
+	public void setBom_quan(double bom_quan) {
+		this.bom_quan = bom_quan;
+	}
+	public int getBom_ma_id() {
+		return bom_ma_id;
+	}
+	public void setBom_ma_id(int bom_ma_id) {
+		this.bom_ma_id = bom_ma_id;
+	}
+	public int getBom_pr_id() {
+		return bom_pr_id;
+	}
+	public void setBom_pr_id(int bom_pr_id) {
+		this.bom_pr_id = bom_pr_id;
+	}
+	public int getInven_ma_id() {
+		return inven_ma_id;
+	}
+	public void setInven_ma_id(int inven_ma_id) {
+		this.inven_ma_id = inven_ma_id;
+	}
+	
+	public int getInven_quan() {
+		return inven_quan;
+	}
+	public void setInven_quan(int inven_quan) {
+		this.inven_quan = inven_quan;
 	}
 	public int getStockquantity() {
 		return stockquantity;
