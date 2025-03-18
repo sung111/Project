@@ -24,7 +24,10 @@ if (session == null || session.getAttribute("userId") == null) {
     }
 }
 %>
-
+<%
+/* 세션 유지시간: 28800초= 8시간 */
+session.setMaxInactiveInterval(28800);
+%>
 <%
 /* 유저 ID 디버깅 */
 String sessionUserId = (String) session.getAttribute("userId");

@@ -127,7 +127,7 @@ body {
 
   .right {
     width: 100%;
-    margin-left: 5px;
+    /* margin-left: 5px; */
     padding: 8px;
   }
 
@@ -203,7 +203,7 @@ body {
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 240px;
+    height: 300px;
     overflow-y: scroll;
     background-color: white;
     color: black;
@@ -565,7 +565,7 @@ body {
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 240px;
+    height: 300px;
     overflow-y: scroll;
     background-color: white;
     color: black;

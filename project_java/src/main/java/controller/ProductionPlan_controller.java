@@ -25,7 +25,6 @@ public class ProductionPlan_controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
-
 		if (action == null || action.isEmpty()) {
 			// 기본 동작: 전체 목록 가져오기
 			List<ProductionPlan_DTO> planList = productionPlanDAO.getAllProductionPlans();

@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 이미지 클릭 시 팝업 토글
     myPageImg.addEventListener("click", function () {
-        popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
+        popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "flex" : "none";
     });
 
     // 닫기 버튼 클릭 시 팝업 숨기기

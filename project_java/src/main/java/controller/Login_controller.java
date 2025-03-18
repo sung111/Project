@@ -69,7 +69,34 @@ public class Login_controller extends HttpServlet {
             
             // 쿠키에 저장
             Cookie userCookie = new Cookie("userId", user.getUserId());
-            userCookie.setMaxAge(60 * 60 * 8); // 60초, 60분, 3시간. 총 8시간동안 유지됨.
+            Cookie userIdCookie = new Cookie("userId", user.getUserId());
+            Cookie userNameCookie = new Cookie("userName", user.getUserName());
+            Cookie jobCookie = new Cookie("job", user.getJob());
+            Cookie emailCookie = new Cookie("email", user.getEmail());
+            Cookie phoneCookie = new Cookie("phone", user.getPhone());
+            Cookie createDateCookie = new Cookie("createDate", user.getCreateDate().toString());
+            Cookie fieldCookie = new Cookie("field", user.getField());
+
+            int expiryTime = 60 * 60 * 8; // 60초, 60분, 3시간. 총 8시간동안 유지됨.
+            
+         // 쿠키 경로를 설정함. (모든 페이지에서 사용이 가능하다!!!!!!!!!!!)
+            userIdCookie.setPath("/");
+            userNameCookie.setPath("/");
+            jobCookie.setPath("/");
+            emailCookie.setPath("/");
+            phoneCookie.setPath("/");
+            createDateCookie.setPath("/");
+            fieldCookie.setPath("/");
+
+            // 쿠키 추가
+            response.addCookie(userIdCookie);
+            response.addCookie(userNameCookie);
+            response.addCookie(jobCookie);
+            response.addCookie(emailCookie);
+            response.addCookie(phoneCookie);
+            response.addCookie(createDateCookie);
+            response.addCookie(fieldCookie);
+             
             userCookie.setPath("/"); // 모든 경로에서 사용 가능함.
             response.addCookie(userCookie);
             

@@ -67,7 +67,7 @@
 							<input type="hidden" name="wpvnaaud" id="wpvnaaud">
 							<div>
 								<!-- 날짜데이터 삽입 -->
-								<input type="datetime-local" class="date1" name="date">
+								<input type="datetime-local" class="date1" name="date" id="date11">
 							</div>
 							<input type="submit" class="btn3" value="등록">
 						</div>
@@ -89,16 +89,16 @@
 						style="padding: 8px 10px 0 10px;width: 100%;">
 						<div style="display: flex; flex-grow: 0.1; width: 26%;">
 							<input type="text" class="wp3" name="searchName"
-								placeholder="제품명">
+								placeholder="제품명" value="<%= request.getParameter("searchName") != null ? request.getParameter("searchName") : "" %>">
 						</div>
 						<div class="date2">
-							<input type="datetime-local" class="indate1" name="startDate">
-							~ <input type="datetime-local" class="indate2" name="endDate">
+							<input type="datetime-local" class="indate1" name="startDate" value="<%= request.getParameter("startDate") != null ? request.getParameter("startDate") : "" %>">
+							~ <input type="datetime-local" class="indate2" name="endDate" value="<%= request.getParameter("endDate") != null ? request.getParameter("endDate") : "" %>">
 						</div>
 						<div style="text-align: end;">
 							<input type="hidden" name="command" value="search"> <input
-								type="submit" value="조회" class="btn4">
-							<button class="btn4">초기화</button>
+								type="submit" value="조회" class="btn4" id="searchbtn">
+							<button class="btn4" id="reset">초기화</button>
 						</div>
 					</form>
 				</div>
@@ -207,10 +207,24 @@
 			}
 		})
 	}
-	/* document.querySelector('.box3Top').addEventListener('click', (e)=>{
-		e.target.
-	}) */.
 	
+	//조회버튼
+	document.querySelector('#searchbtn').addEventListener('click',(e)=>{
+	    e.preventDefault()
+	    if( document.querySelector('.indate1').value == '' || document.querySelector('.indate2').value == ''){
+	    	alert("날짜값을 입력해야합니다.")
+	    } else {
+	    	document.querySelector('#searchForm').submit();
+	    }
+	})
+		
+	// 초기화 버튼
+  	document.querySelector('#reset').addEventListener('click',(e)=>{
+	    e.preventDefault()
+	    document.querySelector('.wp3').value = '';
+	    document.querySelector('.indate1').value = '';
+	    document.querySelector('.indate2').value = '';
+ 	})
 	
 
 

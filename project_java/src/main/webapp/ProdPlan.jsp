@@ -22,7 +22,7 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 	<table class="search-container">
 		<thead>
 			<tr>
-				<td class="search-contaoner-name">전체 상품 생성계획</td>
+				<td class="search-contaoner-name">전체 상품 생산계획</td>
 				<td class="search-contaoner-name">일정별 상품 생산계획</td>
 			</tr>
 		</thead>

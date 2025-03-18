@@ -16,6 +16,8 @@ public class QualityControl_DTO {
 	String comments;		// 코멘트
 	Timestamp reportTime;		// 실적등록 시간
 	Timestamp reportTime2;		// 조회때 사용
+	Date dateReportTime;	// date타입 조회 박스때 사용
+
 	int passpack;			//합격갯수
 	int failPack;			// 불합갯수
 	
@@ -80,6 +82,12 @@ public class QualityControl_DTO {
 	}
 	public void setReportTime2(Timestamp reportTime2) {
 		this.reportTime2 = reportTime2;
+	}
+	public Date getDateReportTime() {
+		return dateReportTime;
+	}
+	public void setDateReportTime(Date dateReportTime) {
+		this.dateReportTime = dateReportTime;
 	}
 	public int getPasspack() {
 		return passpack;
