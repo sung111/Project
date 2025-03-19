@@ -54,6 +54,7 @@ public class ProductionPlan_DAO {
 
                 // Products_DTO 객체 생성 및 상품 정보 저장
                 Products_DTO product = new Products_DTO();
+                product.setProductid(rs.getInt("productid"));
                 product.setProductname(rs.getString("productname"));
                 product.setSpec(rs.getString("spec"));
                 product.setLotnumber(rs.getString("lotnumber"));

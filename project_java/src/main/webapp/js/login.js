@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginContainer = document.querySelector(".login-container");
     const signUpButton = document.getElementById("sign-up-button");
     const cancelButton = document.getElementById("cancel-button");
+// 로그인 버튼 연결
+let loginButton = document.getElementById("login-layer");
 
     // 화원가입 버튼 클릭 시, 효과
     signUpButton.addEventListener("click", function (event) {
@@ -79,7 +81,7 @@ loginButton.addEventListener("click", function (event) {
     });
 
     //키보드연결
-    let loginButton = document.getElementById("login-layer");
+
     loginButton.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             // 기본되는 엔터 동작을 방지함

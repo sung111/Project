@@ -83,7 +83,9 @@ List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 			<tr name="prodPlanList" class="order-info-content wolist" data-id="<%= plan.getPlanId() %>">
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음"%>
 				<%= "[" %><%=(plan.getProduct() != null) ? plan.getProduct().getSpec() : "데이터 없음"%><%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%><%= "]" %>
+				</td>
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getLotnumber() : "데이터 없음"%>
+				</td>
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%>
 				</td>
 				<td><%=(plan.getProduct() != null) ? plan.getProduct().getWarehouse() : "데이터 없음"%>

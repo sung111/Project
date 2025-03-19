@@ -1,6 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //전체/일정별 상품 생산계획
+    //전체 상품 생산계획 조회버튼
+    function getProductionPlan(range) {
+        const today = new Date();
+        const endOfWeek = new Date(today);
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
+        endOfWeek.setDate(today.getDate() + (5 - today.getDay())); // 이번 주 금요일
+        let endDate;
+
+        if (range === 'daily') {
+            endDate = today;
+        } else if (range === 'weekly') {
+            endDate = endOfWeek;
+        } else if (range === 'monthly') {
+            endDate = endOfMonth;
+        }
+
+        // 데이터에서 오늘부터 endDate까지의 항목 필터링
+        const filteredData = productionData.filter(item => {
+            const productionDate = new Date(item.date);
+            return productionDate >= today && productionDate <= endDate;
+        });
+
+        // 상품 이름별로 그룹화하고 수량 합산
+        const groupedData = {};
+        filteredData.forEach(item => {
+            if (!groupedData[item.productName]) {
+                groupedData[item.productName] = 0;
+            }
+            groupedData[item.productName] += item.quantity;
+        });
+
+        // 결과 리스트 생성
+        const resultList = Object.keys(groupedData).map(name => ({
+            productName: name,
+            totalQuantity: groupedData[name]
+        }));
+
+        return resultList;
+    }
+
+    // 버튼 클릭 이벤트 핸들러
+    document.getElementById("getPlanBtn").addEventListener("click", function () {
+        const button = this;
+        const isActive = button.classList.contains("active");
+
+        if (isActive) {
+            // 비활성화 (원래 색상으로 복구)
+            button.classList.remove("active");
+        } else {
+            // 활성화 (색상 변경)
+            button.classList.add("active");
+
+            const range = document.querySelector('input[name="range"]:checked').value;
+            const result = getProductionPlan(range);
+            console.log(result); // 콘솔에 출력 (UI에 표시 가능)
+        }
+    });
+    //일정별 상품 생산계획 조회버튼
 
     // Search 검색
     const searchButton = document.querySelector('.submitlayer');
@@ -77,9 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
-
-
     // 페이지네이션 초기화
     updatePagination();
 
@@ -87,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePagination() {
         const rows = document.querySelectorAll(".order-info-content");
         const totalRows = rows.length;
-        
+
         // 최소 1페이지는 생성이 된다.
         const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
         const paginationContainer = document.getElementById("pagination-container");
@@ -266,31 +320,60 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 상품계획 생성 버튼
-    const tbody = document.querySelector(".new-workorder tbody");
+    // 상품계획 생성 버튼 클릭 이벤트
     document.getElementById("new-ProdPlan").addEventListener("click", function () {
+        const tableBody = document.querySelector(".new-workorder tbody");
         const newRow = document.createElement("tr");
-        newRow.setAttribute("name", "WorkOrder");
         newRow.classList.add("order-info-content", "wolist");
-
         newRow.innerHTML = `
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="number" value="0"></td>
-            <td><input type="date"></td>
-            <td><input type="date"></td>
-            <td><input type="date"></td>
-            <td><button>MRP계산</button></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
-            <td><input type="text" value="샘플"></td>
+            <td>
+                <input type="text" class="product-input" placeholder="품명 선택">
+            </td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>MRP 계산</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
+            <td>데이터 없음</td>
         `;
+        tableBody.appendChild(newRow);
+    });
 
-        tbody.appendChild(newRow);
-        updatePagination(); // 새로 추가된 항목에 대해 페이지네이션 갱신
+    // 품명 입력창 클릭 시 상품 탭 표시 이벤트
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("product-input")) {
+            const row = event.target.closest("tr");
+            if (!row.nextElementSibling || !row.nextElementSibling.classList.contains("product-tab")) {
+                const productTabRow = document.createElement("tr");
+                productTabRow.classList.add("product-tab");
+                productTabRow.innerHTML = `
+<td colspan="14">
+    <div class="product-tab-content">
+        <span>상품 목록:</span>
+        <ul>
+            <% for (ProductionPlan_DTO planItem : planList) { %>
+                <li>
+                    <%=(planItem.getProduct() != null) ? planItem.getProduct().getProductname() : "데이터 없음"%>
+                    [<%=(planItem.getProduct() != null) ? planItem.getProduct().getSpec() : "데이터 없음"%>
+                    <%=(planItem.getProduct() != null) ? planItem.getProduct().getUnit() : "데이터 없음"%>]
+                </li>
+            <% } %>
+        </ul>
+    </div>
+</td>
+                `;
+                row.parentNode.insertBefore(productTabRow, row.nextSibling);
+            } else {
+                row.nextElementSibling.remove();
+            }
+        }
     });
 
     // 작업지시서 버튼 클릭 시 iframe 변경
