@@ -6,7 +6,7 @@ body{
 @media screen and (max-width: 767px){
 
 .login-container {
-    width: 80%; max-width: 800px; height: 50%; padding: 20px; background-color: #ffffff; border: 1px solid #007bff; border-radius: 5px; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; display: flex; flex-direction: column; justify-content: space-between;  
+    width: 80%; min-width: 430px; max-width: 800px; height: 400px; padding: 20px; background-color: #ffffff; border: 1px solid #007bff; border-radius: 5px; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; display: flex; flex-direction: column; justify-content: space-between;  
 }
 
 .mainlayer{
@@ -94,7 +94,7 @@ body{
     width: 50%;
 }
 .sublayer{
-width: 100%; display: flex; flex-direction: row-reverse;justify-content: space-between;
+width: 100%; display: none; flex-direction: row-reverse;justify-content: space-between;
 }
 
 .sublayer button{
@@ -110,11 +110,11 @@ width: 100%; display: flex; flex-direction: row-reverse;justify-content: space-b
 @media screen and (min-width: 768px){
 
     .login-container {
-        width: 80%; max-width: 800px; height: 40%; padding: 20px; background-color: #ffffff; border: 1px solid #007bff; border-radius: 5px; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; display: flex; flex-direction: column; justify-content: space-between;  
+        width: 80%; min-width: 430px; max-width: 800px; height: 400px; padding: 20px; background-color: #ffffff; border: 1px solid #007bff; border-radius: 5px; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; display: flex; flex-direction: column; justify-content: space-between;  
     }
     
     .mainlayer{
-        height: 40%; display: flex; justify-content: space-around; align-items: center;
+        height: 100%; display: flex; justify-content: space-around; align-items: center;
     }
     
     /* 로그인 화면 영역 */
@@ -122,6 +122,10 @@ width: 100%; display: flex; flex-direction: row-reverse;justify-content: space-b
     .imglayer img{
         width: 100px; height: 70px;
     }
+.imglayer h5{
+    margin-top: 20px;
+}
+
     .login-layer{
         width: 60%; height: 60%;  display: flex; flex-direction: column; align-items: center; justify-content: space-around;
         }
@@ -199,7 +203,7 @@ width: 100%; display: flex; flex-direction: row-reverse;justify-content: space-b
         width: 100%;
     }
     .sublayer{
-    width: 100%; display: flex; flex-direction: row-reverse;justify-content: space-between;
+    width: 100%; display: none; flex-direction: row-reverse;justify-content: space-between;
     }
     
     .sublayer button{

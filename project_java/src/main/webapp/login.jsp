@@ -18,6 +18,7 @@
             <div class="mainlayer">
                 <div class="imglayer">
                     <img src="img/icon.png" alt="loginlogo" >
+                    <h5>혁신적인 밀키트 생산관리 MES</h5>
                 </div>
 <form class="login-layer" id="login-layer" action="Login_controller" method="post">
     <h1>Login</h1>
