@@ -37,7 +37,7 @@
     <div class="tagtitlecontainer">
         <div class="taglayer">
             <div class="noticelayer-title">
-            <h2>검사기준</h2>
+            <h2>신규 상품등록</h2>
             <a class="more" href="componant/process.html">더 보기</a>
         </div>
             <ul class="taglist">

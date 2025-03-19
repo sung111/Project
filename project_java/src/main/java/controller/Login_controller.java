@@ -74,7 +74,6 @@ public class Login_controller extends HttpServlet {
             Cookie jobCookie = new Cookie("job", user.getJob());
             Cookie emailCookie = new Cookie("email", user.getEmail());
             Cookie phoneCookie = new Cookie("phone", user.getPhone());
-            Cookie createDateCookie = new Cookie("createDate", user.getCreateDate().toString());
             Cookie fieldCookie = new Cookie("field", user.getField());
 
             int expiryTime = 60 * 60 * 8; // 60초, 60분, 3시간. 총 8시간동안 유지됨.
@@ -85,7 +84,6 @@ public class Login_controller extends HttpServlet {
             jobCookie.setPath("/");
             emailCookie.setPath("/");
             phoneCookie.setPath("/");
-            createDateCookie.setPath("/");
             fieldCookie.setPath("/");
 
             // 쿠키 추가
@@ -94,7 +92,6 @@ public class Login_controller extends HttpServlet {
             response.addCookie(jobCookie);
             response.addCookie(emailCookie);
             response.addCookie(phoneCookie);
-            response.addCookie(createDateCookie);
             response.addCookie(fieldCookie);
              
             userCookie.setPath("/"); // 모든 경로에서 사용 가능함.

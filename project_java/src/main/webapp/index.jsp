@@ -3,7 +3,7 @@
 <%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, dao.User_DAO, dto.User_DTO" %>
 <%
 /* ========== 1. 세션이 없으면 쿠키 확인 후 자동 로그인 처리 ========== */
-   /*  HttpSession session = request.getSession();  왜 계속 빨간줄나오노!*/
+/* HttpSession session = request.getSession(); */
 if (session == null || session.getAttribute("userId") == null) {
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
@@ -76,8 +76,7 @@ if (user != null) {
 <!-- css link -->
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
-<!-- javascript link -->
-<script src="js/indexScript.js"></script>
+
 </head>
 
 <body class="index">
@@ -164,5 +163,6 @@ if (user != null) {
 		</div>
 	</div>
 </body>
-
+<!-- javascript link -->
+<script src="js/indexScript.js"></script>
 </html>
