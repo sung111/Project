@@ -270,9 +270,7 @@ public class QualityControl_DAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return result;
-
 	}
 
 //	실적 일일 조회
