@@ -169,9 +169,13 @@ th {
   border-radius: 5px;
 }
 
-.listbtn {
+.listhead {
   text-align: right;
   margin-right: 15px;
+}
+
+.listhead2 {
+  margin-top: 50px;
 }
 
 .popup {
@@ -246,6 +250,7 @@ input[type="date"] {
 
 .addtable {
   border-collapse: collapse; /* 경계선 겹침 방지 */
+  font-size: 20px;
 }
 
 .addtable th, .addtable td {
@@ -253,7 +258,10 @@ input[type="date"] {
   vertical-align: middle; /* 세로 정렬 */
   padding: 10px; /* 여백 추가 */
 }
-
+/* 팝업창 input 폰트사이즈 */
+.popInput{
+  font-size: 20px;
+}
 
 .unit-container {
   display: flex;
