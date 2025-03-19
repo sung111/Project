@@ -14,6 +14,9 @@ public class Materials_DTO {
 	String lotnumber;
 	String warehouse;
 	String origin;
+	String bomdel;
+	int bomid;
+
 	int materiaid;
 	String materiadel;
 	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
@@ -26,6 +29,18 @@ public class Materials_DTO {
 	int inven_quan;  // 남은 원자재 수량
 	
 	
+	public int getBomid() {
+		return bomid;
+	}
+	public void setBomid(int bomid) {
+		this.bomid = bomid;
+	}
+	public String getBomdel() {
+		return bomdel;
+	}
+	public void setBomdel(String bomdel) {
+		this.bomdel = bomdel;
+	}
 	public double getBom_quan() {
 		return bom_quan;
 	}

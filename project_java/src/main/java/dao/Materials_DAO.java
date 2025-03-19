@@ -148,8 +148,10 @@ public class Materials_DAO {
 	            query += " m.WAREHOUSE, ";
 	            query += " m.MATERIALDEL, ";
 	            query += " b.MATERIALID  as bom_ma_id, ";
+	            query += " b.BOMID  , ";
 	            query += " b.PRODUCTID as bom_pr_id, ";
 	            query += " b.QUANTITY as bom_quan, ";
+	            query += " b.bomdel , ";
 	            query += " i.MATERIALID as inven_ma_id, ";
 	            query += " i.QUANTITY as inven_quan ";
 	            query += " FROM  materials m ";
@@ -157,6 +159,7 @@ public class Materials_DAO {
 	            query += " left join inventorystatus i on m.MATERIALID = i.MATERIALID ";
 	            query += " where  m.materialdel = 'n' ";
 	            query += " and b.productid = ? ";
+	            query += " and b.bomdel = 'n' ";
 	            query += " order by m.MATERIALID ";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, materials_DTO.getBom_pr_id());
@@ -180,7 +183,9 @@ public class Materials_DAO {
 				DTO.setLotnumber(rs.getString("lotnumber")); //랏넘버
 				DTO.setWarehouse(rs.getString("warehouse")); //창고위치
 				DTO.setPartNumber(rs.getString("partNumber")); //품번
+				DTO.setBomdel(rs.getString("bomdel")); //품번
 				DTO.setBom_quan(rs.getDouble("bom_quan")); // 사용수량
+				DTO.setBomid(rs.getInt("bomid"));
 				
 				
 				

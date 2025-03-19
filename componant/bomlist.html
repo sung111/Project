@@ -151,16 +151,18 @@
             border: none;
             cursor: pointer;
             height: 35px;
+            margin: 5px;
         }
         .input_field_outrine{
-            border: 1px solid #007bff;
+          border: 1px solid #007bff;
             border-radius: 20px;
-            width: 90%;
+            width: 50%;
             height: 100px;
             display: flex;
-            align-items: center;
             justify-content: space-around;
-            margin: 0 auto;
+            align-items: center;
+            
+          
         }
         #matesel{
            
@@ -171,18 +173,30 @@
             margin-top: 15px;
         }
         .textwithd{
-            width: 60px;
+            width: 100px;
         }
         #input_parent{
             width: 100%;
-            border: 1px solid #007bff;
+         
             border-radius: 20px;
-          
             display: flex;
         }
         #creatbutton{
             display: flex;
             justify-content: end;
+        }
+        #field_button{
+           height: 100%;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+        .up{
+            margin-bottom: 30px;
+        }
+        #title_insert_none{
+            margin-bottom: 5px;
         }
 
         @media screen and (max-width: 600px) {
@@ -216,21 +230,19 @@
         <div><h2>부대찌개</h2></div>
     </div>
     <div id="creatbutton">
-        <input type="button" value="생성" class="btn">
+        <input type="button" value="생성" class="btn " id="input_show">
     </div>
+    <div id="title_insert_none">
         <div id="input_parent">
 
                     <div class="input_field_outrine">
                         <div>
+
                             <div >
-                                    <span>제품명</span>
-                                    <select name="materials" id="matesel">
-                                        <option value="1" >1번입니다</option>
-                                    </select>
-                            </div>
-                            <div class="mleft">
-                                <span> 규격</span>
-                                <span> ㅇㅇㅇ</span>
+                                <span>제품명</span>
+                                <select name="materials" id="matesel">
+                                    <option value="1" >1번입니다</option>
+                                </select>
                             </div>
                         </div>
 
@@ -240,53 +252,20 @@
                                 <span>투입수량 입력</span>
                                 <input type="text" name="" id="" value="" class="textwithd">
                             </div>
-                    
-                            <div class="mleft">
-                                <span> 공급업체</span>
-                                <span> ㅇㅇㅇ</span>
-                            </div>
                         </div>
 
-                            <div>
-                                <div>
-                                    <span> 가격</span>
-                                    <span> ㅇㅇㅇ</span>
-                                </div>
-                                <div class="mleft">
-                                    <span> LotNo</span>
-                                    <span> ㅇㅇㅇ</span>
-                                </div>
+                           
+                            <div id="field_button">
+                                <input type="button" value="확인" id="insert" class="btn up">
+                                <input type="button" value="취소" id="input_hide" class="btn up" >   
                             </div>
-                            <div>
-                                <div>
-                                    <span> 단위</span>
-                                    <span> ㅇㅇㅇ</span>
-                                </div>
-                                <div class="mleft">
-                                    <span> 창고위치</span>
-                                    <span> ㅇㅇㅇ</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <span>재고수량 입력</span>
-                                    <input type="text" name="" id="" value="" class="textwithd">
-                                </div>
-                                <div class="mleft">
-                                    <span> 품번</span>
-                                    <span> ㅇㅇㅇ</span>
-                                </div>
-                            </div>
+                                 
                     </div>
-            <div>
-                <input type="button" value="확인" id="insert" class="btn">
-                <input type="button" value="취소" id="insert" class="btn">
-            </div>
-                 
                 
 
 
         </div>
+    </div>
     <table id="maintable">
         <tr>
             <th>제품명</th>
@@ -302,13 +281,32 @@
 			            <th>수정/삭제</th>
 
         </tr>
-        <br>
+   
     </table>
 
 
     <script>
         window.addEventListener("load", function () {
-         
+            
+
+            document.querySelector("#title_insert_none").classList.add("none")
+
+            document.querySelector("#input_show").addEventListener("click", function () {
+                document.querySelector("#title_insert_none").classList.remove("none")
+            });
+
+            document.querySelector("#input_hide").addEventListener("click", function () {
+                document.querySelector("#title_insert_none").classList.add("none")
+            });
+            
+
+           let oks = document.querySelectorAll(".ok")
+           let cansles = document.querySelectorAll(".cansle")
+           for(let i++; i<oks.length; i++){
+               oks[i].classList.add("none")
+               cansles[i].classList.add("none")
+               })
+
 
 
 
@@ -870,140 +868,140 @@
 
             } else {
 
-                mu.forEach(function (v, i) {
-                    let options = bj.map(v => `<option value="${v.제품명}">${v.제품명}</option>`).join("");
-                    budae = document.createElement("tr")
-                    budae.innerHTML = `
-                        <td><span class="new-span">${v.제품명}</span>
-                        <select name="option" class="check-option" value="${v.제품명}">${options}</select></td>
-                        <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
-                        <td><span class="new-span aa">${v.규격}</span><input type="text" class="new-text ab" value="${v.규격}"></td>
-                        <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
-                        <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
-                        <td><span class="new-span aa">${v.공급업체}</span><input type="text" class="new-text ab" value="${v.공급업체}"></td>
-                        <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
-                        <td><span class="new-span aa">${v.창고위치}</span><input type="text" class="new-text ab" value="${v.창고위치}"></td>
-                        <td><span class="new-span aa">${v.품번}</span><input type="text" class="new-text ab" value="${v.품번}"></td>
+                // mu.forEach(function (v, i) {
+                //     let options = bj.map(v => `<option value="${v.제품명}">${v.제품명}</option>`).join("");
+                //     budae = document.createElement("tr")
+                //     budae.innerHTML = `
+                //         <td><span class="new-span">${v.제품명}</span>
+                //         <select name="option" class="check-option" value="${v.제품명}">${options}</select></td>
+                //         <td><span class="new-span">${v.가격}</span><input type="text" class="new-text" value="${v.가격}"></td>
+                //         <td><span class="new-span aa">${v.규격}</span><input type="text" class="new-text ab" value="${v.규격}"></td>
+                //         <td><span class="new-span">${v.재고수량}</span><input type="text" class="new-text" value="${v.재고수량}"></td>
+                //         <td><span class="new-span">${v.단위}</span><input type="text" class="new-text" value="${v.단위}"></td>
+                //         <td><span class="new-span aa">${v.공급업체}</span><input type="text" class="new-text ab" value="${v.공급업체}"></td>
+                //         <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
+                //         <td><span class="new-span aa">${v.창고위치}</span><input type="text" class="new-text ab" value="${v.창고위치}"></td>
+                //         <td><span class="new-span aa">${v.품번}</span><input type="text" class="new-text ab" value="${v.품번}"></td>
                     
-                        <td class="buttontd">
-                        <input type="button" value="수정" class="u">
-                        <input type="button" value="삭제" class="d">
-                        <input type="button" value="확인" class="ok">
-                        <input type="button" value="취소" class="can">
-                        </td>`
+                //         <td class="buttontd">
+                //         <input type="button" value="수정" class="u">
+                //         <input type="button" value="삭제" class="d">
+                //         <input type="button" value="확인" class="ok">
+                //         <input type="button" value="취소" class="can">
+                //         </td>`
 
-                    // <input type="text" class="new-text" value="${v.제품명}"></td>
-                    starttablebody.append(budae)
-                    let new_texs = budae.querySelectorAll(".new-text")
-                    let new_spans = budae.querySelectorAll(".new-span")
-                    let new_chop = budae.querySelector(".check-option")
-                    let ab = budae.querySelectorAll(".ab")
-                    let aa = budae.querySelectorAll(".aa")
-                    let oks = budae.querySelectorAll(".ok")
-                    let cans = budae.querySelectorAll(".can")
-                    let us = budae.querySelectorAll(".u")
-                    let ds = budae.querySelectorAll(".d")
-                    for (let a = 0; a < new_texs.length; a++) {
-                        new_texs[a].classList.add("none")
-                    }
-                    for (let a = 0; a < ab.length; a++) {
-                        console.log(ab[a])
-                        ab[a].classList.add("none")
-                    }
-
-
-                    new_chop.classList.add("none")
-
-                    for (let a = 0; a < oks.length; a++) {
-                        oks[a].classList.add("none")
-                        cans[a].classList.add("none")
-                    }
-                    budae.querySelector(".u").addEventListener("click", function (e) {
-
-                        for (let a = 0; a < new_texs.length; a++) {
-                            console.log(new_texs[a])
-                            console.log(new_spans[a])
-                            new_texs[a].classList.remove("none")
-                            new_spans[a].classList.add("none")
-                            // console.log(e.target.parentNode)
-                            e.target.parentNode.querySelector(".u").classList.add("none")
-                            e.target.parentNode.querySelector(".d").classList.add("none")
-                            e.target.parentNode.querySelector(".ok").classList.remove("none")
-                            e.target.parentNode.querySelector(".can").classList.remove("none")
-                        }
-
-                        new_chop.classList.remove("none")
-                        for (let a = 0; a < aa.length; a++) {
-                            console.log(aa[a])
-                            aa[a].classList.remove("none")
-                        }
-                        for (let a = 0; a < ab.length; a++) {
-                            console.log(ab[a])
-                            ab[a].classList.add("none")
-                        }
-
-                    })
-
-                    budae.querySelector(".ok").addEventListener("click", function (e) {
-                        for (let a = 0; a < new_texs.length; a++) {
-                            // console.log(new_texs[a])
-                            // console.log(new_span[a])
-                            new_texs[a].classList.add("none")
-                            new_spans[a].classList.remove("none")
-                            // console.log(e.target.parentNode)    
-                        }
-                        console.log(e)
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-
-                        new_chop.classList.add("none")
-
-                        new_spans[0].innerText = new_chop.value
-                        for (let aa = 1; aa < new_texs.length; aa++) {
-                            new_spans[aa + 1].innerText = new_texs[aa].value
-                        }
-                        console.log(e.target.parentNode.parentNode)
-
-                    })
-                    budae.querySelector(".check-option").addEventListener("change", function (e) {
-                        console.log(e.target.value)
-                        console.log(e.target.parentNode.parentNode.querySelectorAll(".new-span")[0])
-                        e.target.parentNode.parentNode.querySelectorAll(".new-span")[0].innerText = e.target.value
-                    })
-
-                    budae.querySelector(".can").addEventListener("click", function (e) {
-                        new_chop.classList.add("none")
-                        for (let ai = 0; ai < new_texs.length; ai++) {
-                            console.log("포문돔")
-                            new_texs[ai].classList.add("none")
-                            new_spans[ai].classList.remove("none")
-
-                        }
-                        e.target.parentNode.querySelector(".u").classList.remove("none")
-                        e.target.parentNode.querySelector(".d").classList.remove("none")
-                        e.target.parentNode.querySelector(".ok").classList.add("none")
-                        e.target.parentNode.querySelector(".can").classList.add("none")
-                    })
+                //     // <input type="text" class="new-text" value="${v.제품명}"></td>
+                //     starttablebody.append(budae)
+                //     let new_texs = budae.querySelectorAll(".new-text")
+                //     let new_spans = budae.querySelectorAll(".new-span")
+                //     let new_chop = budae.querySelector(".check-option")
+                //     let ab = budae.querySelectorAll(".ab")
+                //     let aa = budae.querySelectorAll(".aa")
+                //     let oks = budae.querySelectorAll(".ok")
+                //     let cans = budae.querySelectorAll(".can")
+                //     let us = budae.querySelectorAll(".u")
+                //     let ds = budae.querySelectorAll(".d")
+                //     for (let a = 0; a < new_texs.length; a++) {
+                //         new_texs[a].classList.add("none")
+                //     }
+                //     for (let a = 0; a < ab.length; a++) {
+                //         console.log(ab[a])
+                //         ab[a].classList.add("none")
+                //     }
 
 
-                    budae.querySelector(".d").addEventListener("click", function (e) {
-                        // console.log(e.target.parentNode.parentNode)
-                        e.target.parentNode.parentNode.remove()
-                    })
+                //     new_chop.classList.add("none")
+
+                //     for (let a = 0; a < oks.length; a++) {
+                //         oks[a].classList.add("none")
+                //         cans[a].classList.add("none")
+                //     }
+                //     budae.querySelector(".u").addEventListener("click", function (e) {
+
+                //         for (let a = 0; a < new_texs.length; a++) {
+                //             console.log(new_texs[a])
+                //             console.log(new_spans[a])
+                //             new_texs[a].classList.remove("none")
+                //             new_spans[a].classList.add("none")
+                //             // console.log(e.target.parentNode)
+                //             e.target.parentNode.querySelector(".u").classList.add("none")
+                //             e.target.parentNode.querySelector(".d").classList.add("none")
+                //             e.target.parentNode.querySelector(".ok").classList.remove("none")
+                //             e.target.parentNode.querySelector(".can").classList.remove("none")
+                //         }
+
+                //         new_chop.classList.remove("none")
+                //         for (let a = 0; a < aa.length; a++) {
+                //             console.log(aa[a])
+                //             aa[a].classList.remove("none")
+                //         }
+                //         for (let a = 0; a < ab.length; a++) {
+                //             console.log(ab[a])
+                //             ab[a].classList.add("none")
+                //         }
+
+                //     })
+
+                //     budae.querySelector(".ok").addEventListener("click", function (e) {
+                //         for (let a = 0; a < new_texs.length; a++) {
+                //             // console.log(new_texs[a])
+                //             // console.log(new_span[a])
+                //             new_texs[a].classList.add("none")
+                //             new_spans[a].classList.remove("none")
+                //             // console.log(e.target.parentNode)    
+                //         }
+                //         console.log(e)
+                //         e.target.parentNode.querySelector(".u").classList.remove("none")
+                //         e.target.parentNode.querySelector(".d").classList.remove("none")
+                //         e.target.parentNode.querySelector(".ok").classList.add("none")
+                //         e.target.parentNode.querySelector(".can").classList.add("none")
+                //         e.target.parentNode.querySelector(".can").classList.add("none")
+
+                //         new_chop.classList.add("none")
+
+                //         new_spans[0].innerText = new_chop.value
+                //         for (let aa = 1; aa < new_texs.length; aa++) {
+                //             new_spans[aa + 1].innerText = new_texs[aa].value
+                //         }
+                //         console.log(e.target.parentNode.parentNode)
+
+                //     })
+                //     budae.querySelector(".check-option").addEventListener("change", function (e) {
+                //         console.log(e.target.value)
+                //         console.log(e.target.parentNode.parentNode.querySelectorAll(".new-span")[0])
+                //         e.target.parentNode.parentNode.querySelectorAll(".new-span")[0].innerText = e.target.value
+                //     })
+
+                //     budae.querySelector(".can").addEventListener("click", function (e) {
+                //         new_chop.classList.add("none")
+                //         for (let ai = 0; ai < new_texs.length; ai++) {
+                //             console.log("포문돔")
+                //             new_texs[ai].classList.add("none")
+                //             new_spans[ai].classList.remove("none")
+
+                //         }
+                //         e.target.parentNode.querySelector(".u").classList.remove("none")
+                //         e.target.parentNode.querySelector(".d").classList.remove("none")
+                //         e.target.parentNode.querySelector(".ok").classList.add("none")
+                //         e.target.parentNode.querySelector(".can").classList.add("none")
+                //     })
 
 
-                })
+                //     budae.querySelector(".d").addEventListener("click", function (e) {
+                //         // console.log(e.target.parentNode.parentNode)
+                //         e.target.parentNode.parentNode.remove()
+                //     })
+
+
+                // })
 
 
 
 
-                document.querySelector("#mid-contain-check").addEventListener("click", function (e) {
-                    console.log(e.target)
-                    plus();
-                })
+                // document.querySelector("#mid-contain-check").addEventListener("click", function (e) {
+                //     console.log(e.target)
+                //     plus();
+                // })
 
 
                 function plus() {
