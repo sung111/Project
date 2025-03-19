@@ -17,35 +17,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginContainer = document.querySelector(".login-container");
     const signUpButton = document.getElementById("sign-up-button");
     const cancelButton = document.getElementById("cancel-button");
-// 로그인 버튼 연결
-let loginButton = document.getElementById("login-layer");
+
+
 
     // 화원가입 버튼 클릭 시, 효과
     signUpButton.addEventListener("click", function (event) {
         event.preventDefault(); // 기본 행동 방지 (form 제출 방지)
-    
+
         // 로그인 숨기고, 잠시 후 회원가입 보이기
         loginLayer.classList.add("hidden");
-        setTimeout(function() {
+        setTimeout(function () {
             signUpLayer.classList.add("active");
         }, 100); // 100ms 후에 전환
     });
-    
+
     cancelButton.addEventListener("click", function (event) {
-        event.preventDefault(); // 기본 행동 방지 (form 제출 방지)
-    
+        // 실질적으로 DB에 작성된 로그인, 아이디의 일치성을 확인하고 로그인을 할 수 있게 하는 기능
+        event.preventDefault();
+
         // 회원가입 숨기고, 로그인 보이기
         signUpLayer.classList.remove("active");
-        setTimeout(function() {
+        setTimeout(function () {
             loginLayer.classList.remove("hidden");
         }, 100); // 100ms 후에 전환
     });
 
-// 로그인 버튼 클릭 시 페이지가 새로 고침되는 것 방지
-loginButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 기본 동작 방지
-    // 로그인 처리 함수 호출
-});
+    // 로그인 버튼 클릭 시 페이지가 새로 고침되는 것 방지
+    let loginButton = document.getElementById("login-layer");
+    loginButton.addEventListener("click", function (event) {
+        // 실질적으로 DB에 작성된 로그인, 아이디의 일치성을 확인하고 로그인을 할 수 있게 하는 기능
+        event.preventDefault(); // 기본 동작 방지
+        // 로그인 처리 함수 호출
+    });
 
     function LocalNavigationbar(tagname, componantname) {
         localBar.innerHTML = `<li>Home</li> <li>> ${tagname}</li> <li>> ${componantname}</li>`;
@@ -81,13 +84,11 @@ loginButton.addEventListener("click", function (event) {
     });
 
     //키보드연결
-
     loginButton.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             // 기본되는 엔터 동작을 방지함
-            event.preventDefault(); 
+            event.preventDefault();
             document.getElementById("login-button").click(); // 로그인 버튼 클릭 실행
         }
     });
-
 });

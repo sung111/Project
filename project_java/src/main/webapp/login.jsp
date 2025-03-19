@@ -66,7 +66,6 @@
                 <button name="cancel-button" class="cancel" id="cancel-button">뒤로 가기</button>
             </form>
         </div>
-
     </body>
     <script src="js/login.js"></script>
 

@@ -44,14 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("getPlanBtn").addEventListener("click", function () {
         const button = this;
         const isActive = button.classList.contains("active");
-
         if (isActive) {
             // 비활성화 (원래 색상으로 복구)
             button.classList.remove("active");
         } else {
             // 활성화 (색상 변경)
             button.classList.add("active");
-
             const range = document.querySelector('input[name="range"]:checked').value;
             const result = getProductionPlan(range);
             console.log(result); // 콘솔에 출력 (UI에 표시 가능)
@@ -97,42 +95,83 @@ document.addEventListener("DOMContentLoaded", function () {
             searchButton.click();
         }
     });
-    // 생산계획 목록을 누르면 특정한 생산계획을 지정한다.
-    let selectedRow = null; const rowsPerPage = 10; let currentPage = 1;
+    // 선택된 행을 저장할 변수
+    let selectedRow = null;
 
     // 생산계획 행 선택
     document.querySelector(".new-workorder tbody").addEventListener("click", function (event) {
         const clickedRow = event.target.closest(".order-info-content");
+
         if (clickedRow) {
             if (selectedRow === clickedRow) {
                 // 선택된 행을 다시 클릭하면 색상을 원래대로 복원된다.
                 clickedRow.style.backgroundColor = "";
                 selectedRow = null;
+
+                // 생성인과 생산기간 초기화
+                document.querySelector("input[name='delivery']").value = '';
+                document.querySelector("input[name='writer']").value = '';
             } else {
                 // 이전에 선택된 행이 있다면 색상 제거한다.
                 if (selectedRow) {
                     selectedRow.style.backgroundColor = "";
                 }
+
                 // 새로 클릭한 행에 배경색 적용
-                clickedRow.style.backgroundColor = "#999999"; // 선택된 행의 변경되는 배경 색
+                clickedRow.style.backgroundColor = "#999999"; // 선택된 행의 배경 색
                 selectedRow = clickedRow;
+
+                // 행을 선택하면 생성인과 생산기간이 자동으로 나타난다.
+                let targetRow = event.target.closest("tr");
+                if (targetRow && targetRow.dataset.userid) {
+                    let userid = targetRow.dataset.userid;
+                    let startDate = targetRow.dataset.startDate;
+                    let endDate = targetRow.dataset.endDate;
+
+                    console.log("선택한 생성인:", userid);
+                    console.log("선택한 생산기간:", startDate, "~", endDate);
+
+                    // 생성인과 생산기간을 해당 input 필드에 채우기
+                    document.querySelector("input[name='delivery']").value = userid;
+                    document.querySelector("input[name='writer']").value = startDate + " ~ " + endDate;
+                }
             }
         }
-        // 행을 선택하면 생성인과 생산기간이 자동으로 나타난다.
-        let targetRow = event.target.closest("tr");
-        if (targetRow && targetRow.dataset.userid) {
-            let userid = targetRow.dataset.userid;
-            let startDate = targetRow.dataset.startDate;
-            let endDate = targetRow.dataset.endDate;
-
-            console.log("선택한 생성인:", userid);
-            console.log("선택한 생산기간:", startDate, "~", endDate);
-
-            // 생성인과 생산기간을 해당 input 필드에 채우기
-            document.querySelector("input[name='delivery']").value = userid;
-            document.querySelector("input[name='writer']").value = startDate + " ~ " + endDate;
-        }
     });
+
+    // // 생산계획 행 선택
+    // document.querySelector(".new-workorder tbody").addEventListener("click", function (event) {
+    //     const clickedRow = event.target.closest(".order-info-content");
+    //     if (clickedRow) {
+    //         if (selectedRow === clickedRow) {
+    //             // 선택된 행을 다시 클릭하면 색상을 원래대로 복원된다.
+    //             clickedRow.style.backgroundColor = "";
+    //             selectedRow = null;
+    //         } else {
+    //             // 이전에 선택된 행이 있다면 색상 제거한다.
+    //             if (selectedRow) {
+    //                 selectedRow.style.backgroundColor = "";
+    //             }
+    //             // 새로 클릭한 행에 배경색 적용
+    //             clickedRow.style.backgroundColor = "#999999"; // 선택된 행의 변경되는 배경 색
+    //             selectedRow = clickedRow;
+    //         }
+    //     }
+    //     // 행을 선택하면 생성인과 생산기간이 자동으로 나타난다.
+    //     let targetRow = event.target.closest("tr");
+    //     if (targetRow && targetRow.dataset.userid) {
+    //         let userid = targetRow.dataset.userid;
+    //         let startDate = targetRow.dataset.startDate;
+    //         let endDate = targetRow.dataset.endDate;
+
+    //         console.log("선택한 생성인:", userid);
+    //         console.log("선택한 생산기간:", startDate, "~", endDate);
+
+    //         // 생성인과 생산기간을 해당 input 필드에 채우기
+    //         document.querySelector("input[name='delivery']").value = userid;
+    //         document.querySelector("input[name='writer']").value = startDate + " ~ " + endDate;
+    //     }
+    // });
 
     // 페이지네이션 초기화
     updatePagination();

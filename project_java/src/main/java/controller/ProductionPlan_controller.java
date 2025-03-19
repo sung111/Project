@@ -20,7 +20,6 @@ import dto.ProductionPlan_DTO;
 public class ProductionPlan_controller extends HttpServlet {
 
 	private ProductionPlan_DAO productionPlanDAO = new ProductionPlan_DAO();
-
 	// GET 요청 처리: 생산 계획 목록을 받아서 JSP에 전달
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
