@@ -14,8 +14,10 @@ public class Inventorycheck_DTO {
 	String maPartNum;	// 품번
 	String maUnit;		// 단위
 	String materialname; // 품목
+	String maSpec;		// 규격
 	
 	
+
 	// 완제품 재고 현황 조회
 	int productinvenId;	// 완제품 재고 시퀀스
 	int productId;		// 완제품 시퀀스값
@@ -25,9 +27,28 @@ public class Inventorycheck_DTO {
 	String prLotNo;		// lot No
 	String prPartNum;	// 품번
 	String prUnit;		// 단위
+	String productname; // 품목
+	String prSpec; 		// 규격
 	
 	
-	
+	public String getMaSpec() {
+		return maSpec;
+	}
+	public void setMaSpec(String maSpec) {
+		this.maSpec = maSpec;
+	}
+	public String getPrSpec() {
+		return prSpec;
+	}
+	public void setPrSpec(String prSpec) {
+		this.prSpec = prSpec;
+	}
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
 	public int getInventoryId() {
 		return inventoryId;
 	}

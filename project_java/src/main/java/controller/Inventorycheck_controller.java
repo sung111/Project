@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Inventorycheck_DAO;
-import dto.Performance_DTO;
+import dto.Inventorycheck_DTO;
 
 /**
  * 재고현황조회
@@ -18,25 +18,76 @@ import dto.Performance_DTO;
 @WebServlet("/Inventorycheck")
 public class Inventorycheck_controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Inventorycheck_DAO checkDAO = new Inventorycheck_DAO(); List<Performance_DTO>
-		resultList = checkDAO.selectcheck();
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Inventorycheck_DAO checkDAO = new Inventorycheck_DAO();
+		List resultList = checkDAO.selectcheck();
+		List resultList2 = checkDAO.selectcheck2();
+
 		request.setAttribute("resultList", resultList);
-		System.out.println("resultList : " +  resultList);
+		request.setAttribute("resultList2", resultList2);
+		System.out.println("resultList : " + resultList);
+		System.out.println("resultList2 : " + resultList2);
+
 		String url = "/WEB-INF/Inventorycheck.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		String command = request.getParameter("command");
+		System.out.println("command :" + command);
+
+		if ("modify1".equals(command)) {
+			String maQuantity = request.getParameter("maQuantity");
+			String receiptDate = request.getParameter("receiptDate");
+			String inventoryId = request.getParameter("inventoryId");
+			System.out.println("입력된 receiptDate 값: " + receiptDate);
+			java.sql.Date receiptDate1 = java.sql.Date.valueOf(receiptDate);
+			int maQuantity1 = Integer.parseInt(maQuantity);
+			int inventoryId1 = Integer.parseInt(inventoryId);
+
+			Inventorycheck_DTO inventoryDTO = new Inventorycheck_DTO();
+			inventoryDTO.setMaQuantity(maQuantity1);
+			inventoryDTO.setReceiptDate(receiptDate1);
+			inventoryDTO.setInventoryId(inventoryId1);
+
+			Inventorycheck_DAO inventoryDAO = new Inventorycheck_DAO();
+			int result = inventoryDAO.updateInventory1(inventoryDTO);
+
+			System.out.println("update1 result :" + result);
+
+			String url = "Inventorycheck";
+			response.sendRedirect(url);
+
+		} else if ("modify2".equals(command)) {
+			String prQuantity = request.getParameter("prQuantity");
+			String makeDate = request.getParameter("makeDate");
+			String productinvenid = request.getParameter("productinvenid");
+
+			java.sql.Date makeDate1 = java.sql.Date.valueOf(makeDate);
+			int prQuantity1 = Integer.parseInt(prQuantity);
+			int productinvenid1 = Integer.parseInt(productinvenid);
+
+			Inventorycheck_DTO inventoryDTO = new Inventorycheck_DTO();
+			inventoryDTO.setMakeDate(makeDate1);
+			inventoryDTO.setPrQuantity(prQuantity1);
+			inventoryDTO.setProductinvenId(productinvenid1);
+
+			Inventorycheck_DAO inventoryDAO = new Inventorycheck_DAO();
+			int result = inventoryDAO.updateInventory2(inventoryDTO);
+
+			System.out.println("update2 result :" + result);
+
+			String url = "Inventorycheck";
+			response.sendRedirect(url);
+		}
+
 	}
 
 }
