@@ -29,7 +29,7 @@ public class Performance_DAO {
 
 			Connection con = ds.getConnection();
 //			테이블 시퀀스값, 제품 시퀀스, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
-			String query = " insert into performances " + " values ( null, ?, ?, 'adminid1', ? , ? , ?)";
+			String query = " insert into performances " + " values ( null, ?, ?, ?, ? , ? , ?)";
 
 			PreparedStatement ps = con.prepareStatement(query);
 //			ps.setString( 몇번째 ? , value );
@@ -40,9 +40,10 @@ public class Performance_DAO {
 //			ps.setInt(4, performDTO.getProductionCount());
 			ps.setInt(1, performDTO.getProductId());
 			ps.setInt(2, performDTO.getPlanId());
-			ps.setTimestamp(3, performDTO.getReportTime());
-			ps.setString(4, performDTO.getPerformanceComment());
-			ps.setInt(5, performDTO.getProductionCount());
+			ps.setString(3, performDTO.getUserId());
+			ps.setTimestamp(4, performDTO.getReportTime());
+			ps.setString(5, performDTO.getPerformanceComment());
+			ps.setInt(6, performDTO.getProductionCount());
 
 			result = ps.executeUpdate();
 
@@ -69,8 +70,11 @@ public class Performance_DAO {
 
 			Connection con = ds.getConnection();
 
-			String query = " select perf.* , prod.productname " + " from performances perf "
-					+ " join products prod on perf.productid = prod.productid " + " order by reporttime desc ";
+			String query = " select perf.* , prod.productname, usr.username "
+					+ " from performances perf "
+					+ " join products prod on perf.productid = prod.productid "
+					+ " join users usr on perf.userid = usr.userid "
+					+ " order by reporttime desc ";
 			PreparedStatement ps = con.prepareStatement(query);
 
 //			excuteQuery : SQL 중 select 실행
@@ -81,6 +85,7 @@ public class Performance_DAO {
 			while (rs.next()) {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
+				dto.setUserName(rs.getString("username"));
 				dto.setProductId(rs.getInt("productid"));
 				dto.setPerformanceId(rs.getInt("performanceid"));
 				dto.setProductName(rs.getString("productname"));

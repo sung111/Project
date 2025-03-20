@@ -9,6 +9,8 @@ public class QualityControl_DTO {
 	int qualityControlId;	// 품질관리 시퀀스번호
 	int performanceId;		// 실적 시퀀스번호
 	String userId;			// 유저 id
+	String userName;
+
 	int productId;		// 완제품 시퀀스
 	String productNameST;		// 완제품명
 	String result;			// 합/불
@@ -22,7 +24,12 @@ public class QualityControl_DTO {
 	int failPack;			// 불합갯수
 	
 	
-	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getQualityControlId() {
 		return qualityControlId;
 	}

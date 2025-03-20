@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.QualityControl_DAO;
 import dto.Performance_DTO;
@@ -25,6 +26,11 @@ public class QualityControl_controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+        String userId = (String)session.getAttribute("userId");
+        request.setAttribute("userId", userId);
+        
 		System.out.println("doGet으로 입장(/qualityControl)");
 
 		QualityControl_DAO quality = new QualityControl_DAO();
@@ -49,6 +55,7 @@ public class QualityControl_controller extends HttpServlet {
 		System.out.println("command :" + command);
 
 		if ("insert".equals(command)) {
+			String userId = request.getParameter("userId");
 			String productName = request.getParameter("wpvnaaud");
 			String result = request.getParameter("ra");
 			String reportTime = request.getParameter("date");
@@ -69,6 +76,7 @@ public class QualityControl_controller extends HttpServlet {
 			int productName1 = Integer.parseInt(productName);
 			int performanceId1 = Integer.parseInt(performanceId);
 
+			qualityDTO.setUserId(userId);
 			qualityDTO.setPerformanceId(performanceId1);
 			qualityDTO.setProductId(productName1);
 			qualityDTO.setResult(result);

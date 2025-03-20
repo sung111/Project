@@ -43,7 +43,7 @@ public class User_DAO {
                 user.setJob(rs.getString("job"));
                 user.setEmail(rs.getString("email"));
                 user.setPhone(rs.getString("phone"));
-                user.setCreateDate(rs.getDate("createDate"));
+                user.setCreateDate(rs.getDate("createDat"));
                 user.setField(rs.getString("field"));
             }
             rs.close();
