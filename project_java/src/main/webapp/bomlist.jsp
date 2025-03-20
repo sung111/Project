@@ -129,7 +129,6 @@ th {
 }
 
 .input_field_outrine {
-	
 	border-radius: 20px;
 	width: 50%;
 	height: 100px;
@@ -152,7 +151,7 @@ th {
 }
 
 #input_parent {
-border: 1px solid #007bff;
+	border: 1px solid #007bff;
 	width: 100%;
 	border-radius: 20px;
 	display: flex;
@@ -212,7 +211,7 @@ border: 1px solid #007bff;
 	th {
 		font-size: 12px;
 	}
-	td{
+	td {
 		font-size: 10px;
 	}
 }
@@ -230,11 +229,11 @@ border: 1px solid #007bff;
 		</div>
 	</div>
 	<div id="creatbutton">
-	<c:if test="${Field == 'ADMIN'}">
-		<input type="button" value="생성" class="btn " id="input_show">
+		<c:if test="${Field == 'ADMIN'}">
+			<input type="button" value="생성" class="btn " id="input_show">
 		</c:if>
 	</div>
-				
+
 	<form method="post" action="Bom_controller">
 		<div class="title_insert_none">
 			<div id="input_parent">
@@ -264,9 +263,8 @@ border: 1px solid #007bff;
 
 
 					<div id="field_button">
-						<input type="hidden" name="type" value="insert"> 
-						<input type="hidden" name="namevalue" value="${namevalue}"> 
-						<input
+						<input type="hidden" name="type" value="insert"> <input
+							type="hidden" name="namevalue" value="${namevalue}"> <input
 							type="submit" value="확인" id="insert" class="btn up"> <input
 							type="button" value="취소" id="input_hide" class="btn up">
 
@@ -294,30 +292,30 @@ border: 1px solid #007bff;
 			<th>창고위치</th>
 			<th>품번</th>
 			<c:if test="${Field == 'ADMIN'}">
-			<th id="crud_th">수정/삭제</th>
+				<th id="crud_th">수정/삭제</th>
 			</c:if>
 		</tr>
-		
+
 		<c:forEach var="dto" items="${total}">
 			<tr>
 				<td>${dto.materialname}</td>
 				<c:choose>
 					<c:when test="${dto.bom_quan == dto.bom_quan.intValue() }">
 						<td>
-							<div class="spbom_quan">${dto.bom_quan.intValue()}/개</div>
-							<c:if test="${Field == 'ADMIN'}">
-							 <input
-							type="text" value="${dto.bom_quan.intValue()}" name="bom_quan"
-							class="inputbom_quan quan_text quan1">
+							<div class="spbom_quan">${dto.bom_quan.intValue()}/개</div> <c:if
+								test="${Field == 'ADMIN'}">
+								<input type="text" value="${dto.bom_quan.intValue()}"
+									name="bom_quan" class="inputbom_quan quan_text quan1">
 							</c:if>
 						</td>
 					</c:when>
 					<c:otherwise>
 						<td>
-							<div class="spbom_quan">${dto.bom_quan}/개</div> 
-							<c:if test="${Field == 'ADMIN'}">
-							<input type="text" value="${dto.bom_quan}" name="bom_quan"class="inputbom_quan quan_text quan2">
-								</c:if>
+							<div class="spbom_quan">${dto.bom_quan}/개</div> <c:if
+								test="${Field == 'ADMIN'}">
+								<input type="text" value="${dto.bom_quan}" name="bom_quan"
+									class="inputbom_quan quan_text quan2">
+							</c:if>
 						</td>
 					</c:otherwise>
 				</c:choose>
@@ -329,37 +327,36 @@ border: 1px solid #007bff;
 				<td>${dto.lotnumber}</td>
 				<td>${dto.warehouse}</td>
 				<td>${dto.partNumber}</td>
-				
+
 				<c:if test="${Field == 'ADMIN'}">
-				<td>
-				
-					<form action="Bom_controller" method="post">
-						<div class="crud_contaner">
-							<input type="hidden" name="quan_value" class="quan_value" value="0">
+					<td>
+
+						<form action="Bom_controller" method="post">
+							<div class="crud_contaner">
+								<input type="hidden" name="quan_value" class="quan_value"
+									value="0"> <input type="hidden" value="${pvalue}"
+									name="pvalueid"> <input type="hidden"
+									value="${dto.bomid}" name="bomid"> <input type="hidden"
+									value="update" name="type"> <input type="hidden"
+									name="namevalue" value="${namevalue}"> <input
+									type="button" value="확인" class="btn ok"> <input
+									type="button" value="취소" class="btn cansle"> <input
+									type="button" value="수정" class="btn update">
+						</form>
+						<form action="Bom_controller" method="post">
 							<input type="hidden" value="${pvalue}" name="pvalueid"> <input
 								type="hidden" value="${dto.bomid}" name="bomid"> <input
-								type="hidden" value="update" name="type"> 
-								<input type="hidden" name="namevalue" value="${namevalue}"> 
-								<input
-								type="button" value="확인" class="btn ok"> <input
-								type="button" value="취소" class="btn cansle"> <input
-								type="button" value="수정" class="btn update">
-					</form>
-					<form action="Bom_controller" method="post">
-						<input type="hidden" value="${pvalue}" name="pvalueid"> <input
-							type="hidden" value="${dto.bomid}" name="bomid">
-							<input type="hidden" name="namevalue" value="${namevalue}"> 
-							 <input
-							type="hidden" value="delet" name="type"> <input
-							type="submit" value="삭제" class="btn delet">
-					</form>
+								type="hidden" name="namevalue" value="${namevalue}"> <input
+								type="hidden" value="delet" name="type"> <input
+								type="submit" value="삭제" class="btn delet">
+						</form>
 
-					</div>
-				</td>
+						</div>
+					</td>
 				</c:if>
-				
+
 			</tr>
-				
+
 		</c:forEach>
 
 	</table>
@@ -370,9 +367,13 @@ border: 1px solid #007bff;
 				.addEventListener(
 						"load",
 						function() {
-							document.querySelector("#back-button").addEventListener("click",function() {
-								window.location.href = "Finished_Product_BOM"
-							})
+							document
+									.querySelector("#back-button")
+									.addEventListener(
+											"click",
+											function() {
+												window.location.href = "Finished_Product_BOM"
+											})
 
 							let oks = document.querySelectorAll(".ok")
 							let cansles = document.querySelectorAll(".cansle")
@@ -431,18 +432,37 @@ border: 1px solid #007bff;
 																	e.target.parentNode.parentNode.parentNode.parentNode
 																			.querySelector(".spbom_quan"))
 
-													console.log("여기 확인버튼",e.target.parentNode.querySelector(".ok"))
-													
-													console.log("여기 수정된데이터",e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan"))
-													console.log("여기 확인버튼에 들어갈데이터",e.target.parentNode.parentNode.querySelector(".quan_value"))
-													   
-													e.target.parentNode.querySelector(".ok").addEventListener("click",function(ev){
-										              let inputbom_quan = e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan")
-										              let quan_value = e.target.parentNode.parentNode.querySelector(".quan_value")
-										              quan_value.value = inputbom_quan.value;
-										                this.type="submit"
-										            })
-													
+													console
+															.log(
+																	"여기 확인버튼",
+																	e.target.parentNode
+																			.querySelector(".ok"))
+
+													console
+															.log(
+																	"여기 수정된데이터",
+																	e.target.parentNode.parentNode.parentNode.parentNode
+																			.querySelector(".inputbom_quan"))
+													console
+															.log(
+																	"여기 확인버튼에 들어갈데이터",
+																	e.target.parentNode.parentNode
+																			.querySelector(".quan_value"))
+
+													e.target.parentNode
+															.querySelector(
+																	".ok")
+															.addEventListener(
+																	"click",
+																	function(ev) {
+																		let inputbom_quan = e.target.parentNode.parentNode.parentNode.parentNode
+																				.querySelector(".inputbom_quan")
+																		let quan_value = e.target.parentNode.parentNode
+																				.querySelector(".quan_value")
+																		quan_value.value = inputbom_quan.value;
+																		this.type = "submit"
+																	})
+
 													e.target.parentNode
 															.querySelector(
 																	".cansle")
@@ -506,9 +526,6 @@ border: 1px solid #007bff;
 
 							//             console.log(document.querySelector("#mid-contain-check"))
 							//             //뒤로가기버튼
-							
-									
-										
 
 							//아래항목 추가 
 						});
