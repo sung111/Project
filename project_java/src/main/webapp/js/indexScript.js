@@ -104,22 +104,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // 기준관리 탭
     const bomlistmenu = document.querySelector("#nav-bomlist")
     bomlistmenu.addEventListener("click", function () {
-        iframe.src = "standard.jsp"
+        iframe.src = "part_code"
         LocalNavigationbar("기준관리", "부품코드");
     })
     const processmenu = document.querySelector("#nav-process")
     processmenu.addEventListener("click", function () {
-        iframe.src = "production_process.jsp"
+        iframe.src = "ProductionProcess_controller"
         LocalNavigationbar("기준관리", "생산공정");
     })
     const inspection = document.querySelector("#nav-inspection")
     inspection.addEventListener("click", function () {
-        iframe.src = "Inspection_standards.jsp"
+        iframe.src = "InspectionS"
         LocalNavigationbar("기준관리", "검사기준");
     })
     const bommenu = document.querySelector("#nav-bom")
     bommenu.addEventListener("click", function () {
-        iframe.src = "bom_v2.jsp"
+        iframe.src = "Finished_Product_BOM"
         LocalNavigationbar("기준관리", "BOM");
     })
     // 생산관리 탭
@@ -130,17 +130,17 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");
     perfomanceRegistrationmenu.addEventListener("click", function () {
-        iframe.src = "performanceRegistration.jsp"
+        iframe.src = "Performance"
         LocalNavigationbar("생산관리", "실적등록");
     })
     const qualityControlmenu = document.querySelector("#nav-qualityControl");
     qualityControlmenu.addEventListener("click", function () {
-        iframe.src = "qualityControl.jsp"
+        iframe.src = "qualityControl"
         LocalNavigationbar("생산관리", "품질관리");
     })
     const 재고조사현황menu = document.querySelector("#nav-inventory");
     재고조사현황menu.addEventListener("click", function () {
-        iframe.src = "01_재고조사현황.jsp"
+        iframe.src = "Inventorycheck"
         LocalNavigationbar("생산관리", "재고현황조회");
     })
     // 실적 보고서

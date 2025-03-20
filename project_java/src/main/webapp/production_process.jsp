@@ -162,7 +162,7 @@
         }
     	#milkit{
     	 margin: 5px;
-    	width: 100px;
+    	width: 150px;
     	height: 30px;
     	padding: 5px 10px;
     	}
@@ -319,26 +319,26 @@
              
             })
 
-// 				document.querySelector("#milkit").addEventListener("change",function(e){
-//                 // 선택된 option의 value 값을 가져옵니다
-//                 if(this.value == "null"){
-//                 	console.log("값이 0입니다")
-//                 }
+				document.querySelector("#milkit").addEventListener("change",function(e){
+                // 선택된 option의 value 값을 가져옵니다
+                if(this.value == "null"){
+                	console.log("값이 0입니다")
+                }
                 
-//                 const selectedValue = encodeURIComponent(this.value);
+                const selectedValue = encodeURIComponent(this.value);
 				
-//                 // 현재 URL에서 쿼리 문자열을 가져옵니다.
-//                 const urlParams = new URLSearchParams(window.location.search);
+                // 현재 URL에서 쿼리 문자열을 가져옵니다.
+                const urlParams = new URLSearchParams(window.location.search);
 
-//                 // 기존 쿼리 문자열에 select_value 파라미터를 추가하거나 업데이트합니다.
-//                 urlParams.set("select_value", selectedValue);
+                // 기존 쿼리 문자열에 select_value 파라미터를 추가하거나 업데이트합니다.
+                urlParams.set("select_value", selectedValue);
 
-//                 // 새로운 URL을 생성합니다.
-//                 const newUrl = window.location.pathname + "?" + urlParams.toString();
+                // 새로운 URL을 생성합니다.
+                const newUrl = window.location.pathname + "?" + urlParams.toString();
 
-//                 // GET 방식으로 데이터를 전송합니다.
-//                 window.location.href = newUrl;
-//                 })
+                // GET 방식으로 데이터를 전송합니다.
+                window.location.href = newUrl;
+                })
 				
                 let updats = document.querySelectorAll(".updat")
 				for(let i=0; i<updats.length; i++){

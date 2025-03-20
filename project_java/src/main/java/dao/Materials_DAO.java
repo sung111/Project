@@ -33,7 +33,7 @@ public class Materials_DAO {
 //					방법 1: sql string을 그냥 만들기
 //					query += " values (seq_todo.nextval, '"+ todoDTO.getTodo() +"', sysdate, null,'N')";
 //					방법 2: ? 활용하기
-					query += " values ('',?,?,?,?,?,?,?,?,'n','','')";
+					query += " values ('',?,?,?,?,?,?,?,?,'n')";
 					
 			PreparedStatement ps = con.prepareStatement(query);
 			

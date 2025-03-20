@@ -292,22 +292,33 @@
             document.querySelector("#title_insert_none").classList.add("none")
 
             document.querySelector("#input_show").addEventListener("click", function () {
-                document.querySelector("#title_insert_none").classList.remove("none")
+                document.querySelector(".title_insert_none").classList.remove("none")
             });
 
             document.querySelector("#input_hide").addEventListener("click", function () {
-                document.querySelector("#title_insert_none").classList.add("none")
+                document.querySelector(".title_insert_none").classList.add("none")
             });
             
+            document.querySelectorAll(".update").addEventListener("click", function (e) {
+                console.log(e.target.parentNode.parentNode.parentNode)
+                e.target.parentNode.parentNode.parentNode.querySelectorAll(".bom_quan").classList.remove("none")
+                e.target.parentNode.parentNode.parentNode.querySelectorAll(".spbom_quan").classList.add("none")
+            });
+       
+            e.target.parentNode.querySelector(".cansle").addEventListener("click", function (ev) {
+                ev.target.parentNode.querySelector(".delet").classList.remove("none")
+                ev.target.parentNode.querySelector(".update").classList.remove("none")
+                ev.target.classList.add("none")
+                e.target.parentNode.querySelector(".ok").classList.add("none")
 
-           let oks = document.querySelectorAll(".ok")
-           let cansles = document.querySelectorAll(".cansle")
-           for(let i++; i<oks.length; i++){
-               oks[i].classList.add("none")
-               cansles[i].classList.add("none")
-               })
 
-
+            });
+            e.target.parentNode.querySelector("ok").addEventListener("click",function(ev){
+              let inputbom_quan = e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan")
+              let quan_value = e.target.parentNode.parentNode.querySelector(".quan_value")
+              quan_value.value = inputbom_quan.value;
+                this.type="submit"
+            })
 
 
 

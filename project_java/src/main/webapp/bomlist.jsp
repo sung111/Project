@@ -129,7 +129,7 @@ th {
 }
 
 .input_field_outrine {
-	border: 1px solid #007bff;
+	
 	border-radius: 20px;
 	width: 50%;
 	height: 100px;
@@ -152,6 +152,7 @@ th {
 }
 
 #input_parent {
+border: 1px solid #007bff;
 	width: 100%;
 	border-radius: 20px;
 	display: flex;
@@ -257,7 +258,9 @@ th {
 
 
 					<div id="field_button">
-						<input type="hidden" name="type" value="insert"> <input
+						<input type="hidden" name="type" value="insert"> 
+						<input type="hidden" name="namevalue" value="${namevalue}"> 
+						<input
 							type="submit" value="확인" id="insert" class="btn up"> <input
 							type="button" value="취소" id="input_hide" class="btn up">
 
@@ -317,17 +320,21 @@ th {
 				<td>
 					<form action="Bom_controller" method="post">
 						<div class="crud_contaner">
-							<input type="hidden" name="quan_value" id="quan_value" value="0">
+							<input type="hidden" name="quan_value" class="quan_value" value="0">
 							<input type="hidden" value="${pvalue}" name="pvalueid"> <input
 								type="hidden" value="${dto.bomid}" name="bomid"> <input
-								type="hidden" value="update" name="type"> <input
-								type="submit" value="확인" class="btn ok"> <input
+								type="hidden" value="update" name="type"> 
+								<input type="hidden" name="namevalue" value="${namevalue}"> 
+								<input
+								type="button" value="확인" class="btn ok"> <input
 								type="button" value="취소" class="btn cansle"> <input
 								type="button" value="수정" class="btn update">
 					</form>
 					<form action="Bom_controller" method="post">
 						<input type="hidden" value="${pvalue}" name="pvalueid"> <input
-							type="hidden" value="${dto.bomid}" name="bomid"> <input
+							type="hidden" value="${dto.bomid}" name="bomid">
+							<input type="hidden" name="namevalue" value="${namevalue}"> 
+							 <input
 							type="hidden" value="delet" name="type"> <input
 							type="submit" value="삭제" class="btn delet">
 					</form>
@@ -403,14 +410,18 @@ th {
 																	e.target.parentNode.parentNode.parentNode.parentNode
 																			.querySelector(".spbom_quan"))
 
-													let quan_value = e.target.parentNode.parentNode
-															.querySelector("#quan_value")
-													let quan1 = e.target.parentNode.parentNode.parentNode.parentNode
-															.querySelector(".quan1")
-													consolo.log("quan_value값은 :",quan_value.value);
-													console.log("quan1값은 :",quan1.value)
-													quan_value.value = quan1.value
-
+													console.log("여기 확인버튼",e.target.parentNode.querySelector(".ok"))
+													
+													console.log("여기 수정된데이터",e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan"))
+													console.log("여기 확인버튼에 들어갈데이터",e.target.parentNode.parentNode.querySelector(".quan_value"))
+													   
+													e.target.parentNode.querySelector(".ok").addEventListener("click",function(ev){
+										              let inputbom_quan = e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan")
+										              let quan_value = e.target.parentNode.parentNode.querySelector(".quan_value")
+										              quan_value.value = inputbom_quan.value;
+										                this.type="submit"
+										            })
+													
 													e.target.parentNode
 															.querySelector(
 																	".cansle")
