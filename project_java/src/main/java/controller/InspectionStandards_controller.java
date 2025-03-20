@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Products_DAO;
 import dto.Products_DTO;
@@ -22,6 +23,10 @@ public class InspectionStandards_controller extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		System.out.println("검사기준 페이지가 실행중입니다");
+		HttpSession session = request.getSession();
+		String Field = (String)session.getAttribute("Field");
+		System.out.println("Field ="+ Field);
+		request.setAttribute("Field", Field);
 		
 		String serchvalue =request.getParameter("serchvalue");
 		String type =request.getParameter("type");

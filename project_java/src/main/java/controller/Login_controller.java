@@ -27,7 +27,7 @@ public class Login_controller extends HttpServlet {
                     String savedUserId = cookie.getValue();
                     User_DAO userDAO = new User_DAO();
                     User_DTO user = userDAO.getUserById(savedUserId);
-
+                    System.out.println("user는 :"+user);	
                     if (user != null) {
 //                    	새로운 세션 생성
                         session = request.getSession();
@@ -39,6 +39,7 @@ public class Login_controller extends HttpServlet {
                         session.setAttribute("Email", user.getEmail());
                         session.setAttribute("CreateDate", user.getCreateDate());
                         session.setAttribute("Field", user.getField());
+                        System.out.println(user.getField());
                         
                         // 자동 로그인 후 index.jsp로 리다이렉트
                         response.sendRedirect("index.jsp");

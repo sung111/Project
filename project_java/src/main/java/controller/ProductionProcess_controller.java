@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Products_DAO;
 import dto.ProductionProcessDescription_DTO;
@@ -25,6 +26,12 @@ public class ProductionProcess_controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		HttpSession session = request.getSession();
+		String Field = (String)session.getAttribute("Field");
+		System.out.println("Field ="+ Field);
+		request.setAttribute("Field", Field);
+		
+		
 		System.out.println("ProductionProcess_controller doGet실행");
 				Products_DAO products_DAO = new Products_DAO();	
 				

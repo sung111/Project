@@ -98,6 +98,7 @@
             width: 100%;
             display: flex;
             justify-content: end;
+             align-items: center;
          	
         }
         .btncenter{
@@ -176,9 +177,9 @@
 	
         
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 767px) {
             td {
-                font-size: 12px;
+                font-size: 11px;
             }
 
             .table-wid {
@@ -209,8 +210,11 @@
                 
                 </select>
            			
-               
+               <c:if test="${Field == 'ADMIN'}">	
                     <input type="button" class="btn" id="c1" value="공정 생성" >
+                    </c:if>
+                    
+
             </div>
             
         </div>
@@ -222,8 +226,11 @@
                     <th class="table-wid2">설명</th>
                     <th class="table-wid3">사용장비</th>
                     <th class="table-wid4">위생 기준</th>
+                    <c:if test="${Field == 'ADMIN'}">	
                     <th class="table-wid5">수정/삭제</th>
+                    </c:if>
                 </tr>
+      
         <c:forEach var="dto" items="${ppdvalue}">
                 <tr>
               <form method="post" action="ProductionProcess_controller" >
@@ -240,21 +247,23 @@
                             
                     <td style="width:30%;"><span class="spantotal">${dto.hygiene}</span><textarea name="hygiene"
                             id="" class="texttotal">${dto.hygiene}</textarea></td>
-                            
+                            <c:if test="${Field == 'ADMIN'}">
                             <td class="table-button">
                             	<input type="hidden"  value="update" name="type">
-	                            <input type="button" value="수정 " class="updat btn">
+	                            <input type="button" value="수정 " class="updat btn ">
                                 <input type="submit" value="확인 " class="uok btn">
                                 <input type="button" value="취소 " class="ucan btn">
 	                        </form>
 	                        <form method="post" action="ProductionProcess_controller">
 	                            <input type="hidden"  value="delet" name="type">
 	                            <input type="hidden"  value="${dto.processid}" name="processid_value">
-	                            <input type="submit" value="삭제 " class="delet btn">
+	                            <input type="submit" value="삭제 " class="delet btn ">
                             </form>
                             </td>
+                            </c:if>
                     </td>
                 </tr>
+         
            </c:forEach>
             </table>
    
