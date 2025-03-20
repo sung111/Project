@@ -23,12 +23,27 @@ public class InspectionStandards_controller extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		System.out.println("검사기준 페이지가 실행중입니다");
 		
-		//전체조회
-		Products_DAO products_DAO = new Products_DAO();	
-		List selectval = products_DAO.selectProducts();
-		request.setAttribute("selectval", selectval);
+		String serchvalue =request.getParameter("serchvalue");
+		String type =request.getParameter("type");
+		Products_DTO products_DTO = new Products_DTO();	
+		System.out.println("type ="+type);
+		System.out.println("serchvalue ="+serchvalue);
 		
-		//이름조회
+		Products_DAO products_DAO = new Products_DAO();	
+		
+		if(type == null || serchvalue.isEmpty()) {
+			System.out.println("전체조회 시작");
+			//전체조회
+			List selectval = products_DAO.selectProducts();
+			request.setAttribute("selectval", selectval);
+	
+		}else if(type.equals("search") ) {
+			System.out.println("이름조회시작");
+			//이름조회
+		products_DTO.setProductname(serchvalue);
+		List selectval =products_DAO.selectProductnameserch(products_DTO);
+		request.setAttribute("selectval", selectval);
+		}
 		
 		
 		

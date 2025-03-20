@@ -137,6 +137,76 @@ public class Products_DAO {
 		return list;
 	}
 	
+	public List selectProductserch(){
+		System.out.println("selectProducts 실행");
+		List list = new ArrayList();
+		
+		try {
+			// [db 접속 시작]
+			Context ctx = new InitialContext(); // JNDI 컨텍스트 생성
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");// 오라클 이라는 이름에 DataSource 찾기
+			// 커넥션 풀에서 접속 정보를 가져오기
+			// 접속이 안되면 null
+			Connection con = ds.getConnection(); // DB 연결
+			// DB 접속 완
+
+			// [SQL 준비]
+			String 	query = " select * from products  WHERE productdel = 'n'";
+			PreparedStatement ps = con.prepareStatement(query);
+					
+
+			// [SQL 실행] 및 [결과 확보]
+			// ResultSet executeQuery : SQL중 select 실행
+			// int executeUpdate() : select 외 모든것
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Products_DTO products_DTO = new Products_DTO();
+//				System.out.println(rs.next());
+				
+				products_DTO.setProductid(rs.getInt("productID"));
+				products_DTO.setProductname(rs.getString("PRODUCTNAME"));
+				products_DTO.setPartnumber(rs.getString("PARTNUMBER"));
+				products_DTO.setExpdatedesc(rs.getString("expdatedesc"));
+				products_DTO.setWarehouse(rs.getString("WAREHOUSE"));
+				products_DTO.setProductimage(rs.getString("productimage"));
+				products_DTO.setNormalcriteria(rs.getString("normalcriteria"));
+				products_DTO.setAbnormalcriteria(rs.getString("abnormalcriteria"));
+				products_DTO.setPrice(rs.getInt("PRICE"));
+				products_DTO.setSpec(rs.getString("SPEC"));
+				products_DTO.setUnit(rs.getString("UNIT"));
+				products_DTO.setProductdel(rs.getString("productdel"));
+				products_DTO.setLotnumber(rs.getString("LotNumber"));
+			
+				
+//				System.out.println("1"+products_DTO.getProductid());
+//				System.out.println("2"+products_DTO.getProductname());
+//				System.out.println("3"+products_DTO.getPartnumber());
+//				System.out.println("4"+products_DTO.getExpdatedesc());
+//				System.out.println("5"+products_DTO.getWarehouse());
+//				System.out.println("6"+products_DTO.getProductimage());
+//				System.out.println("7"+products_DTO.getNormalcriteria());
+//				System.out.println("8"+products_DTO.getAbnormalcriteria());
+//				System.out.println("9"+products_DTO.getPrice());
+//				System.out.println("10"+products_DTO.getSpec());
+//				System.out.println("11"+products_DTO.getUnit());
+//				System.out.println("12"+products_DTO.getProductdel());
+//				System.out.println("13"+products_DTO.getLotnumber());
+			
+				
+			
+				list.add(products_DTO);
+			}
+
+		
+			con.close();
+		} catch (Exception e) {
+			System.err.println("버그발생 셀렉트");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	
 	public List selectProductname(){
 		System.out.println("selectProductname 실행");
@@ -346,5 +416,66 @@ public class Products_DAO {
 	}
 	
 	
+	public List selectProductnameserch(Products_DTO pproducts_DTO){
+		System.out.println("selectProductnameserch 실행");
+		List list = new ArrayList();
+		
+		try {
+			// [db 접속 시작]
+			Context ctx = new InitialContext(); // JNDI 컨텍스트 생성
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");// 오라클 이라는 이름에 DataSource 찾기
+			// 커넥션 풀에서 접속 정보를 가져오기
+			// 접속이 안되면 null
+			Connection con = ds.getConnection(); // DB 연결
+			// DB 접속 완
+
+			// [SQL 준비]
+			String 	query = " select * from products ";
+			query	+= " where productname = ? ";
+			query	+= " and productdel = 'n'";
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, pproducts_DTO.getProductname());
+					
+
+			// [SQL 실행] 및 [결과 확보]
+			// ResultSet executeQuery : SQL중 select 실행
+			// int executeUpdate() : select 외 모든것
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Products_DTO products_DTO = new Products_DTO();
+//				System.out.println(rs.next());
+				
+				products_DTO.setProductid(rs.getInt("productID"));
+				products_DTO.setProductname(rs.getString("PRODUCTNAME"));
+				products_DTO.setPartnumber(rs.getString("PARTNUMBER"));
+				products_DTO.setExpdatedesc(rs.getString("expdatedesc"));
+				products_DTO.setWarehouse(rs.getString("WAREHOUSE"));
+				products_DTO.setProductimage(rs.getString("productimage"));
+				products_DTO.setNormalcriteria(rs.getString("normalcriteria"));
+				products_DTO.setAbnormalcriteria(rs.getString("abnormalcriteria"));
+				products_DTO.setPrice(rs.getInt("PRICE"));
+				products_DTO.setSpec(rs.getString("SPEC"));
+				products_DTO.setUnit(rs.getString("UNIT"));
+				products_DTO.setProductdel(rs.getString("productdel"));
+				products_DTO.setLotnumber(rs.getString("LotNumber"));
+				
+				
+				System.out.println("1 : "+products_DTO.getProductid());
+				System.out.println("2 : "+products_DTO.getProductname());
+
+
+				list.add(products_DTO);
+			}
+
+		
+			con.close();
+		} catch (Exception e) {
+			System.err.println("버그발생 셀렉트");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 }

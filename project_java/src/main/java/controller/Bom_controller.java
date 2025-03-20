@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -76,7 +77,8 @@ public class Bom_controller extends HttpServlet {
 		String pvalue = request.getParameter("pvalueid");
 		request.setAttribute("pvalue", pvalue);
 		    
-		
+		String namevalue = request.getParameter("namevalue");
+		request.setAttribute("namevalue", namevalue);
 		
 		
 		//여기서 값을 넣고 get로 전송
@@ -118,7 +120,7 @@ public class Bom_controller extends HttpServlet {
 		
 		
 		
-		String url = "Bom_controller?pvalue="+pvalue;
+		String url = "Bom_controller?namevalue=" + URLEncoder.encode(namevalue, "UTF-8") + "&pvalue="+pvalue;
 		response.sendRedirect(url);
 	}
 }

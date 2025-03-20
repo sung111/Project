@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let loginButton = document.getElementById("login-layer");
     loginButton.addEventListener("click", function (event) {
         // 실질적으로 DB에 작성된 로그인, 아이디의 일치성을 확인하고 로그인을 할 수 있게 하는 기능
-        event.preventDefault(); // 기본 동작 방지
+      //  event.preventDefault(); // 기본 동작 방지 (정상 작동을 하기위해 주석처리 >영석씨 보세요)
         // 로그인 처리 함수 호출
     });
 
