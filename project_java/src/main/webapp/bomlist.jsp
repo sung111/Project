@@ -200,17 +200,20 @@ border: 1px solid #007bff;
 	width: 50px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
 	#back-button {
-		width: 60px;
+		width: 80px;
 		height: 60px;
 	}
 	.article {
 		margin: 0 0 20px 0;
 		font-size: 12px;
 	}
-	th, td {
+	th {
 		font-size: 12px;
+	}
+	td{
+		font-size: 10px;
 	}
 }
 </style>
@@ -227,8 +230,11 @@ border: 1px solid #007bff;
 		</div>
 	</div>
 	<div id="creatbutton">
+	<c:if test="${Field == 'ADMIN'}">
 		<input type="button" value="생성" class="btn " id="input_show">
+		</c:if>
 	</div>
+				
 	<form method="post" action="Bom_controller">
 		<div class="title_insert_none">
 			<div id="input_parent">
@@ -287,25 +293,31 @@ border: 1px solid #007bff;
 			<th>LotNo</th>
 			<th>창고위치</th>
 			<th>품번</th>
+			<c:if test="${Field == 'ADMIN'}">
 			<th id="crud_th">수정/삭제</th>
+			</c:if>
 		</tr>
+		
 		<c:forEach var="dto" items="${total}">
 			<tr>
 				<td>${dto.materialname}</td>
 				<c:choose>
 					<c:when test="${dto.bom_quan == dto.bom_quan.intValue() }">
 						<td>
-							<div class="spbom_quan">${dto.bom_quan.intValue()}/개</div> <input
+							<div class="spbom_quan">${dto.bom_quan.intValue()}/개</div>
+							<c:if test="${Field == 'ADMIN'}">
+							 <input
 							type="text" value="${dto.bom_quan.intValue()}" name="bom_quan"
 							class="inputbom_quan quan_text quan1">
-
+							</c:if>
 						</td>
 					</c:when>
 					<c:otherwise>
 						<td>
-							<div class="spbom_quan">${dto.bom_quan}/개</div> <input
-							type="text" value="${dto.bom_quan}" name="bom_quan"
-							class="inputbom_quan quan_text quan2">
+							<div class="spbom_quan">${dto.bom_quan}/개</div> 
+							<c:if test="${Field == 'ADMIN'}">
+							<input type="text" value="${dto.bom_quan}" name="bom_quan"class="inputbom_quan quan_text quan2">
+								</c:if>
 						</td>
 					</c:otherwise>
 				</c:choose>
@@ -317,7 +329,10 @@ border: 1px solid #007bff;
 				<td>${dto.lotnumber}</td>
 				<td>${dto.warehouse}</td>
 				<td>${dto.partNumber}</td>
+				
+				<c:if test="${Field == 'ADMIN'}">
 				<td>
+				
 					<form action="Bom_controller" method="post">
 						<div class="crud_contaner">
 							<input type="hidden" name="quan_value" class="quan_value" value="0">
@@ -341,7 +356,10 @@ border: 1px solid #007bff;
 
 					</div>
 				</td>
+				</c:if>
+				
 			</tr>
+				
 		</c:forEach>
 
 	</table>
@@ -352,6 +370,9 @@ border: 1px solid #007bff;
 				.addEventListener(
 						"load",
 						function() {
+							document.querySelector("#back-button").addEventListener("click",function() {
+								window.location.href = "Finished_Product_BOM"
+							})
 
 							let oks = document.querySelectorAll(".ok")
 							let cansles = document.querySelectorAll(".cansle")
@@ -485,13 +506,9 @@ border: 1px solid #007bff;
 
 							//             console.log(document.querySelector("#mid-contain-check"))
 							//             //뒤로가기버튼
-							document
-									.querySelector("#back-button")
-									.addEventListener(
-											"click",
-											function() {
-												window.location.href = "Finished_Product_BOM"
-											})
+							
+									
+										
 
 							//아래항목 추가 
 						});

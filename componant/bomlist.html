@@ -13,16 +13,16 @@
 
         body {
             width: 100%;
-           
+
         }
 
 
         #back-button {
-          margin: 10px;
-       
-          
-           
-           
+            margin: 10px;
+
+
+
+
         }
 
         #mid-contain {
@@ -30,8 +30,8 @@
             border-radius: 20px; */
             width: 100%;
             height: 50px;
-           
-           
+
+
         }
 
 
@@ -119,7 +119,7 @@
         }
 
 
-  
+
 
         .buttontd {
             display: flex;
@@ -128,7 +128,7 @@
             height: 50px;
         }
 
-   
+
 
         .none {
             display: none;
@@ -138,12 +138,14 @@
             text-align: center;
             width: 80%;
         }
-        #boodea{
+
+        #boodea {
             text-align: center;
             width: 100%;
             margin-bottom: 15px;
         }
-        .btn{
+
+        .btn {
             border-radius: 5px;
             background-color: #007bff;
             color: white;
@@ -153,49 +155,58 @@
             height: 35px;
             margin: 5px;
         }
-        .input_field_outrine{
-          border: 1px solid #007bff;
+
+        .input_field_outrine {
+            border: 1px solid #007bff;
             border-radius: 20px;
             width: 50%;
             height: 100px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            
-          
+
+
         }
-        #matesel{
-           
+
+        #matesel {
+
             width: 150px;
             height: 30px;
         }
-        .mleft{
+
+        .mleft {
             margin-top: 15px;
         }
-        .textwithd{
+
+        .textwithd {
             width: 100px;
         }
-        #input_parent{
+
+        #input_parent {
             width: 100%;
-         
+
             border-radius: 20px;
             display: flex;
         }
-        #creatbutton{
+
+        #creatbutton {
             display: flex;
             justify-content: end;
         }
-        #field_button{
-           height: 100%;
+
+        #field_button {
+            height: 100%;
             width: 100px;
             display: flex;
             justify-content: center;
             align-items: end;
         }
-        .up{
+
+        .up {
             margin-bottom: 30px;
         }
-        #title_insert_none{
+
+        #title_insert_none {
             margin-bottom: 5px;
         }
 
@@ -223,11 +234,13 @@
 
 <body>
     <div id="mid-contain">
-                <input type="button" class="button btn" value="목록이동" id="back-button">
-        </div>
+        <input type="button" class="button btn" value="목록이동" id="back-button">
+    </div>
     </div>
     <div id="boodea">
-        <div><h2>부대찌개</h2></div>
+        <div>
+            <h2>부대찌개</h2>
+        </div>
     </div>
     <div id="creatbutton">
         <input type="button" value="생성" class="btn " id="input_show">
@@ -235,33 +248,33 @@
     <div id="title_insert_none">
         <div id="input_parent">
 
-                    <div class="input_field_outrine">
-                        <div>
+            <div class="input_field_outrine">
+                <div>
 
-                            <div >
-                                <span>제품명</span>
-                                <select name="materials" id="matesel">
-                                    <option value="1" >1번입니다</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div>
-                            <div>
-                                <span>투입수량 입력</span>
-                                <input type="text" name="" id="" value="" class="textwithd">
-                            </div>
-                        </div>
-
-                           
-                            <div id="field_button">
-                                <input type="button" value="확인" id="insert" class="btn up">
-                                <input type="button" value="취소" id="input_hide" class="btn up" >   
-                            </div>
-                                 
+                    <div>
+                        <span>제품명</span>
+                        <select name="materials" id="matesel">
+                            <option value="1">1번입니다</option>
+                        </select>
                     </div>
-                
+                </div>
+
+
+                <div>
+                    <div>
+                        <span>투입수량 입력</span>
+                        <input type="text" name="" id="" value="" class="textwithd">
+                    </div>
+                </div>
+
+
+                <div id="field_button">
+                    <input type="button" value="확인" id="insert" class="btn up">
+                    <input type="button" value="취소" id="input_hide" class="btn up">
+                </div>
+
+            </div>
+
 
 
         </div>
@@ -269,25 +282,84 @@
     <table id="maintable">
         <tr>
             <th>제품명</th>
-			            <th>투입수량</th>
-			            <th>가격</th>
-			            <th>단위</th>
-			            <th>재고수량</th>
-			            <th>규격</th>
-			            <th>공급업체</th>
-			            <th>LotNo</th>
-			            <th>창고위치</th>
-			            <th>품번</th>
-			            <th>수정/삭제</th>
+            <th>투입수량</th>
+            <th>가격</th>
+            <th>단위</th>
+            <th>재고수량</th>
+            <th>규격</th>
+            <th>공급업체</th>
+            <th>LotNo</th>
+            <th>창고위치</th>
+            <th>품번</th>
+            <th>수정/삭제</th>
 
         </tr>
-   
+
     </table>
+
+    <div id="title">
+        <h1>원재료/완제품 조회</h1>
+    </div>
+    <div id="top-contain">
+        <form method="get" action="part_code">
+
+            <select name="view_value" id="check_option">
+                <option value="1">원재료 조회</option>
+                <option value="2">완재품 조회</option>
+                <option value="3">전체 조회</option>
+            </select> <input type="submit" value="조회" class="button" id="check_view">
+
+        </form>
+
+
+
+        <c:if test="${Field == 'ADMIN'}">
+            <input type="button" value="원재료생성" id="materials_hide" name="generation">
+            <input type="button" value="완제품생성" id="finished_hide" name="generation">
+
+        </c:if>
+    </div>
+
+    <form method="post" action="part_code">
+        <div id="mid-contain">
+            <div class="mid-contain-article" id="materials_id1">
+                제품명:<input type="text" class="mid-data" name="materialname">
+            </div>
+            <div class="mid-contain-article" id="materials_id2">
+                가격:<input type="text" class="mid-data" name="price">
+            </div>
+            <div class="mid-contain-article" id="materials_id3">
+                규격:<input type="text" class="mid-data" name="spec">
+            </div>
+            <div class="mid-contain-article" id="materials_id4">
+                단위:<input type="text" class="mid-data" name="unit">
+            </div>
+            <br>
+            <div class="mid-contain-article" id="materials_id5">
+                공급업체:<input type="text" class="mid-data" name="supplier">
+            </div>
+            <div class="mid-contain-article" id="materials_id6">
+                품번:<input type="text" class="mid-data" name="partNumber">
+            </div>
+            <div class="mid-contain-article" id="materials_id7">
+                LotNo:<input type="text" class="mid-data" name="lotnumber">
+            </div>
+            <div class="mid-contain-article" id="materials_id8">
+                창고위치:<input type="text" class="mid-data" name="warehouse">
+            </div>
+
+            <div class="mid-contain-article " id="materials_id9">
+
+                <input type="hidden" name="type" value="creat"> <input type="submit" value="생성" id="materials_c"
+                    class="button">
+                </div>
+            </div>
+        </form>
 
 
     <script>
         window.addEventListener("load", function () {
-            
+
 
             document.querySelector("#title_insert_none").classList.add("none")
 
@@ -298,13 +370,13 @@
             document.querySelector("#input_hide").addEventListener("click", function () {
                 document.querySelector(".title_insert_none").classList.add("none")
             });
-            
+
             document.querySelectorAll(".update").addEventListener("click", function (e) {
                 console.log(e.target.parentNode.parentNode.parentNode)
                 e.target.parentNode.parentNode.parentNode.querySelectorAll(".bom_quan").classList.remove("none")
                 e.target.parentNode.parentNode.parentNode.querySelectorAll(".spbom_quan").classList.add("none")
             });
-       
+
             e.target.parentNode.querySelector(".cansle").addEventListener("click", function (ev) {
                 ev.target.parentNode.querySelector(".delet").classList.remove("none")
                 ev.target.parentNode.querySelector(".update").classList.remove("none")
@@ -313,15 +385,18 @@
 
 
             });
-            e.target.parentNode.querySelector("ok").addEventListener("click",function(ev){
-              let inputbom_quan = e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan")
-              let quan_value = e.target.parentNode.parentNode.querySelector(".quan_value")
-              quan_value.value = inputbom_quan.value;
-                this.type="submit"
+            e.target.parentNode.querySelector("ok").addEventListener("click", function (ev) {
+                let inputbom_quan = e.target.parentNode.parentNode.parentNode.parentNode.querySelector(".inputbom_quan")
+                let quan_value = e.target.parentNode.parentNode.querySelector(".quan_value")
+                quan_value.value = inputbom_quan.value;
+                this.type = "submit"
             })
-
-
-
+            e.target.parentNode
+            ev.target.parentNode.parentNode.querySelector("#matecera_can").addEventListener("click", function (e) {
+                e.target.parentNode.parentNode.classList.add("none")
+               
+            })
+            matecera_can
             // URL에서 ?value=값 부분 가져오기
             let params = new URLSearchParams(window.location.search);
             let value = params.get("value"); // 'value' 값 가져오기
@@ -893,7 +968,7 @@
                 //         <td><span class="new-span">${v.LotNo}</span><input type="text" class="new-text"value="${v.LotNo}"></td>
                 //         <td><span class="new-span aa">${v.창고위치}</span><input type="text" class="new-text ab" value="${v.창고위치}"></td>
                 //         <td><span class="new-span aa">${v.품번}</span><input type="text" class="new-text ab" value="${v.품번}"></td>
-                    
+
                 //         <td class="buttontd">
                 //         <input type="button" value="수정" class="u">
                 //         <input type="button" value="삭제" class="d">

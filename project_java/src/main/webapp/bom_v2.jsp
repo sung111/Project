@@ -122,7 +122,7 @@
             justify-content: space-around;
         }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 767px) {
 
             #back-button {
                 width: 60px;
@@ -136,7 +136,7 @@
 
             th,
             td {
-                font-size: 10px;
+                font-size: 12px;
             }
             .btn-parent{
                 display: flex;

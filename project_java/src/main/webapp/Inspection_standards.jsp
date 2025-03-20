@@ -167,7 +167,7 @@ th {
 	border: 1px solid #007bff;
 	border-radius: 20px;
 	margin: 10px;
-	width: 48%;
+	width: 45%;
 }
 
 .standards-imege-contain {
@@ -285,12 +285,12 @@ th {
 
 .showtext {
 	height: 150px;
-	width: 320px;
+	width: 98%;
 }
 
 .showtext2 {
 	height: 150px;
-	width: 320px;
+	width: 98%;
 }
 
 .titlecenter {
@@ -386,18 +386,19 @@ th {
 						</div>
 					</div>
 				</div>
+					<c:if test="${Field == 'ADMIN'}">	
 				<div class="btncenter">
-
-					<input type="hidden" value="update" name="type"> <input
-						type="button" value="수정" class="btn u">
-					<!--                     삭제 보류 선생님이 말해줄거임 -->
-					<!--                             DB에 데이터 \t? 였나 넣어서 줄바꿔서 만든다음에 서블릿에서 \t?를 \n으로 바꿔라-->
-					<!--                     <input type="button" value="삭제" class="btn d"> -->
+					<input type="hidden" value="update" name="type"> 
+					
+					<input type="button" value="수정" class="btn u">
+					
 					<input type="submit" value="확인" class="btn ok"> <input
 						type="button" value="취소" class="btn can">
 				</div>
+					</c:if>
 			</div>
 			</form>
+				
 		</c:forEach>
 
 	</div>

@@ -26,7 +26,8 @@ public class User_DAO {
 
     //  특정 유저 정보 가져오기 (SELECT)
     public User_DTO getUserById(String userId) {
-        User_DTO user = null;
+       System.out.println("getUserById 실행");
+    	User_DTO user = null;
         String sql = "SELECT * FROM USERS WHERE userId = ?";
         
         try (Connection conn = dataSource.getConnection();
@@ -36,15 +37,18 @@ public class User_DAO {
             ResultSet rs = pstmt.executeQuery();
             
             if (rs.next()) {
+            	System.out.println("getUserById_셀렉트실행");
                 user = new User_DTO();
                 user.setUserId(rs.getString("userId"));
                 user.setUserPw(rs.getString("userPw"));
                 user.setUserName(rs.getString("userName"));
                 user.setJob(rs.getString("job"));
+                System.out.println("getUserById_셀렉트실행 중간점검 몇번도는지");
                 user.setEmail(rs.getString("email"));
                 user.setPhone(rs.getString("phone"));
-                user.setCreateDate(rs.getDate("createDate"));
+                user.setCreateDate(rs.getDate("createDat"));
                 user.setField(rs.getString("field"));
+                System.out.println("이건왜출력안함?"+rs.getString("userId")+" " +rs.getString("userPw")+ "" +rs.getString("field"));
             }
             rs.close();
         } catch (SQLException e) {

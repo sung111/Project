@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Bom_DAO;
 import dao.Materials_DAO;
@@ -25,7 +26,10 @@ public class Bom_controller extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		System.out.println("doget 실행");
-
+		HttpSession session = request.getSession();
+		String Field = (String)session.getAttribute("Field");
+		System.out.println("Field ="+ Field);
+		
 		Materials_DAO materials_DAO = new Materials_DAO(); 
 		Materials_DTO materials_DTO = new Materials_DTO();
 		Bom_DAO bom_DAO = new Bom_DAO();
