@@ -6,6 +6,7 @@
 ProductionPlan_DAO dao = new ProductionPlan_DAO();
 List<ProductionPlan_DTO> planList = dao.getAllProductionPlans();
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

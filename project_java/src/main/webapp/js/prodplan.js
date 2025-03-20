@@ -41,20 +41,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 버튼 클릭 이벤트 핸들러
-    document.getElementById("getPlanBtn").addEventListener("click", function () {
-        const button = this;
-        const isActive = button.classList.contains("active");
-        if (isActive) {
-            // 비활성화 (원래 색상으로 복구)
-            button.classList.remove("active");
-        } else {
-            // 활성화 (색상 변경)
-            button.classList.add("active");
-            const range = document.querySelector('input[name="range"]:checked').value;
-            const result = getProductionPlan(range);
-            console.log(result); // 콘솔에 출력 (UI에 표시 가능)
-        }
-    });
+    // document.getElementById("getPlanBtn").addEventListener("click", function () {
+    //     const button = this;
+    //     const isActive = button.classList.contains("active");
+    //     if (isActive) {
+    //         // 비활성화 (원래 색상으로 복구)
+    //         button.classList.remove("active");
+    //     } else {
+    //         // 활성화 (색상 변경)
+    //         button.classList.add("active");
+    //         const range = document.querySelector('input[name="range"]:checked').value;
+    //         const result = getProductionPlan(range);
+    //         console.log(result); // 콘솔에 출력 (UI에 표시 가능)
+    //     }
+    // });
     //일정별 상품 생산계획 조회버튼
 
     // Search 검색
@@ -180,7 +180,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePagination() {
         const rows = document.querySelectorAll(".order-info-content");
         const totalRows = rows.length;
-
+        const rowsPerPage = 10; // 한 페이지당 표시할 행 개수
+        let currentPage = 1; // 현재 페이지 (기본값 1)
         // 최소 1페이지는 생성이 된다.
         const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
         const paginationContainer = document.getElementById("pagination-container");
@@ -332,18 +333,18 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("삭제할 행을 선택하세요.");
             return;
         }
-
+    
         // 확인 메시지 띄우기
         if (confirm("정말로 이 행을 삭제하시겠습니까?")) {
-            const planId = selectedRow.getAttribute("data-id");
-
+            const 삭제할_아이디 = selectedRow.getAttribute("data-id");  // planId를 가져와서 삭제할_아이디에 할당
+    
             // 서버에 삭제 요청 보내기
             fetch("http://localhost:8081/project_HHMES/ProductionPlan_controller?action=delete", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                body: new URLSearchParams({ planId: 삭제할_아이디 }).toString()
+                body: new URLSearchParams({ planId: 삭제할_아이디 }).toString()  // 삭제할 아이디 전달
             })
                 .then(response => {
                     if (response.ok) {

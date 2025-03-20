@@ -48,7 +48,7 @@ public class User_DAO {
                 user.setPhone(rs.getString("phone"));
                 user.setCreateDate(rs.getDate("createDat"));
                 user.setField(rs.getString("field"));
-                System.out.println("이건왜출력안함?"+rs.getString("userId")+" " +rs.getString("userPw")+ "" +rs.getString("field"));
+                System.out.println(rs.getString("userId")+" " +rs.getString("userPw")+ "" +rs.getString("field"));
             }
             rs.close();
         } catch (SQLException e) {
@@ -102,7 +102,6 @@ public class User_DAO {
         }
         return false;
     }
-
     // 유저 삭제
     public boolean deleteUser(String userId) {
         String sql = "DELETE FROM USERS WHERE userId = ?";
