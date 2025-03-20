@@ -10,12 +10,18 @@ public class Performance_DTO {
 	String ProductName;			// 완제품명
 	int PlanId;					// 생산계획 시퀀스번호
 	String UserId;				// 유저 id
+	String userName;
 	Timestamp ReportTime;		// 실적등록 시간
 	Timestamp ReportTime2;		// 조회때 사용
 	String PerformanceComment;	// 코멘트
 	int ProductionCount;		// 생산수량
 	
-	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getPerformanceId() {
 		return PerformanceId;
 	}

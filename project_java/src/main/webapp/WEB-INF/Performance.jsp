@@ -64,6 +64,7 @@
 							<!-- 제품명 들어갈자리 hidden -->
 							<input type="hidden" name="Productplan" id="Productplan">
 							<input type="hidden" name="productId" id="productId">
+							<input type="hidden" name="userid" value="${ userId }">
 							<div>
 								<!-- 날짜데이터 삽입 -->
 								<input type="datetime-local" class="date1" name="date"
@@ -127,7 +128,7 @@
 								<div class="emdwp">${dto.productName}</div>
 								<div class="emdtn">${dto.productionCount}</div>
 								<div class="text1">${dto.performanceComment}</div>
-								<div class="emdId">${dto.userId}</div>
+								<div class="emdId">${dto.userName}</div>
 								<input type="hidden" name="performanceId"
 									value="${dto.performanceId}" class="performId">
 								<div style="display: flex; justify-content: center;">

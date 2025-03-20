@@ -58,7 +58,7 @@
 							<div class="emdwp">${dto.productName}</div>
 							<div class="emdtn">${dto.productionCount}</div>
 							<div class="text1">${dto.performanceComment}</div>
-							<div class="emdId">${dto.userId}</div>
+							<div class="emdId">${dto.userName}</div>
 							<input type="hidden" name="productid" value="${dto.productId}"
 								class="productid"> <input type="hidden"
 								name="performanceId" value="${dto.performanceId}"
@@ -101,6 +101,7 @@
 					<div class="rightTop">
 						<div class="wp2">제품명</div>
 						<input type="hidden" name="wpvnaaud" id="wpvnaaud">
+						<input type="hidden" name="userId" value="${ userId }">
 					</div>
 					<div>
 						<div>
@@ -212,7 +213,7 @@
 						<div class="emdgkq" id="qualityResult">${ttT.result}</div>
 						<div class="tkdb" id="qualityFailreason">${ttT.failreason}</div>
 						<div class="text1" id="qualityComments">${ttT.comments}</div>
-						<div class="text1" id="qualityUserId">${ttT.userId}</div>
+						<div class="text1" id="qualityUserId">${ttT.userName}</div>
 						<div
 							style="display: flex; justify-content: center; align-items: center;">
 							<button style="font-size: 12px; height: 25px;" class="modify">수정</button>
