@@ -184,7 +184,7 @@
 								<form method="post" action="Performance" class="kk">
 								<input type="hidden" name="command" value="update">
 		    					<div class="dateB">
-		    						<input type="datetime-local" class="date1" name="date2" value="\${date}" style="font-size:15px">
+		    						<input type="datetime-local" class="date1" name="date2" value="\${date}" style="font-size:13px">
 									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
 								</div>
 								<div class="emdwp">\${emdwp}</div>

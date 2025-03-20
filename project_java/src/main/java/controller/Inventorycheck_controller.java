@@ -25,11 +25,17 @@ public class Inventorycheck_controller extends HttpServlet {
 		Inventorycheck_DAO checkDAO = new Inventorycheck_DAO();
 		List resultList = checkDAO.selectcheck();
 		List resultList2 = checkDAO.selectcheck2();
+		List prodDB = checkDAO.prodDB();
+		List matDB = checkDAO.matDB();
 
 		request.setAttribute("resultList", resultList);
 		request.setAttribute("resultList2", resultList2);
+		request.setAttribute("prodDB", prodDB);
+		request.setAttribute("matDB", matDB);
 		System.out.println("resultList : " + resultList);
 		System.out.println("resultList2 : " + resultList2);
+		System.out.println("prodDB : " + prodDB);
+		System.out.println("matDB : " + matDB);
 
 		String url = "/WEB-INF/Inventorycheck.jsp";
 		request.getRequestDispatcher(url).forward(request, response);

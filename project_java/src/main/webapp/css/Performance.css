@@ -600,8 +600,9 @@ body {
 
 
   .index {
-    margin: 8px;
-    width: 97%;
+    /* margin: 8px; */
+    padding: 0 28px 0 0;
+    width: 100%;
     display: flex;
     justify-content: space-around;
 
