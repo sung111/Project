@@ -80,12 +80,13 @@
 						<td id="receiptDate">${ dto.receiptDate }</td>
 						<td id="maExpDate">${ dto.maExpDate }</td>
 						<td>
-							<form method="post" action="Inventorycheck" id="updateForm1" class="delFrom">
+							<form method="post" action="Inventorycheck" id="updateForm1"
+								class="delFrom">
 								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete1"> <input
-									type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;"><input type="hidden"
-									name="inventoryId" value="${ dto.inventoryId }"
+								<input type="hidden" name="command" value="delete1">
+								<input type="submit" name="delete" value="삭제" id="del" class="del"
+									style="width: 55px; height: 35px;">
+								<input type="hidden" name="inventoryId" value="${ dto.inventoryId }"
 									id="inventoryId">
 							</form>
 						</td>
@@ -103,12 +104,13 @@
 						<td id="makeDate">${ dto.makeDate }</td>
 						<td id="prExpDate">${ dto.prExpDate }</td>
 						<td>
-							<form method="post" action="Inventorycheck" id="updateForm2"  class="delFrom">
+							<form method="post" action="Inventorycheck" id="updateForm2"
+								class="delFrom">
 								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete2"> <input
-									type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;"> <input
-									type="hidden" name="productinvenid"
+								<input type="hidden" name="command" value="delete2">
+								<input type="submit" name="delete" value="삭제" id="del" class="del"
+									style="width: 55px; height: 35px;">
+								<input type="hidden" name="productinvenid"
 									value="${ dto.productinvenId }" id="productinvenid">
 							</form>
 						</td>
@@ -146,13 +148,13 @@
 								type="hidden" id="hiddenInventoryId" name="inventoryId">
 								<input type="hidden" id="hiddenProductInvenId"
 								name="productinvenid"> <datalist id="suggestions">
-									<c:forEach var="dto" items="${resultList}">
+									<c:forEach var="dto" items="${matDB}">
 										<option value="${dto.materialname}"
-											data-id="${dto.inventoryId}"></option>
-									</c:forEach>
-									<c:forEach var="dto" items="${resultList2}">
+											data-id="${dto.materialId}" data-type="원자재"></option>
+									</c:forEach>									
+									<c:forEach var="dto" items="${prodDB}">
 										<option value="${dto.productname}"
-											data-id="${dto.productinvenId}"></option>
+											data-id="${dto.productId}" data-type="완제품"></option>
 									</c:forEach>
 								</datalist></td>
 						</tr>
@@ -188,6 +190,7 @@
 							<td>
 								<div class="unit-container">
 									<select id="itemtype" class="itemtype popInput" name="type">
+										<option value="">선택</option>
 										<option value="완제품">완제품</option>
 										<option value="원자재">원자재</option>
 									</select>
@@ -239,7 +242,6 @@
 		    		// console.log(e.target.parentNode.parentNode.parentNode);
 		    		const trModify = e.target.closest("tr");
 		    		const dbgud = trModify.querySelector('#dbgud').innerText
-		    		console.log(trModify, dbgud)
 		    		
 		    		const form = document.createElement("form");
 		            form.method = "POST";
@@ -255,7 +257,6 @@
 		            const input4 = document.createElement("input");
 		            input4.type = "hidden";
 		    		if( dbgud == "원자재"){
-		    			
 		    			// 원자재
 		    			const lotNo = trModify.querySelector('#lotNo').innerText
 			    		const materialname = trModify.querySelector('#materialname').innerText
@@ -276,13 +277,13 @@
 									<td id="maUnit">\${maUnit}</td>
 									<td id="receiptDate"><input type="date" name="receiptDate" value="\${receiptDate}" style="font-size: 12px;" id="receiptDate1"></td>
 									<td id="maExpDate">\${maExpDate}</td>
-									<td colspan="2">
-											<input type="hidden" name="command" value="modify1">
-											<input type="submit" name="modify" value="완료" id="yes"
-												style="width: 55px; height: 35px;">
-											<button class="cancel" style="width: 55px; height: 35px;">취소</button>
+									<td>
+										<input type="submit" value="확인"  class="yes"
+											style="width: 55px; height: 35px;">
+										<button class="cancel" style="width: 55px; height: 35px;">취소</button>
+										<input type="hidden" name="inventoryId" value="\${ inventoryId }"
+											id="inventoryId">
 									</td>
-									<td style="display: none;"><input type="hidden" name="inventoryId" value="\${inventoryId}" id="inventoryId"></td>
 							`
 						
 		    		} else {
@@ -308,19 +309,18 @@
 									<td id="prUnit">\${prUnit}</td>
 									<td id="makeDate"><input type="date" name="makeDate" value="\${makeDate}" style="font-size: 12px;" id="makeDate1"</td>
 									<td id="prExpDate">\${prExpDate}</td>
-									<td colspan="2">
-											<input type="hidden" name="command" value="modify2">
-											<input type="submit" name="modify" value="완료" id="yes"
-												style="width: 55px; height: 35px;">
-											<button class="cancel" style="width: 55px; height: 35px;">취소</button>
+									<td>
+										<input type="submit" value="확인"  class="yes"
+											style="width: 55px; height: 35px;">
+										<button class="cancel" style="width: 55px; height: 35px;">취소</button>
+										<input type="hidden" name="productinvenid"
+											value="\${ productinvenid }" id="productinvenid">
 									</td>
-									<td style="display: none;"><input type="hidden" name="productinvenid" value="\${productinvenid}" id="productinvenid"></td>
 							`
 						
 		    		}
-		    		
-					document.querySelector('#yes').addEventListener('click', (e)=>{
-						
+		    		const yes = document.querySelectorAll('.yes');
+		    		yes[i].addEventListener('click', (e)=>{
 						if( dbgud == "원자재"){
 							input1.value = "modify1"; // 수정 명령어 값
 			    			// 5. `<input>` 요소를 생성하여 `inventoryId` 값을 숨겨서 전달
@@ -350,58 +350,25 @@
 			            // 8. 폼을 자동으로 제출 (서버에 데이터 전송)
 			            form.submit();
 						alert("수정되었습니다.")
-					})
-					
-					
-					document.querySelector('.cancel').addEventListener('click', (e)=>{
-						if( dbgud == "원자재"){
-							trModify.innerHTML =`
-											<td id="lotNo">\${lotNo}</td>
-											<td id="materialname">\${materialname}</td>
-											<td id="dbgud">\${dbgud}</td>
-											<td id="maPartNum">\${maPartNum}</td>
-											<td id="maQuantity">\${maQuantity}</td>
-											<td id="maSpec">\${maSpec}</td>
-											<td id="maUnit">\${maUnit}</td>
-											<td id="receiptDate">\${receiptDate}</td>
-											<td id="maExpDate">\${maExpDate}</td>
-											<td colspan="2">
-												<form method="post" action="Inventorycheck" id="updateForm1">
-													<button class="modify" style="width: 55px; height: 35px;">수정</button>
-													<input type="hidden" name="command" value="delete">
-													<input type="submit" name="delete" value="삭제" id="del" style="width: 55px; height: 35px;">
-												</form>
-											</td>
-											<td style="display: none;"><input type="hidden" name="inventoryId" value="31" id="inventoryId"></td>
-											`
-						} else {
-							trModify.innerHTML =`
-											<td id="prLotNo">\\${prLotNo}</td>
-											<td id="productname">\${productname}</td>
-											<td id="dbgud">\${dbgud}</td>
-											<td id="prPartNum">\${prPartNum}</td>
-											<td id="prQuantity">\${prQuantity}</td>
-											<td id="prSpec">\${prSpec}</td>
-											<td id="prUnit">\${prUnit}</td>
-											<td id="makeDate">\${makeDate}</td>
-											<td id="prExpDate">\${prExpDate}</td>
-											<td colspan="2">
-												<form method="post" action="Inventorycheck" id="updateForm2">
-													<button class="modify" style="width: 55px; height: 35px;">수정</button>
-													<input type="hidden" name="command" value="delete"> <input type="submit" name="delete" value="삭제" id="del" style="width: 55px; height: 35px;">
-												</form>
-											</td>
-											<td style="display: none;"><input type="hidden" name="productinvenid" value="0" id="productinvenid"></td>
-											`
-						}
 						
-					})
+					}) // yes event end
 					
-		    	})
-		    }
+					
+					const cancel = document.querySelectorAll('.cancel');
+		    		cancel[i].addEventListener('click', (e)=>{
+		    			location.reload();
+	    			})
+	    			
+		    			
+		    	}) // modify addevent end
+		    } // for end
+		    
 		    
 		    document.querySelector('#insertBtn').addEventListener('click', (e)=>{
 		    	e.preventDefault();
+		    	let hiddenInventoryId = document.querySelector('#hiddenInventoryId');
+		    	let hiddenProductInvenId = document.querySelector('#hiddenProductInvenId');
+		    	let itemtype = document.querySelector('#itemtype').value;
 		    	let inputBox = document.querySelector('#additem')
 		    	let addquantity = document.querySelector('#addquantity');
 		    	let addin_date = document.querySelector('#addin_date');
@@ -423,9 +390,14 @@
 		    		
 		    		if( option.value === inputBox.value){
 		    			let data = option.getAttribute('data-id');
+		    			let type = option.getAttribute('data-type');
 		    			if( data ){
 		    				hiddenInventoryId.value = data;
 		                    hiddenProductInvenId.value = data;
+			    			if(itemtype != type){
+			    				alert("제품유형을 다시 선택해주시기 바랍니다.");
+			    				return;
+			    			}
 		    			}
 			    		break;
 		    		} 

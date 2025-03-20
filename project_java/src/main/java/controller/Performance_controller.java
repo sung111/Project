@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -47,7 +48,8 @@ public class Performance_controller extends HttpServlet {
 		System.out.println("command :" + command);
 		
 		if( "insert".equals(command) ) {
-			String Productplan = request.getParameter("wpvnaaud");  // 제품명
+			String Productplan = request.getParameter("Productplan");  // 생산계획 시퀀스번호
+			String productId = request.getParameter("productId");  // 생산계획 시퀀스번호
 			String ea = request.getParameter("ea");					//갯수 입력
 			String comment = request.getParameter("comment");		//코멘트 입력
 			
@@ -59,6 +61,7 @@ public class Performance_controller extends HttpServlet {
 			
 //		String 으로 받은 ea를 int 타입으로 변환호 set(ea1) 전달인자가 int 인것을 변환하기위해 작성
 			int ea1 = Integer.parseInt(ea);
+			int productId1 = Integer.parseInt(productId);
 			
 //		Oracle의 DATE 타입은 사실상 TIMESTAMP와 같기 때문에 java.sql.Timestamp 사용
 //		DTO 에서 전달인자값도 Timestamp 으로 변경함.
@@ -67,6 +70,7 @@ public class Performance_controller extends HttpServlet {
 			
 			Performance_DTO performDTO = new Performance_DTO();
 			performDTO.setPlanId(ProductName1); 	// 제품명 설정
+			performDTO.setProductId(productId1);	// 제품 시퀀스
 			performDTO.setProductionCount(ea1); 		// 갯수 설정
 			performDTO.setPerformanceComment(comment);  // 코멘트 설정
 			performDTO.setReportTime(sqlTime); 			// 날짜 설정
@@ -148,9 +152,27 @@ public class Performance_controller extends HttpServlet {
 		    request.getRequestDispatcher(url).forward(request, response);
 			
 			
+		} else if( "getProductName".equals(command) ) {
+			String productId = request.getParameter("productId");
+	        System.out.println("받은 Product ID: " + productId);
+
+	        if (productId != null && !productId.isEmpty()) {
+	            response.setContentType("text/plain; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            Performance_DAO performance_DAO = new Performance_DAO();
+
+	            // 데이터베이스에서 해당 productId의 제품명 가져오기
+	            String productName = performance_DAO.getProductNameById(Integer.parseInt(productId));
+
+	            if (productName != null) {
+	                out.print(productName); // 제품명 반환
+	            } else {
+	                out.print("데이터 없음"); // 해당 productId가 없을 경우
+	            }
+	            return;
+	        }
 		} else {
-			String url = "Performance";
-			response.sendRedirect(url);
+			response.sendRedirect("Performance");
 		}
 		
 		
