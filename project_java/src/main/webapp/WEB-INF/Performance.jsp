@@ -56,13 +56,14 @@
 				</div>
 				<div class="registration">
 					<!-- form 여깄어요!! -->
-					<form method="post" action="Performance">
+					<form method="post" action="Performance"  id="insertForm">
 						<!-- insert 폼인지 확인 -->
 						<input type="hidden" name="command" value="insert">
 						<div class="rightTop" style="width: 100%;">
-							<div class="wp2">제품명</div>
+							<div class="wp2">제품명 : <span id="productName">ㅎㅇ</span></div>
 							<!-- 제품명 들어갈자리 hidden -->
-							<input type="hidden" name="wpvnaaud" id="wpvnaaud">
+							<input type="hidden" name="Productplan" id="Productplan">
+							<input type="hidden" name="productId" id="productId">
 							<div>
 								<!-- 날짜데이터 삽입 -->
 								<input type="datetime-local" class="date1" name="date"
@@ -150,18 +151,45 @@
 
 
 	<script>
+	//등록버튼
+	document.querySelector('.btn3').addEventListener('click', (e)=>{
+		e.preventDefault();
+		const tt = confirm("정말로 등록하시겠습니까?")
+		if(tt){
+			document.querySelector('#insertForm').submit();
+		}
+	})
 	
+	// 작지 행클릭시 계획 시퀀스&제품 시퀀스 가져옴.
 	document.querySelector('.instView').addEventListener('click', (e)=>{
 		/* console.log(e.target.parentNode.hasAttribute("data-id")); */
 		if(e.target.parentNode.hasAttribute("data-id")){
 			const planId = e.target.parentNode.getAttribute("data-id");
-			document.querySelector('#wpvnaaud').value = planId;
-			console.log(planId);
+			const productId = e.target.parentNode.getAttribute("data-pi");
+			document.querySelector('#Productplan').value = planId;
+			document.querySelector('#productId').value = productId;
+			console.log(planId, productId);
+			// 
+			fetch("Performance", {
+	            method: "POST", // `POST` 요청
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            body: "command=getProductName&productId=" + encodeURIComponent(productId)
+	        })
+	        .then(response => response.text()) // 응답을 텍스트로 변환
+	        .then(data => {
+	            console.log("받은 데이터:", data); // 서버 응답 확인
+	            document.getElementById("productName").textContent = data; // 제품명 변경
+	            
+	        })
+	        .catch(error => console.error("Error fetching product:", error));
 		} else {
 			e.preventDefault();
 			e.target.blur();
 			alert("현재 페이지에서 수정하실수없습니다.")
 		}
+		
 	})
 	
 	
@@ -211,7 +239,7 @@
 		
 	}
 
-		// 삭제 버튼
+	// 삭제 버튼
 	const del = document.querySelectorAll('.delete')
 	const deleteF = document.querySelectorAll('.deleteForm')
 	for(let i = 0; i < del.length; i++){
