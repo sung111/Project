@@ -27,8 +27,11 @@ public class QualityControl_DAO {
 
 			Connection con = ds.getConnection();
 
-			String query = " select perf.* , prod.productname " + " from performances perf "
-					+ " join products prod on perf.productid = prod.productid " + " order by reporttime desc ";
+			String query = " select perf.* , prod.productname, usr.username "
+					+ " from performances perf "
+					+ " join products prod on perf.productid = prod.productid "
+					+ " join users usr on perf.userid = usr.userid "
+					+ " order by reporttime desc ";
 			PreparedStatement ps = con.prepareStatement(query);
 
 //			excuteQuery : SQL 중 select 실행
@@ -39,6 +42,7 @@ public class QualityControl_DAO {
 			while (rs.next()) {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
+				dto.setUserName(rs.getString("username"));
 				dto.setProductId(rs.getInt("productid"));
 				dto.setPerformanceId(rs.getInt("performanceid"));
 				dto.setProductName(rs.getString("productname"));
@@ -71,19 +75,19 @@ public class QualityControl_DAO {
 			Connection con = ds.getConnection();
 //			테이블 시퀀스값, 제품명, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
 			String query = " insert into " + "	qualitycontrols "
-					+ "	values(null, ?, ?,'adminid1', ?, ?, ?, ?, ?, ?)";
+					+ "	values(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement ps = con.prepareStatement(query);
 
 			ps.setInt(1, qualityDTO.getProductId());
 			ps.setInt(2, qualityDTO.getPerformanceId());
-//			ps.setString(result, query);
-			ps.setString(3, qualityDTO.getResult());
-			ps.setString(4, qualityDTO.getFailreason());
-			ps.setString(5, qualityDTO.getComments());
-			ps.setTimestamp(6, qualityDTO.getReportTime());
-			ps.setInt(7, qualityDTO.getPasspack());
-			ps.setInt(8, qualityDTO.getFailPack());
+			ps.setString(3, qualityDTO.getUserId());
+			ps.setString(4, qualityDTO.getResult());
+			ps.setString(5, qualityDTO.getFailreason());
+			ps.setString(6, qualityDTO.getComments());
+			ps.setTimestamp(7, qualityDTO.getReportTime());
+			ps.setInt(8, qualityDTO.getPasspack());
+			ps.setInt(9, qualityDTO.getFailPack());
 
 			result = ps.executeUpdate();
 
@@ -106,8 +110,11 @@ public class QualityControl_DAO {
 
 			Connection con = ds.getConnection();
 
-			String query = " select qu.*, pr.productname " + " from qualitycontrols qu "
-					+ " join products pr on qu.productid = pr.productid " + " order by qualitycontroltime desc";
+			String query = " select qu.*, pr.productname, usr.username "
+					+ " from qualitycontrols qu "
+					+ " join products pr on qu.productid = pr.productid "
+					+ " join users usr on qu.userid = usr.userid "
+					+ " order by qualitycontroltime desc";
 			PreparedStatement ps = con.prepareStatement(query);
 
 			ResultSet rs = ps.executeQuery();
@@ -115,6 +122,7 @@ public class QualityControl_DAO {
 			while (rs.next()) {
 				QualityControl_DTO dto = new QualityControl_DTO();
 //				컬럼명 입력
+				dto.setUserName(rs.getString("username"));
 				dto.setQualityControlId(rs.getInt("qualitycontrolid"));
 				dto.setProductId(rs.getInt("productid"));
 				dto.setProductNameST(rs.getString("productname"));

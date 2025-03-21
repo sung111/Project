@@ -174,16 +174,5 @@ document.addEventListener("DOMContentLoaded", function () {
     일반게시판menu.addEventListener("click", function () {
         iframe.src = "04_일반게시판.jsp"
         LocalNavigationbar("게시판", "일반게시판");
-    })
-})
-
-// 로그인 창 닫기
-document.addEventListener("DOMContentLoaded", function () {
-    const loginWallpaper = document.querySelector(".login-wallpaper");
-    const loginContainer = document.querySelector(".login-container");
-
-    loginWallpaper.addEventListener("click", function () {
-        loginWallpaper.style.display = "none";
-        loginContainer.style.display = "none"; 
     });
 });

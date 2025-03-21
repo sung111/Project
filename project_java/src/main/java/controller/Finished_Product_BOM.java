@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.*;
+import javax.servlet.http.HttpSession;
+
+import dao.Products_DAO;
 /**
  * 완제품 BOM 컨트롤러
  */
@@ -20,7 +22,12 @@ public class Finished_Product_BOM extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		System.out.println("Finished_Product_BOM doGet 페이지가 실행중입니다");
+		HttpSession session = request.getSession();
+		String Field = (String)session.getAttribute("Field");
+		System.out.println("Field ="+ Field);
+		request.setAttribute("Field", Field);
 		//전체 셀렉트후 출력
+		
 		Products_DAO products_DAO = new Products_DAO();
 		List slectall = products_DAO.selectProducts();
 		request.setAttribute("slectall", slectall);

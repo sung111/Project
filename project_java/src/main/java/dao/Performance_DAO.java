@@ -29,7 +29,7 @@ public class Performance_DAO {
 
 			Connection con = ds.getConnection();
 //			테이블 시퀀스값, 제품 시퀀스, 계획시퀀스값, userId , 작성일자, 코멘트 , 생산갯수 
-			String query = " insert into performances " + " values ( null, 1, ?, 'adminid1', ? , ? , ?)";
+			String query = " insert into performances " + " values ( null, ?, ?, ?, ? , ? , ?)";
 
 			PreparedStatement ps = con.prepareStatement(query);
 //			ps.setString( 몇번째 ? , value );
@@ -38,13 +38,16 @@ public class Performance_DAO {
 //			ps.setTimestamp(2, performDTO.getReportTime());
 //			ps.setString(3, performDTO.getPerformanceComment());
 //			ps.setInt(4, performDTO.getProductionCount());
-			ps.setInt(1, performDTO.getPlanId());
-			ps.setTimestamp(2, performDTO.getReportTime());
-			ps.setString(3, performDTO.getPerformanceComment());
-			ps.setInt(4, performDTO.getProductionCount());
+			ps.setInt(1, performDTO.getProductId());
+			ps.setInt(2, performDTO.getPlanId());
+			ps.setString(3, performDTO.getUserId());
+			ps.setTimestamp(4, performDTO.getReportTime());
+			ps.setString(5, performDTO.getPerformanceComment());
+			ps.setInt(6, performDTO.getProductionCount());
 
 			result = ps.executeUpdate();
 
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,8 +70,11 @@ public class Performance_DAO {
 
 			Connection con = ds.getConnection();
 
-			String query = " select perf.* , prod.productname " + " from performances perf "
-					+ " join products prod on perf.productid = prod.productid " + " order by reporttime desc ";
+			String query = " select perf.* , prod.productname, usr.username "
+					+ " from performances perf "
+					+ " join products prod on perf.productid = prod.productid "
+					+ " join users usr on perf.userid = usr.userid "
+					+ " order by reporttime desc ";
 			PreparedStatement ps = con.prepareStatement(query);
 
 //			excuteQuery : SQL 중 select 실행
@@ -79,6 +85,7 @@ public class Performance_DAO {
 			while (rs.next()) {
 				Performance_DTO dto = new Performance_DTO();
 //				컬럼명입력해서 가져오기
+				dto.setUserName(rs.getString("username"));
 				dto.setProductId(rs.getInt("productid"));
 				dto.setPerformanceId(rs.getInt("performanceid"));
 				dto.setProductName(rs.getString("productname"));
@@ -222,60 +229,40 @@ public class Performance_DAO {
 		return list;
 	}
 
-	public List allSerach(Performance_DTO performDTO) {
 
-		List list = new ArrayList();
 
-		Context ctx;
-		try {
-			ctx = new InitialContext();
+	
+	
+	public String getProductNameById(int productId) {
+	    String productName = null;
+	    ResultSet rs = null;
+
+	    try {
+	    	Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
 
 			Connection con = ds.getConnection();
 
-			String query = "  ";
+			String query = " select * "
+					+ " from products "
+					+ " where productid = ? ";
 			PreparedStatement ps = con.prepareStatement(query);
+			
+	        ps.setInt(1, productId);
+	        
+	        rs = ps.executeQuery();
 
-			ps.setTimestamp(1, performDTO.getReportTime());
-			ps.setTimestamp(2, performDTO.getReportTime2());
-//			ps.setString( 3, performDTO.getProductName() );
-//			ps.setString( 4, performDTO.getProductName() );
-
-			String productName = performDTO.getProductName();
-			if (productName == null || productName.trim().isEmpty()) {
-				ps.setNull(3, java.sql.Types.VARCHAR);
-				ps.setString(4, "%"); // 전체 검색
-			} else {
-				ps.setString(3, productName);
-				ps.setString(4, "%" + productName + "%"); // LIKE 검색
-			}
-
-//			executeQuery : SQL 중 select 실행
-//			executeUpdate : select 외 모든것
-//			ResultSet : select 조회 결과 전체 : 엑셀 테이블 느낌
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Performance_DTO dto = new Performance_DTO();
-//				컬럼명입력해서 가져오기
-				dto.setPerformanceId(rs.getInt("performanceid"));
-				dto.setProductName(rs.getString("productname"));
-				dto.setPlanId(rs.getInt("PlanId"));
-				dto.setUserId(rs.getString("UserId"));
-				dto.setReportTime(rs.getTimestamp("ReportTime"));
-				dto.setPerformanceComment(rs.getString("PerformanceComment"));
-				dto.setProductionCount(rs.getInt("ProductionCount"));
-
-				list.add(dto);
-			}
-
-			con.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
+	        if ( rs.next() ) {
+	            productName = rs.getString("productname");
+	        }
+	        
+	        con.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } 
+	    return productName;
 	}
-
+	
+	
+	
 }

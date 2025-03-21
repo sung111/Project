@@ -10,9 +10,10 @@ import dto.ProductionPlan_DTO;
 import dto.Products_DTO;
 
 public class ProductionPlan_DAO {
-
     private DataSource dataSource;
-
+ // DAO 객체 선언
+    private ProductionPlan_DAO planDAO; 
+    
     public ProductionPlan_DAO() {
         try {
             Context initContext = new InitialContext();
@@ -103,27 +104,43 @@ public class ProductionPlan_DAO {
 
 //    생산계획 삭제
     public boolean deleteProductionPlan(int planId) {
-        String sql = "DELETE FROM productionplans WHERE planId = ?";
+//    	외래키가 연결이 되있다면 외래키 제약조건 위반으로 삭제가 안됨.
+    	// 자식 테이블이 조회
+        String checkSQL = "SELECT COUNT(*) FROM performances WHERE planId = ?"; 
+     // 자식 테이블에서 삭제하도록 명령
+        String deleteChildSQL = "DELETE FROM performances WHERE planId = ?"; 
+     // 부모 테이블에서 삭제
+        String deleteParentSQL = "DELETE FROM productionplans WHERE planId = ?"; 
+
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkSQL);
+             PreparedStatement deleteChildStmt = conn.prepareStatement(deleteChildSQL);
+             PreparedStatement deleteParentStmt = conn.prepareStatement(deleteParentSQL)) {
 
-            System.out.println("[DAO] deleteProductionPlan() 실행");
-            System.out.println("SQL: " + sql);
-            System.out.println("파라미터 - planId: " + planId);
+            // 자식 데이터 확인
+            checkStmt.setInt(1, planId);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                // 자식 데이터가 있다면 삭제
+                System.out.println("[DAO] 자식 데이터 삭제 중...");
+                deleteChildStmt.setInt(1, planId);
+                int childRowsDeleted = deleteChildStmt.executeUpdate();
+                System.out.println("삭제된 자식 행 개수: " + childRowsDeleted);
+            }
 
-            pstmt.setInt(1, planId);
+            // 부모 데이터 삭제
+            deleteParentStmt.setInt(1, planId);
+            int parentRowsDeleted = deleteParentStmt.executeUpdate();
+            System.out.println("[DAO] 부모 데이터 삭제 중...");
+            System.out.println("삭제된 부모 행 개수: " + parentRowsDeleted);
 
-            int rowsDeleted = pstmt.executeUpdate();
-            System.out.println("삭제된 행 개수: " + rowsDeleted);
-
-            return rowsDeleted > 0;
+            return parentRowsDeleted > 0;
         } catch (SQLException e) {
             System.out.println("SQL 실행 오류 발생!");
             e.printStackTrace();
             return false;
         }
     }
-    
     // 생산계획 추가
     public boolean addProductionPlan(String planName, String planStatus) {
         String sql = "INSERT INTO productionplans (planName, planStatus) VALUES (?, ?)";
