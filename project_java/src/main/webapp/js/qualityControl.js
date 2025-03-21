@@ -199,17 +199,6 @@ function init() {
   }
 
 
-  //등록버튼
-  // document.querySelector('.btn3').addEventListener('click', (e) => {
-  //   const rad = document.querySelectorAll('.rad')
-  //   let ss
-  //   for (let i = 0; i < rad.length; i++) {
-  //     // console.log(rad[i].checked);
-  //     // console.log(rad[i].value);
-  //     if (rad[i].checked) {
-  //       ss = rad[i].value;
-  //     }
-  //   }
 
   //   // ss=합불
   //   // drop = 불합일때 드랍메뉴 벨류

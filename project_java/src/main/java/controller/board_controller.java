@@ -1,4 +1,4 @@
-package Board;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.Board_DAO;
+import dto.Board_DTO;
 
 
 @WebServlet("/board")
@@ -30,7 +33,7 @@ public class board_controller extends HttpServlet {
 		
 		
 		   // 돌려주다
-		   boardDAO boarddao = new boardDAO();
+		   Board_DAO boarddao = new Board_DAO();
 		   List result2 = boarddao.selectList();
 		   request.setAttribute("result2", result2);
 		
@@ -78,7 +81,7 @@ public class board_controller extends HttpServlet {
 	    
 	    
 	    // DTO 값 저장
-	    boardDTO boarddto = new boardDTO();
+	    Board_DTO boarddto = new Board_DTO();
 	    
 	    boarddto.setUserid(userid);
 	    boarddto.setTitle(write);
@@ -91,7 +94,7 @@ public class board_controller extends HttpServlet {
 	    
 	    
 	    // DAO 메소드에 저장
-	    boardDAO boarddao = new boardDAO();
+        Board_DAO boarddao = new Board_DAO();
 	    
 	    int result = boarddao.PostList(boarddto);
 	    System.out.println("결과물 : " + result);
