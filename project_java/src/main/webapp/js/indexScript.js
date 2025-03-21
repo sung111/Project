@@ -146,33 +146,28 @@ document.addEventListener("DOMContentLoaded", function () {
     // 실적 보고서
     const performmenu = document.querySelector("#nav-perform");
     performmenu.addEventListener("click", function () {
-        iframe.src = "perform_0203.jsp"
+        iframe.src = "perform_0203.html"
         LocalNavigationbar("실적보고서", "실적보고서");
     })
     const reportmenu = document.querySelector("#nav-report");
     reportmenu.addEventListener("click", function () {
-        iframe.src = "report.jsp"
+        iframe.src = "report.html"
         LocalNavigationbar("실적보고서", "주요지표");
     })
     const chartmenu = document.querySelector("#nav-chart");
     chartmenu.addEventListener("click", function () {
-        iframe.src = "chart_0203.jsp"
+        iframe.src = "chart_0203.html"
         LocalNavigationbar("실적보고서", "대시보드");
     })
     // 게시판
     const 공지사항menu = document.querySelector("#nav-공지사항");
     공지사항menu.addEventListener("click", function () {
-        iframe.src = "02_공지사항.jsp";
+        iframe.src = "02_공지사항.html";
         LocalNavigationbar("게시판", "공지사항");
-    })
-    const 사내복지menu = document.querySelector("#nav-사내복지");
-    사내복지menu.addEventListener("click", function () {
-        iframe.src = "03_사내복지.jsp"
-        LocalNavigationbar("게시판", "사내복지");
     })
     const 일반게시판menu = document.querySelector("#nav-일반게시판");
     일반게시판menu.addEventListener("click", function () {
-        iframe.src = "04_일반게시판.jsp"
+        iframe.src = "board.jsp"
         LocalNavigationbar("게시판", "일반게시판");
     });
 });

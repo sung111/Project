@@ -1,4 +1,4 @@
-package Board;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.Board_DAO;
+import dto.Board_DTO;
 
 
 @WebServlet("/Update")
@@ -36,12 +39,12 @@ public class Update_controller extends HttpServlet {
 		System.out.println("업데이트제목 : " + up2);
 		System.out.println("업데이트내용 : " + up3);
 		
-		boardDTO dtup = new boardDTO();
+		Board_DTO dtup = new Board_DTO();
 		dtup.setPostid(up);
 		dtup.setTitle(up2);
 		dtup.setContent(up3);
 		
-		boardDAO daup = new boardDAO();
+		Board_DAO daup = new Board_DAO();
 		int uplist = daup.UpdateList(dtup);
 		request.setAttribute("uplist",uplist);
 		

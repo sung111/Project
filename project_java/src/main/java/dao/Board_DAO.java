@@ -1,4 +1,4 @@
-package Board;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class board_DAO {
+import dto.Board_DTO;
 
-	public int PostList(board_DTO boardDTO) {
+public class Board_DAO {
+
+	public int PostList(Board_DTO boardDTO) {
 		System.out.println("Post 테스트 실행");
 		int result = -1;
 
@@ -89,7 +91,8 @@ public class board_DAO {
 			
 			while (rs.next()) {
 
-				board_DTO dto = new board_DTO();
+				Board_DTO dto = new Board_DTO();
+				
 				// 실행(조회)된 것에서 // INT를 가져옴(입력X)
 				// ( int "" )
 				// rs.number("nextval)
@@ -118,7 +121,7 @@ public class board_DAO {
 			
 	                       // 주의
 	                      // 값을 가져올때.
-	public List newList(board_DTO boardDTO) {
+	public List newList(Board_DTO boardDTO) {
 		System.out.println("게시판 조회");
 		List list2 = new ArrayList();
 
@@ -146,7 +149,7 @@ public class board_DAO {
 			
 			 rs.next(); {
 
-				board_DTO dto2 = new board_DTO();
+				 Board_DTO dto2 = new Board_DTO();
 				// 실행(조회)된 것에서 // INT를 가져옴(입력X)
 				// ( int "" )
 				// rs.number("nextval)
@@ -191,7 +194,7 @@ return list2;
 	
 	
 	
-	public int DeleteList(board_DTO boardDTO) {
+	public int DeleteList(Board_DTO boardDTO) {
 		System.out.println("게시판 조회");
 		
 //		int a = 0;
@@ -259,7 +262,7 @@ return list2;
 	
 	
 	// 수정 페이지에 제목과 내용 가져오기
-	public List ModifyList(board_DTO boardDTO) {
+	public List ModifyList(Board_DTO boardDTO) {
 		System.out.println("게시판 조회");
 		List list5 = new ArrayList();
 
@@ -284,7 +287,7 @@ return list2;
 			
 			 rs.next(); {
 
-				board_DTO dto5 = new board_DTO();
+				 Board_DTO dto5 = new Board_DTO();
 				// 실행(조회)된 것에서 // INT를 가져옴(입력X)
 				// ( int "" )
 				// rs.number("nextval)
@@ -319,7 +322,7 @@ return list5;
 	
 	
 	// 조회수 컬럼
-	public int viewcountList(board_DTO boardDTO) {
+	public int viewcountList(Board_DTO boardDTO) {
 		System.out.println("게시판 수정");
 		
         int rs = 0;
@@ -387,7 +390,7 @@ return rs;
 	
 	
 	// 수정 페이지에 내용 수정하기
-	public int UpdateList(board_DTO boardDTO) {
+	public int UpdateList(Board_DTO boardDTO) {
 		System.out.println("게시판 수정");
 		
         int rs = 0;

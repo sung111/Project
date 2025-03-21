@@ -1,4 +1,4 @@
-package Board;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.Board_DAO;
+import dto.Board_DTO;
 
 
 @WebServlet("/Delete")
@@ -36,10 +39,10 @@ public class Delete_controller extends HttpServlet {
 		System.out.println("삭제 :" + del);
 		
 		// "DTO"에 값을 담음
-		boardDTO bd = new boardDTO();
+		Board_DTO bd = new Board_DTO();
 		bd.setPostid(del);
 		
-		boardDAO ba = new boardDAO();
+		Board_DAO ba = new Board_DAO();
 		               // DTO의 값을 DAO 메소드에 담음
 		// "DAO"와 연결(타입 동일시).
 		int count = ba.DeleteList(bd);

@@ -1,4 +1,4 @@
-package Perform;
+package dao;
 
 
 import java.sql.Connection;
@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.queryDTO;
+
 
 
 
@@ -18,7 +20,7 @@ public class queryDAO {
 
 	
 	
-	public List selectList(queryDTO queryDTO) {
+	public List selectList(dto.queryDTO queryDTO) {
 		System.out.println("쿼리표 조회");
 		List list = new ArrayList();
 
@@ -86,7 +88,7 @@ public class queryDAO {
 			
 			while (rs.next()) {
 
-				queryDTO dto = new queryDTO();
+				dto.queryDTO dto = new dto.queryDTO();
 				// 실행(조회)된 것에서 // INT를 가져옴(입력X)
 				// ( int "" )
 				// rs.number("nextval)

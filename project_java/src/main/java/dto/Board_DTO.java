@@ -1,8 +1,8 @@
-package Board;
+package dto;
 
 import java.sql.Date;
 
-public class board_DTO {
+public class Board_DTO {
 
 	private int postid;
 	private String userid;  
