@@ -1,4 +1,4 @@
-package Board;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.Board_DAO;
+import dto.Board_DTO;
 
 
 @WebServlet("/Modify")
@@ -32,12 +35,12 @@ public class Modify_controller extends HttpServlet {
 	int re = Integer.parseInt(request.getParameter("mod"));	
 	System.out.println("수정 : " + re);	
 	
-	boardDTO dtmod = new boardDTO();
+	Board_DTO dtmod = new Board_DTO();
 	dtmod.setPostid(re);
 		
 	
 	// 3차
-	boardDAO damod = new boardDAO();
+	Board_DAO damod = new Board_DAO();
 	// DAO아님 (담아서 다른곳에 돌려주는 용도)
 	List listmod = damod.ModifyList(dtmod);
 	// 수정된 값 돌려줌

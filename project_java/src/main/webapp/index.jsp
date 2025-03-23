@@ -108,7 +108,6 @@ if (user != null) {
 			<button class="nav-button">게시판</button>
 			<ul class="nav-tag">
 				<li id="nav-공지사항">공지사항</li>
-				<li id="nav-사내복지">사내복지</li>
 				<li id="nav-일반게시판">일반게시판</li>
 			</ul>
 		</div>

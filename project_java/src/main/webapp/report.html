@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="css/reset">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+</head>
+<body class="perform">
+            <!-- <div id="title">
+                <li>주요 지표</li>
+            </div> -->
+
+
+
+
+
+
+
+            <!-- 일간 주간 월간 선택 -->
+            <div id="cor">
+                <select id="sel">
+                    <option id="daily">일간</option>
+                    <option id="week">주간</option>
+                    <option id="month">월간</option>
+                </select>
+
+
+                <!-- 일간 주간 월간 날짜 선택 -->
+                <div id="cal">
+                <input type="date" id="date" value="2025-02-03" name="날짜선택">
+                <input type="week" id="weeks" value="2025-02-03" name="날짜선택">
+                <input type="month" id="months" value="2025-02-03" name="날짜선택">
+                <!-- <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> -->
+                </div>  
+            </div>
+            
+
+            
+             
+
+
+
+
+
+            <!-- nav 표 -->
+             <div style="overflow-x:auto;">
+             <table border="1" id="info">
+                 <thead>
+                     <tr>
+                         <td class="one">담당자</td>
+                         <td></td>
+                         <td class="one">소속</td>
+                         <td></td>
+                     </tr>
+                 </thead>
+                
+                 <tbody>
+
+                  
+
+                    <br>
+                    <div id="set">
+                        
+                           
+                            <!-- <button id="join">등록</button> -->
+                        
+                    </div>
+
+
+                         <tr id="budae1">
+                             <td class="one">기간</td>
+                             <td id="two"></td>
+                             <td class="one">보고일</td>
+                             <td id="two"></td>
+                             </tr>
+                      
+                 </tbody>
+
+                </table>
+
+
+               
+
+                    
+                    
+                
+                       
+                        <!-- <button id="join">등록</button> -->
+                    
+                </div>
+
+
+
+              
+           
+
+
+
+
+                 <!-- 일간 차트 -->
+                <div id="Chart1">
+
+                   
+
+                <canvas id="myChart" width="900%" height="500%"></canvas>
+                </div>
+
+
+
+
+                
+                 <!-- 주간 차트 -->
+                <div id="Chart2">
+
+                    <!-- <div id="but2">
+                    <button id="dadd2">데이터 추가</button>
+                    <button id="ddel2">데이터 삭제</button>
+                    </div> -->
+
+                <canvas id="myChart2" width="900%" height="500%"></canvas>
+                </div>
+
+
+
+
+                
+                 <!-- 월간 차트 -->
+                <div id="Chart3">
+
+                <!-- <div id="but3">
+                    <button id="dadd3">데이터 추가</button>
+                    <button id="ddel3">데이터 삭제</button>
+                </div> -->
+
+                
+                <canvas id="myChart3" width="900%" height="500%"></canvas>
+                </div>
+
+
+
+
+
+
+                <!-- 메인 표 -->
+                <table border="1" id="first">
+                    <thead>
+                        <tr>
+                            <td class="daytime">완제품명</td>
+                            <td class="daytime">성과목표</td>
+                            <td class="daytime">06:00~08:00</td>
+                            <td class="daytime">08:00~10:00</td>
+                            <td class="daytime">10:00~12:00</td>
+                            <td class="daytime">12:00~14:00</td>
+                            <td class="daytime">14:00~16:00</td>
+                            <td class="daytime">16:00~18:00</td>
+                            <td class="daytime">목표</td>
+                            <td class="daytime">달성률</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                     
+
+
+
+                            <tr id="budae1">
+                                <td>부대찌개</td>
+                                <td>100</td>
+                                <td>100</td>
+                                <td>835</td>
+                                <td>445</td>
+                                <td>366</td>
+                                <td>351</td>
+                                <td>923</td> 
+                                <td>923</td> 
+                                <td>923</td> 
+                            </tr>
+
+                            <tr id="nabe1">
+                                <td>밀푀유 나베</td>
+                                <td>100</td>
+                                <td>626</td>
+                                <td>835</td>
+                                <td>445</td>
+                                <td>366</td>
+                                <td>351</td>
+                                <td>923</td> 
+                                <td>923</td> 
+                                <td>923</td> 
+                               
+                            </tr>
+
+                            <tr id="kimchi1">
+                                <td>김치찌개</td>
+                                <td>100</td>
+                                <td>626</td>
+                                <td>835</td>
+                                <td>445</td>
+                                <td>366</td>
+                                <td>351</td>
+                                <td>923</td>
+                                <td>923</td> 
+                                <td>923</td> 
+                              
+                            </tr>
+
+                            <tr id="ttuk1">
+                                <td>떡볶이</td>
+                                <td>100</td>
+                                <td>626</td>
+                                <td>835</td>
+                                <td>445</td>
+                                <td>366</td>
+                                <td>351</td>
+                                <td>923</td>
+                                <td>923</td> 
+                                <td>923</td> 
+                             
+                            </tr>
+
+                            <tr id="ggop1">
+                                <td>곱창전골</td>
+                                <td>100</td>
+                                <td>626</td>
+                                <td>835</td>
+                                <td>445</td>
+                                <td>366</td>
+                                <td>351</td>
+                                <td>923</td>
+                                <td>923</td> 
+                                <td>923</td> 
+                               
+                            </tr>
+                         
+                    </tbody>
+                </table>
+
+                  
+
+                    <table border="1" id="second">
+                        <thead>
+                            <tr>
+                                <td class="wektime">완제품명</td>
+                                <td class="wektime">성과목표</td>
+                                <td class="wektime">월요일</td>
+                                <td class="wektime">화요일</td>
+                                <td class="wektime">수요일</td>
+                                <td class="wektime">목요일</td>
+                                <td class="wektime">금요일</td>
+                                <td class="wektime">토요일</td>
+                                <td class="wektime">일요일</td>
+                                <td class="wektime">목표</td>
+                                <td class="wektime">달성률</td>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                         
+    
+    
+    
+                                <tr id="budae1">
+                                    <td>부대찌개</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                </tr>
+    
+                                <tr id="nabe1">
+                                    <td >밀푀유 나베</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                   
+                                </tr>
+    
+                                <tr id="kimchi1">
+                                    <td>김치찌개</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                </tr>
+    
+                                <tr id="ttuk1">
+                                    <td>떡볶이</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                 
+                                </tr>
+    
+                                <tr id="ggop1">
+                                    <td>곱창전골</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                    <td>923</td> 
+                                   
+                                </tr>
+                             
+                        </tbody>
+    
+                    </table>
+    
+    
+    
+
+                    <table border="1" id="third">
+                        <thead>
+                            <tr>
+                                <td class="montime">완제품명</td>
+                                <td class="montime">성과목표</td>
+                                <td class="montime">1주차</td>
+                                <td class="montime">2주차</td>
+                                <td class="montime">3주차</td>
+                                <td class="montime">4주차</td>
+                                <td class="montime">목표</td>
+                                <td class="montime">달성률</td>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                         
+    
+    
+    
+                                <tr id="budae1">
+                                    <td>부대찌개</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td> 
+                                  
+                                </tr>
+    
+                                <tr id="nabe1">
+                                    <td >밀푀유 나베</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td> 
+                                 
+                                   
+                                </tr>
+    
+                                <tr id="kimchi1">
+                                    <td>김치찌개</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                              
+                                </tr>
+    
+                                <tr id="ttuk1">
+                                    <td>떡볶이</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                 
+                                </tr>
+    
+                                <tr id="ggop1">
+                                    <td>곱창전골</td>
+                                    <td>100</td>
+                                    <td>626</td>
+                                    <td>835</td>
+                                    <td>445</td>
+                                    <td>366</td>
+                                    <td>351</td>
+                                    <td>923</td>
+                                   
+                                </tr>
+                             
+                        </tbody>
+    
+                    </table>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </table>
+                </div>
+
+
+
+             
+                
+
+
+
+
+                    <div id="set">
+                    
+                        <br>
+                        <button id="regi">등록</button>
+                        <!-- <button id="del">삭제</button> -->
+                        <button id="fix">수정</button>
+                    
+                    <div id="sum">&nbsp;※ 요약 및 개요 </div>
+               
+                    <input type="text" id="text">
+
+
+                   <div id="sum">&nbsp;※ 평가 및 피드백 </div>
+               
+                   <input type="text" id="text">
+
+                   <div id="sum">&nbsp;※ 보고 수신자 코멘트 </div>
+               
+                   <input type="text" id="text">
+
+                   </div>
+             
+</body>
+
+
+
+<script src="../js/report.js"></script>
+</html>
