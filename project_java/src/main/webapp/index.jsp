@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, dao.User_DAO,project.dto.User_DTO" %>
+<%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, dao.User_DAO,dto.User_DTO" %>
 <%
 /* ========== 1. 세션이 없으면 쿠키 확인 후 자동 로그인 처리 ========== */
 /* HttpSession session = request.getSession(); */

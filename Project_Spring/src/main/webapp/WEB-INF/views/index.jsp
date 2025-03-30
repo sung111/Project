@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, dao.User_DAO,project.dto.User_DTO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, project.dto.User_DTO" %>
+
 <%
 /* ========== 1. 세션이 없으면 쿠키 확인 후 자동 로그인 처리 ========== */
-/* HttpSession session = request.getSession(); */
 if (session == null || session.getAttribute("userId") == null) {
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
@@ -11,14 +10,9 @@ if (session == null || session.getAttribute("userId") == null) {
             if ("userId".equals(cookie.getName())) {
                 String savedUserId = cookie.getValue();
                 
-                User_DAO userDAO = new User_DAO();
-                User_DTO user = userDAO.getUserById(savedUserId);
-
-                if (user != null) {
-                    session = request.getSession(); // 새로운 세션 생성
-                    session.setAttribute("userId", user.getUserId());
-                    session.setAttribute("userName", user.getUserName());
-                }
+                // 세션 생성 후 userId 저장
+                session = request.getSession(); // 새로운 세션 생성
+                session.setAttribute("userId", savedUserId);
             }
         }
     }
@@ -31,13 +25,11 @@ session.setMaxInactiveInterval(28800);
 <%
 /* 유저 ID 디버깅 */
 String sessionUserId = (String) session.getAttribute("userId");
-String sessionUserName = (String) session.getAttribute("userName");
 System.out.println("index.jsp - 현재 세션 userId: " + sessionUserId);
-System.out.println(" index.jsp - 현재 세션 userName: " + sessionUserName);
 
 if (sessionUserId == null) {
-	response.sendRedirect(" login.jsp");
-	return;
+    response.sendRedirect("login.jsp");
+    return;
 }
 %>
 <%
@@ -48,21 +40,21 @@ if (userId == null) {
 	return;
 }
 %>
+
+
+
 <%
-// 세션에서 userId 가져오기 
-if (userId == null) {
-	response.sendRedirect("login.jsp");
-	return;
-} // DAO를 통해 유저 정보를 가져옴 
-User_DAO userDAO = new User_DAO();
-User_DTO user = userDAO.getUserById(userId); //유저 정보가 null이 아니면 이름과 권한을 설정한다. 
+/* 기본값 설정 */
 String helloUser = "로그인이 필요한 서비스입니다.";
 String userRole = "";
 String userName = "";
+
+/* 세션에서 유저 정보 가져오기 */
+User_DTO user = (User_DTO) session.getAttribute("user"); // DTO를 세션에서 직접 가져옴
 if (user != null) {
-	userRole = user.getJob();
-	userName = user.getUserName();
-	helloUser = userRole + " " + userName + "님, 환영합니다!";
+    userRole = user.getJob();
+    userName = user.getUserName();
+    helloUser = userRole + " " + userName + "님, 환영합니다!";
 }
 %>
 <!DOCTYPE html>
