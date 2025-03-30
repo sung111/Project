@@ -12,4 +12,17 @@
 		select * from products  WHERE productdel = 'n'
 	</select>
 	
+	
+	<select id="selectMaterialsProducts" resultType="project.dto.Materials_DTO">
+		select materialname,PRICE,SPEC,UNIT,SUPPLIER,PARTNUMBER,LOTNUMBER,WAREHOUSE,'m' type,materialdel,materialid from MATERIALS
+		WHERE materialdel = 'n'
+		union all
+		select productname materialname,PRICE,SPEC,UNIT,'',PARTNUMBER,LOTNUMBER,WAREHOUSE,'p' type,productdel materialdel,productid materialid from products
+		WHERE productdel = 'n' 
+		order by materialname 
+	</select>
+	
+	
+	
+		
 </mapper>

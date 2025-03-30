@@ -1,4 +1,4 @@
-package project.dao;
+package project.dao.Standard_total_dao;
 
 import java.util.List;
 
@@ -16,7 +16,15 @@ public class Products_DAOImpl implements Products_DAO {
 	
 	@Override
 	public List<Products_DTO> selectProducts() {
-		List list = sqlSession.selectList("mapper.emp.selectProducts");
+		List<Products_DTO> list = null;
+		try {
+			list = sqlSession.selectList("mapper.emp.selectProducts");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+			
 		return list;
 	}
 

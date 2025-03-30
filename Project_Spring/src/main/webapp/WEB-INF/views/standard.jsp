@@ -82,7 +82,7 @@
 						}
 
 						.lotno {
-							width: 20%;
+							width: 15%;
 						}
 
 						.ud {
@@ -156,6 +156,13 @@
 						#radios {
 							margin-left: 20px;
 						}
+						.manu-name5{
+							width: 150px;
+						}
+						.text_hide{
+							width: 60%;
+						}
+					
 
 						/* 넓이에따른 if문 0~600px까지만 적용  */
 						@media screen and (max-width: 767px) {
@@ -242,7 +249,7 @@
 						<h1>원재료/완제품 조회</h1>
 					</div>
 					<div id="top-contain">
-						<form method="get" action="part_code">
+						<form method="get" action="standard">
 
 							<select name="view_value" id="check_option">
 								<option value="1">원재료 조회</option>
@@ -335,14 +342,14 @@
 
 
 					<div id="main_contain">
-						<!-- 원재료 테이블 -->
+						<!-- 원재료 테이블 / 전체테이블-->
 						<table id="start_table">
 							<tr>
 								<th class="manu-name poom">제품명</th>
 								<th>가격</th>
 								<th>규격</th>
 								<th>단위</th>
-								<th>공급업체</th>
+								<th class="manu-name5">공급업체</th>
 								<th>품번</th>
 								<th class="lotno">LotNo</th>
 								<th>창고위치</th>
@@ -358,7 +365,8 @@
 									<form method="post" action="part_code">
 										<td><span class="text_view">${dto.materialname}</span> <input type="text"
 												value="${dto.materialname}" class="text_hide" name="materialname2">
-											<input type="hidden" value="${dto.materialname}" name="origin"></td>
+											<input type="hidden" value="${dto.materialname}" name="origin">
+										</td>
 										<td><span class="text_view">${dto.price}</span> <input type="text"
 												value="${dto.price}" class="text_hide" name="price2"></td>
 
@@ -366,10 +374,12 @@
 												value="${dto.spec}" class="text_hide" name="spec2"></td>
 										<td><span class="text_view">${dto.unit}</span><input type="text"
 												value="${dto.unit}" class="text_hide" name="unit2"></td>
-										<td><span class="text_view">${dto.supplier}</span><input type="text"
-												value="${dto.supplier}" class="text_hide" name="supplier2"></td>
-										<td><span class="text_view">${dto.partNumber}</span><input type="text"
-												value="${dto.partNumber}" class="text_hide" name="partNumber2"></td>
+											
+										<td><span class="text_view text_view_hide">${dto.supplier}</span><input type="text"
+												value="${dto.supplier}" class="text_hide text_hide_hide" name="supplier2"></td>
+											
+										<td><span class="text_view">${dto.partNumber}</span>
+											<input type="text" value="${dto.partNumber}" class="text_hide" name="partNumber2"></td>
 										<td><span class="text_view">${dto.lotnumber}</span><input type="text"
 												value="${dto.lotnumber}" class="text_hide text_width" name="lotnumber2">
 										</td>
@@ -434,7 +444,7 @@
 								</c:if>
 
 							</tr>
-							<span>${finishiList}</span>
+
 							<c:forEach var="dto" items="${finishiList}">
 								<tr class="table_tr">
 									<form method="post" action="part_code">
@@ -507,7 +517,7 @@
 									document.querySelector("#finish_table").classList
 										.add("none")
 
-									let vv = '${viewValue}'
+									let vv = '${view_value}'
 
 									if (vv == 1 || vv == '') {
 										document.querySelector("#start_table").classList
@@ -605,14 +615,30 @@
 													console
 														.log(e.target.parentNode.parentNode.parentNode)
 													let update = e.target.parentNode.parentNode.parentNode.parentNode
+												
+
 													let textHides = update
 														.querySelectorAll(".text_hide")
 													let textViews = update
 														.querySelectorAll(".text_view")
+													let textVtext_hide_hide = update
+														.querySelector(".text_hide_hide")
+
+													let text_view_hide = update
+														.querySelector(".text_view_hide")
+
 
 													for (let y = 0; y < textHides.length; y++) {
+														
 														textHides[y].classList
 															.remove("none")
+
+														if(textHides.value == null){
+
+															console.log("---textHides.value"+textHides.value)
+															text_view_hide.classList
+															.remove("none")
+														}
 													}
 													for (let y = 0; y < textHides.length; y++) {
 														textViews[y].classList

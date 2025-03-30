@@ -6,6 +6,7 @@ package project.dto;
 public class Materials_DTO {
 	
 	private String materialname;
+	private String productname;
 	private int price;
 	private String spec;
 	private String unit;

@@ -1,10 +1,10 @@
-package project.service;
+package project.dao.Standard_total_dao;
 
 import java.util.List;
 
 import project.dto.Materials_DTO;
 
-public interface Materials_service {
+public interface Materials_DAO {
 
 	List<Materials_DTO> SelectList();
 	
@@ -15,4 +15,7 @@ public interface Materials_service {
 	List<Materials_DTO> updateMaterials();
 	
 	List<Materials_DTO> deleteMaterials();
+	
+	
+	
 }

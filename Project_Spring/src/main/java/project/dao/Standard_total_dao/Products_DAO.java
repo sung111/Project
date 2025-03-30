@@ -1,4 +1,4 @@
-package project.dao;
+package project.dao.Standard_total_dao;
 
 import java.util.List;
 

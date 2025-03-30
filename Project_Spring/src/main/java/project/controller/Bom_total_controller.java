@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import dao.MaterialsProducts_DAO;
-import dao.Materials_DAO;
-import dao.Products_DAO;
-import project.service.Materials_service;
-import project.service.Products_service;
+import project.service.Standard_total_service.MaterialsProducts_service;
+import project.service.Standard_total_service.Materials_service;
+import project.service.Standard_total_service.Products_service;
 //자 여기는 bom,재고,관련된 controller입니다 싹다 몰아주세요 
 @Controller
 public class Bom_total_controller {
@@ -22,53 +22,45 @@ public class Bom_total_controller {
 	Materials_service materials_service;
 	@Autowired
 	Products_service Products_service;
+	@Autowired
+	MaterialsProducts_service materialsProducts_service;
 	
 	
-	@RequestMapping("/standard")
-	public String standard(Model model, @RequstParam(value="view_value",required=true)) {
+	
+//	@RequestMapping("/standard" )
+	@RequestMapping(value="/standard",method=RequestMethod.GET)
+	public String standard(Model model,@RequestParam(value="view_value", required=false)String view_value,
+			HttpSession httpSession) {
 
-		List resultList = materials_service.selectMaterials();
-		List finishiList = Products_service.selectProducts();
-		model.addAttribute("resultList",resultList);
-		model.addAttribute("finishiList",finishiList);
-		
-		
-		HttpSession session = request.getSession();
-		String Field = (String)session.getAttribute("Field");
+//		String Field = (String)httpSession.getAttribute("Field");
+		String Field = "ADMIN";
+		String id = (String)httpSession.getAttribute("id");
 		System.out.println("Field ="+ Field);
-		String id = (String)session.getAttribute("id");
+		
 		try {
 
-			String viewValue = request.getParameter("view_value");
-			
-			System.out.println("viewValue :"+viewValue);
-			if(viewValue == null) {
-				viewValue = "1";
-				System.out.println("viewValue 널이벤트값 :"+viewValue);
+			System.out.println("---------view_value :"+view_value);
+			if(view_value == null) {
+				view_value = "1";
+				System.out.println("view_value 널이벤트값 :"+view_value);
 			}
-		
-			if(viewValue.equals("1")) {
+			if(view_value.equals("1")) {
 				System.out.println("1번원재료조회");
-				System.out.println("1번 viewValue 값"+viewValue);
-				List resultList = materials_DAO.selectMaterials();
-				request.setAttribute("resultList", resultList);
-			
-			}else if(viewValue.equals("2")) {
+				System.out.println("1번 view_value 값"+view_value);
+				List resultList = materials_service.selectMaterials();
+				model.addAttribute("resultList",resultList);
+			}else if(view_value.equals("2")) {
 				System.out.println("2번완제품조회");
-				System.out.println("2번 viewValue 값"+viewValue);
-				Products_DAO products_DAO = new Products_DAO();
-				List finishiList = products_DAO.selectProducts();
-				request.setAttribute("finishiList", finishiList);
-				
-			}else if(viewValue.equals("3")) {
-				List resultList = materialsProducts_DAO.selectMaterialsProducts();
-				request.setAttribute("resultList", resultList);
-				
-	
+				System.out.println("2번 view_value 값"+view_value);
+				List finishiList = Products_service.selectProducts();
+				model.addAttribute("finishiList",finishiList);
+			}else if(view_value.equals("3")) {
+				System.out.println("3번완제품조회");
+				List resultList = materialsProducts_service.selectMaterialsProducts();
+				model.addAttribute("resultList",resultList);
 			}
-			request.setAttribute("Field", Field);
-			request.setAttribute("viewValue", viewValue);
-			
+			model.addAttribute("Field",Field);
+			model.addAttribute("view_value",view_value);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,6 +68,42 @@ public class Bom_total_controller {
 		
 		return "standard";
 	}
+	
+//	원재료 생성, 삭제(수정) , 수정 
+	@RequestMapping(value="/standard_insert",method=RequestMethod.POST)
+	public String standardinsert() {
+		
+		return "forward:/standard";
+	}
+	@RequestMapping(value="/standard_delet",method=RequestMethod.PUT)
+	public String standarddelet() {
+		
+		return "forward:/standard";
+	}
+	@RequestMapping(value="/standard_update",method=RequestMethod.PUT)
+	public String standardupdate() {
+		
+		return "forward:/standard";
+	}
+	
+//	완제품 생성, 삭제(수정) , 수정 
+	@RequestMapping(value="/products_insert",method=RequestMethod.POST)
+	public String productsinsert() {
+		
+		return "forward:/standard";
+	}
+	@RequestMapping(value="/products_delet",method=RequestMethod.PUT)
+	public String productsddelet() {
+		
+		return "forward:/standard";
+	}
+	@RequestMapping(value="/products_update",method=RequestMethod.PUT)
+	public String productsdupdate() {
+		
+		return "forward:/standard";
+	}
+	
+	
 	
 	@RequestMapping("/inspectionStandards")
 	public String inspectionStandards() {

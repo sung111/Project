@@ -1,12 +1,13 @@
-package project.service;
+package project.service.Standard_total_service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.dao.Materials_DAO;
+import project.dao.Standard_total_dao.Materials_DAO;
 import project.dto.Materials_DTO;
+import project.dto.Products_DTO;
 
 @Service
 public class Materials_serviceImpl implements Materials_service {
@@ -22,9 +23,16 @@ public class Materials_serviceImpl implements Materials_service {
 
 	@Override
 	public List<Materials_DTO> selectMaterials() {
-		List list = materials_DAO.selectMaterials();
-//		System.out.println("Materials_serviceImpl_selectMaterials실행");
-//		System.out.println("list값 ="+list);
+		List<Materials_DTO> list = null;
+		try {
+		
+			list = materials_DAO.selectMaterials();
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+
 		return list;
 	}
 
