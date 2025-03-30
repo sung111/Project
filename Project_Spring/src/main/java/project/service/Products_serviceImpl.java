@@ -16,8 +16,8 @@ public class Products_serviceImpl implements Products_service {
 	
 	@Override
 	public List<Products_DTO> selectProducts() {
-		
-		return null;
+		List list = products_DAO.selectProducts();
+		return list;
 	}
 
 	@Override
