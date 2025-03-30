@@ -1,19 +1,19 @@
 package project.dto;
-//?™„? œ?’ˆ ?…Œ?´ë¸?
+//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 public class Products_DTO {
-	int productid;
-	String productname;
-	String partnumber;
-	String expdatedesc; //?œ ?†µê¸°í•œ
-	String warehouse;
-	String productimage; //?´ë¯¸ì?ë§í¬
-	String normalcriteria; // ? •?ƒ? œ?’ˆê¸°ì?
-	String abnormalcriteria; //ë¹„ì •?ƒ? œ?’ˆê¸°ì?
-	int price;
-	String spec;
-	String unit;
-	String productdel; //?‚­? œ?œ ë¬?
-	String lotnumber;
+	private int productid;
+	private String productname;
+	private String partnumber;
+	private String expdatedesc; //?ï¿½ï¿½?ï¿½ï¿½ê¸°í•œ
+	private String warehouse;
+	private String productimage; //?ï¿½ï¿½ë¯¸ï¿½?ë§í¬
+	private String normalcriteria; // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê¸°ï¿½?
+	private String abnormalcriteria; //ë¹„ì •?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê¸°ï¿½?
+	private int price;
+	private String spec;
+	private String unit;
+	private String productdel; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?
+	private String lotnumber;
 	
 	public String getExpdatedesc() {
 		return expdatedesc;

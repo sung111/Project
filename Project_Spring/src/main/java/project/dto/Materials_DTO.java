@@ -2,31 +2,31 @@ package project.dto;
 
 
 
-//??¬ ?…Œ?´ë¸?
+//?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 public class Materials_DTO {
 	
-	String materialname;
-	int price;
-	String spec;
-	String unit;
-	String supplier;
-	String partNumber;
-	String lotnumber;
-	String warehouse;
-	String origin;
-	String bomdel;
-	int bomid;
+	private String materialname;
+	private int price;
+	private String spec;
+	private String unit;
+	private String supplier;
+	private String partNumber;
+	private String lotnumber;
+	private String warehouse;
+	private String origin;
+	private String bomdel;
+	private int bomid;
 
-	int materiaid;
-	String materiadel;
-	String type; //?›??¬, ?™„? œ?’ˆ ???… êµ¬ë¶„ p?›?? œ, m?™„? œ?’ˆ
-	int stockquantity;
-	int product_material_id;
-	double bom_quan; //bom ?ˆ¬?…ê³„ìˆ˜
-	int bom_ma_id; //bom ë©”í„°ë¦¬ì–¼?•„?´?””
-	int bom_pr_id; //bom ?”„ë¡œë•?Š¸ ?•„?´?””
-	int inven_ma_id; // ?¸ë²¤í† ë¦? ë©”í„°ë¦¬ì–¼?•„?´?””
-	int inven_quan;  // ?‚¨?? ?›??¬ ?ˆ˜?Ÿ‰
+	private int materiaid;
+	private String materiadel;
+	private String type; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½, ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ???ï¿½ï¿½ êµ¬ë¶„ p?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½, m?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	private int stockquantity;
+	private int product_material_id;
+	private double bom_quan; //bom ?ï¿½ï¿½?ï¿½ï¿½ê³„ìˆ˜
+	private int bom_ma_id; //bom ë©”í„°ë¦¬ì–¼?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	private int bom_pr_id; //bom ?ï¿½ï¿½ë¡œë•?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	private int inven_ma_id; // ?ï¿½ï¿½ë²¤í† ï¿½? ë©”í„°ë¦¬ì–¼?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	private int inven_quan;  // ?ï¿½ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
 	
 	
 	public int getBomid() {
