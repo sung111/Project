@@ -1,21 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, project.dto.User_DTO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page
+	import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, project.dto.User_DTO"%>
 
 <%
 /* ========== 1. 세션이 없으면 쿠키 확인 후 자동 로그인 처리 ========== */
 if (session == null || session.getAttribute("userId") == null) {
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if ("userId".equals(cookie.getName())) {
-                String savedUserId = cookie.getValue();
-                
-                // 세션 생성 후 userId 저장
-                session = request.getSession(); // 새로운 세션 생성
-                session.setAttribute("userId", savedUserId);
-            }
-        }
-    }
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+	if ("userId".equals(cookie.getName())) {
+		String savedUserId = cookie.getValue();
+
+		// 세션 생성 후 userId 저장
+		session = request.getSession(); // 새로운 세션 생성
+		session.setAttribute("userId", savedUserId);
+	}
+		}
+	}
 }
 %>
 <%
@@ -28,8 +33,8 @@ String sessionUserId = (String) session.getAttribute("userId");
 System.out.println("index.jsp - 현재 세션 userId: " + sessionUserId);
 
 if (sessionUserId == null) {
-    response.sendRedirect("login.jsp");
-    return;
+	response.sendRedirect("login.jsp");
+	return;
 }
 %>
 <%
@@ -52,9 +57,9 @@ String userName = "";
 /* 세션에서 유저 정보 가져오기 */
 User_DTO user = (User_DTO) session.getAttribute("user"); // DTO를 세션에서 직접 가져옴
 if (user != null) {
-    userRole = user.getJob();
-    userName = user.getUserName();
-    helloUser = userRole + " " + userName + "님, 환영합니다!";
+	userRole = user.getJob();
+	userName = user.getUserName();
+	helloUser = userRole + " " + userName + "님, 환영합니다!";
 }
 %>
 <!DOCTYPE html>
