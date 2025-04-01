@@ -8,13 +8,12 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="img/icon.png" />
+<link rel="icon" href="${ pageContext.request.contextPath }/resources/img/icon.png" />
 <title>HHMES:Login</title>
 
-<!--         <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/login.css"> -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
+
 
 </head>
 
@@ -23,9 +22,9 @@
 	<div class="login-container">
 		<div class="mainlayer">
 			<div class="imglayer">
-				<img src="img/icon.png" alt="loginlogo">
+				<img src="${ pageContext.request.contextPath }/resources/img/icon.png" alt="loginlogo">
 				<h5>혁신적인 밀키트 생산관리 MES</h5>
-			</div>
+			</div> 
 			<form class="login-layer" id="login-layer" action="Login_controller"
 				method="post">
 				<h1>Login</h1>
@@ -61,11 +60,11 @@
 					placeholder="이메일 혹은 전화번호를 입력해주세요.">
 				<ul class="certified">
 					<h4>인증 수단을 클릭해주세요.</h4>
-					<li><img src="img/phone.png">
+					<li><img src="${ pageContext.request.contextPath }/resources/img/phone.png">
 						<p>휴대폰으로 본인인증</p></li>
-					<li><img src="img/email.png">
+					<li><img src="${ pageContext.request.contextPath }/resources/img/email.png">
 						<p>이메일로 본인인증</p></li>
-					<li><img src="img/card.png">
+					<li><img src="${ pageContext.request.contextPath }/resources/img/card.png">
 						<p>신용카드로 본인인증</p></li>
 				</ul>
 			</form>
@@ -84,6 +83,6 @@
 		</form>
 	</div>
 </body>
-<script src="js/login.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/js/login.js"></script>
 
 </html>
