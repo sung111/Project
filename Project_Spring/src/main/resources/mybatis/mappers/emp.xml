@@ -22,7 +22,9 @@
 		order by materialname 
 	</select>
 	
-	
-	
+    <!-- 로그인 관련 -->
+    <select id="selectUserId" parameterType="string" resultType="project.dto.User_DTO">
+        SELECT * FROM users WHERE user_id = #{userId}
+    </select>
 		
 </mapper>

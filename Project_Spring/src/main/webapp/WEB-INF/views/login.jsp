@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
 
 
-</head>
+</head> 
 
 <body>
 	<!-- 로그인 페이지 -->

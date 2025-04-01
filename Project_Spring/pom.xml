@@ -10,11 +10,12 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>4.3.0.RELEASE</org.springframework-version>
+		<org.springframework-version>4.3.0.RELEASE
+		</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	<dependencies> 
+	<dependencies>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -172,7 +173,13 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
+		<!-- 배운건데 써야제! lombok 가즈ㅏ -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -182,10 +189,12 @@
 				<version>2.9</version>
 				<configuration>
 					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+						<projectnature>org.springframework.ide.eclipse.core.springnature
+						</projectnature>
 					</additionalProjectnatures>
 					<additionalBuildcommands>
-						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder
+						</buildcommand>
 					</additionalBuildcommands>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>

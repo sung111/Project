@@ -1,16 +1,22 @@
 package project.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import project.service.Users_total_service.User_service;
 
 @Controller
 @RequestMapping("/")
 public class Index_total_controller {
 
+	@Autowired
+	User_service user_service;
+	
     @GetMapping("index")
     public ModelAndView index(HttpSession session) {
         // 세션에서 userId 가져오기
