@@ -9,13 +9,14 @@ import project.dto.User_DTO;
 @Repository
 public class User_DAOImpl implements Users_DAO {
 
-    @Autowired
-    private SqlSession sqlSession;
+	@Autowired
+	private SqlSession sqlSession;
 
-    private static final String NAMESPACE = "mapper.user";
+	private static final String NAMESPACE = "mapper.emp";
 
-    @Override
-    public User_DTO selectUserId(String userId) {
-        return sqlSession.selectOne(NAMESPACE + ".selectUserById", userId);
-    }
+	@Override
+	public User_DTO selectUserId(String userId) {
+		return sqlSession.selectOne(NAMESPACE + ".selectUserId", userId);
+	}
+
 }

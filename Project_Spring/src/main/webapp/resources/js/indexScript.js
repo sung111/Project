@@ -1,4 +1,5 @@
 // PC version and nav accodian script
+    
 document.addEventListener('DOMContentLoaded', function () {
     const navButtons = document.querySelectorAll('.nav-button');
     navButtons.forEach(function (navbtn) {
@@ -91,83 +92,85 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const iframe = document.querySelector("iframe")
     const localBar = document.querySelector(".local-bar");
-
+    var contextPath = document.body.getAttribute("data-contextPath");
+    
     function LocalNavigationbar(tagname, componantname) {
         localBar.innerHTML = `<li>Home</li> <li>> ${tagname}</li> <li>> ${componantname}</li>`;
     }
     // 메인 페이지(로고클릭 시)탭
     const logomenu = document.querySelector("#nav-mainlogo");
     logomenu.addEventListener("click", function () {
-        iframe.src = "MainTitle.jsp";
+         iframe.src = contextPath + "/maintitle"; 
+        console.log("Navigating to:", iframe.src);
         localBar.innerHTML = `<li>Home</li>`;
     })
     // 기준관리 탭
     const bomlistmenu = document.querySelector("#nav-bomlist")
     bomlistmenu.addEventListener("click", function () {
-        iframe.src = "part_code"
+        iframe.src = contextPath + "/part_code"; 
         LocalNavigationbar("기준관리", "부품코드");
     })
     const processmenu = document.querySelector("#nav-process")
     processmenu.addEventListener("click", function () {
-        iframe.src = "ProductionProcess_controller"
+        iframe.src =  contextPath + "/ProductionProcess_controller"; 
         LocalNavigationbar("기준관리", "생산공정");
     })
     const inspection = document.querySelector("#nav-inspection")
     inspection.addEventListener("click", function () {
-        iframe.src = "InspectionS"
+        iframe.src = contextPath + "/InspectionS"
         LocalNavigationbar("기준관리", "검사기준");
     })
     const bommenu = document.querySelector("#nav-bom")
     bommenu.addEventListener("click", function () {
-        iframe.src = "Finished_Product_BOM"
+        iframe.src = contextPath + "/Finished_Product_BOM"
         LocalNavigationbar("기준관리", "BOM");
     })
     // 생산관리 탭
     const prodPlanmenu = document.querySelector("#nav-workorder");
     prodPlanmenu.addEventListener("click", function () {
-        iframe.src = "ProdPlan.jsp"
+        iframe.src = contextPath + "/ProdPlan"
         LocalNavigationbar("생산관리", "생산계획");
     })
     const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");
     perfomanceRegistrationmenu.addEventListener("click", function () {
-        iframe.src = "Performance"
+        iframe.src = contextPath + "Performance"
         LocalNavigationbar("생산관리", "실적등록");
     })
     const qualityControlmenu = document.querySelector("#nav-qualityControl");
     qualityControlmenu.addEventListener("click", function () {
-        iframe.src = "qualityControl"
+        iframe.src = contextPath + "qualityControl"
         LocalNavigationbar("생산관리", "품질관리");
     })
     const 재고조사현황menu = document.querySelector("#nav-inventory");
     재고조사현황menu.addEventListener("click", function () {
-        iframe.src = "Inventorycheck"
+        iframe.src = contextPath + "Inventorycheck"
         LocalNavigationbar("생산관리", "재고현황조회");
     })
     // 실적 보고서
     const performmenu = document.querySelector("#nav-perform");
     performmenu.addEventListener("click", function () {
-        iframe.src = "perform_0203.html"
+        iframe.src = contextPath + "perform_0203.html"
         LocalNavigationbar("실적보고서", "실적보고서");
     })
     const reportmenu = document.querySelector("#nav-report");
     reportmenu.addEventListener("click", function () {
-        iframe.src = "report.html"
+        iframe.src = contextPath + "report.html"
         LocalNavigationbar("실적보고서", "주요지표");
     })
     const chartmenu = document.querySelector("#nav-chart");
     chartmenu.addEventListener("click", function () {
-        iframe.src = "chart_0203.html"
+        iframe.src = contextPath + "chart_0203.html"
         LocalNavigationbar("실적보고서", "대시보드");
     })
     // 게시판
     const 공지사항menu = document.querySelector("#nav-공지사항");
     공지사항menu.addEventListener("click", function () {
-        iframe.src = "02_공지사항.html";
+        iframe.src = contextPath + "02_공지사항.html";
         LocalNavigationbar("게시판", "공지사항");
     })
     const 일반게시판menu = document.querySelector("#nav-일반게시판");
     일반게시판menu.addEventListener("click", function () {
-        iframe.src = "board.jsp"
+        iframe.src = contextPath + "board"
         LocalNavigationbar("게시판", "일반게시판");
     });
 });

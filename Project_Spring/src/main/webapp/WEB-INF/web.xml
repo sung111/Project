@@ -35,6 +35,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+
 	<!-- 정적 리소스 요청을 default 서블릿이 처리하도록 설정한다. 문제가 생긴다면 지우기 -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>

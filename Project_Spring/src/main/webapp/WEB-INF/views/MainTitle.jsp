@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HHMES 메인 페이지</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/maintitle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/maintitle.css">
 </head>
 
 <body class="mainpage">

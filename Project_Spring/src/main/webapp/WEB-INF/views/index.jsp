@@ -1,52 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page
 	import="javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest, java.sql.*, project.dto.User_DTO"%>
 
 <%
-/* ========== 1. 세션이 없으면 쿠키 확인 후 자동 로그인 처리 ========== */
+/*  세션이 없거나 userId가 없으면 쿠키 확인 후 자동 로그인 처리 */
+if (session == null || session.getAttribute("userId") == null) {
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("userId".equals(cookie.getName())) {
+                String savedUserId = cookie.getValue();
+
+                // 세션 생성 후 userId 저장
+                session = request.getSession(true); // 세션이 없으면 생성
+                session.setAttribute("userId", savedUserId);
+             // userId를 찾았으면 종료
+                break; 
+            }
+        }
+    }
+}
+
+/*  세션이 여전히 없으면 로그인 페이지로 이동한다. */
+if (session == null || session.getAttribute("userId") == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+
+/* 세션 유지시간 설정 ( 28800초, 8시간)  */
+session.setMaxInactiveInterval(28800);
+
+/* 유저 ID 디버깅 출력  */
+String sessionUserId = (String) session.getAttribute("userId");
+System.out.println("index.jsp - 현재 세션 userId: " + sessionUserId);
+
+
+/* 로그인이 안되있으면 강제로 login.jsp로 이동하게 된다. */
+/* 자동 로그인으로 쿠키에서 userId 확인 후 세션 생성이 된다. */
 if (session == null || session.getAttribute("userId") == null) {
 	Cookie[] cookies = request.getCookies();
 	if (cookies != null) {
 		for (Cookie cookie : cookies) {
-	if ("userId".equals(cookie.getName())) {
-		String savedUserId = cookie.getValue();
+			if ("userId".equals(cookie.getName())) {
+				String savedUserId = cookie.getValue();
 
-		// 세션 생성 후 userId 저장
-		session = request.getSession(); // 새로운 세션 생성
-		session.setAttribute("userId", savedUserId);
-	}
+				// 새 세션 생성 후 userId 저장됨.
+				session = request.getSession(true); // true를 넣어 새로운 세션 강제 생성
+				session.setAttribute("userId", savedUserId);
+			}
 		}
 	}
 }
-%>
-<%
-/* 세션 유지시간: 28800초= 8시간 */
-session.setMaxInactiveInterval(28800);
-%>
-<%
-/* 유저 ID 디버깅 */
-String sessionUserId = (String) session.getAttribute("userId");
-System.out.println("index.jsp - 현재 세션 userId: " + sessionUserId);
 
-if (sessionUserId == null) {
+/* userId가 없으면 로그인 페이지로 이동 */
+if (session.getAttribute("userId") == null) {
 	response.sendRedirect("login.jsp");
 	return;
 }
 %>
-<%
-/* 로그인이 안되있으면 강제로 login.js[p로 이동하게 된다. */
-String userId = (String) session.getAttribute("userId");
-if (userId == null) {
-	response.sendRedirect("login.jsp");
-	return;
-}
-%>
-
-
 
 <%
 /* 기본값 설정 */
@@ -67,19 +82,22 @@ if (user != null) {
 
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="img/icon.png" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/img/icon.png" />
 <title>혁신적인 밀키트 생산관리, HHMES</title>
 
 <!-- css link -->
-<link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/common.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 </head>
 
-<body class="index">
+<body class="index"
+	data-contextPath="${pageContext.request.contextPath}">
 	<nav>
 		<div class="logo-layer">
-			<img src="img/mainlogo.png" alt="logo" class="logo" id="nav-mainlogo">
+			<img
+				src="${pageContext.request.contextPath}/resources/img/mainlogo.png"
+				alt="logo" class="logo" id="nav-mainlogo">
 		</div>
 		<div class="navigation">
 			<button class="nav-button">기준관리</button>
@@ -114,8 +132,9 @@ if (user != null) {
 			<div class="my-populater">
 				<div id="mypagePopup" class="mypage-layer">
 					<div class="my-page">
-						<img src="./img/mypage-img.png" class="mypage-img" id="mypage-img"
-							alt="mypage-img">
+						<img
+							src="${pageContext.request.contextPath}/resources/img/mypage-img.png"
+							class="mypage-img" id="mypage-img" alt="mypage-img">
 					</div>
 					<h6 class="login-button">
 						<%=helloUser%>
@@ -134,7 +153,8 @@ if (user != null) {
 			</ol>
 		</div>
 		<div class="navopen-shadow"></div>
-		<iframe src="MainTitle.jsp" id="Mainiframe"></iframe>
+		<iframe src="${pageContext.request.contextPath}/maintitle"
+			id="Mainiframe"></iframe>
 	</div>
 	<!-- 팝업창 -->
 	<div id="popup" class="popup">
@@ -160,5 +180,11 @@ if (user != null) {
 	</div>
 </body>
 <!-- javascript link -->
-<script src="js/indexScript.js"></script>
+<script>
+//스프링으로 옮겨지면서 새로운 선언. jsp에서 contextPath를 가져온다.
+var contextPath = "<%=request.getContextPath()%>
+	";
+</script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/indexScript.js"></script>
 </html>

@@ -20,7 +20,7 @@ public class Login_total_controller {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; // login.jsp로 이동
+        return "login"; 
     }
 
     @PostMapping("/Login_controller")
@@ -37,13 +37,14 @@ public class Login_total_controller {
             // 로그인 성공 -> 세션 저장 + index로 이동
             session.setAttribute("userId", user.getUserId());
             System.out.println("로그인 성공: " + user.getUserId());
+            
             mav.setViewName("redirect:/index");
         } else {
             // 로그인 실패 -> 다시 login.jsp로
-            System.out.println("로그인 실패: userId = " + userId);
-            mav.setViewName("login");
+            System.out.println("로그인 실패");
+            mav.setViewName("redirect:/login"); 
             mav.addObject("error", "아이디 또는 비밀번호가 잘못되었습니다.");
-            mav.addObject("userId", userId); // 입력했던 ID 유지
+            mav.addObject("userId", userId);
         }
         return mav;
     }
