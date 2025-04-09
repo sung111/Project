@@ -94,10 +94,10 @@
 				<div class="box3View"></div>
 			</div>
 		</div>
-
-		<script>
-			
-		</script>
+	</div>
+	<script>
+		
+	</script>
 </body>
 
 </html>

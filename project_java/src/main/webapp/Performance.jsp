@@ -30,7 +30,6 @@
 			<div class="instView"></div>
 		</div>
 		<div>
-
 			<div class="bord">
 				<div class="inBord">
 					<div>현재 진행률</div>
@@ -94,10 +93,10 @@
 				<div class="box3View"></div>
 			</div>
 		</div>
-
-		<script>
-			
-		</script>
+	</div>
+	<script>
+		
+	</script>
 </body>
 
 </html>
