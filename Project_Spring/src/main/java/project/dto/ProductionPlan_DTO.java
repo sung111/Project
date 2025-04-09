@@ -2,20 +2,20 @@ package project.dto;
 
 import java.sql.Date;
 
-//?ƒ?‚°ê³„íš ?…Œ?´ë¸?
+//ìƒì‚°ê³„íš í…Œì´ë¸”
 public class ProductionPlan_DTO {
 
-	int planId; // ?”Œ?œ ID
-	String userId; // ?‘?„±? ID
-	int productId; // ?ƒ?’ˆë²ˆí˜¸
-	int totalqty; // ?ƒ?‚°?ˆ˜?Ÿ‰
-	Date startDate; // ?‹œ?‘?¼
-	Date endDate; // ì¢…ë£Œ?¼
-	Date createDate; // ?ƒ?„±?¼
-	Date deliveryDate; // ?‚©?’ˆê¸°ê°„
-	String deliveryDest; // ?‚©?’ˆ?—…ì²?
-	String planStatus; // ì§„í–‰?ƒ?™©
-	String planCause; // ì§„í–‰?‚¬?œ 
+	int planId; // í”Œëœ ID
+	String userId; // ì‘ì„±ì ID
+	int productId; // ìƒí’ˆë²ˆí˜¸
+	int totalqty; // ìƒì‚°ìˆ˜ëŸ‰
+	Date startDate; // ì‹œì‘ì¼
+	Date endDate; // ì¢…ë£Œì¼
+	Date createDate; // ìƒì„±ì¼
+	Date deliveryDate; // ë‚©í’ˆê¸°ê°„
+	String deliveryDest; // ë‚©í’ˆì—…ì²´
+	String planStatus; // ì§„í–‰ìƒí™©
+	String planCause; // ì§„í–‰ì‚¬ìœ 
 	String planNotes; // ë¹„ê³ 
 
 	public String getUserId() {
@@ -114,7 +114,7 @@ public class ProductionPlan_DTO {
 		this.planId = planId;
 	}
 
-//	productsê°?? ¸?˜´.
+//	productsê°€ì ¸ì˜´.
 
 	private Products_DTO product;
 

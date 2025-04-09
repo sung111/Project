@@ -2,12 +2,12 @@ package project.dto;
 
 import java.sql.Date;
 
-//?‘?—…ì§??‹œ?„œ ?…Œ?´ë¸?
+//ì‘ì—…ì§€ì‹œì„œ í…Œì´ë¸”
 public class WorkOrder_DTO {
 
-	int OrderId; // ?‘?—…ì§??‹œ?„œ ë²ˆí˜¸
-	Date OrderDate; // ?‘?—…ì§??‹œ?„œ ?ƒ?„±?¼
-	int ProductId; // ?‘?—…ì§??‹œ?š© ?ƒ?’ˆë²ˆí˜¸
+	int OrderId; // ì‘ì—…ì§€ì‹œì„œ ë²ˆí˜¸
+	Date OrderDate; // ì‘ì—…ì§€ì‹œì„œ ìƒì„±ì¼
+	int ProductId; // ì‘ì—…ì§€ì‹œìš© ìƒí’ˆë²ˆí˜¸
 	
 	public int getOrderId() {
 		return OrderId;
@@ -28,7 +28,7 @@ public class WorkOrder_DTO {
 		ProductId = productId;
 	}
 
-//	?ƒ?’ˆëª©ë¡?„ ê°?? ¸?˜´.
+//	ìƒí’ˆëª©ë¡ì„ ê°€ì ¸ì˜´.
 	private Products_DTO product;
 
 	public Products_DTO getProduct() {
@@ -39,7 +39,7 @@ public class WorkOrder_DTO {
 		this.product = product;
 	}
 	
-//	? œì¡°ê³¼? •?„ ê°?? ¸?˜´.
+//	ì œì¡°ê³¼ì •ì„ ê°€ì ¸ì˜´.
 	private MFGprocess_DTO MFGprocess;
 
 	public MFGprocess_DTO getMFGprocess() {

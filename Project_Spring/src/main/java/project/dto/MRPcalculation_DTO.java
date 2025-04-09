@@ -1,11 +1,11 @@
 package project.dto;
 
 public class MRPcalculation_DTO {
-	int productId; // ?™„? œ?’ˆ ?‹œ???Š¤ ê°?
-	String safeTyunit; //?•ˆ? „?¬ê³? ?‹¨?œ„
-	String minInrementUnit; // ìµœì†Œì¦ê??‹¨?œ„
+	int productId; // ì™„ì œí’ˆ ì‹œí€€ìŠ¤ ê°’
+	String safeTyunit; //ì•ˆì „ì¬ê³  ë‹¨ìœ„
+	String minInrementUnit; // ìµœì†Œì¦ê°€ë‹¨ìœ„
 	String leadTime; //ì¡°ë‹¬ê¸°ê°„
-	int inComingInv; //? „?…?¬ê³?
+	int inComingInv; //ì „ì…ì¬ê³ 
 	
 	public int getproductId() {
 		return productId;

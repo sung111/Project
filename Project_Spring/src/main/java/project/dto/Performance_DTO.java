@@ -2,19 +2,19 @@ package project.dto;
 
 import java.sql.Timestamp;
 
-//?‹¤? ?…Œ?´ë¸?
+//ì‹¤ì í…Œì´ë¸”
 public class Performance_DTO {
 
-	int PerformanceId;			// ?‹¤?  ?‹œ???Š¤ ë²ˆí˜¸
-	int ProductId;				// ?™„? œ?’ˆ ?‹œ???Š¤
-	String ProductName;			// ?™„? œ?’ˆëª?
-	int PlanId;					// ?ƒ?‚°ê³„íš ?‹œ???Š¤ë²ˆí˜¸
-	String UserId;				// ?œ ?? id
+	int PerformanceId;			// ì‹¤ì  ì‹œí€€ìŠ¤ ë²ˆí˜¸
+	int ProductId;				// ì™„ì œí’ˆ ì‹œí€€ìŠ¤
+	String ProductName;			// ì™„ì œí’ˆëª…
+	int PlanId;					// ìƒì‚°ê³„íš ì‹œí€€ìŠ¤ë²ˆí˜¸
+	String UserId;				// ìœ ì € id
 	String userName;
-	Timestamp ReportTime;		// ?‹¤? ?“±ë¡? ?‹œê°?
-	Timestamp ReportTime2;		// ì¡°íšŒ?•Œ ?‚¬?š©
-	String PerformanceComment;	// ì½”ë©˜?Š¸
-	int ProductionCount;		// ?ƒ?‚°?ˆ˜?Ÿ‰
+	Timestamp ReportTime;		// ì‹¤ì ë“±ë¡ ì‹œê°„
+	Timestamp ReportTime2;		// ì¡°íšŒë•Œ ì‚¬ìš©
+	String PerformanceComment;	// ì½”ë©˜íŠ¸
+	int ProductionCount;		// ìƒì‚°ìˆ˜ëŸ‰
 	
 	public String getUserName() {
 		return userName;
