@@ -4,30 +4,30 @@ import java.sql.Date;
 
 public class Inventorycheck_DTO {
 	
-	// ??¬ ?¬ê³? ?˜„?™© ì¡°íšŒ
-	int inventoryId;	// ?¬ê³ ì‹œ???Š¤ë²ˆí˜¸
-	Date receiptDate;	// ?…ê³ ì¼
-	Date maExpDate;		// ?œ ?š¨ê¸°ê°„
-	int materialId;		// ??¬ ?‹œ???Š¤ê°?
-	int maQuantity;		// ?¬ê³ ìˆ˜?Ÿ‰
+	// ìì¬ ì¬ê³  í˜„í™© ì¡°íšŒ
+	int inventoryId;	// ì¬ê³ ì‹œí€€ìŠ¤ë²ˆí˜¸
+	Date receiptDate;	// ì…ê³ ì¼
+	Date maExpDate;		// ìœ íš¨ê¸°ê°„
+	int materialId;		// ìì¬ ì‹œí€€ìŠ¤ê°’
+	int maQuantity;		// ì¬ê³ ìˆ˜ëŸ‰
 	String maLotNo;		// lot No
-	String maPartNum;	// ?’ˆë²?
-	String maUnit;		// ?‹¨?œ„
-	String materialname; // ?’ˆëª?
+	String maPartNum;	// í’ˆë²ˆ
+	String maUnit;		// ë‹¨ìœ„
+	String materialname; // í’ˆëª©
 	String maSpec;		// ê·œê²©
 	
 	
 
-	// ?™„? œ?’ˆ ?¬ê³? ?˜„?™© ì¡°íšŒ
-	int productinvenId;	// ?™„? œ?’ˆ ?¬ê³? ?‹œ???Š¤
-	int productId;		// ?™„? œ?’ˆ ?‹œ???Š¤ê°?
-	Date makeDate;		// ?ƒ?‚°?¼
-	Date prExpDate;		// ?œ ?š¨ê¸°ê°„
-	int prQuantity;		// ?¬ê³ ìˆ˜?Ÿ‰
+	// ì™„ì œí’ˆ ì¬ê³  í˜„í™© ì¡°íšŒ
+	int productinvenId;	// ì™„ì œí’ˆ ì¬ê³  ì‹œí€€ìŠ¤
+	int productId;		// ì™„ì œí’ˆ ì‹œí€€ìŠ¤ê°’
+	Date makeDate;		// ìƒì‚°ì¼
+	Date prExpDate;		// ìœ íš¨ê¸°ê°„
+	int prQuantity;		// ì¬ê³ ìˆ˜ëŸ‰
 	String prLotNo;		// lot No
-	String prPartNum;	// ?’ˆë²?
-	String prUnit;		// ?‹¨?œ„
-	String productname; // ?’ˆëª?
+	String prPartNum;	// í’ˆë²ˆ
+	String prUnit;		// ë‹¨ìœ„
+	String productname; // í’ˆëª©
 	String prSpec; 		// ê·œê²©
 	
 	

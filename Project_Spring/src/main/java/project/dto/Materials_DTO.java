@@ -2,32 +2,31 @@ package project.dto;
 
 
 
-//?��?�� ?��?���?
+//자재 테이블
 public class Materials_DTO {
 	
-	private String materialname;
-	private String productname;
-	private int price;
-	private String spec;
-	private String unit;
-	private String supplier;
-	private String partNumber;
-	private String lotnumber;
-	private String warehouse;
-	private String origin;
-	private String bomdel;
-	private int bomid;
+	String materialname;
+	int price;
+	String spec;
+	String unit;
+	String supplier;
+	String partNumber;
+	String lotnumber;
+	String warehouse;
+	String origin;
+	String bomdel;
+	int bomid;
 
-	private int materiaid;
-	private String materiadel;
-	private String type; //?��?��?��, ?��?��?�� ???�� 구분 p?��?��?��, m?��?��?��
-	private int stockquantity;
-	private int product_material_id;
-	private double bom_quan; //bom ?��?��계수
-	private int bom_ma_id; //bom 메터리얼?��?��?��
-	private int bom_pr_id; //bom ?��로덕?�� ?��?��?��
-	private int inven_ma_id; // ?��벤토�? 메터리얼?��?��?��
-	private int inven_quan;  // ?��?? ?��?��?�� ?��?��
+	int materiaid;
+	String materiadel;
+	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
+	int stockquantity;
+	int product_material_id;
+	double bom_quan; //bom 투입계수
+	int bom_ma_id; //bom 메터리얼아이디
+	int bom_pr_id; //bom 프로덕트 아이디
+	int inven_ma_id; // 인벤토리 메터리얼아이디
+	int inven_quan;  // 남은 원자재 수량
 	
 	
 	public int getBomid() {

@@ -1,19 +1,19 @@
 package project.dto;
-//?��?��?�� ?��?���?
+//완제품 테이블
 public class Products_DTO {
-	private int productid;
-	private String productname;
-	private String partnumber;
-	private String expdatedesc; //?��?��기한
-	private String warehouse;
-	private String productimage; //?��미�?링크
-	private String normalcriteria; // ?��?��?��?��기�?
-	private String abnormalcriteria; //비정?��?��?��기�?
-	private int price;
-	private String spec;
-	private String unit;
-	private String productdel; //?��?��?���?
-	private String lotnumber;
+	int productid;
+	String productname;
+	String partnumber;
+	String expdatedesc; //유통기한
+	String warehouse;
+	String productimage; //이미지링크
+	String normalcriteria; // 정상제품기준
+	String abnormalcriteria; //비정상제품기준
+	int price;
+	String spec;
+	String unit;
+	String productdel; //삭제유무
+	String lotnumber;
 	
 	public String getExpdatedesc() {
 		return expdatedesc;

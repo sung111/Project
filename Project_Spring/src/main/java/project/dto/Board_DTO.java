@@ -6,8 +6,8 @@ public class Board_DTO {
 
 	private int postid;
 	private String userid;  
-	private String title;    // ê¸??“°ê¸? ?‚´?š©
-	private String content;  // ê¸??“°ê¸? ? œëª?
+	private String title;    // ê¸€ì“°ê¸° ë‚´ìš©
+	private String content;  // ê¸€ì“°ê¸° ì œëª©
 	private Date postdate; 
 	private String notify;
 	private int viewcount;
