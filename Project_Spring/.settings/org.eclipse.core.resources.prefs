@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/project/dto=UTF-8
+encoding//src/main/java/project/dto/Comment_DTO.java=UTF-8
+encoding//src/main/java/project/dto/Inventorycheck_DTO.java=UTF-8
 encoding//src/main/java/project/dto/Materials_DTO.java=utf-8

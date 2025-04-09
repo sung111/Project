@@ -173,7 +173,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- 배운건데 써야제! lombok 가즈ㅏ -->
+		<!-- 배운건데 써야제! lombok 가즈ㅏ 시발 언제했노 영석이개빠르네-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
