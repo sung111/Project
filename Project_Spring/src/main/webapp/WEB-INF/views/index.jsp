@@ -77,6 +77,9 @@ if (user != null) {
 	helloUser = userRole + " " + userName + "님, 환영합니다!";
 }
 %>
+
+
+
 <!DOCTYPE html>
 <html>
 
