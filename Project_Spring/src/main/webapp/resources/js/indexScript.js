@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 생산관리 탭
     const prodPlanmenu = document.querySelector("#nav-workorder");
     prodPlanmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "/ProdPlan"
+        iframe.src = contextPath + "/prodplan"
         LocalNavigationbar("생산관리", "생산계획");
     })
     const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");

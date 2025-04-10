@@ -16,20 +16,21 @@
 
 	<select id="selectMaterialsProducts"
 		resultType="project.dto.Materials_DTO">
-		select materialname, PRICE, SPEC, UNIT, SUPPLIER,
-		PARTNUMBER, LOTNUMBER,
-		WAREHOUSE, 'm' type, materialdel, materialid
-		from MATERIALS
+		SELECT materialname, PRICE, SPEC, UNIT, SUPPLIER,
+		PARTNUMBER, LOTNUMBER, WAREHOUSE,
+		'm' AS type, materialdel, materialid
+		FROM MATERIALS
 		WHERE materialdel = 'n'
-		union all
-		select productname
-		materialname, PRICE, SPEC, UNIT, '', PARTNUMBER,
-		LOTNUMBER, WAREHOUSE,
-		'p' type, productdel materialdel, productid
-		materialid
-		from products
+
+		UNION ALL
+
+		SELECT productname AS materialname, PRICE, SPEC, UNIT,
+		'' AS SUPPLIER, PARTNUMBER, LOTNUMBER, WAREHOUSE,
+		'p' AS type, productdel AS materialdel, productid AS materialid
+		FROM PRODUCTS
 		WHERE productdel = 'n'
-		order by materialname
+
+		ORDER BY materialname
 	</select>
 
 	<!-- 로뀨잉 -->

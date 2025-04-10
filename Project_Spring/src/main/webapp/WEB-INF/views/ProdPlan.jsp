@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, project.dto.ProductionPlan_DTO, project.dto.Products_DTO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page
+	import="java.util.List, project.dto.ProductionPlan_DTO, project.dto.Products_DTO"%>
 
 <%
 /* 세션에서 데이터 가져오기 */
@@ -15,9 +17,12 @@ String username = (String) session.getAttribute("username");
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HHMES 생산관리</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodplan.css">
-<script src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/prodplan.css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
 </head>
 
 <body>
@@ -52,12 +57,17 @@ String username = (String) session.getAttribute("username");
 	<table class="name-layer">
 		<tr class="menufacturer-info">
 			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생성인</div> 
-				<input type="text" class="menufacturer-info-completion" value="<%= (username != null) ? username : "알 수 없음" %>" readonly>
+				<div class="menufacturer-info-name">생성인</div> <input type="text"
+				class="menufacturer-info-completion"
+				value="<%=(username != null) ? username : "알 수 없음"%>" readonly>
 			</td>
 			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생산기간</div> 
-				<input type="text" class="menufacturer-info-completion" value="<%=(planList != null && !planList.isEmpty()) ? planList.get(0).getStartDate() + " ~ " + planList.get(0).getEndDate() : "데이터 없음"%>" readonly>
+				<div class="menufacturer-info-name">생산기간</div> <input type="text"
+				class="menufacturer-info-completion"
+				value="<%=(planList != null && !planList.isEmpty())
+		? planList.get(0).getStartDate() + " ~ " + planList.get(0).getEndDate()
+		: "데이터 없음"%>"
+				readonly>
 			</td>
 		</tr>
 	</table>
@@ -84,9 +94,9 @@ String username = (String) session.getAttribute("username");
 			if (planList != null) {
 				for (ProductionPlan_DTO plan : planList) {
 			%>
-			<tr name="prodPlanList" class="order-info-content wolist" data-id="<%=plan.getPlanId()%>" data-pi="<%= plan.getProductId() %>">
-				<td>
-					<%=(plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음"%>
+			<tr name="prodPlanList" class="order-info-content wolist"
+				data-id="<%=plan.getPlanId()%>" data-pi="<%=plan.getProductId()%>">
+				<td><%=(plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음"%>
 					<%="["%><%=(plan.getProduct() != null) ? plan.getProduct().getSpec() : "데이터 없음"%>
 					<%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%><%="]"%>
 				</td>
@@ -105,10 +115,12 @@ String username = (String) session.getAttribute("username");
 				<td><%=plan.getPlanNotes()%></td>
 			</tr>
 			<%
-				}
+			}
 			} else {
 			%>
-			<tr><td colspan="14">데이터가 없습니다.</td></tr>
+			<tr>
+				<td colspan="14">데이터가 없습니다.</td>
+			</tr>
 			<%
 			}
 			%>
