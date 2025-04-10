@@ -167,6 +167,7 @@ if (user != null) {
 				<%=userName%>
 				님!
 			</h2>
+			<div id="chatbot-icon" class="chatbot-icon"></div>
 		</div>
 		<p>
 			현재
@@ -176,17 +177,37 @@ if (user != null) {
 		</p>
 		<div name="popup-buttonlayer" id="popup-buttonlayer"
 			class="popup-buttonlayer">
-			<a id="mypage-a" class="mypopup-a">마이페이지</a> <a id="logout-a"
-				class="mypopup-a">로그아웃</a>
+			<a id="mypage-a" class="mypopup-a">마이페이지</a> 
+			<a id="logout-a" class="mypopup-a" href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			<button id="closePopupBtn" class="closebtn">닫기</button>
 		</div>
 	</div>
+	
+	<!-- 챗봇 팝업창 -->
+	
+	<!-- 챗봇 팝업창 -->
+<div id="chatbotPopup" class="chatbot-popup" style="display:none;">
+	<div class="chatbot-header">
+		<h4> HHMES 챗봇</h4>
+		<button id="chatbotCloseBtn">X</button>
+	</div>
+	<div class="chatbot-body" id="chatbotBody">
+		<p>안녕하세요! 무엇을 도와드릴까요?</p>
+		<p>- 생산계획 등록 방법<br>- 재고현황 조회<br>- 시스템 사용법</p>
+	</div>
+	<div class="chatbot-input-layer">
+		<input type="text" id="chatInput" placeholder="질문을 입력하세요..." />
+		<button id="chatSendBtn">전송</button>
+	</div>
+</div>
+	
+	
+	
 </body>
 <!-- javascript link -->
 <script>
 //스프링으로 옮겨지면서 새로운 선언. jsp에서 contextPath를 가져온다.
-var contextPath = "<%=request.getContextPath()%>
-	";
+	var contextPath = "<%= request.getContextPath() %>";
 </script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/indexScript.js"></script>

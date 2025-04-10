@@ -39,12 +39,12 @@ public class Index_total_controller {
         return Loginmv;
     }
 
-    @GetMapping("logout")
-    public String logout(HttpSession session) {
-        // 로그아웃: 세션 초기화 후 로그인 페이지로 이동
-        String userId = (String) session.getAttribute("userId");
-        session.invalidate();
-        System.out.println("로그아웃: userId = " + userId);
-        return "redirect:/login";
-    }
+//    @GetMapping("logout")
+//    public String logout(HttpSession session) {
+//        // 로그아웃: 세션 초기화 후 로그인 페이지로 이동
+//        String userId = (String) session.getAttribute("userId");
+//        session.invalidate();
+//        System.out.println("로그아웃: userId = " + userId);
+//        return "redirect:/login";
+//    }
 }

@@ -1,5 +1,7 @@
 package project.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class Login_total_controller {
         if (user != null) {
             //  로그인 성공하면 세션에 userId와 전체 user 객체로 저장됨
             session.setAttribute("userId", user.getUserId());
-            session.setAttribute("user", user); // ✅ 핵심 추가 부분
+            session.setAttribute("user", user); // 핵심 추가 부분
             System.out.println("로그인 성공: " + user.getUserId());
             System.out.println("userName: " + user.getUserName() + ", job: " + user.getJob());
 
@@ -48,5 +50,19 @@ public class Login_total_controller {
             mav.addObject("userId", userId);
         }
         return mav;
+    }
+    
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletResponse response) {
+    	
+    	// 세션과 쿠키 내용을 제거한다.
+        session.invalidate(); 
+        Cookie cookie = new Cookie("userId", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "redirect:/login";
     }
 }

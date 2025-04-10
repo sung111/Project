@@ -1,3 +1,61 @@
+.chatbot-icon{
+	width: 35px; height: 35px; border: 1px solid #007bff;
+}
+
+.chatbot-popup {
+	position: fixed;
+	right: 20px;
+	bottom: 80px;
+	width: 300px;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	z-index: 999;
+	font-family: sans-serif;
+}
+
+.chatbot-header {
+	background: #007bff;
+	color: #fff;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 10px 10px 0 0;
+}
+
+.chatbot-body {
+	padding: 10px;
+	height: 200px;
+	overflow-y: auto;
+	font-size: 14px;
+}
+
+.chatbot-input-layer {
+	display: flex;
+	padding: 10px;
+	border-top: 1px solid #eee;
+}
+
+.chatbot-input-layer input {
+	flex: 1;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.chatbot-input-layer button {
+	margin-left: 5px;
+	padding: 5px 10px;
+	background: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+
 @media screen and (max-width: 767px){
 
     /* 주로 navigation이나 footer 등의 모든 영역에서 만약 나중에 봇 등에 css가 필요하다면 여기에! */
@@ -140,9 +198,14 @@ nav.open ~ .navopen-shadow {
     width: 300px;  height: 250px; margin-top: 50px; margin-left: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; left: 0; z-index: 20; display: none; flex-direction: column;
 }
 
+.popup-title{
+	display: flex; justify-content: space-between;
+}
+
 #popup-title h2{
-    font-size: 24px; margin-bottom: 20px;
+    font-size: 20px; margin-bottom: 20px;
     }
+    
 .mypage-img {
     cursor: pointer;  /* 마우스를 올렸을 때 클릭 가능하도록 */
 }
@@ -280,8 +343,12 @@ cursor: pointer;
     width: 300px;  height: 250px; margin-top: 50px; margin-right: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; right: 0; z-index: 20; display: none; flex-direction: column;
 }
 
+.popup-title{
+	display: flex; justify-content: space-between;
+}
+
 #popup-title h2{
-    font-size: 24px; margin-bottom: 20px;
+    font-size: 20px; margin-bottom: 20px;
     }
 .mypage-img {
     cursor: pointer;  /* 마우스를 올렸을 때 클릭 가능하도록 */

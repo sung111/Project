@@ -173,4 +173,62 @@ document.addEventListener("DOMContentLoaded", function () {
         iframe.src = contextPath + "board"
         LocalNavigationbar("게시판", "일반게시판");
     });
+    
+    //마이페이지 클릭 효과
+document.getElementById("mypage-a").addEventListener("click", function () {
+    window.open(
+        contextPath + "/mypage",
+        "MyPagePopup",
+        "width=500,height=400,top=100,left=100,resizable=no,scrollbars=yes"
+    );
 });
+
+    //로그아웃 버튼 클릭 효과
+    const logoutLink = document.getElementById("logout-a");
+    if (logoutLink) {
+        logoutLink.addEventListener("click", function () {
+            if (confirm("로그아웃 하시겠습니까?")) {
+                window.location.href = contextPath + "/logout";
+            }
+        });
+    }
+
+// 챗봇 아이콘 클릭 시 팝업 열기
+document.getElementById("chatbot-icon").addEventListener("click", function () {
+	document.getElementById("chatbotPopup").style.display = "block";
+});
+
+// 닫기 버튼 클릭 시 팝업 닫기
+document.getElementById("chatbotCloseBtn").addEventListener("click", function () {
+	document.getElementById("chatbotPopup").style.display = "none";
+});
+
+// 간단한 응답 처리
+document.getElementById("chatSendBtn").addEventListener("click", function () {
+	const input = document.getElementById("chatInput").value.trim();
+	const body = document.getElementById("chatbotBody");
+
+	if (input !== "") {
+		const userMessage = document.createElement("p");
+		userMessage.innerHTML = `<strong> 나:</strong> ${input}`;
+		body.appendChild(userMessage);
+
+		const botMessage = document.createElement("p");
+		if (input.includes("생산계획")) {
+			botMessage.innerHTML = "<strong> HHBot:</strong> 생산계획은 '기준관리 > 생산계획' 메뉴에서 등록할 수 있어요.";
+		} else if (input.includes("재고")) {
+			botMessage.innerHTML = "<strong> HHBot:</strong> '생산관리 > 재고현황조회' 메뉴에서 확인 가능합니다.";
+		} else {
+			botMessage.innerHTML = "<strong> HHBot:</strong> 죄송해요, 아직 그 질문에 대한 답변은 준비 중이에요.";
+		}
+
+		body.appendChild(botMessage);
+		body.scrollTop = body.scrollHeight;
+		document.getElementById("chatInput").value = "";
+	}
+});
+
+    
+});
+
+
