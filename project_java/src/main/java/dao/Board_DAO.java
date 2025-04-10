@@ -10,7 +10,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+<<<<<<< Updated upstream
 import dto.Board_DTO;
+=======
+public class Board_DAO {
+>>>>>>> Stashed changes
 
 public class Board_DAO {
 
