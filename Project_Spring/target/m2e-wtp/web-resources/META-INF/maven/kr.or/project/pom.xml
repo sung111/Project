@@ -173,7 +173,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- 배운건데 써야제! lombok 가즈ㅏ 시발 언제했노 영석이개빠르네-->
+		<!-- 배운건데 써야제! lombok 가즈ㅏ 시발 언제했노 영석이개빠르네 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -181,12 +181,13 @@
 			<scope>provided</scope>
 		</dependency>
 
-<!-- root-context관련 -->
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-dbcp2</artifactId>
-    <version>2.9.0</version> 
-</dependency>
+		<!-- root-context관련 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		
 
 
 	</dependencies>
