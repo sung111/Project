@@ -293,6 +293,12 @@ input[type="date"] {
 table, th, td {
   box-sizing: border-box;
 }
+#page-container{
+  text-align: center;
+}
+.bold{
+  font-weight: 900;
+}
 
 
 
@@ -321,6 +327,12 @@ table, th, td {
   select, input {
       width: 100%;  /* 전체 너비 사용 */
       max-width: 300px;  /* 최대 너비 제한 */
+  }
+  #page-container{
+    text-align: center;
+  }
+  .bold{
+    font-weight: 900;
   }
   
 }

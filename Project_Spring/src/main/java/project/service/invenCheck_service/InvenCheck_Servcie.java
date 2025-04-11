@@ -7,7 +7,7 @@ import project.dto.InvenCheck_DTO;
 public interface InvenCheck_Servcie {
 
 	public List page(InvenCheck_DTO invenDTO);
-	
+	public int totalCount();
 	
 	
 }
