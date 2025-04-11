@@ -18,7 +18,7 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 	public List page(InvenCheck_DTO dto) {
 
 		System.out.println("db들어가기전에 dao에서 받은 dto 출력하기"+dto);
-		List list = sqlSession.selectList("project.mapper.InvenCheck.InvenCheckPage");
+		List list = sqlSession.selectList("project.mapper.InvenCheck.InvenCheckPage", dto);
 		System.out.println("DB 갔따온 list :::" + list);
 		
 		return list;

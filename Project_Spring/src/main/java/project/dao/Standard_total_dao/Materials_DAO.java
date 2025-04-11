@@ -8,13 +8,14 @@ public interface Materials_DAO {
 
 	List<Materials_DTO> SelectList();
 	
-	List<Materials_DTO> selectMaterials();
+	List<Materials_DTO> selectMaterials(Materials_DTO dto);
 
 	List<Materials_DTO> selectFM();
 
 	List<Materials_DTO> updateMaterials();
 	
 	List<Materials_DTO> deleteMaterials();
+	public int countmaterials ();
 	
 	
 	

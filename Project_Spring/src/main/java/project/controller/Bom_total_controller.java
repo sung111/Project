@@ -1,6 +1,7 @@
 package project.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import project.dto.Materials_DTO;
 import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
 import project.service.Standard_total_service.Products_service;
@@ -30,12 +32,14 @@ public class Bom_total_controller {
 //	@RequestMapping("/standard" )
 	@RequestMapping(value="/standard",method=RequestMethod.GET)
 	public String standard(Model model,@RequestParam(value="view_value", required=false)String view_value,
-			HttpSession httpSession) {
+			HttpSession httpSession,
+			Materials_DTO materials_DTO) {
 
 //		String Field = (String)httpSession.getAttribute("Field");
 		String Field = "ADMIN";
 		String id = (String)httpSession.getAttribute("id");
 		System.out.println("Field ="+ Field);
+		
 		
 		try {
 
@@ -47,8 +51,13 @@ public class Bom_total_controller {
 			if(view_value.equals("1")) {
 				System.out.println("1번원재료조회");
 				System.out.println("1번 view_value 값"+view_value);
-				List resultList = materials_service.selectMaterials();
-				model.addAttribute("resultList",resultList);
+				Map map = materials_service.selectMaterials(materials_DTO);
+				
+				model.addAttribute("map",map);
+				model.addAttribute("materials_DTO",materials_DTO);
+				
+				System.out.println("map : "+map +""+ "materials_DTO :"+materials_DTO);
+				
 			}else if(view_value.equals("2")) {
 				System.out.println("2번완제품조회");
 				System.out.println("2번 view_value 값"+view_value);
