@@ -2,7 +2,7 @@ package project.dto;
 
 
 
-//자재 테이블
+//자재 테이블 원자제bom
 public class Materials_DTO {
 	
 	String materialname;

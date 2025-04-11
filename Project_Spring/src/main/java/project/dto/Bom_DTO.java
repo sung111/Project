@@ -1,5 +1,6 @@
 package project.dto;
 
+//원자제 bom
 public class Bom_DTO {
 int bomid;
 double quantity ;
