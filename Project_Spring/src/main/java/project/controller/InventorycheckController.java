@@ -28,8 +28,15 @@ public class InventorycheckController {
 //		로드될때 무조건 1페이지
 //		dto에 rnum 번호를 순서대로받아서 보여줌.
 		List list = service.page(invenDTO);
+		int totalCount = service.totalCount();
+		
+		
 		System.out.println("컨트롤러에서 뽑아보기"+list);
-//		model.addAttribute("list", list);
+		System.out.println("컨트롤러에서 count 뽑기" + totalCount);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("dto",invenDTO);
 		
 		
 		return "Inventorycheck";

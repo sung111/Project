@@ -42,5 +42,35 @@
 		) wherereslut
 		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
 	</select>
+	
+	<select id="invenCount" resultType="int">
+		
+			select count(*) from (SELECT
+		        prod.lotnumber,
+		        prod.productname,
+		        prod.partnumber,
+		        pro.quantity,
+		        prod.spec,
+		        prod.unit,
+		        pro.makedate,
+		        pro.expdate
+		    FROM
+		             productinven pro
+		        JOIN products prod ON ( pro.productid = prod.productid )
+		    UNION ALL
+		    SELECT
+		        mat.lotnumber,
+		        mat.materialname,
+		        mat.partnumber,
+		        inv.quantity,
+		        mat.spec,
+		        mat.unit,
+		        inv.receiptdate,
+		        inv.expdate
+		    FROM
+		             inventorystatus inv
+		        JOIN materials mat ON ( inv.materialid = mat.materialid )
+		        )
+	</select>
 
 </mapper>

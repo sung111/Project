@@ -26,12 +26,20 @@ public class InvenCheck_ServiceImpl implements InvenCheck_Servcie{
 		int indexEnd = page * viewCount;
 		dto.setIndexStart(indexStart);
 		dto.setIndexEnd(indexEnd);
+		
 		System.out.println("dto : " + dto);
 		
 		list = dao.page(dto);
 		
-		
 		return list;
 	}
-	
+
+	@Override
+	public int totalCount() {
+		
+		int result = dao.invenTotalCount();
+		
+		return result;
+	}
+
 }

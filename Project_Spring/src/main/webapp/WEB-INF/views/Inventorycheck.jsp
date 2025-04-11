@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ page import="java.util.*"%>
+<%@ page import="project.dto.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,17 +70,17 @@
 				</tr>
 			</thead>
 			<tbody id="inventoryTableBody">
-				<c:forEach var="dto" items="${resultList}">
+				<c:forEach var="dto" items="${list}">
 					<tr>
-						<td id="lotNo">${ dto.maLotNo }</td>
-						<td id="materialname">${ dto.materialname }</td>
-						<td id="dbgud">원자재</td>
-						<td id="maPartNum">${ dto.maPartNum }</td>
-						<td id="maQuantity">${ dto.maQuantity }</td>
-						<td id="maSpec">${ dto.maSpec }</td>
-						<td id="maUnit">${ dto.maUnit }</td>
-						<td id="receiptDate">${ dto.receiptDate }</td>
-						<td id="maExpDate">${ dto.maExpDate }</td>
+						<td id="lotNo">${ dto.lotnumber }</td>
+						<td id="materialname">${ dto.productname }</td>
+						<td id="dbgud">d</td>
+						<td id="maPartNum">${ dto.partnumber }</td>
+						<td id="maQuantity">${ dto.quantity }</td>
+						<td id="maSpec">${ dto.spec }</td>
+						<td id="maUnit">${ dto.unit }</td>
+						<td id="receiptDate">${ dto.makeDate }</td>
+						<td id="maExpDate">${ dto.expDate }</td>
 						<td>
 							<form method="post" action="Inventorycheck" id="updateForm1"
 								class="delFrom">
@@ -91,32 +94,77 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<c:forEach var="dto" items="${resultList2}">
-					<tr>
-						<td id="prLotNo">${ dto.prLotNo }</td>
-						<td id="productname">${ dto.productname }</td>
-						<td id="dbgud">완제품</td>
-						<td id="prPartNum">${ dto.prPartNum }</td>
-						<td id="prQuantity">${ dto.prQuantity }</td>
-						<td id="prSpec">${ dto.prSpec }</td>
-						<td id="prUnit">${ dto.prUnit }</td>
-						<td id="makeDate">${ dto.makeDate }</td>
-						<td id="prExpDate">${ dto.prExpDate }</td>
-						<td>
-							<form method="post" action="Inventorycheck" id="updateForm2"
-								class="delFrom">
-								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete2"> <input
-									type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;"> <input
-									type="hidden" name="productinvenid"
-									value="${ dto.productinvenId }" id="productinvenid">
-							</form>
-						</td>
-					</tr>
-				</c:forEach>
+				<%-- 				<c:forEach var="dto" items="${resultList2}"> --%>
+				<!-- 					<tr> -->
+				<%-- 						<td id="prLotNo">${ dto.prLotNo }</td> --%>
+				<%-- 						<td id="productname">${ dto.productname }</td> --%>
+				<!-- 						<td id="dbgud">완제품</td> -->
+				<%-- 						<td id="prPartNum">${ dto.prPartNum }</td> --%>
+				<%-- 						<td id="prQuantity">${ dto.prQuantity }</td> --%>
+				<%-- 						<td id="prSpec">${ dto.prSpec }</td> --%>
+				<%-- 						<td id="prUnit">${ dto.prUnit }</td> --%>
+				<%-- 						<td id="makeDate">${ dto.makeDate }</td> --%>
+				<%-- 						<td id="prExpDate">${ dto.prExpDate }</td> --%>
+				<!-- 						<td> -->
+				<!-- 							<form method="post" action="Inventorycheck" id="updateForm2" -->
+				<!-- 								class="delFrom"> -->
+				<!-- 								<button class="modify" style="width: 55px; height: 35px;">수정</button> -->
+				<!-- 								<input type="hidden" name="command" value="delete2"> <input -->
+				<!-- 									type="submit" name="delete" value="삭제" id="del" class="del" -->
+				<!-- 									style="width: 55px; height: 35px;"> <input -->
+				<!-- 									type="hidden" name="productinvenid" -->
+				<%-- 									value="${ dto.productinvenId }" id="productinvenid"> --%>
+				<!-- 							</form> -->
+				<!-- 						</td> -->
+				<!-- 					</tr> -->
+				<%-- 				</c:forEach> --%>
 			</tbody>
 		</table>
+
+		<div id="page-container">
+			<%
+			int total = (Integer)request.getAttribute("totalCount");
+			InvenCheck_DTO dto = (InvenCheck_DTO)request.getAttribute("dto");
+			int pageNo = dto.getPage();
+			int viewCount = dto.getViewCount();
+
+			// 1401 / 10 = 140.1 올림해서 141
+			int lastPage = (int) Math.ceil((double) total / viewCount);
+
+			int groupCount = 5; // 한번에 보여줄 페이지 개수
+			int groupPosition = (int) Math.ceil((double) pageNo / groupCount);
+			int begin = ((groupPosition - 1) * groupCount) + 1;
+			//             int end = begin + groupCount - 1;
+			int end = groupPosition * groupCount;
+			if (end > lastPage){
+				end = lastPage;
+			}
+			%>
+			<c:if test="<%=begin == 1%>">
+                  [이전]
+               </c:if>
+			<c:if test="<%=begin != 1%>">
+				<a href="inven?page=<%=begin - 1%>">[이전]</a>
+			</c:if>
+
+			<c:forEach var="i" begin="<%=begin%>" end="<%=end%>">
+				<c:if test="${i == dto.page }">
+					<c:set var="clazz" value="bold" />
+				</c:if>
+				<c:if test="${ not (i == dto.page) }">
+					<c:set var="clazz" value="" />
+				</c:if>
+
+				<a href="inven?page=${ i }" class="${clazz }">${ i }</a>
+			</c:forEach>
+
+			<c:if test="<%=end == lastPage%>">
+                  [다음]
+               </c:if>
+			<c:if test="<%=end != lastPage%>">
+				<a href="inven?page=<%=end + 1%>">[다음]</a>
+			</c:if>
+		</div>
 	</div>
 
 

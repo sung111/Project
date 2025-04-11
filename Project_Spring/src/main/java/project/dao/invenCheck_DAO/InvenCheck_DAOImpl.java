@@ -23,6 +23,14 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 		
 		return list;
 	}
+
+	@Override
+	public int invenTotalCount() {
+		int result = sqlSession.selectOne("project.mapper.InvenCheck.invenCount");
+		System.out.println("totalcount 35나와야댐" + result);
+		return result;
+	}
+	
 	
 	
 	
