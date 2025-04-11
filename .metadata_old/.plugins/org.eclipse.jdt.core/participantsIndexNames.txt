@@ -1,0 +1,21 @@
+INDEX VERSION 1.131
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3232725674.index
+\proj2_calc\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3199250902.index
+\proj1_hello\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\832990418.index
+\project_java\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2063797656.index
+\project_java\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1918714777.index
+\proj6_cookie_session\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3039793951.index
+\proj5_todo\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\238680056.index
+\proj7_file\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3819910660.index
+\proj4_forward\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2998966679.index
+\proj5_todo\src\main\java
+C:\Users\admin\Desktop\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2320174308.index
+\proj0\src\main\java

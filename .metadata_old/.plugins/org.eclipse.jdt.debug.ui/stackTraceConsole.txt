@@ -1,0 +1,4 @@
+System.out.println("update result :" + result);
+			
+			String url = "Performance";
+			response.sendRedirect(url);

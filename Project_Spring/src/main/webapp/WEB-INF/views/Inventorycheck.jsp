@@ -10,8 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>재고현황조회</title>
-<link rel="stylesheet" href="css\reset.css">
-<link rel="stylesheet" href="css\Inventorycheck.css">
+<link rel="stylesheet" href="resources\css\Inventorycheck.css">
 </head>
 
 <body>
@@ -83,10 +82,10 @@
 							<form method="post" action="Inventorycheck" id="updateForm1"
 								class="delFrom">
 								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete1">
-								<input type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;">
-								<input type="hidden" name="inventoryId" value="${ dto.inventoryId }"
+								<input type="hidden" name="command" value="delete1"> <input
+									type="submit" name="delete" value="삭제" id="del" class="del"
+									style="width: 55px; height: 35px;"> <input
+									type="hidden" name="inventoryId" value="${ dto.inventoryId }"
 									id="inventoryId">
 							</form>
 						</td>
@@ -107,10 +106,10 @@
 							<form method="post" action="Inventorycheck" id="updateForm2"
 								class="delFrom">
 								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete2">
-								<input type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;">
-								<input type="hidden" name="productinvenid"
+								<input type="hidden" name="command" value="delete2"> <input
+									type="submit" name="delete" value="삭제" id="del" class="del"
+									style="width: 55px; height: 35px;"> <input
+									type="hidden" name="productinvenid"
 									value="${ dto.productinvenId }" id="productinvenid">
 							</form>
 						</td>
@@ -151,10 +150,10 @@
 									<c:forEach var="dto" items="${matDB}">
 										<option value="${dto.materialname}"
 											data-id="${dto.materialId}" data-type="원자재"></option>
-									</c:forEach>									
+									</c:forEach>
 									<c:forEach var="dto" items="${prodDB}">
-										<option value="${dto.productname}"
-											data-id="${dto.productId}" data-type="완제품"></option>
+										<option value="${dto.productname}" data-id="${dto.productId}"
+											data-type="완제품"></option>
 									</c:forEach>
 								</datalist></td>
 						</tr>

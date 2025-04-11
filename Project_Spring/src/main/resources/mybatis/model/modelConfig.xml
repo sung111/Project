@@ -10,7 +10,10 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
-
+	
+	<typeAliases>
+		<typeAlias type="project.dto.InvenCheck_DTO" alias="InvenCheck"/>
+	</typeAliases>
     
 </configuration>
 
