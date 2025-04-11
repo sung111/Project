@@ -28,7 +28,7 @@ public class Materials_serviceImpl implements Materials_service {
 		Map <String,Object> map = new HashMap();
 		try {
 		
-//			list = materials_DAO.selectMaterials();
+
 			
 			System.out.println("dto ="+ dto);
 			//한페이지의 내용만 있는 리스트
@@ -36,7 +36,7 @@ public class Materials_serviceImpl implements Materials_service {
 			//전체 글 개수 
 			int count = materials_DAO.countmaterials();
 			
-			map.put("list", list);
+			map.put("list1", list);
 			map.put("count", count);
 			
 			//그대로주고 DB에서 바꾸자 

@@ -1,12 +1,13 @@
 package project.service.Standard_total_service;
 
 import java.util.List;
+import java.util.Map;
 
 import project.dto.Products_DTO;
 
 public interface Products_service {
 
-	List<Products_DTO> selectProducts();
+	public Map<String,Object> selectProducts(Products_DTO dto);
 	List<Products_DTO> insertProducts();
 	List<Products_DTO> selectProductserch();
 	List<Products_DTO> selectProductname();

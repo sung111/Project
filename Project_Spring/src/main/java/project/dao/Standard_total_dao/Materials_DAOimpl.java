@@ -30,28 +30,34 @@ public class Materials_DAOimpl implements Materials_DAO {
 //	}
 	@Override
 	public List<Materials_DTO> selectMaterials(Materials_DTO dto) {
-		List<Materials_DTO> result = sqlSession.selectList("mapper.materials.selectPageMaterials");
-		System.out.println("SelectList 의 값 ="+result);
+		List<Materials_DTO> list = null;
+		try {
+			
+			int page = dto.getPage();
+			int viewCount = dto.getViewCount();
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.selectPageMaterials",dto);
+			System.out.println("selectMaterials 실행");
+			System.out.println("list 값="+ list);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		int page = dto.getPage();
-		int viewCount = dto.getViewCount();
 		
-		int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
-		int indexEnd = page * viewCount; // 비번페이지 마지막 
-		
-		dto.setIndexStart(indexStart);
-		dto.setIndexEnd(indexEnd);
-		
-		List list = sqlSession.selectList("mapper.materials.selectPageMaterials",dto);
-		System.out.println("selectMaterials 실행");
-		System.out.println("list 값="+ list);
 		return list;
 		
 		
 	}
 	@Override
 	public int countmaterials() {
-		int result = sqlSession.selectOne("mapper.materials.totalMaterials");
+		int result = sqlSession.selectOne("mapper.bom.totalMaterials");
 		System.out.println("countEmp실행");
 		System.out.println("result 값="+result);
 		

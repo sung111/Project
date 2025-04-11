@@ -1,5 +1,7 @@
 package project.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 // 검사기준,부품코드
@@ -20,6 +22,11 @@ public class Products_DTO {
 	String productdel; //삭제유무
 	String lotnumber;
 	
+	private List empnos;
+	private int page = 1; // 현재 페이지
+	private int viewCount =10; // 페이지당 보여줄 수 countPerPage / rowPerPage
+	private int indexStart;
+	private int indexEnd;
 	
 
 	

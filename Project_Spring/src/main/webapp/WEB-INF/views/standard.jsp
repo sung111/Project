@@ -165,6 +165,7 @@
 							width: 60%;
 						}
 					
+					
 
 						/* 넓이에따른 if문 0~600px까지만 적용  */
 						@media screen and (max-width: 767px) {
@@ -360,8 +361,8 @@
 								</c:if>
 							</tr>
 
-						<c:if test="${not empty map.list}">		
-							<c:forEach var="dto" items="${map.list}">
+						<c:if test="${not empty map.list1}">		
+							<c:forEach var="dto" items="${map.list1}">
 
 								<tr class="table_tr">
 									<form method="post" action="part_code">
@@ -427,9 +428,9 @@
 
 					</c:forEach>
 					</c:if>
-					<c:if test="${empty map.List}">
+					<c:if test="${empty map.list1}">
 									<tr>
-										<td colspan=9>조회 내용이 없습니다</td>
+										<td colspan=9>원재료/완재품 조회 내용이 없습니다</td>
 									</tr>
 								</c:if>
 					</table>
@@ -451,8 +452,8 @@
 								</c:if>
 
 							</tr>
-							<c:if test="${not empty map.finishiList}">
-							<c:forEach var="dto" items="${map.finishiList}">
+							<c:if test="${not empty map.list2}">
+							<c:forEach var="dto" items="${map.list2}">
 								<tr class="table_tr">
 									<form method="post" action="part_code">
 										<td><span class="text_view">${dto.productname}</span> <input type="text"
@@ -505,9 +506,9 @@
 
 					</c:forEach>
 					</c:if>
-					<c:if test="${empty map.finishiList}">
+					<c:if test="${empty map.list2}">
 									<tr>
-										<td colspan=8>조회 내용이 없습니다</td>
+										<td colspan=8>완제품조회 내용이 없습니다</td>
 									</tr>
 								</c:if>
 					</table>
@@ -517,15 +518,24 @@
 
 					</div>
 
-					<div>
+					<div id="page-container">
 						<%
+						int pageNo = 1;
+						int viewCount = 10;
 						// model에 담은건 request에서 꺼낼 수 있다
 						Map map = (Map)request.getAttribute("map");
-						Materials_DTO dto = (Materials_DTO)request.getAttribute("materials_DTO");
+						if((Materials_DTO)request.getAttribute("materials_DTO") == null){
+							Products_DTO dto = (Products_DTO)request.getAttribute("products_DTO");
+							 pageNo = dto.getPage();
+							 viewCount = dto.getViewCount();
 						System.out.println(">>>>>>>>> map :"+map +" : "+ "dto :"+dto);
+						}else if((Products_DTO)request.getAttribute("products_DTO") == null){
+							Materials_DTO dto = (Materials_DTO)request.getAttribute("materials_DTO");
+							 pageNo = dto.getPage();
+							viewCount = dto.getViewCount();
+						System.out.println(">>>>>>>>> map :"+map +" : "+ "dto :"+dto);
+						}
 						int total = (Integer)map.get("count");
-						int pageNo = dto.getPage();
-						int viewCount = dto.getViewCount();
 						
 						// 1401 / 10 = 140.1 올림해서 141
 						int lastPage = (int)Math.ceil((double)total / viewCount);

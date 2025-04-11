@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.dto.Materials_DTO;
+import project.dto.Products_DTO;
 import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
 import project.service.Standard_total_service.Products_service;
@@ -33,7 +34,8 @@ public class Bom_total_controller {
 	@RequestMapping(value="/standard",method=RequestMethod.GET)
 	public String standard(Model model,@RequestParam(value="view_value", required=false)String view_value,
 			HttpSession httpSession,
-			Materials_DTO materials_DTO) {
+			Materials_DTO materials_DTO,
+			Products_DTO products_DTO) {
 
 //		String Field = (String)httpSession.getAttribute("Field");
 		String Field = "ADMIN";
@@ -61,8 +63,14 @@ public class Bom_total_controller {
 			}else if(view_value.equals("2")) {
 				System.out.println("2번완제품조회");
 				System.out.println("2번 view_value 값"+view_value);
-				List finishiList = Products_service.selectProducts();
-				model.addAttribute("finishiList",finishiList);
+				
+				Map map = Products_service.selectProducts(products_DTO);
+				
+				model.addAttribute("map",map);
+				model.addAttribute("products_DTO",products_DTO);
+				
+				System.out.println("map : "+map +""+ "products_DTO :"+products_DTO);
+				
 			}else if(view_value.equals("3")) {
 				System.out.println("3번완제품조회");
 				List resultList = materialsProducts_service.selectMaterialsProducts();

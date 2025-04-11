@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.materials">
+<mapper namespace="mapper.bom">
 
 
 	<select id="selectPageMaterials" resultType="Materials_DTO" parameterType="Materials_DTO">
@@ -24,21 +24,40 @@
 	
 	</select>
 	
-
-
-
-
-
-
-	<select id="selectMaterials"
-		resultType="Materials_DTO">
-		select * from MATERIALS WHERE materialdel = 'n'
+	<select id="selectPageProducts" resultType="Products_DTO" parameterType="Products_DTO">
+		select rnum, tmp2.* from(
+		    		select rownum rnum, tmp1.* from(
+		            select  * from PRODUCTS
+		            WHERE PRODUCTDEL = 'n'
+		            order by PRODUCTNAME
+		           
+		   			 ) tmp1
+		)tmp2
+		where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
+		
 	</select>
-
-	<select id="selectProducts"
-		resultType="Products_DTO">
-		select * from products WHERE productdel = 'n'
+	
+	<select id="totalProducts" resultType="int" >
+		select count(*) from PRODUCTS
+		WHERE PRODUCTDEL = 'n'
+	
 	</select>
+	
+
+
+
+
+
+
+<!-- 	<select id="selectMaterials" -->
+<!-- 		resultType="Materials_DTO"> -->
+<!-- 		select * from MATERIALS WHERE materialdel = 'n' -->
+<!-- 	</select> -->
+
+<!-- 	<select id="selectProducts" -->
+<!-- 		resultType="Products_DTO"> -->
+<!-- 		select * from products WHERE productdel = 'n' -->
+<!-- 	</select> -->
 
 	<select id="selectMaterialsProducts"
 		resultType="Materials_DTO">
@@ -59,10 +78,6 @@
 		ORDER BY materialname
 	</select>
 
-	<!-- 로뀨잉 -->
-	<select id="selectUserId" parameterType="java.lang.String"
-		resultType="project.dto.User_DTO">
-		SELECT * FROM users WHERE userid = #{userid}
-	</select>
+	
 
 </mapper>
