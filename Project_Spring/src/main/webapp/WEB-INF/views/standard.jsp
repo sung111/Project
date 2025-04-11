@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-			<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.*" %>
+<%@ page import="project.dto.*" %>
 				<!DOCTYPE html>
 				<html lang="en">
 
@@ -358,8 +360,8 @@
 								</c:if>
 							</tr>
 
-
-							<c:forEach var="dto" items="${resultList}">
+						<c:if test="${not empty map.list}">		
+							<c:forEach var="dto" items="${map.list}">
 
 								<tr class="table_tr">
 									<form method="post" action="part_code">
@@ -424,7 +426,12 @@
 					</tr>
 
 					</c:forEach>
-
+					</c:if>
+					<c:if test="${empty map.List}">
+									<tr>
+										<td colspan=9>조회 내용이 없습니다</td>
+									</tr>
+								</c:if>
 					</table>
 					</div>
 
@@ -444,8 +451,8 @@
 								</c:if>
 
 							</tr>
-
-							<c:forEach var="dto" items="${finishiList}">
+							<c:if test="${not empty map.finishiList}">
+							<c:forEach var="dto" items="${map.finishiList}">
 								<tr class="table_tr">
 									<form method="post" action="part_code">
 										<td><span class="text_view">${dto.productname}</span> <input type="text"
@@ -497,11 +504,63 @@
 					</tr>
 
 					</c:forEach>
-
+					</c:if>
+					<c:if test="${empty map.finishiList}">
+									<tr>
+										<td colspan=8>조회 내용이 없습니다</td>
+									</tr>
+								</c:if>
 					</table>
 					</div>
 
 
+
+					</div>
+
+					<div>
+						<%
+						// model에 담은건 request에서 꺼낼 수 있다
+						Map map = (Map)request.getAttribute("map");
+						Materials_DTO dto = (Materials_DTO)request.getAttribute("materials_DTO");
+						System.out.println(">>>>>>>>> map :"+map +" : "+ "dto :"+dto);
+						int total = (Integer)map.get("count");
+						int pageNo = dto.getPage();
+						int viewCount = dto.getViewCount();
+						
+						// 1401 / 10 = 140.1 올림해서 141
+						int lastPage = (int)Math.ceil((double)total / viewCount);
+						
+						int groupCount = 5;	// 한번에 보여줄 페이지 개수
+						int groupPosition = (int)Math.ceil((double)pageNo / groupCount);
+						int begin = ((groupPosition-1) * groupCount) + 1;
+		// 				int end = begin + groupCount - 1;
+						int end = groupPosition * groupCount;
+						if(end > lastPage) end = lastPage;
+					%>
+					<c:if test="<%= begin == 1 %>">
+						[이전]
+					</c:if>
+					<c:if test="<%= begin != 1 %>">
+						<a href="standard?page=<%= begin-1 %>">[이전]</a>
+					</c:if>
+					
+					<c:forEach var="i" begin="<%= begin %>" end="<%= end %>">
+						<c:if test="${i == dto.page }">
+							<c:set var="clazz" value="bold" />
+						</c:if>
+						<c:if test="${ not (i == dto.page) }">
+							<c:set var="clazz" value="" />
+						</c:if>
+						
+						<a href="standard?page=${ i }" class="${clazz }">${ i }</a>
+					</c:forEach>
+					
+					<c:if test="<%= end == lastPage %>">
+						[다음]
+					</c:if>
+					<c:if test="<%= end != lastPage %>">
+						<a href="standard?page=<%= end+1 %>">[다음]</a>
+					</c:if>
 					</div>
 					<script>
 						window

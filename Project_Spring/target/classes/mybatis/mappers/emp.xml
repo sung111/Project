@@ -2,20 +2,46 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.emp">
+<mapper namespace="mapper.materials">
+
+
+	<select id="selectPageMaterials" resultType="Materials_DTO" parameterType="Materials_DTO">
+		select rnum, tmp2.* from(
+ 			select rownum rnum, tmp1.* from(
+	            select  * from MATERIALS
+	            WHERE materialdel = 'n'
+	            order by MATERIALNAME
+   			 )tmp1
+		)tmp2
+		
+		where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
+		
+	</select>
+	
+	<select id="totalMaterials" resultType="int" >
+		select count(*) from MATERIALS
+		WHERE materialdel = 'n'
+	
+	</select>
+	
+
+
+
+
+
 
 	<select id="selectMaterials"
-		resultType="project.dto.Materials_DTO">
+		resultType="Materials_DTO">
 		select * from MATERIALS WHERE materialdel = 'n'
 	</select>
 
 	<select id="selectProducts"
-		resultType="project.dto.Products_DTO">
+		resultType="Products_DTO">
 		select * from products WHERE productdel = 'n'
 	</select>
 
 	<select id="selectMaterialsProducts"
-		resultType="project.dto.Materials_DTO">
+		resultType="Materials_DTO">
 		SELECT materialname, PRICE, SPEC, UNIT, SUPPLIER,
 		PARTNUMBER, LOTNUMBER, WAREHOUSE,
 		'm' AS type, materialdel, materialid
