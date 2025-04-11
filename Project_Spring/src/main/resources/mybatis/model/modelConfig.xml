@@ -11,11 +11,10 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
-<<<<<<< HEAD
 	<typeAliases>
 		<typeAlias type="project.dto.InvenCheck_DTO" alias="InvenCheck"/>
 	</typeAliases>
-=======
+	
 		<!-- mapper에 사용할 타입이 길어서 짧게 별칭 지정 -->
 	<typeAliases>
 		<typeAlias type="project.dto.Bom_DTO" alias="Bom_DTO" />
@@ -24,7 +23,6 @@
 		<typeAlias type="project.dto.Products_DTO" alias="Products_DTO" />
 	</typeAliases>
 
->>>>>>> 9a292ff9d4c9e1b4781ec93d4717eb9e32aaf017
     
 </configuration>
 
