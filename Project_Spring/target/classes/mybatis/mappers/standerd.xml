@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.bom">
 
-
+<!--  원재료 조회 -->
 	<select id="selectPageMaterials" resultType="Materials_DTO" parameterType="Materials_DTO">
 		select rnum, tmp2.* from(
  			select rownum rnum, tmp1.* from(
@@ -24,6 +24,7 @@
 	
 	</select>
 	
+<!-- 	완재품조회 -->
 	<select id="selectPageProducts" resultType="Products_DTO" parameterType="Products_DTO">
 		select rnum, tmp2.* from(
 		    		select rownum rnum, tmp1.* from(
@@ -43,6 +44,94 @@
 	
 	</select>
 	
+<!-- 	원재료/완제품조회 -->
+	<select id="selectPageMaterialsProducts" resultType="Materials_DTO" parameterType="Materials_DTO">
+	
+		select rnum, materialname,PRICE,SPEC,UNIT,SUPPLIER,PARTNUMBER,LOTNUMBER,WAREHOUSE,type,materialdel,materialid from(
+                select rownum rnum, tmp1.* from(
+		        select materialname,PRICE,SPEC,UNIT,SUPPLIER,PARTNUMBER,LOTNUMBER,WAREHOUSE,'m' type,materialdel,materialid from MATERIALS
+                WHERE materialdel = 'n'
+                union all
+                select productname materialname,PRICE,SPEC,UNIT,'',PARTNUMBER,LOTNUMBER,WAREHOUSE,'p' type,productdel materialdel,productid materialid from products
+                WHERE productdel = 'n' 
+                order by materialname
+                 ) tmp1
+		)tmp2
+			where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
+		
+	</select>
+	
+	<select id="totalMaPr" resultType="int" >
+			 select count(*)
+			 from(
+					select materialname,PRICE,SPEC,UNIT,SUPPLIER,PARTNUMBER,LOTNUMBER,WAREHOUSE,'m' type,materialdel,materialid from MATERIALS
+					WHERE materialdel = 'n'
+					union all
+					select productname materialname,PRICE,SPEC,UNIT,'',PARTNUMBER,LOTNUMBER,WAREHOUSE,'p' type,productdel materialdel,productid materialid from products
+					WHERE productdel = 'n' 
+					order by materialname
+			 ) count
+	
+	</select>
+<!-- 	원재료생성	 -->
+	<insert id="insertMaterials" parameterType="Materials_DTO">
+	insert into materials 
+	values ('',#{materialname},#{price},#{spec},#{unit},#{supplier},#{partNumber},#{lotnumber},#{warehouse},'n')
+	</insert>
+<!-- 	원재료 수정 -->
+	<update id="updateMaterials" parameterType="Materials_DTO">
+	update materials
+		set materialname=#{materialname} ,
+		price=#{price} ,
+		spec=#{spec} ,
+		unit=#{unit},
+		supplier=#{supplier},
+		partNumber=#{partNumber},
+		lotnumber=#{lotnumber},
+		warehouse=#{warehouse}
+		where materialid = #{materialid}
+	</update>
+	
+<!-- 	원재료 삭제 -->
+	<update id="deleteMaterials" parameterType="Materials_DTO">
+		update materials
+			set materialdel= 'y' 
+		where materialid = #{materialid}
+	</update>
+	
+	
+<!-- 	완재품생성 -->
+	<insert id="insertProducts" parameterType="Products_DTO">
+		insert into products 
+		values ('',#{productname},#{partnumber},null,#{warehouse},null,null,null,#{price},#{spec},#{unit},'n',#{lotnumber})
+	</insert>
+
+	
+<!-- 	완재품 수정 -->
+	<update id="updateProducts" parameterType="Products_DTO">
+		update products
+		set productname=#{productname} ,
+		partnumber=#{partnumber} ,
+		price=#{price} ,
+		spec=${'spec'},
+		unit=#{unit},
+		lotnumber=#{lotnumber},
+		warehouse=#{warehouse}
+		where productid = #{productid}
+	</update>
+	
+	<!-- 	완제품 삭제 -->
+	<update id="deleteProducts" parameterType="Products_DTO">
+		update products
+			set productdel= 'y' 
+		where productid = #{productid}
+	</update>
+			
+			
+			
+		
+		
+		
 
 
 

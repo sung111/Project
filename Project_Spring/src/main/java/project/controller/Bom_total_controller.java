@@ -1,6 +1,5 @@
 package project.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -8,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.Materials_DTO;
 import project.dto.Products_DTO;
@@ -73,9 +74,14 @@ public class Bom_total_controller {
 				
 			}else if(view_value.equals("3")) {
 				System.out.println("3번완제품조회");
-				List resultList = materialsProducts_service.selectMaterialsProducts();
-				model.addAttribute("resultList",resultList);
+				Map map = materialsProducts_service.selectMaterialsProducts(materials_DTO);
+				
+				model.addAttribute("map",map);
+				model.addAttribute("materials_DTO",materials_DTO);
+				
+				System.out.println("map : "+map +""+ "materials_DTO :"+materials_DTO);
 			}
+			
 			model.addAttribute("Field",Field);
 			model.addAttribute("view_value",view_value);
 		}catch (Exception e) {
@@ -87,38 +93,115 @@ public class Bom_total_controller {
 	}
 	
 //	원재료 생성, 삭제(수정) , 수정 
+	//생성
+	@ResponseBody
 	@RequestMapping(value="/standard_insert",method=RequestMethod.POST)
-	public String standardinsert() {
+	public int standardinsert(@RequestBody Materials_DTO materials_DTO ) {
+		System.out.println("standard_insert 실행");
+		System.out.println("materials_DTO 값은 ="+materials_DTO);
+		int result = 0;
+		try {			
+			result = materials_service.insertMaterials(materials_DTO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		return "forward:/standard";
+		System.out.println("materials_insert_post :"+result);
+		return result;
 	}
-	@RequestMapping(value="/standard_delet",method=RequestMethod.PUT)
-	public String standarddelet() {
-		
-		return "forward:/standard";
-	}
+	//수정
+	@ResponseBody
 	@RequestMapping(value="/standard_update",method=RequestMethod.PUT)
-	public String standardupdate() {
+	public int standardupdate(@RequestBody Materials_DTO materials_DTO ) {
+		System.out.println("standard_update 실행");
+		System.out.println("materials_DTO 값은 ="+materials_DTO);
+		int result = 0;
+		try {			
+			result = materials_service.updateMaterials(materials_DTO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		return "forward:/standard";
+		System.out.println("materials_update_put :"+result);
+		return result;
 	}
 	
-//	완제품 생성, 삭제(수정) , 수정 
+	//삭제
+	@ResponseBody
+	@RequestMapping(value="/standard_delet",method=RequestMethod.PUT)
+	public int standarddelet(@RequestBody Materials_DTO materials_DTO) {
+		System.out.println("standard_delet 실행");
+		System.out.println("materials_DTO 값은 ="+materials_DTO);
+		int result = 0;
+		try {			
+			result = materials_service.deleteMaterials(materials_DTO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("materials_update_put :"+result);
+		return result;
+		
+		
+	}
+	
+//	=====완제품 생성, 삭제(수정) , 수정 
+	//생성
+	@ResponseBody
 	@RequestMapping(value="/products_insert",method=RequestMethod.POST)
-	public String productsinsert() {
+	public int productsinsert(@RequestBody Products_DTO products_DTO ) {
+		System.out.println("products_insert 실행");
+		System.out.println("products_DTO 값은 ="+products_DTO);
+		int result = 0;
+		try {			
+			result = Products_service.insertProducts(products_DTO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		return "forward:/standard";
+		System.out.println("products_insert_post :"+result);
+		return result;
 	}
-	@RequestMapping(value="/products_delet",method=RequestMethod.PUT)
-	public String productsddelet() {
-		
-		return "forward:/standard";
-	}
+	//수정
+	@ResponseBody
 	@RequestMapping(value="/products_update",method=RequestMethod.PUT)
-	public String productsdupdate() {
+	public int productsupdate(@RequestBody Products_DTO products_DTO ) {
+		System.out.println("products_update 실행");
+		System.out.println("products_DTO 값은 ="+products_DTO);
+		int result = 0;
+		try {			
+			result = Products_service.updateProducts(products_DTO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		return "forward:/standard";
+		System.out.println("products_update_put :"+result);
+		return result;
 	}
+	
+	//삭제
+	@ResponseBody
+	@RequestMapping(value="/products_delet",method=RequestMethod.PUT)
+	public int productsdelet(@RequestBody Products_DTO products_DTO) {
+		System.out.println("products_delet 실행");
+		System.out.println("products_DTO 값은 ="+products_DTO);
+		int result = 0;
+		try {			
+			result = Products_service.deleteProducts(products_DTO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("products_update_put :"+result);
+		return result;
+		
+		
+	}
+	
+	
+	
+	
+
 	
 	
 	

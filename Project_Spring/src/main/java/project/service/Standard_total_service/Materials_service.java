@@ -8,13 +8,14 @@ import project.dto.Materials_DTO;
 
 public interface Materials_service {
 
-	List<Materials_DTO> SelectList();
+	public List<Materials_DTO> SelectList();
 	
+
+	public List<Materials_DTO> selectFM();
+//사용하는거
 	public Map<String,Object> selectMaterials(Materials_DTO dto);
-
-	List<Materials_DTO> selectFM();
-
-	List<Materials_DTO> updateMaterials();
+	public int insertMaterials(Materials_DTO dto);
+	public int updateMaterials(Materials_DTO dto);
+	public int deleteMaterials(Materials_DTO dto);
 	
-	List<Materials_DTO> deleteMaterials();
 }

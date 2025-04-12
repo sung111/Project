@@ -8,6 +8,7 @@ import lombok.Data;
 //완제품 테이블
 @Data
 public class Products_DTO {
+	
 	int productid;
 	String productname;
 	String partnumber;

@@ -44,13 +44,59 @@ public class Products_DAOImpl implements Products_DAO {
 	
 	@Override
 	public int countProducts() {
-		int result = sqlSession.selectOne("mapper.bom.totalProducts");
-		System.out.println("countEmp실행");
-		System.out.println("result 값="+result);
+		int result = 0;
+		try {
+			result = sqlSession.selectOne("mapper.bom.totalProducts");
+			System.out.println("countEmp실행");
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return result;
 	}
 
+	@Override
+	public int insertProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.insert("mapper.bom.insertProducts",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int updateProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.updateProducts",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.deleteProducts",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public List<Products_DTO> insertProducts() {
 		// TODO Auto-generated method stub
@@ -98,6 +144,7 @@ public class Products_DAOImpl implements Products_DAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	
 

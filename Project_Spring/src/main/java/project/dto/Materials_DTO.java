@@ -20,7 +20,7 @@ public class Materials_DTO {
 	String bomdel;
 	int bomid;
 
-	int materiaid;
+	int materialid;
 	String materiadel;
 	String type; //원자재, 완제품 타입 구분 p원자제, m완제품
 	int stockquantity;

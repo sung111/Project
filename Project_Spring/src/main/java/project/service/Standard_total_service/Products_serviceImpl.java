@@ -39,6 +39,49 @@ public class Products_serviceImpl implements Products_service {
 		}
 		return map;
 	}
+	//완제품생성
+	@Override
+	public int insertProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = products_DAO.insertProducts(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	//완제품수정
+	@Override
+	public int updateProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = products_DAO.updateProducts(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	//완제품삭제
+	@Override
+	public int deleteProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = products_DAO.deleteProducts(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public List<Products_DTO> insertProducts() {

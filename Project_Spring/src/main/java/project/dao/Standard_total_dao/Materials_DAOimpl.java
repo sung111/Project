@@ -57,14 +57,58 @@ public class Materials_DAOimpl implements Materials_DAO {
 	}
 	@Override
 	public int countmaterials() {
-		int result = sqlSession.selectOne("mapper.bom.totalMaterials");
-		System.out.println("countEmp실행");
-		System.out.println("result 값="+result);
+		int result = 0;
+		try {
+			result = sqlSession.selectOne("mapper.bom.totalMaterials");
+			System.out.println("countEmp실행");
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 		
 		return result;
 		
 	}
 
+	//원재려생성
+	@Override
+	public int insertMaterials(Materials_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.insert("mapper.bom.insertMaterials",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	//원재려수정
+	@Override
+	public int updateMaterials(Materials_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.updateMaterials",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	//원재료 삭제
+	@Override
+	public int deleteMaterials(Materials_DTO dto) {
+		int result = 0;
+		try {
+		result = sqlSession.update("mapper.bom.deleteMaterials",dto);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	@Override
 	public List<Materials_DTO> selectFM() {
 		// TODO Auto-generated method stub
@@ -72,17 +116,9 @@ public class Materials_DAOimpl implements Materials_DAO {
 	}
 
 	
-	@Override
-	public List<Materials_DTO> updateMaterials() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<Materials_DTO> deleteMaterials() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 
 
 }
