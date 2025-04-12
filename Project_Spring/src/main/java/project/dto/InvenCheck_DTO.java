@@ -7,19 +7,19 @@ import lombok.Data;
 @Data
 public class InvenCheck_DTO {
 	
-//	재고현황조회
-	private int inventoryId;
+//	재고현황
+	private int inventoryid;
 	private int materialId;
 	private Date receiptDate;
 	private Date expDate;
 	private int quantity;
-	
-//	완제품 조회
+
+//	완제품
 	private int productinvenid;
 	private int productid;
 	private Date makeDate;
-	
-//	컬럼명같은거 주석처리함
+
+//	컬럼명 같은거 주석처리함
 //	private Date expDate1;
 //	private int quantity1;
 	
@@ -30,7 +30,7 @@ public class InvenCheck_DTO {
 	private int indexEnd;
 	private int totalCount;
 	
-//	조회화기위한 필드
+//	db 조회하기 위한 필드
 	private int rnum;
 	private String lotnumber;
 	private String productname;

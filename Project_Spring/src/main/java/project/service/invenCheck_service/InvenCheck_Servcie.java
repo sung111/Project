@@ -8,6 +8,6 @@ public interface InvenCheck_Servcie {
 
 	public List page(InvenCheck_DTO invenDTO);
 	public int totalCount();
-	
+	public int invenDelete(InvenCheck_DTO dto);
 	
 }

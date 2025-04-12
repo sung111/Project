@@ -42,4 +42,23 @@ public class InventorycheckController {
 		return "Inventorycheck";
 	}
 	
+	//삭제
+	@RequestMapping(value="invenDelete", method=RequestMethod.POST)
+	public String invenDelete(InvenCheck_DTO invenDTO, Model model) {
+		
+		System.out.println("삭제 받아오라고 씨볼아"+invenDTO );
+		int result = service.invenDelete(invenDTO);
+		System.out.println("삭제는 ? result : "+result);
+		
+		//리스트가없으면 c:forEach가 안돌아서 nullPointException 나옴.
+		List list = service.page(invenDTO);
+		int totalCount = service.totalCount();
+		model.addAttribute("list", list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("dto",invenDTO);
+		
+		return "Inventorycheck";
+	}
+	
+	
 }

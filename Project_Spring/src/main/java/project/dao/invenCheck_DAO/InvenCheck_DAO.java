@@ -8,7 +8,7 @@ public interface InvenCheck_DAO {
 	
 	public List page(InvenCheck_DTO dto);
 	public int invenTotalCount();
-	
+	public int invenDelete(InvenCheck_DTO dto);
 	
 	
 }
