@@ -42,4 +42,13 @@ public class InvenCheck_ServiceImpl implements InvenCheck_Servcie{
 		return result;
 	}
 
+	@Override
+	public int invenDelete(InvenCheck_DTO dto) {
+
+		System.out.println("서비스!!!!!!에서 인벤아이디 받아와라고" + dto);
+		int result = dao.invenDelete(dto);
+		System.out.println("서비스가 DAO 다녀왔다고 쌰발 " + result);
+		return result;
+	}
+
 }

@@ -11,6 +11,7 @@
 			select rownum rnum, unionresult.* from (
 				select
 					prod.lotnumber,
+					pro.productinvenid,
 					prod.productname,
 					prod.PARTNUMBER,
 					pro.quantity,
@@ -27,6 +28,7 @@
 				
 				select
 					mat.lotnumber,
+					inv.inventoryid,
 					mat.materialname,
 					mat.partnumber,
 					inv.quantity,
@@ -43,7 +45,7 @@
 		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
 	</select>
 	
-	<select id="invenCount" resultType="int">
+	<select id="invenCount" resultType="int" >
 		
 			select count(*) from (SELECT
 		        prod.lotnumber,
@@ -72,5 +74,9 @@
 		        JOIN materials mat ON ( inv.materialid = mat.materialid )
 		        )
 	</select>
+	
+	<delete id="invenDelete">
+		delete from inventorystatus where inventoryid <![CDATA[ = ]]> #{productinvenid}
+	</delete>
 
 </mapper>

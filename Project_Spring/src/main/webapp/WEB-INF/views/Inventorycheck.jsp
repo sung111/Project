@@ -74,7 +74,24 @@
 					<tr>
 						<td id="lotNo">${ dto.lotnumber }</td>
 						<td id="materialname">${ dto.productname }</td>
-						<td id="dbgud">d</td>
+
+						<td id="dbgud">
+							<c:choose>
+								<c:when test="${fn:substring(dto.lotnumber, 0, 3)== 'ING' }">
+									원자재
+								</c:when>
+								<c:when test="${fn:substring(dto.lotnumber, 0, 3)== 'WPD' }">
+									완제품
+								</c:when>
+								<c:when test="${fn:substring(dto.lotnumber, 0, 3)== 'PKG' }">
+									용기
+								</c:when>
+								<c:otherwise>
+									기타
+								</c:otherwise>
+							</c:choose>
+						</td>
+
 						<td id="maPartNum">${ dto.partnumber }</td>
 						<td id="maQuantity">${ dto.quantity }</td>
 						<td id="maSpec">${ dto.spec }</td>
@@ -82,45 +99,24 @@
 						<td id="receiptDate">${ dto.makeDate }</td>
 						<td id="maExpDate">${ dto.expDate }</td>
 						<td>
-							<form method="post" action="Inventorycheck" id="updateForm1"
+							<form method="post" action="invenDelete" id="updateForm1"
 								class="delFrom">
 								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete1"> <input
+								<input
 									type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;"> <input
-									type="hidden" name="inventoryId" value="${ dto.inventoryId }"
-									id="inventoryId">
+									style="width: 55px; height: 35px;">
+								<input
+									type="hidden" name="productinvenid" value="${ dto.productinvenid }"
+									id="productinvenid">
 							</form>
 						</td>
 					</tr>
 				</c:forEach>
-				<%-- 				<c:forEach var="dto" items="${resultList2}"> --%>
-				<!-- 					<tr> -->
-				<%-- 						<td id="prLotNo">${ dto.prLotNo }</td> --%>
-				<%-- 						<td id="productname">${ dto.productname }</td> --%>
-				<!-- 						<td id="dbgud">완제품</td> -->
-				<%-- 						<td id="prPartNum">${ dto.prPartNum }</td> --%>
-				<%-- 						<td id="prQuantity">${ dto.prQuantity }</td> --%>
-				<%-- 						<td id="prSpec">${ dto.prSpec }</td> --%>
-				<%-- 						<td id="prUnit">${ dto.prUnit }</td> --%>
-				<%-- 						<td id="makeDate">${ dto.makeDate }</td> --%>
-				<%-- 						<td id="prExpDate">${ dto.prExpDate }</td> --%>
-				<!-- 						<td> -->
-				<!-- 							<form method="post" action="Inventorycheck" id="updateForm2" -->
-				<!-- 								class="delFrom"> -->
-				<!-- 								<button class="modify" style="width: 55px; height: 35px;">수정</button> -->
-				<!-- 								<input type="hidden" name="command" value="delete2"> <input -->
-				<!-- 									type="submit" name="delete" value="삭제" id="del" class="del" -->
-				<!-- 									style="width: 55px; height: 35px;"> <input -->
-				<!-- 									type="hidden" name="productinvenid" -->
-				<%-- 									value="${ dto.productinvenId }" id="productinvenid"> --%>
-				<!-- 							</form> -->
-				<!-- 						</td> -->
-				<!-- 					</tr> -->
-				<%-- 				</c:forEach> --%>
 			</tbody>
 		</table>
 
+
+<!-- 		페이지네이션 -->
 		<div id="page-container">
 			<%
 			int total = (Integer)request.getAttribute("totalCount");
@@ -146,7 +142,6 @@
 			<c:if test="<%=begin != 1%>">
 				<a href="inven?page=<%=begin - 1%>">[이전]</a>
 			</c:if>
-
 			<c:forEach var="i" begin="<%=begin%>" end="<%=end%>">
 				<c:if test="${i == dto.page }">
 					<c:set var="clazz" value="bold" />
@@ -154,7 +149,6 @@
 				<c:if test="${ not (i == dto.page) }">
 					<c:set var="clazz" value="" />
 				</c:if>
-
 				<a href="inven?page=${ i }" class="${clazz }">${ i }</a>
 			</c:forEach>
 
@@ -183,18 +177,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td>등록 날짜</td>
-							<td><input type="date" id="addlotno"
-								placeholder="LOT NO를 입력하세요." class="popInput" name="date"></td>
-						</tr> -->
 						<tr>
 							<td>품명</td>
-							<td><input type="text" id="additem" placeholder="품명을 입력하세요."
-								class="popInput" list="suggestions" name="name"> <input
-								type="hidden" id="hiddenInventoryId" name="inventoryId">
+							<td>
+								<input type="text" id="additem" placeholder="품명을 입력하세요."
+									class="popInput" list="suggestions" name="name">
+								<input
+									type="hidden" id="hiddenInventoryId" name="inventoryId">
 								<input type="hidden" id="hiddenProductInvenId"
-								name="productinvenid"> <datalist id="suggestions">
+								name="productinvenid">
+								<datalist id="suggestions">
 									<c:forEach var="dto" items="${matDB}">
 										<option value="${dto.materialname}"
 											data-id="${dto.materialId}" data-type="원자재"></option>
@@ -203,35 +195,17 @@
 										<option value="${dto.productname}" data-id="${dto.productId}"
 											data-type="완제품"></option>
 									</c:forEach>
-								</datalist></td>
+								</datalist>
+							</td>
 						</tr>
-						<!-- <tr>
-							<td>품번</td>
-							<td><input type="text" id="additemno"
-								placeholder="품번을 입력하세요." class="popInput"></td>
-						</tr> -->
 						<tr>
 							<td>입고 수량</td>
-							<td><input type="number" id="addquantity" name="ea"
-								placeholder="입고 수량을 입력하세요." class="popInput"
-								style="width: 90%; text-align: center;"></td>
-						</tr>
-						<!-- <tr>
-							<td>단위</td>
-							<td style="display: flex; justify-content: center;">
-								<div class="unit-container" style="width: 90%;">
-									<input type="number" id="addunit" placeholder="개수를 입력하세요."
-										class="unit-input popInput" style="width: 100%;"> <select
-										id="unitDropdown" class="unit-dropdown popInput" name="unit">
-										<option value="g">g</option>
-										<option value="kg">kg</option>
-										<option value="ml">ml</option>
-										<option value="캔">캔</option>
-										<option value="개">개</option>
-									</select>
-								</div>
+							<td>
+								<input type="number" id="addquantity" name="ea"
+									placeholder="입고 수량을 입력하세요." class="popInput"
+									style="width: 90%; text-align: center;">
 							</td>
-						</tr> -->
+						</tr>
 						<tr>
 							<td>제품 유형</td>
 							<td>
@@ -246,8 +220,10 @@
 						</tr>
 						<tr>
 							<td>입고일</td>
-							<td><input type="date" id="addin_date" name="indate"
-								class="popInput"></td>
+							<td>
+								<input type="date" id="addin_date" name="indate"
+									class="popInput">
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -281,6 +257,9 @@
 			}
 		    
 		    
+		    
+		    
+		    // 수정
 		    const modify = document.querySelectorAll('.modify');
 		    console.log(modify.length);
 		    for(let i = 0 ; i < modify.length ; i++){
@@ -331,7 +310,7 @@
 										<input type="hidden" name="inventoryId" value="\${ inventoryId }"
 											id="inventoryId">
 									</td>
-							`
+									`
 						
 		    		} else {
 		    			
@@ -397,20 +376,20 @@
 			            // 8. 폼을 자동으로 제출 (서버에 데이터 전송)
 			            form.submit();
 						alert("수정되었습니다.")
-						
+
 					}) // yes event end
-					
-					
+
+
 					const cancel = document.querySelectorAll('.cancel');
 		    		cancel[i].addEventListener('click', (e)=>{
 		    			location.reload();
 	    			})
-	    			
-		    			
+
+
 		    	}) // modify addevent end
 		    } // for end
-		    
-		    
+
+
 		    document.querySelector('#insertBtn').addEventListener('click', (e)=>{
 		    	e.preventDefault();
 		    	let hiddenInventoryId = document.querySelector('#hiddenInventoryId');
@@ -432,9 +411,8 @@
 		    		alert("입고일을 입력해주시기 바랍니다.")
 		    		return;
 		    	}
-		    	
+
 		    	for( let option of options ){
-		    		
 		    		if( option.value === inputBox.value){
 		    			let data = option.getAttribute('data-id');
 		    			let type = option.getAttribute('data-type');
@@ -447,23 +425,26 @@
 			    			}
 		    			}
 			    		break;
-		    		} 
+		    		}
 		    	}
 		    	document.querySelector('#inputForm').submit();
 		    })
+
 		    
+		    // 삭제
 			const del = document.querySelectorAll('.del');
-			const delF = document.querySelectorAll('.delFrom')
+			const delF = document.querySelectorAll('.delFrom');
 			for(let i = 0; i < del.length; i++){
 				del[i].addEventListener('click', (e)=>{
 					e.preventDefault()
 					const tt = confirm("정말로 삭제하시겠습니까?")
 					if(tt){
 						delF[i].submit();
+						alert("삭제되었습니다.");
 					}
 				})
 			}
-		
+
 	</script>
 </body>
 
