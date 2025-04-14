@@ -179,7 +179,7 @@ function init() {
 
 
   // 제품 합/불 라디오버튼클릭시 숨기기/나오기
-  const rad = document.querySelectorAll('.rad')
+  const rad = document.querySelectorAll('.rad');
   for (let i = 0; i < rad.length; i++) {
     rad[i].addEventListener('click', (e) => {
       

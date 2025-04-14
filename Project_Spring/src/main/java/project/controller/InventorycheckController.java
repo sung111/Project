@@ -18,7 +18,7 @@ public class InventorycheckController {
 	InvenCheck_Servcie service;
 	
 	@RequestMapping(value="inven", method=RequestMethod.GET)
-	public String invenSearch(
+	public String invenHome(
 					InvenCheck_DTO invenDTO,
 					Model model
 					)
@@ -29,10 +29,6 @@ public class InventorycheckController {
 //		dto에 rnum 번호를 순서대로받아서 보여줌.
 		List list = service.page(invenDTO);
 		int totalCount = service.totalCount();
-		
-		
-		System.out.println("컨트롤러에서 뽑아보기"+list);
-		System.out.println("컨트롤러에서 count 뽑기" + totalCount);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalCount",totalCount);
@@ -46,9 +42,8 @@ public class InventorycheckController {
 	@RequestMapping(value="invenDelete", method=RequestMethod.POST)
 	public String invenDelete(InvenCheck_DTO invenDTO, Model model) {
 		
-		System.out.println("삭제 받아오라고 씨볼아"+invenDTO );
-		int result = service.invenDelete(invenDTO);
-		System.out.println("삭제는 ? result : "+result);
+//		int result = service.matInvenDelete(invenDTO);
+		service.deleteCheck(invenDTO);
 		
 		//리스트가없으면 c:forEach가 안돌아서 nullPointException 나옴.
 		List list = service.page(invenDTO);
@@ -57,6 +52,21 @@ public class InventorycheckController {
 		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("dto",invenDTO);
 		
+		return "Inventorycheck";
+	}
+	
+	//검색
+	@RequestMapping(value="invenSearch", method=RequestMethod.POST)
+	public String invenSearch(InvenCheck_DTO invenDTO, Model model) {
+		
+		System.out.println("invenDTOㄱㄱㄱㄱ  : "+invenDTO);
+		List list = service.searchInven(invenDTO);
+		int totalCount = service.searchInvenCount(invenDTO);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("dto",invenDTO);
+		System.out.println("검색갯수 ::::"+totalCount);
 		return "Inventorycheck";
 	}
 	

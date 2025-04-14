@@ -38,6 +38,15 @@ public class InvenCheck_DTO {
 	private int spec;
 	private String unit;
 	
+//  검색 필드
+	private String searchName;
+	private String searchType;
+	private String searchWay;
+	private String search;
+	private Date dateStart;
+	private Date dateEnd;
+	
+	
 	
 	
 	

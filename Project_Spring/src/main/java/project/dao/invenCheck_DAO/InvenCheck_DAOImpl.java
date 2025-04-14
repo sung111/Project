@@ -17,30 +17,38 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 	
 	@Override
 	public List page(InvenCheck_DTO dto) {
-
-		System.out.println("db들어가기전에 dao에서 받은 dto 출력하기"+dto);
 		List list = sqlSession.selectList("project.mapper.InvenCheck.InvenCheckPage", dto);
-		System.out.println("DB 갔따온 list :::" + list);
-		
 		return list;
 	}
 
 	@Override
 	public int invenTotalCount() {
 		int result = sqlSession.selectOne("project.mapper.InvenCheck.invenCount");
-		System.out.println("totalcount 35나와야댐" + result);
 		return result;
 	}
 
 	@Override
-	public int invenDelete(InvenCheck_DTO dto) {
-		
-		System.out.println("나 DAO dto를 받아서 sql문을 실행하지"+ dto);
-		int result = sqlSession.delete("project.mapper.InvenCheck.invenDelete", dto);
-		System.out.println("나 DAO dto를 받아서 sql문을 실행해서 결과를 가져왔지"+result);
-		
+	public int matInvenDelete(InvenCheck_DTO dto) {
+		int result = sqlSession.delete("project.mapper.InvenCheck.matInvenDelete", dto);
 		return result;
 	}
+	@Override
+	public int productInvenDelete(InvenCheck_DTO dto) {
+		int result = sqlSession.delete("project.mapper.InvenCheck.productInvenDelete", dto);
+		return result;
+	}
+	@Override
+	public List searchInven(InvenCheck_DTO dto) {
+		List list = sqlSession.selectList("project.mapper.InvenCheck.searchInven", dto);
+		return list;
+	}
+	@Override
+	public int searchInvenCount(InvenCheck_DTO dto) {
+		int result = sqlSession.selectOne("project.mapper.InvenCheck.searchInvenCount",dto);
+		System.out.println("dao검색개수인데요?"+result);
+		return result;
+	}
+	
 	
 	
 	

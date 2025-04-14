@@ -8,6 +8,13 @@ public interface InvenCheck_Servcie {
 
 	public List page(InvenCheck_DTO invenDTO);
 	public int totalCount();
-	public int invenDelete(InvenCheck_DTO dto);
+	public int matInvenDelete(InvenCheck_DTO dto);
+	public int productInvenDelete(InvenCheck_DTO dto);
+	public void deleteCheck(InvenCheck_DTO dto);
+	public List searchInven(InvenCheck_DTO dto);
+	public int searchInvenCount(InvenCheck_DTO dto);
+	
+	
+	
 	
 }

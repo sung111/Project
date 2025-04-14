@@ -17,7 +17,7 @@
 		<typeAlias type="project.dto.Materials_DTO" alias="Materials_DTO" />
 		<typeAlias type="project.dto.ProductionProcessDescription_DTO" alias="ProductionProcessDescription_DTO" />
 		<typeAlias type="project.dto.Products_DTO" alias="Products_DTO" />
-		<typeAlias type="project.dto.InvenCheck_DTO" alias="InvenCheck"/>
+		<typeAlias type="project.dto.InvenCheck_DTO" alias="Inven_DTO"/>
 	</typeAliases>
 
     

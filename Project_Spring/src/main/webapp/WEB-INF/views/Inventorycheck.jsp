@@ -14,21 +14,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>재고현황조회</title>
 <link rel="stylesheet" href="resources\css\Inventorycheck.css">
+<script src="resources/js/Inventory.js"></script>
 </head>
 
 <body>
 	<div class="box">
-		<!--제목 -->
 		<h1>재고 현황 조회</h1>
 	</div>
 	<div class="box">
 		<form class="container" style="font-size: 15px;" method="post"
-			action="Inventorycheck" id="selectForm">
+			action="invenSearch" id="selectForm">
 			<label for="inventoryType">제품 유형 :<select id="inventoryType"
 				name="searchType">
 					<option value="">선택</option>
 					<option value="원자재">원자재</option>
 					<option value="완제품">완제품</option>
+					<option value="용기">용기</option>
 			</select>
 			</label> <label for="warehouse">검색 방식 :<select id="warehouse"
 				name="searchWay">
@@ -36,14 +37,21 @@
 					<option value="품명">품명</option>
 					<option value="품번">품번</option>
 					<option value="LotNo">Lot No</option>
+					<option value="입고일">입고일</option>
+					<option value="유효기간">유효기간</option>
 			</select>
 			</label>
 			<div class="item">
 				<label for="search" class="search">검색 : </label> <input type="text"
-					id="search" placeholder="검색어를 입력하세요.">
+					id="search" name="search" placeholder="검색어를 입력하세요.">
+					<div class="go hide">
+						<div class="searchDateBox" id="searchDateBox">
+							<input type="date" name="receiptDate" id="receiptDate" disabled style="font-size: 16px;">  ~  <input type="date" id="expDate" name="expDate" disabled style="font-size: 16px;">
+						</div>
+					</div>
 			</div>
 			<div class="item">
-				<button type="button" class="check">조회</button>
+				<button type="submit" class="check">조회</button>
 			</div>
 		</form>
 	</div>
@@ -66,7 +74,6 @@
 					<th>입고일</th>
 					<th>유효기간</th>
 					<th colspan="2">관리</th>
-					<!-- <th>제품 유형</th> -->
 				</tr>
 			</thead>
 			<tbody id="inventoryTableBody">
@@ -107,7 +114,10 @@
 									style="width: 55px; height: 35px;">
 								<input
 									type="hidden" name="productinvenid" value="${ dto.productinvenid }"
-									id="productinvenid">
+									>
+								<input
+									type="hidden" name="lotnumber" value="${ dto.lotnumber }"
+									>
 							</form>
 						</td>
 					</tr>
@@ -123,7 +133,7 @@
 			InvenCheck_DTO dto = (InvenCheck_DTO)request.getAttribute("dto");
 			int pageNo = dto.getPage();
 			int viewCount = dto.getViewCount();
-
+			System.out.println("dddddddddddddd"+viewCount);
 			// 1401 / 10 = 140.1 올림해서 141
 			int lastPage = (int) Math.ceil((double) total / viewCount);
 
@@ -444,6 +454,8 @@
 					}
 				})
 			}
+
+
 
 	</script>
 </body>
