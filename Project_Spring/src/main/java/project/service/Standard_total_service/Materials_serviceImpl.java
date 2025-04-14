@@ -56,16 +56,26 @@ public class Materials_serviceImpl implements Materials_service {
 		return null;
 	}
 
+	//원재료생성
 	@Override
-	public List<Materials_DTO> updateMaterials() {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertMaterials(Materials_DTO dto) {
+		int result = materials_DAO.insertMaterials(dto);
+		
+		return result;
+	}
+	//원재료수정
+	@Override
+	public int updateMaterials(Materials_DTO dto) {
+		int result = materials_DAO.updateMaterials(dto);
+		return result;
 	}
 
 	@Override
-	public List<Materials_DTO> deleteMaterials() {
-		// TODO Auto-generated method stub
-		return null;
+	public int deleteMaterials(Materials_DTO dto) {
+		int result = materials_DAO.deleteMaterials(dto);
+		return result;
 	}
+
+
 
 }
