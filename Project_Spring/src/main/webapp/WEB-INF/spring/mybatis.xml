@@ -57,17 +57,12 @@
 			value="classpath:mybatis/mappers/*.xml"></property>
 	</bean>
 	
-	
-
 	<!-- dao에서 sqlSession뉴하면 class뉴가되고 constructor-arg(생성자에 전달인자로 인덱스0번인 ref를 
 		준다) -->
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
-
-
-
 
 </beans>
 
