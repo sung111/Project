@@ -52,6 +52,36 @@ public class MaterialsProducts_DAOImpl implements MaterialsProducts_DAO {
 		
 		return result;
 	}
+	@Override
+	public int updateMaterialsProducts_products(Materials_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.updateMaterialsProducts_products",dto);
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+		return result;
+	}
+	
+	@Override
+	public int deleteMaterialsProducts_products(Materials_DTO dto) {
+		
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.deleteMaterialsProducts_products",dto);
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+		return result;
+	}
 	
 	@Override
 	public List<Materials_DTO> deleteMaterialsProducts() {
@@ -76,6 +106,7 @@ public class MaterialsProducts_DAOImpl implements MaterialsProducts_DAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

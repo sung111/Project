@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.dao.Login_total_dao.Users_DAO">
+
+    <!-- userId로 사용자 정보를 조회함. -->
+    <select id="selectUserId" resultType="project.dto.User_DTO">
+        SELECT 
+            USERID AS userId,
+            USERPW AS userPw,
+            USERNAME AS userName,
+            JOB,
+            EMAIL,
+            PHONE,
+            CREATEDAT AS createDate,
+            FIELD
+        FROM USERS
+        WHERE USERID = #{userId}
+    </select>
+
+</mapper>

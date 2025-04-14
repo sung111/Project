@@ -93,7 +93,17 @@ public class Products_DAOImpl implements Products_DAO {
 		return result;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProducts() {
+		List list = sqlSession.selectList("mapper.bom.selectProducts");
+		return list;
+	}
 	
+	@Override
+	public List<Products_DTO> selectProductname() {
+		List list = sqlSession.selectList("mapper.bom.selectProductsName");
+		return list;
+	}
 	
 	
 	
@@ -109,11 +119,6 @@ public class Products_DAOImpl implements Products_DAO {
 		return null;
 	}
 
-	@Override
-	public List<Products_DTO> selectProductname() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Products_DTO> updateProducts() {
@@ -144,6 +149,7 @@ public class Products_DAOImpl implements Products_DAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 	

@@ -76,7 +76,17 @@ public class Products_serviceImpl implements Products_service {
 		return result;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProducts() {
+		List list = products_DAO.selectProducts();
+		return list;
+	}
 	
+	@Override
+	public List<Products_DTO> selectProductname() {
+		List list = products_DAO.selectProductname();
+		return list;
+	}
 	
 	
 	
@@ -95,11 +105,6 @@ public class Products_serviceImpl implements Products_service {
 		return null;
 	}
 
-	@Override
-	public List<Products_DTO> selectProductname() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Products_DTO> updateProducts() {

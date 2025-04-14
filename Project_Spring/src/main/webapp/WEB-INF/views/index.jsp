@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -211,4 +211,114 @@ if (user != null) {
 </script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/indexScript.js"></script>
+</html> --%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="javax.servlet.http.*, java.sql.*, project.dto.User_DTO" %>
+
+<%
+if (session == null || session.getAttribute("userId") == null) {
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("userId".equals(cookie.getName())) {
+                session = request.getSession(true);
+                session.setAttribute("userId", cookie.getValue());
+                break;
+            }
+        }
+    }
+}
+if (session.getAttribute("userId") == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+session.setMaxInactiveInterval(28800);
+String userId = (String) session.getAttribute("userId");
+
+String helloUser = "로그인이 필요한 서비스입니다.";
+String userRole = "";
+String userName = "";
+User_DTO user = (User_DTO) session.getAttribute("user");
+if (user != null) {
+    userRole = user.getJob();
+    userName = user.getUserName();
+    helloUser = userRole + " " + userName + "님, 환영합니다!";
+}
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/icon.png" />
+    <title>혁신적인 밀키트 생산관리, HHMES</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+</head>
+
+<body class="index" data-contextPath="${pageContext.request.contextPath}">
+    <!-- 메뉴 include -->
+    <jsp:include page="menu.jsp"/>
+
+    <!-- 상단바 + 메인 프레임 -->
+    <div class="gnb-bar">
+        <div class="my-layer">
+            <div class="my-populater">
+                <div id="mypagePopup" class="mypage-layer">
+                    <div class="my-page">
+                        <img src="${pageContext.request.contextPath}/resources/img/mypage-img.png" class="mypage-img" alt="mypage-img">
+                    </div>
+                    <h6 class="login-button"><%=helloUser%></h6>
+                </div>
+                <button type="button" class="mobnav-bar">
+                    <span class="mobnav bar1"></span>
+                    <span class="mobnav bar2"></span>
+                    <span class="mobnav bar3"></span>
+                </button>
+            </div>
+            <ol class="local-bar">
+                <li>Home</li><li></li><li></li>
+            </ol>
+        </div>
+        <div class="navopen-shadow"></div>
+        <iframe src="${pageContext.request.contextPath}/maintitle" id="Mainiframe"></iframe>
+    </div>
+
+    <!-- 팝업 -->
+    <div id="popup" class="popup">
+        <div id="popup-title" class="popup-title">
+            <h2>안녕하세요. <%=userName%> 님!</h2>
+            <div id="chatbot-icon" class="chatbot-icon"></div>
+        </div>
+        <p>현재 <%=userName%>님의 권한은 <%=userRole%>입니다.</p>
+        <div id="popup-buttonlayer" class="popup-buttonlayer">
+            <a id="mypage-a" class="mypopup-a">마이페이지</a>
+            <a id="logout-a" class="mypopup-a" href="${pageContext.request.contextPath}/logout">로그아웃</a>
+            <button id="closePopupBtn" class="closebtn">닫기</button>
+        </div>
+    </div>
+
+    <!-- 챗봇 -->
+    <div id="chatbotPopup" class="chatbot-popup" style="display:none;">
+        <div class="chatbot-header">
+            <h4>HHMES 챗봇</h4>
+            <button id="chatbotCloseBtn">X</button>
+        </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <p>안녕하세요! 무엇을 도와드릴까요?</p>
+            <p>- 생산계획 등록 방법<br>- 재고현황 조회<br>- 시스템 사용법</p>
+        </div>
+        <div class="chatbot-input-layer">
+            <input type="text" id="chatInput" placeholder="질문을 입력하세요..." />
+            <button id="chatSendBtn">전송</button>
+        </div>
+    </div>
+
+    <script>
+        var contextPath = "<%= request.getContextPath() %>";
+    </script>
+    <script src="${pageContext.request.contextPath}/resources/js/indexScript.js"></script>
+</body>
 </html>
