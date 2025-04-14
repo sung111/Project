@@ -1,5 +1,6 @@
 package project.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
 import project.service.Standard_total_service.Products_service;
 //자 여기는 bom,재고,관련된 controller입니다 싹다 몰아주세요 
+//원재료 완제품 조회
 @Controller
 public class Bom_total_controller {
 
@@ -57,7 +59,7 @@ public class Bom_total_controller {
 				Map map = materials_service.selectMaterials(materials_DTO);
 				
 				model.addAttribute("map",map);
-				model.addAttribute("materials_DTO",materials_DTO);
+				model.addAttribute("mDTO",materials_DTO);
 				
 				System.out.println("map : "+map +""+ "materials_DTO :"+materials_DTO);
 				
@@ -68,7 +70,7 @@ public class Bom_total_controller {
 				Map map = Products_service.selectProducts(products_DTO);
 				
 				model.addAttribute("map",map);
-				model.addAttribute("products_DTO",products_DTO);
+				model.addAttribute("pDTO",products_DTO);
 				
 				System.out.println("map : "+map +""+ "products_DTO :"+products_DTO);
 				
@@ -132,6 +134,7 @@ public class Bom_total_controller {
 	public int standarddelet(@RequestBody Materials_DTO materials_DTO) {
 		System.out.println("standard_delet 실행");
 		System.out.println("materials_DTO 값은 ="+materials_DTO);
+		
 		int result = 0;
 		try {			
 			result = materials_service.deleteMaterials(materials_DTO);
@@ -197,32 +200,49 @@ public class Bom_total_controller {
 		
 		
 	}
-	
-	
-	
+//-----------------------------------------------------------------	
 	
 
-	
-	
+// 검사기준 
+//----------------------------------------------------------------
 	
 	@RequestMapping("/inspectionStandards")
-	public String inspectionStandards() {
-		
+	public String inspectionStandards(Model model,
+			HttpSession httpSession,
+			Products_DTO products_DTO
+			) {
+		System.out.println("inspectionStandards 실행");
+		String Field = "ADMIN";
+
+			Map map = Products_service.selectProducts(products_DTO);
+			List name_list = Products_service.selectProductname();
+		 
+		 model.addAttribute("map",map);
+		 model.addAttribute("pDTO",products_DTO);
+		 model.addAttribute("name_list",name_list);
+		 model.addAttribute("Field",Field);
+		 System.out.println("map : "+map +""+ "products_DTO"+products_DTO);
+		 
 		return "inspectionStandards";
 	}
 	
+//생산공정 
+//----------------------
 	@RequestMapping("/production_process")
 	public String production_process() {
 		
 		return "production_process";
 	}
 	
+//완제품 BOM
+//----
 	@RequestMapping("/bom_v2")
 	public String Bom_v2() {
 		
 		return "bom_v2";
 	}
 	
+//원재료 BOM
 	@RequestMapping("/bomlist")
 	public String Bomlist() {
 		

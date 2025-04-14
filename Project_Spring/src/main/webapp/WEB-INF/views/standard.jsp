@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-			<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-				<%@ page import="java.util.*" %>
-					<%@ page import="project.dto.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.*" %>
+<%@ page import="project.dto.*" %>
 
 						<!DOCTYPE html>
 						<html lang="en">
@@ -131,7 +131,7 @@
 									color: blueviolet;
 								}
 
-								input[type=button] {
+								.button {
 									border-radius: 5px;
 									background-color: #007bff;
 									color: white;
@@ -173,6 +173,10 @@
 								/* 넓이에따른 if문 0~600px까지만 적용  */
 								@media screen and (max-width: 767px) {
 									.text_hide {
+										width: 20px;
+										font-size: 7px;
+									}
+									.text_width{
 										width: 40px;
 									}
 
@@ -221,6 +225,31 @@
 									td {
 										font-size: 10px;
 									}
+									.btn{
+										width: 10px;
+										height: 10px;
+										font-size: 7px;
+										box-sizing: content-box;
+									}
+									.manu-name5{
+										width: 50px;
+									}
+
+									#top-contain {
+									border: 1px solid red;
+									
+									
+									}
+									.button_mo{
+										width: 80px;
+										box-sizing: border-box;
+										font-size: 10px;
+										padding: 8px;
+									}
+						
+						
+							
+								
 								}
 
 								#title {
@@ -243,10 +272,9 @@
 								.margin {
 									margin-top: 100px;
 								}
+								
 
-								.text_width {
-									width: 140px;
-								}
+							
 							</style>
 						</head>
 
@@ -261,22 +289,23 @@
 										<option value="1">원재료 조회</option>
 										<option value="2">완재품 조회</option>
 										<option value="3">전체 조회</option>
-									</select> <input type="submit" value="조회" class="button" id="check_view">
+									</select> <input type="submit" value="조회" class="button " id="check_view"  >
 
 								</form>
 
 
 
 								<c:if test="${Field == 'ADMIN'}">
-									<input type="button" value="원재료생성" id="materials_hide" name="generation">
-									<input type="button" value="완제품생성" id="finished_hide" name="generation">
-
+									
+									<input type="button" value="원재료생성" id="materials_hide" name="generation" class="button button_mo">
+									<input type="button" value="완제품생성" id="finished_hide" name="generation" class="button button_mo">
+									
 								</c:if>
 
 							</div>
 
 
-							<div id="mid-contain">
+							<div id="mid-contain" class="none">
 								<div class="mid-contain-article" id="materials_id1">
 									제품명:<input type="text" class="mid-data" name="materialname" id="m_materialname">
 								</div>
@@ -305,15 +334,16 @@
 
 								<div class="mid-contain-article " id="materials_id9">
 
-									<input type="hidden" name="type" value="creat"> <input type="button" value="생성"
-										id="materials_c" class="button"> <input type="button" value="취소"
-										id="matecera_can" class="button">
+									<input type="hidden" name="type" value="creat">
+									 <input type="button" value="생성" id="materials_c" class="button btn"> 
+										<input type="button" value="취소"
+										id="matecera_can" class="button btn">
 								</div>
 							</div>
 
 
 
-							<div id="mid-contain2">
+							<div id="mid-contain2" class="none">
 								<div class="mid-contain-article" id="finished_id1">
 									완제품명:<input type="text" class="mid-data" name="productname" id="f_productname">
 								</div>
@@ -338,9 +368,10 @@
 								</div>
 								<div class="mid-contain-article " id="finished_id9">
 
-									<input type="hidden" value="finished_creat" name="type"> <input type="button"
-										value="생성" id="finished_c"> <input type="button" value="취소" id="produc_can"
-										class="button">
+									<input type="hidden" value="finished_creat" name="type"> 
+									<input type="button" value="생성" id="finished_c"  class="button btn"> 
+										<input type="button" value="취소" id="produc_can"
+										class="button btn">
 								</div>
 
 							</div>
@@ -348,7 +379,7 @@
 
 
 
-							<div id="main_contain">
+							<div id="main_contain" class="none">
 								<!-- 원재료 테이블 / 전체테이블-->
 								<table id="start_table">
 									<tr>
@@ -371,32 +402,39 @@
 											<tr class="table_tr">
 
 												<td><span class="text_view">${dto.materialname}</span> <input
-														type="text" value="${dto.materialname}" class="text_hide"
+														type="text" value="${dto.materialname}" class="text_hide none"
 														id="materialname2">
 													<input type="hidden" value="${dto.materialname}" name="origin">
 												</td>
 												<td><span class="text_view">${dto.price}</span> <input type="text"
-														value="${dto.price}" class="text_hide" id="price2"></td>
+														value="${dto.price}" class="text_hide none" id="price2"></td>
 
 												<td><span class="text_view">${dto.spec}</span> <input type="text"
-														value="${dto.spec}" class="text_hide" id="spec2"></td>
+														value="${dto.spec}" class="text_hide none" id="spec2"></td>
 												<td><span class="text_view">${dto.unit}</span><input type="text"
-														value="${dto.unit}" class="text_hide" id="unit2"></td>
+														value="${dto.unit}" class="text_hide none" id="unit2"></td>
 
+												<c:if test="${not empty dto.supplier}">
 												<td><span class="text_view text_view_hide">${dto.supplier}</span><input
 														type="text" value="${dto.supplier}"
-														class="text_hide text_hide_hide" id="supplier2"></td>
+														class="text_hide text_hide_hide none" id="supplier2"></td>
+												</c:if>
+												<c:if test="${empty dto.supplier}">
+												<td>
+													<input type="hidden" id="supplier2" value="-">
+												</td>
+												</c:if>
 
 												<td><span class="text_view">${dto.partNumber}</span>
-													<input type="text" value="${dto.partNumber}" class="text_hide"
+													<input type="text" value="${dto.partNumber}" class="text_hide none"
 														id="partNumber2">
 												</td>
 												<td><span class="text_view">${dto.lotnumber}</span><input type="text"
-														value="${dto.lotnumber}" class="text_hide text_width"
+														value="${dto.lotnumber}" class="text_hide text_width none"
 														id="lotnumber2">
 												</td>
 												<td><span class="text_view">${dto.warehouse}</span><input type="text"
-														value="${dto.warehouse}" class="text_hide" id="warehouse2"></td>
+														value="${dto.warehouse}" class="text_hide none" id="warehouse2"></td>
 
 												<c:if test="${Field == 'ADMIN'}">
 													<td>
@@ -404,28 +442,18 @@
 															<div class="edit_delete_box">
 																<input type="hidden" value="${dto.materialid}" id="materialid">
 																<input type="hidden" value="${dto.type}" id="matetype">
-																<input type="button" value="수정" class="update user_none">
-																<input type="button" value="확인" class="ok"> 
-																<input type="button" value="취소" class="cancel">
+																<input type="button" value="수정" class="update user_none btn button">
+																<input type="button" value="확인" class="ok none btn button"> 
+																<input type="button" value="취소" class="cancel none btn button">
 															</div>
-
-
+															<input type="hidden" value="del" name="type"> <input
+															type="hidden" value="${dto.materialid}" name="materialidValue"> 
+															<input type="hidden" value="typeValue" name="type"> 
+																<input type="hidden" value="${dto.type}" name="matetype">
+																<input type="button" value="삭제" class="delet user_none btn button">
+														
 
 														
-															<input type="hidden" value="del" name="type"> <input
-																type="hidden" value="${dto.materialid}" name="materialidValue"> 
-																<input type="hidden" value="typeValue" name="type"> 
-																<input type="button" value="삭제" class="delet user_none">
-
-
-
-															<!--전체조회 삭제 -->
-
-
-															<input type="hidden" value="${dto.materialid}" name="materialid">
-															<input type="hidden" value="${dto.type}" name="matetype">
-															<input type="hidden" value="viewall_del" name="type">
-															 <input type="button" value="삭제" class="total user_none" id="viewall">
 
 														</div>
 
@@ -444,7 +472,7 @@
 								</table>
 							</div>
 
-							<div id="finish_contain">
+							<div id="finish_contain" class="none">
 								<!-- 완제품 테이블 -->
 								<table id="finish_table">
 									<tr id="finish=tr">
@@ -464,9 +492,9 @@
 										<c:forEach var="dto" items="${map.list2}">
 											<tr class="table_tr">
 
-												<td><span class="text_view">${dto.productname}</span> <input type="text"
-														value="${dto.productname}" class="text_hide" name="productname">
-													<input type="hidden" value="${dto.productname}" id="productname">
+												<td><span class="text_view">${dto.productname}</span>
+													 <input type="text" value="${dto.productname}" class="text_hide" id="productname">
+													
 												</td>
 
 												<td><span class="text_view">${dto.partnumber}</span> <input type="text"
@@ -496,15 +524,15 @@
 														<div class="edit_delete_box">
 															<div class="edit_delete_box">
 																<input type="button" value="수정"
-																	class="user_none product_up">
-																<input type="hidden" name="type" value="finish_update">
-																<input type="button" value="확인" class="product_ok">
-																<input type="button" value="취소" class="product_can">
+																	class="user_none product_up btn button">
+																<input type="hidden" name="type" value="finish_update button">
+																<input type="button" value="확인" class="product_ok btn button">
+																<input type="button" value="취소" class="product_can btn button">
 															</div>
 
 															<input type="hidden" value="finish_del" name="type">
 															 <input type="hidden" value="${dto.productid}" id="productid">
-															<input type="button" value="삭제" class="product_del user_none">
+															<input type="button" value="삭제" class="product_del user_none btn button">
 
 
 														</div>
@@ -530,10 +558,10 @@
 							<div id="page-container">
 								<% int pageNo=1; int viewCount=10; // model에 담은건 request에서 꺼낼 수 있다  
 									Map map=(Map)request.getAttribute("map");
-									if((Materials_DTO)request.getAttribute("materials_DTO")==null) 
+									if((Materials_DTO)request.getAttribute("mDTO")==null) 
 									{ Products_DTO dto=(Products_DTO)request.getAttribute("products_DTO"); pageNo=dto.getPage();
 									viewCount=dto.getViewCount(); System.out.println(">>>>>>>>> map :"+map +" : "+ "dto:"+dto);
-									}else if((Products_DTO)request.getAttribute("products_DTO") == null){
+									}else if((Products_DTO)request.getAttribute("pDTO") == null){
 									Materials_DTO dto = (Materials_DTO)request.getAttribute("materials_DTO");
 									pageNo = dto.getPage();
 									viewCount = dto.getViewCount();
@@ -692,6 +720,7 @@
 																		}
 																	}
 																})
+															
 
 
 
@@ -719,10 +748,15 @@
 											let vv = '${view_value}'
 
 											if (vv == 1 || vv == '') {
+												document.querySelector("#check_option").value = 1;
 												document.querySelector("#start_table").classList
 													.remove("none");
 												document.querySelector("#finish_table").classList
 													.add("none");
+												document.querySelector("#main_contain").classList
+													.remove("none")
+												document.querySelector("#finish_contain").classList
+													.add("none")
 												let totals = document
 													.querySelectorAll(".total");
 												for (let i = 0; i < totals.length; i++) {
@@ -730,20 +764,26 @@
 												}
 
 											} else if (vv == 2) {
+												document.querySelector("#check_option").value = 2;
 												document.querySelector("#start_table").classList
 													.add("none");
 												document.querySelector("#finish_table").classList
 													.remove("none");
+												document.querySelector("#main_contain").classList
+													.add("none")
+												document.querySelector("#finish_contain").classList
+													.remove("none")
 											} else if (vv == 3) {
+												document.querySelector("#check_option").value = 3;
+												document.querySelector("#main_contain").classList
+													.remove("none")
+												document.querySelector("#finish_contain").classList
+													.add("none")
 												document.querySelector("#start_table").classList
 													.remove("none");
 												document.querySelector("#finish_table").classList
 													.add("none");
-												let delets = document
-													.querySelectorAll(".delet");
-												for (let i = 0; i < delets.length; i++) {
-													delets[i].classList.add("none");
-												}
+										
 											}
 
 											//처음 항목 출력 
@@ -951,8 +991,10 @@
 											for(let i =0; i < delets.length; i++){
 												delets[i].addEventListener("click",function(e){
 													console.log(e.target.parentNode.querySelector("#materialid").value)
+													console.log(e.target.parentNode.querySelector("#matetype").value)
 													const material = {
 														materialid : e.target.parentNode.querySelector("#materialid").value
+														,type : e.target.parentNode.querySelector("#matetype").value
 
 													}
 
@@ -976,36 +1018,36 @@
 													
 												})
 											}
-											// //완재품 삭제이벤트
-											// let product_dels = document.querySelectorAll(".product_del")
-											// for(let i =0; i < product_dels.length; i++){
-											// 	delets[i].addEventListener("click",function(e){
-											// 		console.log(e.target.parentNode.querySelector("#productid").value)
-											// 		const products = {
-											// 			productid : e.target.parentNode.querySelector("#productid").value
+											//완재품 삭제이벤트
+											let product_dels = document.querySelectorAll(".product_del")
+											for(let i =0; i < product_dels.length; i++){
+												product_dels[i].addEventListener("click",function(e){
+													console.log(e.target.parentNode.querySelector("#productid").value)
+													const products = {
+														productid : e.target.parentNode.querySelector("#productid").value
 
-											// 		}
+													}
 
-											// 		const xhr = new XMLHttpRequest();
-											// 								xhr.open('put', 'products_delet')
+													const xhr = new XMLHttpRequest();
+																			xhr.open('put', 'products_delet')
 
-											// 								xhr.setRequestHeader('Content-Type', 'application/json')
+																			xhr.setRequestHeader('Content-Type', 'application/json')
 
-											// 								xhr.send(JSON.stringify(products))
+																			xhr.send(JSON.stringify(products))
 
-											// 								xhr.onload = function () {
-											// 									if (xhr.responseText == "1") {
-											// 										console.log(xhr.responseText)
-											// 										alert("삭제 되었습니다")
-											// 										location.href = "standard?view_value=${view_value}"
-											// 									} else {
-											// 										console.log(xhr.responseText)
-											// 										alert('삭제 실패하였습니다.')
-											// 									}
-											// 								}
+																			xhr.onload = function () {
+																				if (xhr.responseText == "1") {
+																					console.log(xhr.responseText)
+																					alert("삭제 되었습니다")
+																					location.href = "standard?view_value=${view_value}"
+																				} else {
+																					console.log(xhr.responseText)
+																					alert('삭제 실패하였습니다.')
+																				}
+																			}
 													
-											// 	})
-											// }
+												})
+											}
 											let oks = document.querySelectorAll(".ok")
 											let cancels = document.querySelectorAll(".cancel")
 											let hides = document.querySelectorAll(".text_hide")
@@ -1020,9 +1062,9 @@
 											for (let i = 0; i < oks.length; i++) {
 												oks[i].classList.add("none")
 											}
-											for (let i = 0; i < oks.length; i++) {
-												delvalues[i].classList.add("none")
-											}
+											// for (let i = 0; i < oks.length; i++) {
+											// 	delvalues[i].classList.add("none")
+											// }
 											let updates = document.querySelectorAll(".update")
 											for (let i = 0; i < updates.length; i++) {
 													//수정이벤트
@@ -1048,12 +1090,7 @@
 																textHides[y].classList
 																	.remove("none")
 
-																if (textHides.value == null) {
-
-																	console.log("---textHides.value" + textHides.value)
-																	text_view_hide.classList
-																		.remove("none")
-																}
+											
 															}
 															for (let y = 0; y < textHides.length; y++) {
 																textViews[y].classList
@@ -1092,10 +1129,10 @@
 															// 																.add("none");
 															// 													}
 															console.log("토탈찾기 e.target", e.target.parentNode.parentNode.parentNode)
-															e.target.parentNode.parentNode.parentNode.querySelector(".total").classList
-																.add("none")
+															// e.target.parentNode.parentNode.parentNode.querySelector(".total").classList
+															// 	.add("none")
 
-															//원재료 확인버튼 클릭시 수정알람
+															//원재료 확인버튼 클릭시 수정이벤트
 															e.target.parentNode
 																.querySelector(
 																	".ok")
@@ -1113,6 +1150,8 @@
 																		const warehouse2 = e.target.parentNode.parentNode.parentNode.parentNode.querySelector("#warehouse2").value
 																		const materialid = e.target.parentNode.parentNode.querySelector("#materialid").value
 																		const matetype = e.target.parentNode.parentNode.querySelector("#matetype").value
+																		console.log("여기는 수정 확인버튼 구간임")
+																		console.log(e.target.parentNode.parentNode.querySelector("#matetype").value)
 																		console.log(e.target.parentNode.parentNode)
 																		console.log(e.target.parentNode)
 																		const material = {
@@ -1124,7 +1163,8 @@
 																			partNumber: partNumber2,
 																			lotnumber: lotnumber2,
 																			warehouse: warehouse2,
-																			materialid:  materialid
+																			materialid:  materialid,
+																			type: matetype
 
 																		}
 

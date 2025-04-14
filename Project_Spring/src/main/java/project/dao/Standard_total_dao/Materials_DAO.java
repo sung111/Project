@@ -16,7 +16,11 @@ public interface Materials_DAO {
 	public int updateMaterials(Materials_DTO dto);
 	public int deleteMaterials(Materials_DTO dto);
 	public int countmaterials ();
-//사용
+//	public int updateMaterialsProducts_materials(Materials_DTO dto);
+//	public int updateMaterialsProducts_products(Materials_DTO dto);
+//	public int deleteMaterialsProducts_materials(Materials_DTO dto);
+//	public int deleteMaterialsProducts_products(Materials_DTO dto);
+////사용
 	
 	
 	

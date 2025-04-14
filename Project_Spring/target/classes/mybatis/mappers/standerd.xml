@@ -38,6 +38,20 @@
 		
 	</select>
 	
+	<!--  검사기준	완재품 값만조회  -->
+	<select id="selectProducts"  resultType="Products_DTO" >
+          select  * from PRODUCTS
+          WHERE PRODUCTDEL = 'n'
+          order by PRODUCTNAME
+	</select>
+	
+	<!--  검사기준	완재품 이름만 조회  -->
+	<select id="selectProductsName"   resultType="Products_DTO">
+        select PRODUCTNAME from PRODUCTs
+          WHERE PRODUCTDEL = 'n'
+          order by PRODUCTNAME
+	</select>
+	
 	<select id="totalProducts" resultType="int" >
 		select count(*) from PRODUCTS
 		WHERE PRODUCTDEL = 'n'
@@ -113,7 +127,7 @@
 		set productname=#{productname} ,
 		partnumber=#{partnumber} ,
 		price=#{price} ,
-		spec=${'spec'},
+		spec=#{spec},
 		unit=#{unit},
 		lotnumber=#{lotnumber},
 		warehouse=#{warehouse}
@@ -138,15 +152,7 @@
 
 
 
-<!-- 	<select id="selectMaterials" -->
-<!-- 		resultType="Materials_DTO"> -->
-<!-- 		select * from MATERIALS WHERE materialdel = 'n' -->
-<!-- 	</select> -->
 
-<!-- 	<select id="selectProducts" -->
-<!-- 		resultType="Products_DTO"> -->
-<!-- 		select * from products WHERE productdel = 'n' -->
-<!-- 	</select> -->
 
 	<select id="selectMaterialsProducts"
 		resultType="Materials_DTO">
@@ -166,6 +172,32 @@
 
 		ORDER BY materialname
 	</select>
+	
+
+	
+	<update id="updateMaterialsProducts_products" parameterType="Materials_DTO">
+		update products
+		set productname=#{materialname} ,
+		partnumber=#{partNumber} ,
+		price=#{price} ,
+		spec=#{spec},
+		unit=#{unit},
+		lotnumber=#{lotnumber},
+		warehouse=#{warehouse}
+		where productid = #{materialid}
+	
+	</update>
+	
+	<update id="deleteMaterialsProducts_products" parameterType="Materials_DTO">
+		update products
+		set productdel= 'y' 
+		where productid = #{materialid}
+	
+	</update>
+	
+
+
+	
 
 	
 
