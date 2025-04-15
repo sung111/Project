@@ -5,6 +5,27 @@
 
 <mapper namespace="project.mapper.InvenCheck">
 	<!-- 팔팔롱 시발 -->
+	
+<!-- 	자재 재고현황 삽입 문 -->
+	<insert id="matInsertInven">
+		insert 
+			into 
+				inventorystatus 
+					( 	inventoryid,
+						receiptdate,
+						expdate,
+						materialid,
+						quantity
+					)
+				values 
+					(	SEQ_INVENTORYSTATUS.nextval,
+						#{receiptDate},
+						#{receiptDate}+30,
+						#{materialId},
+						#{quantity}
+					 )
+	</insert>
+	
 	<select id="InvenCheckPage" resultType="Inven_DTO"
 		parameterType="Inven_DTO">
 		select wherereslut.* from(
@@ -128,30 +149,6 @@
 				JOIN materials mat ON ( inv.materialid = mat.materialid )
 			)search
 		<where>
-			<if test=" searchType == '' ">
-				<choose>
-					<when test="searchWay == '품명' ">
-						productname like '%' || #{search} || '%'
-					</when>
-					<when test="searchWay == '품번' ">
-						partnumber like '%' || #{search} || '%'
-					</when>
-					<when test="searchWay == 'LotNo' ">
-						lotnumber like '%' || #{search} || '%'
-					</when>
-					<when test="searchWay == '입고일' ">
-						MAKEDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
-						AND to_date(#{dateEnd},'YYYY-MM-DD');
-					</when>
-					<when test="searchWay == '유효기간' ">
-						EXPDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
-						AND to_date(#{dateEnd},'YYYY-MM-DD');
-					</when>
-					<otherwise>
-						1=1
-					</otherwise>
-				</choose>
-			</if>
 			<if test=" searchType == '완제품' ">
 				lotnumber like '%' || 'WPD' || '%'
 				<choose>
@@ -166,18 +163,18 @@
 					</when>
 					<when test="searchWay == '입고일' ">
 						and MAKEDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd};
 					</when>
 					<when test="searchWay == '유효기간' ">
 						and EXPDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<otherwise>
-						1=1
+						and 1=1
 					</otherwise>
 				</choose>
 			</if>
@@ -195,18 +192,18 @@
 					</when>
 					<when test="searchWay == '입고일' ">
 						and MAKEDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<when test="searchWay == '유효기간' ">
 						and EXPDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd};
 					</when>
 					<otherwise>
-						1=1
+						and 1=1
 					</otherwise>
 				</choose>
 			</if>
@@ -224,18 +221,46 @@
 					</when>
 					<when test="searchWay == '입고일' ">
 						and MAKEDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<when test="searchWay == '유효기간' ">
 						and EXPDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<otherwise>
-						1=1
+						and 1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '' ">
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						#{dateStart}
+						AND
+						#{dateEnd}
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						#{dateStart}
+						AND
+						#{dateEnd}
+					</when>
+					<otherwise>
+						and 1=1
 					</otherwise>
 				</choose>
 			</if>
@@ -282,24 +307,28 @@
 			<if test=" searchType == '' ">
 				<choose>
 					<when test="searchWay == '품명' ">
-						productname like '%' || #{search} || '%'
+						and productname like '%' || #{search} || '%'
 					</when>
 					<when test="searchWay == '품번' ">
-						partnumber like '%' || #{search} || '%'
+						and partnumber like '%' || #{search} || '%'
 					</when>
 					<when test="searchWay == 'LotNo' ">
-						lotnumber like '%' || #{search} || '%'
+						and lotnumber like '%' || #{search} || '%'
 					</when>
 					<when test="searchWay == '입고일' ">
-						MAKEDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
-						AND to_date(#{dateEnd},'YYYY-MM-DD');
+						and MAKEDATE BETWEEN
+						#{dateStart}
+						AND
+						#{dateEnd}
 					</when>
 					<when test="searchWay == '유효기간' ">
-						EXPDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
-						AND to_date(#{dateEnd},'YYYY-MM-DD');
+						and EXPDATE BETWEEN
+						#{dateStart}
+						AND
+						#{dateEnd}
 					</when>
 					<otherwise>
-						1=1
+						 and 1=1
 					</otherwise>
 				</choose>
 			</if>
@@ -317,18 +346,18 @@
 					</when>
 					<when test="searchWay == '입고일' ">
 						and MAKEDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<when test="searchWay == '유효기간' ">
 						and EXPDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<otherwise>
-						1=1
+						 and 1=1
 					</otherwise>
 				</choose>
 			</if>
@@ -346,18 +375,18 @@
 					</when>
 					<when test="searchWay == '입고일' ">
 						and MAKEDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<when test="searchWay == '유효기간' ">
 						and EXPDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<otherwise>
-						1=1
+						and 1=1
 					</otherwise>
 				</choose>
 			</if>
@@ -375,18 +404,18 @@
 					</when>
 					<when test="searchWay == '입고일' ">
 						and MAKEDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<when test="searchWay == '유효기간' ">
 						and EXPDATE BETWEEN
-						to_date(#{dateStart},'YYYY-MM-DD')
+						#{dateStart}
 						AND
-						to_date(#{dateEnd},'YYYY-MM-DD');
+						#{dateEnd}
 					</when>
 					<otherwise>
-						1=1
+						and 1=1
 					</otherwise>
 				</choose>
 			</if>

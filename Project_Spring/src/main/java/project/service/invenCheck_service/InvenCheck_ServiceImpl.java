@@ -81,6 +81,11 @@ public class InvenCheck_ServiceImpl implements InvenCheck_Servcie{
 		System.out.println("써비스 검색개수인데요?"+result);
 		return result;
 	}
+	@Override
+	public int matInsertInven(InvenCheck_DTO dto) {
+		int result = dao.matInsertInven(dto);
+		return result;
+	}
 
 	
 

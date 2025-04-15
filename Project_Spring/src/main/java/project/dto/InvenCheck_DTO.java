@@ -43,8 +43,8 @@ public class InvenCheck_DTO {
 	private String searchType;
 	private String searchWay;
 	private String search;
-	private Date dateStart;
-	private Date dateEnd;
+	private String dateStart;
+	private String dateEnd;
 	
 	
 	

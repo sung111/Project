@@ -5,13 +5,19 @@
 
 <tiles-definitions>
     <definition name="defaultLayout" template="/WEB-INF/views/defaultLayout.jsp">
-        <put-attribute name="title" value="HHMES 시스템" />
-        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
-        <put-attribute name="body" value="" />
+        <put-attribute name="topbar" value="/WEB-INF/views/topbar.jsp"/>
+        <put-attribute name="localnav" value="/WEB-INF/views/localnav.jsp"/>
+        <put-attribute name="mainframe" value="/WEB-INF/views/mainframe.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
+        <put-attribute name="popup" value="/WEB-INF/views/popup.jsp"/>
+        <put-attribute name="chatbot" value="/WEB-INF/views/chatbot.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/index.jsp"/>
     </definition>
 
     <definition name="index" extends="defaultLayout">
-        <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+        <put-attribute name="mainframe" value="/WEB-INF/views/index.jsp"/>
+        <put-attribute name="title" value="홈"/>
     </definition>
 </tiles-definitions>
+
