@@ -133,7 +133,7 @@ nav.open ~ .navopen-shadow {
     }
     
     .my-layer{
-     width: 100%; height: 100px; position: relative; display: flex; flex-direction: column; z-index: 5; filter: none;
+     width: 100%; position: relative; display: flex; flex-direction: column; z-index: 5; filter: none;
     }
     
     .my-populater{
@@ -246,13 +246,15 @@ li{
     font-size: 16px; 
 }
 
-/* 클래스 적용 */
+.mainframe-container{
+	width: 100%;
+}
 
-.index{
+.index {
     width: 100%; height: 100vh; display: flex; 
 }
 .logo-layer{
-    width: 100%; height: 100px; margin-top: 20px;display: flex; justify-content: center; padding: 10px;
+    width: 100%; height: 100px; display: flex; justify-content: center; padding: 10px;
 }
 .logo-layer img:hover{
     cursor: pointer;
@@ -283,7 +285,7 @@ li{
 }
 
 .my-layer{
- width: 100%; height: 100px; display: flex; flex-direction: column;
+ width: 100%; display: flex; flex-direction: column;
 }
 
 .my-populater{
