@@ -48,6 +48,12 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 		System.out.println("dao검색개수인데요?"+result);
 		return result;
 	}
+	@Override
+	public int matInsertInven(InvenCheck_DTO dto) {
+		int result = sqlSession.insert("project.mapper.InvenCheck.matInsertInven",dto);
+		System.out.println("dao에서 자재 재고현황에 인서트가 됐농?? : "+result);
+		return result;
+	}
 	
 	
 	

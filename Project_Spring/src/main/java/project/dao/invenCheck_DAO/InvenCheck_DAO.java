@@ -13,6 +13,7 @@ public interface InvenCheck_DAO {
 	public List searchInven(InvenCheck_DTO dto);
 	public int searchInvenCount(InvenCheck_DTO dto);
 	
+	public int matInsertInven(InvenCheck_DTO dto);
 	
 	
 }

@@ -55,8 +55,24 @@ public class InventorycheckController {
 		return "Inventorycheck";
 	}
 	
+	//자재 등록.
+	@RequestMapping(value="matInsertInven", method=RequestMethod.POST)
+	public String matInsertInven(InvenCheck_DTO dto, Model model) {
+		
+		service.matInsertInven(dto);
+		
+		//리스트가없으면 c:forEach가 안돌아서 nullPointException 나옴.
+		List list = service.page(dto);
+		int totalCount = service.totalCount();
+		model.addAttribute("list", list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("dto",dto);
+		
+		return "Inventorycheck";
+	}
+	
 	//검색
-	@RequestMapping(value="invenSearch", method=RequestMethod.POST)
+	@RequestMapping(value="invenSearch", method=RequestMethod.GET)
 	public String invenSearch(InvenCheck_DTO invenDTO, Model model) {
 		
 		System.out.println("invenDTOㄱㄱㄱㄱ  : "+invenDTO);

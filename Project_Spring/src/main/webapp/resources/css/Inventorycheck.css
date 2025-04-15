@@ -331,10 +331,16 @@ td {
   align-items: center;
   font-size: 15px
 }
-
+#addinven:hover{
+  cursor: pointer;
+}
 
 
 @media (max-width: 768px) {
+  #addinven:hover{
+    cursor: pointer;
+  }
+  
   .hide {
     display: none;
   }
