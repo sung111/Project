@@ -1,5 +1,6 @@
 package project.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -205,15 +206,14 @@ public class Bom_total_controller {
 
 // 검사기준 
 //----------------------------------------------------------------
-	
-	@RequestMapping("/inspectionStandards")
+	//전체 조회
+	@RequestMapping(value="/inspectionStandards",method=RequestMethod.GET)
 	public String inspectionStandards(Model model,
 			HttpSession httpSession,
 			Products_DTO products_DTO
-			) {
+			)  {
 		System.out.println("inspectionStandards 실행");
 		String Field = "ADMIN";
-
 			Map map = Products_service.selectProducts(products_DTO);
 			List name_list = Products_service.selectProductname();
 		 
@@ -226,6 +226,29 @@ public class Bom_total_controller {
 		return "inspectionStandards";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
+	public Map<String,Object> insSelectone(
+			@RequestParam("serchname") String serchname,
+			Model model
+		
+			) {
+		System.out.println("검색값 productname"+serchname);
+		String Field = "ADMIN";
+		List pickname = Products_service.selectProductnameserch(serchname);
+		List name_list = Products_service.selectProductname();
+		
+		Map<String,Object> result = new HashMap();
+		result.put("Field", Field);
+		result.put("pickname",pickname);
+		result.put("name_list",name_list);
+		
+		System.out.println("밀키트 검색한 결과값name_list ="+name_list);
+		System.out.println("pickname ="+pickname);
+	
+		
+		return result ;
+	}
 //생산공정 
 //----------------------
 	@RequestMapping("/production_process")

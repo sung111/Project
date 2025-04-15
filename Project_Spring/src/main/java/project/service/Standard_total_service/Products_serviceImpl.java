@@ -88,6 +88,11 @@ public class Products_serviceImpl implements Products_service {
 		return list;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProductnameserch(String name) {
+		List list = products_DAO.selectProductnameserch(name);
+		return list;
+	}
 	
 	
 	
@@ -129,6 +134,7 @@ public class Products_serviceImpl implements Products_service {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 
 

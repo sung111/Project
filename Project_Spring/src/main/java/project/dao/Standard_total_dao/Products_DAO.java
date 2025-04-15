@@ -12,9 +12,10 @@ public interface Products_DAO {
 	List<Products_DTO> updateProducts();
 	List<Products_DTO> updateProductsInspection();
 	List<Products_DTO> deleteProducts();
-	List<Products_DTO> selectProductnameserch();
+
 	List<Materials_DTO> deleteMaterials();
 //사용
+	public List<Products_DTO> selectProductnameserch(String name);
 	public List<Products_DTO> selectProductname();
 	public List<Products_DTO> selectProducts(Products_DTO dto);
 	public List<Products_DTO> selectProducts();

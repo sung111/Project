@@ -105,6 +105,12 @@ public class Products_DAOImpl implements Products_DAO {
 		return list;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProductnameserch(String name) {
+		System.out.println("selectProductnameserch 받은 이름name"+name);
+		List list = sqlSession.selectList("mapper.bom.selectProductsserch",name);
+		return list;
+	}
 	
 	
 	@Override
@@ -138,17 +144,14 @@ public class Products_DAOImpl implements Products_DAO {
 		return null;
 	}
 
-	@Override
-	public List<Products_DTO> selectProductnameserch() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Materials_DTO> deleteMaterials() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 

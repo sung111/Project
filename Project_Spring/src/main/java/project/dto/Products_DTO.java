@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class Products_DTO {
 	
+	String serchname ;
 	int productid;
 	String productname;
 	String partnumber;
