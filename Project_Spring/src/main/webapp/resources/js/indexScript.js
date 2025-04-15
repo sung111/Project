@@ -71,28 +71,38 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-     const myPageImg = document.getElementById("mypage-img");
+    const myPageImg = document.getElementById("mypage-img");
     const popup = document.getElementById("popup");
     const closePopupBtn = document.getElementById("closePopupBtn");
+console.log(popup);
 
-    // 팝업창을 기본적으로 숨김
-    if (popup) {
-        popup.style.display = "none";
+    if (!popup) {
+        console.warn("popup 요소가 존재하지 않습니다.");
+        return;
     }
 
-    // myPageImg 요소가 있을 때만 이벤트 리스너 추가
+    // 팝업창 기본 숨김
+    popup.style.display = "none";
+
+    // myPageImg 클릭 시 팝업 토글
     if (myPageImg) {
         myPageImg.addEventListener("click", function () {
+            // 팝업을 열거나 닫기
             popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "flex" : "none";
         });
+    } else {
+        console.warn("mypage-img 요소가 존재하지 않습니다.");
     }
 
-    // 닫기 버튼 클릭 시 팝업 숨기기
+    // 닫기 버튼 클릭 시 팝업 닫기
     if (closePopupBtn) {
         closePopupBtn.addEventListener("click", function () {
             popup.style.display = "none";
         });
+    } else {
+        console.warn("closePopupBtn 요소가 존재하지 않습니다.");
     }
+
 
 // 네비게이션 버튼 클릭 시, iframe 이동 스크립트 + 로컬 네비게이션
 
