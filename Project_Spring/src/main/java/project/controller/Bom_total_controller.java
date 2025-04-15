@@ -1,5 +1,8 @@
 package project.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.dto.Materials_DTO;
 import project.dto.Products_DTO;
@@ -214,41 +219,99 @@ public class Bom_total_controller {
 			)  {
 		System.out.println("inspectionStandards 실행");
 		String Field = "ADMIN";
-			Map map = Products_service.selectProducts(products_DTO);
+
+		try {
+			Map map = Products_service.selectFinishedProduct(products_DTO);
 			List name_list = Products_service.selectProductname();
-		 
-		 model.addAttribute("map",map);
-		 model.addAttribute("pDTO",products_DTO);
-		 model.addAttribute("name_list",name_list);
-		 model.addAttribute("Field",Field);
-		 System.out.println("map : "+map +""+ "products_DTO"+products_DTO);
+			
+			model.addAttribute("map",map);
+			model.addAttribute("pDTO",products_DTO);
+			model.addAttribute("name_list",name_list);
+			model.addAttribute("Field",Field);
+			System.out.println("map : "+map);
+			System.out.println("products_DTO"+products_DTO);
+			System.out.println("name_list"+name_list);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		 
 		return "inspectionStandards";
 	}
-	
+	// 검색어조회
 	@ResponseBody
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
 	public Map<String,Object> insSelectone(
 			@RequestParam("serchname") String serchname,
 			Model model
-		
 			) {
 		System.out.println("검색값 productname"+serchname);
 		String Field = "ADMIN";
-		List pickname = Products_service.selectProductnameserch(serchname);
-		List name_list = Products_service.selectProductname();
-		
 		Map<String,Object> result = new HashMap();
-		result.put("Field", Field);
-		result.put("pickname",pickname);
-		result.put("name_list",name_list);
 		
-		System.out.println("밀키트 검색한 결과값name_list ="+name_list);
-		System.out.println("pickname ="+pickname);
-	
+		try {
+			List pickname = Products_service.selectProductnameserch(serchname);
+			List name_list = Products_service.selectProductname();
+			
+			result.put("Field", Field);
+			result.put("pickname",pickname);
+			result.put("name_list",name_list);
+			System.out.println("밀키트 검색한 결과값name_list ="+name_list);
+			System.out.println("pickname ="+pickname);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return result ;
 	}
+	
+	//수정 및 파일 업로드 
+	@RequestMapping("/upload")
+    public String upload( 
+    		MultipartHttpServletRequest req 
+    		) throws UnsupportedEncodingException {
+		
+		req.setCharacterEncoding("utf-8");
+		
+		String productname = req.getParameter("slectname");
+		String normalcriteria = req.getParameter("normalProduct");
+		String abnormalcriteria = req.getParameter("abnormalProduct");
+		System.out.println("slectname"+productname);
+		
+		MultipartFile mf = req.getFile("uplodeFile");
+		long fileSize = mf.getSize();
+		System.out.println("fileSize"+fileSize);
+		String fileName = mf.getOriginalFilename();
+		System.out.println("fileName"+fileName);
+		
+		try {
+			String path = "C:\\project\\img" ;
+			String safeFileName = path + "\\" + fileName;
+			System.out.println("safeFileName"+safeFileName);
+			File file = new File(safeFileName);
+			
+			mf.transferTo( file );
+			
+			Products_DTO dto = new Products_DTO();
+			dto.setProductname(productname);
+			dto.setNormalcriteria(abnormalcriteria);
+			dto.setAbnormalcriteria(abnormalcriteria);
+			// jsp에 프러덕트 id있는지 확인 1.html에 id있는지확인 있으면 아작스  formData에담기 
+			
+		}catch (IllegalStateException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		
+		
+		
+		return "redirect:inspectionStandards";
+	}
+	
+	
 //생산공정 
 //----------------------
 	@RequestMapping("/production_process")

@@ -18,7 +18,7 @@ public interface Products_DAO {
 	public List<Products_DTO> selectProductnameserch(String name);
 	public List<Products_DTO> selectProductname();
 	public List<Products_DTO> selectProducts(Products_DTO dto);
-	public List<Products_DTO> selectProducts();
+	public List<Products_DTO> selectFinishedProduct(Products_DTO dto);
 	public int insertProducts(Products_DTO dto);
 	public int updateProducts(Products_DTO dto);
 	public int deleteProducts(Products_DTO dto);

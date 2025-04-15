@@ -346,11 +346,12 @@
 								</div>
 
 
-
+								
+								
 									<div id="preant">
 										<div class="standards-top" id="original">
-											<c:if test="${not empty map.list2}">
-												<c:forEach var="dto" items="${map.list2}">
+											<c:if test="${not empty map.list}">
+												<c:forEach var="dto" items="${map.list}">
 
 													<div class="standards-contain">
 
@@ -413,7 +414,7 @@
 
 												</c:forEach>
 											</c:if>
-											<c:if test="${empty map.list2}">
+											<c:if test="${empty map.list}">
 												<div>
 													완제품조회 내용이 없습니다
 												</div>
@@ -475,11 +476,14 @@
 										document.querySelector("#search").addEventListener("click", function (e) {
 											console.log("검색버튼 클릭" + e.target.parentNode)
 											console.log(document.querySelector("#navigation-title-search").value)
-											if(!isNaN(document.querySelector("#navigation-title-search").value) ){
-												alert("검색어는 숫자가 올 수 없습니다")
+											let value = document.querySelector("#navigation-title-search").value.trim();
+											//숫자만 ^문자열시작/ \d숫자하나 +앞에있는\d가 1개이상반복 $문자끝의미 .test() 문자열검사 메서드
+											if(/^\d+$/.test(value)){
+												alert("검색어는 숫자가 올 수 없습니다");
+											}else if(value.length === 0){
+												location.href="inspectionStandards?page=1"
 												
 											}else{
-
 
 												//ajax
 												const xhr = new XMLHttpRequest();
@@ -656,22 +660,26 @@
 															e.target.parentNode.querySelector(".ok").classList.add("none");
 															e.target.parentNode.querySelector(".u").classList.remove("none");
 														})// 취소 클릭이벤트
+
 														e.target.parentNode.querySelector(".ok").addEventListener("click",(e)=>{
 															console.log(e.target.parentNode.parentNode.querySelector(".file").value)
 															console.log(e.target.parentNode.parentNode.querySelector("#select").value)
 															console.log(e.target.parentNode.parentNode.querySelector(".showtext").value)
 															console.log(e.target.parentNode.parentNode.querySelector(".showtext2").value)
+															let slectname = e.target.parentNode.parentNode.querySelector(".file").value;
+															let normalProduct = e.target.parentNode.parentNode.querySelector(".showtext").value;
+															let abnormalProduct = e.target.parentNode.parentNode.querySelector(".showtext2").value;
 
 															var formData = new FormData();
 															var inputFile = e.target.parentNode.parentNode.querySelector(".file").files[0];
 															console.log("inputFile",inputFile)
 															formData.append("uplodeFile", inputFile);
+															formData.append("slectname", slectname);
+															formData.append("normalProduct", normalProduct);
+															formData.append("abnormalProduct", abnormalProduct);
 															
-															let change = {
-																formData : formData,
-																수정1 : ㅇㅇ
-																수저ㅏㅇ  : 222
-															} 
+													
+															
 															//포멧데이터(파일)과 다른 값들을 같이 전송하는방법 찾아보기
 
 
@@ -679,7 +687,7 @@
 				
 															xhr.setRequestHeader('Content-Type', 'application/json')
 				
-															xhr.send()
+															xhr.send(formData)
 				
 															xhr.onload = function () {
 																console.log(xhr.responseText)

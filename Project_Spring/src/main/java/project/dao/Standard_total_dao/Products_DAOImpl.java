@@ -93,9 +93,31 @@ public class Products_DAOImpl implements Products_DAO {
 		return result;
 	}
 	
+	//검사기준 초반에 조회
 	@Override
-	public List<Products_DTO> selectProducts() {
-		List list = sqlSession.selectList("mapper.bom.selectProducts");
+	public List<Products_DTO> selectFinishedProduct(Products_DTO dto) {
+		List<Products_DTO> list = null;
+		try {
+			
+			int page = dto.getPage();
+			int viewCount = dto.getViewCount();
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.selectFinishedProduct",dto);
+			System.out.println("selectProducts 실행");
+			System.out.println("list 값="+ list);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+			
 		return list;
 	}
 	
