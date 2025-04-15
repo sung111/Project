@@ -193,11 +193,12 @@ console.log(popup);
     //마이페이지 클릭 효과
 document.getElementById("mypage-a").addEventListener("click", function () {
     window.open(
-        contextPath + "/mypage",
+        contextPath + "/mypage", 
         "MyPagePopup",
         "width=500,height=400,top=100,left=100,resizable=no,scrollbars=yes"
     );
 });
+
 
     //로그아웃 버튼 클릭 효과
     const logoutLink = document.getElementById("logout-a");

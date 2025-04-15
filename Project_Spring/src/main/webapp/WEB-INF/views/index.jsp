@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css"/>
 </head>
-<body>
+<body data-contextPath="${pageContext.request.contextPath}">
     <div class="main-content"></div>
 </body>
 </html>
