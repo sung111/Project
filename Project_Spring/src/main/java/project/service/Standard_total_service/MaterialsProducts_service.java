@@ -1,12 +1,14 @@
 package project.service.Standard_total_service;
 
 import java.util.List;
+import java.util.Map;
 
 import project.dto.Materials_DTO;
 
 public interface MaterialsProducts_service {
 
-	List<Materials_DTO> selectMaterialsProducts();
+	public Map<String,Object> selectMaterialsProducts(Materials_DTO dto);
+	
 	
 	List<Materials_DTO> deleteMaterialsProducts();
 

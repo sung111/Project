@@ -16,19 +16,73 @@ public class MaterialsProducts_DAOImpl implements MaterialsProducts_DAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<Materials_DTO> selectMaterialsProducts() {
-		List<Materials_DTO> list = null;
+	public List<Materials_DTO> selectMaterialsProducts(Materials_DTO dto) {
 		
+		List<Materials_DTO> list = null;
 		try {
-			list = sqlSession.selectList("mapper.emp.selectMaterialsProducts");
-
-		} catch (Exception e) {
+			
+			int page = dto.getPage();
+			int viewCount = dto.getViewCount();
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.selectPageMaterialsProducts",dto);
+			System.out.println("selectMaterialsProducts 실행");
+			System.out.println("list 값="+ list);
+			
+		}catch (Exception e) {
 			e.printStackTrace();
-
 		}
+		
+		
 		return list;
+		
+		
 	}
 
+	@Override
+	public int countProducts() {
+		int result = sqlSession.selectOne("mapper.bom.totalMaPr");
+		System.out.println("countEmp실행");
+		System.out.println("result 값="+result);
+		
+		return result;
+	}
+	@Override
+	public int updateMaterialsProducts_products(Materials_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.updateMaterialsProducts_products",dto);
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+		return result;
+	}
+	
+	@Override
+	public int deleteMaterialsProducts_products(Materials_DTO dto) {
+		
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.deleteMaterialsProducts_products",dto);
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+		return result;
+	}
+	
 	@Override
 	public List<Materials_DTO> deleteMaterialsProducts() {
 		// TODO Auto-generated method stub
@@ -52,5 +106,7 @@ public class MaterialsProducts_DAOImpl implements MaterialsProducts_DAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

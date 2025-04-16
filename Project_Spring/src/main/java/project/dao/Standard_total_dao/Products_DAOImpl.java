@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.dto.Materials_DTO;
 import project.dto.Products_DTO;
 
 @Repository
@@ -15,10 +16,23 @@ public class Products_DAOImpl implements Products_DAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<Products_DTO> selectProducts() {
+	public List<Products_DTO> selectProducts(Products_DTO dto){
 		List<Products_DTO> list = null;
 		try {
-			list = sqlSession.selectList("mapper.emp.selectProducts");
+			
+			int page = dto.getPage();
+			int viewCount = dto.getViewCount();
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.selectPageProducts",dto);
+			System.out.println("selectProducts 실행");
+			System.out.println("list 값="+ list);
+			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -27,7 +41,72 @@ public class Products_DAOImpl implements Products_DAO {
 			
 		return list;
 	}
+	
+	@Override
+	public int countProducts() {
+		int result = 0;
+		try {
+			result = sqlSession.selectOne("mapper.bom.totalProducts");
+			System.out.println("countEmp실행");
+			System.out.println("result 값="+result);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 
+	@Override
+	public int insertProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.insert("mapper.bom.insertProducts",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int updateProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.updateProducts",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteProducts(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.deleteProducts",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Products_DTO> selectProducts() {
+		List list = sqlSession.selectList("mapper.bom.selectProducts");
+		return list;
+	}
+	
+	@Override
+	public List<Products_DTO> selectProductname() {
+		List list = sqlSession.selectList("mapper.bom.selectProductsName");
+		return list;
+	}
+	
+	
+	
 	@Override
 	public List<Products_DTO> insertProducts() {
 		// TODO Auto-generated method stub
@@ -40,11 +119,6 @@ public class Products_DAOImpl implements Products_DAO {
 		return null;
 	}
 
-	@Override
-	public List<Products_DTO> selectProductname() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Products_DTO> updateProducts() {
@@ -70,4 +144,15 @@ public class Products_DAOImpl implements Products_DAO {
 		return null;
 	}
 
+	@Override
+	public List<Materials_DTO> deleteMaterials() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
+
+	
 }

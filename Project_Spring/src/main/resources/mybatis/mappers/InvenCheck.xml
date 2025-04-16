@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.mapper.InvenCheck">
+	<!-- 팔팔롱 시발 -->
+	<select id="InvenCheckPage" resultType="Inven_DTO"
+		parameterType="Inven_DTO">
+		select wherereslut.* from(
+			select rownum rnum, unionresult.* 
+			from (
+				select
+					prod.lotnumber,
+					pro.productinvenid,
+					prod.productname,
+					prod.PARTNUMBER,
+					pro.quantity,
+					prod.spec,
+					prod.unit,
+					pro.makedate,
+					pro.expdate
+				from
+					productinven pro
+				join
+					products prod on ( pro.productid =
+						prod.productid )
+		
+				union all
+		
+				select
+					mat.lotnumber,
+					inv.inventoryid,
+					mat.materialname,
+					mat.partnumber,
+					inv.quantity,
+					mat.spec,
+					mat.unit,
+					inv.receiptdate,
+					inv.expdate
+				from
+					inventorystatus inv
+				join
+					materials mat on
+						( inv.materialid = mat.materialid )
+			) unionresult
+		) wherereslut
+		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
+	</select>
+
+	<!-- 전체 테이블 데이터 갯수 -->
+	<select id="invenCount" resultType="int">
+		select count(*) from (SELECT
+		prod.lotnumber,
+		prod.productname,
+		prod.partnumber,
+		pro.quantity,
+		prod.spec,
+		prod.unit,
+		pro.makedate,
+		pro.expdate
+		FROM
+		productinven pro
+		JOIN
+		products prod ON ( pro.productid = prod.productid )
+		UNION ALL
+		SELECT
+		mat.lotnumber,
+		mat.materialname,
+		mat.partnumber,
+		inv.quantity,
+		mat.spec,
+		mat.unit,
+		inv.receiptdate,
+		inv.expdate
+		FROM
+		inventorystatus inv
+		JOIN
+		materials mat ON ( inv.materialid = mat.materialid )
+		)
+	</select>
+
+<!-- 	자재 재고현황 삭제 -->
+	<delete id="matInvenDelete">
+		delete from inventorystatus where inventoryid <![CDATA[ = ]]>
+		#{productinvenid}
+	</delete>
+<!-- 	제품 재고현황 삭제 -->
+	<delete id="productInvenDelete">
+		delete from PRODUCTINVEN where productinvenid <![CDATA[ = ]]>
+		#{productinvenid}
+	</delete>
+
+
+
+	<!-- 검색하기 -->
+	<select id="searchInven" resultType="Inven_DTO"
+		parameterType="Inven_DTO">
+		select  searchwhere.* from (
+			select ROWNUM rnum, search.*
+			from(
+				SELECT
+					prod.lotnumber,
+					pro.productinvenid,
+					prod.productname,
+					prod.partnumber,
+					pro.quantity,
+					prod.spec,
+					prod.unit,
+					pro.makedate,
+					pro.expdate
+				FROM
+					productinven pro
+				JOIN products prod ON (pro.productid = prod.productid )
+				UNION ALL
+				SELECT
+					mat.lotnumber,
+					inv.inventoryid,
+					mat.materialname,
+					mat.partnumber,
+					inv.quantity,
+					mat.spec,
+					mat.unit,
+					inv.receiptdate,
+					inv.expdate
+				FROM
+					inventorystatus inv
+				JOIN materials mat ON ( inv.materialid = mat.materialid )
+			)search
+		<where>
+			<if test=" searchType == '' ">
+				<choose>
+					<when test="searchWay == '품명' ">
+						productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						MAKEDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
+						AND to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						EXPDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
+						AND to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '완제품' ">
+				lotnumber like '%' || 'WPD' || '%'
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '원자재' ">
+				lotnumber like '%' || 'ING' || '%'
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '용기' ">
+				lotnumber like '%' || 'PKG' || '%'
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+			)searchwhere
+			where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
+	</select>
+
+	<!-- 검색후 토탈 갯수(페이지 네이션을위한) -->
+	<select id="searchInvenCount" resultType="int"
+		parameterType="Inven_DTO">
+		select count(*)
+		from(
+			SELECT
+				prod.lotnumber,
+				pro.productinvenid,
+				prod.productname,
+				prod.partnumber,
+				pro.quantity,
+				prod.spec,
+				prod.unit,
+				pro.makedate,
+				pro.expdate
+			FROM
+				productinven pro
+			JOIN products prod ON (
+				pro.productid = prod.productid )
+			UNION ALL
+			SELECT
+				mat.lotnumber,
+				inv.inventoryid,
+				mat.materialname,
+				mat.partnumber,
+				inv.quantity,
+				mat.spec,
+				mat.unit,
+				inv.receiptdate,
+				inv.expdate
+			FROM
+				inventorystatus inv
+			JOIN materials mat ON ( inv.materialid = mat.materialid )
+		)search
+		<where>
+			<if test=" searchType == '' ">
+				<choose>
+					<when test="searchWay == '품명' ">
+						productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						MAKEDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
+						AND to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						EXPDATE BETWEEN to_date(#{dateStart},'YYYY-MM-DD')
+						AND to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '완제품' ">
+				lotnumber like '%' || 'WPD' || '%'
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '원자재' ">
+				lotnumber like '%' || 'ING' || '%'
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+			<if test=" searchType == '용기' ">
+				lotnumber like '%' || 'PKG' || '%'
+				<choose>
+					<when test="searchWay == '품명' ">
+						and productname like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '품번' ">
+						and partnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == 'LotNo' ">
+						and lotnumber like '%' || #{search} || '%'
+					</when>
+					<when test="searchWay == '입고일' ">
+						and MAKEDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<when test="searchWay == '유효기간' ">
+						and EXPDATE BETWEEN
+						to_date(#{dateStart},'YYYY-MM-DD')
+						AND
+						to_date(#{dateEnd},'YYYY-MM-DD');
+					</when>
+					<otherwise>
+						1=1
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+	</select>
+
+</mapper>

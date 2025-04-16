@@ -1,42 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.emp">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<select id="selectMaterials"
-		resultType="project.dto.Materials_DTO">
-		select * from MATERIALS WHERE materialdel = 'n'
-	</select>
+<mapper namespace="project.dao.Login_total_dao.Users_DAO">
 
-	<select id="selectProducts"
-		resultType="project.dto.Products_DTO">
-		select * from products WHERE productdel = 'n'
-	</select>
-
-	<select id="selectMaterialsProducts"
-		resultType="project.dto.Materials_DTO">
-		SELECT materialname, PRICE, SPEC, UNIT, SUPPLIER,
-		PARTNUMBER, LOTNUMBER, WAREHOUSE,
-		'm' AS type, materialdel, materialid
-		FROM MATERIALS
-		WHERE materialdel = 'n'
-
-		UNION ALL
-
-		SELECT productname AS materialname, PRICE, SPEC, UNIT,
-		'' AS SUPPLIER, PARTNUMBER, LOTNUMBER, WAREHOUSE,
-		'p' AS type, productdel AS materialdel, productid AS materialid
-		FROM PRODUCTS
-		WHERE productdel = 'n'
-
-		ORDER BY materialname
-	</select>
-
-	<!-- 로뀨잉 -->
-	<select id="selectUserId" parameterType="java.lang.String"
-		resultType="project.dto.User_DTO">
-		SELECT * FROM users WHERE userid = #{userid}
-	</select>
+    <!-- userId로 사용자 정보를 조회함. -->
+    <select id="selectUserId" resultType="project.dto.User_DTO">
+        SELECT 
+            USERID AS userId,
+            USERPW AS userPw,
+            USERNAME AS userName,
+            JOB,
+            EMAIL,
+            PHONE,
+            CREATEDAT AS createDate,
+            FIELD
+        FROM USERS
+        WHERE USERID = #{userId}
+    </select>
 
 </mapper>

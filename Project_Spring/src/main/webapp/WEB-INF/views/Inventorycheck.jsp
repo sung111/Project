@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ page import="java.util.*"%>
+<%@ page import="project.dto.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,23 +13,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>재고현황조회</title>
-<link rel="stylesheet" href="css\reset.css">
-<link rel="stylesheet" href="css\Inventorycheck.css">
+<link rel="stylesheet" href="resources\css\Inventorycheck.css">
+<script src="resources/js/Inventory.js"></script>
 </head>
 
 <body>
 	<div class="box">
-		<!--제목 -->
 		<h1>재고 현황 조회</h1>
 	</div>
 	<div class="box">
 		<form class="container" style="font-size: 15px;" method="post"
-			action="Inventorycheck" id="selectForm">
+			action="invenSearch" id="selectForm">
 			<label for="inventoryType">제품 유형 :<select id="inventoryType"
 				name="searchType">
 					<option value="">선택</option>
 					<option value="원자재">원자재</option>
 					<option value="완제품">완제품</option>
+					<option value="용기">용기</option>
 			</select>
 			</label> <label for="warehouse">검색 방식 :<select id="warehouse"
 				name="searchWay">
@@ -34,14 +37,21 @@
 					<option value="품명">품명</option>
 					<option value="품번">품번</option>
 					<option value="LotNo">Lot No</option>
+					<option value="입고일">입고일</option>
+					<option value="유효기간">유효기간</option>
 			</select>
 			</label>
 			<div class="item">
 				<label for="search" class="search">검색 : </label> <input type="text"
-					id="search" placeholder="검색어를 입력하세요.">
+					id="search" name="search" placeholder="검색어를 입력하세요.">
+					<div class="go hide">
+						<div class="searchDateBox" id="searchDateBox">
+							<input type="date" name="receiptDate" id="receiptDate" disabled style="font-size: 16px;">  ~  <input type="date" id="expDate" name="expDate" disabled style="font-size: 16px;">
+						</div>
+					</div>
 			</div>
 			<div class="item">
-				<button type="button" class="check">조회</button>
+				<button type="submit" class="check">조회</button>
 			</div>
 		</form>
 	</div>
@@ -64,60 +74,101 @@
 					<th>입고일</th>
 					<th>유효기간</th>
 					<th colspan="2">관리</th>
-					<!-- <th>제품 유형</th> -->
 				</tr>
 			</thead>
 			<tbody id="inventoryTableBody">
-				<c:forEach var="dto" items="${resultList}">
+				<c:forEach var="dto" items="${list}">
 					<tr>
-						<td id="lotNo">${ dto.maLotNo }</td>
-						<td id="materialname">${ dto.materialname }</td>
-						<td id="dbgud">원자재</td>
-						<td id="maPartNum">${ dto.maPartNum }</td>
-						<td id="maQuantity">${ dto.maQuantity }</td>
-						<td id="maSpec">${ dto.maSpec }</td>
-						<td id="maUnit">${ dto.maUnit }</td>
-						<td id="receiptDate">${ dto.receiptDate }</td>
-						<td id="maExpDate">${ dto.maExpDate }</td>
-						<td>
-							<form method="post" action="Inventorycheck" id="updateForm1"
-								class="delFrom">
-								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete1">
-								<input type="submit" name="delete" value="삭제" id="del" class="del"
-									style="width: 55px; height: 35px;">
-								<input type="hidden" name="inventoryId" value="${ dto.inventoryId }"
-									id="inventoryId">
-							</form>
+						<td id="lotNo">${ dto.lotnumber }</td>
+						<td id="materialname">${ dto.productname }</td>
+
+						<td id="dbgud">
+							<c:choose>
+								<c:when test="${fn:substring(dto.lotnumber, 0, 3)== 'ING' }">
+									원자재
+								</c:when>
+								<c:when test="${fn:substring(dto.lotnumber, 0, 3)== 'WPD' }">
+									완제품
+								</c:when>
+								<c:when test="${fn:substring(dto.lotnumber, 0, 3)== 'PKG' }">
+									용기
+								</c:when>
+								<c:otherwise>
+									기타
+								</c:otherwise>
+							</c:choose>
 						</td>
-					</tr>
-				</c:forEach>
-				<c:forEach var="dto" items="${resultList2}">
-					<tr>
-						<td id="prLotNo">${ dto.prLotNo }</td>
-						<td id="productname">${ dto.productname }</td>
-						<td id="dbgud">완제품</td>
-						<td id="prPartNum">${ dto.prPartNum }</td>
-						<td id="prQuantity">${ dto.prQuantity }</td>
-						<td id="prSpec">${ dto.prSpec }</td>
-						<td id="prUnit">${ dto.prUnit }</td>
-						<td id="makeDate">${ dto.makeDate }</td>
-						<td id="prExpDate">${ dto.prExpDate }</td>
+
+						<td id="maPartNum">${ dto.partnumber }</td>
+						<td id="maQuantity">${ dto.quantity }</td>
+						<td id="maSpec">${ dto.spec }</td>
+						<td id="maUnit">${ dto.unit }</td>
+						<td id="receiptDate">${ dto.makeDate }</td>
+						<td id="maExpDate">${ dto.expDate }</td>
 						<td>
-							<form method="post" action="Inventorycheck" id="updateForm2"
+							<form method="post" action="invenDelete" id="updateForm1"
 								class="delFrom">
 								<button class="modify" style="width: 55px; height: 35px;">수정</button>
-								<input type="hidden" name="command" value="delete2">
-								<input type="submit" name="delete" value="삭제" id="del" class="del"
+								<input
+									type="submit" name="delete" value="삭제" id="del" class="del"
 									style="width: 55px; height: 35px;">
-								<input type="hidden" name="productinvenid"
-									value="${ dto.productinvenId }" id="productinvenid">
+								<input
+									type="hidden" name="productinvenid" value="${ dto.productinvenid }"
+									>
+								<input
+									type="hidden" name="lotnumber" value="${ dto.lotnumber }"
+									>
 							</form>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+
+
+<!-- 		페이지네이션 -->
+		<div id="page-container">
+			<%
+			int total = (Integer)request.getAttribute("totalCount");
+			InvenCheck_DTO dto = (InvenCheck_DTO)request.getAttribute("dto");
+			int pageNo = dto.getPage();
+			int viewCount = dto.getViewCount();
+			System.out.println("dddddddddddddd"+viewCount);
+			// 1401 / 10 = 140.1 올림해서 141
+			int lastPage = (int) Math.ceil((double) total / viewCount);
+
+			int groupCount = 5; // 한번에 보여줄 페이지 개수
+			int groupPosition = (int) Math.ceil((double) pageNo / groupCount);
+			int begin = ((groupPosition - 1) * groupCount) + 1;
+			//             int end = begin + groupCount - 1;
+			int end = groupPosition * groupCount;
+			if (end > lastPage){
+				end = lastPage;
+			}
+			%>
+			<c:if test="<%=begin == 1%>">
+                  [이전]
+               </c:if>
+			<c:if test="<%=begin != 1%>">
+				<a href="inven?page=<%=begin - 1%>">[이전]</a>
+			</c:if>
+			<c:forEach var="i" begin="<%=begin%>" end="<%=end%>">
+				<c:if test="${i == dto.page }">
+					<c:set var="clazz" value="bold" />
+				</c:if>
+				<c:if test="${ not (i == dto.page) }">
+					<c:set var="clazz" value="" />
+				</c:if>
+				<a href="inven?page=${ i }" class="${clazz }">${ i }</a>
+			</c:forEach>
+
+			<c:if test="<%=end == lastPage%>">
+                  [다음]
+               </c:if>
+			<c:if test="<%=end != lastPage%>">
+				<a href="inven?page=<%=end + 1%>">[다음]</a>
+			</c:if>
+		</div>
 	</div>
 
 
@@ -136,55 +187,35 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td>등록 날짜</td>
-							<td><input type="date" id="addlotno"
-								placeholder="LOT NO를 입력하세요." class="popInput" name="date"></td>
-						</tr> -->
 						<tr>
 							<td>품명</td>
-							<td><input type="text" id="additem" placeholder="품명을 입력하세요."
-								class="popInput" list="suggestions" name="name"> <input
-								type="hidden" id="hiddenInventoryId" name="inventoryId">
+							<td>
+								<input type="text" id="additem" placeholder="품명을 입력하세요."
+									class="popInput" list="suggestions" name="name">
+								<input
+									type="hidden" id="hiddenInventoryId" name="inventoryId">
 								<input type="hidden" id="hiddenProductInvenId"
-								name="productinvenid"> <datalist id="suggestions">
+								name="productinvenid">
+								<datalist id="suggestions">
 									<c:forEach var="dto" items="${matDB}">
 										<option value="${dto.materialname}"
 											data-id="${dto.materialId}" data-type="원자재"></option>
-									</c:forEach>									
-									<c:forEach var="dto" items="${prodDB}">
-										<option value="${dto.productname}"
-											data-id="${dto.productId}" data-type="완제품"></option>
 									</c:forEach>
-								</datalist></td>
+									<c:forEach var="dto" items="${prodDB}">
+										<option value="${dto.productname}" data-id="${dto.productId}"
+											data-type="완제품"></option>
+									</c:forEach>
+								</datalist>
+							</td>
 						</tr>
-						<!-- <tr>
-							<td>품번</td>
-							<td><input type="text" id="additemno"
-								placeholder="품번을 입력하세요." class="popInput"></td>
-						</tr> -->
 						<tr>
 							<td>입고 수량</td>
-							<td><input type="number" id="addquantity" name="ea"
-								placeholder="입고 수량을 입력하세요." class="popInput"
-								style="width: 90%; text-align: center;"></td>
-						</tr>
-						<!-- <tr>
-							<td>단위</td>
-							<td style="display: flex; justify-content: center;">
-								<div class="unit-container" style="width: 90%;">
-									<input type="number" id="addunit" placeholder="개수를 입력하세요."
-										class="unit-input popInput" style="width: 100%;"> <select
-										id="unitDropdown" class="unit-dropdown popInput" name="unit">
-										<option value="g">g</option>
-										<option value="kg">kg</option>
-										<option value="ml">ml</option>
-										<option value="캔">캔</option>
-										<option value="개">개</option>
-									</select>
-								</div>
+							<td>
+								<input type="number" id="addquantity" name="ea"
+									placeholder="입고 수량을 입력하세요." class="popInput"
+									style="width: 90%; text-align: center;">
 							</td>
-						</tr> -->
+						</tr>
 						<tr>
 							<td>제품 유형</td>
 							<td>
@@ -199,8 +230,10 @@
 						</tr>
 						<tr>
 							<td>입고일</td>
-							<td><input type="date" id="addin_date" name="indate"
-								class="popInput"></td>
+							<td>
+								<input type="date" id="addin_date" name="indate"
+									class="popInput">
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -234,6 +267,9 @@
 			}
 		    
 		    
+		    
+		    
+		    // 수정
 		    const modify = document.querySelectorAll('.modify');
 		    console.log(modify.length);
 		    for(let i = 0 ; i < modify.length ; i++){
@@ -284,7 +320,7 @@
 										<input type="hidden" name="inventoryId" value="\${ inventoryId }"
 											id="inventoryId">
 									</td>
-							`
+									`
 						
 		    		} else {
 		    			
@@ -350,20 +386,20 @@
 			            // 8. 폼을 자동으로 제출 (서버에 데이터 전송)
 			            form.submit();
 						alert("수정되었습니다.")
-						
+
 					}) // yes event end
-					
-					
+
+
 					const cancel = document.querySelectorAll('.cancel');
 		    		cancel[i].addEventListener('click', (e)=>{
 		    			location.reload();
 	    			})
-	    			
-		    			
+
+
 		    	}) // modify addevent end
 		    } // for end
-		    
-		    
+
+
 		    document.querySelector('#insertBtn').addEventListener('click', (e)=>{
 		    	e.preventDefault();
 		    	let hiddenInventoryId = document.querySelector('#hiddenInventoryId');
@@ -385,9 +421,8 @@
 		    		alert("입고일을 입력해주시기 바랍니다.")
 		    		return;
 		    	}
-		    	
+
 		    	for( let option of options ){
-		    		
 		    		if( option.value === inputBox.value){
 		    			let data = option.getAttribute('data-id');
 		    			let type = option.getAttribute('data-type');
@@ -400,23 +435,28 @@
 			    			}
 		    			}
 			    		break;
-		    		} 
+		    		}
 		    	}
 		    	document.querySelector('#inputForm').submit();
 		    })
+
 		    
+		    // 삭제
 			const del = document.querySelectorAll('.del');
-			const delF = document.querySelectorAll('.delFrom')
+			const delF = document.querySelectorAll('.delFrom');
 			for(let i = 0; i < del.length; i++){
 				del[i].addEventListener('click', (e)=>{
 					e.preventDefault()
 					const tt = confirm("정말로 삭제하시겠습니까?")
 					if(tt){
 						delF[i].submit();
+						alert("삭제되었습니다.");
 					}
 				})
 			}
-		
+
+
+
 	</script>
 </body>
 
