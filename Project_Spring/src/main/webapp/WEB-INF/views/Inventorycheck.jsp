@@ -23,7 +23,7 @@
 	</div>
 	<div class="box">
 		<form class="container" style="font-size: 15px;" method="GET"
-			action="invenSearch" id="selectForm">
+			action="inven" id="selectForm">
 			<label for="inventoryType">제품 유형 :<select id="inventoryType"
 				name="searchType">
 					<option value="" ${param.searchType == '' ? 'selected' : ''}>전체</option>
@@ -46,7 +46,10 @@
 					id="search" name="search" placeholder="검색어를 입력하세요." value=${param.search}>
 					<div class="go hide">
 						<div class="searchDateBox" id="searchDateBox">
-							<input type="date" name="dateStart" id="receiptDate" disabled style="font-size: 16px;">  ~  <input type="date" id="expDate" name="dateEnd" disabled style="font-size: 16px;">
+							<input type="date" name="dateStart" id="receiptDate" disabled style="font-size: 16px;"
+							value="${ param.dateStart }">  ~  
+							<input type="date" id="expDate" name="dateEnd" disabled style="font-size: 16px;"
+							value="${ param.dateEnd }">
 						</div>
 					</div>
 			</div>
@@ -77,6 +80,7 @@
 				</tr>
 			</thead>
 			<tbody id="inventoryTableBody">
+<!-- 			리스트 보여주기 -->
 				<c:forEach var="dto" items="${list}">
 					<tr>
 						<td id="lotNo">${ dto.lotnumber }</td>
@@ -108,12 +112,12 @@
 						<td>
 							<form method="post" action="invenDelete" id="updateForm1"
 								class="delFrom">
-								<button class="modify" style="width: 55px; height: 35px;">수정</button>
+								<button type="button" class="modify" style="width: 55px; height: 35px;">수정</button>
 								<input
 									type="submit" name="delete" value="삭제" id="del" class="del"
 									style="width: 55px; height: 35px;">
 								<input
-									type="hidden" name="productinvenid" value="${ dto.productinvenid }"
+									type="hidden" name="productinvenid" value="${ dto.productinvenid }" id="productinvenid"
 									>
 								<input
 									type="hidden" name="lotnumber" value="${ dto.lotnumber }"
@@ -163,7 +167,7 @@
 					<c:set var="clazz" value="" />
 				</c:if>
 				
-				<c:url var="pageLink" value="invenSearch">
+				<c:url var="pageLink" value="inven">
 					<c:param name="page" value="${ i }" />
 					<c:param name="searchType" value="${ param.searchType }" />
 					<c:param name="searchWay" value="${ param.searchWay }" />
@@ -207,17 +211,14 @@
 							<td>
 								<input type="text" id="additem" placeholder="품명을 입력하세요."
 									class="popInput" list="suggestions" name="name">
-								<input
-									type="hidden" id="hiddenInventoryId" name="inventoryId">
-								<input type="hidden" id="hiddenProductInvenId"
-								name="productinvenid">
+								<input type="hidden" id="hiddenInventoryId" name="inventoryid">
 								<datalist id="suggestions">
 									<c:forEach var="dto" items="${matDB}">
-										<option value="${dto.materialname}"
-											data-id="${dto.materialId}" data-type="원자재"></option>
+										<option value="${dto.optionMaterialname}"
+											data-id="${dto.optionMaterialid}" data-type="원자재"></option>
 									</c:forEach>
 									<c:forEach var="dto" items="${prodDB}">
-										<option value="${dto.productname}" data-id="${dto.productId}"
+										<option value="${dto.optionProductname}" data-id="${dto.optionProductid}"
 											data-type="완제품"></option>
 									</c:forEach>
 								</datalist>
@@ -226,7 +227,7 @@
 						<tr>
 							<td>입고 수량</td>
 							<td>
-								<input type="number" id="addquantity" name="ea"
+								<input type="number" id="addquantity" name="quantity"
 									placeholder="입고 수량을 입력하세요." class="popInput"
 									style="width: 90%; text-align: center;">
 							</td>
@@ -246,7 +247,7 @@
 						<tr>
 							<td>입고일</td>
 							<td>
-								<input type="date" id="addin_date" name="indate"
+								<input type="date" id="addin_date" name="receiptDate"
 									class="popInput">
 							</td>
 						</tr>
@@ -261,45 +262,7 @@
 	</div>
 
 	<script>
-// 		    document.querySelector('#insertBtn').addEventListener('click', (e)=>{
-// 		    	e.preventDefault();
-// 		    	let hiddenInventoryId = document.querySelector('#hiddenInventoryId');
-// 		    	let hiddenProductInvenId = document.querySelector('#hiddenProductInvenId');
-// 		    	let itemtype = document.querySelector('#itemtype').value;
-// 		    	let inputBox = document.querySelector('#additem')
-// 		    	let addquantity = document.querySelector('#addquantity');
-// 		    	let addin_date = document.querySelector('#addin_date');
-// 		    	let datalist = document.querySelector('#suggestions');
-// 		    	let options = datalist.querySelectorAll('option');
-		    	
-// 		    	if( inputBox.value == ''){
-// 		    		alert("품명을 입력해주시기 바랍니다.")
-// 		    		return;
-// 		    	} else if( addquantity.value == '' ){
-// 		    		alert("입고수량을 입력해주시기 바랍니다.")
-// 		    		return;
-// 		    	} else if ( addin_date.value == '' ){
-// 		    		alert("입고일을 입력해주시기 바랍니다.")
-// 		    		return;
-// 		    	}
 
-// 		    	for( let option of options ){
-// 		    		if( option.value === inputBox.value){
-// 		    			let data = option.getAttribute('data-id');
-// 		    			let type = option.getAttribute('data-type');
-// 		    			if( data ){
-// 		    				hiddenInventoryId.value = data;
-// 		                    hiddenProductInvenId.value = data;
-// 			    			if(itemtype != type){
-// 			    				alert("제품유형을 다시 선택해주시기 바랍니다.");
-// 			    				return;
-// 			    			}
-// 		    			}
-// 			    		break;
-// 		    		}
-// 		    	}
-// 		    	document.querySelector('#inputForm').submit();
-// 		    })
 	</script>
 </body>
 
