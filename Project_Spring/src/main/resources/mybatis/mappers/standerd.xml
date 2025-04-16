@@ -38,20 +38,8 @@
 		
 	</select>
 	
-	<!--  검사기준	완재품 값만조회  -->
-	<select id="selectProducts"  resultType="Products_DTO" >
-          select  * from PRODUCTS
-          WHERE PRODUCTDEL = 'n'
-          order by PRODUCTNAME
-	</select>
 	
-	<!--  검사기준	완재품 이름만 조회  -->
-	<select id="selectProductsName"   resultType="Products_DTO">
-        select PRODUCTNAME from PRODUCTs
-          WHERE PRODUCTDEL = 'n'
-          order by PRODUCTNAME
-	</select>
-	
+	<!-- 	완제품카운트갑 -->
 	<select id="totalProducts" resultType="int" >
 		select count(*) from PRODUCTS
 		WHERE PRODUCTDEL = 'n'
@@ -141,9 +129,40 @@
 		where productid = #{productid}
 	</update>
 			
-			
-			
-		
+<!-- 	완제품 검색으로 이름으로가져오기		 -->
+	<select id="selectProductsserch"   resultType="Products_DTO" parameterType="String">
+	
+	select PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from PRODUCTS
+		<where>
+		 PRODUCTDEL = 'n'
+                <if test="_parameter != null and _parameter !='' ">
+					and PRODUCTNAME like ('%' || #{_parameter} || '%') 
+				</if>
+		</where>
+		order by PRODUCTNAME
+	</select>
+	
+	
+		<!--  검사기준	완재품/페이징 값만조회  -->
+		<select id="selectFinishedProduct"  resultType="Products_DTO"  parameterType="Products_DTO">
+			select rnum, tmp2.PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from(
+		    		select rownum rnum, tmp1.PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from(
+		            select  * from PRODUCTS
+		            where PRODUCTDEL = 'n'
+		        	    order by PRODUCTNAME
+		            
+		           
+		   			 ) tmp1
+				)tmp2
+				where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
+		</select>
+	
+	<!--  검사기준	완재품 이름만 조회  -->
+		<select id="selectProductsName"   resultType="Products_DTO">
+	        select PRODUCTNAME,PRODUCTID from PRODUCTs
+	          WHERE PRODUCTDEL = 'n'
+	          order by PRODUCTNAME
+		</select>
 		
 		
 

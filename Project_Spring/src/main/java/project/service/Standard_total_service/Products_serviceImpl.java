@@ -26,7 +26,7 @@ public class Products_serviceImpl implements Products_service {
 		//전체 글 개수 
 		int count = products_DAO.countProducts();
 		
-		map.put("list2", list);
+		map.put("list", list);
 		map.put("count", count);
 		
 		System.out.println("selectProducts 실행");
@@ -77,9 +77,27 @@ public class Products_serviceImpl implements Products_service {
 	}
 	
 	@Override
-	public List<Products_DTO> selectProducts() {
-		List list = products_DAO.selectProducts();
-		return list;
+	public Map<String,Object> selectFinishedProduct(Products_DTO dto) {
+		Map <String,Object> map = new HashMap();
+		try {
+			
+		//한페이지의 내용만 있는 리스트
+		List list = products_DAO.selectFinishedProduct(dto);
+		//전체 글 개수 
+		int count = products_DAO.countProducts();
+		
+		map.put("list", list);
+		map.put("count", count);
+		
+		System.out.println("selectProducts 실행");
+		System.out.println("list :"+list+""+"count :"+count);
+		//그대로주고 DB에서 바꾸자 
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return map;
 	}
 	
 	@Override
@@ -88,6 +106,11 @@ public class Products_serviceImpl implements Products_service {
 		return list;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProductnameserch(String name) {
+		List list = products_DAO.selectProductnameserch(name);
+		return list;
+	}
 	
 	
 	
@@ -129,6 +152,7 @@ public class Products_serviceImpl implements Products_service {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 
 
