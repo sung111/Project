@@ -60,6 +60,8 @@ public class InvenCheck_ServiceImpl implements InvenCheck_Servcie{
 		}
 		
 	}
+	
+//	검색
 	@Override
 	public List searchInven(InvenCheck_DTO dto) {
 		
@@ -78,7 +80,30 @@ public class InvenCheck_ServiceImpl implements InvenCheck_Servcie{
 	@Override
 	public int searchInvenCount(InvenCheck_DTO dto) {
 		int result = dao.searchInvenCount(dto);
-		System.out.println("써비스 검색개수인데요?"+result);
+		return result;
+	}
+	
+//	등록
+	@Override
+	public int matInsertInven(InvenCheck_DTO dto) {
+		int result = dao.matInsertInven(dto);
+		return result;
+	}
+	@Override
+	public int prodInsertInven(InvenCheck_DTO dto) {
+		int result = dao.prodInsertInven(dto);
+		return result;
+	}
+	
+//	등록폼 option
+	@Override
+	public List matDB(InvenCheck_DTO dto) {
+		List result = dao.matDB(dto);
+		return result;
+	}
+	@Override
+	public List prodDB(InvenCheck_DTO dto) {
+		List result = dao.prodDB(dto);
 		return result;
 	}
 

@@ -2,3 +2,5 @@ eclipse.preferences.version=1
 encoding//src/main/java/project/controller/Bom_total_controller.java=UTF-8
 encoding//src/main/java/project/dto=UTF-8
 encoding//src/main/java/project/dto/Comment_DTO.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/defaultLayout.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mainframe.jsp=UTF-8

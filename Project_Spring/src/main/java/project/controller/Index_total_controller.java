@@ -8,43 +8,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.dto.User_DTO;
 import project.service.Users_total_service.User_service;
 
+//Index_total_controller.java
 @Controller
 @RequestMapping("/")
 public class Index_total_controller {
 
-	@Autowired
-	User_service user_service;
-	
+    @Autowired
+    User_service user_service;
+
     @GetMapping("index")
     public ModelAndView index(HttpSession session) {
         // 세션에서 userId 가져오기
         String userId = (String) session.getAttribute("userId");
 
-        ModelAndView Loginmv = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
 
         if (userId != null) {
-            // userId가 있으면 index.jsp로 이동
-            System.out.println("index 페이지 접근: userId = " + userId);
-            Loginmv.setViewName("index"); 
-            Loginmv.addObject("userId", userId);
+            // 세션에 사용자 정보 있을 때
+            String helloUser = "로그인이 필요한 서비스입니다.";
+            String userRole = "";
+            String userName = "";
+
+            User_DTO user = (User_DTO) session.getAttribute("user");
+            if (user != null) {
+                userRole = user.getJob();  
+                userName = user.getUserName(); 
+                helloUser = userRole + " " + userName + "님, 환영합니다!";
+            }
+
+            // Tiles 이름으로 view 지정
+            mv.setViewName("index");
+            mv.addObject("userId", userId);
+            mv.addObject("helloUser", helloUser);
         } else {
-            // userId가 없으면 로그인 페이지로 리다이렉트
-            System.out.println("index 페이지 접근 실패: 세션에 userId 없음, 로그인 페이지로 리다이렉트됩니다.");
-         // 로그인 페이지로 이동
-            Loginmv.setViewName("redirect:/login"); 
+            mv.setViewName("redirect:/login");
         }
 
-        return Loginmv;
+        return mv;
     }
-
-//    @GetMapping("logout")
-//    public String logout(HttpSession session) {
-//        // 로그아웃: 세션 초기화 후 로그인 페이지로 이동
-//        String userId = (String) session.getAttribute("userId");
-//        session.invalidate();
-//        System.out.println("로그아웃: userId = " + userId);
-//        return "redirect:/login";
-//    }
 }
+

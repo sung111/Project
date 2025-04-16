@@ -71,116 +71,102 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-     const myPageImg = document.getElementById("mypage-img");
+    const myPageImg = document.getElementById("mypage-img");
     const popup = document.getElementById("popup");
     const closePopupBtn = document.getElementById("closePopupBtn");
+console.log(popup);
 
-    // 팝업창을 기본적으로 숨김
-    if (popup) {
-        popup.style.display = "none";
+    if (!popup) {
+        console.warn("popup 요소가 존재하지 않습니다.");
+        return;
     }
 
-    // myPageImg 요소가 있을 때만 이벤트 리스너 추가
+    // 팝업창 기본 숨김
+    popup.style.display = "none";
+
+    // myPageImg 클릭 시 팝업 토글
     if (myPageImg) {
         myPageImg.addEventListener("click", function () {
+            // 팝업을 열거나 닫기
             popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "flex" : "none";
         });
+    } else {
+        console.warn("mypage-img 요소가 존재하지 않습니다.");
     }
 
-    // 닫기 버튼 클릭 시 팝업 숨기기
+    // 닫기 버튼 클릭 시 팝업 닫기
     if (closePopupBtn) {
         closePopupBtn.addEventListener("click", function () {
             popup.style.display = "none";
         });
+    } else {
+        console.warn("closePopupBtn 요소가 존재하지 않습니다.");
     }
+
 
 // 네비게이션 버튼 클릭 시, iframe 이동 스크립트 + 로컬 네비게이션
 
-    const iframe = document.querySelector("iframe")
-    const localBar = document.querySelector(".local-bar");
-    var contextPath = document.body.getAttribute("data-contextPath");
-    
-    function LocalNavigationbar(tagname, componantname) {
-        localBar.innerHTML = `<li>Home</li> <li>> ${tagname}</li> <li>> ${componantname}</li>`;
-    }
-    // 메인 페이지(로고클릭 시)탭
-    const logomenu = document.querySelector("#nav-mainlogo");
-    logomenu.addEventListener("click", function () {
-         iframe.src = contextPath + "/maintitle"; 
-        console.log("Navigating to:", iframe.src);
-        localBar.innerHTML = `<li>Home</li>`;
-    })
-    // 기준관리 탭
-    const bomlistmenu = document.querySelector("#nav-bomlist")
-    bomlistmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "/part_code"; 
-        LocalNavigationbar("기준관리", "부품코드");
-    })
-    const processmenu = document.querySelector("#nav-process")
-    processmenu.addEventListener("click", function () {
-        iframe.src =  contextPath + "/ProductionProcess_controller"; 
-        LocalNavigationbar("기준관리", "생산공정");
-    })
-    const inspection = document.querySelector("#nav-inspection")
-    inspection.addEventListener("click", function () {
-        iframe.src = contextPath + "/InspectionS"
-        LocalNavigationbar("기준관리", "검사기준");
-    })
-    const bommenu = document.querySelector("#nav-bom")
-    bommenu.addEventListener("click", function () {
-        iframe.src = contextPath + "/Finished_Product_BOM"
-        LocalNavigationbar("기준관리", "BOM");
-    })
-    // 생산관리 탭
-    const prodPlanmenu = document.querySelector("#nav-workorder");
-    prodPlanmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "/prodplan"
-        LocalNavigationbar("생산관리", "생산계획");
-    })
-    const perfomanceRegistrationmenu = document.querySelector("#nav-perfomanceRegistratio");
-    perfomanceRegistrationmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "Performance"
-        LocalNavigationbar("생산관리", "실적등록");
-    })
-    const qualityControlmenu = document.querySelector("#nav-qualityControl");
-    qualityControlmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "qualityControl"
-        LocalNavigationbar("생산관리", "품질관리");
-    })
-    const 재고조사현황menu = document.querySelector("#nav-inventory");
-    재고조사현황menu.addEventListener("click", function () {
-        iframe.src = contextPath + "Inventorycheck"
-        LocalNavigationbar("생산관리", "재고현황조회");
-    })
-    // 실적 보고서
-    const performmenu = document.querySelector("#nav-perform");
-    performmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "perform_0203.html"
-        LocalNavigationbar("실적보고서", "실적보고서");
-    })
-    const reportmenu = document.querySelector("#nav-report");
-    reportmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "report.html"
-        LocalNavigationbar("실적보고서", "주요지표");
-    })
-    const chartmenu = document.querySelector("#nav-chart");
-    chartmenu.addEventListener("click", function () {
-        iframe.src = contextPath + "chart_0203.html"
-        LocalNavigationbar("실적보고서", "대시보드");
-    })
-    // 게시판
-    const 공지사항menu = document.querySelector("#nav-공지사항");
-    공지사항menu.addEventListener("click", function () {
-        iframe.src = contextPath + "02_공지사항.html";
-        LocalNavigationbar("게시판", "공지사항");
-    })
-    const 일반게시판menu = document.querySelector("#nav-일반게시판");
-    일반게시판menu.addEventListener("click", function () {
-        iframe.src = contextPath + "board"
-        LocalNavigationbar("게시판", "일반게시판");
-    });
-    
-    //마이페이지 클릭 효과
+const localBar = document.querySelector(".local-bar");
+var contextPath = document.body.getAttribute("data-contextPath");
+
+function LocalNavigationbar(tagname, componantname) {
+    localBar.innerHTML = `<li>Home</li> <li>> ${tagname}</li> <li>> ${componantname}</li>`;
+}
+
+// 메인 페이지(로고 클릭 시)
+const logomenu = document.querySelector("#nav-mainlogo");
+logomenu.addEventListener("click", function () {
+    window.location.href = contextPath + "/maintitle";
+});
+
+// 기준관리 탭
+document.querySelector("#nav-bomlist").addEventListener("click", function () {
+    location.href = contextPath + "/part_code";
+});
+document.querySelector("#nav-process").addEventListener("click", function () {
+    location.href = contextPath + "/ProductionProcess_controller";
+});
+document.querySelector("#nav-inspection").addEventListener("click", function () {
+    location.href = contextPath + "/InspectionS";
+});
+document.querySelector("#nav-bom").addEventListener("click", function () {
+    location.href = contextPath + "/Finished_Product_BOM";
+});
+
+// 생산관리 탭
+document.querySelector("#nav-workorder").addEventListener("click", function () {
+    location.href = contextPath + "/prodplan";
+});
+document.querySelector("#nav-perfomanceRegistratio").addEventListener("click", function () {
+    location.href = contextPath + "/Performance";
+});
+document.querySelector("#nav-qualityControl").addEventListener("click", function () {
+    location.href = contextPath + "/qualityControl";
+});
+document.querySelector("#nav-inventory").addEventListener("click", function () {
+    location.href = contextPath + "/Inventorycheck";
+});
+
+// 실적보고서
+document.querySelector("#nav-perform").addEventListener("click", function () {
+    location.href = contextPath + "/perform_0203.jsp";
+});
+document.querySelector("#nav-report").addEventListener("click", function () {
+    location.href = contextPath + "/report.jsp";
+});
+document.querySelector("#nav-chart").addEventListener("click", function () {
+    location.href = contextPath + "/chart_0203.jsp";
+});
+
+// 게시판
+document.querySelector("#nav-공지사항").addEventListener("click", function () {
+    location.href = contextPath + "/notice"; // .jsp 대신 컨트롤러 경로면 더 좋아
+});
+document.querySelector("#nav-일반게시판").addEventListener("click", function () {
+    location.href = contextPath + "/board";
+});
+
+// 마이페이지 클릭 효과
 document.getElementById("mypage-a").addEventListener("click", function () {
     window.open(
         contextPath + "/mypage",
@@ -188,6 +174,17 @@ document.getElementById("mypage-a").addEventListener("click", function () {
         "width=500,height=400,top=100,left=100,resizable=no,scrollbars=yes"
     );
 });
+
+    
+    //마이페이지 클릭 효과
+document.getElementById("mypage-a").addEventListener("click", function () {
+    window.open(
+        contextPath + "/mypage", 
+        "MyPagePopup",
+        "width=500,height=400,top=100,left=100,resizable=no,scrollbars=yes"
+    );
+});
+
 
     //로그아웃 버튼 클릭 효과
     const logoutLink = document.getElementById("logout-a");

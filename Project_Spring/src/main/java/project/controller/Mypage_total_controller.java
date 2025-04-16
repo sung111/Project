@@ -19,7 +19,6 @@ public class Mypage_total_controller {
         }
 
         model.addAttribute("user", user);
-        return "mypage";  
+        return "mypage"; 
     }
-	
 }

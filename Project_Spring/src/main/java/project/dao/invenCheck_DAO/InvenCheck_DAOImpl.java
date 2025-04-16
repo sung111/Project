@@ -15,18 +15,19 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 	@Autowired
 	SqlSession sqlSession;
 	
+//	페이지네이션
 	@Override
 	public List page(InvenCheck_DTO dto) {
 		List list = sqlSession.selectList("project.mapper.InvenCheck.InvenCheckPage", dto);
 		return list;
 	}
-
 	@Override
 	public int invenTotalCount() {
 		int result = sqlSession.selectOne("project.mapper.InvenCheck.invenCount");
 		return result;
 	}
-
+	
+//	삭제
 	@Override
 	public int matInvenDelete(InvenCheck_DTO dto) {
 		int result = sqlSession.delete("project.mapper.InvenCheck.matInvenDelete", dto);
@@ -37,6 +38,8 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 		int result = sqlSession.delete("project.mapper.InvenCheck.productInvenDelete", dto);
 		return result;
 	}
+	
+//	검색 
 	@Override
 	public List searchInven(InvenCheck_DTO dto) {
 		List list = sqlSession.selectList("project.mapper.InvenCheck.searchInven", dto);
@@ -45,7 +48,32 @@ public class InvenCheck_DAOImpl implements InvenCheck_DAO{
 	@Override
 	public int searchInvenCount(InvenCheck_DTO dto) {
 		int result = sqlSession.selectOne("project.mapper.InvenCheck.searchInvenCount",dto);
-		System.out.println("dao검색개수인데요?"+result);
+		return result;
+	}
+	
+//	등록
+	@Override
+	public int matInsertInven(InvenCheck_DTO dto) {
+		int result = sqlSession.insert("project.mapper.InvenCheck.matInsertInven",dto);
+		System.out.println("dao에서 자재 재고현황에 인서트가 됐농?? : "+result);
+		return result;
+	}
+	@Override
+	public int prodInsertInven(InvenCheck_DTO dto) {
+		int result = sqlSession.insert("project.mapper.InvenCheck.prodInsertInven",dto);
+		System.out.println("dao에서 원자재 재고현황에 인서트가 됐농?? : "+result);
+		return result;
+	}
+	
+//	등록폼 option 보여주기위함
+	@Override
+	public List matDB(InvenCheck_DTO dto) {
+		List result = sqlSession.selectList("project.mapper.InvenCheck.matDB",dto);
+		return result;
+	}
+	@Override
+	public List prodDB(InvenCheck_DTO dto) {
+		List result = sqlSession.selectList("project.mapper.InvenCheck.prodDB",dto);
 		return result;
 	}
 	
