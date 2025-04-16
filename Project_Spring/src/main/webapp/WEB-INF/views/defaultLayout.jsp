@@ -1,13 +1,18 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title><tiles:insertAttribute name="title" /></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
 </head>
 <body class="index">
+
+    <div class="header">
+        <tiles:insertAttribute name="header" />
+    </div>
+
     <div class="menu">
         <tiles:insertAttribute name="menu" />
     </div>
@@ -39,5 +44,4 @@
         </div>
     </div>
 </body>
-
 </html>
