@@ -6,26 +6,61 @@
 <mapper namespace="project.mapper.InvenCheck">
 	<!-- 팔팔롱 시발 -->
 	
-<!-- 	자재 재고현황 삽입 문 -->
+<!-- 	등록창 팝업에 옵션을 넣기위한 셀렉문 2개 -->
+<!-- 	자제 -->
+	<select id="matDB" resultType="Inven_DTO" parameterType="Inven_DTO">
+		select materialname as optionMaterialname , materialid as optionMaterialid from materials
+	</select>
+	
+<!-- 	완제품 -->
+	<select id="prodDB" resultType="Inven_DTO" parameterType="Inven_DTO">
+		select productname as optionProductname , productid as optionProductid from products
+	</select>
+
+<!-- 	등록 -->
+<!-- 	자재 재고현황 등록 문 -->
 	<insert id="matInsertInven">
 		insert 
 			into 
 				inventorystatus 
-					( 	inventoryid,
+					( 	
+						inventoryid,
 						receiptdate,
 						expdate,
 						materialid,
 						quantity
 					)
 				values 
-					(	SEQ_INVENTORYSTATUS.nextval,
+					(	
+						SEQ_INVENTORYSTATUS.nextval,
 						#{receiptDate},
 						#{receiptDate}+30,
-						#{materialId},
+						#{inventoryid},
 						#{quantity}
 					 )
 	</insert>
+<!-- 	완제품 인서트 -->
+	<insert id="prodInsertInven">
+		insert into 
+			productinven 
+				(
+					productinvenid,
+					productid,
+					makedate,
+					expdate,
+					quantity
+				)
+			values
+				(
+					SEQ_PRODUCTINVEN.nextval,
+					#{inventoryid},
+					#{receiptDate},
+					#{receiptDate}+30,
+					#{quantity}
+				)
+	</insert>
 	
+<!-- 	페이지네이션 -->
 	<select id="InvenCheckPage" resultType="Inven_DTO"
 		parameterType="Inven_DTO">
 		select wherereslut.* from(
@@ -64,6 +99,8 @@
 				join
 					materials mat on
 						( inv.materialid = mat.materialid )
+						
+				 order by makedate desc
 			) unionresult
 		) wherereslut
 		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
@@ -147,6 +184,7 @@
 				FROM
 					inventorystatus inv
 				JOIN materials mat ON ( inv.materialid = mat.materialid )
+				order by makedate desc
 			)search
 		<where>
 			<if test=" searchType == '완제품' ">

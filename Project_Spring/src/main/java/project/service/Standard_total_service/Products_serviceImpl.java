@@ -112,7 +112,24 @@ public class Products_serviceImpl implements Products_service {
 		return list;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProducidserch(int pid) {
+		System.out.println("selectProductnameserch 받은 이름name"+pid);
+		List list = products_DAO.selectProducidserch(pid);
+		return list;
+	}
 	
+	@Override
+	public int updateProductsFhinish(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = products_DAO.updateProductsFhinish(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 
@@ -152,6 +169,8 @@ public class Products_serviceImpl implements Products_service {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 	
 
 

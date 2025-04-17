@@ -15,6 +15,10 @@ public interface InvenCheck_Servcie {
 	public int searchInvenCount(InvenCheck_DTO dto);
 	
 	public int matInsertInven(InvenCheck_DTO dto);
+	public int prodInsertInven(InvenCheck_DTO dto);
+	
+	public List prodDB(InvenCheck_DTO dto);
+	public List matDB(InvenCheck_DTO dto);
 	
 	
 }
