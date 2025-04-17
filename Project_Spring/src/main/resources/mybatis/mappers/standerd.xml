@@ -132,7 +132,7 @@
 <!-- 	완제품 검색으로 이름으로가져오기		 -->
 	<select id="selectProductsserch"   resultType="Products_DTO" parameterType="String">
 	
-	select PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from PRODUCTS
+	select PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRODUCTID from PRODUCTS
 		<where>
 		 PRODUCTDEL = 'n'
                 <if test="_parameter != null and _parameter !='' ">
