@@ -41,27 +41,27 @@ public class FiledaoImpl implements Filedao{
 	
 	
 	// 전체조회
-//	@Override
-//	public 	List<Linkdto> Linksel(){
-//		
-//		
-//	List<Linkdto> Linksel = sqlSession.selectList("mapper.pro.link.Linksel");
-//    System.out.println("댓글전체목록조회 : " + Linksel);
-//    return Linksel;
-//		
-//	}
+	@Override
+	public 	List<Filedto> Filesel(){
+		
+		
+	List<Filedto> Filesel = sqlSession.selectList("mapper.pro.file.Filesel");
+    System.out.println("파일전체목록조회 : " + Filesel);
+    return Filesel;
+		
+	}
 	
 	
 	// 하나만 조회
-//	@Override
-//	public  Linkdto Linkselid(Linkdto Linkdto){
-//		
-//		
-//	Linkdto Linkselid = sqlSession.selectOne("mapper.pro.link.Linkselid", Linkdto);
-//    System.out.println("댓글하나조회 : " + Linkselid);
-//    return Linkselid;
-//		
-//	}
+	@Override
+	public  Filedto Fileselid(Filedto Filedto){
+		
+		
+	Filedto Fileselid = sqlSession.selectOne("mapper.pro.file.Fileselid", Filedto);
+    System.out.println("파일하나조회 : " + Fileselid);
+    return Fileselid;
+		
+	}
 	
 	
 	// 삭제 메소드
