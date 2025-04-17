@@ -2,43 +2,36 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	           <!-- 상위 이름 -->
+<!-- 상위 이름 -->
 <mapper namespace="mapper.pro.file">
 
 
-          <!-- 안쪽에서 바깥으로 실행 -->
-      <insert id="Fileint" parameterType="project.dto.Filedto">
-                    
-insert into fileattachments (fileid, postid, files, file_name)
-values (seq_fileattachments.nextval, #{postid}, 'Y', #{file_name})
+	<!-- 안쪽에서 바깥으로 실행 -->
+	<insert id="Fileint" parameterType="project.dto.Filedto">
 
-<!-- insert into comments (postid, userid, title, content, postdate, notify, viewcount)
-values (#{postid}, 'adminid1', #{title}, #{content}, sysdate, 'Y', 0) -->
+		insert into fileattachments (fileid, postid, files, file_name)
+		values (seq_fileattachments.nextval, #{postid}, 'Y', #{file_name})
 
-       
-      </insert> 
-        
-        
-        <!--  링크 전체 목록 -->
-	   <!-- <select id="Linksel" resultType="project.dto.Linkdto" parameterType="int">
-	  select * from linkattachments order by linkid  
-	  </select> -->
-        
-        
-        <!--  링크 목록 하나 -->
-	   <!--  <select id="Linkselid" resultType="project.dto.Linkdto" parameterType="int"> 
-		select * from linkattachments  
-		where postid = #{postid}
-		</select> -->
-        
-        
-         <!--  링크 수정 -->
-          <!-- <select id="Linkup" resultType="int">
-			update linkattachments 
-        	set link = #{link}
-        	where postid = #{postid}
-         </select>  -->
-         
-         
-        
+	</insert>
+	<!-- insert into comments (postid, userid, title, content, postdate, notify, 
+		viewcount) values (#{postid}, 'adminid1', #{title}, #{content}, sysdate, 
+		'Y', 0) -->
+
+
+	<!-- 링크 전체 목록 -->
+	<!-- <select id="Linksel" resultType="project.dto.Linkdto" parameterType="int"> 
+		select * from linkattachments order by linkid </select> -->
+
+
+	<!-- 링크 목록 하나 -->
+	<!-- <select id="Linkselid" resultType="project.dto.Linkdto" parameterType="int"> 
+		select * from linkattachments where postid = #{postid} </select> -->
+
+
+	<!-- 링크 수정 -->
+	<!-- <select id="Linkup" resultType="int"> update linkattachments set link 
+		= #{link} where postid = #{postid} </select> -->
+
+
+
 </mapper>

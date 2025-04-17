@@ -6,10 +6,6 @@
 <mapper namespace="mapper.pro.page">
 
 
-          <!-- 안쪽에서 바깥으로 실행 -->
-       <select id="selectPageEmp" resultType="project.dto.Prodto">
-       
-       
        <!-- index start에서 end까지 -->
   <!--  select postid, title, viewcount, postdate, userid from (
             select rownum as postid, title, viewcount, postdate, userid from (
@@ -23,10 +19,8 @@
            
         ]]> -->
         
-       
-       
-       
-       
+          <!-- 안쪽에서 바깥으로 실행 -->
+       <select id="selectPageEmp" resultType="project.dto.Prodto">
        
              SELECT * FROM (
     SELECT ROWNUM AS rnum, inner_data.* FROM (
@@ -41,19 +35,7 @@
   <![CDATA[
   WHERE rnum >= #{indexStart}
   ]]>
-      
-         
-         
-         
         </select> 
-        
-        
-        
-        
-        
-        
-        
-        
         
         <!-- 모든 페이지 -->
         <select id="totalEmp" resultType="int">
