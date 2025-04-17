@@ -1,1 +1,1 @@
-package kr.or.human6.Service;
+package project.service.Board_service;

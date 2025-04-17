@@ -5,16 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import project.dto.Comdto;
+import project.dto.Filedto;
 import project.dto.Linkdto;
 import project.dto.Prodto;
 
 
-public interface Linkdao {
+public interface Filedao {
 
 	
 	
-	public int Linkint(Linkdto Linkdto);
-	public List<Linkdto> Linksel();
-	public Linkdto Linkselid(Linkdto Linkdto);
-	int Linkfix(Linkdto Linkdto);
+	public 	int Fileint(Filedto Filedto);
+	
 }

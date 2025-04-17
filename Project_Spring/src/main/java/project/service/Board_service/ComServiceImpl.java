@@ -1,13 +1,13 @@
-package kr.or.human6.Service;
+package project.service.Board_service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.human6.dto.Comdto;
-import kr.or.human6.dto.Prodto;
-import kr.or.human6.dao.Comdao;
+import project.dto.Comdto;
+import project.dto.Prodto;
+import project.dao.Board_dao.Comdao;
 
 
 @Service

@@ -1,1 +1,1 @@
-package kr.or.human6.dao;
+package project.dao.Board_dao;

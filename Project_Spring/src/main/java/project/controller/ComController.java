@@ -1,4 +1,4 @@
-package kr.or.human6.controller;
+package project.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import kr.or.human6.Service.ComService;
-import kr.or.human6.dto.Comdto;
-import kr.or.human6.dto.Prodto;
+import project.service.Board_service.ComService;
+import project.dto.Comdto;
+import project.dto.Prodto;
 
 
 @Controller
