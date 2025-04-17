@@ -8,100 +8,7 @@ function init() {
   const year = now.getFullYear();
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
   const day = ("0" + now.getDate()).slice(-2);
-  const hour = ("0" + now.getHours()).slice(-2);
-  const minute = ("0" + now.getMinutes()).slice(-2);
 
-  const date = `${year}-${month}-${day}T${hour}:${minute}`;
-  document.querySelector('#date11').value = date;
-  
-  
-
-
-
-  // document.querySelector('.instView').addEventListener('click', (e) => {
-
-  //   // 작지 박스에서 클릭을 할시. menufacturer란 클래스가있다면 포커스 풀기.
-  //   if (e.target.parentNode.parentNode.classList.contains('menufacturer-info')) {
-  //     e.preventDefault();
-  //     e.target.blur();
-  //     alert("현재 페이지에서 수정하실수없습니다.")
-  //   }
-
-    // // 클릭한 요소 혹은 조상 요소가 .workorderlist-sample 클래스가 있는지 확인
-    // if (e.target.innerText == '수정') {
-    //   const instView = document.querySelector('.instView')
-    //   const a = instView.querySelector('.workorder-tag')
-    //   const b = instView.querySelectorAll('.workorderlist')
-    //   const b2 = instView.querySelectorAll('a')
-    //   const c = instView.querySelector('.new-workorder')
-    //   const d = instView.querySelector('.order-buttonlayer')
-    //   a.style.display = "none"
-    //   for (let i = 0; i < b.length; i++) {
-    //     b[i].style.display = "none"
-    //   }
-    //   for (let i = 0; i < b2.length; i++) {
-    //     b2[i].style.display = "none"
-    //     // console.log(b2[i])
-    //   }
-    //   d.style.display = "none"
-    //   c.style.display = ""
-    // }
-
-
-    // 작지박스 클릭해서 텍스트뽑아와서 제품명 박스에 넣기
-    // const z = e.target.parentNode.classList.contains("order-info-content")
-    // if (z) {
-    //   document.querySelector('.wp2').innerText = e.target.parentNode.querySelector('td').innerText
-    //   document.querySelector('.wp').innerText = e.target.parentNode.querySelector('td').innerText
-    // }
-
-    // if (e.target.innerText == "삭제하기") {
-    //   alert("현재 페이지에서 삭제하실수없습니다.")
-    // }
-
-  // });
-
-
-
-  // 작지 조회버튼튼
-  // document.querySelector('.btn1').addEventListener('click', (e) => {
-  //   fetch('WorkOrder.html')
-  //     .then(response => {
-  //       return response.text();
-
-  //     })
-  //     .then(html => {
-  //       const parser = new DOMParser();
-  //       const doc = parser.parseFromString(html, 'text/html');
-
-  //       const targetBox = doc.querySelector('.workorder-layer');
-  //       const targetBox2 = doc.querySelector('.workorder-pagenation');
-  //       const targetBox3 = doc.querySelector('.sample');
-
-  //       const SampleClick = doc.querySelector(".workorderlist-sample")
-
-  //       if (targetBox) {
-  //         document.querySelector('.instView').innerHTML = targetBox.innerHTML
-  //         document.querySelector('.instView').innerHTML += targetBox2.innerHTML
-  //         document.querySelector('.instView').innerHTML += targetBox3.innerHTML
-  //         SampleClick.addEventListener('click', (e) => {
-  //           e.target.parentNode.parentNode.classList.add('hide')
-  //           targetBox2.style.display = "none"
-  //           targetBox3.style.display = "block"
-  //         })
-  //       } else {
-  //         document.querySelector('.instView').innerHTML = "불로오는도중 오류가발생했습니다."
-  //       }
-
-
-  //     })
-  //     .catch(error => {
-  //       console.error('페이지를 불러오는 도중 에러 발생:', error);
-  //     });
-
-
-  
-  // })
 
 
   // 제품 합/불 기준 불러오기
@@ -158,6 +65,7 @@ function init() {
 
 
   })
+  
   // 제품합불기준 모달창 생성시 클릭이벤트
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
@@ -175,35 +83,6 @@ function init() {
 
 
 
-  // //등록버튼
-  // document.querySelector('.btn3').addEventListener('click', (e) => {
-  //   const intd = document.querySelector('.textarea1').value
-  //   const view = document.querySelector('.box3View')
-  //   const date = document.querySelector('.date1')
-  //   const wpName = document.querySelector('.wp2')
-
-  //   // bom 불러와서 저장하기
-  //   // 날짜, 제품명, LotNo, 코멘트, 수/삭but
-  //   if(wpName.innerText == "제품명"){
-  //     alert("제품이 선택되지않았습니다.")
-  //   }else{
-  //     view.innerHTML = `<div class="dex item">
-  //                         <div class="dateB">${date.value}</div>
-  //                         <div class="emdwp">${wpName.innerHTML}</div>
-  //                         <div class="emdtn">10pack</div>
-  //                         <div>생산완료</div>
-  //                         <div class="text1">${intd}</div>
-  //                         <div>
-  //                           <button class="tn">수정</button>
-  //                           <button class="tkr">삭제</button>
-  //                         </div>
-  //                       </div>` + view.innerHTML
-  //     alert('실적등록을 완료했습니다.')
-  //     renderPagination();
-
-  //   }
-
-  // })
 
 
 

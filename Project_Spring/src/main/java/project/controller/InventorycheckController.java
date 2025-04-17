@@ -1,12 +1,12 @@
 package project.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.InvenCheck_DTO;
 import project.service.invenCheck_service.InvenCheck_Servcie;
@@ -17,7 +17,7 @@ public class InventorycheckController {
 	@Autowired
 	InvenCheck_Servcie service;
 
-	@RequestMapping(value = "inven", method = RequestMethod.GET)
+	@RequestMapping(value = "/inven", method = RequestMethod.GET)
 	public String invenHome(InvenCheck_DTO invenDTO, Model model) {
 
 //		get으로 들어오고 값을 받아서 1페이지 리스트를보여줌
@@ -54,7 +54,7 @@ public class InventorycheckController {
 	}
 
 	// 삭제
-	@RequestMapping(value = "invenDelete", method = RequestMethod.POST)
+	@RequestMapping(value = "/invenDelete", method = RequestMethod.POST)
 	public String invenDelete(InvenCheck_DTO invenDTO, Model model) {
 
 //		int result = service.matInvenDelete(invenDTO);
@@ -72,7 +72,7 @@ public class InventorycheckController {
 	}
 
 	// 자재 등록.
-	@RequestMapping(value = "matInsertInven", method = RequestMethod.POST)
+	@RequestMapping(value = "/matInsertInven", method = RequestMethod.POST)
 	public String matInsertInven(InvenCheck_DTO dto, Model model) {
 
 		if ("완제품".equals(dto.getType())) {
@@ -92,5 +92,15 @@ public class InventorycheckController {
 
 		return "Inventorycheck";
 	}
-
+	
+	//수정
+	@RequestMapping(value="/invenModify", method = RequestMethod.PUT)
+	@ResponseBody
+	public int invenModify(
+							@RequestBody InvenCheck_DTO dto
+	) {
+		System.out.println("put dto 도착스" + dto);
+		int result = service.invenUpdateCheck(dto);
+		return result;
+	}
 }

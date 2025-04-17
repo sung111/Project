@@ -26,7 +26,7 @@ public class Products_serviceImpl implements Products_service {
 		//전체 글 개수 
 		int count = products_DAO.countProducts();
 		
-		map.put("list", list);
+		map.put("list2", list);
 		map.put("count", count);
 		
 		System.out.println("selectProducts 실행");

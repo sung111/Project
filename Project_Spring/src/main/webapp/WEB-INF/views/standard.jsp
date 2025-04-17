@@ -235,11 +235,7 @@
 										width: 50px;
 									}
 
-									#top-contain {
-									border: 1px solid red;
 									
-									
-									}
 									.button_mo{
 										width: 80px;
 										box-sizing: border-box;

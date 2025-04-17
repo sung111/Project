@@ -19,6 +19,7 @@
 		<typeAlias type="project.dto.Products_DTO" alias="Products_DTO" />
 		<typeAlias type="project.dto.InvenCheck_DTO" alias="Inven_DTO"/>
 		<typeAlias type="project.dto.Prodto" alias="Prodto"/>
+		<typeAlias type="project.dto.Performance_DTO" alias="Performance_DTO"/>
 	</typeAliases>
 
     

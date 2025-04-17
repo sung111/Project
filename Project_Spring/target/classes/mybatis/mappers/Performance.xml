@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.mapper.Performance">
+
+<!-- 	페이지네이션을위한 토탈카운트 -->
+	<select id="performTotalCount" resultType="int">
+		select count(*) from performances
+	</select>
+	
+<!-- 	페이지네이션 값만 가져오기 -->
+	<select id="performFristList" resultType="Performance_DTO" parameterType="Performance_DTO">
+		select result2.*
+		from
+		    (select rownum rnum, results.*
+		    from
+		        (
+		            select perf.*, prod.productname, users.username
+		            from performances perf
+		            join products prod on (perf.productid = prod.productid)
+		            join users on (users.userid = perf.userid)
+		            order by reporttime
+		        )results
+		    )result2
+		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]>  #{indexEnd}  
+	</select>
+	
+	<delete id="performanceDelete">
+		delete from performances
+		where performanceid = #{performanceid}
+	</delete>
+
+</mapper>

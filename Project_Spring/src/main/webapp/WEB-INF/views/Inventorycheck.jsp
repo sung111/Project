@@ -137,7 +137,6 @@
 			InvenCheck_DTO dto = (InvenCheck_DTO)request.getAttribute("dto");
 			int pageNo = dto.getPage();
 			int viewCount = dto.getViewCount();
-			System.out.println("dddddddddddddd"+viewCount);
 			// 1401 / 10 = 140.1 올림해서 141
 			int lastPage = (int) Math.ceil((double) total / viewCount);
 
