@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.util.*" %>
+<%@ page import="project.dto.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -158,7 +160,7 @@
 /*          height:60px; */
           display: flex;
            justify-content: center;
-           lign-items: center;
+           align-items: center;
             
         }
     	#milkit{
@@ -198,14 +200,11 @@
             </div>
             
             <div id="c_container2">
-            
+              
                 <select name="select_value" id="milkit">    
-                <c:forEach var="dto" items="${productvalue}">      
-                       
-                <option value="${dto.productid}" 
-                <c:if test="${dto.productid == param.select_value}">selected</c:if>>
-                
-                ${dto.productname}</option>
+                <c:forEach var="dto" items="${list}">    
+
+                <option value="${dto.productid}" > ${dto.productname}</option>
                 </c:forEach>
                 
                 </select>
@@ -277,76 +276,77 @@
             document.querySelectorAll(".uok").forEach(el => el.classList.add("none"));
             document.querySelectorAll(".ucan").forEach(el => el.classList.add("none"));
         
-         
-            
-            
-            
-            document.querySelector("#c1").addEventListener("click",function(e){
-                newtable = document.createElement("tr")
-                newtable.innerHTML = `
-                <td id="newtd" colspan="5">
-                	  <form method="post" action="ProductionProcess_controller">   
-                	  <table class="tableall" id="newtable">
-                	  <tr>
-                            <td style="width:10.2%;"><textarea  name="new_processstage">기본값필요</textarea></td>
-                            <td style="width:30%;"><textarea  name="new_description">기본값필요</textarea></td>
-                            <td style="width:15%;"><textarea  name="new_equipment">기본값필요</textarea></td>
-                            <td style="width:30%;"><textarea  name="new_hygiene">기본값필요</textarea></td>
-                            <td id="td_5" class="table-button">
-                            	<input type="hidden" value="" name="new_pro_value" id="new_pro_value">
-                            	<input type="hidden" value="new" name="type" id="new_pro_value">
+            // document.querySelector("#c1").addEventListener("click",function(e){
+            //     newtable = document.createElement("tr")
+            //     newtable.innerHTML = `
+            //     <td id="newtd" colspan="5">
+            //     	  <form method="post" action="ProductionProcess_controller">   
+            //     	  <table class="tableall" id="newtable">
+            //     	  <tr>
+            //                 <td style="width:10.2%;"><textarea  name="new_processstage">기본값필요</textarea></td>
+            //                 <td style="width:30%;"><textarea  name="new_description">기본값필요</textarea></td>
+            //                 <td style="width:15%;"><textarea  name="new_equipment">기본값필요</textarea></td>
+            //                 <td style="width:30%;"><textarea  name="new_hygiene">기본값필요</textarea></td>
+            //                 <td id="td_5" class="table-button">
+            //                 	<input type="hidden" value="" name="new_pro_value" id="new_pro_value">
+            //                 	<input type="hidden" value="new" name="type" id="new_pro_value">
                       
-                                <input type="button" value="삭제"	 class="dd btn">
-                                <input type="button" value="확인 " class="uok btn">
-                            </td>
-                      	  </tr>
-                         </table>
-                        </form>
-                        </td>
-                            `
+            //                     <input type="button" value="삭제"	 class="dd btn">
+            //                     <input type="button" value="확인 " class="uok btn">
+            //                 </td>
+            //           	  </tr>
+            //              </table>
+            //             </form>
+            //             </td>
+            //                 `
           
         
                             
                             
-                	newtable.querySelector(".dd").addEventListener("click",function(ev){
-                	console.log(ev.target.parentNode);
-                	ev.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
+            //     	newtable.querySelector(".dd").addEventListener("click",function(ev){
+            //     	console.log(ev.target.parentNode);
+            //     	ev.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
                
-                	})
+            //     	})
                 	
-                	newtable.querySelector(".uok").addEventListener("click",function(ev){
-                		let value = document.querySelector("#milkit").value
-                		console.log("value값은 " ,value);
-                		let new_pro_value = ev.target.parentNode.querySelector("#new_pro_value");
-                		new_pro_value.value = value
-                		// 여기
-                		this.type = "submit";
-                	})
+            //     	newtable.querySelector(".uok").addEventListener("click",function(ev){
+            //     		let value = document.querySelector("#milkit").value
+            //     		console.log("value값은 " ,value);
+            //     		let new_pro_value = ev.target.parentNode.querySelector("#new_pro_value");
+            //     		new_pro_value.value = value
+            //     		// 여기
+            //     		this.type = "submit";
+            //     	})
                 	
-                 let defult = document.querySelector("#defult")
-                defult.append(newtable);
+            //      let defult = document.querySelector("#defult")
+            //     defult.append(newtable);
              
-            })
+            // })
 
 				document.querySelector("#milkit").addEventListener("change",function(e){
                 // 선택된 option의 value 값을 가져옵니다
                 if(this.value == "null"){
                 	console.log("값이 0입니다")
                 }
-                
-                const selectedValue = encodeURIComponent(this.value);
-				
-                // 현재 URL에서 쿼리 문자열을 가져옵니다.
-                const urlParams = new URLSearchParams(window.location.search);
+                		// ajax
+                        const xhr = new XMLHttpRequest();
+																		xhr.open('put', 'products_update')
 
-                // 기존 쿼리 문자열에 select_value 파라미터를 추가하거나 업데이트합니다.
-                urlParams.set("select_value", selectedValue);
+																		xhr.setRequestHeader('Content-Type', 'application/json')
 
-                // 새로운 URL을 생성합니다.
-                const newUrl = window.location.pathname + "?" + urlParams.toString();
+																		xhr.send(JSON.stringify(material))
 
-                // GET 방식으로 데이터를 전송합니다.
-                window.location.href = newUrl;
+																		xhr.onload = function () {
+																			if (xhr.responseText == "1") {
+																				console.log(xhr.responseText)
+																				alert("수정이되었습니다")
+																				location.href = "standard?view_value=${view_value}"
+																			} else {
+																				console.log(xhr.responseText)
+																				alert('수정 실패')
+																			}
+																		}
+               
                 })
 				
                 let updats = document.querySelectorAll(".updat")
