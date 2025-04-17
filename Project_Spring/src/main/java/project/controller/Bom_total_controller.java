@@ -1,12 +1,18 @@
 package project.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +43,8 @@ public class Bom_total_controller {
 	@Autowired
 	MaterialsProducts_service materialsProducts_service;
 	
+	@Autowired
+	private ServletContext servletContext;
 	
 	
 //	@RequestMapping("/standard" )
@@ -265,51 +273,150 @@ public class Bom_total_controller {
 		
 		return result ;
 	}
+	//수정클릭시 프러덕트id기준으로 조회
+	@ResponseBody
+	@RequestMapping(value="/insSelectproductid",method=RequestMethod.GET)
+	public Map<String,Object> insSelectproductid(
+			@RequestParam("productid") int productid,
+			Model model
+			) {
+		System.out.println("insSelectproductid_프러덕트id검색");
+		System.out.println("검색값 productid"+productid);
+		String Field = "ADMIN";
+		Map<String,Object> result = new HashMap();
+		
+		try {
+			List pickid = Products_service.selectProducidserch(productid);
+			List name_list = Products_service.selectProductname();
+			
+			result.put("Field", Field);
+			result.put("pickid",pickid);
+			result.put("name_list",name_list);
+			System.out.println("밀키트 검색한 결과값name_list ="+name_list);
+			System.out.println("pickid ="+pickid);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result ;
+	}
+	
+	
+	//수정페이지
 	
 	//수정 및 파일 업로드 
 	@RequestMapping("/upload")
     public String upload( 
     		MultipartHttpServletRequest req 
     		) throws UnsupportedEncodingException {
-		
+		System.out.println("파일업로드컨트롤러실행");
 		req.setCharacterEncoding("utf-8");
 		
-		String productname = req.getParameter("slectname");
+		String productid = req.getParameter("pid");
+		String productname = req.getParameter("pname");
 		String normalcriteria = req.getParameter("normalProduct");
 		String abnormalcriteria = req.getParameter("abnormalProduct");
-		System.out.println("slectname"+productname);
+		
+		System.out.println("productid"+productid);
+		System.out.println("productname"+productname);
+		System.out.println("normalcriteria"+normalcriteria);
+		System.out.println("abnormalcriteria"+abnormalcriteria);
+	
 		
 		MultipartFile mf = req.getFile("uplodeFile");
 		long fileSize = mf.getSize();
+		
 		System.out.println("fileSize"+fileSize);
 		String fileName = mf.getOriginalFilename();
 		System.out.println("fileName"+fileName);
-		
+		int result = 0;
 		try {
-			String path = "C:\\project\\img" ;
-			String safeFileName = path + "\\" + fileName;
-			System.out.println("safeFileName"+safeFileName);
-			File file = new File(safeFileName);
+			//현재프로젝트 내의 img경로 저장
+//			String realPath = servletContext.getRealPath("img");
+			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+	
+			String productimage = realPath + "\\" + fileName;
+			System.out.println("safeFileName"+productimage);
+			File file = new File(productimage);
+			System.out.println("mf.transferTo전file"+file);
+			try {
+				mf.transferTo( file );			
+				System.out.println("파일업로드성공");
+			}catch (IOException e) {
+				e.printStackTrace();
 			
-			mf.transferTo( file );
+			}
+			System.out.println();
 			
 			Products_DTO dto = new Products_DTO();
+			dto.setProductid(Integer.parseInt(productid));
 			dto.setProductname(productname);
 			dto.setNormalcriteria(abnormalcriteria);
 			dto.setAbnormalcriteria(abnormalcriteria);
+			dto.setProductimage(productimage);
+			result = Products_service.updateProductsFhinish(dto);
 			// jsp에 프러덕트 id있는지 확인 1.html에 id있는지확인 있으면 아작스  formData에담기 
+			System.out.println("완제품 업데이트결과:"+ result);
 			
 		}catch (IllegalStateException e) {
 			e.printStackTrace();
-		}catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		}
 		
 		
-		
-		return "redirect:inspectionStandards";
+		return "redirect:/inspectionStandards";
 	}
+	
+	//파일다운로드 컨트롤러 
+		@RequestMapping("/download")
+	    public void download(
+	    		HttpServletRequest request,HttpServletResponse response  
+	    		) throws IOException {
+				System.out.println("download 싱행");
+			
+			try {
+				String fileName = request.getParameter("filename");
+				System.out.println("fileName --"+fileName);
+				String path = "C:\\temp\\download";
+				File file = new File(path + "\\" + fileName);
+				
+				//브라우저 캐시를 사용하지 않도록 설정
+				response.setHeader("Cashe-Control", "no-cashe");
+				//지금 응답이 첨부파일이라는 것
+				//그리고 그 파일 이름이 뭐 라는 것
+				response.addHeader("Content-Disposition", "attachment; fileName"+fileName);
+				//파일 보낼꺼야 알려주기
+				
+				
+				// 파일 읽기
+				FileInputStream fis = new FileInputStream(file);
+				// 메모리로 퍼 올릴 바가지 크기 설정
+				byte[] buf = new byte[1024 * 1]; // 보통은 8kB
+				
+				OutputStream os = response.getOutputStream();
+				
+				int count = -1;
+				//바가지 크기 만큼 읽음
+				//읽을게 없으면 -1
+				while( (count = fis.read(buf)) != -1 ) {
+					// 브라우저로 내보냄
+					// 0 : 컨너뛸 byte 수
+					// count : 보낼 byte 수
+					os.write(buf, 0, count);
+				}
+				os.flush();
+				os.close();
+				fis.close();
+				
+				
+				
+			}catch (IllegalStateException e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
 	
 	
 //생산공정 

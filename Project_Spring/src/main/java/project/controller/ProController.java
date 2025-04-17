@@ -1,4 +1,4 @@
-package kr.or.human6.controller;
+package project.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import kr.or.human6.Service.ComService;
-import kr.or.human6.Service.LinkService;
-import kr.or.human6.Service.ProService;
-import kr.or.human6.dto.Comdto;
-import kr.or.human6.dto.Linkdto;
-import kr.or.human6.dto.Prodto;
+import project.service.Board_service.ComService;
+import project.service.Board_service.FileService;
+import project.service.Board_service.LinkService;
+import project.service.Board_service.ProService;
+import project.dto.Comdto;
+import project.dto.Filedto;
+import project.dto.Linkdto;
+import project.dto.Prodto;
 
 
 
@@ -39,6 +41,10 @@ public class ProController {
 	
 	@Autowired
 	LinkService Linkservice;
+	
+	@Autowired
+	FileService Fileservice;
+	
 	
 //	// 목록 전시
 //	@RequestMapping(value = "/select")
@@ -160,7 +166,8 @@ public class ProController {
 			@ModelAttribute
 			Prodto Prodto,
 			Linkdto Linkdto,
-			MultipartHttpServletRequest req
+			Filedto Filedto
+//			MultipartHttpServletRequest req
 			
 			) {
    
@@ -180,47 +187,52 @@ public class ProController {
 		// 2. 링크 생성
 		Linkdto.setPostid(id);
 //		System.out.println("post아이디2 : " + id2);
-		
+		// file_name
 		int linkdto = Linkservice.Linkint(Linkdto);
+		System.out.println(" Linkdto : " + Linkdto);
 		System.out.println(" 글 생성 성공시 1 :  " + intdto);
 		
 		
 		
+		// 3. 파일 생성
+		
+		Filedto.setPostid(id);
+		
+		int filedto = Fileservice.Fileint(Filedto);
+		System.out.println(" Filedto : " + Filedto);
+		System.out.println(" 파일 생성 성공시 1 :  " + filedto);
 		
 		
 		
-		
-		
-		
-		
-		// 3. 파일 처리
+		// 3-2. 파일 업로드 처리
 //      MultipartFile mf = req.getFile("file1");
-		  List<MultipartFile> fileList = req.getFiles("file1");
-        for(MultipartFile mf: fileList) {
-  
-  	long fileSize = mf.getSize();
-      System.out.println("fileSize: "+ fileSize);
-      
-      String fileName = mf.getOriginalFilename();
-      System.out.println("fileName: "+ fileName);
-      
-      try {
-          String path = "C:\\temp\\upload";
-          String safeFileName = path +"\\"+ System.currentTimeMillis() +"_"+ fileName;
-          System.out.println("safeFileName: "+ safeFileName);
-          File file = new File(safeFileName);
-          
-          mf.transferTo( file );
-          
-      } catch (IllegalStateException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-      } catch (IOException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-      }
-  }
 		
+//		  List<MultipartFile> fileList = req.getFiles("file1");
+//        for(MultipartFile mf: fileList) {
+//  
+//  	long fileSize = mf.getSize();
+//      System.out.println("fileSize: "+ fileSize);
+//      
+//      String fileName = mf.getOriginalFilename();
+//      System.out.println("fileName: "+ fileName);
+//      
+//      try {
+//          String path = "C:\\temp\\upload";
+//          String safeFileName = path +"\\"+ System.currentTimeMillis() +"_"+ fileName;
+//          System.out.println("safeFileName: "+ safeFileName);
+//          File file = new File(safeFileName);
+//          
+//          mf.transferTo( file );
+//          
+//      } catch (IllegalStateException e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//      } catch (IOException e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//      }
+//  }
+//		
 		
 		
 		

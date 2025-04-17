@@ -1,4 +1,4 @@
-package kr.or.human6.Service;
+package project.service.Board_service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import kr.or.human6.dao.Prodao;
-import kr.or.human6.dto.Prodto;
+import project.dao.Board_dao.Prodao;
+import project.dto.Prodto;
 
 //import kr.or.human.dao.EmpDAO;
 

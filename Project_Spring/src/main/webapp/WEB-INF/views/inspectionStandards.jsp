@@ -98,6 +98,9 @@
 								.none {
 									display: none;
 								}
+								.file{
+									margin-top: 20px;
+								}
 
 								@media screen and (max-width: 600px) {
 									.imeg {
@@ -305,6 +308,10 @@
 								#page-container {
 									text-align: center;
 								}
+								.pname{
+									text-align: center;
+									font-size: 20px;
+								}
 
 								@media screen and (max-width: 600px) {
 									#navigation-title-text {
@@ -347,7 +354,7 @@
 
 
 								
-								
+							
 									<div id="preant">
 										<div class="standards-top" id="original">
 											<c:if test="${not empty map.list}">
@@ -359,16 +366,19 @@
 															<div class="center">
 																<div class="manu-name text-serch">${dto.productname}밀키트</div>
 
+																<input type="text" value="${dto.productid}" class="pid">
+
 																<select id="select" class="selects none"
 																	style="margin-bottom: 80px;" name="product_select">
 																	<c:forEach var="dto1" items="${name_list}">
-																		<option value="${dto1.productid}">${dto1.productname}
+																		<option value="${dto1.productid}" 
+																		<c:if test="${dto1.productid == dto.productid}">selected</c:if>>
+																		${dto1.productname}
 																		</option>
 																	</c:forEach>
 																</select>
 															</div>
-															<img src="resources/img/${dto.productimage}"
-																class="standards-imege">
+															<img src="C:\temp\download?filename=${dto.productimage}" class="standards-imege">
 															<input type="file" class="file files none" name="file_value" name="uploadFile">
 														</div>
 														<div class="standards-font-contain">
@@ -629,20 +639,140 @@
 												for (let i = 0; i < us.length; i++) {
 													us[i].addEventListener("click", function (e) {
 														console.log(e.target.parentNode.parentNode);
-														// 						console.log("e타겟",e.target.parentNode)
-														// 						console.log("e타겟",e.target.parentNode.parentNode)
-														e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none");
-														e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none");
-														e.target.parentNode.parentNode.querySelector(".file").classList.remove("none");
-														e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none");
-														e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none");
-														e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none");
-														e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none");
-														e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none");
+													
 
 														e.target.classList.add("none");
 														e.target.parentNode.querySelector(".ok").classList.remove("none");
 														e.target.parentNode.querySelector(".can").classList.remove("none");
+														console.log("pid",e.target.parentNode.parentNode.querySelector(".pid").value)
+														//수정클릭시 수정화면 아작스 이벤트
+																		//ajax
+																		const xhr = new XMLHttpRequest();
+																		xhr.open('get', 'insSelectproductid?productid=' + e.target.parentNode.parentNode.querySelector(".pid").value)
+							
+																		xhr.setRequestHeader('Content-Type', 'application/json')
+							
+																		xhr.send()
+							
+																		xhr.onload = function () {
+																			let data = (xhr.responseText)
+																			console.log(xhr.responseText)
+																			data=JSON.parse(data)
+																			console.log(data)
+																			document.querySelector(".standards-top").innerHTML = ` `
+							
+																			let pickid = data.pickid;        // 밀키트 검색 결과
+																			let nameList = data.name_list;           // 전체 제품명 리스트
+																			let field = data.Field;
+							
+																			
+																			if ((pickid)  && (pickid.length > 0)) {
+																						pickid.forEach(dto => {
+																										let newdataHtml = document.createElement("div")
+																										newdataHtml.setAttribute("class", "standards-contain")
+																											const ctrlHTML = `
+																										<div class="btncenter">
+																											<input type="button" value="확인" class="btn ok ">
+																											<input type="button" value="취소" class="btn can ">
+																										</div>
+																										` 
+																								newdataHtml.innerHTML = `
+																									<div class="standards-imege-contain">
+																									<div class="center">
+																										<div class="manu-name text-serch">\${dto.productname}</div>
+																										<input type="hidden" value="\${dto.productid}" class="pid">
+																										<input type="text" value="\${dto.productname}" class="pname">			
+																										</div>
+																										<input type="file" class="file files " name="file_value" >
+																									</div>
+																									<div class="standards-font-contain">
+																									<div class="standards-font-parent">
+									
+																										<div class="standards-font-charild">
+									
+																											<div class="titlecenter">
+																												<h2>정상제품기준</h2>
+																											</div>
+																											
+																											<textarea name="normalcriteria_value" class="showtext "
+																												>\${dto.normalcriteria}</textarea>
+																										</div>
+									
+																									</div>
+																									<div class="standards-font-parent">
+									
+																										<div class="standards-font-charild">
+									
+																											<div class="titlecenter">
+																												<h2>비정상제품기준</h2>
+																											</div>
+																											
+																											<textarea name="abnormalcriteria_value" class="showtext2"
+																												>\${dto.abnormalcriteria}</textarea>
+																										</div>
+																									</div>
+																								</div>
+																								 \${ctrlHTML}
+																								</div>
+																							
+																								`;
+																								document.querySelector(".standards-top").append(newdataHtml)
+
+																								newdataHtml.querySelector(".ok").addEventListener("click",(e)=>{
+																									console.log("file",e.target.parentNode.parentNode.querySelector(".file").value)
+																									console.log("pname",e.target.parentNode.parentNode.querySelector(".pname").value)
+																									console.log("pid",e.target.parentNode.parentNode.querySelector(".pid").value)
+																									console.log("showtext",e.target.parentNode.parentNode.querySelector(".showtext").value) //가져옴 
+																									console.log("showtext2",e.target.parentNode.parentNode.querySelector(".showtext2").value)//가져옴
+																								
+																									let pid = e.target.parentNode.parentNode.querySelector(".pid").value;
+																									let pname = e.target.parentNode.parentNode.querySelector(".pname").value;
+																									let normalProduct = e.target.parentNode.parentNode.querySelector(".showtext").value;
+																									let abnormalProduct = e.target.parentNode.parentNode.querySelector(".showtext2").value;
+
+																									var formData = new FormData();
+																									var inputFile = e.target.parentNode.parentNode.querySelector(".file").files[0];
+																									console.log("inputFile",inputFile)
+																									
+																									
+																										formData.append("pid", pid);
+																										formData.append("pname", pname);
+																										formData.append("uplodeFile", inputFile);
+																										formData.append("normalProduct", normalProduct);
+																										formData.append("abnormalProduct", abnormalProduct);
+																		
+								
+																					
+																									//포멧데이터(파일)과 다른 값들을 같이 전송하는방법 찾아보기
+
+
+																									xhr.open('post', 'upload')
+																									
+																									//formData는 내부적으로 multipart/from-data형식으로 전송
+																									// xhr.setRequestHeader()
+														
+																									xhr.send(formData)
+														
+																									xhr.onload = function () {
+																										console.log(xhr.responseText)
+																										
+																									}
+
+																								})// 수정확인버튼 클릭이벤트
+
+
+
+																							});
+																						}
+
+																								
+
+																												
+																			}//수정클릭시 수정화면 아작스 이벤트
+																											
+
+
+
 
 														e.target.parentNode.querySelector(".can").addEventListener("click", function (e) {
 															console.log("e타겟", e.target.parentNode.parentNode)
@@ -659,44 +789,21 @@
 															e.target.classList.add("none");
 															e.target.parentNode.querySelector(".ok").classList.add("none");
 															e.target.parentNode.querySelector(".u").classList.remove("none");
+															
+															
+
 														})// 취소 클릭이벤트
-
-														e.target.parentNode.querySelector(".ok").addEventListener("click",(e)=>{
-															console.log(e.target.parentNode.parentNode.querySelector(".file").value)
-															console.log(e.target.parentNode.parentNode.querySelector("#select").value)
-															console.log(e.target.parentNode.parentNode.querySelector(".showtext").value)
-															console.log(e.target.parentNode.parentNode.querySelector(".showtext2").value)
-															let slectname = e.target.parentNode.parentNode.querySelector(".file").value;
-															let normalProduct = e.target.parentNode.parentNode.querySelector(".showtext").value;
-															let abnormalProduct = e.target.parentNode.parentNode.querySelector(".showtext2").value;
-
-															var formData = new FormData();
-															var inputFile = e.target.parentNode.parentNode.querySelector(".file").files[0];
-															console.log("inputFile",inputFile)
-															formData.append("uplodeFile", inputFile);
-															formData.append("slectname", slectname);
-															formData.append("normalProduct", normalProduct);
-															formData.append("abnormalProduct", abnormalProduct);
-															
+															//선택된 옵션의 텍스트 가져오는이벤트
+															let slectname ;
+															document.querySelector("#select").addEventListener("change", function (e) {
+																let selectedOption = this.options[this.selectedIndex];
+																slectname = selectedOption.text;
+																console.log("slectname",slectname)
+															})
 													
-															
-															//포멧데이터(파일)과 다른 값들을 같이 전송하는방법 찾아보기
-
-
-															xhr.open('get', 'insSelectone')
-				
-															xhr.setRequestHeader('Content-Type', 'application/json')
-				
-															xhr.send(formData)
-				
-															xhr.onload = function () {
-																console.log(xhr.responseText)
 																
-															}
+													})// 수정버튼 클릭이벤트
 
-														})
-																
-													})// 수정클릭이벤트
 												} // for end
 
 

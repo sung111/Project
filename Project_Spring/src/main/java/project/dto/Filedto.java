@@ -13,16 +13,16 @@ import lombok.Data;
 //@RequiredArgsConstructor // 생성자
 //@EqualsAndHashCode
 @Data // 통합
-public class Comdto {
+public class Filedto {
 
 	
 	
 	
-	private int commentid;
+	private int fileid;
 	private int postid;
-	private String userid; 
-	private Date commentdate;
-	private String commenttext;
+	private String files;
+	private String file_name;
+	
 	
 	
 	

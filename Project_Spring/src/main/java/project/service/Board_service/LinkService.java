@@ -1,11 +1,11 @@
-package kr.or.human6.Service;
+package project.service.Board_service;
 
 import java.util.List;
 import java.util.Map;
 
-import kr.or.human6.dto.Comdto;
-import kr.or.human6.dto.Linkdto;
-import kr.or.human6.dto.Prodto;
+import project.dto.Comdto;
+import project.dto.Linkdto;
+import project.dto.Prodto;
 
 
 

@@ -142,16 +142,22 @@
 		order by PRODUCTNAME
 	</select>
 	
+	<!-- 	완제품 검색으로 productid로만가져오기		 -->
+	<select id="insSelectproductid"   resultType="Products_DTO" parameterType="int">
+	
+	select PRODUCTID,PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from PRODUCTS
+		 where PRODUCTDEL = 'n'
+		and PRODUCTID = #{_parameter}
+	</select>
+	
 	
 		<!--  검사기준	완재품/페이징 값만조회  -->
 		<select id="selectFinishedProduct"  resultType="Products_DTO"  parameterType="Products_DTO">
-			select rnum, tmp2.PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from(
-		    		select rownum rnum, tmp1.PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from(
+			select rnum, tmp2.PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRODUCTID from(
+		    		select rownum rnum, tmp1.PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRODUCTID from(
 		            select  * from PRODUCTS
 		            where PRODUCTDEL = 'n'
 		        	    order by PRODUCTNAME
-		            
-		           
 		   			 ) tmp1
 				)tmp2
 				where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
@@ -164,6 +170,15 @@
 	          order by PRODUCTNAME
 		</select>
 		
+		<!-- 	검사기준 완재품 수정 -->
+	<update id="updateProductsFhinish" parameterType="Products_DTO">
+		update products
+		set productname=#{productname} ,
+		PRODUCTIMAGE=#{productimage} ,
+		NORMALCRITERIA=#{normalcriteria} ,
+		ABNORMALCRITERIA=#{abnormalcriteria}
+		where productid = #{productid}
+	</update>
 		
 
 

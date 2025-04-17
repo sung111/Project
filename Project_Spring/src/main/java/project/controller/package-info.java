@@ -1,1 +1,1 @@
-package kr.or.human6.controller;
+package project.controller;

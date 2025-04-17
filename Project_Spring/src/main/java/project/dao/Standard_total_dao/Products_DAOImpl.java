@@ -134,6 +134,26 @@ public class Products_DAOImpl implements Products_DAO {
 		return list;
 	}
 	
+	@Override
+	public List<Products_DTO> selectProducidserch(int pid) {
+		System.out.println("selectProductnameserch 받은 이름name"+pid);
+		List list = sqlSession.selectList("mapper.bom.insSelectproductid",pid);
+		return list;
+	}
+	
+	@Override
+	public int updateProductsFhinish(Products_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.update("mapper.bom.updateProductsFhinish",dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
 	
 	@Override
 	public List<Products_DTO> insertProducts() {
@@ -173,6 +193,9 @@ public class Products_DAOImpl implements Products_DAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 
 
