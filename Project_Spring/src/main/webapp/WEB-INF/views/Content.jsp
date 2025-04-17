@@ -223,12 +223,12 @@ width: 30%;
 <br>
 <br>
 <%-- <c:forEach var="filink" items="${filelist}"> --%>
-<div id="attach">첨부된 파일 : <a href="download?filename=${filink.file_name}" id="href">${filink.file_name}</a></div>
+<div id="attach">첨부된 파일 : <a href="download?file_name=${Fileselid.file_name}">${Fileselid.file_name}</a></div>
 <%-- </c:forEach> --%>
       
       
       
-      
+    
              
       
         <div class="button-container">

@@ -43,28 +43,28 @@ public class FileserviceImpl implements FileService {
 	
 	
 	
-	    // 전체조회
-//		@Override
-//		public 	List<Linkdto> Linksel(){
-//			
-//			
-//		List<Linkdto> Linksel = Linkdao.Linksel();
-//	    System.out.println("댓글전체목록조회 : " + Linksel);
-//	    return Linksel;
-//			
-//		}
+	// 전체조회
+	@Override
+	public 	List<Filedto> Filesel(){
 		
 		
-		// 하나만 조회
-//		@Override
-//		public 	Linkdto Linkselid(Linkdto Linkdto){
-//			
-//			
-//		Linkdto Linkselid = Linkdao.Linkselid(Linkdto);
-//	    System.out.println("댓글하나조회 : " + Linkselid);
-//	    return Linkselid;
-//			
-//		}
+	List<Filedto> Filesel = Filedao.Filesel();
+    System.out.println("파일전체목록조회 : " + Filesel);
+    return Filesel;
+		
+	}
+		
+		
+	// 하나만 조회
+	@Override
+	public  Filedto Fileselid(Filedto Filedto){
+		
+		
+	Filedto Fileselid = Filedao.Fileselid(Filedto);
+    System.out.println("파일하나조회 : " + Fileselid);
+    return Fileselid;
+		
+	}
 	
 		
 		// 댓글 삭제

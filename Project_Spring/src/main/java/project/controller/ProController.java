@@ -1,11 +1,15 @@
 package project.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,7 +77,7 @@ public class ProController {
 	
 	
 	
-	
+	         // 목록에 표시
 	        // 페이지 겸 셀렉트
 			// 전체조회 // 메소드 GET
 			@RequestMapping(value = "/select")
@@ -85,7 +89,7 @@ public class ProController {
 					HttpServletRequest request
 					
 					) {
-
+System.out.println("접속중....");
 		            
 				
 				
@@ -165,9 +169,15 @@ public class ProController {
 			
 			@ModelAttribute
 			Prodto Prodto,
+			
+			@ModelAttribute
 			Linkdto Linkdto,
-			Filedto Filedto
-//			MultipartHttpServletRequest req
+			
+//			@ModelAttribute
+//			Filedto Filedto,
+			
+			
+			MultipartHttpServletRequest req
 			
 			) {
    
@@ -195,44 +205,52 @@ public class ProController {
 		
 		
 		// 3. 파일 생성
-		
-		Filedto.setPostid(id);
-		
-		int filedto = Fileservice.Fileint(Filedto);
-		System.out.println(" Filedto : " + Filedto);
-		System.out.println(" 파일 생성 성공시 1 :  " + filedto);
+		// "DB" 저장
 		
 		
+//		Filedto.setPostid(id);
+//		int filedto = Fileservice.Fileint(Filedto);
+//		System.out.println(" Filedto : " + Filedto);
 		
-		// 3-2. 파일 업로드 처리
-//      MultipartFile mf = req.getFile("file1");
 		
-//		  List<MultipartFile> fileList = req.getFiles("file1");
-//        for(MultipartFile mf: fileList) {
-//  
-//  	long fileSize = mf.getSize();
-//      System.out.println("fileSize: "+ fileSize);
-//      
-//      String fileName = mf.getOriginalFilename();
-//      System.out.println("fileName: "+ fileName);
-//      
-//      try {
-//          String path = "C:\\temp\\upload";
-//          String safeFileName = path +"\\"+ System.currentTimeMillis() +"_"+ fileName;
-//          System.out.println("safeFileName: "+ safeFileName);
-//          File file = new File(safeFileName);
-//          
-//          mf.transferTo( file );
-//          
-//      } catch (IllegalStateException e) {
-//          // TODO Auto-generated catch block
-//          e.printStackTrace();
-//      } catch (IOException e) {
-//          // TODO Auto-generated catch block
-//          e.printStackTrace();
-//      }
-//  }
-//		
+		
+		
+		// 3-2. 파일 "업로드" 처리
+		// 업로드를 해야 다운로드 가능
+//         MultipartFile Mf = req.getFile("file1");
+		
+		  List<MultipartFile> fileList = req.getFiles("file_name");
+          for(MultipartFile mf : fileList) {
+  
+  	long fileSize = mf.getSize();
+      System.out.println("fileSize: "+ fileSize);
+      
+      String fileName = mf.getOriginalFilename();
+      System.out.println("fileName: "+ fileName);
+      
+      try {
+          String path = "C:\\temp\\upload";
+          String safeFileName = path +"\\"+ System.currentTimeMillis() +"_"+ fileName;
+          System.out.println("safeFileName: "+ safeFileName);
+          File file = new File(safeFileName);
+          
+          Filedto filedto = new Filedto();
+          filedto.setPostid(id);
+          filedto.setFile_name(safeFileName);
+          int dtofile = Fileservice.Fileint(filedto);
+          System.out.println(" 파일 생성 성공시 1 :  " + dtofile);
+          
+          mf.transferTo( file );
+          
+      } catch (IllegalStateException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      }
+  }
+		
 		
 		
 		
@@ -264,6 +282,7 @@ public class ProController {
 			Prodto prodto, 
 			Comdto comdto,
 			Linkdto Linkdto,
+			Filedto Filedto,
 			Model model
 			
 			
@@ -291,19 +310,23 @@ public class ProController {
 //		    System.out.println(" 댓글목록 Content :" + comsel);
 //		    model.addAttribute("comsel", comsel);
 	
-		    
+		    // 댓글 미리 조회하기 * 중요
 		    List<Comdto> selcom = Comservice.Comselid(postid);
 	        System.out.println(" Comdto " + postid);
 	        System.out.println(" 댓글 하나 Content " + selcom);
 		    model.addAttribute("selcom", selcom);
 		    
-		    // 상세글에 주소 뿌리기
+		    // 상세글에 링크 뿌리기
 		    Linkdto Linkselid = Linkservice.Linkselid(Linkdto);
 		    System.out.println("링크  DTO : " + Linkdto);
 		    System.out.println("링크 하나만 뽑기 : " + Linkselid);
 		    model.addAttribute("Linkselid", Linkselid);
 		    
-		    
+		    // 상세글에 파일 뿌리기
+		    Filedto Fileselid = Fileservice.Fileselid(Filedto);
+		    System.out.println("파일  DTO : " + Filedto);
+		    System.out.println("파일 하나만 뽑기 : " + Fileselid);
+		    model.addAttribute("Fileselid", Fileselid);
 		    
 		    
 		    
@@ -347,9 +370,8 @@ public class ProController {
 		public String conmod(
 				
 				
-				@ModelAttribute
-				Prodto prodto,
-				Linkdto linkdto,
+				@ModelAttribute Prodto prodto,
+				@ModelAttribute Linkdto linkdto,
 				Model model
 									
 				) {
@@ -399,8 +421,59 @@ public class ProController {
 		}	
 		
 		
-		
-		
+		// 파일 다운로드
+		@RequestMapping(value = "/download")
+		public String download(
+				
+				HttpServletRequest request,
+				HttpServletResponse response
+									
+				) throws IOException {
+			
+			
+			   
+			String fileName = request.getParameter("file_name");
+			System.out.println("download fileName : "+ fileName );
+		      String path = "C:\\temp\\upload";
+		      File file = new File(path +"\\"+ fileName);
+		      
+		      // 브라우저 캐시를 사용하지 않도록 설정
+		      response.setHeader("Cache-Control", "no-cache");
+		      // 지금 응답이 첨부파일이라는 것
+		      // 그리고 그 파일 이름이 뭐 라는 것
+		      response.addHeader("Content-disposition", "attachment; fileName="+ fileName);
+		      
+		      // 파일 읽기
+		      FileInputStream fis = new FileInputStream(file);
+		      // 메모리로 퍼 올릴 바가지 크기 설정
+		      byte[] buf = new byte[1024 * 1]; // 보통은 8kB
+		      
+		      OutputStream os = response.getOutputStream();
+		      
+		      int count = -1;
+		      // 바가지 크기 만큼 읽음
+		      // 읽을게 없으면 -1
+		      while(  (count = fis.read(buf)) != -1  ) {
+		         // 브라우저로 내보냄
+		         // 0 : 건너뛰 byte 수
+		         // count : 보낼 byte 수
+		         os.write(buf, 0, count);
+		      }
+		      os.flush();
+		      os.close();
+		      fis.close();
+			
+			
+			
+			
+			
+			
+			
+			
+				
+			return "board";
+			
+		}	
 
 		
 		

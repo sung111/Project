@@ -209,7 +209,7 @@ h1 {
   
         
         <!-- enctype="multipart/form-data" -->
-        <form method="post" action="insert">
+        <form method="post" action="insert" enctype="multipart/form-data">
        
        
              <!-- 제목 -->

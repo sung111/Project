@@ -100,7 +100,7 @@ public class Products_DAOImpl implements Products_DAO {
 		try {
 			
 			int page = dto.getPage();
-			int viewCount = dto.getViewCount();
+			int viewCount = dto.getFinishViewCount();
 			
 			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
 			int indexEnd = page * viewCount; // 비번페이지 마지막 

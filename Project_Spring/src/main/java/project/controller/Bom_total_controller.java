@@ -2,7 +2,6 @@ package project.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -31,6 +30,7 @@ import project.dto.Products_DTO;
 import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
 import project.service.Standard_total_service.Products_service;
+import project.service.production_process_service.production_process_service;
 //자 여기는 bom,재고,관련된 controller입니다 싹다 몰아주세요 
 //원재료 완제품 조회
 @Controller
@@ -42,6 +42,8 @@ public class Bom_total_controller {
 	Products_service Products_service;
 	@Autowired
 	MaterialsProducts_service materialsProducts_service;
+	@Autowired
+	production_process_service service; 
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -246,6 +248,7 @@ public class Bom_total_controller {
 		 
 		return "inspectionStandards";
 	}
+	
 	// 검색어조회
 	@ResponseBody
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
@@ -273,6 +276,7 @@ public class Bom_total_controller {
 		
 		return result ;
 	}
+	
 	//수정클릭시 프러덕트id기준으로 조회
 	@ResponseBody
 	@RequestMapping(value="/insSelectproductid",method=RequestMethod.GET)
@@ -303,11 +307,12 @@ public class Bom_total_controller {
 	}
 	
 	
-	//수정페이지
+
 	
 	//수정 및 파일 업로드 
+	@ResponseBody
 	@RequestMapping("/upload")
-    public String upload( 
+    public int upload( 
     		MultipartHttpServletRequest req 
     		) throws UnsupportedEncodingException {
 		System.out.println("파일업로드컨트롤러실행");
@@ -335,10 +340,11 @@ public class Bom_total_controller {
 			//현재프로젝트 내의 img경로 저장
 //			String realPath = servletContext.getRealPath("img");
 			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
-	
-			String productimage = realPath + "\\" + fileName;
-			System.out.println("safeFileName"+productimage);
-			File file = new File(productimage);
+			String productimage = System.currentTimeMillis() + "_" + fileName;
+			String safeFileName = realPath + "\\" +productimage;
+		
+			System.out.println("safeFileName"+safeFileName);
+			File file = new File(safeFileName);
 			System.out.println("mf.transferTo전file"+file);
 			try {
 				mf.transferTo( file );			
@@ -348,6 +354,8 @@ public class Bom_total_controller {
 			
 			}
 			System.out.println();
+			
+			//이미지 네임 set으로 넣음
 			
 			Products_DTO dto = new Products_DTO();
 			dto.setProductid(Integer.parseInt(productid));
@@ -363,8 +371,9 @@ public class Bom_total_controller {
 			e.printStackTrace();
 		}
 		
-		
-		return "redirect:/inspectionStandards";
+		System.out.println("redirect:/inspectionStandards");
+		return result;
+			
 	}
 	
 	//파일다운로드 컨트롤러 
@@ -377,7 +386,7 @@ public class Bom_total_controller {
 			try {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
-				String path = "C:\\temp\\download";
+				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정
@@ -422,10 +431,37 @@ public class Bom_total_controller {
 //생산공정 
 //----------------------
 	@RequestMapping("/production_process")
-	public String production_process() {
+	public String production_process(Model model) {
 		
+		System.out.println("production_process 실행");
+		List list = service.SelectProductPnamePid();
+		String Field = "ADMIN";
+		model.addAttribute("list",list);
+		model.addAttribute("Field",Field);
+		System.out.println("list"+list+""+"Field"+Field);
 		return "production_process";
 	}
+	
+//생상공정 value에따라 화면 출력
+	
+	@RequestMapping(value="/production_process ",method=RequestMethod.GET)
+	public String production_process(@RequestParam("productid") int select_value,
+			Model model) {
+		//쿼리문 작성 완료 DAO작성완료 서비스 작성후 컨트롤러 작성 시작하면됨
+		
+		System.out.println("production_process 실행");
+		List list = service.SelectProductPnamePid();
+		String Field = "ADMIN";
+		model.addAttribute("list",list);
+		model.addAttribute("Field",Field);
+		System.out.println("list"+list+""+"Field"+Field);
+		return "production_process";
+	}
+	
+	
+	
+	
+	
 	
 //완제품 BOM
 //----

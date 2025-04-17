@@ -15,5 +15,8 @@ public interface Filedao {
 	
 	
 	public 	int Fileint(Filedto Filedto);
+	public 	List<Filedto> Filesel();
+	public  Filedto Fileselid(Filedto Filedto);
+	
 	
 }

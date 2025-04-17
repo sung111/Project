@@ -132,7 +132,7 @@
 <!-- 	완제품 검색으로 이름으로가져오기		 -->
 	<select id="selectProductsserch"   resultType="Products_DTO" parameterType="String">
 	
-	select PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA from PRODUCTS
+	select PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRODUCTID from PRODUCTS
 		<where>
 		 PRODUCTDEL = 'n'
                 <if test="_parameter != null and _parameter !='' ">
@@ -181,7 +181,7 @@
 	</update>
 		
 
-
+	
 
 
 
@@ -229,6 +229,26 @@
 	
 	</update>
 	
+<!-- 	생산공정 조회 -->
+	<select id="SelectProductPnamePid" resultType="Products_DTO" >
+	
+		            select  productname,productid  from PRODUCTS
+		            WHERE PRODUCTDEL = 'n'
+		            order by productid
+
+	</select>
+	
+	<!-- 	생산공정 조회 -->
+	<select id="SelectProductPid_All" resultType="Products_DTO" parameterType="int">
+	
+		          select PROCESSID, PRODUCTID,
+		          PROCESSSTAGE,DESCRIPTION,EQUIPMENT,HYGIENE,PROCESSDESCRIPTIONSDEL
+		          from PROCESSDESCRIPTIONS 
+					where productid = #{_parameter}
+					and PROCESSDESCRIPTIONSDEL = 'n'
+					order by productid
+
+	</select>
 
 
 	
