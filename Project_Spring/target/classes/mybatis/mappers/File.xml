@@ -5,7 +5,7 @@
 <!-- 상위 이름 -->
 <mapper namespace="mapper.pro.file">
 
-
+    <!-- 쿼리문 안쪽에 주석 X-->
 	<!-- 안쪽에서 바깥으로 실행 -->
 	<insert id="Fileint" parameterType="project.dto.Filedto">
 
@@ -18,14 +18,16 @@
 		'Y', 0) -->
 
 
-	<!-- 링크 전체 목록 -->
-	<!-- <select id="Linksel" resultType="project.dto.Linkdto" parameterType="int"> 
-		select * from linkattachments order by linkid </select> -->
+	<!-- 파일 전체 목록 -->
+	 <select id="Filesel" resultType="project.dto.Filedto" parameterType="int"> 
+	select * from fileattachments order by fileid 
+	</select> 
 
 
-	<!-- 링크 목록 하나 -->
-	<!-- <select id="Linkselid" resultType="project.dto.Linkdto" parameterType="int"> 
-		select * from linkattachments where postid = #{postid} </select> -->
+	<!-- 파일 목록 하나 -->
+	<select id="Fileselid" resultType="project.dto.Filedto" parameterType="int"> 
+	select * from fileattachments where postid = #{postid} 
+	</select>
 
 
 	<!-- 링크 수정 -->
