@@ -65,14 +65,14 @@ public class LinkdaoImpl implements Linkdao{
 	
 	// 삭제 메소드
 //	@Override
-//	public 	int Comdel(Comdto Comdto){
+//	public 	int Linkdel(Linkdto Linkdto){
 //				
 //	
 //	
-//	int Comdel = sqlSession.selectOne("mapper.pro.comment.Comdel", Comdto);
-//    System.out.println("mapper.pro.comment.Comdel : " + Comdel);
+//	int Linkdel = sqlSession.delete("mapper.pro.file.Filedel", Comdto);
+//    System.out.println("mapper.pro.comment.Comdel : " + Linkdel);
 //
-//    return Comdel;	
+//    return Linkdel;	
 //	}
 	
 	// 수정 메소드

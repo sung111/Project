@@ -54,10 +54,10 @@ public class FiledaoImpl implements Filedao{
 	
 	// 하나만 조회
 	@Override
-	public  Filedto Fileselid(Filedto Filedto){
+	public  List<Filedto> Fileselid(Filedto Filedto){
 		
 		
-	Filedto Fileselid = sqlSession.selectOne("mapper.pro.file.Fileselid", Filedto);
+	List<Filedto> Fileselid = sqlSession.selectList("mapper.pro.file.Fileselid", Filedto);
     System.out.println("파일하나조회 : " + Fileselid);
     return Fileselid;
 		
@@ -65,28 +65,28 @@ public class FiledaoImpl implements Filedao{
 	
 	
 	// 삭제 메소드
-//	@Override
-//	public 	int Comdel(Comdto Comdto){
-//				
-//	
-//	
-//	int Comdel = sqlSession.selectOne("mapper.pro.comment.Comdel", Comdto);
-//    System.out.println("mapper.pro.comment.Comdel : " + Comdel);
-//
-//    return Comdel;	
-//	}
+	@Override
+	public 	int Filedel(Filedto Filedto){
+				
+	
+	
+	int Filedel = sqlSession.delete("mapper.pro.file.Filedel", Filedto);
+    System.out.println("mapper.pro.file.Filedel : " + Filedel);
+
+    return Filedel;	
+	}
 	
 	// 수정 메소드
-//	@Override
-//	public 	int Linkfix(Linkdto Linkdto){
-//				
-//	
-//	
-//	int Linkfix = sqlSession.update("mapper.pro.link.Linkup", Linkdto);
-//    System.out.println("링크수정 : " + Linkfix);
-//
-//    return Linkfix;	
-//	}
+	@Override
+	public 	int Filefix(Filedto Filedto){
+				
+	
+	
+	int Filefix = sqlSession.update("mapper.pro.file.Fileup", Filedto);
+    System.out.println("파일수정 : " + Filefix);
+
+    return Filefix;	
+	}
 
 	
 }

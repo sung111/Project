@@ -70,13 +70,13 @@
 								oninput="validity.valid||(value='')" value="10"> pack
 						</div>
 					</div>
-					<textarea name="" id="" class="textarea1" rows="8"></textarea>
+					<textarea name="" id="" class="textarea1" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="box3">
 				<div class="box3Top" style="margin: 5px;">
 					<div style="font-size: 16px;">
-						<input type="text" class="wp3" placeholder="제품명">
+						<input type="text" class="wp3" placeholder="제품명"style="margin-right: 10px;">
 					</div>
 					<div class="date2">
 						<input type="datetime-local" class="indate1"> ~ <input

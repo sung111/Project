@@ -188,6 +188,33 @@ h1 {
         width: 90%; /* 팝업 너비 조정 */
     }
 }
+
+
+
+
+#attach {
+
+
+border: 2px solid lightgray;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+border-bottom-right-radius:5px;
+border-bottom-left-radius:5px;
+
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+
+margin-top : 5%;
+
+width: 50%;
+
+}
+
+
+
+
 </style>
 <body>
     <div class="box">
@@ -205,7 +232,7 @@ h1 {
      
      
      
-      <form method="post" action="conup">
+      <form method="post" action="conup" enctype="multipart/form-data">
      
      
             
@@ -225,7 +252,8 @@ h1 {
             <label for="content">내용</label>
             <div class="button-container">
                
-                <input type="file" id="file-input" style="display:none;" />
+               <!-- 차후 테스트 -->
+                <input type="file" id="file-input" name="neme" style="display:none;" />
                 <label for="file-input" class="file-label">파일 첨부</label>
                 
                 
@@ -247,13 +275,25 @@ h1 {
             </div>
          <%-- </c:forEach>   --%>  
             
+            
+            
             <br>
             <div id="link-input-container" margin-top: 10px;">
                 <label for="link">첨부 파일</label>
-                <input type="file" id="link" placeholder="링크를 입력하세요" name="upfile" value=${doo.file_name}> 
+                <input type="file" id="link" placeholder="파일을 입력하세요" name="file_name" multiple> 
             </div>
         
-    
+            <c:forEach var="flink" items="${Fileselid}">
+			<div id="attach">첨부된 파일 : 
+			<!-- <form method="post" action="downloads">  -->
+			 ${flink.file_name}<br>
+			<!-- </form> -->
+			</div>
+			<a href="filedel?fileid=${flink.fileid}">삭제</a>
+			</c:forEach> 
+			
+        
+        
         
         
         

@@ -156,7 +156,7 @@ border-bottom-left-radius:5px;
 
 margin-top : 5%;
 
-width: 30%;
+width: 50%;
 
 }
 
@@ -222,10 +222,17 @@ width: 30%;
 <br>
 <br>
 <br>
-<%-- <c:forEach var="filink" items="${filelist}"> --%>
-<div id="attach">첨부된 파일 : <a href="download?file_name=${Fileselid.file_name}">${Fileselid.file_name}</a></div>
-<%-- </c:forEach> --%>
-      
+
+
+ <c:forEach var="flink" items="${Fileselid}">
+ <div id="attach">첨부된 파일 : 
+<!-- <form method="post" action="downloads">  -->
+ <a href="downloads?file_name=${flink.file_name}"  id="href">${flink.file_name}</a><br>
+  <img src="/upload/${flink.file_name}" alt="첨부 이미지" width="300">
+<!-- </form> -->
+</div>
+</c:forEach> 
+
       
       
     

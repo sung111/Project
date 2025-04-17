@@ -57,39 +57,41 @@ public class FileserviceImpl implements FileService {
 		
 	// 하나만 조회
 	@Override
-	public  Filedto Fileselid(Filedto Filedto){
+	public  List<Filedto> Fileselid(Filedto Filedto){
 		
 		
-	Filedto Fileselid = Filedao.Fileselid(Filedto);
+	List<Filedto> Fileselid = Filedao.Fileselid(Filedto);
     System.out.println("파일하나조회 : " + Fileselid);
     return Fileselid;
 		
 	}
 	
 		
-		// 댓글 삭제
-//		@Override
-//		public 	int Comdel(Comdto Comdto){
-//		 			
-//		
-//		
-//		int Comdel = Comdao.Comdel(Comdto);
-//	    System.out.println(" 댓글 삭제 : " + Comdel);
-//
-//	    return Comdel;	
-//		}
+	// 삭제 메소드
+	@Override
+	public 	int Filedel(Filedto Filedto){
+				
+	
+	
+	int Filedel = Filedao.Filedel(Filedto);
+    System.out.println("mapper.pro.file.Filedel : " + Filedel);
+
+    return Filedel;	
+    
+	}
 		
 		
-		// 수정 메소드
-//		@Override
-//		public 	int Linkfix(Linkdto Linkdto){
-//					
-//		
-//		
-//		int Linkfix = Linkdao.Linkfix(Linkdto);
-//	    System.out.println("링크수정 : " + Linkfix);
-//
-//	    return Linkfix;	
-//		}
+	// 수정 메소드
+	@Override
+	public 	int Filefix(Filedto Filedto){
+				
+	
+	
+	int Filefix = Filedao.Filefix(Filedto);
+    System.out.println("파일수정 : " + Filefix);
+
+    return Filefix;	
+	}
+
 		
 }

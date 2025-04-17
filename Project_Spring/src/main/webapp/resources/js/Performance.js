@@ -8,6 +8,17 @@ function init() {
   const year = now.getFullYear();
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
   const day = ("0" + now.getDate()).slice(-2);
+  const hour = ("0" + now.getHours()).slice(-2);
+  const minute = ("0" + now.getMinutes()).slice(-2);
+  const second = ("0" + now.getSeconds()).slice(-2);
+  const date = `${year}-${month}-${day}T${hour}:${minute}:${second}`
+  console.log(date)
+  document.querySelector('.indate1').value = date
+  document.querySelector('.indate2').value = date
+  document.querySelector('.date1').value = date
+  console.log(date.indexOf("T")); // 10
+  console.log( date.slice( date.indexOf("T")+1 ) );
+  console.log( date.slice( 0 , date.indexOf("T") ) );
 
 
 
@@ -15,9 +26,6 @@ function init() {
   document.querySelector('.btn2').addEventListener('click', (e) => {
     const modal = document.querySelector('#myModal')
     const content = document.querySelector('.modal-content')
-
-
-
     fetch('Inspection_standards.html')
       .then(response => {
         if (!response.ok) {
@@ -82,6 +90,46 @@ function init() {
   });
 
 
+  //삭제
+  const del = document.querySelectorAll('.delete');
+  const delf = document.querySelectorAll('.deleteForm');
+  for(let i = 0 ; i < del.length ; i++){
+    del[i].addEventListener('click',(e)=>{
+      e.preventDefault();
+      let tt = confirm("삭제하시겠습니까?");
+      if(tt){
+        delf[i].submit();
+        alert("삭제되었습니다.")
+      }
+    })
+  }
+
+  //조회버튼
+  document.querySelector('.btn4').addEventListener('click',(e)=>{
+
+    const productname = document.querySelector('.wp3');
+    const indexStart = document.querySelector('.indate1');
+    const indexEnd = document.querySelector('.indate2');
+
+    fetch('/project/perFormSearch?',{
+      method : "GET",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        productname : productname,
+        searchDateStart : indexStart,
+        searchDateEnd : indexEnd,
+      })
+      .then(response => response.text())
+      .then( text =>{} )
+      .catch()
+
+    })
+
+
+
+  })
 
 
 
@@ -207,60 +255,6 @@ function init() {
   //   });
   // });
 
-
-
-
-  // // 페이지네이션 관련 전역 변수
-  // let currentPage = 1;
-  // const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
-
-  // // 페이지네이션을 적용하는 함수
-  // function renderPagination() {
-  //   // 모든 등록된 항목 선택 (.item 클래스 사용)
-  //   const view = document.querySelector('.box3View');
-  //   const items = Array.from(view.querySelectorAll('.item'));
-  //   const totalItems = items.length;
-  //   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  //   // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
-  //   items.forEach((item, index) => {
-  //     if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
-  //       item.style.display = '';
-  //     } else {
-  //       item.style.display = 'none';
-  //     }
-  //   });
-
-  //   // pagination 컨테이너 업데이트
-  //   let paginationContainer = document.querySelector('.pagination');
-  //   if (!paginationContainer) {
-  //     // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
-  //     paginationContainer = document.createElement('div');
-  //     paginationContainer.classList.add('pagination');
-  //     // box3 하단에 추가
-  //     document.querySelector('.box3').appendChild(paginationContainer);
-  //   }
-
-  //   // 기존 페이지네이션 버튼 초기화
-  //   paginationContainer.innerHTML = '';
-
-  //   // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
-  //   for (let page = 1; page <= totalPages; page++) {
-  //     const btn = document.createElement('button');
-  //     btn.textContent = page;
-  //     if (page === currentPage) {
-  //       btn.disabled = true;
-  //     }
-  //     btn.addEventListener('click', () => {
-  //       currentPage = page;
-  //       renderPagination();
-  //     });
-  //     paginationContainer.appendChild(btn);
-  //   }
-  // }
-
-  // // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
-  // window.addEventListener('DOMContentLoaded', renderPagination);
 
 
 
