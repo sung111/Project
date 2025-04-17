@@ -230,13 +230,14 @@ System.out.println("접속중....");
       
       try {
           String path = "C:\\temp\\upload";
-          String safeFileName = path +"\\"+ System.currentTimeMillis() +"_"+ fileName;
+          
+          String safeFileName = path +"\\"+ fileName;
           System.out.println("safeFileName: "+ safeFileName);
           File file = new File(safeFileName);
           
           Filedto filedto = new Filedto();
           filedto.setPostid(id);
-          filedto.setFile_name(safeFileName);
+          filedto.setFile_name(fileName);
           int dtofile = Fileservice.Fileint(filedto);
           System.out.println(" 파일 생성 성공시 1 :  " + dtofile);
           
@@ -323,7 +324,7 @@ System.out.println("접속중....");
 		    model.addAttribute("Linkselid", Linkselid);
 		    
 		    // 상세글에 파일 뿌리기
-		    Filedto Fileselid = Fileservice.Fileselid(Filedto);
+		    List<Filedto> Fileselid = Fileservice.Fileselid(Filedto);
 		    System.out.println("파일  DTO : " + Filedto);
 		    System.out.println("파일 하나만 뽑기 : " + Fileselid);
 		    model.addAttribute("Fileselid", Fileselid);
@@ -372,6 +373,7 @@ System.out.println("접속중....");
 				
 				@ModelAttribute Prodto prodto,
 				@ModelAttribute Linkdto linkdto,
+				@ModelAttribute Filedto Filedto,
 				Model model
 									
 				) {
@@ -387,7 +389,15 @@ System.out.println("접속중....");
 			    System.out.println(" 링크 수정 정보 DTO2 :" + dtolink);
 			    model.addAttribute("dtolink", dtolink);
 			
-			System.out.println("확인");		
+			    // 상세글에 파일 뿌리기
+			    List<Filedto> Fileselid = Fileservice.Fileselid(Filedto);
+			    System.out.println("파일  DTO : " + Filedto);
+			    System.out.println("파일 하나만 뽑기 : " + Fileselid);
+			    model.addAttribute("Fileselid", Fileselid);
+			    
+			    
+			    
+				
 			return "Modify";
 			
 		}	
@@ -398,13 +408,22 @@ System.out.println("접속중....");
 		public String conup(
 				
 				
-				
+				MultipartHttpServletRequest req,
 				@ModelAttribute
 				Prodto prodto,
 				Linkdto linkdto
+//				Filedto filedto
 //				Model model
 									
 				) {
+			
+				// 키포인트
+				int id = prodto.getPostid();
+				System.out.println("post아이디 수정씨 : " + id);
+				// 키포인트
+			
+			
+			 
 			
 			
 			    System.out.println(" 컨텐츠 수정임 DTO " + prodto);
@@ -413,16 +432,68 @@ System.out.println("접속중....");
 			    int modlink = Linkservice.Linkfix(linkdto);
 			    System.out.println(" 링크 수정임 ㅇㅇ " + modlink);
 //		        model.addAttribute("modi", conmod);
-			
+			    
 			
 				
+			    
+			    
+			    List<MultipartFile> fileList = req.getFiles("file_name");
+		          for(MultipartFile mf : fileList) {
+		  
+		  	long fileSize = mf.getSize();
+		      System.out.println("fileSize: "+ fileSize);
+		      
+		      String fileName = mf.getOriginalFilename();
+		      System.out.println("fileName: "+ fileName);
+		      
+		      try {
+		          String path = "C:\\temp\\upload";
+		          
+		          String safeFileName = path +"\\"+ fileName;
+		          System.out.println("safeFileName: "+ safeFileName);
+		          File file = new File(safeFileName);
+		          
+		          Filedto filedto = new Filedto();
+		          filedto.setPostid(id);
+		          filedto.setFile_name(fileName);
+		          int dtofile = Fileservice.Fileint(filedto);
+		          int modfile = Fileservice.Filefix(filedto);
+		          System.out.println(" 파일 생성 성공시 1 :  " + modfile);
+		          
+		          mf.transferTo( file );
+		          
+		      } catch (IllegalStateException e) {
+		          // TODO Auto-generated catch block
+		          e.printStackTrace();
+		      } catch (IOException e) {
+		          // TODO Auto-generated catch block
+		          e.printStackTrace();
+		      }
+		  }
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
 			return "forward:select";
 			
 		}	
 		
 		
 		// 파일 다운로드
-		@RequestMapping(value = "/download")
+		@RequestMapping(value = "/downloads")
 		public String download(
 				
 				HttpServletRequest request,
@@ -477,7 +548,24 @@ System.out.println("접속중....");
 
 		
 		
+		// 파일 삭제
+		@RequestMapping(value = "/filedel")
+		public String filedel(
+				
+				@ModelAttribute
+				Filedto filedto
+				
+				) {
+			
+			    System.out.println("??????????? :" + filedto);
+			    int filedel = Fileservice.Filedel(filedto);
+			    
+			    System.out.println(" 파일 삭제되면 1이뜸 " + filedel);
+			    
 		
+			return "redirect:conmod";
+			
+		}
 		
 
 }

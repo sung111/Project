@@ -30,10 +30,18 @@
 	</select>
 
 
-	<!-- 링크 수정 -->
-	<!-- <select id="Linkup" resultType="int"> update linkattachments set link 
-		= #{link} where postid = #{postid} </select> -->
+    <!-- resulttype 안됨 -->
+	<!-- 파일 수정 -->
+	<update id="Fileup" parameterType="project.dto.Filedto"> 
+	    update fileattachments 
+	    set file_name = #{file_name} 
+	    where fileid = #{fileid} 
+	</update>
 
-
+   <!-- 파일 삭제 -->
+    <delete id="Filedel" parameterType="project.dto.Filedto">
+		delete from fileattachments
+		where fileid = #{fileid}
+	</delete>
 
 </mapper>
