@@ -107,6 +107,32 @@ public class InvenCheck_ServiceImpl implements InvenCheck_Servcie{
 		return result;
 	}
 
+	@Override
+	public int prodInvenUpdate(InvenCheck_DTO dto) {
+		int result = dao.prodInvenUpdate(dto);
+		return result;
+	}
+	@Override
+	public int matInvenUpdate(InvenCheck_DTO dto) {
+		int result = dao.matInvenUpdate(dto);
+		return result;
+	}
+	@Override
+	public int invenUpdateCheck(InvenCheck_DTO dto) {
+		String lot =dto.getLotnumber().substring(0, 3);
+		System.out.println(lot);
+		
+		int result = -1;
+		
+		if( "WPD".equals(lot) ) {
+			result = dao.prodInvenUpdate(dto);
+		} else {
+			result = dao.matInvenUpdate(dto);
+		}
+		
+		System.out.println("여기는 서비스 result 응답바람 :" + result);
+		return result;
+	}
 	
 
 }

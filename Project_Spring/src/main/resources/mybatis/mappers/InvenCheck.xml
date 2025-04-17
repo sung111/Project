@@ -6,6 +6,30 @@
 <mapper namespace="project.mapper.InvenCheck">
 	<!-- 팔팔롱 시발 -->
 	
+<!-- 	수정해서 업데이트 하기 -->
+<!-- 	완제품 -->
+	<update id="prodInvenUpdate">
+			update
+			    PRODUCTINVEN 
+			set 
+			    quantity = #{quantity},
+			    makedate = #{receiptDate},
+			    expdate = #{receiptDate}+30
+			WHERE
+			    productinvenid = #{productinvenid}
+	</update>
+<!-- 	원자재 업뎃 -->
+	<update id="matInvenUpdate">
+			update
+			    inventorystatus
+			set 
+			    quantity = #{quantity},
+			    receiptdate = #{receiptDate},
+			    expdate = #{receiptDate}+30
+			WHERE
+			    inventoryid = #{productinvenid}
+	</update>
+	
 <!-- 	등록창 팝업에 옵션을 넣기위한 셀렉문 2개 -->
 <!-- 	자제 -->
 	<select id="matDB" resultType="Inven_DTO" parameterType="Inven_DTO">

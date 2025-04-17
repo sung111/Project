@@ -26,6 +26,9 @@ public interface InvenCheck_DAO {
 	public List matDB(InvenCheck_DTO dto);
 	public List prodDB(InvenCheck_DTO dto);
 	
+//	수정
+	public int prodInvenUpdate(InvenCheck_DTO dto);
+	public int matInvenUpdate(InvenCheck_DTO dto);
 	
 	
 }

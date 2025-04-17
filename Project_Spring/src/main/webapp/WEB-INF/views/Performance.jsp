@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ page import="java.util.*"%>
+<%@ page import="project.dto.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +13,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>실적등록</title>
-<link rel="stylesheet" href="css\Performance.css">
-<script src="js\Performance.js"></script>
+<link rel="stylesheet" href="resources\css\Performance.css">
+<script src="resources\js\Performance.js"></script>
 
 </head>
 
@@ -64,12 +70,12 @@
 								oninput="validity.valid||(value='')" value="10"> pack
 						</div>
 					</div>
-					<textarea name="" id="" class="textarea1" rows="8" heigth="100"></textarea>
+					<textarea name="" id="" class="textarea1" rows="8"></textarea>
 				</div>
 			</div>
 			<div class="box3">
-				<div class="box3Top">
-					<div>
+				<div class="box3Top" style="margin: 5px;">
+					<div style="font-size: 16px;">
 						<input type="text" class="wp3" placeholder="제품명">
 					</div>
 					<div class="date2">
@@ -85,13 +91,94 @@
 						<div>날짜</div>
 						<div>제품명</div>
 						<div>수량</div>
-						<div>생산현황</div>
 						<div>코멘트</div>
 						<div>등록인</div>
 						<div>비고</div>
 					</div>
 				</div>
-				<div class="box3View"></div>
+				<div class="box3View">
+					<c:forEach var="dto" items="${ list }">
+						<div class="dex item">
+							<form method="post" action="performanceDelete" class="kk deleteForm">
+								<div class="dateB">
+									<fmt:formatDate value="${dto.reporttime}"
+ 										pattern="yyyy-MM-dd HH:mm:ss" />
+									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
+								</div>
+								<div class="emdwp">${dto.productname}</div>
+								<div class="emdtn">${dto.productioncount}</div>
+								<div class="text1">${dto.performancecomment}</div>
+								<div class="emdId">${dto.username}</div>
+								<input type="hidden" name="performanceId"
+									value="${dto.performanceid}" class="performId">
+								<div style="display: flex; justify-content: center;">
+									<!-- css안먹어서 그냥박아버림 -->
+									<button class="tn" style="height: 26px;">수정</button>
+									<!-- <form method="post" action="Performance">
+									<input type="hidden" name="command" value="update">
+									<input type="submit" value="수정">
+								</form>-->
+									<input type="hidden" name="performanceid" value="${dto.performanceid}">
+									<input type="submit" value="삭제" style="height: 26px;" class="delete">
+								</div>
+							</form>
+						</div>
+					</c:forEach>
+
+				</div>
+
+				<div id="page-container" style="text-align: center;">
+					<%
+					int total = (Integer) request.getAttribute("totalCount");
+					Performance_DTO dto = (Performance_DTO) request.getAttribute("dto");
+					int pageNo = dto.getPage();
+					int viewCount = dto.getViewCount();
+					int lastPage = (int) Math.ceil((double) total / viewCount);
+
+					int groupCount = 5; // 한번에 보여줄 페이지 개수
+					int groupPosition = (int) Math.ceil((double) pageNo / groupCount);
+					int begin = ((groupPosition - 1) * groupCount) + 1;
+					//             int end = begin + groupCount - 1;
+					int end = groupPosition * groupCount;
+					if (end > lastPage) {
+						end = lastPage;
+					}
+					%>
+
+					<c:if test="<%=begin == 1%>">
+                  [이전]
+               </c:if>
+					<c:if test="<%=begin != 1%>">
+						<a href="performance?page=<%=begin - 1%>">[이전]</a>
+					</c:if>
+
+
+					<c:forEach var="i" begin="<%=begin%>" end="<%=end%>">
+						<c:if test="${i == dto.page }">
+							<c:set var="clazz" value="bold" />
+						</c:if>
+						<c:if test="${ not (i == dto.page) }">
+							<c:set var="clazz" value="" />
+						</c:if>
+
+						<c:url var="pageLink" value="performance">
+							<c:param name="page" value="${ i }" />
+							<%-- 							<c:param name="dateStart" value="${ param.dateStart }" /> --%>
+							<%-- 							<c:param name="dateEnd" value="${ param.dateEnd }" /> --%>
+						</c:url>
+
+
+						<a href="${ pageLink }" class="${clazz}">${ i }</a>
+					</c:forEach>
+
+
+					<c:if test="<%=end == lastPage%>">
+                  [다음]
+               </c:if>
+					<c:if test="<%=end != lastPage%>">
+						<a href="performance?page=<%=end + 1%>">[다음]</a>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</div>
