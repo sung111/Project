@@ -194,7 +194,7 @@
 								.standards-font-charild {
 									padding: 2px;
 									width: 95%;
-									height: 220px;
+									height: 10%;
 									text-align: start;
 								}
 
@@ -319,8 +319,23 @@
 									}
 
 									#navigation-title-search {
-										width: 50%;
+										width: 100%;
 									}
+									.standards-imege{
+										width: 100%;
+										height: 100%;
+									}
+									.pname{
+										width: 80%;
+									}
+									.standards-contain{
+										width: 40%;
+										padding: 1px;
+									}
+									.manu-name{
+										height: 50px;
+									}
+								
 								}
 							</style>
 						</head>
@@ -365,21 +380,10 @@
 														<div class="standards-imege-contain">
 															<div class="center">
 																<div class="manu-name text-serch">${dto.productname}밀키트</div>
-
-																<input type="text" value="${dto.productid}" class="pid">
-
-																<select id="select" class="selects none"
-																	style="margin-bottom: 80px;" name="product_select">
-																	<c:forEach var="dto1" items="${name_list}">
-																		<option value="${dto1.productid}" 
-																		<c:if test="${dto1.productid == dto.productid}">selected</c:if>>
-																		${dto1.productname}
-																		</option>
-																	</c:forEach>
-																</select>
+																<input type="hidden" value="${dto.productid}" class="pid">
 															</div>
-															<img src="C:\temp\download?filename=${dto.productimage}" class="standards-imege">
-															<input type="file" class="file files none" name="file_value" name="uploadFile">
+															<img src="download?filename=${dto.productimage}" class="standards-imege">
+															
 														</div>
 														<div class="standards-font-contain">
 															<div class="standards-font-parent">
@@ -390,8 +394,7 @@
 																		<h2>정상제품기준</h2>
 																	</div>
 																	<div class="hidetext">${dto.normalcriteria}</div>
-																	<textarea name="normalcriteria_value" class="showtext none"
-																		value="${dto.normalcriteria}">${dto.normalcriteria}</textarea>
+																
 																</div>
 
 															</div>
@@ -403,20 +406,17 @@
 																		<h2>비정상제품기준</h2>
 																	</div>
 																	<div class="hidetext2">${dto.abnormalcriteria}</div>
-																	<textarea name="abnormalcriteria_value"
-																		class="showtext2 none"
-																		value="${dto.abnormalcriteria}">${dto.abnormalcriteria}</textarea>
+																
 																</div>
 															</div>
 														</div>
 														<c:if test="${Field == 'ADMIN'}">
 															<div class="btncenter">
-																<input type="hidden" value="update" name="type">
+											
 
 																<input type="button" value="수정" class="btn u">
 
-																<input type="button" value="확인" class="btn ok none"> <input
-																	type="button" value="취소" class="btn can none">
+																
 															</div>
 														</c:if>
 													</div>
@@ -523,21 +523,18 @@
 														<div class="btncenter">
 															<input type="hidden" value="update" name="type">
 															<input type="button" value="수정" class="btn u">
-															<input type="button" value="확인" class="btn ok none">
-															<input type="button" value="취소" class="btn can none">
+															
 														</div>
 														` 
 															newdataHtml.innerHTML = `
 																		<div class="standards-imege-contain">
 																			<div class="center">
 																				<div class="manu-name text-serch">\${dto.productname}밀키트</div>
-			
-																				<select id="select" class="selects none" style="margin-bottom: 80px;" name="product_select">
-																			\${nameList ? nameList.map(function (dto1) { return "<option value="+dto1.productid+">"+dto1.productname+"</option>"; }).join('') : ""}
-																					</select>
 																				</div>
-																				<img src="resources/img/\${dto.productimage}" class="standards-imege">
-																				<input type="file" class="file files none" name="file_value" >
+																					<input type="hidden" value="\${dto.productid}" class="pid">
+																		
+																				<img src="download?filename=\${dto.productimage}" class="standards-imege">
+																			
 																			</div>
 																			<div class="standards-font-contain">
 																			<div class="standards-font-parent">
@@ -548,8 +545,7 @@
 																						<h2>정상제품기준</h2>
 																					</div>
 																					<div class="hidetext">\${dto.normalcriteria}</div>
-																					<textarea name="normalcriteria_value" class="showtext none"
-																						value="\${dto.normalcriteria}">\${dto.normalcriteria}</textarea>
+																					
 																				</div>
 			
 																			</div>
@@ -561,8 +557,7 @@
 																						<h2>비정상제품기준</h2>
 																					</div>
 																					<div class="hidetext2">\${dto.abnormalcriteria}</div>
-																					<textarea name="abnormalcriteria_value" class="showtext2 none"
-																						value="\${dto.abnormalcriteria}">\${dto.abnormalcriteria}</textarea>
+																					
 																				</div>
 																			</div>
 																		</div>
@@ -571,81 +566,15 @@
 																	
 																		`;
 																		document.querySelector(".standards-top").append(newdataHtml)
-																	});
-																	
-																} else {
-																	newdataHtml = `
-																	<div>
-																		완제품조회 내용이 없습니다
-																		</div>
-																		`
-																		document.querySelector(".standards-top").append(newdataHtml)
-																	};
-																	
-															
-															
-															
-															let us = newdataHtml.querySelectorAll(".u")
-															us.forEach(el => {
-																el.addEventListener("click", function (e) {
-																	console.log(e.target.parentNode.parentNode);
-																	// 						console.log("e타겟",e.target.parentNode)
-																	// 						console.log("e타겟",e.target.parentNode.parentNode)
-																	e.target.parentNode.parentNode.querySelector(".showtext").classList.remove("none");
-																	e.target.parentNode.parentNode.querySelector(".showtext2").classList.remove("none");
-																	e.target.parentNode.parentNode.querySelector(".file").classList.remove("none");
-																	e.target.parentNode.parentNode.querySelector(".selects").classList.remove("none");
-																	e.target.parentNode.parentNode.querySelector(".hidetext").classList.add("none");
-																	e.target.parentNode.parentNode.querySelector(".hidetext2").classList.add("none");
-																	e.target.parentNode.parentNode.querySelector(".standards-imege").classList.add("none");
-																	e.target.parentNode.parentNode.querySelector(".text-serch").classList.add("none");
-	
-																	e.target.classList.add("none");
-																	e.target.parentNode.querySelector(".ok").classList.remove("none");
-																	e.target.parentNode.querySelector(".can").classList.remove("none");
-																})
-															})
-	
-	
-	
-	
-	
-	
-	
-	
-	
-													} // if end
-												}// 아작스 
-											}) // 검색이벤트
 
-
-
-											let btnok = document.querySelectorAll(" .ok")
-											let btncan = document.querySelectorAll(".can")
-											for (let i = 0; i < btnok.length; i++) {
-												btnok[i].classList.add("none")
-												btncan[i].classList.add("none")
-											}
-
-
-												document.querySelectorAll(".showtext").forEach(el => el.classList.add("none"));
-												document.querySelectorAll(".showtext2").forEach(el => el.classList.add("none"));
-												document.querySelectorAll(".file").forEach(el => el.classList.add("none"));
-												document.querySelectorAll(".selects").forEach(el => el.classList.add("none"));
-												document.querySelectorAll(".hidetext").forEach(el => el.classList.remove("none"));
-												document.querySelectorAll(".hidetext2").forEach(el => el.classList.remove("none"));
-
-												let us = document.querySelectorAll(".u");
-												for (let i = 0; i < us.length; i++) {
-													us[i].addEventListener("click", function (e) {
-														console.log(e.target.parentNode.parentNode);
-													
-
-														e.target.classList.add("none");
-														e.target.parentNode.querySelector(".ok").classList.remove("none");
-														e.target.parentNode.querySelector(".can").classList.remove("none");
-														console.log("pid",e.target.parentNode.parentNode.querySelector(".pid").value)
-														//수정클릭시 수정화면 아작스 이벤트
+																	let us = newdataHtml.querySelectorAll(".u");
+																	for (let i = 0; i < us.length; i++) {
+																		us[i].addEventListener("click", function (e) {
+																			console.log(e.target);
+																			console.log(e.target.parentNode.parentNode.querySelector(".pid").value);
+	
+											
+																		//수정클릭시 수정화면 아작스 이벤트
 																		//ajax
 																		const xhr = new XMLHttpRequest();
 																		xhr.open('get', 'insSelectproductid?productid=' + e.target.parentNode.parentNode.querySelector(".pid").value)
@@ -679,7 +608,7 @@
 																								newdataHtml.innerHTML = `
 																									<div class="standards-imege-contain">
 																									<div class="center">
-																										<div class="manu-name text-serch">\${dto.productname}</div>
+																										
 																										<input type="hidden" value="\${dto.productid}" class="pid">
 																										<input type="text" value="\${dto.productname}" class="pname">			
 																										</div>
@@ -752,15 +681,233 @@
 																									// xhr.setRequestHeader()
 														
 																									xhr.send(formData)
-														
+																									
 																									xhr.onload = function () {
+																									alert("수정완료")
 																										console.log(xhr.responseText)
+																										location.href = "inspectionStandards"
 																										
 																									}
 
 																								})// 수정확인버튼 클릭이벤트
 
+																									//수정버튼클릭후 취소버튼
+																								newdataHtml.querySelector(".can").addEventListener("click",(e)=>{
+																									alert("수정취소")
+																									location.href = "inspectionStandards"
+																								
+																								
+																								})//수정버튼클릭후 취소버튼
 
+																							});
+																						}
+
+																								
+
+																												
+																			}//수정클릭시 수정화면 아작스 이벤트
+																											
+
+
+
+
+												
+															//선택된 옵션의 텍스트 가져오는이벤트
+															let slectname ;
+															document.querySelector("#select").addEventListener("change", function (e) {
+																let selectedOption = this.options[this.selectedIndex];
+																slectname = selectedOption.text;
+																console.log("slectname",slectname)
+															})
+													
+																
+													})// 수정버튼 클릭이벤트
+
+												} // for end
+
+
+
+
+																	});
+																	
+																} else {
+																	newdataHtml = `
+																	<div>
+																		완제품조회 내용이 없습니다
+																		</div>
+																		`
+																		document.querySelector(".standards-top").append(newdataHtml)
+																	};
+																	
+															
+															
+															
+																	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+													} // if end
+												}// 아작스 
+											}) // 검색이벤트
+
+
+
+											let btnok = document.querySelectorAll(" .ok")
+											let btncan = document.querySelectorAll(".can")
+											for (let i = 0; i < btnok.length; i++) {
+												btnok[i].classList.add("none")
+												btncan[i].classList.add("none")
+											}
+
+
+												document.querySelectorAll(".showtext").forEach(el => el.classList.add("none"));
+												document.querySelectorAll(".showtext2").forEach(el => el.classList.add("none"));
+												document.querySelectorAll(".file").forEach(el => el.classList.add("none"));
+												document.querySelectorAll(".selects").forEach(el => el.classList.add("none"));
+												document.querySelectorAll(".hidetext").forEach(el => el.classList.remove("none"));
+												document.querySelectorAll(".hidetext2").forEach(el => el.classList.remove("none"));
+
+												let us = document.querySelectorAll(".u");
+												for (let i = 0; i < us.length; i++) {
+													us[i].addEventListener("click", function (e) {
+														console.log(e.target.parentNode.parentNode);
+													
+
+														e.target.classList.add("none");
+													
+													
+														console.log("pid",e.target.parentNode.parentNode.querySelector(".pid").value)
+														//수정클릭시 수정화면 아작스 이벤트
+																		//ajax
+																		const xhr = new XMLHttpRequest();
+																		xhr.open('get', 'insSelectproductid?productid=' + e.target.parentNode.parentNode.querySelector(".pid").value)
+							
+																		xhr.setRequestHeader('Content-Type', 'application/json')
+							
+																		xhr.send()
+							
+																		xhr.onload = function () {
+																			let data = (xhr.responseText)
+																			console.log(xhr.responseText)
+																			data=JSON.parse(data)
+																			console.log(data)
+																			document.querySelector(".standards-top").innerHTML = ` `
+							
+																			let pickid = data.pickid;        // 밀키트 검색 결과
+																			let nameList = data.name_list;           // 전체 제품명 리스트
+																			let field = data.Field;
+							
+																			
+																			if ((pickid)  && (pickid.length > 0)) {
+																						pickid.forEach(dto => {
+																										let newdataHtml = document.createElement("div")
+																										newdataHtml.setAttribute("class", "standards-contain")
+																											const ctrlHTML = `
+																										<div class="btncenter">
+																											<input type="button" value="확인" class="btn ok ">
+																											<input type="button" value="취소" class="btn can ">
+																										</div>
+																										` 
+																								newdataHtml.innerHTML = `
+																									<div class="standards-imege-contain">
+																									<div class="center">
+																										
+																										<input type="hidden" value="\${dto.productid}" class="pid">
+																										<input type="text" value="\${dto.productname}" class="pname">			
+																										</div>
+																										<input type="file" class="file files " name="file_value" >
+																									</div>
+																									<div class="standards-font-contain">
+																									<div class="standards-font-parent">
+									
+																										<div class="standards-font-charild">
+									
+																											<div class="titlecenter">
+																												<h2>정상제품기준</h2>
+																											</div>
+																											
+																											<textarea name="normalcriteria_value" class="showtext "
+																												>\${dto.normalcriteria}</textarea>
+																										</div>
+									
+																									</div>
+																									<div class="standards-font-parent">
+									
+																										<div class="standards-font-charild">
+									
+																											<div class="titlecenter">
+																												<h2>비정상제품기준</h2>
+																											</div>
+																											
+																											<textarea name="abnormalcriteria_value" class="showtext2"
+																												>\${dto.abnormalcriteria}</textarea>
+																										</div>
+																									</div>
+																								</div>
+																								 \${ctrlHTML}
+																								</div>
+																							
+																								`;
+																								document.querySelector(".standards-top").append(newdataHtml)
+
+																								newdataHtml.querySelector(".ok").addEventListener("click",(e)=>{
+																									console.log("file",e.target.parentNode.parentNode.querySelector(".file").value)
+																									console.log("pname",e.target.parentNode.parentNode.querySelector(".pname").value)
+																									console.log("pid",e.target.parentNode.parentNode.querySelector(".pid").value)
+																									console.log("showtext",e.target.parentNode.parentNode.querySelector(".showtext").value) //가져옴 
+																									console.log("showtext2",e.target.parentNode.parentNode.querySelector(".showtext2").value)//가져옴
+																								
+																									let pid = e.target.parentNode.parentNode.querySelector(".pid").value;
+																									let pname = e.target.parentNode.parentNode.querySelector(".pname").value;
+																									let normalProduct = e.target.parentNode.parentNode.querySelector(".showtext").value;
+																									let abnormalProduct = e.target.parentNode.parentNode.querySelector(".showtext2").value;
+
+																									var formData = new FormData();
+																									var inputFile = e.target.parentNode.parentNode.querySelector(".file").files[0];
+																									console.log("inputFile",inputFile)
+																									
+																									
+																										formData.append("pid", pid);
+																										formData.append("pname", pname);
+																										formData.append("uplodeFile", inputFile);
+																										formData.append("normalProduct", normalProduct);
+																										formData.append("abnormalProduct", abnormalProduct);
+																		
+								
+																					
+																									//포멧데이터(파일)과 다른 값들을 같이 전송하는방법 찾아보기
+
+
+																									xhr.open('post', 'upload')
+																									
+																									//formData는 내부적으로 multipart/from-data형식으로 전송
+																									// xhr.setRequestHeader()
+														
+																									xhr.send(formData)
+																									
+																									xhr.onload = function () {
+																										alert("수정완료")
+																										console.log(xhr.responseText)
+																										location.href = "inspectionStandards"
+																										
+																									}
+
+																								})// 수정확인버튼 클릭이벤트
+
+																								//수정버튼클릭후 취소버튼
+																								
+																								newdataHtml.querySelector(".can").addEventListener("click",(e)=>{
+																									alert("수정취소")
+																								location.href = "inspectionStandards"
+																								
+																								
+																								})//수정버튼클릭후 취소버튼
 
 																							});
 																						}

@@ -246,6 +246,7 @@ public class Bom_total_controller {
 		 
 		return "inspectionStandards";
 	}
+	
 	// 검색어조회
 	@ResponseBody
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
@@ -306,8 +307,9 @@ public class Bom_total_controller {
 	//수정페이지
 	
 	//수정 및 파일 업로드 
+	@ResponseBody
 	@RequestMapping("/upload")
-    public String upload( 
+    public int upload( 
     		MultipartHttpServletRequest req 
     		) throws UnsupportedEncodingException {
 		System.out.println("파일업로드컨트롤러실행");
@@ -335,10 +337,11 @@ public class Bom_total_controller {
 			//현재프로젝트 내의 img경로 저장
 //			String realPath = servletContext.getRealPath("img");
 			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
-	
-			String productimage = realPath + "\\" + fileName;
-			System.out.println("safeFileName"+productimage);
-			File file = new File(productimage);
+			String productimage = System.currentTimeMillis() + "_" + fileName;
+			String safeFileName = realPath + "\\" +productimage;
+		
+			System.out.println("safeFileName"+safeFileName);
+			File file = new File(safeFileName);
 			System.out.println("mf.transferTo전file"+file);
 			try {
 				mf.transferTo( file );			
@@ -348,6 +351,8 @@ public class Bom_total_controller {
 			
 			}
 			System.out.println();
+			
+			//이미지 네임 set으로 넣음
 			
 			Products_DTO dto = new Products_DTO();
 			dto.setProductid(Integer.parseInt(productid));
@@ -363,8 +368,9 @@ public class Bom_total_controller {
 			e.printStackTrace();
 		}
 		
-		
-		return "redirect:/inspectionStandards";
+		System.out.println("redirect:/inspectionStandards");
+		return result;
+			
 	}
 	
 	//파일다운로드 컨트롤러 
