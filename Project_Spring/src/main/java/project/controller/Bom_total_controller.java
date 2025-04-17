@@ -377,7 +377,7 @@ public class Bom_total_controller {
 			try {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
-				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+				String path = "C:\\temp\\download";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정

@@ -378,7 +378,7 @@
 																	</c:forEach>
 																</select>
 															</div>
-															<img src="download?filename=${dto.productimage}" class="standards-imege">
+															<img src="C:\temp\download?filename=${dto.productimage}" class="standards-imege">
 															<input type="file" class="file files none" name="file_value" name="uploadFile">
 														</div>
 														<div class="standards-font-contain">
