@@ -7,7 +7,7 @@
 
 
           <!-- 안쪽에서 바깥으로 실행 -->
-      <insert id="Comint" parameterType="kr.or.human6.dto.Comdto">
+      <insert id="Comint" parameterType="project.dto.Comdto">
  
             <!-- 넣을 필드 -->
 <selectKey keyProperty="commentid" resultType="int" order="BEFORE">
@@ -30,13 +30,13 @@ values (#{postid}, 'adminid1', #{title}, #{content}, sysdate, 'Y', 0) -->
         
         
         <!--  댓글 전체 목록 -->
-	  <select id="Comsel" resultType="kr.or.human6.dto.Comdto">
+	  <select id="Comsel" resultType="project.dto.Comdto">
 	  select * from comments order by commentid  
 	  </select>
         
         
         <!--  댓글 목록 하나 -->
-	     <select id="Comselid" resultType="kr.or.human6.dto.Comdto" parameterType="int"> 
+	     <select id="Comselid" resultType="project.dto.Comdto" parameterType="int"> 
 		select * from comments  
 		where postid = #{postid}
 		</select>
@@ -44,7 +44,7 @@ values (#{postid}, 'adminid1', #{title}, #{content}, sysdate, 'Y', 0) -->
         
         
         <!--  댓글 삭제 -->
-         <delete id="Comdel" parameterType="kr.or.human6.dto.Comdto">
+         <delete id="Comdel" parameterType="project.dto.Comdto">
 			delete from comments
 			where commentid = #{commentid}
          </delete>

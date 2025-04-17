@@ -7,7 +7,7 @@
 
 
           <!-- 안쪽에서 바깥으로 실행 -->
-       <select id="selectPageEmp" resultType="kr.or.human6.dto.Prodto">
+       <select id="selectPageEmp" resultType="project.dto.Prodto">
        
        
        <!-- index start에서 end까지 -->

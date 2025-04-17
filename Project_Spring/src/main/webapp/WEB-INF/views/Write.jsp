@@ -208,8 +208,8 @@ h1 {
        
   
         
-        
-        <form method="post" action="insert" enctype="multipart/form-data">
+        <!-- enctype="multipart/form-data" -->
+        <form method="post" action="insert">
        
        
              <!-- 제목 -->
@@ -223,8 +223,10 @@ h1 {
 	            <div class="button-container">
 	            
 	            
-	                                          
-	                <input type="file" name="file1" multiple>
+	                                         
+	                <input type="file" name="file_name" multiple>
+	                
+	                
 	                
 	                <button type="button" class="link-button" id="link-button">링크 첨부</button>
 	                <button type="button" class="schedule-button" id="schedule-button">일정</button>

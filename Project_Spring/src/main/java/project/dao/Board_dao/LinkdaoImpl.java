@@ -1,4 +1,4 @@
-package kr.or.human6.dao;
+package project.dao.Board_dao;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
-import kr.or.human6.dto.Comdto;
-import kr.or.human6.dto.Linkdto;
-import kr.or.human6.dto.Prodto;
+import project.dto.Comdto;
+import project.dto.Linkdto;
+import project.dto.Prodto;
 
 
 

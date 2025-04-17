@@ -1,4 +1,4 @@
-package kr.or.human6.dto;
+package project.dto;
 
 import java.sql.Date;
 
