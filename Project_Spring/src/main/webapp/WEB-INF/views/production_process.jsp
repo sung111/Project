@@ -192,6 +192,7 @@
 </head>
 
 <body>
+
     <div id="total">
 
         <div id="c_container">
@@ -202,7 +203,7 @@
             <div id="c_container2">
               
                 <select name="select_value" id="milkit">    
-                <c:forEach var="dto" items="${list}">    
+                <c:forEach var="dto" items="${plist}">    
 
                 <option value="${dto.productid}" > ${dto.productname}</option>
                 </c:forEach>
@@ -220,50 +221,23 @@
         <!-- 부대찌개 밀키트  -->
         <div id="table-chiled">
             <table class="tableall" id="defult">
-                <tr>
-                    <th class="table-wid">공정단계</th>
-                    <th class="table-wid2">설명</th>
-                    <th class="table-wid3">사용장비</th>
-                    <th class="table-wid4">위생 기준</th>
-                    <c:if test="${Field == 'ADMIN'}">	
-                    <th class="table-wid5">수정/삭제</th>
-                    </c:if>
-                </tr>
-      
-        <c:forEach var="dto" items="${ppdvalue}">
-                <tr>
-              <form method="post" action="ProductionProcess_controller" >
-                    <td style="width:10.1%;"><span class="spantotal">${dto.processstage}</span>
-                    <input type="hidden" value="${dto.processid}" name="processid">
-                     <input type="hidden" value="${dto.productid}">
-                    <textarea class="texttotal" name="processstage">${dto.processstage}</textarea></td>
-                    
-                    <td style="width:29%;"><span class="spantotal">${dto.description}</span>
-                    <textarea name="description" id="" class="texttotal">${dto.description}</textarea></td>
-                    
-                    <td style="width:15%;"><span class="spantotal">${dto.equipment}</span><textarea name="equipment" id=""
-                            class="texttotal">${dto.equipment}</textarea></td>
-                            
-                    <td style="width:30%;"><span class="spantotal">${dto.hygiene}</span><textarea name="hygiene"
-                            id="" class="texttotal">${dto.hygiene}</textarea></td>
-                            <c:if test="${Field == 'ADMIN'}">
-                            <td class="table-button">
-                            	<input type="hidden"  value="update" name="type">
-	                            <input type="button" value="수정 " class="updat btn ">
-                                <input type="submit" value="확인 " class="uok btn">
-                                <input type="button" value="취소 " class="ucan btn">
-	                        </form>
-	                        <form method="post" action="ProductionProcess_controller">
-	                            <input type="hidden"  value="delet" name="type">
-	                            <input type="hidden"  value="${dto.processid}" name="processid_value">
-	                            <input type="submit" value="삭제 " class="delet btn ">
-                            </form>
-                            </td>
-                            </c:if>
-                    </td>
-                </tr>
-         
-           </c:forEach>
+                <thead>
+                    <tr id="top-title">
+                        <th class="table-wid">공정단계</th>
+                        <th class="table-wid2">설명</th>
+                        <th class="table-wid3">사용장비</th>
+                        <th class="table-wid4">위생 기준</th>
+                        <c:if test="${Field == 'ADMIN'}">	
+                        <th class="table-wid5">수정/삭제</th>
+                        </c:if>
+                    </tr>
+                </thead>
+
+                 <tbody id="new-tbody">
+
+
+                </tbody>
+
             </table>
    
         </div>
@@ -272,117 +246,174 @@
         <script>
 
             window.addEventListener("load", function () {
-            document.querySelectorAll(".texttotal").forEach(el => el.classList.add("none"));
-            document.querySelectorAll(".uok").forEach(el => el.classList.add("none"));
-            document.querySelectorAll(".ucan").forEach(el => el.classList.add("none"));
-        
-            // document.querySelector("#c1").addEventListener("click",function(e){
-            //     newtable = document.createElement("tr")
-            //     newtable.innerHTML = `
-            //     <td id="newtd" colspan="5">
-            //     	  <form method="post" action="ProductionProcess_controller">   
-            //     	  <table class="tableall" id="newtable">
-            //     	  <tr>
-            //                 <td style="width:10.2%;"><textarea  name="new_processstage">기본값필요</textarea></td>
-            //                 <td style="width:30%;"><textarea  name="new_description">기본값필요</textarea></td>
-            //                 <td style="width:15%;"><textarea  name="new_equipment">기본값필요</textarea></td>
-            //                 <td style="width:30%;"><textarea  name="new_hygiene">기본값필요</textarea></td>
-            //                 <td id="td_5" class="table-button">
-            //                 	<input type="hidden" value="" name="new_pro_value" id="new_pro_value">
-            //                 	<input type="hidden" value="new" name="type" id="new_pro_value">
-                      
-            //                     <input type="button" value="삭제"	 class="dd btn">
-            //                     <input type="button" value="확인 " class="uok btn">
-            //                 </td>
-            //           	  </tr>
-            //              </table>
-            //             </form>
-            //             </td>
-            //                 `
-          
-        
-                            
-                            
-            //     	newtable.querySelector(".dd").addEventListener("click",function(ev){
-            //     	console.log(ev.target.parentNode);
-            //     	ev.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
+                console.log("페이지 로드 완료")
+                selectfun();
+                document.querySelector("#milkit").addEventListener("change",selectfun)
+                
                
-            //     	})
-                	
-            //     	newtable.querySelector(".uok").addEventListener("click",function(ev){
-            //     		let value = document.querySelector("#milkit").value
-            //     		console.log("value값은 " ,value);
-            //     		let new_pro_value = ev.target.parentNode.querySelector("#new_pro_value");
-            //     		new_pro_value.value = value
-            //     		// 여기
-            //     		this.type = "submit";
-            //     	})
-                	
-            //      let defult = document.querySelector("#defult")
-            //     defult.append(newtable);
-             
-            // })
+		
+                
+                //공정생성 클릭 이벤트
+                document.querySelector("#c1").addEventListener("click",function(e){
+                	console.log("공정생성 클릭")
 
-				document.querySelector("#milkit").addEventListener("change",function(e){
-                // 선택된 option의 value 값을 가져옵니다
-                if(this.value == "null"){
-                	console.log("값이 0입니다")
-                }
-                		// ajax
-                        const xhr = new XMLHttpRequest();
-																		xhr.open('put', 'products_update')
 
-																		xhr.setRequestHeader('Content-Type', 'application/json')
+                        let newbody = document.createElement("tr")
+                            newbody.setAttribute("class", "article")
+                            newbody.innerHTML = `
+                            <td style="width:10.1%;">
+                            <textarea class="texttotal"id="text1" >값을 입력해주세요</textarea>   
+                            </td>                   
+                            <td style="width:29%;">
+                            <textarea class="texttotal" id="text2">값을 입력해주세요</textarea>   
+                            </td>                   
+                            <td style="width:15%;">
+                            <textarea class="texttotal" id="text3" >값을 입력해주세요</textarea>   
+                            </td>                   
+                            <td style="width:30%;">
+                            <textarea class="texttotal" id="text4" >값을 입력해주세요</textarea>   
+                            </td>                   
+                            <td class="table-button">
+                                <input type="button" value="확인 " class="newupdat btn ">
+                                <input type="submit" value="취소 " class="delet btn ">
+                            </td>
+                            `
 
-																		xhr.send(JSON.stringify(material))
+                            document.querySelector("#new-tbody").append(newbody)
 
-																		xhr.onload = function () {
-																			if (xhr.responseText == "1") {
-																				console.log(xhr.responseText)
-																				alert("수정이되었습니다")
-																				location.href = "standard?view_value=${view_value}"
-																			} else {
-																				console.log(xhr.responseText)
-																				alert('수정 실패')
-																			}
-																		}
-               
+                            newbody.querySelector(".newupdat").addEventListener("click",(ev)=>{
+                                console.log(ev.target.parentNode.parentNode.querySelector("#text1").value)
+                                let text1 = ev.target.parentNode.parentNode.querySelector("#text1").value
+                                let text2 = ev.target.parentNode.parentNode.querySelector("#text2").value
+                                let text3 = ev.target.parentNode.parentNode.querySelector("#text3").value
+                                let text4 = ev.target.parentNode.parentNode.querySelector("#text4").value
+                                console.log( document.querySelector("#milkit").value)
+                                let productid = document.querySelector("#milkit").value
+                          
+                                if(text1.trim() == ""){
+                                    alert("공정단계는 필수입니다")
+                                }else if(text2.trim() == ""){
+                                    alert("설명은 필수입니다")
+                                }else if(text3.trim() == ""){
+                                    alert("사용장비는 필수입니다")
+                                }else if(text4.trim() == ""){
+                                    alert("위생기준은 필수입니다")
+                                }else{
+                                    dto ={
+                                        processstage : text1,
+                                        description : text2,
+                                        equipment : text3,
+                                        hygiene : text4,
+                                        productid : productid
+                                    }
+
+
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.open('post','production_process_insert')
+                                    xhr.setRequestHeader('Content-Type', 'application/json')
+                                    xhr.send(JSON.stringify(dto))
+                                    xhr.onload = function(){
+                                        let data = JSON.parse(xhr.responseText)
+                                        console.log(data)
+                                        if(data == 1){
+                                            alert("공정 생성 완료")
+                                          
+                                            selectfun();
+                                           
+                                        }else if (data == 0){
+                                            alert("공정 생성 실패")
+                                        }
+                               
+                                    }
+
+                                
+                                
+                                
+                                }   
+                            })
+
                 })
-				
-                let updats = document.querySelectorAll(".updat")
-				for(let i=0; i<updats.length; i++){
-					updats[i].addEventListener("click",function(e){
-						console.log(e.target.parentNode.parentNode.parentNode)
-						e.target.parentNode.querySelector(".uok").classList.remove("none")
-						e.target.parentNode.querySelector(".ucan").classList.remove("none")
-						e.target.parentNode.parentNode.querySelector(".delet").classList.add("none")
-						e.target.classList.add("none")
-						let texttotals = e.target.parentNode.parentNode.querySelectorAll(".texttotal")
-						let spantotals = e.target.parentNode.parentNode.querySelectorAll(".spantotal")
-						for(let i=0; i<texttotals.length; i++){
-							texttotals[i].classList.remove("none")
-							spantotals[i].classList.add("none")
-							
-						}
-						e.target.parentNode.querySelector(".ucan").addEventListener("click",function(ev){
-							ev.target.parentNode.querySelector(".uok").classList.add("none")
-							ev.target.classList.add("none")
-							ev.target.parentNode.querySelector(".updat").classList.remove("none")
-							ev.target.parentNode.parentNode.querySelector(".delet").classList.remove("none")
-							console.log(ev.target.parentNode.parentNode)
-							
-							let texttotals = ev.target.parentNode.parentNode.querySelectorAll(".texttotal")
-							let spantotals = ev.target.parentNode.parentNode.querySelectorAll(".spantotal")
-							for(let i=0; i<texttotals.length; i++){
-								texttotals[i].classList.add("none")
-								spantotals[i].classList.remove("none")
-								
-							}
-						})
-					})
-				}
 			
 
+
+
+                function selectfun(){
+                // 선택된 option의 value 값을 가져옵니다
+                    console.log("값은 ",document.querySelector("#milkit").value)
+                    // ajax
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('get', 'production_process_view?select_value='+document.querySelector("#milkit").value)
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                    xhr.send()
+                    xhr.onload = function () {
+                            let data = JSON.parse(xhr.responseText);
+                            console.log(data)
+                            let deview = data.Descriptionlist;
+                            document.querySelector("#new-tbody").innerHTML = ``
+                            deview.forEach(dto => {
+                                        let DescripBody = document.createElement("tr")
+                                        DescripBody.setAttribute("class", "article")
+                                        DescripBody.innerHTML = `
+                                            <td style="width:10.1%;">
+                                                <span class="spantotal">\${dto.processstage}</span>
+                                              </td>
+                                            <td style="width:29%;">
+                                                <span class="spantotal">\${dto.description}</span>
+                                            </td>
+                                            <td style="width:15%;">
+                                                <span class="spantotal">\${dto.equipment}</span>
+                                                </td> 
+                                            <td style="width:30%;">
+                                                <span class="spantotal">\${dto.hygiene}</span>
+                                             </td>
+                                                `
+                                         if(data.Field == 'ADMIN')
+                                            {DescripBody.innerHTML +=`
+                                                <td class="table-button">
+                                                    <input type="hidden"  value="update" name="type">
+                                                    <input type="button" value="수정 " class="updat btn ">
+                                                    <input type="hidden"  value="\${dto.processid}" name="processid_value">
+                                                    <input type="submit" value="삭제 " class="delet btn ">
+                                                </td>
+                                                `
+                                            }else{DescripBody.innerHTML +=`<td></td>`}
+                                        document.querySelector("#new-tbody").append(DescripBody)
+
+                                        //수정 삭제 버튼 이벤트 만들기
+                                        let update = DescripBody.querySelector(".updat")
+                                        DescripBody.querySelector(".updat").addEventListener("click", function(e){
+
+
+                                            console.log(e.target.parentNode.parentNode)
+                                            // e.target.parentNode.parentNode.innerHTML = ``
+                                            // console.log(e.target.parentNode.parentNode)
+                                            e.target.parentNode.parentNode.innerHTML = `
+                                                                        <tr>
+                                                                            <td style="width:10.1%;">
+                                                                            <textarea class="texttotal"id="text1" >값을 입력해주세요</textarea>   
+                                                                            </td>                   
+                                                                            <td style="width:29%;">
+                                                                            <textarea class="texttotal" id="text2">값을 입력해주세요</textarea>   
+                                                                            </td>                   
+                                                                            <td style="width:15%;">
+                                                                            <textarea class="texttotal" id="text3" >값을 입력해주세요</textarea>   
+                                                                            </td>                   
+                                                                            <td style="width:30%;">
+                                                                            <textarea class="texttotal" id="text4" >값을 입력해주세요</textarea>   
+                                                                            </td>                   
+                                                                            <td class="table-button">
+                                                                                <input type="button" value="확인 " class="newupdat btn ">
+                                                                                <input type="submit" value="취소 " class="delet btn ">
+                                                                            </td>
+                                                                        </tr>
+                                                                            `     
+                                        });
+
+                            })
+                    }
+                }
+
+              
 
             })
         </script>

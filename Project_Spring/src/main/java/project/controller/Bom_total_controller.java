@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.dto.Materials_DTO;
+import project.dto.ProductionProcessDescription_DTO;
 import project.dto.Products_DTO;
 import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
@@ -430,32 +431,66 @@ public class Bom_total_controller {
 	
 //생산공정 
 //----------------------
-	@RequestMapping("/production_process")
-	public String production_process(Model model) {
-		
-		System.out.println("production_process 실행");
-		List list = service.SelectProductPnamePid();
-		String Field = "ADMIN";
-		model.addAttribute("list",list);
-		model.addAttribute("Field",Field);
-		System.out.println("list"+list+""+"Field"+Field);
+	@RequestMapping(value="/production_process",method=RequestMethod.GET)
+	public String production_process(Model model
+			) {
+		try {
+			System.out.println("production_process 실행");
+			List plist = service.SelectProductPnamePid();
+			List dlist = service.SelectProcessDescription(1);
+			String Field = "ADMIN";
+			model.addAttribute("plist",plist);
+			model.addAttribute("dlist",dlist);
+			model.addAttribute("Field",Field);
+			System.out.println("plist"+plist+""+"dlist"+dlist);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "production_process";
 	}
 	
 //생상공정 value에따라 화면 출력
-	
-	@RequestMapping(value="/production_process ",method=RequestMethod.GET)
-	public String production_process(@RequestParam("productid") int select_value,
-			Model model) {
-		//쿼리문 작성 완료 DAO작성완료 서비스 작성후 컨트롤러 작성 시작하면됨
+	@ResponseBody
+	@RequestMapping(value="/production_process_view",method=RequestMethod.GET)
+	public Map<String,Object> production_process(@RequestParam("select_value") int select_value
+			) {  
 		
-		System.out.println("production_process 실행");
-		List list = service.SelectProductPnamePid();
-		String Field = "ADMIN";
-		model.addAttribute("list",list);
-		model.addAttribute("Field",Field);
-		System.out.println("list"+list+""+"Field"+Field);
-		return "production_process";
+		Map<String,Object> map = new HashMap();
+	
+		try {
+			System.out.println("production_process 실행");
+			System.out.println("select_value"+select_value);
+			
+			List Descriptionlist = service.SelectProcessDescription(select_value);
+			String Field = "ADMIN";
+
+			map.put("Descriptionlist", Descriptionlist);
+			map.put("Field", Field);
+			System.out.println("Descriptionlist"+Descriptionlist+""+"Field"+Field);
+			
+		}catch (Exception e) {
+		e.printStackTrace();
+		}
+	
+		
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/production_process_insert",method=RequestMethod.POST)
+	public int production_process_insert(@RequestBody ProductionProcessDescription_DTO dto
+			) {  
+		System.out.println("production_process_insert 실행");
+		
+		int result = 0;
+		try {
+			 result = service.ProductionProcessInsert(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	
 	

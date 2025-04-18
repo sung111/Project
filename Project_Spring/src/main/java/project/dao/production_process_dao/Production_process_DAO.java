@@ -11,7 +11,7 @@ public interface Production_process_DAO {
 //사용
 	public List<Products_DTO> SelectProductPnamePid();
 	public List<ProductionProcessDescription_DTO> SelectProcessDescription(int productid);
-
+	public int ProductionProcessInsert(ProductionProcessDescription_DTO dto);
 
 ////사용
 	
