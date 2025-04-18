@@ -13,4 +13,10 @@ public interface Performance_DAO {
 	//삭제
 	public int performanceDelete(Performance_DTO dto);
 
+	//검색
+	public List performanceSearchList(Performance_DTO dto);
+	public int performanceSearchCount(Performance_DTO dto);
+	
+	//업뎃
+	public int performanceUpdate(Performance_DTO dto);
 }
