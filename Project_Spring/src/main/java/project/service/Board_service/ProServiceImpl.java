@@ -148,7 +148,19 @@ public class ProServiceImpl implements ProService {
 		
 		
 		
-		
+		// 검색
+		@Override
+		public 	List<Prodto> search(Prodto Prodto){
+							
+									                      
+	  
+		List<Prodto> search = Prodao.search(Prodto);
+	    System.out.println("검색 : " + search);
+	    return search;
+					
+	    
+	    
+				}	
 		
 		
 		

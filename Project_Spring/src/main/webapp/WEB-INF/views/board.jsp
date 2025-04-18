@@ -159,7 +159,18 @@ font-weight : bold;
 
 </style>
 
+<form method="post" action="select">
+<input type="text" name="title">
+<button type="submit" class="newpost">등록</button>
+</form>
 
+
+<select>
+    <option value="five">5</option>
+    <option value="ten">10</option>
+    <option value="fifteen">15</option>
+    <option value="twenty">20</option>
+</select>
 
 <body>
 	<div class="box">
@@ -179,7 +190,7 @@ font-weight : bold;
     <c:forEach var="dto" items="${map.list}">
 		<!-- 게시물 목록 -->                   <!--  id만 따오면 뒤에 따라온다 -->
 		<div class="post" >        <!--  a태그 : get방식(파라미터 뒤에쓰기) form : post방식 -->
-			<span class="content"><a href="Content?postid=${dto.postid}" id="move">${dto.title}</a></span>
+			<span class="content"><a href="Content?postid=${dto.postid}" id="move" >${dto.title}</a></span>
 			<span class="author">${dto.viewcount}</span> 
 			<span class="date">${dto.postdate}</span>
 			<span class="author">${dto.userid}</span> 

@@ -19,7 +19,7 @@ public interface Prodao {
 	public int Viewcount(Prodto prodto);
 	public List<Prodto> selectpage(Prodto Prodto);
 	public int totalList();
-	
+	public 	List<Prodto> search(Prodto Prodto);
 	
 	
 }
