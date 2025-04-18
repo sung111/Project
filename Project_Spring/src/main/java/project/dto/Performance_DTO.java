@@ -31,8 +31,8 @@ public class Performance_DTO {
 	
 //	조회하기위한 필드 정의
 	
-	private Date searchDateStart;
-	private Date searchDateEnd;
+	private String searchDateStart;
+	private String searchDateEnd;
 	
 	
 	

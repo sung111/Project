@@ -27,6 +27,7 @@ public class Performance_DAOImpl implements Performance_DAO{
 		return result;
 	}
 	
+	
 	//삭제
 	@Override
 	public int performanceDelete(Performance_DTO dto) {
@@ -34,6 +35,26 @@ public class Performance_DAOImpl implements Performance_DAO{
 		return result;
 	}
 	
+	
+	// 검색
+	@Override
+	public List performanceSearchList(Performance_DTO dto) {
+		List result = sqlsession.selectList("project.mapper.Performance.performanceSearch", dto);
+		return result;
+	}
+	// 검색카운트
+	@Override
+	public int performanceSearchCount(Performance_DTO dto) {
+		int result = sqlsession.selectOne("project.mapper.Performance.performanceSearchCount", dto);
+		return result;
+	}
+	
+	//업데이트
+	@Override
+	public int performanceUpdate(Performance_DTO dto) {
+		int result = sqlsession.update("project.mapper.Performance.performanceUpdate", dto);
+		return result;
+	}
 	
 	
 	

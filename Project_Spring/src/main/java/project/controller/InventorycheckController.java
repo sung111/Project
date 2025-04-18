@@ -61,14 +61,14 @@ public class InventorycheckController {
 		service.deleteCheck(invenDTO);
 
 		// 리스트가없으면 c:forEach가 안돌아서 nullPointException 나옴.
-		model.addAttribute("list", service.page(invenDTO));
-		model.addAttribute("totalCount", service.totalCount());
-		model.addAttribute("dto", invenDTO);
+//		model.addAttribute("list", service.page(invenDTO));
+//		model.addAttribute("totalCount", service.totalCount());
+//		model.addAttribute("dto", invenDTO);
+//
+//		model.addAttribute("matDB", service.matDB(invenDTO));
+//		model.addAttribute("prodDB", service.prodDB(invenDTO));
 
-		model.addAttribute("matDB", service.matDB(invenDTO));
-		model.addAttribute("prodDB", service.prodDB(invenDTO));
-
-		return "Inventorycheck";
+		return "redirect:/inven";
 	}
 
 	// 자재 등록.
@@ -83,14 +83,14 @@ public class InventorycheckController {
 			return "error";
 		}
 
-		model.addAttribute("list", service.page(dto));
-		model.addAttribute("totalCount", service.totalCount());
-		model.addAttribute("dto", dto);
+//		model.addAttribute("list", service.page(dto));
+//		model.addAttribute("totalCount", service.totalCount());
+//		model.addAttribute("dto", dto);
+//
+//		model.addAttribute("matDB", service.matDB(dto));
+//		model.addAttribute("prodDB", service.prodDB(dto));
 
-		model.addAttribute("matDB", service.matDB(dto));
-		model.addAttribute("prodDB", service.prodDB(dto));
-
-		return "Inventorycheck";
+		return "redirect:/inven";
 	}
 	
 	//수정
