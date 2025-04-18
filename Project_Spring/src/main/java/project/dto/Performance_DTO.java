@@ -9,13 +9,13 @@ import lombok.Data;
 public class Performance_DTO {
 
 //	performances 테이블 db
-	int performanceid;
-	int productid;
-	int planid;
-	String userid;
-	Date reporttime;
-	String performancecomment;
-	int productioncount;
+	private int performanceid;
+	private int productid;
+	private int planid;
+	private String userid;
+	private Date reporttime;
+	private String performancecomment;
+	private int productioncount;
 
 //	페이지네이션
 	private int Page = 1; //첫페이지
@@ -28,7 +28,12 @@ public class Performance_DTO {
 	private int rnum;
 	private String productname;
 	private String username;
-	 
+	
+//	조회하기위한 필드 정의
+	
+	private String searchDateStart;
+	private String searchDateEnd;
+	
 	
 	
 	

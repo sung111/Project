@@ -201,13 +201,16 @@ function init() {
           .catch(error => {
             console.log("에러발생데스요 : ", error);
           })
+      })//수정완료 클릭 end
 
-
-
+      //취소클릭시 새로고침
+      modimodi.querySelector('.cancel').addEventListener('click', (e)=>{
+        alert("수정을 취소하셨습니다.");
+        location.reload();
       })
 
-    })
-  }
+    }) // 수정 클릭이벤트 끗
+  } // 수정 for문 끝
 
 
 

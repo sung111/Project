@@ -239,10 +239,7 @@ width: 50%;
 <br>
 
  <c:forEach var="flink" items="${Fileselid}"> 
-
   <img src="downloads?file_name=${flink.file_name}"  alt="image" width="500"><br>
-
-
  </c:forEach> 
 
 <br>

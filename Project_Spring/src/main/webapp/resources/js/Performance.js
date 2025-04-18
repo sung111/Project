@@ -8,6 +8,20 @@ function init() {
   const year = now.getFullYear();
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
   const day = ("0" + now.getDate()).slice(-2);
+  const hour = ("0" + now.getHours()).slice(-2);
+  const minute = ("0" + now.getMinutes()).slice(-2);
+  // const second = ("0" + now.getSeconds()).slice(-2);
+  const date = `${year}-${month}-${day}T${hour}:${minute}`
+  if(document.querySelector('.indate1').value == null || document.querySelector('.indate1').value == '' ){
+    document.querySelector('.indate1').value = date
+  }
+  if(document.querySelector('.indate2').value == null || document.querySelector('.indate2').value == '' ){
+    document.querySelector('.indate2').value = date
+  }
+  document.querySelector('.date1').value = date
+  // console.log(date.indexOf("T")); // 10
+  // console.log( date.slice( date.indexOf("T")+1 ) );
+  // console.log( date.slice( 0 , date.indexOf("T") ) );
 
 
 
@@ -15,9 +29,6 @@ function init() {
   document.querySelector('.btn2').addEventListener('click', (e) => {
     const modal = document.querySelector('#myModal')
     const content = document.querySelector('.modal-content')
-
-
-
     fetch('Inspection_standards.html')
       .then(response => {
         if (!response.ok) {
@@ -82,185 +93,138 @@ function init() {
   });
 
 
+  //삭제
+  const del = document.querySelectorAll('.delete');
+  const delf = document.querySelectorAll('.deleteForm');
+  for(let i = 0 ; i < del.length ; i++){
+    del[i].addEventListener('click',(e)=>{
+      e.preventDefault();
+      let tt = confirm("삭제하시겠습니까?");
+      if(tt){
+        delf[i].submit();
+        alert("삭제되었습니다.")
+      }
+    })
+  }
 
+  //조회버튼 하다가 form으로 도망감
+  // document.querySelector('.btn4').addEventListener('click',(e)=>{
 
+  //   const productname = document.querySelector('.wp3').value;
+  //   const indexStart = document.querySelector('.indate1').value;
+  //   const indexEnd = document.querySelector('.indate2').value;
 
+  //   const params = new URLSearchParams({
+  //     productname : productname,
+  //     searchDateStart : indexStart,
+  //     searchDateEnd : indexEnd
+  //   }).toString();
 
-
-  // document.querySelector('.box3View').addEventListener('click', (e) => {
-
-
-  //   if (e.target.innerText == '완료') {
-  //     const tarG = e.target.parentNode.parentNode
-  //     const date = tarG.querySelector('.emdskf').value
-  //     const wp = tarG.querySelector('.emdwp').innerText
-  //     const tn = tarG.querySelector('.emdtn').value
-  //     const tT = tarG.querySelector('.text1').value
-  //     tarG.innerHTML = "";
-  //     // for (let i = 0; i < tarGe.length; i++) {
-  //     //   console.log(tarGe[i].value);
-  //     //   tarG.innerHTML += `<div>${tarGe[i].value}</div>`;
-  //     // }
-  //     tarG.innerHTML += `
-  //                         <div class="dateB">${date}</div>
-  //                         <div class="emdwp">${wp}</div>
-  //                         <div class="emdtn">${tn}</div>
-  //                         <div>생산완료</div>
-  //                         <div class="text1">${tT}</div>
-  //                         <div>
-  //                           <button class="tn">수정</button>
-  //                           <button class="tkr">삭제</button>
-  //                         </div>
-  //                         </div>
-  //                       `
-  //     alert("수정되었습니다.")
-  //   }
-
-  //   //수정버튼
-  //   if (e.target.innerText == '수정') {
-
-  //     const row = e.target.parentNode.parentNode;
-      // row.dataset.original = row.innerHTML
-
-  //     const now = new Date();
-  //     const year = now.getFullYear();
-  //     const month = ("0" + (now.getMonth() + 1)).slice(-2);
-  //     const day = ("0" + now.getDate()).slice(-2);
-  //     const hour = ("0" + now.getHours()).slice(-2);
-  //     const minute = ("0" + now.getMinutes()).slice(-2);
-  //     const date = `${year}-${month}-${day}T${hour}:${minute}`;
-
-  //     const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
-  //     const emdtn = e.target.parentNode.parentNode.querySelector('.emdtn').innerText
-  //     const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
-  //     e.target.parentNode.parentNode.innerHTML =
-  //       `
-  //     <div><input type="datetime-local" class="emdskf" value="${date}"></div>
-  //     <div class="emdwp">${emdwp}</div>
-  //     <div><input type="text" class="emdtn" value="${emdtn}"></div>
-  //     <div>생산완료</div>
-  //     <div><input type="text" class="text1" value="${text}"></div>
-  //     <div>
-  //       <button class="dhks">완료</button>
-  //       <button class="cnl">취소</button>
-  //     </div>
-  //     `
-
-  //   }
-
-  //   if (e.target.innerText === "취소") {
-  //     const row = e.target.parentNode.parentNode;
-  //     if (row.dataset.original) {
-  //       row.innerHTML = row.dataset.original;
+  //   fetch(`/project/performanceSearch?${params}`,{
+  //     method : "GET",
+  //     headers:{
+  //       "Accept":"application/json"
   //     }
-  //   }
+  //   })
+  //   .then( response => response.json() )
+  //   .then( data => {
+  //     console.log("받은데이따 : " , data);
+  //     const viewBox = document.querySelector('.box3View');
+  //     viewBox.innerHTML='';
 
+  //     const list = data.list;
+  //     const totalCount = data.totalCount;
+  //     console.log("리스트", list);
+  //     console.log("토탈카운따", totalCount);
 
+  //   })
+  //   .catch(error =>{
+  //     console.log("에러띵 : ", error);
+  //   })
 
-  //   const tkr = document.querySelectorAll('.tkr')
-  //   for (let i = 0; i < tkr.length; i++) {
-  //     if (e.target.innerText == '삭제') {
-  //       e.target.parentNode.parentNode.remove();
-  //       alert("삭제되었습니다.")
-  //       break;
-  //     }
-  //   }
   // })
 
 
-  // document.querySelector('.btn4').addEventListener('click', () => {
+  //수정 드가자이
+  const modify = document.querySelectorAll('.tn');
+  for(let i = 0 ; i < modify.length ; i++){
+    modify[i].addEventListener('click', (e)=>{
+      e.preventDefault();
 
-  //   const productFilter = document.querySelector('.wp3').value.trim().toLowerCase();
-  //   const startD = document.querySelector('.indate1').value;
-  //   const endD = document.querySelector('.indate2').value;
+      console.log(e.target.closest("form"))
+      const modimodi = e.target.closest("form")
+      const dateB = modimodi.querySelector('.dateB').innerText;
+      const emdwp = modimodi.querySelector('.emdwp').innerText;
+      const emdtn = modimodi.querySelector('.emdtn').innerText;
+      const text1 = modimodi.querySelector('.text1').innerText;
+      const emdId = modimodi.querySelector('.emdId').innerText;
+      const performId = modimodi.querySelector('.performId').value;
 
-  //   const startDate = startD ? new Date(startD) : null;
-  //   const endDate = endD ? new Date(endD) : null;
+      modimodi.innerHTML = `
+        <div class="dateB">
+          <input type="datetime-local" id="time" value="${dateB}">
+        </div>
+        <div class="emdwp">${emdwp}</div>
+        <div class="emdtn">
+          <input type="text" id="emdtn" value="${emdtn}">
+        </div>
+        <div class="text1">
+          <input type="text" id="text1" value="${text1}">
+        </div>
+        <div class="emdId">${emdId}</div>
+        <div style="display: flex; justify-content: center;">
+          <button type="button" class="yes" style="height: 26px;">완료</button>
+          <button type="button" class="cancel" style="height: 26px;">취소</button>
+          <input type="hidden" id="performId" value="${performId}">
+        </div>
+      `
 
-  //   const items = document.querySelectorAll('.box3View .item');
+      // 수정완료 클릭시
+      const yes = modimodi.querySelector('.yes');
+      yes.addEventListener('click',(e)=>{
+        const time = modimodi.querySelector('#time').value;
+        const emdtn = modimodi.querySelector('#emdtn').value;
+        const text1 = modimodi.querySelector('#text1').value;
+        const performId = modimodi.querySelector('#performId').value;
 
-  //   items.forEach(item => {
-  //     const dateElem = item.querySelector('.dateB');
-  //     const emdwp = item.querySelector('.emdwp');
+        fetch("/project/performanceUpdate",{
+          method : 'POST',
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body : JSON.stringify({
+            reporttime: time,
+            productioncount: emdtn,
+            performancecomment: text1,
+            performanceid: performId
+          })
+        })
+        .then( respnose => respnose.text() )
+        .then( text =>{
+          console.log('text');
+          if(text == 1){
+            alert("수정완료");
+            location.reload();
+          }
+          else{
+            alert("수정실패");
+          }
+        })
+        .catch(error =>{
+          console.log("에러에러에러 :" , error);
+        })
+      }) // 수정완료 클릭 end
 
-  //     const dateText = dateElem ? dateElem.textContent.trim() : "";
-  //     const productText = emdwp ? emdwp.textContent.trim().toLowerCase() : "";
-
-  //     const itemDate = new Date(dateText);
-
-  //     let match = true;
-
-  //     // 제품명 필터 (입력한 텍스트가 항목의 제품명에 포함되어 있어야 함)
-  //     if (productFilter && !productText.includes(productFilter)) {
-  //       match = false;
-  //     }
-
-  //     if (startDate && itemDate < startDate) {
-  //       match = false;
-  //     }
-
-  //     if (endDate && itemDate > endDate) {
-  //       match = false;
-  //     }
-
-  //     item.style.display = match ? "" : "none";
-  //   });
-  // });
+      //취소클릭시 새로고침
+      modimodi.querySelector('.cancel').addEventListener('click', (e)=>{
+        alert("수정을 취소하셨습니다.");
+        location.reload();
+      })
+    }) // 수정 클릭이벤트 끗
+  }// 수정 for문 끝
 
 
 
-
-  // // 페이지네이션 관련 전역 변수
-  // let currentPage = 1;
-  // const itemsPerPage = 7;  // 한 페이지에 표시할 항목 수
-
-  // // 페이지네이션을 적용하는 함수
-  // function renderPagination() {
-  //   // 모든 등록된 항목 선택 (.item 클래스 사용)
-  //   const view = document.querySelector('.box3View');
-  //   const items = Array.from(view.querySelectorAll('.item'));
-  //   const totalItems = items.length;
-  //   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  //   // 모든 항목 숨긴 후, 현재 페이지에 해당하는 항목만 보이도록 처리
-  //   items.forEach((item, index) => {
-  //     if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
-  //       item.style.display = '';
-  //     } else {
-  //       item.style.display = 'none';
-  //     }
-  //   });
-
-  //   // pagination 컨테이너 업데이트
-  //   let paginationContainer = document.querySelector('.pagination');
-  //   if (!paginationContainer) {
-  //     // HTML에 없다면 새로 생성 (보통 HTML에 미리 만들어두는 것이 좋음)
-  //     paginationContainer = document.createElement('div');
-  //     paginationContainer.classList.add('pagination');
-  //     // box3 하단에 추가
-  //     document.querySelector('.box3').appendChild(paginationContainer);
-  //   }
-
-  //   // 기존 페이지네이션 버튼 초기화
-  //   paginationContainer.innerHTML = '';
-
-  //   // 페이지 번호 버튼 생성 (전체 페이지 수만큼)
-  //   for (let page = 1; page <= totalPages; page++) {
-  //     const btn = document.createElement('button');
-  //     btn.textContent = page;
-  //     if (page === currentPage) {
-  //       btn.disabled = true;
-  //     }
-  //     btn.addEventListener('click', () => {
-  //       currentPage = page;
-  //       renderPagination();
-  //     });
-  //     paginationContainer.appendChild(btn);
-  //   }
-  // }
-
-  // // (옵션) 페이지 로드 시 처음에도 페이지네이션 렌더링
-  // window.addEventListener('DOMContentLoaded', renderPagination);
 
 
 

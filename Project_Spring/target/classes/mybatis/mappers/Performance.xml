@@ -5,6 +5,76 @@
 
 <mapper namespace="project.mapper.Performance">
 
+
+<!-- 	업데이트 -->
+	<update id="performanceUpdate">
+		update 
+	    	PERFORMANCES
+		set
+		    reporttime = #{reporttime},
+		    productioncount = #{productioncount},
+		    performancecomment = #{performancecomment}
+		where
+		    performanceid = #{performanceid}
+	</update>
+
+<!-- 	검색 결과 -->
+	<select id="performanceSearch"  parameterType="Performance_DTO" resultType="Performance_DTO">
+		select result2.*
+		from
+		    (select rownum rnum, results.*
+		    from
+		        (
+		        select
+		            perf.*, prod.productname, users.username
+		        from 
+		            performances perf
+		        join 
+		            products prod on (perf.productid = prod.productid)
+		        join
+		            users on (users.userid = perf.userid)
+		        <where>
+			        <if test="productname != null and productname != ''">
+			        	and prod.productname like '%' || #{productname} || '%'
+			        </if>
+			        <if test="searchDateStart != null and searchDateEnd != null">
+						and reporttime between TO_DATE(#{searchDateStart}, 'YYYY-MM-DD"T"HH24:MI:SS')
+						and TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD"T"HH24:MI:SS')
+					</if>
+			    </where>
+		        order by
+		            reporttime desc
+		        )results
+		    )result2
+		where 
+			rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]>  #{indexEnd}
+	</select>
+<!-- 	검색 토탈카운트 -->
+	<select id="performanceSearchCount" resultType="int" parameterType="Performance_DTO">
+		select count(*)
+		from(
+		    select
+		        perf.*, prod.productname, users.username
+		    from 
+		        performances perf
+		    join 
+		        products prod on (perf.productid = prod.productid)
+		    join
+		        users on (users.userid = perf.userid)
+		    <where>
+			    <if test="productname != null and productname != ''">
+			   		and prod.productname like '%' || #{productname} || '%'
+			    </if>
+				<if test="searchDateStart != null and searchDateEnd != null">
+					and reporttime between TO_DATE(#{searchDateStart}, 'YYYY-MM-DD"T"HH24:MI:SS')
+					and TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD"T"HH24:MI:SS')
+				</if>
+		    </where>
+		    order by
+		        reporttime
+		)
+	</select>
+
 <!-- 	페이지네이션을위한 토탈카운트 -->
 	<select id="performTotalCount" resultType="int">
 		select count(*) from performances
@@ -21,12 +91,13 @@
 		            from performances perf
 		            join products prod on (perf.productid = prod.productid)
 		            join users on (users.userid = perf.userid)
-		            order by reporttime
+		            order by reporttime desc
 		        )results
 		    )result2
 		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]>  #{indexEnd}  
 	</select>
 	
+<!-- 	삭제 -->
 	<delete id="performanceDelete">
 		delete from performances
 		where performanceid = #{performanceid}
