@@ -1,6 +1,7 @@
 package project.dao.Board_dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,8 @@ public interface Prodao {
 	public int Condel(Prodto Prodto);
 	public int Conup(Prodto prodto);
 	public int Viewcount(Prodto prodto);
+	
+	
 	public List<Prodto> selectpage(Prodto Prodto);
 	public int totalList();
 	public 	List<Prodto> search(Prodto Prodto);

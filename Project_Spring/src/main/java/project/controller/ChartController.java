@@ -58,7 +58,7 @@ public class ChartController {
 	
 	
 
-	// 전체 목록 조회
+	// 조건 목록 조회
     //	@ResponseBody
 	@RequestMapping(value = "/searchs")
 	public String chartid(

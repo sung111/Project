@@ -100,7 +100,7 @@ public class ProServiceImpl implements ProService {
 	
 	
 	
-	// 조건 메소드 //searchlist
+	// 페이징 목록 메소드 //searchlist
 		@Override
 		public 	Map<String, Object> SelectPage(Prodto Prodto){
 							
@@ -150,13 +150,54 @@ public class ProServiceImpl implements ProService {
 		
 		// 검색
 		@Override
-		public 	List<Prodto> search(Prodto Prodto){
+		public 	Map<String, Object> search(Prodto Prodto){
 							
-									                      
+		
+			
+			// 보여줄 시작. 끝 index 찾기
+		    // unreachble code : 위에 끝난 코드가 있음
+		int page = Prodto.getPage();
+//		if (page <= 0) page = 1;
+//		Prodto.setPage(page);
+
+		int viewCount = Prodto.getPagecount();
+//		if (viewCount <= 0) viewCount = 10;
+//		Prodto.setPagecount(viewCount);
+			
+			int indexStart = (viewCount * (page-1)) + 1;
+			int indexEnd = page * viewCount;
+			
+			Prodto.setIndexStart(indexStart);
+			Prodto.setIndexEnd(indexEnd);
+			System.out.println("인덱스스타트 :" + indexStart);
+			System.out.println("인덱스엔드 : " + indexEnd);	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 	  
-		List<Prodto> search = Prodao.search(Prodto);
+		List search = Prodao.search(Prodto);
 	    System.out.println("검색 : " + search);
-	    return search;
+	    
+	    
+	    // 전체 글 개수
+	    int total = Prodao.totalList();
+	    
+	    Map<String, Object> map = new HashMap();
+	    System.out.println("지도 :" + map);
+	    map.put("list", search);
+	    map.put("total", total);
+	    
+	    
+	    
+	    
+	    return map;
 					
 	    
 	    

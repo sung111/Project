@@ -596,7 +596,7 @@ top: 100px;
 			</div>
 
 			<div id="set">
-				<input type="text" id="text" name="productname">
+				<input type="text" id="text" name="productname" placeholder="검색어를 입력해주세요">
 				<button id="sele" type="submit">조회</button>
 			</div>
 		</div>

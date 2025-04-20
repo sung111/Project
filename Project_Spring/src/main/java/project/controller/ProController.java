@@ -118,7 +118,7 @@ System.out.println("접속중....");
 				
 				
 				
-                List<Prodto> search = ProService.search(dto);
+//                List<Prodto> search = ProService.search(dto);
                 
                 
 				int view = ProService.Viewcount(dto);
@@ -134,7 +134,7 @@ System.out.println("접속중....");
 				model.addAttribute("dto", dto);   // 명시적으로 쓰기
 				
 				
-				model.addAttribute("search", search);   // 명시적으로 쓰기
+//				model.addAttribute("search", search);   // 명시적으로 쓰기
 //				model.addAttribute("list", list);
 
 				
@@ -584,6 +584,7 @@ System.out.println("접속중....");
 				
 				// 404시 이쪽으로 안들어오는거
 				@ModelAttribute Prodto prodto,
+				HttpServletRequest request,
 				Model model
 				
 				
@@ -591,15 +592,24 @@ System.out.println("접속중....");
 			
 			
 			
-			    System.out.println("prodto 조회 :" + prodto);
-			    List<Prodto> search = ProService.search(prodto);
+			    System.out.println("검색 prodto 조회 :" + prodto);
+			    Map map = ProService.search(prodto);
 //			    int postid = prodto.getPostid();
 //			    System.out.println(" 파일 삭제 포스트아이디" + prodto.getPostid());
-			    System.out.println(" 검색 성공시 1 " + search);
-			    model.addAttribute("search", search);
+			    System.out.println(" 검색 성공시 1 " + map);
+			    model.addAttribute("search", map);
+			    model.addAttribute("dto", prodto);
+	
 			    
-		
-			return "board";
+			    if(prodto.getTitle() == "") {
+					
+					return "redirect:select";
+					
+				} else {
+					
+					return "board";					
+				}
+			    
 			
 		}
 

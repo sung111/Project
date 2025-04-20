@@ -20,8 +20,9 @@ public interface ProService {
 	public int Condel(Prodto Prodto);
 	public int Conup(Prodto prodto);
 	public int Viewcount(Prodto prodto);
+	
 	public 	Map<String, Object> SelectPage(Prodto Prodto);
-	public 	List<Prodto> search(Prodto Prodto);
+	public 	Map<String, Object> search(Prodto Prodto);
 	
 	
 	

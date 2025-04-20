@@ -98,7 +98,7 @@
             ) temp
             GROUP BY productid
         ) b ON a.productid = b.productid
-			        
+		WHERE (a.productname = #{productname} OR #{productname} IS NULL)       
 
 </select>
 
