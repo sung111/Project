@@ -118,4 +118,26 @@ public class ProdaoImpl implements Prodao{
 								
 			}
 	
+	
+	
+	
+	
+	// 검색
+	@Override
+	public 	List<Prodto> search(Prodto Prodto){
+						
+								                      
+  
+	List<Prodto> search = sqlSession.selectList("mapper.emp.searchboard", Prodto);
+    System.out.println("검색 : " + search);
+    return search;
+				
+    
+    
+			}
+		
+	
+	
+	
+	
 }

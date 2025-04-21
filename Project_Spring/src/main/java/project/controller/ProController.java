@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -89,6 +90,7 @@ public class ProController {
 					HttpServletRequest request
 					
 					) {
+				
 System.out.println("접속중....");
 		            
 				
@@ -116,7 +118,9 @@ System.out.println("접속중....");
 				
 				
 				
-				
+//                List<Prodto> search = ProService.search(dto);
+                
+                
 				int view = ProService.Viewcount(dto);
 			     // ??????????
 				// 리스트로 담기 // 호출
@@ -128,6 +132,9 @@ System.out.println("접속중....");
 //				System.out.println("list.size : " + list.size());
 				model.addAttribute("map", map);  // 돌려줄때 map.empno처럼 표기.
 				model.addAttribute("dto", dto);   // 명시적으로 쓰기
+				
+				
+//				model.addAttribute("search", search);   // 명시적으로 쓰기
 //				model.addAttribute("list", list);
 
 				
@@ -367,7 +374,7 @@ System.out.println("접속중....");
 		
 		
 		// 글 수정 정보
-		@RequestMapping(value = "/conmod")
+		@RequestMapping(value = "/conmod", method = RequestMethod.GET)
 		public String conmod(
 				
 				
@@ -409,9 +416,8 @@ System.out.println("접속중....");
 				
 				
 				MultipartHttpServletRequest req,
-				@ModelAttribute
-				Prodto prodto,
-				Linkdto linkdto
+				@ModelAttribute Prodto prodto,
+				@ModelAttribute Linkdto linkdto
 //				Filedto filedto
 //				Model model
 									
@@ -496,6 +502,7 @@ System.out.println("접속중....");
 		@RequestMapping(value = "/downloads")
 		public String download(
 				
+				
 				HttpServletRequest request,
 				HttpServletResponse response
 									
@@ -552,20 +559,58 @@ System.out.println("접속중....");
 		@RequestMapping(value = "/filedel")
 		public String filedel(
 				
-				@ModelAttribute
-				Filedto filedto
+				@ModelAttribute Filedto filedto,
+				@ModelAttribute Prodto prodto
 				
 				) {
 			
 			    System.out.println("??????????? :" + filedto);
 			    int filedel = Fileservice.Filedel(filedto);
-			    
+			    int postid = prodto.getPostid();
+			    System.out.println(" 파일 삭제 포스트아이디" + prodto.getPostid());
 			    System.out.println(" 파일 삭제되면 1이뜸 " + filedel);
 			    
 		
-			return "redirect:conmod";
+			return "redirect:/conmod?postid=" + postid;
 			
 		}
 		
+		
+		
+		
+		// 검색
+		@RequestMapping(value = "/search")
+		public String search(
+				
+				// 404시 이쪽으로 안들어오는거
+				@ModelAttribute Prodto prodto,
+				HttpServletRequest request,
+				Model model
+				
+				
+				) {
+			
+			
+			
+			    System.out.println("검색 prodto 조회 :" + prodto);
+			    Map map = ProService.search(prodto);
+//			    int postid = prodto.getPostid();
+//			    System.out.println(" 파일 삭제 포스트아이디" + prodto.getPostid());
+			    System.out.println(" 검색 성공시 1 " + map);
+			    model.addAttribute("search", map);
+			    model.addAttribute("dto", prodto);
+	
+			    
+			    if(prodto.getTitle() == "") {
+					
+					return "redirect:select";
+					
+				} else {
+					
+					return "board";					
+				}
+			    
+			
+		}
 
 }

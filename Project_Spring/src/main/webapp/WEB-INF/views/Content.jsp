@@ -228,15 +228,27 @@ width: 50%;
  <div id="attach">첨부된 파일 : 
 <!-- <form method="post" action="downloads">  -->
  <a href="downloads?file_name=${flink.file_name}"  id="href">${flink.file_name}</a><br>
-  <img src="/upload/${flink.file_name}" alt="첨부 이미지" width="300">
+
+  
 <!-- </form> -->
 </div>
 </c:forEach> 
+<br>
+<br>
+<br>
+<br>
 
-      
-      
-    
-             
+ <c:forEach var="flink" items="${Fileselid}"> 
+  <img src="downloads?file_name=${flink.file_name}"  alt="image" width="500"><br>
+ </c:forEach> 
+
+<br>
+<br>
+<br>
+<br>
+ <c:forEach var="flink" items="${Fileselid}">      
+ <video src="downloads?file_name=${flink.file_name}" alt="video" width="500" controls autoplay></video>        
+ </c:forEach>            
       
         <div class="button-container">
         <!-- <form method ="post" action ="board"> -->
@@ -246,9 +258,9 @@ width: 50%;
         
         
     <%--  <c:forEach var="dyo" items="${idpost}">  --%>  
-        <form method ="post" action ="conmod">
-            <button type="submit" id="modify" name="postid" value="${con.postid}">수정</button>
-        </form>
+        <!-- <form method ="post" action ="conmod"> -->
+            <a href="conmod?postid=${con.postid}"><div id="modify">수정</div></a>
+        <!-- </form> -->
      <%--  </c:forEach>   --%> 
             
             

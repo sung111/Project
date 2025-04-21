@@ -23,7 +23,8 @@
 		<typeAlias type="project.dto.QualityControl_DTO" alias="QualityControl_DTO"/>
 	</typeAliases>
 
-    
+       
+           
 </configuration>
 
 

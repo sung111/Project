@@ -119,6 +119,7 @@ public class ComController {
 			Comdto Comdto
 			
 			) {
+		
 		int postid = Comdto.getPostid();	
 	    int delcon = ComService.Comdel(Comdto);
 	    
@@ -128,6 +129,7 @@ public class ComController {
 	    
 	    
 	    
+	    		
      return "redirect:/Content?postid=" + Comdto.getPostid();
 		
 	}	

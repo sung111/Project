@@ -70,13 +70,19 @@
 	<!-- 조회수 / 업뎃 -->
 	<select id="Viewcount" resultType="int">
 		update posts
-		set viewcount = (select viewcount + 1 from posts where postid =
-		#{postid})
+		set viewcount = (select viewcount + 1 from posts where postid = #{postid})
 		where postid = #{postid}
 		<!-- DTO에 전부 넣어줌 while문도 다 -->
 	</select>
 
 
+
+
+    <!-- 검색 -->
+	<select id="searchboard" resultType="Prodto" parameterType="Prodto">
+	        select * from posts
+	        where upper(title) like upper ('%' || #{title} || '%')
+	</select>
 
 
 

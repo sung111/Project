@@ -157,7 +157,52 @@ font-weight : bold;
 
 }
 
+#selpage {
+
+
+position:absolute;
+ top: 100px;
+
+
+
+}
+
+
+
+
 </style>
+
+<form method="post" action="search" id="searchform">
+<input type="text" name="title" placeholder="검색어 입력">
+<button type="submit" class="newpost" id="search">등록</button>
+</form>
+
+<%-- <% Prodto pt = new Prodto() %>
+<select name="pagecount" onchange="this.form.submit()">
+    <option value="five" <%= Prodto.getPagecount() == 5 ? "selected" : "" %>>5</option>
+    <option value="ten" <%= Prodto.getPagecount() == 10 ? "selected" : "" %>>10</option>
+    <option value="fifteen" <%= Prodto.getPagecount() == 15 ? "selected" : "" %>>15</option>
+    <option value="twenty" <%= Prodto.getPagecount() == 20 ? "selected" : "" %>>20</option>
+</select> --%>
+
+
+
+
+
+<%-- <form method="get" action="yourServletOrController">
+  <select name="pagecount" onchange="this.form.submit()">
+    <option value="5" <%= pt.getPagecount() == 5 ? "selected" : "" %>>5</option>
+    <option value="10" <%= pt.getPagecount() == 10 ? "selected" : "" %>>10</option>
+    <option value="15" <%= pt.getPagecount() == 15 ? "selected" : "" %>>15</option>
+    <option value="20" <%= pt.getPagecount() == 20 ? "selected" : "" %>>20</option>
+  </select>
+</form> --%>
+
+
+
+
+
+
 
 
 
@@ -175,11 +220,28 @@ font-weight : bold;
 
 
 
+      <c:forEach var="dlo" items="${search.list}">
+		<!-- 게시물 목록 -->                   <!--  id만 따오면 뒤에 따라온다 -->
+		<div class="post" >        <!--  a태그 : get방식(파라미터 뒤에쓰기) form : post방식 -->
+			<span class="content"><a href="Content?postid=${dlo.postid}" id="move" >${dlo.title}</a></span>
+			<span class="author">${dlo.viewcount}</span> 
+			<span class="date">${dlo.postdate}</span>
+			<span class="author">${dlo.userid}</span> 
+		</div>
+	</c:forEach>  	
+		
+
+
+
+
+
+
+
 <c:if test="${ not empty map.list }">
     <c:forEach var="dto" items="${map.list}">
 		<!-- 게시물 목록 -->                   <!--  id만 따오면 뒤에 따라온다 -->
 		<div class="post" >        <!--  a태그 : get방식(파라미터 뒤에쓰기) form : post방식 -->
-			<span class="content"><a href="Content?postid=${dto.postid}" id="move">${dto.title}</a></span>
+			<span class="content"><a href="Content?postid=${dto.postid}" id="move" >${dto.title}</a></span>
 			<span class="author">${dto.viewcount}</span> 
 			<span class="date">${dto.postdate}</span>
 			<span class="author">${dto.userid}</span> 
@@ -193,6 +255,11 @@ font-weight : bold;
 						</c:if> 
     <div>
 
+
+
+
+
+
 <%              
                 // JAVA에서 써도 되고 xml에서 써도 된다
                 // ??? 
@@ -203,11 +270,29 @@ font-weight : bold;
                 	
                 
 				Prodto Prodto = (Prodto)request.getAttribute("dto");
-				/* if (Prodto == null) {
+				
+			   if (Prodto == null) {
 					Prodto = new Prodto(); // 기본 객체라도 생성해서 NullPointerException 방지
 					Prodto.setPage(1);
-					Prodto.setPagecount(10);  // 기본값
-				} */
+					Prodto.setPagecount(20);  // 기본값
+				} 
+			   %>
+			   
+			   
+			   <div id="selpage">
+<form method="get" action="select">  
+	<select name="pagecount" onchange="this.form.submit()">
+    <option value="5" <%= Prodto.getPagecount() == 5 ? "selected" : "" %>>5</option>
+    <option value="10" <%= Prodto.getPagecount() == 10 ? "selected" : "" %>>10</option>
+    <option value="15" <%= Prodto.getPagecount() == 15 ? "selected" : "" %>>15</option>
+    <option value="20" <%= Prodto.getPagecount() == 20 ? "selected" : "" %>>20</option>
+    </select>
+</form>	
+               </div>
+               
+               
+               	   
+			   <%	   
 				System.out.println("dto : " + Prodto); 
 				
 				
@@ -269,6 +354,111 @@ font-weight : bold;
 </div> 
 	
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		<%-- <%              
+                // JAVA에서 써도 되고 xml에서 써도 된다
+                // ??? 
+				// model에 담은건 request에서 꺼낼 수 있다
+				Map maps = (Map)request.getAttribute("search");
+                System.out.println("맵 : " + maps); 
+                
+                	
+                
+				Prodto Prodtos = (Prodto)request.getAttribute("dlo");
+				/* if (Prodto == null) {
+					Prodto = new Prodto(); // 기본 객체라도 생성해서 NullPointerException 방지
+					Prodto.setPage(1);
+					Prodto.setPagecount(10);  // 기본값
+				} */
+				System.out.println("dlo : " + Prodtos); 
+				
+				
+				int totals = (Integer)map.get("total");
+				System.out.println("토탈 : " + total);
+				
+				int pageNos = Prodto.getPage();
+				System.out.println("현재 페이지 : " +  pageNos);
+				int viewCounts = Prodto.getPagecount();
+				System.out.println("한번에 볼 페이지 개수 : " +  viewCounts);
+				// 1401 / 10 = 140.1 올림해서 141
+				int lastPages = (int)Math.ceil((double)totals / viewCounts);
+				
+				int groupCounts = 5;	// 한번에 보여줄 페이지 개수
+				int groupPositions = (int)Math.ceil((double)pageNos / groupCounts);
+				int begins = ((groupPositions-1) * groupCounts) + 1;
+				if (begins < 1) begins = 1; 
+// 				int end = begin + groupCount - 1;
+				int ends = groupPositions * groupCounts;
+				if(ends > lastPages) ends = lastPages;
+				
+			%>
+			
+			<span id="font"><%= totals %></span>개의 글
+			
+			
+			<div class="pagination">
+			
+			
+			<c:if test="<%= begins == 1 %>">
+				<button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
+			</c:if>
+			<c:if test="<%= begins != 1 %>">			                     
+				<a href="search?page=<%= begins-1 %>"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
+			</c:if>
+			
+			
+			<c:forEach var="i" begin="<%= begins %>" end="<%= ends %>">
+			<!--  서식 적용 -->
+				<c:if test="${i == dlo.page }">
+				    <div id="now"><span id="font">${ i }</span>페이지</div>
+					<c:set var="clazz" value="bold" />
+				</c:if>
+				<c:if test="${ not (i == dlo.page) }">
+					<c:set var="clazz" value="" />
+				</c:if>
+				<a href="search?page=${ i }" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
+		
+			</c:forEach>
+			
+			
+			<c:if test="<%= ends == lastPages %>">
+				<button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
+			</c:if>
+			<c:if test="<%= ends != lastPages %>">
+				<a href="search?page=<%= ends+1 %>"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
+			</c:if>
+     	</div>
+</div> 
+		 --%>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<!-- </div>
 		<div class="post">
 			<span class="content">팀워크 향상을 위한 아이디어 모집</span> <span class="date">2025-02-01</span>
@@ -307,6 +497,19 @@ font-weight : bold;
 	
 	
 	<script>
+	
+	// 클릭 - 버튼만 form - submit
+	let search = document.querySelector("#searchform");	
+	search.addEventListener("submit", function() {
+		
+		console.log("안녕하세요");
+		
+	});
+	
+	
+	
+	
+	
 	
 	   
 	   

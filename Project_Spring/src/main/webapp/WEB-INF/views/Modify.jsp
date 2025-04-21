@@ -240,7 +240,7 @@ width: 50%;
             
   <%--    <c:forEach var="doo" items="${modi}">  --%>
      
-            
+          
         <div class="post">
             <label for="title">제목</label>
             <input type="text" id="title" placeholder="제목을 입력하세요" name="title" value="${modi.title}"></input>
@@ -283,13 +283,15 @@ width: 50%;
                 <input type="file" id="link" placeholder="파일을 입력하세요" name="file_name" multiple> 
             </div>
         
+            
             <c:forEach var="flink" items="${Fileselid}">
-			<div id="attach">첨부된 파일 : 
+			 <div id="attach">첨부된 파일 :
 			<!-- <form method="post" action="downloads">  -->
 			 ${flink.file_name}<br>
 			<!-- </form> -->
 			</div>
-			<a href="filedel?fileid=${flink.fileid}">삭제</a>
+			<%-- <input type="hidden" name="postid" value="${flink.postid}"> --%>
+			<a href="filedel?fileid=${flink.fileid}&postid=${flink.postid}">삭제</a>
 			</c:forEach> 
 			
         

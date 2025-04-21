@@ -239,7 +239,7 @@
 	</select>
 	
 	<!-- 	생산공정 조회 -->
-	<select id="SelectProductPid_All" resultType="Products_DTO" parameterType="int">
+	<select id="SelectProductPid_All" resultType="ProductionProcessDescription_DTO" parameterType="int">
 	
 		          select PROCESSID, PRODUCTID,
 		          PROCESSSTAGE,DESCRIPTION,EQUIPMENT,HYGIENE,PROCESSDESCRIPTIONSDEL
@@ -249,6 +249,15 @@
 					order by productid
 
 	</select>
+	
+	<!-- 	생산공정 생성 -->
+	<update id="ProductionProcessInsert" parameterType="ProductionProcessDescription_DTO">
+	
+		insert into PROCESSDESCRIPTIONS 
+		(PROCESSID,PRODUCTID,PROCESSSTAGE,DESCRIPTION,EQUIPMENT,HYGIENE,PROCESSDESCRIPTIONSDEL)
+		values ('',#{productid},#{processstage},#{description},#{equipment},#{hygiene},'n')
+
+	</update>
 
 
 	

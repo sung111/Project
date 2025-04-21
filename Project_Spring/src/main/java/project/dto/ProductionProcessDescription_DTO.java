@@ -12,7 +12,7 @@ public class ProductionProcessDescription_DTO {
 	private String description ;
 	private String equipment ;
 	private String hygiene;
-	
+	private String processdescriptionsdel;
 	
 	
 	
