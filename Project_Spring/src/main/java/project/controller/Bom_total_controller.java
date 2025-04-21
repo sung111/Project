@@ -390,7 +390,7 @@ public class Bom_total_controller {
 			try {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
-				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+				String path = "C:\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정
@@ -562,7 +562,7 @@ public class Bom_total_controller {
 			public String Bom_v2( 
 					
 					)  {
-				
+				System.out.println("bom_v2 입장~~~");
 				return "bom_v2";
 			}
 			
@@ -573,7 +573,7 @@ public class Bom_total_controller {
 			
 			)  {
 		
-		System.out.println("bom_v2 입장~~~");
+	
 		Map<String, Object> map = new HashMap();
 		List list = null;
 		try {
@@ -590,11 +590,43 @@ public class Bom_total_controller {
 		return map;
 	}
 	
-//원재료 BOM
+//완제품 > 원재료 메인홤면
 	@RequestMapping("/bomlist")
-	public String Bomlist() {
-		
+	public String Bomlist(Model model,
+			@RequestParam(value="pname",required = false) String pname,
+			@RequestParam(value="pid",required = false) String pid
+			) {
+		String Field = "ADMIN";
+		List mlist = null;
+		try {
+			model.addAttribute("Field",Field);
+			model.addAttribute("pid",pid);
+			model.addAttribute("pname",pname);
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 		return "bomlist";
+	}
+	
+	//완제품 > 원재료 메인홤면
+	@RequestMapping(value="/bomlistSlect",method=RequestMethod.GET)
+	public Map<String,Object> bomlistSlect(
+			@RequestParam(value="pid",required = false) int pid
+			) {
+		Map<String, Object> map = new HashMap();
+		List list = null;
+		try {
+			list = build_of_Materials_service.BuildOfMaterials_materialSelect(pid);
+			System.out.println("mlist :"+list);
+			map.put("list", list);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return map;
 	}
 	
 	

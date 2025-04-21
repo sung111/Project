@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-			<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-				<%@ page import="java.util.*" %>
-					<%@ page import="project.dto.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.*" %>
+<%@ page import="project.dto.*" %>
 						<!DOCTYPE html>
 						<html lang="en">
 
@@ -640,11 +640,16 @@
 																												>\${dto.abnormalcriteria}</textarea>
 																										</div>
 																									</div>
-																								</div>
-																								 \${ctrlHTML}
-																								</div>
 																							
-																								`;
+																									</div>
+																									
+																									\${ctrlHTML}
+																									</div>`
+																							
+																								
+																								
+																							
+																								;
 																								document.querySelector(".standards-top").append(newdataHtml)
 
 																								newdataHtml.querySelector(".ok").addEventListener("click",(e)=>{

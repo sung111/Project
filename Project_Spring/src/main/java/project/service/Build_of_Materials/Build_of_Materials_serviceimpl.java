@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import project.dao.Build_of_Materials.Build_of_Materials_DAO;
+import project.dto.Materials_DTO;
 import project.dto.Products_DTO;
 
 @Repository
@@ -20,6 +21,30 @@ public class Build_of_Materials_serviceimpl implements Build_of_Materials_servic
 		List list = null;
 		try {
 			list = dao.Product_All(prosessname);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid) {
+		List list = null;
+		try {
+			list = dao.BuildOfMaterials_materialSelect(productid);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Materials_DTO> BuildOfMaterials_materialList() {
+		List list = null;
+		try {
+			list = dao.BuildOfMaterials_materialList();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

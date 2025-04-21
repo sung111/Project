@@ -255,8 +255,10 @@
                                          newdataHtml.querySelector(".move").addEventListener("click",function(e){
                                             
                                             let pvalue = e.target.parentNode.querySelector(".productid").value
+                                            let productname = e.target.innerHTML
                                             console.log(pvalue)
-                                            // window.location.href = "Bom_controller?namevalue=" + encodedNamevalue +"&pvalue="+encodedpvalue;
+                                            console.log(pvalue)
+                                             location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
 
                                         })
                                    
