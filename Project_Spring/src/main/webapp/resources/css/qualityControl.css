@@ -52,9 +52,9 @@ body {
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 250px;
+    height: 241px;
     overflow-y: scroll;
-    margin: 10px;
+    margin: 0 10px;
     background-color: white;
     color: black;
   }
@@ -129,6 +129,7 @@ body {
     width: 100%;
     /* margin-left: 5px; */
     padding: 8px;
+    border: 1px solid rgb(199, 196, 196);
   }
 
   .rightTop {
@@ -355,13 +356,60 @@ body {
   .viewSelect{
     background-color: #f5ebeb;
   }
+  .performance-card{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid gray;
+    margin: 1px;
+    padding: 5px;
+  }
+  .performance-card > div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  .page-container{
+    text-align: center;
+  }
+  .page-container > button{
+    font-size: 16px;
+    margin : 3px;
+    padding: 3px;
+  }
 }
 
 
 /* 데탑 */
 @media screen and (min-width:768px) {
+  .performance-card{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid gray;
+    margin: 1px;
+    padding: 5px;
+  }
+  .performance-card > div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  .page-container{
+    text-align: center;
+  }
+  .page-container > button{
+    font-size: 16px;
+    padding: 3px;
+    margin : 3px;
+  }
+
   .viewSelect{
-    background-color: #f5ebeb;
+    background-color: #7a7a7a;
   }
   .kk{
     width: 100%;
@@ -422,9 +470,9 @@ body {
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 250px;
+    height: 241px;
     overflow-y: scroll;
-    margin: 10px;
+    margin: 0 10px;
     background-color: white;
     color: black;
   }
@@ -497,6 +545,7 @@ body {
     width: 50%;
     margin-left: 5px;
     padding: 5px;
+    border: 1px solid rgb(199, 196, 196);
   }
 
   .rightTop {

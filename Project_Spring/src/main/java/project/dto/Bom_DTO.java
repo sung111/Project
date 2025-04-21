@@ -1,6 +1,6 @@
 package project.dto;
 
-//원자제 bom
+//원자제 bom 쓸지말지 보류중
 public class Bom_DTO {
 int bomid;
 double quantity ;
