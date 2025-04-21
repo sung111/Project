@@ -19,20 +19,24 @@ public class Prodplan_total_controller {
 
     @GetMapping("/prodplan")
     public String showProductionPlan(HttpSession session, Model model) {
+        // 세션에서 사용자 정보 가져오기
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
 
-        // 서비스에서 계획 목록 가져오기
-        List<ProductionPlan_DTO> planList = prodplanService.getAllPlans();
+        // 세션에서 planList 가져오기
+        List<ProductionPlan_DTO> planList = (List<ProductionPlan_DTO>) session.getAttribute("planList");
+        if (planList == null) {
+            // 세션에 데이터가 없으면 DB에서 조회
+            planList = prodplanService.getAllPlans();
+            // 세션에 planList를 저장
+            session.setAttribute("planList", planList);
+        }
+
+        // planList를 Model에 추가
         model.addAttribute("planList", planList);
 
         return "ProdPlan";
     }
-    
-    @GetMapping("/test-prodplan")
-    public String testRoute() {
-        System.out.println(" Prodplan 컨트롤러 매핑 성공!");
-        return "ProdPlan"; 
-    }
+
     
 }

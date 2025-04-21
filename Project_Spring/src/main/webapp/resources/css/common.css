@@ -2,6 +2,7 @@
 	width: 35px; height: 35px; border: 1px solid #007bff;
 }
 
+
 .chatbot-popup {
 	position: fixed;
 	right: 20px;
@@ -87,8 +88,8 @@ nav.open ~ .navopen-shadow {
 .nav.open .mobnav-bar .bar3 {
     transform: rotate(45deg) translate(5px, -6px); 
 }
-
-    iframe{
+/* 원래는 iframe */
+    .mainframe{
         width: 100%; height: calc(100% - 100px); display: block; 
     }
     
@@ -194,8 +195,8 @@ nav.open ~ .navopen-shadow {
         }
 
         /* 마이페이지 팝업창 */
-.popup {
-    width: 300px;  height: 250px; margin-top: 50px; margin-left: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; left: 0; z-index: 20; display: none; flex-direction: column;
+.popup-page {
+    width: 300px;  height: 250px; margin-top: 50px; margin-left: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; left: 0; z-index: 998; display: none; flex-direction: column;
 }
 
 .popup-title{
@@ -238,7 +239,8 @@ nav{
     width: 190px; height: 100%; background-color: #d9d9d9; flex-shrink: 0;
 }
 
-iframe{
+/* 원래는 iframe */
+    .mainframe{
     width: 100%; height: calc(100% - 100px); display: block;
 }
 
@@ -341,8 +343,8 @@ cursor: pointer;
 }
 
 /* 마이페이지 팝업창 */
-.popup {
-    width: 300px;  height: 250px; margin-top: 50px; margin-right: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; right: 0; z-index: 20; display: none; flex-direction: column;
+.popup-page {
+    width: 300px;  height: 250px; margin-top: 50px; margin-right: 40px; padding: 20px; border: 1px solid #007bff; border-radius: 8px; background-color: #f9f9f9; position: fixed; right: 0; z-index: 998; display: none; flex-direction: column;
 }
 
 .popup-title{
