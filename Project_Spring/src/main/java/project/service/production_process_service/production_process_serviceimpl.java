@@ -52,6 +52,45 @@ public class production_process_serviceimpl implements production_process_servic
 		return result;
 	}
 
+	@Override
+	public int ProductionProcessUpdate(ProductionProcessDescription_DTO dto) {
+		int result = 0;
+		try {
+			
+			result = dao.ProductionProcessUpdate(dto);	
+			
+		}catch (Exception e) {
+		e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public List<ProductionProcessDescription_DTO> ProductionProcess_select_one_line(int processid) {
+		List list = null;
+		try {
+			
+			list = dao.ProductionProcess_select_one_line(processid);
+			
+		}catch (Exception e) {
+		e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int ProductionProcessDelete(ProductionProcessDescription_DTO dto) {
+		int result = 0;
+		try {
+			
+			result = dao.ProductionProcessDelete(dto);
+			
+		}catch (Exception e) {
+		e.printStackTrace();
+		}
+		return result;
+	}
+
 
 	
 

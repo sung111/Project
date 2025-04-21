@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import project.dto.Materials_DTO;
 import project.dto.ProductionProcessDescription_DTO;
 import project.dto.Products_DTO;
+import project.service.Build_of_Materials.Build_of_Materials_service;
 import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
 import project.service.Standard_total_service.Products_service;
@@ -45,6 +46,8 @@ public class Bom_total_controller {
 	MaterialsProducts_service materialsProducts_service;
 	@Autowired
 	production_process_service service; 
+	@Autowired
+	Build_of_Materials_service build_of_Materials_service;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -476,6 +479,8 @@ public class Bom_total_controller {
 		
 		return map;
 	}
+	
+	//생산공정 생성
 	@ResponseBody
 	@RequestMapping(value="/production_process_insert",method=RequestMethod.POST)
 	public int production_process_insert(@RequestBody ProductionProcessDescription_DTO dto
@@ -492,6 +497,59 @@ public class Bom_total_controller {
 
 		return result;
 	}
+	//생산공정 수정
+	@ResponseBody
+	@RequestMapping(value="/production_process_update",method=RequestMethod.PUT)
+	public int production_process_update(@RequestBody ProductionProcessDescription_DTO dto
+			) {  
+		System.out.println("production_process_update 실행");
+		
+		int result = 0;
+		try {
+			 result = service.ProductionProcessUpdate(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	//생산공정 한줄만 수정 화면이벤트
+		@ResponseBody
+		@RequestMapping(value="/production_process_one_line",method=RequestMethod.GET)
+		public List production_process_one_line(@RequestParam ("processid") int processid
+				) {  
+			System.out.println("production_process_one_line 실행");
+			
+			List list = null;
+			try {
+				 list = service.ProductionProcess_select_one_line(processid);
+				System.out.println("list :" +list);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return list;
+		}
+		
+	//생산공정 삭제이벤트
+			@ResponseBody
+			@RequestMapping(value="/production_process_delete",method=RequestMethod.PUT)
+			public int production_process_delete(@RequestBody ProductionProcessDescription_DTO dto
+					) {  
+				System.out.println("production_process_delete 실행");
+				int result = 0;
+				
+				try {
+					System.out.println("dto :"+dto);
+					result = service.ProductionProcessDelete(dto);
+					System.out.println("result :" +result);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return result;
+			}
 	
 	
 	
@@ -500,10 +558,36 @@ public class Bom_total_controller {
 	
 //완제품 BOM
 //----
-	@RequestMapping("/bom_v2")
-	public String Bom_v2() {
+			@RequestMapping(value="/bom_v2",method=RequestMethod.GET)
+			public String Bom_v2( 
+					
+					)  {
+				
+				return "bom_v2";
+			}
+			
+			
+	@ResponseBody
+	@RequestMapping(value="/bom_v2_select",method=RequestMethod.GET)
+	public Map<String,Object> Bom_v2(@RequestParam (value="processname",required=false) String processname 
+			
+			)  {
 		
-		return "bom_v2";
+		System.out.println("bom_v2 입장~~~");
+		Map<String, Object> map = new HashMap();
+		List list = null;
+		try {
+			list = build_of_Materials_service.Product_All(processname);
+			System.out.println("list : "+ list);
+			map.put("list", list);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return map;
 	}
 	
 //원재료 BOM

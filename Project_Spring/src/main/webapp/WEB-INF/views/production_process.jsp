@@ -84,9 +84,7 @@
         }
 
 
-        .bood {
-            width: 90%;
-        }
+  
 
         #c_container {
         
@@ -112,7 +110,7 @@
 
         .texttotal {
             font-size: 15px;
-            width: 95%;
+            width: 90%;
             height: 80%;
         }
 
@@ -121,7 +119,7 @@
         }
 
         .table-wid2 {
-            width: 30%;
+            width: 25%;
         }
 
         .table-wid3 {
@@ -129,11 +127,11 @@
         }
 
         .table-wid4 {
-            width: 30%;
+            width: 25%;
         }
 
         .table-wid5 {
-            width: 15%;
+            width: 10%;
         }
 
         #title {
@@ -155,14 +153,10 @@
             margin: 5px;
             height: 50px;
         }
+     
 
-        .table-button {
-/*          height:60px; */
-          display: flex;
-           justify-content: center;
-           align-items: center;
-            
-        }
+       
+
     	#milkit{
     	 margin: 5px;
     	width: 150px;
@@ -171,12 +165,16 @@
     	}
     	.tableall{
     	width: 100%;
+        text-align: center;
     	}
 	    #newtable{
 	    height: 30px;
 	    }
 	    
-	
+        .table-button{
+          text-align: center;
+          height: 100%;
+        }
         
 
         @media screen and (max-width: 767px) {
@@ -187,6 +185,32 @@
             .table-wid {
                 width: 70px;
             }
+
+            .btn {
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            height: 50px;
+
+            font-size: 10px;
+
+            
+            }
+            .table-wid5 {
+                min-width: 110px;
+            }
+            .texttotal{
+                width: 80%;
+             
+                font-size: 8px;
+                padding: 5px;
+            
+            }
+
         }
     </style>
 </head>
@@ -261,16 +285,16 @@
                         let newbody = document.createElement("tr")
                             newbody.setAttribute("class", "article")
                             newbody.innerHTML = `
-                            <td style="width:10.1%;">
+                            <td >
                             <textarea class="texttotal"id="text1" >값을 입력해주세요</textarea>   
                             </td>                   
-                            <td style="width:29%;">
+                            <td >
                             <textarea class="texttotal" id="text2">값을 입력해주세요</textarea>   
                             </td>                   
-                            <td style="width:15%;">
+                            <td >
                             <textarea class="texttotal" id="text3" >값을 입력해주세요</textarea>   
                             </td>                   
-                            <td style="width:30%;">
+                            <td >
                             <textarea class="texttotal" id="text4" >값을 입력해주세요</textarea>   
                             </td>                   
                             <td class="table-button">
@@ -331,10 +355,15 @@
                                 
                                 }   
                             })
+                            //공정 생성 취소버튼 
+                            newbody.querySelector(".delet").addEventListener("click",(ee)=>{
+                                console.log("취소버튼 클릭")
+                                selectfun();
+                            })
 
                 })
 			
-
+               
 
 
                 function selectfun(){
@@ -372,42 +401,151 @@
                                                 <td class="table-button">
                                                     <input type="hidden"  value="update" name="type">
                                                     <input type="button" value="수정 " class="updat btn ">
-                                                    <input type="hidden"  value="\${dto.processid}" name="processid_value">
+                                                    <input type="hidden"  value="\${dto.processid}"  id="processid_value">
                                                     <input type="submit" value="삭제 " class="delet btn ">
                                                 </td>
                                                 `
                                             }else{DescripBody.innerHTML +=`<td></td>`}
                                         document.querySelector("#new-tbody").append(DescripBody)
+                                        //삭제 버튼 이벤트 만들기
+                                        DescripBody.querySelector(".delet").addEventListener("click", function(e){
+                                          console.log("삭제값",e.target.parentNode.querySelector("#processid_value").value)
+                                           let dto = {
+                                            processid : e.target.parentNode.querySelector("#processid_value").value
+                                           }
+                                            const xhr = new XMLHttpRequest();
+                                            xhr.open('put','production_process_delete')
+                                            xhr.setRequestHeader('Content-Type', 'application/json')
+                                            xhr.send(JSON.stringify(dto))
+                                            xhr.onload = function(){
+                                                let data = JSON.parse(xhr.responseText)
+                                                console.log(data)
+                                                if(data == 1){
+                                                    alert("삭제 완료")
+                                                
+                                                    selectfun();
+                                                
+                                                }else if (data == 0){
+                                                    alert("삭제 실패")
+                                                }
+                                    
+                                            }
+                                        
+                                        })
 
-                                        //수정 삭제 버튼 이벤트 만들기
+                                        //수정  버튼 이벤트 만들기
                                         let update = DescripBody.querySelector(".updat")
                                         DescripBody.querySelector(".updat").addEventListener("click", function(e){
+                                            
+                                            //수정버튼 누르면 프로세서 id를 가지고 한줄만 그리기
+                                            console.log("수정버튼 클릭",e.target.parentNode.querySelector("#processid_value").value)
+                                            const xhr = new XMLHttpRequest();
+                                                xhr.open('get','production_process_one_line?processid='+e.target.parentNode.querySelector("#processid_value").value)
+                                                xhr.setRequestHeader('Content-Type', 'application/json')
+                                                xhr.send()
+                                                xhr.onload = function(){
+                                                    let data = JSON.parse(xhr.responseText)
+                                                    console.log(data)
+                                                
+                                                    console.log(e.target.parentNode.parentNode)
+                                                    // e.target.parentNode.parentNode.innerHTML = ``
+                                                    // console.log(e.target.parentNode.parentNode)
+                                                    data.forEach(dto => {
+                                                        e.target.parentNode.parentNode.innerHTML = `
+                                                                                    <tr>
+                                                                                        <td >
+                                                                                        <textarea class="texttotal"id="text1" >\${dto.processstage}</textarea>   
+                                                                                        </td>                   
+                                                                                        <td >
+                                                                                        <textarea class="texttotal" id="text2">\${dto.description}</textarea>   
+                                                                                        </td>                   
+                                                                                        <td >
+                                                                                        <textarea class="texttotal" id="text3" >\${dto.equipment}</textarea>   
+                                                                                        </td>                   
+                                                                                        <td>
+                                                                                        <textarea class="texttotal" id="text4" >\${dto.hygiene}</textarea>   
+                                                                                        </td>                   
+                                                                                        <td class="table-button">
+                                                                                      
+                                                                                            <input type="hidden"  value="\${dto.processid}"  id="processid_value">
+                                                                                            <input type="button" value="확인 " class="newupdat btn ">
+                                                                                            <input type="submit" value="취소 " class="can btn ">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                        `     
+                                                                                        //취소버튼 이벤트
+                                                                                        document.querySelector(".can").addEventListener("click",function(ee){
+                                                                                            selectfun();
+                                                                                        })
+                                                                                   
+                                                                                  
+                                                                                            
+                                                                                       
+                                                                                    // })
+        
+                                                                                    DescripBody.querySelector(".newupdat").addEventListener("click",function(ee){
+                                                                                        let text1 = ee.target.parentNode.parentNode.querySelector("#text1").value
+                                                                                        let text2 = ee.target.parentNode.parentNode.querySelector("#text2").value
+                                                                                        let text3 = ee.target.parentNode.parentNode.querySelector("#text3").value
+                                                                                        let text4 = ee.target.parentNode.parentNode.querySelector("#text4").value
+                                                                                        let processid = ee.target.parentNode.querySelector("#processid_value").value
+                                                                                        console.log("-----",text1,text2,text3,text4,processid)
+                                                                                      
+                                                                                        let productid = document.querySelector("#milkit").value
+                                                                                
+                                                                                        if(text1.trim() == ""){
+                                                                                            alert("공정단계는 필수입니다")
+                                                                                        }else if(text2.trim() == ""){
+                                                                                            alert("설명은 필수입니다")
+                                                                                        }else if(text3.trim() == ""){
+                                                                                            alert("사용장비는 필수입니다")
+                                                                                        }else if(text4.trim() == ""){
+                                                                                            alert("위생기준은 필수입니다")
+                                                                                        }else{
+                                                                                            dto ={
+                                                                                                processstage : text1,
+                                                                                                description : text2,
+                                                                                                equipment : text3,
+                                                                                                hygiene : text4,
+                                                                                                processid : processid
+                                                                                            }
+        
+        
+                                                                                            const xhr = new XMLHttpRequest();
+                                                                                            xhr.open('put','production_process_update')
+                                                                                            xhr.setRequestHeader('Content-Type', 'application/json')
+                                                                                            xhr.send(JSON.stringify(dto))
+                                                                                            xhr.onload = function(){
+                                                                                                let data = JSON.parse(xhr.responseText)
+                                                                                                console.log(data)
+                                                                                                if(data == 1){
+                                                                                                    alert("공정 수정 완료")
+                                                                                                
+                                                                                                    selectfun();
+                                                                                                
+                                                                                                }else if (data == 0){
+                                                                                                    alert("공정 수정 실패")
+                                                                                                }
+                                                                                    
+                                                                                            }
+        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        } 
+                                                                                    })
+
+                                                                                })
+                                        
+                                                }
 
 
-                                            console.log(e.target.parentNode.parentNode)
-                                            // e.target.parentNode.parentNode.innerHTML = ``
-                                            // console.log(e.target.parentNode.parentNode)
-                                            e.target.parentNode.parentNode.innerHTML = `
-                                                                        <tr>
-                                                                            <td style="width:10.1%;">
-                                                                            <textarea class="texttotal"id="text1" >값을 입력해주세요</textarea>   
-                                                                            </td>                   
-                                                                            <td style="width:29%;">
-                                                                            <textarea class="texttotal" id="text2">값을 입력해주세요</textarea>   
-                                                                            </td>                   
-                                                                            <td style="width:15%;">
-                                                                            <textarea class="texttotal" id="text3" >값을 입력해주세요</textarea>   
-                                                                            </td>                   
-                                                                            <td style="width:30%;">
-                                                                            <textarea class="texttotal" id="text4" >값을 입력해주세요</textarea>   
-                                                                            </td>                   
-                                                                            <td class="table-button">
-                                                                                <input type="button" value="확인 " class="newupdat btn ">
-                                                                                <input type="submit" value="취소 " class="delet btn ">
-                                                                            </td>
-                                                                        </tr>
-                                                                            `     
-                                        });
+                                                                          
+                                                                            
+                                                                                
+                                                                            
+                                        })
+                                     
 
                             })
                     }
