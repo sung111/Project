@@ -81,41 +81,40 @@
 				<td>비고</td>
 			</tr>
 
-			<c:choose>
-				<c:when test="${not empty planList}">
-					<c:forEach var="plan" items="${planList}">
-						<tr name="prodPlanList" class="order-info-content wolist"
-							data-id="${plan.planId}" data-pi="${plan.productId}">
-							<td>
-								<c:choose>
-									<c:when test="${not empty plan.product}">
-										${plan.product.productname}[${plan.product.spec}${plan.product.unit}]
-									</c:when>
-									<c:otherwise>데이터 없음</c:otherwise>
-								</c:choose>
-							</td>
-							<td>${plan.product.lotnumber}</td>
-							<td>${plan.product.unit}</td>
-							<td>${plan.product.warehouse}</td>
-							<td>${plan.deliveryDest}</td>
-							<td>${plan.product.partnumber}</td>
-							<td>${plan.totalqty}</td>
-							<td>${plan.createDate}</td>
-							<td>${plan.startDate}</td>
-							<td>${plan.endDate}</td>
-							<td><a>MRP 계산</a></td>
-							<td>${plan.planStatus}</td>
-							<td>${plan.planCause}</td>
-							<td>${plan.planNotes}</td>
-						</tr>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<td colspan="14">데이터가 없습니다.</td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
+<c:choose>
+  <c:when test="${not empty planList}">
+    <c:forEach var="plan" items="${planList}">
+      <tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.productId}">
+        <td>
+          <c:choose>
+            <c:when test="${not empty plan.product}">
+              ${plan.product.productname}[${plan.product.spec}${plan.product.unit}]
+            </c:when>
+            <c:otherwise>데이터 없음</c:otherwise>
+          </c:choose>
+        </td>
+        <td>${plan.product.lotnumber}</td>
+        <td>${plan.product.unit}</td>
+        <td>${plan.product.warehouse}</td>
+        <td>${plan.deliveryDest}</td>
+        <td>${plan.product.partnumber}</td>
+        <td>${plan.totalqty}</td>
+        <td>${plan.createDate}</td>
+        <td>${plan.startDate}</td>
+        <td>${plan.endDate}</td>
+        <td><a>MRP 계산</a></td>
+        <td>${plan.planStatus}</td>
+        <td>${plan.planCause}</td>
+        <td>${plan.planNotes}</td>
+      </tr>
+    </c:forEach>
+  </c:when>
+  <c:otherwise>
+    <tr>
+      <td colspan="14">데이터가 없습니다.</td>
+    </tr>
+  </c:otherwise>
+</c:choose>
 		</tbody>
 
 		<tfoot>
@@ -132,5 +131,9 @@
 			</tr>
 		</tfoot>
 	</table>
+	<script>
+	console.log("JS 됨!");
+</script>
+	
 </body>
 </html>

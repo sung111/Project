@@ -3,7 +3,11 @@ package project.dto;
 import java.sql.Date;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 public class ProductionPlan_DTO {
 
@@ -22,4 +26,8 @@ public class ProductionPlan_DTO {
 
     // 조인된 상품 정보
     private Products_DTO product;
+
+
+
+
 }
