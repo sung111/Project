@@ -15,16 +15,16 @@ public class QualityControl_ServiceImpl implements QualityControl_Service {
 	@Autowired
 	QualityControl_DAO dao;
 
+	// 실적등록 리스트
 	@Override
 	public List pageList(QualityControl_DTO dto) {
 		List list = new ArrayList();
 
 		int page = dto.getPage();
 		int viewCount = dto.getViewCount();
-		System.out.println("여잇다 ::::::::::" + dto.getViewCount());
 
 		if (viewCount == 0) { // 기본값 세팅
-			viewCount = 3;
+			viewCount = 7;
 			dto.setViewCount(viewCount);
 		}
 
@@ -37,11 +37,49 @@ public class QualityControl_ServiceImpl implements QualityControl_Service {
 
 		return list;
 	}
-
+	// 실적등록 카운트
 	@Override
 	public int pageTotalCaount() {
 		int result = dao.pageTotalCaount();
 		return result;
 	}
+	
+	//품질등록 리스트
+	@Override
+	public List QualityList(QualityControl_DTO dto) {
+		List list = new ArrayList();
 
+		int page = dto.getPage();
+		int viewCount = dto.getViewCount();
+
+		if (viewCount == 0) { // 기본값 세팅
+			viewCount = 7;
+			dto.setViewCount(viewCount);
+		}
+
+		int indexStart = (viewCount * (page - 1)) + 1;
+		int indexEnd = page * viewCount;
+		dto.setIndexStart(indexStart);
+		dto.setIndexEnd(indexEnd);
+
+		list = dao.QualityList(dto);
+
+		return list;
+	}
+	// 품질등록 카운트
+	@Override
+	public int QualityTotalCount() {
+		int result = dao.QualityTotalCount();
+		return result;
+	}
+	
+	@Override
+	public int QualityInsert(QualityControl_DTO dto) {
+		int result = dao.QualityInsert(dto);
+		return result;
+	}
+	
+	
+	
+	
 }
