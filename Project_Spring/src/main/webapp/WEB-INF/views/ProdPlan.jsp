@@ -131,5 +131,9 @@
 			</tr>
 		</tfoot>
 	</table>
+	<script>
+	console.log("JS 됨!");
+</script>
+	
 </body>
 </html>

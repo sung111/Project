@@ -39,5 +39,8 @@ public class Products_DTO {
     public int getProductId() {
         return productid;
     }
-	
+    public String getLotnumber() {
+        return this.lotnumber;
+    }
+
 }

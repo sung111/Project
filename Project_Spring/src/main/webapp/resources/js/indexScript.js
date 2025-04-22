@@ -202,7 +202,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
         
-    // document.querySelector("#nav-inventory").addEventListener("click", function () {
+        //재고현황조회 페이지
+        document.querySelector("#nav-inventory").addEventListener("click", function () {
+            fetch(contextPath + "/inven")
+                .then(response => response.text())
+                .then(html => {
+                    if (mainContent) {
+                        mainContent.innerHTML = html;
+    
+                        // URL 변경 
+                        history.pushState(null, null, contextPath + "/inven");
+    
+                        // 로컬 네비게이션
+                        if (typeof LocalNavigationbar === 'function') {
+                            LocalNavigationbar('생산관리', '재고현황조회');
+                        }
+                    } else {
+                        console.error("파일을 불러오는 중 오류가 발생했습니다.");
+                    }
+                })
+                .catch(err => {
+                    console.error('생산 계획 페이지 로드 실패:', err);
+                });
+        });
+
+    // document.querySelector("").addEventListener("click", function () {
     //     location.href = contextPath + "/Inventorycheck";
     // });
 
