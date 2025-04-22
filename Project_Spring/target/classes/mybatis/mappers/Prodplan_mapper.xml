@@ -4,44 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.dao.mapper.ProdplanMapper">
-
   <!-- 조인 결과 매핑할 resultMap -->
   <resultMap id="PlanWithProductResultMap" type="project.dto.ProductionPlan_DTO">
-    <id property="planId" column="plan_id" />
-    <result property="userId" column="user_id" />
-    <result property="productId" column="product_id" />
+    <id property="planId" column="planid" />
+    <result property="userId" column="userid" />
+    <result property="productId" column="productid" />
     <result property="totalqty" column="totalqty" />
-    <result property="startDate" column="start_date" />
-    <result property="endDate" column="end_date" />
-    <result property="createDate" column="create_date" />
-    <result property="deliveryDate" column="delivery_date" />
-    <result property="deliveryDest" column="delivery_dest" />
-    <result property="planStatus" column="plan_status" />
-    <result property="planCause" column="plan_cause" />
-    <result property="planNotes" column="plan_notes" />
+    <result property="startDate" column="startdate" />
+    <result property="endDate" column="enddate" />
+    <result property="createDate" column="createdate" />
+    <result property="deliveryDate" column="deliverydate" />
+    <result property="deliveryDest" column="deliverydest" />
+    <result property="planStatus" column="planstatus" />
+    <result property="planCause" column="plancause" />
+    <result property="planNotes" column="plannotes" />
 
     <!-- 조인된 product 정보 매핑 -->
     <association property="product" javaType="project.dto.Products_DTO">
-      <id property="productId" column="product_id" />
-      <result property="productName" column="product_name" />
+      <id property="productId" column="productid" />
+      <result property="productname" column="productname" />
       <result property="spec" column="spec" />
-      <!-- 필요하다면 다른 컬럼도 추가 가능 -->
+      <result property="unit" column="unit" />
+      <result property="partnumber" column="partnumber" />
+      <result property="warehouse" column="warehouse" />
     </association>
   </resultMap>
 
   <!-- 실제 select 쿼리 -->
-<select id="selectAllPlans" resultMap="PlanWithProductResultMap">
-  SELECT 
-    pp.*, 
-    p.productname, 
-    p.spec
-  FROM 
-    productionplans pp
-  LEFT JOIN 
-    products p 
-  ON 
-    pp.productid = p.productid
-</select>
-
+  <select id="selectAllPlans" resultMap="PlanWithProductResultMap">
+    SELECT 
+      pp.planid, 
+      pp.userid, 
+      pp.productid, 
+      pp.totalqty, 
+      pp.startdate, 
+      pp.enddate, 
+      pp.createdate, 
+      pp.deliverydate, 
+      pp.deliverydest, 
+      pp.planstatus, 
+      pp.plancause, 
+      pp.plannotes, 
+      p.productname, 
+      p.spec, 
+      p.unit, 
+      p.partnumber, 
+      p.warehouse 
+    FROM productionplans pp
+    LEFT JOIN products p 
+      ON pp.productid = p.productid
+  </select>
 
 </mapper>

@@ -101,30 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
 
-                // 검사기준
-                document.querySelector("#nav-process").addEventListener("click", function () {
-                    fetch(contextPath + "/select")
-                        .then(response => response.text())
-                        .then(html => {
-                            if (mainContent) {
-                                mainContent.innerHTML = html;
-            
-                                // URL을 변경해서 사용자가 직접 새로고침해도 같은 페이지로
-                                history.pushState(null, null, contextPath + "/select");
-            
-                                // 네비게이션 텍스트도 변경
-                                if (typeof LocalNavigationbar === 'function') {
-                                    LocalNavigationbar('공정관리', '검사기준');
-                                }
-                            } else {
-                                console.error("파일을 불러오는 중 오류가 발생했습니다.");
-                            }
-                        })
-                        .catch(err => {
-                            console.error('생산 계획 페이지 로드 실패:', err);
-                        });
-                });
-
     // document.querySelector("#").addEventListener("click", function () {
     //     location.href = contextPath + "/InspectionS";
     // });
@@ -239,30 +215,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // document.querySelector("#nav-chart").addEventListener("click", function () {
     //     location.href = contextPath + "/chart_0203.jsp";
     // });
-
-        //품질관리 페이지
-        document.querySelector("#nav-qualityControl").addEventListener("click", function () {
-            fetch(contextPath + "/qual")
-                .then(response => response.text())
-                .then(html => {
-                    if (mainContent) {
-                        mainContent.innerHTML = html;
-    
-                        // URL 변경 
-                        history.pushState(null, null, contextPath + "/qual");
-    
-                        // 로컬 네비게이션
-                        if (typeof LocalNavigationbar === 'function') {
-                            LocalNavigationbar('생산관리', '품질관리');
-                        }
-                    } else {
-                        console.error("파일을 불러오는 중 오류가 발생했습니다.");
-                    }
-                })
-                .catch(err => {
-                    console.error('생산 계획 페이지 로드 실패:', err);
-                });
-        });
 
     // document.querySelector("#nav-공지사항").addEventListener("click", function () {
     //     location.href = contextPath + "/notice";
