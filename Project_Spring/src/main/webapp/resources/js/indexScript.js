@@ -1,7 +1,6 @@
 // PC version and nav accodian script
 document.addEventListener('DOMContentLoaded', function () {
     const navButtons = document.querySelectorAll('.nav-button');
-
     navButtons.forEach(function (navbtn) {
         navbtn.addEventListener('click', function () {
             const navMenu = navbtn.nextElementSibling;
