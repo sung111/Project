@@ -5,9 +5,53 @@
 
 <mapper namespace="project.mapper.Quality">
 
-	<select id="" >
-	
+	<select id="QualityView" parameterType="QualityControl_DTO" resultType="QualityControl_DTO">
+		select rnumwhere.* 
+		from
+		    (
+		        select rownum rnum,quresult.* from
+		            (
+		                select qu.*, users.username, pro.productname
+		                from qualitycontrols qu
+		                join users on (users.userid = qu.userid)
+		                join products pro on (pro.productid = qu.productid)
+		                order by qu.qualitycontroltime desc
+		            ) quresult
+		    ) rnumwhere
+		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
 	</select>
-
+	
+	<select id="QualityTotalCount" resultType="int">
+		select count(*) from qualitycontrols
+	</select>
+	
+	<insert id="QualityInsert">
+	insert into qualitycontrols
+		(
+			qualitycontrolid,
+			productid,
+			performanceid,
+			userid,
+			result,
+			failreason,
+			comments,
+			qualitycontroltime,
+			passpack,
+			failpack
+		)
+	values
+		(
+			SEQ_QUALITYCONTROLS.nextval,
+			#{productid},
+			#{performanceid},
+			#{userid},
+			#{result},
+			#{failreason},
+			#{comments},
+			#{qualitycontroltime},
+			#{passpack},
+			#{failpack}
+		)
+	</insert>
 
 </mapper>

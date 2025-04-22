@@ -37,19 +37,18 @@
 			<div class="wkrView"></div>
 			<div class="page-container"></div>
 		</div>
-		<div class="bord">
-			<div class="inBord">
-				<div>검사완료율</div>
-				<div>%</div>
-				<div>(제품별)</div>
-			</div>
-			<div class="inBord">
-				<div>불량률</div>
-				<div>%</div>
-				<div>(제품별)</div>
-			</div>
-
-		</div>
+<!-- 		<div class="bord"> -->
+<!-- 			<div class="inBord"> -->
+<!-- 				<div>검사완료율</div> -->
+<!-- 				<div>%</div> -->
+<!-- 				<div>(제품별)</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="inBord"> -->
+<!-- 				<div>불량률</div> -->
+<!-- 				<div>%</div> -->
+<!-- 				<div>(제품별)</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="box2">
 			<div class="left">
 				<div class="wp">제품명</div>
@@ -68,7 +67,8 @@
 							value="불합격"> 불합격
 					</div>
 					<div>
-						<input type="datetime-local" class="date2">
+						<input type="datetime-local" class="date2" id="inputdate">
+						<input type="hidden" id="productid11">
 						<div>
 							합격 갯수입력 : <input type="number" class="myInput" min="1" max="100"
 								oninput="validity.valid||(value='')" value="10"> pack
@@ -123,7 +123,7 @@
 				</div>
 			</div>
 			<div class="dede">
-				<div class="index">
+				<div class="indexsss">
 					<div>날짜</div>
 					<div>제품명</div>
 					<div>합격/불합격</div>

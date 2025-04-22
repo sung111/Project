@@ -204,7 +204,7 @@ body {
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 300px;
+    height: 309px;
     overflow-y: scroll;
     background-color: white;
     color: black;
@@ -255,7 +255,7 @@ body {
     color: black;
   }
 
-  .index {
+  .indexsss {
     display: flex;
     justify-content: space-around;
     width: 98%;
@@ -264,7 +264,7 @@ body {
 
   }
 
-  .index>div {
+  .indexsss>div {
     width: 100%;
     text-align: center;
   }
@@ -346,10 +346,10 @@ body {
     border: 1px solid #d9d9d9;
     text-align: center;
   }
-  #index>div{
+  #indexsss>div{
     background-color: #c7c7c7;
   }
-  #index>div>div{
+  #indexsss>div>div{
     border: 1px solid;
   }
 
@@ -375,7 +375,31 @@ body {
     text-align: center;
   }
   .page-container > button{
-    font-size: 16px;
+    font-size: 14px;
+    margin : 3px;
+    padding: 3px;
+  }
+
+  .qualList-card{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid gray;
+    margin: 1px;
+    padding: 5px;
+  }
+  .qualList-card > div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  .pageNationQuality{
+    text-align: center;
+  }
+  .pageNationQuality > button{
+    font-size: 14px;
     margin : 3px;
     padding: 3px;
   }
@@ -384,6 +408,30 @@ body {
 
 /* 데탑 */
 @media screen and (min-width:768px) {
+  .qualList-card{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid gray;
+    margin: 1px;
+    padding: 5px;
+  }
+  .qualList-card > div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+  .pageNationQuality{
+    text-align: center;
+  }
+  .pageNationQuality > button{
+    font-size: 14px;
+    margin : 3px;
+    padding: 3px;
+  }
+
   .performance-card{
     display: flex;
     justify-content: space-around;
@@ -403,7 +451,7 @@ body {
     text-align: center;
   }
   .page-container > button{
-    font-size: 16px;
+    font-size: 14px;
     padding: 3px;
     margin : 3px;
   }
@@ -422,10 +470,10 @@ body {
     border: 1px solid #d9d9d9;
     text-align: center;
   }
-  #index>div{
+  #indexsss>div{
     background-color: #c7c7c7;
   }
-  #index>div>div{
+  #indexsss>div>div{
     border: 1px solid;
   }
 
@@ -614,7 +662,7 @@ body {
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 300px;
+    height: 309px;
     overflow-y: scroll;
     background-color: white;
     color: black;
@@ -671,13 +719,13 @@ body {
     width: 97%;
   }
 
-  .index {
+  .indexsss {
     display: flex;
     justify-content: space-around;
     width: 100%;
   }
 
-  .index>div {
+  .indexsss>div {
     width: 100%;
     text-align: center;
   }

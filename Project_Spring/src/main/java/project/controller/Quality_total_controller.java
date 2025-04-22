@@ -47,7 +47,36 @@ public class Quality_total_controller {
 		return map;
 	}
 	
-
+	@RequestMapping(value="/qualList", method=RequestMethod.POST)
+	@ResponseBody
+	public Map qualList(
+			@RequestBody
+			QualityControl_DTO dto
+			) {
+		Map map = new HashMap();
+		
+		List list = Service.QualityList(dto);
+		int totalCount = Service.QualityTotalCount();
+		
+		map.put("list", list);
+		map.put("totalCount", totalCount);
+		map.put("page", dto.getPage() );
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/qualInsert", method=RequestMethod.POST)
+	@ResponseBody
+	public void qualInsert(
+			@RequestBody
+			QualityControl_DTO dto
+			) {
+		
+		
+//		return map;
+	}
+	
+	
 	
 
 }

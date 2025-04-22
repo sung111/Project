@@ -8,4 +8,7 @@ public interface QualityControl_DAO {
 
 	public List pageList(QualityControl_DTO dto);
 	public int pageTotalCaount();
+	public List QualityList(QualityControl_DTO dto);
+	public int QualityTotalCount();
+	public int QualityInsert(QualityControl_DTO dto);
 }

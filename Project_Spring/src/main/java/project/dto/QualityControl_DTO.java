@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class QualityControl_DTO {
 
-//	페이지네이션
+//	실적등록 페이지네이션
 	private int Page;//첫페이지
 	private int viewCount;//10개씩보여줌
 	private int indexStart;
@@ -18,7 +18,7 @@ public class QualityControl_DTO {
 	private String productname;
 	private String username;
 	
-//	performances 테이블 db
+//	performances 테이블 컬럼명
 	private int performanceid;
 	private int productid;
 	private int planid;
@@ -26,6 +26,16 @@ public class QualityControl_DTO {
 	private Date reporttime;
 	private String performancecomment;
 	private int productioncount;
+	
+//	qualitycontrols 테이블 컬럼명
+	private int qualitycontrolid;
+	private String result;
+	private String failreason;
+	private String comments;
+	private String qualitycontroltime;
+	private int passpack;
+	private int failpack;
+	
 	
 //	조회하기위한 필드 정의
 	private String searchDateStart;

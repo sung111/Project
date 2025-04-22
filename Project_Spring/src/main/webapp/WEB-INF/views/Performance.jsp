@@ -89,7 +89,7 @@
 					</div>
 				</form>
 				<div class="indexBox">
-					<div class="index">
+					<div class="indexsss">
 						<div>날짜</div>
 						<div>제품명</div>
 						<div>수량</div>

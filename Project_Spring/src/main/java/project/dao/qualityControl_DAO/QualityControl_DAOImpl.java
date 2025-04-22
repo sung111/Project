@@ -24,4 +24,21 @@ public class QualityControl_DAOImpl implements QualityControl_DAO{
 		int result = sqlsession.selectOne("project.mapper.Performance.performTotalCount");
 		return result;
 	}
+	
+//	품질관리 리스트
+	@Override
+	public List QualityList(QualityControl_DTO dto) {
+		List list = sqlsession.selectList("project.mapper.Quality.QualityView",dto);
+		return list;
+	}
+	@Override
+	public int QualityTotalCount() {
+		int result = sqlsession.selectOne("project.mapper.Quality.QualityTotalCount");
+		return result;
+	}
+	@Override
+	public int QualityInsert(QualityControl_DTO dto) {
+		int result = sqlsession.insert("project.mapper.Quality.QualityInsert", dto);
+		return result;
+	}
 }
