@@ -429,7 +429,7 @@ function select() {
       const productName = e.target.parentNode.parentNode.querySelectorAll('div')[1].innerText;
       document.querySelector('.wp2').innerText = productName; 
       document.querySelector('.wp').innerText = productName; 
-      const document.querySelector('.productid11').value = document.querySelector('.productid111').value
+      // const document.querySelector('.productid11').value = document.querySelector('.productid111').value
     });
   }
 }
