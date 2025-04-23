@@ -5,34 +5,31 @@
 
 <tiles-definitions>
 
-<definition name="defaultLayout" template="/WEB-INF/views/defaultLayout.jsp">
-    <put-attribute name="topbar" value="/WEB-INF/views/topbar.jsp"/>
-    <put-attribute name="localnav" value="/WEB-INF/views/localnav.jsp"/>
-    
-    <put-attribute name="mainframe" value="/WEB-INF/views/mainframe.jsp"/>
-    <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
-    <put-attribute name="popup" value="/WEB-INF/views/popup.jsp"/>
-    <put-attribute name="chatbot" value="/WEB-INF/views/chatbot.jsp"/>
-    <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
-    <put-attribute name="body" value="/WEB-INF/views/MainTitle.jsp"/>
-</definition>
-
-
-    <definition name="index" extends="defaultLayout">
-    
-            <put-attribute name="title" value="홈"/>
-        <put-attribute name="mainframe" value="/WEB-INF/views/MainTitle.jsp"/>
+    <!-- 기본 레이아웃 정의 -->
+    <definition name="defaultLayout" template="/WEB-INF/views/defaultLayout.jsp">
+        <put-attribute name="topbar" value="/WEB-INF/views/topbar.jsp"/>
+        <put-attribute name="localnav" value="/WEB-INF/views/localnav.jsp"/>
+        <put-attribute name="mainframe" value="/WEB-INF/views/mainframe.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
-
+        <put-attribute name="popup" value="/WEB-INF/views/popup.jsp"/>
+        <put-attribute name="chatbot" value="/WEB-INF/views/chatbot.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/MainTitle.jsp"/>
     </definition>
-    
-<definition name="maintitle" extends="defaultLayout">
+
+    <!-- index 페이지용 정의 -->
+    <definition name="index" extends="defaultLayout">
+        <put-attribute name="title" value="홈"/>
+        <!-- mainframe이나 menu는 defaultLayout과 같으므로 생략 가능 -->
+        <!-- 필요한 경우만 override -->
+    </definition>
+
+    <!-- maintitle 하위 페이지용 정의 -->
+<definition name="*" extends="defaultLayout">
     <put-attribute name="title" value="메인페이지" />
-    <put-attribute name="body" value="/WEB-INF/views/MainTitle.jsp" />
-    <put-attribute name="head" value="/WEB-INF/views/head/maintitleHead.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
 </definition>
 
-    
-    
-</tiles-definitions>
 
+
+</tiles-definitions>

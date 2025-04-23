@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 왼쪽 화살표 (이전 페이지)
         const prevButton = document.createElement("a");
-        prevButton.innerHTML = `<img src="img/lefticon.png" alt="pagenationleft" class="pagenationicon">`;
+        prevButton.innerHTML = `<img src="${pageContext.request.contextPath}/resources/img/lefticon.png" alt="pagenationleft" class="pagenationicon">`;
         prevButton.addEventListener("click", function () {
             if (currentPage > 1) {
                 currentPage--;
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 오른쪽 화살표 (다음 페이지)
         const nextButton = document.createElement("a");
-        nextButton.innerHTML = `<img src="img/righticon.png" alt="pagenationright" class="pagenationicon">`;
+        nextButton.innerHTML = `<img src="${pageContext.request.contextPath}/resources/img/righticon.png" alt="pagenationright" class="pagenationicon">`;
         nextButton.addEventListener("click", function () {
             if (currentPage < totalPages) {
                 currentPage++;

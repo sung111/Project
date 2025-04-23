@@ -9,10 +9,10 @@ import lombok.Data;
 public class Materials_DTO {
 	
 	String materialname;
-	int price;
-	String spec;
-	String unit;
-	String supplier;
+	int price; //가격
+	String spec;  //규격
+	String unit; //단위
+	String supplier; //공급업체
 	String partNumber;
 	String lotnumber;
 	String warehouse;

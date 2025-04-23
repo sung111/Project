@@ -9,11 +9,9 @@
 <title>HHMES 생산관리</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodplan.css">
-<script src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
+
 </head>
-
 <body>
-
 	<table class="search-container">
 		<thead>
 			<tr>
@@ -47,18 +45,30 @@
 		<tr class="menufacturer-info">
 			<td class="menufacturer-info-list">
 				<div class="menufacturer-info-name">생성인</div>
-				<input type="text" class="menufacturer-info-completion" value="${username != null ? username : '알 수 없음'}" readonly>
+				<c:choose>
+  <c:when test="${not empty username}">
+    <input type="text" class="menufacturer-info-completion" value="${username}" readonly />
+  </c:when>
+  <c:otherwise>
+    <input type="text" class="menufacturer-info-completion" value="알 수 없음" readonly />
+  </c:otherwise>
+</c:choose>
+
 			</td>
-			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생산기간</div>
-				<input type="text" class="menufacturer-info-completion"
-					value="<c:choose>
-								<c:when test="${not empty planList}">
-									${planList[0].startDate} ~ ${planList[0].endDate}
-								</c:when>
-								<c:otherwise>데이터 없음</c:otherwise>
-						   </c:choose>" readonly>
-			</td>
+<td class="menufacturer-info-list">
+	<div class="menufacturer-info-name">생산기간</div>
+	<c:choose>
+		<c:when test="${not empty planList}">
+			<input type="text" class="menufacturer-info-completion"
+				   value="${planList[0].startDate} ~ ${planList[0].endDate}" readonly>
+		</c:when>
+		<c:otherwise>
+			<input type="text" class="menufacturer-info-completion"
+				   value="데이터 없음" readonly>
+		</c:otherwise>
+	</c:choose>
+</td>
+
 		</tr>
 	</table>
 
@@ -131,9 +141,8 @@
 			</tr>
 		</tfoot>
 	</table>
-	<script>
-	console.log("JS 됨!");
-</script>
-	
+
+<script src="${ pageContext.request.contextPath }/resources/js/prodplan.js"></script>
 </body>
+
 </html>
