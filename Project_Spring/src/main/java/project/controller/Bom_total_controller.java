@@ -63,9 +63,9 @@ public class Bom_total_controller {
 			HttpSession httpSession,
 			Materials_DTO materials_DTO,
 			Products_DTO products_DTO ) {
-		User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
-		System.out.println("Field2"+Field2);
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
+		System.out.println("Field2"+Field2);
 		System.out.println("Field :"+ Field);
 		String id = (String)httpSession.getAttribute("id");
 		System.out.println("Field ="+ Field);
@@ -237,7 +237,7 @@ public class Bom_total_controller {
 			Products_DTO products_DTO
 			)  {
 		System.out.println("inspectionStandards 실행");
-		User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
 		
 
@@ -446,7 +446,7 @@ public class Bom_total_controller {
 			HttpSession httpSession
 			) {
 		try {
-			User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
+			User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 			String Field = Field2.getJob();
 //			String Field  = "ADMIN";
 			System.out.println("production_process 실행");
@@ -470,7 +470,7 @@ public class Bom_total_controller {
 	public Map<String,Object> production_process(@RequestParam("select_value") int select_value
 			,HttpSession httpSession
 			) {  
-		User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
 		Map<String,Object> map = new HashMap();
 //		String Field = "ADMIN";
@@ -577,9 +577,9 @@ public class Bom_total_controller {
 					
 					)  {
 				System.out.println("bom_v2 입장~~~");
-//				User_DTO Field2 = (User_DTO) httpsession.getAttribute("userRole");
-//				String Field = Field2.getJob();
-				String Field = "ADMIN";
+				User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
+				String Field = Field2.getJob();
+//				String Field = "ADMIN";
 				model.addAttribute(Field);
 				return "bom_v2";
 			}
@@ -615,7 +615,7 @@ public class Bom_total_controller {
 			@RequestParam(value="pid",required = false) String pid,
 			 HttpSession httpsession
 			) {
-		User_DTO Field2 = (User_DTO) httpsession.getAttribute("userRole");
+		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
 		String Field = Field2.getJob();
 //		String Field = "ADMIN";
 		List mlist = null;

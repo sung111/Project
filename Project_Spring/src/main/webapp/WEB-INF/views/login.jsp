@@ -25,14 +25,17 @@
 				<img src="${ pageContext.request.contextPath }/resources/img/icon.png" alt="loginlogo">
 				<h5>혁신적인 밀키트 생산관리 MES</h5>
 			</div> 
+			
 			<form class="login-layer" id="login-layer" action="Login_controller"
 				method="post">
 				<h1>Login</h1>
 				<input type="text" name="userId" id="username"
-					placeholder="Username" required> <input type="password"
+					placeholder="Username" required>
+					 <input type="password"
 					name="userPw" id="password" placeholder="Password" required>
 				<button type="submit" id="login-button">Login</button>
 			</form>
+			
 			<form class="signup-layer" id="signup-layer">
 				<h6>이름</h6>
 				<input type="text" name="user_name" class="writing_layer"
