@@ -32,15 +32,6 @@ public class Products_DTO {
 	private int indexStart;
 	private int indexEnd;
 	
-    public void setProductId(int productId) {
-        this.productid = productId;
-    }
-
-    public int getProductId() {
-        return productid;
-    }
-    public String getLotnumber() {
-        return this.lotnumber;
-    }
+  
 
 }

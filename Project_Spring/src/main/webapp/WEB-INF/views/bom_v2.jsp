@@ -173,6 +173,9 @@
           #chang{
             width: 50px;
           }
+          #search-button{
+            font-size: 10px;
+          }
         
         }
     </style>

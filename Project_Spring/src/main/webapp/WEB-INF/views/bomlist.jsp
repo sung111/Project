@@ -98,12 +98,7 @@
 									height: 30px;
 								}
 
-								.buttontd {
-									display: flex;
-									justify-content: center;
-									align-items: center;
-									height: 50px;
-								}
+							
 
 
 								.new-text {
@@ -126,6 +121,7 @@
 									cursor: pointer;
 									height: 35px;
 									margin: 5px;
+									display: inline-block;
 								}
 
 								.input_field_outrine {
@@ -188,10 +184,7 @@
 								}
 
 								.crud_contaner {
-									width: 140px;
-									display: flex;
-									justify-content: center;
-									border-width: 0px;
+									text-align: center;
 								}
 
 								.quan_text {
@@ -201,6 +194,12 @@
 
 								.none {
 									display: none;
+								}
+								td,
+								th {
+									border: 1px solid #ddd;
+								
+									border-collapse: collapse;
 								}
 
 								@media screen and (max-width: 767px) {
@@ -221,6 +220,20 @@
 									td {
 										font-size: 10px;
 									}
+									#crud_th{
+										width: 20%;
+									}
+									.quan_text{
+										width: 10%;
+									}
+									.font_size{
+										font-size: 8px;
+									}
+									.crud_contaner{
+										display: flex;
+										justify-content: center;
+									}
+								
 								}
 							</style>
 						</head>
@@ -248,12 +261,11 @@
 
 											<div>
 												<span>제품명</span>
-												<input type="hidden" value="${pvalue}" name="pvalueid">
+												<input type="hidden" value="${pid}" id="pid">
 
 												<select name="materialsid" id="matesel">
-
 													<c:forEach var="dto" items="${mlist}">
-														<option value="${dto.materialid}">${dto.materialname}</option>
+														<option value="${dto.materialid}" selected="selected">${dto.materialname}</option>
 													</c:forEach>
 
 												</select>
@@ -264,16 +276,15 @@
 
 										<div>
 											<div>
-												<span>투입수량 입력</span> <input type="text" name="input_quantity" id=""
-													value="" class="textwithd">
+												<span>투입수량 입력</span> 
+												<input type="text"  id="inputValue" class="textwithd">
 											</div>
 										</div>
 
 
 										<div id="field_button">
 
-
-											<input type="submit" value="확인" id="insert" class="btn up">
+											<input type="button" value="확인" id="insert" class="btn up">
 											<input type="button" value="취소" id="input_hide" class="btn up">
 
 										</div>
@@ -291,9 +302,9 @@
 										<th>제품명</th>
 										<th>투입수량</th>
 										<th>가격</th>
+										<th>규격</th>
 										<th>단위</th>
 										<th>재고수량</th>
-										<th>규격</th>
 										<th>공급업체</th>
 										<th>LotNo</th>
 										<th>창고위치</th>
@@ -318,7 +329,8 @@
 							<script>
 								window.addEventListener("load", function () {
 									//목록이동버튼
-									
+									pidselect();
+
 									document.querySelector("#back-button").addEventListener("click", () => {
 										location.href = "bom_v2"
 									})
@@ -329,20 +341,50 @@
 										document.querySelector(".title_insert").classList.remove("none")
 
 										//생성>확인 이벤트 아작스보내기
+										document.querySelector("#insert").addEventListener("click", (e) => {
+											console.log(document.querySelector("#matesel").value)
+											console.log(document.querySelector("#inputValue").value)
+											console.log(document.querySelector("#pid").value)
+											let data = {
+												quantity : document.querySelector("#inputValue").value,
+												materialid : document.querySelector("#matesel").value,
+												productid : document.querySelector("#pid").value
+											
+											}
+												const xhr = new XMLHttpRequest();
+												xhr.open('POST','bominsert')
+
+												xhr.setRequestHeader('Content-Type', 'application/json')
+
+												xhr.send(JSON.stringify(data))
+
+												xhr.onload = function () {
+													if(xhr.responseText == 1){
+														alert("생성완료")
+														pidselect();
+													}else if(xhr.responseText == 0){
+														alert("생성실패")
+													}
+												}
+											// const xhr= new XMLHttpRequest();
+											// xhr.open('post')
+										})//생성>취소
+
+										//생성>취소이벤트
 										document.querySelector("#input_hide").addEventListener("click", (e) => {
 											document.querySelector(".title_insert").classList.add("none")
 
 											// const xhr= new XMLHttpRequest();
 											// xhr.open('post')
-										})//생성>확인 이벤트 아작스보내기
+										})//생성>취소 이벤트
 
 
 
 									})
-									
+									//맨처음 화면 가져오는
 									function pidselect() {
 										const xhr = new XMLHttpRequest();
-									xhr.open('get', 'bomlistSlect?pid='+ "${pid}")
+									xhr.open('get', 'bomlistSlect?pid='+document.querySelector("#pid").value )
 
 									xhr.setRequestHeader('Content-Type', 'application/json')
 
@@ -354,79 +396,167 @@
 										data=JSON.parse(data)
 										console.log(data)
 										let list = data.list;
-										document.querySelector("#appendbody").innerHTML = ` `
+										document.querySelector("#bodyuphand").innerHTML = ` `
 											list.forEach(dto => {
 													let newdataHtml = document.createElement("tr")
 												
 													newdataHtml.innerHTML = `
-																<td>\${dto.materialname}</td>`
+																<td>\${dto.materialname}</td>
+																<td>\${dto.bom_quan}/개</td>
+																<td>\${dto.price}</td>
+																<td>\${dto.spec}</td>
+																<td>\${dto.unit}</td>`
 
-																if(dto.bom_quan == dto.bom_quan.intValue()){
-																	`<td>
-																				<div class="spbom_quan">\${dto.bom_quan}/개</div>
-																				`
-																				if(Field == 'ADMIN'){
-																					`<input type="text" value="\${dto.bom_quan}" name="bom_quan"
-																							class="inputbom_quan quan_text quan2">
-`
-																				}
-																				`
-																			</td>`
+																if(Number.isInteger(dto.inven_quan)){
+																	newdataHtml.innerHTML += `
+																	
+																	<td>\${dto.inven_quan}/개</td>`
+																}else if(!Number.isInteger(dto.inven_quan)){
+																	newdataHtml.innerHTML += `
+																	<td>\${dto.inven_quan}/개</td>`
+																}
+																newdataHtml.innerHTML += `
+																<td>\${dto.supplier}</td>
+																<td>\${dto.lotnumber}</td>
+																<td>\${dto.warehouse}</td>
+																<td>\${dto.partNumber}</td>
+																<td>
+																	<div class="crud_contaner">
+																		<input type="hidden" value=\${dto.bomid} class="bomid">
+																		<input type="button" value="수정" class="update btn font_size">
+																		<input type="button" value="삭제" class="delete btn font_size">
+																	</div>
+																</td>
+																
+																`
+
+														
+																
+																					
+																						
+																						
+																document.querySelector("#bodyuphand").append(newdataHtml)
+																
+																
+																
+																//삭제이벤트
+																newdataHtml.querySelector(".delete").addEventListener("click",function(e){
+																		console.log("삭제할값",e.target.parentNode.querySelector(".bomid").value)
+																
+																		let dto = {
+																			bomid : e.target.parentNode.querySelector(".bomid").value
+																		}	
+
+																		const xhr = new XMLHttpRequest();
+																		xhr.open('PUT', 'bomDelete' )
+
+																		xhr.setRequestHeader('Content-Type', 'application/json')
+
+																		xhr.send(JSON.stringify(dto))
+
+																		xhr.onload = function () {
+																			if(xhr.responseText == 1){
+																				alert("삭제성공")
+																				pidselect();
+																			}else if(xhr.responseText == 0){
+																				alert("삭제실패")
+																			}
 																		}
-																			
-																			`
-																			<td>${dto.price}</td>
-																			<td>${dto.unit}</td>
-																			<td>${dto.inven_quan}</td>
-																			<td>${dto.spec}</td>
-																			<td>${dto.supplier}</td>
-																			<td>${dto.lotnumber}</td>
-																			<td>${dto.warehouse}</td>
-																			<td>${dto.partNumber}</td>
-																			
-																			<c:if test="${Field == 'ADMIN'}">
-																			<td>
-																				
-																				<form action="Bom_controller" method="post">
-																				<div class="crud_contaner">
-																					<input type="hidden" name="quan_value" class="quan_value"
-																					value="0">
-																					<input type="hidden" value="${pvalue}" name="pvalueid"> <input
-																					type="hidden" value="${dto.bomid}" name="bomid"> <input
-																					type="hidden" value="update" name="type"> <input
-																					type="hidden" name="namevalue" value="${namevalue}"> <input
-																					type="button" value="확인" class="btn ok"> <input
-																					type="button" value="취소" class="btn cansle"> <input
-																					type="button" value="수정" class="btn update">
-																					</form>
-																					<form action="Bom_controller" method="post">
-																						<input type="hidden" value="${pvalue}" name="pvalueid"> <input
-																						type="hidden" value="${dto.bomid}" name="bomid"> <input
-																						type="hidden" name="namevalue" value="${namevalue}"> <input
-																						type="hidden" value="delet" name="type">
-																						<input type="submit" value="삭제" class="btn delet">
-																						</form>
-																						
-																						</div>
-																						</td>
-																						</c:if>
-																						
+																
+																})
+
+																//수정클릭시 데이터가져온후 확인버튼 이벤트
+																newdataHtml.querySelector(".update").addEventListener("click",function(e){
+																		console.log("수정값",e.target.parentNode.querySelector(".bomid").value)
+																		console.log(e.target.parentNode.parentNode)
+																		const xhr = new XMLHttpRequest();
+																		xhr.open('get', 'bomlistSlectOne?bomid='+e.target.parentNode.querySelector(".bomid").value )
+
+																		xhr.setRequestHeader('Content-Type', 'application/json')
+
+																		xhr.send()
+
+																		xhr.onload = function () {
+																			let data = (xhr.responseText)
+																			console.log("값임",xhr.responseText)
+																			dto = JSON.parse(data)
+																			console.log("값임",dto)
+																			console.log("바뀌어야되는tr",e.target.parentNode.parentNode.parentNode)
+																		
+																				for(let i = 0; i <dto.length ; i++){
+																				let newtext = `
+																					
+																							<td>\${dto[i].materialname}</td>
+																							<td><input type="text" class="quan_text" value="\${dto[i].bom_quan}">/개</td>
+																							<td>\${dto[i].price}</td>
+																							<td>\${dto[i].spec}</td>
+																							<td>\${dto[i].unit}</td>`
+
+																							if(Number.isInteger(dto[i].inven_quan)){
+																								newtext += `
+																								
+																								<td>\${dto[i].inven_quan}/개</td>`
+																							}else if(!Number.isInteger(dto[i].inven_quan)){
+																								newtext += `
+																								<td>\${dto[i].inven_quan}/개</td>`
+																							}
+																							newtext += `
+																							<td>\${dto[i].supplier}</td>
+																							<td>\${dto[i].lotnumber}</td>
+																							<td>\${dto[i].warehouse}</td>
+																							<td>\${dto[i].partNumber}</td>
+																							<td>
+																								<div class="crud_contaner">
+																									<input type="hidden" value=\${dto[i].bomid} class="bomid">
+																									<input type="button" value="확인" class="ok btn font_size">
+																									<input type="button" value="취소" class="can btn font_size">
+																								</div>
+																							</td>
+																					
 																						`
-																						document.querySelector("#bodyuphand").append(newdataHtml)
 																						
 																						
 																						
-																						
-																						newdataHtml.querySelector(".move").addEventListener("click",function(e){
+																						e.target.parentNode.parentNode.parentNode.innerHTML = newtext
+																						newdataHtml.querySelector(".ok").addEventListener("click",function(ee){
+																							console.log("확인클릭",ee.target)
+																							console.log("bomid",ee.target.parentNode.querySelector(".bomid").value)
+																							console.log("수정할값",ee.target.parentNode.parentNode.parentNode.querySelector(".quan_text").value)
+
+																							let data = {
+																								quantity : ee.target.parentNode.parentNode.parentNode.querySelector(".quan_text").value,
+																								bomid : ee.target.parentNode.querySelector(".bomid").value
 																							
-																							let pvalue = e.target.parentNode.querySelector(".productid").value
-																							let productname = e.target.innerHTML
-																							console.log(pvalue)
-																							console.log(pvalue)
-																							location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
-																							
+																							}
+																								const xhr = new XMLHttpRequest();
+																								xhr.open('PUT','bomUpdate')
+
+																								xhr.setRequestHeader('Content-Type', 'application/json')
+
+																								xhr.send(JSON.stringify(data))
+
+																								xhr.onload = function () {
+																									if(xhr.responseText == 1){
+																										alert("수정환료")
+																										pidselect();
+																									}else if(xhr.responseText == 0){
+																										alert("수정실패")
+																									}
+																								}
+
+
+																						})
+																						newdataHtml.querySelector(".can").addEventListener("click",function(ee){
+																							pidselect();
+																						})
+																						 
+																					}			
+																				
+																					
+																					
+																				}
 																						
-														})
+																})
 											})
 										}
 
