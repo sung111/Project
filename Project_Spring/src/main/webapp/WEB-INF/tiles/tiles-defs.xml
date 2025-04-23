@@ -25,7 +25,7 @@
     </definition>
 
     <!-- maintitle 하위 페이지용 정의 -->
-<definition name="maintitle/*" extends="defaultLayout">
+<definition name="*" extends="defaultLayout">
     <put-attribute name="title" value="메인페이지" />
     <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
 </definition>

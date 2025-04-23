@@ -64,6 +64,7 @@ public class Bom_total_controller {
 			Materials_DTO materials_DTO,
 			Products_DTO products_DTO ) {
 		User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
+		System.out.println("Field2"+Field2);
 		String Field = Field2.getJob();
 		System.out.println("Field :"+ Field);
 		String id = (String)httpSession.getAttribute("id");
@@ -445,9 +446,9 @@ public class Bom_total_controller {
 			HttpSession httpSession
 			) {
 		try {
-//			User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
-//			String Field = Field2.getJob();
-			String Field  = "ADMIN";
+			User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
+			String Field = Field2.getJob();
+//			String Field  = "ADMIN";
 			System.out.println("production_process 실행");
 			List plist = service.SelectProductPnamePid();
 			List dlist = service.SelectProcessDescription(1);
@@ -469,10 +470,10 @@ public class Bom_total_controller {
 	public Map<String,Object> production_process(@RequestParam("select_value") int select_value
 			,HttpSession httpSession
 			) {  
-//		User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
-//		String Field = Field2.getJob();
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("userRole");
+		String Field = Field2.getJob();
 		Map<String,Object> map = new HashMap();
-		String Field = "ADMIN";
+//		String Field = "ADMIN";
 		try {
 			System.out.println("production_process 실행");
 			System.out.println("select_value"+select_value);
@@ -614,9 +615,9 @@ public class Bom_total_controller {
 			@RequestParam(value="pid",required = false) String pid,
 			 HttpSession httpsession
 			) {
-//		User_DTO Field2 = (User_DTO) httpsession.getAttribute("userRole");
-//		String Field = Field2.getJob();
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpsession.getAttribute("userRole");
+		String Field = Field2.getJob();
+//		String Field = "ADMIN";
 		List mlist = null;
 		try {
 			mlist = build_of_Materials_service.BuildOfMaterials_materialList();
