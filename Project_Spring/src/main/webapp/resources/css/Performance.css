@@ -3,11 +3,6 @@
   padding: 0;
   margin: 0;
 }
-
-body {
-  align-items: center;
-}
-
 /* 모바일 */
 @media screen and (max-width:767px) {
   .warrap {

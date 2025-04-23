@@ -4,10 +4,6 @@
   margin: 0;
 }
 
-body {
-  align-items: center;
-}
-
 
 /* 모바일 */
 @media screen and (max-width: 767px) {
@@ -52,7 +48,7 @@ body {
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 241px;
+    height: 262px;
     overflow-y: scroll;
     margin: 0 10px;
     background-color: white;
@@ -204,7 +200,7 @@ body {
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 309px;
+    height: 336px;
     overflow-y: scroll;
     background-color: white;
     color: black;
@@ -518,7 +514,7 @@ body {
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 241px;
+    height: 262px;
     overflow-y: scroll;
     margin: 0 10px;
     background-color: white;
@@ -662,7 +658,7 @@ body {
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 309px;
+    height: 336px;
     overflow-y: scroll;
     background-color: white;
     color: black;

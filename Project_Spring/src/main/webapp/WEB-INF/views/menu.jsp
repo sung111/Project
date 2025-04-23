@@ -1,22 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <nav>
     <div class="logo-layer">
+    <a href="${pageContext.request.contextPath}/maintitle/MainTitle">
         <img src="${pageContext.request.contextPath}/resources/img/mainlogo.png" alt="logo" class="logo" id="nav-mainlogo">
+        </a>
     </div>
     <div class="navigation">
         <button class="nav-button">기준관리</button>
         <ul class="nav-tag">
-            <li id="nav-bomlist">부품코드</li>
-            <li id="nav-inspection">검사기준</li>
-            <li id="nav-process">생산공정</li>
-            <li id="nav-bom">BOM</li>
+        <li><a href="${pageContext.request.contextPath}/standard">부품코드</a></li>
+            <%-- <li><a href="${pageContext.request.contextPath}/standard">부품코드</a></li> --%>
+            <li><a href="${pageContext.request.contextPath}/inspectionStandards">검사기준</a></li>
+            <li><a href="${pageContext.request.contextPath}/production_process">생산공정</a></li>
+            <li><a href="${pageContext.request.contextPath}/bom_v2">BOM</a></li>
         </ul>
         <button class="nav-button">생산관리</button>
         <ul class="nav-tag">
-            <li id="nav-workorder">생산계획</li>
-            <li id="nav-perfomanceRegistratio">실적등록</li>
-            <li id="nav-qualityControl">품질관리</li>
-            <li id="nav-inventory">재고현황조회</li>
+            <li><a href="${pageContext.request.contextPath}/prodplan">생산계획</a></li>
+            <li><a href="${pageContext.request.contextPath}/Performance">실적등록</a></li>
+            <li><a href="${pageContext.request.contextPath}/qualityControl">품질관리</a></li>
+            <li><a href="${pageContext.request.contextPath}/inventorycheck">재고현황조회</a></li>
         </ul>
         <button class="nav-button">실적보고서</button>
         <ul class="nav-tag">
@@ -26,8 +29,9 @@
         </ul>
         <button class="nav-button">게시판</button>
         <ul class="nav-tag">
-            <li id="nav-공지사항">공지사항</li>
-            <li id="nav-일반게시판">일반게시판</li>
+            <li><a href="${pageContext.request.contextPath}/standard">공지사항</a></li>
+            <li><a href="${pageContext.request.contextPath}/board">일반게시판</a></li>
         </ul>
     </div>
 </nav>
+

@@ -33,18 +33,18 @@
 			<div class="instView"></div>
 		</div>
 		<div>
-			<div class="bord">
-				<div class="inBord">
-					<div>현재 진행률</div>
-					<div>%</div>
-					<div>(제품별)</div>
-				</div>
-				<div class="inBord">
-					<div>불량률</div>
-					<div>%</div>
-					<div>(제품별)</div>
-				</div>
-			</div>
+<!-- 			<div class="bord"> -->
+<!-- 				<div class="inBord"> -->
+<!-- 					<div>현재 진행률</div> -->
+<!-- 					<div>%</div> -->
+<!-- 					<div>(제품별)</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="inBord"> -->
+<!-- 					<div>불량률</div> -->
+<!-- 					<div>%</div> -->
+<!-- 					<div>(제품별)</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="box2">
 				<div class="criteria">
 					<div class="wp">제품명</div>

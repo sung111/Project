@@ -141,10 +141,6 @@
 			</tr>
 		</tfoot>
 	</table>
-	<script>
-    alert("JSP는 렌더링 됨");
-    console.log("JSP 로딩 OK");
-</script>
 
 <script src="${ pageContext.request.contextPath }/resources/js/prodplan.js"></script>
 </body>

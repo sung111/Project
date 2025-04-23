@@ -304,7 +304,7 @@
 	
 	<!--빌드오브 머터리얼 완제품id > 원재료 조회 -->
 	<select id="BuildOfMaterials_materialSelect" parameterType="int" resultType="Materials_DTO">
-		SELECT 
+	SELECT 
 	m.MATERIALID, 
 	m.MATERIALNAME, 
 	m.PRICE, 
@@ -336,7 +336,55 @@
 	<select id="BuildOfMaterials_materialList" resultType="Materials_DTO"  >
 	select MATERIALID,MATERIALNAME from MATERIALS  WHERE materialdel = 'n'
 	</select>
-
 	
+	<insert id="BuildOfMaterials_materialListInsert" parameterType="Bom_DTO" >
+	insert into boms 
+	 values ('',${quantity},${materialid},${productid},'n')
+	</insert>
+	
+<!-- 	bom material 삭제코드 -->
+	<update id="BuildOfMaterials_materialListDelete" parameterType="Bom_DTO" >
+ 					update boms 
+					 set bomdel  = 'y'
+					where bomid = ${bomid}
+	</update>
+	
+	<!-- 	bom material수정코드 -->
+	<update id="BuildOfMaterials_materialListUpdate" parameterType="Bom_DTO" >
+			  	update boms 
+				set quantity  = ${quantity}
+				where bomid =${bomid}
+	</update>
+	
+	<!-- 	bom 한줄만 셀렉트 -->
+	<select id="BuildOfMaterials_materialOneList" resultType="Materials_DTO" parameterType="int" >
+		SELECT 
+	m.MATERIALID, 
+	m.MATERIALNAME, 
+	m.PRICE, 
+	m.SPEC, 
+	m.UNIT, 
+	m.SUPPLIER, 
+	m.PARTNUMBER, 
+	m.LOTNUMBER, 
+	m.WAREHOUSE, 
+	m.MATERIALDEL, 
+	b.MATERIALID  as bom_ma_id, 
+	b.BOMID  , 
+	b.PRODUCTID as bom_pr_id, 
+	b.QUANTITY as bom_quan, 
+	b.bomdel , 
+	i.MATERIALID as inven_ma_id, 
+	i.QUANTITY as inven_quan 
+	FROM  materials m 
+	left JOIN boms b ON m.MATERIALID = b.MATERIALID  
+	left join inventorystatus i on m.MATERIALID = i.MATERIALID 
+	where  m.materialdel = 'n' 
+	and b.BOMID = ${_parameter}
+	and b.bomdel = 'n' 
+	order by m.MATERIALID 
+	</select>
+	
+
 
 </mapper>

@@ -5,6 +5,7 @@
 
 <mapper namespace="project.mapper.Quality">
 
+<!-- 	테이블 순서대로 전체셀렉 -->
 	<select id="QualityView" parameterType="QualityControl_DTO" resultType="QualityControl_DTO">
 		select rnumwhere.* 
 		from
@@ -21,11 +22,13 @@
 		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
 	</select>
 	
+<!-- 	테이블 카운트 -->
 	<select id="QualityTotalCount" resultType="int">
 		select count(*) from qualitycontrols
 	</select>
 	
-	<insert id="QualityInsert">
+<!-- 	삽입 -->
+	<insert id="QualityInsert" parameterType="QualityControl_DTO">
 	insert into qualitycontrols
 		(
 			qualitycontrolid,
@@ -48,10 +51,74 @@
 			#{result},
 			#{failreason},
 			#{comments},
-			#{qualitycontroltime},
+			TO_DATE(#{qualitycontroltime}, 'YYYY-MM-DD"T"HH24:MI'),
 			#{passpack},
 			#{failpack}
 		)
 	</insert>
+	
+<!-- 	검색리스트 -->
+<select id="searchQualList" parameterType="QualityControl_DTO" resultType="QualityControl_DTO">
+    SELECT resulttt.*
+    FROM (
+        SELECT rownum rnum, quresult.*
+        FROM (
+            SELECT qu.*, users.username, pro.productname
+            FROM qualitycontrols qu
+            JOIN users ON (users.userid = qu.userid)
+            JOIN products pro ON (pro.productid = qu.productid)
+            <where>
+                <if test="productname != null and productname != ''">
+                    AND productname LIKE '%' || #{productname} || '%'
+                </if>
+                <if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
+                    AND qualitycontroltime BETWEEN 
+                    TO_DATE(#{searchDateStart}, 'yyyy-MM-dd"T"HH24:mi') AND 
+                    TO_DATE(#{searchDateEnd}, 'yyyy-MM-dd"T"HH24:mi')
+                </if>
+                <if test="result != null and result != ''">
+                    AND result LIKE #{result}
+                </if>
+                <if test="failreason != null and failreason != ''">
+                    AND failreason LIKE '%' || #{failreason} || '%'
+                </if>
+            </where>
+            ORDER BY qu.qualitycontroltime DESC
+        ) quresult
+    ) resulttt
+    WHERE rnum <![CDATA[>=]]> #{indexStart}
+      AND rnum <![CDATA[<=]]> #{indexEnd}
+</select>
 
+	
+	<!-- 	검색 테이블 카운트 -->
+<select id="searchQualTotalCount" parameterType="QualityControl_DTO" resultType="int">
+    SELECT COUNT(*)
+    FROM (
+        SELECT rownum rnum, quresult.*
+        FROM (
+            SELECT qu.*, users.username, pro.productname
+            FROM qualitycontrols qu
+            JOIN users ON (users.userid = qu.userid)
+            JOIN products pro ON (pro.productid = qu.productid)
+            <where>
+                <if test="productname != null and productname != ''">
+                    AND productname LIKE '%' || #{productname} || '%'
+                </if>
+                <if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
+                    AND qualitycontroltime BETWEEN 
+                    TO_DATE(#{searchDateStart}, 'yyyy-MM-dd"T"HH24:mi') AND 
+                    TO_DATE(#{searchDateEnd}, 'yyyy-MM-dd"T"HH24:mi')
+                </if>
+                <if test="result != null and result != ''">
+                    AND result LIKE '%' || #{result} || '%'
+                </if>
+                <if test="failreason != null and failreason != ''">
+                    AND failreason LIKE '%' || #{failreason} || '%'
+                </if>
+            </where>
+            ORDER BY qu.qualitycontroltime DESC
+        ) quresult
+    ) resulttt
+</select>
 </mapper>

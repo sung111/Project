@@ -407,6 +407,7 @@
                                                 `
                                             }else{DescripBody.innerHTML +=`<td></td>`}
                                         document.querySelector("#new-tbody").append(DescripBody)
+                                        
                                         //삭제 버튼 이벤트 만들기
                                         DescripBody.querySelector(".delet").addEventListener("click", function(e){
                                           console.log("삭제값",e.target.parentNode.querySelector("#processid_value").value)

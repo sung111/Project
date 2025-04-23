@@ -1,6 +1,7 @@
+let isSearching = false; // 전역에서 선언
+let currentSearchParams = {}; // 검색 조건 저장용 객체
+
 window.addEventListener('load', init)
-
-
 
 function init() {
 
@@ -182,11 +183,40 @@ function init() {
   //   }
   // })
 
+
+  // 검색창에 드랍박스 클릭시 불합사유 보이게 or 안보이게
+  const searchBox = document.querySelector('#searchResult');
+  const searchFail = document.querySelector('#searchFail');
+  searchBox.addEventListener('change',(e)=>{
+    if(searchBox.value == '불합격'){
+      searchFail.disabled = false;
+      searchFail.parentNode.style.display = "block";
+    } else {
+      searchFail.disabled = true;
+      searchFail.parentNode.style.display = "none";
+    }
+  
+  })
+
+  // 새로고침
   document.querySelector('.btn1').addEventListener('click',(e)=>{
     location.reload();
   })
+
+  //검색버튼
+  document.querySelector('.btn4').addEventListener('click',(e)=>{
+    qualSearchList(1);
+  })
+
+
+  //등록버튼
   document.querySelector('.btn3').addEventListener('click', (e)=>{
+    // 보낼데이터 선언
     const sendData = {};
+    // productid ㅇ, performanceid ㅇ, userid, result ㅇ, failreason ㅇ,comment ㅇ, qualitycontroltime ㅇ, passpack ㅇ, failpack ㅇ
+    // FK
+    sendData.productid = document.querySelector('#productid11').value;
+    //합불 radio
     const rad = document.querySelectorAll('.rad')
     for(let i = 0 ; i<rad.length ; i++){
       if(rad[i].checked){
@@ -196,26 +226,48 @@ function init() {
         }
       }
     }
-    const ea = document.querySelectorAll('.myinput');
-    sendData.passpack=ea[0].value
-    sendData.failpack=ea[1].value
+    // 합/불 갯수
+    const ea = document.querySelectorAll('.myInput');
+    sendData.passpack = ea[0].value === "" ? 0 : parseInt(ea[0].value);
+    sendData.failpack = ea[1].value === "" ? 0 : parseInt(ea[1].value);
+    //코멘트
     sendData.comments = document.querySelector('.textBox').value
+    //날짜
     sendData.qualitycontroltime = document.querySelector('#inputdate').value
+    // 실적 PK -> FK
+    sendData.performanceid = document.querySelector('#performancegaja11').value;
+    // id 일단 박아놓음 세션받아서넣어야함.
+    sendData.userid = 'adminid2'
 
+    if(document.querySelector('.wp2').innerText == "제품명" || document.querySelector('.wp').innerText == "제품명"){
+      alert("제품을 선택해주세요");
+      return;
+    }
+    if( ea[0].value == '' || ea[1].value == '' ){
+      alert('합/불 갯수를 입력해주세요.');
+      return;
+    }
 
-    fetch("/project/qualInsert",{
-      method : "PUT",
-      headers : {
-        "Content-Type" : "application/json"
-      },
-      body : JSON.stringify(sendData)
-    })
-    .then(response => response.json())
-    .then(data =>{
-
-    })
-
-  })
+    const tt = confirm("정말로 등록하시겠습니까?");
+    if(tt){
+      fetch("/project/qualInsert",{
+        method : "POST",
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(sendData)
+      })
+      .then(response => response.json())
+      .then(data =>{
+        console.log(data);
+        alert("등록완료되었습니다.")
+        location.reload();
+      })
+      .catch(error =>{
+        console.log('오류발쒱 :' , error);
+      })
+    }
+  }) // 등록 클릭이벤트 end
 
   //실적조회 페이지네이션과 조회
   loadPerformList(1);
@@ -227,6 +279,7 @@ function init() {
 
 // 품질 페이지네이션 fetch 가즈아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
 function loadQualList(page = 1){
+  isSearching=false;
   fetch("/project/qualList",{
     method : "POST",
     headers : {
@@ -238,6 +291,35 @@ function loadQualList(page = 1){
   .then( data => {
     renderQualList(data.list);
     renderQualPagination(data.totalCount, data.page);
+  })
+}
+
+// fetch로 search List가즈아
+function qualSearchList( page = 1 ){
+
+  if(page === 1){
+    isSearching = true;
+    currentSearchParams = {
+      productname : document.querySelector('.wp3').value,
+      searchDateStart : document.querySelector('.indate1').value,
+      searchDateEnd : document.querySelector('.indate2').value,
+      result : document.querySelector('#searchResult').value,
+      failreason : document.querySelector('#searchFail').value
+    }
+  }
+  const params = new URLSearchParams({
+    ...currentSearchParams,
+    page,
+    viewCount : 9
+  })
+  fetch(`/project/qualList/search?${params}`)
+  .then(response => response.json())
+  .then(data =>{
+    renderQualList(data.list);
+    renderQualPagination(data.totalCount, page);
+  })
+  .catch(error =>{
+    console.log('ㅃㅣ용삐용 에러데스요  : ', error);
   })
 }
 
@@ -267,6 +349,7 @@ function renderQualList(list){
   })
 }
 
+// 페이지네이션 버튼임
 function renderQualPagination(totalCount, currentPage){
   const pageNationQuality = document.querySelector('.pageNationQuality');
   pageNationQuality.innerHTML = '';
@@ -285,7 +368,7 @@ function renderQualPagination(totalCount, currentPage){
     const prevBtn = document.createElement('button');
     prevBtn.textContent = '[이전]';
     prevBtn.addEventListener('click', () => {
-      loadQualList(groupStart - 1);
+      isSearching ? qualSearchList(groupStart - 1) : loadQualList(groupStart - 1);
     });
     pageNationQuality.appendChild(prevBtn);
   }
@@ -298,7 +381,7 @@ function renderQualPagination(totalCount, currentPage){
       btn.style.fontWeight = 'bold';
     }
     btn.addEventListener('click', () => {
-      loadQualList(i); // 번호를 loadPerformList로 넘긴다
+      isSearching ? qualSearchList(i) : loadQualList(i); // 번호를 loadPerformList로 넘긴다
     });
     pageNationQuality.appendChild(btn);
   }
@@ -308,11 +391,12 @@ function renderQualPagination(totalCount, currentPage){
     const nextBtn = document.createElement('button');
     nextBtn.textContent = '[다음]';
     nextBtn.addEventListener('click', () => {
-      loadQualList(groupEnd + 1);
+      isSearching ? qualSearchList(groupEnd + 1) : loadQualList(groupEnd + 1);
     });
     pageNationQuality.appendChild(nextBtn);
   }
 }
+// 품질관리 end //
 
 
 
@@ -363,7 +447,7 @@ function renderPerformanceList(list) {
         <div>${item.username}</div>
         <div>
           <button type="button" class="select">선택</button>
-          <input type="hidden" value="${item.performanceid}">
+          <input type="hidden" value="${item.performanceid}" id="performancegaja">
           <input id="productid111" type="hidden" value="${item.productid}">
         </div>
       `;
@@ -429,13 +513,12 @@ function select() {
       const productName = e.target.parentNode.parentNode.querySelectorAll('div')[1].innerText;
       document.querySelector('.wp2').innerText = productName; 
       document.querySelector('.wp').innerText = productName; 
-      // const document.querySelector('.productid11').value = document.querySelector('.productid111').value
+      document.querySelector('#productid11').value = e.target.parentNode.querySelector('#productid111').value;
+      document.querySelector('#performancegaja11').value = e.target.parentNode.querySelector('#performancegaja').value;
     });
   }
-}
+}// 실적조회 end //
 
 
 
 
-
-// 품질관리 fetch 가즈아
