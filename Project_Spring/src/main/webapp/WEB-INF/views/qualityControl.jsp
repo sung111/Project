@@ -69,6 +69,7 @@
 					<div>
 						<input type="datetime-local" class="date2" id="inputdate">
 						<input type="hidden" id="productid11">
+						<input type="hidden" id="performancegaja11">
 						<div>
 							합격 갯수입력 : <input type="number" class="myInput" min="1" max="100"
 								oninput="validity.valid||(value='')" value="10"> pack
@@ -104,18 +105,18 @@
 						type="datetime-local" class="indate2">
 				</div>
 				<div>
-					결과 : <select class="dropBox2">
+					결과 : <select class="dropBox2" id="searchResult">
 						<option value="">전체</option>
-						<option value="">합격</option>
-						<option value="">불합격</option>
+						<option value="합격">합격</option>
+						<option value="불합격">불합격</option>
 					</select>
 				</div>
 				<div>
-					불합격 사유 : <select class="dropBox2">
+					불합격 사유 : <select class="dropBox2" id="searchFail">
 						<option value="">전체</option>
-						<option value="">무게 미달</option>
-						<option value="">외관 불량</option>
-						<option value="">자재 불량</option>
+						<option value="무게 미달">무게 미달</option>
+						<option value="외관 불량">외관 불량</option>
+						<option value="자재 불량">자재 불량</option>
 					</select>
 				</div>
 				<div>

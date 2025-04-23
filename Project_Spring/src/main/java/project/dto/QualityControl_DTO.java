@@ -8,7 +8,7 @@ import lombok.Data;
 public class QualityControl_DTO {
 
 //	실적등록 페이지네이션
-	private int Page;//첫페이지
+	private int page;//첫페이지
 	private int viewCount;//10개씩보여줌
 	private int indexStart;
 	private int indexEnd;
