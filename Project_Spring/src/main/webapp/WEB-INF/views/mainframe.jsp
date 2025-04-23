@@ -13,7 +13,6 @@
       .then(response => response.text())
       .then(html => {
         document.getElementById('main-content').innerHTML = html;
-
         const img = document.getElementById("someImage");
         if (img) {
           img.src = "path/to/image.png";

@@ -2,7 +2,9 @@
 	width: 35px; height: 35px; border: 1px solid #007bff;
 }
 
-
+.logo{
+	width: 130px; height: 100px;
+}
 .chatbot-popup {
 	position: fixed;
 	right: 20px;

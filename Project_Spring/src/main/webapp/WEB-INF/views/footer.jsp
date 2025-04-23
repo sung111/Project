@@ -2,7 +2,3 @@
 <!-- <footer>
     <p>&copy; 2025 HHMES. All rights reserved.</p>
 </footer> -->
-<script>
-    var contextPath = "<%= request.getContextPath() %>";
-</script>
-<script src="${pageContext.request.contextPath}/resources/js/indexScript.js"></script>
