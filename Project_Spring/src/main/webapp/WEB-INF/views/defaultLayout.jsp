@@ -47,5 +47,9 @@
 		</div>
 
 	</div>
+	<script>
+    var contextPath = "<%= request.getContextPath() %>";
+</script>
+<script src="${pageContext.request.contextPath}/resources/js/indexScript.js"></script>
 </body>
 </html>

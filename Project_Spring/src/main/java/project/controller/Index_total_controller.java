@@ -16,6 +16,8 @@ import project.service.Users_total_service.User_service;
 @RequestMapping("/")
 public class Index_total_controller {
 
+	
+	
     @Autowired
     User_service user_service;
 
