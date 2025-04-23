@@ -15,7 +15,7 @@
 
 <tiles:insertAttribute name="head" ignore="true" />
 </head>
-<body class="index"
+<body class="main-index"
 	data-contextPath="${pageContext.request.contextPath}">
 
 	<div class="popup" id="popup">
