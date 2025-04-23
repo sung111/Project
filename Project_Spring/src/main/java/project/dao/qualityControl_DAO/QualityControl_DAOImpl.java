@@ -36,9 +36,26 @@ public class QualityControl_DAOImpl implements QualityControl_DAO{
 		int result = sqlsession.selectOne("project.mapper.Quality.QualityTotalCount");
 		return result;
 	}
+	
+//	삽입
 	@Override
 	public int QualityInsert(QualityControl_DTO dto) {
 		int result = sqlsession.insert("project.mapper.Quality.QualityInsert", dto);
 		return result;
 	}
+	
+//	검색리스트
+	@Override
+	public List searchQualList(QualityControl_DTO dto) {
+		System.out.println(dto);
+		List list = sqlsession.selectList("project.mapper.Quality.searchQualList",dto);
+		return list;
+	}
+	@Override
+	public int searchQualTotalCount(QualityControl_DTO dto) {
+		System.out.println(dto);
+		int result = sqlsession.selectOne("project.mapper.Quality.searchQualTotalCount", dto);
+		return result;
+	}
+	
 }
