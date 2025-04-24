@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <nav>
     <div class="logo-layer">
-    <a href="${pageContext.request.contextPath}/maintitle/MainTitle">
+    <a href="${pageContext.request.contextPath}/maintitle">
         <img src="${pageContext.request.contextPath}/resources/img/mainlogo.png" alt="logo" class="logo" id="nav-mainlogo">
         </a>
     </div>
@@ -17,9 +17,9 @@
         <button class="nav-button">생산관리</button>
         <ul class="nav-tag">
             <li><a href="${pageContext.request.contextPath}/prodplan">생산계획</a></li>
-            <li><a href="${pageContext.request.contextPath}/Performance">실적등록</a></li>
-            <li><a href="${pageContext.request.contextPath}/qualityControl">품질관리</a></li>
-            <li><a href="${pageContext.request.contextPath}/inventorycheck">재고현황조회</a></li>
+            <li><a href="${pageContext.request.contextPath}/performance">실적등록</a></li>
+            <li><a href="${pageContext.request.contextPath}//qual">품질관리</a></li>
+            <li><a href="${pageContext.request.contextPath}/inven">재고현황조회</a></li>
         </ul>
         <button class="nav-button">실적보고서</button>
         <ul class="nav-tag">
