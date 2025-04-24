@@ -25,4 +25,8 @@ public interface QualityControl_DAO {
 	
 //	삭제
 	public int QaulDelete(QualityControl_DTO dto);
+	
+//	모달창구현
+	public QualityControl_DTO QaulModalSelect(int productid);
+	
 }

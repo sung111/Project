@@ -20,4 +20,6 @@ public interface QualityControl_Service {
 	public int QualUpdate(QualityControl_DTO dto);
 //	삭제
 	public int QaulDelete(QualityControl_DTO dto);
+//	모달창 구현
+	public QualityControl_DTO QaulModalSelect(int productid);
 }

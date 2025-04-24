@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.QualityControl_DTO;
@@ -112,4 +113,13 @@ public class Quality_total_controller {
 		return service.QualUpdate(dto);
 	}
 	
+//	모달창구현
+	@RequestMapping(value="/QaulModalSelect", method=RequestMethod.GET)
+	@ResponseBody
+	public QualityControl_DTO QaulModalSelect(
+			@RequestParam("productid")
+			int productid
+			) {
+		return service.QaulModalSelect(productid);
+	}
 }

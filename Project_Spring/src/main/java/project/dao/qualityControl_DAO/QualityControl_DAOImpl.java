@@ -69,6 +69,11 @@ public class QualityControl_DAOImpl implements QualityControl_DAO{
 		int result = sqlsession.delete("project.mapper.Quality.QaulDelete", dto);
 		return result;
 	}
-
 	
+//	모달창 구현
+	@Override
+	public QualityControl_DTO QaulModalSelect(int productid) {
+		QualityControl_DTO result = sqlsession.selectOne("project.mapper.Quality.QaulModalSelect", productid);
+		return result;
+	}
 }

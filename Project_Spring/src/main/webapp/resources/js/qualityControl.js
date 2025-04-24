@@ -19,57 +19,49 @@ function init() {
 
   // 합/불 큰버튼
   document.querySelector('.btn2').addEventListener('click', (e) => {
-    const modal = document.querySelector('#myModal')
-    const content = document.querySelector('.modal-content')
-
-    fetch('Inspection_standards.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('에러발쌩!');
-        }
-        return response.text();
+    //모달창
+    const modal = document.querySelector('#myModal');
+    // 모달창 내용
+    const content = document.querySelector('.modal-content');
+    //제품번호
+    const productid = document.querySelector('#productid11').value;
+    if(!productid){
+      alert("제품을 선택해 주십시오.");
+    } else {
+      fetch(`/project/QaulModalSelect?productid=${productid}`)
+      .then( res => res.json() )
+      .then( data => {
+        console.log(data);
+        console.log(data.productname);
+        content.innerHTML = '';
+        content.innerHTML = `<span class="close">&times;</span>
+                <div style="border: 1px solid #8989ef;border-radius: inherit;margin: 10px;padding: 10px;">
+                  <h1>${data.productname}</h1>
+                  <div>
+                    <img src="download?filename=${data.productimage}"
+                    style="margin: 15px;width: 300px;">
+                  </div>
+                  <div style="display: flex;gap: 20px;margin: 10px auto;max-width: 516px;">
+                    <div style="max-width: 258px;">
+                      <h2>정상제품기준</h2>
+                      <div>${data.normalcriteria}</div>
+                    </div>
+                    <div style="max-width: 258px;">
+                      <h2>비정상제품기준</h2>
+                      <div>${data.abnormalcriteria}</div>
+                    </div>
+                  </div>
+                </div>
+        `
+        modal.style.display = 'block';
       })
-      .then(htmlString => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const sel = doc.querySelectorAll('.standards-contain')
-        const wp = document.querySelector('.wp')
-        for (let i = 0; i < sel.length; i++) {
-          if (wp.innerText == "부대찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[0].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "김치찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[1].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "밀푀유나베") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[2].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "떡볶이") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[3].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "곱창전골") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[4].cloneNode(true));
-            modal.style.display = 'block';
-          }
-        }
+      .catch(err =>{
+        console.log("에러 : ", err)
       })
+    }
   })
 
-
-
-  // 모달창
+  // 모달창 닫기 이벤트
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
     const modal = document.querySelector('#myModal')
@@ -83,7 +75,6 @@ function init() {
       modal.style.display = "none";
     }
   });
-
 
   // 제품 합/불 라디오버튼클릭시 숨기기/나오기
   const rad = document.querySelectorAll('.rad')
@@ -104,85 +95,6 @@ function init() {
       }
     })
   }
-
-
-
-  //수정
-  // if (e.target.innerText == "수정") {
-  // const now = new Date();
-  // const year = now.getFullYear();
-  // const month = ("0" + (now.getMonth() + 1)).slice(-2);
-  // const day = ("0" + now.getDate()).slice(-2);
-  // const hour = ("0" + now.getHours()).slice(-2);
-  // const minute = ("0" + now.getMinutes()).slice(-2);
-
-  // const date = `${year}-${month}-${day}T${hour}:${minute}`;
-
-  // const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
-  // const tkdb = e.target.parentNode.parentNode.querySelector('.tkdb').innerText
-  // const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
-
-
-  // const row = e.target.parentNode.parentNode;
-  // row.dataset.original = row.innerHTML
-
-  // e.target.parentNode.parentNode.innerHTML =
-  //   `
-  //   <div>
-  //     <input type="datetime-local" class="inputT dateB" value="${date}">
-  //   </div>
-  //   <div class="emdwp">${emdwp}</div>
-  //   <div>
-  //     <select name="" id="" class="emdgkq">
-  //       <option value="합격">합격</option>
-  //       <option value="불합격">불합격</option>
-  //     </select>
-  //   </div>
-  //   <div class="">
-  //     <input type="text" class="inputT tkdb" value="${tkdb}">
-  //   </div>
-  //   <div>
-  //     <input type="text" class="inputT text1" value="${text}">
-  //   </div>
-  //   <div>
-  //     <button class="tn">완료</button>
-  //     <button class="tkr">취소</button>
-  //   </div>
-  // `
-  // }
-
-  // 수정완료
-  // if (e.target.innerText == "완료") {
-  //   const view = e.target.parentNode.parentNode
-  //   const tarG = e.target.parentNode.parentNode
-  //   const date = tarG.querySelector('.dateB').value
-  //   const wp = tarG.querySelector('.emdwp').innerText
-  //   const gkq = tarG.querySelector('.emdgkq').value
-  //   const tk = tarG.querySelector('.tkdb').value
-  //   const tT = tarG.querySelector('.text1').value
-  //   view.innerHTML = ""
-  //   view.innerHTML += `
-  //                     <div class="dateB">${date}</div>
-  //                     <div class="emdwp">${wp}</div>
-  //                     <div class="emdgkq">${gkq}</div>
-  //                     <div class="tkdb">${tk}</div>
-  //                     <div class="text1">${tT}</div>
-  //                     <div>
-  //                       <button class="tn">수정</button>
-  //                       <button class="tkr">삭제</button>
-  //                     </div>
-  //                   `
-  //   alert("수정되었습니다.")
-  // }
-
-  //   if (e.target.innerText === "취소") {
-  //     const row = e.target.parentNode.parentNode;
-  //     if (row.dataset.original) {
-  //       row.innerHTML = row.dataset.original;
-  //     }
-  //   }
-  // })
-
 
   // 검색창에 드랍박스 클릭시 불합사유 보이게 or 안보이게
   const searchBox = document.querySelector('#searchResult');

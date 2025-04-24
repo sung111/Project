@@ -5,6 +5,15 @@
 
 <mapper namespace="project.mapper.Quality">
 
+<!-- 	모달창 구현을 위한 select -->
+	<select id="QaulModalSelect" parameterType="int" resultType="QualityControl_DTO">
+		select 
+			productid, productname, productimage, normalcriteria, abnormalcriteria
+		from
+			products
+		where
+			productid = #{productid}
+	</select>
 
 	<delete id="QaulDelete" parameterType="QualityControl_DTO">
 		delete from qualitycontrols

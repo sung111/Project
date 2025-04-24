@@ -112,6 +112,12 @@ public class QualityControl_ServiceImpl implements QualityControl_Service {
 		int result = dao.QaulDelete(dto);
 		return result;
 	}
+//	모달창 구현
+	@Override
+	public QualityControl_DTO QaulModalSelect(int productid) {
+		QualityControl_DTO result = dao.QaulModalSelect(productid);
+		return result;
+	}
 	
 	
 }
