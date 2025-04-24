@@ -32,6 +32,4 @@ public class Products_DTO {
 	private int indexStart;
 	private int indexEnd;
 	
-  
-
 }
