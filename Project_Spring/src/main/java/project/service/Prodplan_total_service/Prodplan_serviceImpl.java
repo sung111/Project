@@ -19,4 +19,19 @@ public class Prodplan_serviceImpl implements Prodplan_service {
         return planDAO.getAllPlans();
     }
 	
+    //추가
+    @Override
+    public void insertPlan(ProductionPlan_DTO plan) {
+        planDAO.insertPlan(plan); 
+    }
+    
+    //수정
+    @Override
+    public void updatePlan(ProductionPlan_DTO plan) {
+        planDAO.updatePlan(plan);
+    }
+
+
+
+    
 }

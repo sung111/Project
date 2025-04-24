@@ -1,13 +1,18 @@
 package project.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.servlet.http.HttpSession;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.ProductionPlan_DTO;
 import project.service.Prodplan_total_service.Prodplan_service;
@@ -31,9 +36,26 @@ public class Prodplan_total_controller {
             planList = prodplanService.getAllPlans();
             session.setAttribute("planList", planList);
         }
-
         model.addAttribute("planList", planList);
 
         return "ProdPlan";  
     }
+    
+
+    @PostMapping("/prodplan/insert")
+    public String insertPlan(@RequestBody ProductionPlan_DTO dto, Model model) {
+        try {
+            prodplanService.insertPlan(dto);
+            model.addAttribute("success", true);
+            return "successPage"; 
+        } catch (Exception e) {
+            model.addAttribute("success", false);
+            model.addAttribute("message", e.getMessage());
+            return "errorPage"; 
+        }
+    }
+
+
+
+    
 }

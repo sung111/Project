@@ -55,4 +55,30 @@
       ON pp.productid = p.productid
   </select>
 
+<!-- 추가 -->
+<insert id="insertPlan" parameterType="project.dto.ProductionPlan_DTO">
+    INSERT INTO productionplans (
+        userId, productId, totalqty, startDate, endDate, createDate,
+        deliveryDate, deliveryDest, planStatus, planCause, planNotes
+    ) VALUES (
+        #{userId}, #{productId}, #{totalqty}, #{startDate}, #{endDate}, #{createDate},
+        #{deliveryDate}, #{deliveryDest}, #{planStatus}, #{planCause}, #{planNotes}
+    )
+</insert>
+
+<!-- 수정 -->
+<update id="updatePlan" parameterType="project.dto.ProductionPlan_DTO">
+    UPDATE productionplans
+    SET
+        totalqty = #{totalqty},
+        startDate = #{startDate},
+        endDate = #{endDate},
+        planStatus = #{planStatus},
+        planCause = #{planCause},
+        planNotes = #{planNotes}
+    WHERE planId = #{planId}
+</update>
+
+
+
 </mapper>

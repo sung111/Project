@@ -5,7 +5,7 @@
 
 <tiles-definitions>
 
-    <!-- 기본 레이아웃 정의 -->
+    <!-- defaultLayout 의 구조 -->
     <definition name="defaultLayout" template="/WEB-INF/views/defaultLayout.jsp">
         <put-attribute name="topbar" value="/WEB-INF/views/topbar.jsp"/>
         <put-attribute name="localnav" value="/WEB-INF/views/localnav.jsp"/>
@@ -17,12 +17,12 @@
         <put-attribute name="body" value="/WEB-INF/views/MainTitle.jsp"/>
     </definition>
 
-    <!-- index 페이지용 정의 -->
+    <!-- index 페이지 -->
     <definition name="index" extends="defaultLayout">
         <put-attribute name="title" value="홈"/>
     </definition>
 
-    <!-- maintitle 하위 페이지용 정의 -->
+    <!-- maintitle 이동하는 위치 -->
 <definition name="*" extends="defaultLayout">
     <put-attribute name="title" value="메인페이지" />
     <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />

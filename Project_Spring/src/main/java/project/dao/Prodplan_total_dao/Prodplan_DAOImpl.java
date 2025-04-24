@@ -20,4 +20,16 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
     public List<ProductionPlan_DTO> getAllPlans() {
         return sqlSession.selectList(NAMESPACE + ".selectAllPlans");
     }
+    
+    @Override
+    public void updatePlan(ProductionPlan_DTO plan) {
+        sqlSession.update(NAMESPACE + ".updatePlan", plan);
+    }
+    //추가
+    @Override
+    public void insertPlan(ProductionPlan_DTO plan) {
+        sqlSession.insert(NAMESPACE + ".insertPlan", plan);
+    }
+
+    
 }
