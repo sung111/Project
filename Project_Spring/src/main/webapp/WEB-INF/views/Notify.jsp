@@ -255,7 +255,13 @@ position:absolute;
 	
  <div>
 
+<c:forEach var="dto" items="${map.list}">
+    <c:if test="${dto.notify == 'Y'}">
+        <c:set var="countN" value="${countN + 1}" />
+    </c:if>
+</c:forEach>
 
+<p>${countN}개의 글</p>
 
 
 
@@ -325,7 +331,7 @@ position:absolute;
 				
 			%>
 			
-			<span id="font"><%= total %></span>개의 글
+			<%-- <span id="font"><%= total %></span>개의 글 --%>
 			
 			
 			<div class="pagination">

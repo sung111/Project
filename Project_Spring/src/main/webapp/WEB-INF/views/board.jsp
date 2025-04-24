@@ -326,8 +326,18 @@ position:absolute;
 				
 			%>
 			
-			<span id="font"><%= Prodto.getNotify() %></span>개의 글
+			<%-- <span id="font"><%= Prodto.getNotify() %></span>개의 글 --%>
 			
+			<c:set var="countN" value="0" />
+
+<c:forEach var="dto" items="${map.list}">
+    <c:if test="${dto.notify == 'N'}">
+        <c:set var="countN" value="${countN + 1}" />
+    </c:if>
+</c:forEach>
+
+<p>${countN}개의 글</p>
+		
 			
 			<div class="pagination">
 			

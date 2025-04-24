@@ -43,7 +43,7 @@
         <!-- 모든 페이지 -->
         <select id="totalEmp" resultType="int">
         
-        select count(*) from posts
+        select count(*) from posts where notify = #{notify}
         
         </select>
         
