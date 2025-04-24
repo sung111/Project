@@ -479,29 +479,31 @@
 								<script>
 									window.addEventListener("load", function () {
 
+										//아작스 페이지로딩 이벤트 
+										document.querySelector("#page-container").addEventListener("click", pageajax);
+
 										//검색이벤트
 										document.querySelector("#search").addEventListener("click", function (e) {
 											console.log("검색버튼 클릭" + e.target.parentNode)
-											console.log(document.querySelector("#navigation-title-search").value)
-											let value = document.querySelector("#navigation-title-search").value.trim();
+											console.log("전달값",document.querySelector("#navigation-title-search").value)
+											let searchvalue = document.querySelector("#navigation-title-search").value.trim();
+											console.log(searchvalue);
 											//숫자만 ^문자열시작/ \d숫자하나 +앞에있는\d가 1개이상반복 $문자끝의미 .test() 문자열검사 메서드
-											if(/^\d+$/.test(value)){
+											if(/^\d+$/.test(searchvalue)){
 												alert("검색어는 숫자가 올 수 없습니다");
-											}else if(value.length === 0){
+											}else if(searchvalue.length === 0){
 												location.href="inspectionStandards?page=1"
 												
 											}else{
-												gogo ={
-													serch : value
-												}
+												
 												//ajax
 												const xhr = new XMLHttpRequest();
-												xhr.open('POST','insSelectone')
+												xhr.open('get','insSelectone?serch='+searchvalue)
 	
 												xhr.setRequestHeader('Content-Type', 'application/json')
 												
-												xhr.send(JSON.stringify(gogo))
-												console.log(gogo);
+												xhr.send()
+												
 												xhr.onload = function () {
 													let data = (xhr.responseText)
 													console.log(xhr.responseText)
@@ -749,10 +751,10 @@
 																		pageNo = dto1.page
 																		viewCount = dto1.getFinishViewCount
 																		console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto1);
-																		total = map.count
-																		lastPage = Math.ceil(total / viewCount)
-																		groupCount = 5
-																		groupPosition = Math.ceil(pageNo / groupCount)
+																		let total = map.count
+																		let lastPage = Math.ceil(total / viewCount)
+																		let groupCount = 5
+																		let groupPosition = Math.ceil(pageNo / groupCount)
 																		let begin = ((groupPosition-1) * groupCount) + 1;
 																		let end = groupPosition * groupCount;
 																		// <form method="POST" accept="insSelectone">
@@ -761,7 +763,7 @@
 																		// <form method="POST" accept="insSelectone">
 																		// 			<input type="submit" name=page value="\${ i }" class="">
 																		// 		</form>
-
+																		let searchvalue = document.querySelector("#navigation-title-search").value.trim();
 																		if(end > lastPage){
 																			end = lastPage
 																		} 
@@ -772,7 +774,8 @@
 																			`
 																		}else{
 																			page_container.innerHTML+=`
-																			<a href="insSelectone?page=\${begin-1}">[이전]</a>
+																			
+																			<a href="#" data-page="\${begin-1}">[이전]</a>
 														
 																			`
 																		}	
@@ -781,7 +784,8 @@
 																			if(i === dto1.page){
 																			
 																				page_container.innerHTML+=`
-																				<a href="inspectionStandards?page=\${ i }" class="$bold">\${ i}</a>
+																		
+																				<a href="#" data-page="\${i}" class="\${i == dto1.page? 'bold' : ''}">\${i} </a>
 																				
 								
 																		
@@ -789,7 +793,7 @@
 																			}else {
 																				
 																				page_container.innerHTML+=`
-																				<a href="inspectionStandards?page=\${ i }" class="">\${ i}</a>
+																					<a href="#" data-page="\${i} class="" >\${i} </a>
 																			
 																				`
 																			}
@@ -802,11 +806,15 @@
 																			`
 																		}else{
 																			page_container.innerHTML+=`
-																			<a href="insSelectone?page=\${end+1}">[다음]</a>
+																			<a href="#" data-page="\${end+1}">[다음]</a>
+																		
 														
 																			`
 																		}
 
+																		document.addEventListener("click", function(e) {
+																			
+																			})
 																		
 																	} else {
 																		newdataHtml = `
@@ -1036,63 +1044,162 @@
 
 									})//온로드 이벤트
 
-									// function pagenation(){
-									// 					let pageNo = 1
-									// 					let viewCount = 2 
-									// 					let map = data.pickname
-									// 					let dto1 = data.pDTO
-									// 					pageNo = dto1.page
-									// 					viewCount = dto1.getFinishViewCount
-									// 					console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto1);
-									// 					total = map.count
-									// 					lastPage = Math.ceil(total / viewCount)
-									// 					groupCount = 5
-									// 					groupPosition = Math.ceil(pageNo / groupCount)
-									// 					let begin = ((groupPosition-1) * groupCount) + 1;
-									// 					let end = groupPosition * groupCount;
-									// 					if(end > lastPage){
-									// 						end = lastPage
-									// 					} 
-									// 					if( begin === 1 ){
-									// 						page_container.innerHTML+=`
-									// 						[이전]
-										
-									// 						`
-									// 					}else{
-									// 						page_container.innerHTML+=`
-									// 						<a href="inspectionStandards?page=\${begin-1}">[이전]</a>
-										
-									// 						`
-									// 					}	
+									function pageajax(e){
 
-									// 					for(let i = begin; i<=end ; i++){
-									// 						if(i === dto1.page){
+										if (e.target.matches("a[data-page]")) {
+											e.preventDefault();
+											const page = e.target.getAttribute("data-page");
+											const searchvalue = encodeURIComponent(document.querySelector("#navigation-title-search").value.trim());
+
+											const xhr = new XMLHttpRequest();
+											xhr.open('get', `insSelectone?page=\${page}&serch=\${searchvalue}`);
+											xhr.setRequestHeader('Content-Type', 'application/json');
+											xhr.send();
+
+												xhr.onload = function () {
+													let data = JSON.parse(xhr.responseText);
+
+													// 기존 데이터 다시 그리기
+													
+											console.log(data)
+											document.querySelector(".standards-top").innerHTML = ` `
+
+											let picknameList = data.pickname.list;        // 밀키트 검색 결과
+											let count = data.pickname.count;  	//카운트갯수
+											let pDTO = data.pDTO    			//인덱스값
+											let nameList = data.name_list;           // 전체 제품명 리스트
+											let field = data.Field;					//계정 직급
+
+													
+													if ((picknameList)  && (picknameList.length > 0)) {
+														picknameList.forEach(dto => {
+													let newdataHtml = document.createElement("div")
+													newdataHtml.setAttribute("class", "standards-contain")
+															const ctrlHTML = `
+														<div class="btncenter">
+															<input type="hidden" value="update" name="type">
+															<input type="button" value="수정" class="btn u">
 															
-									// 							page_container.innerHTML+=`
-									// 							<a href="inspectionStandards?page=\${ i }" class="bold">\${ i }</a>
-									// 							`
-									// 						}else {
-																
-									// 							page_container.innerHTML+=`
-									// 							<a href="inspectionStandards?page=\${ i }" class="">\${ i }</a>
-									// 							`
-									// 						}
+														</div>
+														` 
+															newdataHtml.innerHTML = `
+																		<div class="standards-imege-contain">
+																			<div class="center">
+																				<div class="manu-name text-serch">\${dto.productname}밀키트</div>
+																				</div>
+																					<input type="hidden" value="\${dto.productid}" class="pid">
+																		
+																				<img src="download?filename=\${dto.productimage}" class="standards-imege">
+																			
+																			</div>
+																			<div class="standards-font-contain">
+																			<div class="standards-font-parent">
+			
+																				<div class="standards-font-charild">
+			
+																					<div class="titlecenter">
+																						<h2>정상제품기준</h2>
+																					</div>
+																					<div class="hidetext">\${dto.normalcriteria}</div>
+																					
+																				</div>
+			
+																			</div>
+																			<div class="standards-font-parent">
+			
+																				<div class="standards-font-charild">
+			
+																					<div class="titlecenter">
+																						<h2>비정상제품기준</h2>
+																					</div>
+																					<div class="hidetext2">\${dto.abnormalcriteria}</div>
+																					
+																				</div>
+																			</div>
+																		</div>
+																		\${field == 'admin' ? ctrlHTML: ''}
+																		</div>`
+
+														})
+													}
+													let pageNo = 1
+													let viewCount = 2 
+													let map = data.pickname
+													let dto1 = data.pDTO
+													pageNo = dto1.page
+													viewCount = dto1.getFinishViewCount
+													console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto1);
+													let total = map.count
+													let lastPage = Math.ceil(total / viewCount)
+													let groupCount = 5
+													let groupPosition = Math.ceil(pageNo / groupCount)
+													let begin = ((groupPosition-1) * groupCount) + 1;
+													let end = groupPosition * groupCount;
+												
+													let searchvalue = document.querySelector("#navigation-title-search").value.trim();
+													document.querySelector("#page-container").innerHTML = ``;
+													if(end > lastPage){
+														end = lastPage
+													} 
+													if( begin === 1 ){
+														page_container.innerHTML+=`
+														[이전]
+													
+														`
+													}else{
+														page_container.innerHTML+=`
+														
+														<a href="#" data-page="\${begin-1}">[이전]</a>
+									
+														`
+													}	
+
+													for(let i = begin; i<=end ; i++){
+														if(i === dto1.page){
+														
+															page_container.innerHTML+=`
 															
-									// 					}
-									// 					if( end === lastPage ){
-									// 						page_container.innerHTML+=`
-									// 						[다음]
-										
-									// 						`
-									// 					}else{
-									// 						page_container.innerHTML+=`
-									// 						<a href="inspectionStandards?page=\${end+1}">[다음]</a>
-										
-									// 						`
-									// 					}
+															 <a href="#" data-page="\${i}" class="\${i === dto1.page ? 'bold' : ''}">\${i}</a>
+															`
+														}else {
+															
+															page_container.innerHTML+=`
+																<a href="#" data-page="\${i}" class="" >\${i} </a>
+														
+															`
+														}
+														
+													}
+													if( end === lastPage ){
+														page_container.innerHTML+=`
+														[다음]
+									
+														`
+													}else{
+														page_container.innerHTML+=`
+														<a href="#" data-page="\${end+1}">[다음]</a>
+									
+														`
+													}
+
+													
 
 
-									// 			}
+
+											}
+									}else{
+										newdataHtml = `
+										<div>
+											완제품조회 내용이 없습니다
+											</div>
+											`
+										document.querySelector(".standards-top").append(newdataHtml)
+										
+									}
+
+
+
+									}	
 
 
 								</script>

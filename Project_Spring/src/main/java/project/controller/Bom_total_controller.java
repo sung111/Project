@@ -269,9 +269,9 @@ public class Bom_total_controller {
 	
 	// 검색어조회
 	@ResponseBody
-	@RequestMapping(value="/insSelectone",method=RequestMethod.POST)
+	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
 	public Map<String,Object> insSelectone(
-			@RequestBody Products_DTO products_DTO ,
+			 Products_DTO products_DTO ,
 			HttpSession httpSession
 			) {
 		System.out.println("검색값 productname"+products_DTO);
