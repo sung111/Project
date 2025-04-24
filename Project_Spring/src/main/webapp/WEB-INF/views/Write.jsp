@@ -191,25 +191,28 @@ h1 {
 }
 </style>
 <body>
+
+
     <div class="box">
         <h1>게시판 글쓰기</h1>
         <div class="postbtn">
+        <form method="post" action="insert" enctype="multipart/form-data">
             <label for="category">게시판 선택</label>
-            <select id="category">
-                <option value="1">선택</option>
-                <option value="2">공지사항</option>
-                <option value="3">사내복지</option>
-                <option value="4">일반 게시판</option>
+            <select id="category" name="category">
+                                   <!--  이것만 전송 -->
+                <option value="select">선택</option>
+                <option value="notify" id="special" name="special">공지사항</option>
+                <option value="normal" id="normal" name="normal">일반 게시판</option>
             </select>
         </div>
-        
+       
         
         
        
   
         
         <!-- enctype="multipart/form-data" -->
-        <form method="post" action="insert" enctype="multipart/form-data">
+        
        
        
              <!-- 제목 -->
@@ -256,10 +259,19 @@ h1 {
 	        
 	        
 	        
+	        <%-- <%
+    String userId = (String) session.getAttribute("userId");
+    String notify = "M"; // 기본값은 일반 사용자
+    if (userId != null && userId.contains("admin")) {
+        notify = "S"; // 관리자일 경우 
+    }
+%> --%>
 	        
 	        
 	        
-	        <!-- <form method="post" action="board"> -->
+	        
+	            <input type="hidden" name="userid" value="<%= session.getAttribute("userId")%>">
+				<input type="hidden" name="notify" value="notify">
 	            <button type="submit">게시하기</button>
 	        <!-- </form> -->
         
@@ -284,6 +296,33 @@ h1 {
     </div>
 
     <script>
+    
+    
+    
+    
+    // 일반 유저 글 안보이기 
+    <%
+    String userIds = (String) session.getAttribute("userId");
+    boolean isNormalUser = userIds != null && userIds.contains("user");
+%>
+
+
+    <% if (isNormalUser) { %>
+        document.addEventListener("DOMContentLoaded", function() {
+            const btn = document.querySelector(".postbtn");
+            if (btn) {
+                btn.style.display = "none";
+            }
+        });
+    <% } %>
+
+    
+    
+    
+    
+    
+    
+   
         document.getElementById('link-button').addEventListener('click', function () {
             const linkInputContainer = document.getElementById('link-input-container');
             linkInputContainer.style.display = (linkInputContainer.style.display === 'none' || linkInputContainer.style.display === '') ? 'block' : 'none';

@@ -202,25 +202,24 @@ position:absolute;
 
 
 
-<!-- <a href="select?notify=N">일반게시판</a>
-<a href="select?notify=Y">공지사항</a> -->
+
 
 
 
 <body>
 	<div class="box">
-		<h1>일반 게시판</h1>
+		<h1>공지사항</h1>
 		<div class="postbtn">
 
 			<form method="post" action="write">
-				<button type="submit" class="newpost">글 쓰기</button>
+				<button type="submit" class="newpost" id="write">글 쓰기</button>
 			</form>
 		</div>
 
 		
 <%-- 유저 : <%= session.getAttribute("userId") %> --%>
 
-<%-- <c:if test="${not empty map.list}">
+<c:if test="${not empty map.list}">
       <c:forEach var="dlo" items="${map.list}">
 		<!-- 게시물 목록 -->                   <!--  id만 따오면 뒤에 따라온다 -->
 		<div class="post" >        <!--  a태그 : get방식(파라미터 뒤에쓰기) form : post방식 -->
@@ -233,7 +232,7 @@ position:absolute;
 </c:if>		
 <c:if test="${empty map.list}">
     <p>검색 결과가 없습니다.</p>
-</c:if> --%>
+</c:if>
 
 
 
@@ -247,7 +246,7 @@ position:absolute;
 			<span class="content"><a href="Content?postid=${dto.postid}" id="move" >${dto.title}</a></span>
 			<span class="author">${dto.viewcount}</span> 
 			<span class="date">${dto.postdate}</span>
-			<span class="author"><%= session.getAttribute("userName") %></span> 
+			<span class="author"><%= session.getAttribute("userId") %></span> 
 		</div>
 	</c:forEach>	
 </c:if>
@@ -326,7 +325,7 @@ position:absolute;
 				
 			%>
 			
-			<span id="font"><%= Prodto.getNotify() %></span>개의 글
+			<span id="font"><%= total %></span>개의 글
 			
 			
 			<div class="pagination">
@@ -519,8 +518,50 @@ position:absolute;
 		
 	});
 	
+	<%-- <% HttpSession sessions = request.getSession();
+	String userId = (String) session.getAttribute("userId"); %>
+	if(<% userId.contains("user"); %>) {
+		
+		<% System.out.println("나는 관리자가 아니야"); %>
+		// 자바스크립트에서는 console.log 이용 권장
+		console.log("나는 관리자가 아니야");
+		
+		
+		window.addEventListener("DOMContentLoaded", function() {
+			
+			
+		let noti = document.querySelector("#write");	
+		noti.style.display = "none";
+		
+		}
+		
+		
+	}   --%>
+		
+		
+	<% HttpSession sessions = request.getSession();
+	String userId = (String) session.getAttribute("userId"); 
+	boolean isNormalUser = userId != null && userId.contains("user");%>
 	
 	
+	<% if (isNormalUser) { %>
+		
+		<%-- <% System.out.println("나는 관리자가 아니야"); %> --%>
+		// 자바스크립트에서는 console.log 이용 권장
+		console.log("나는 관리자가 아니야");
+		
+		
+		window.addEventListener("DOMContentLoaded", function() {
+			
+			
+		let noti = document.querySelector("#write");	
+		noti.style.display = "none";
+		
+		
+		});
+		
+		
+		<% } %> 
 	
 	
 	

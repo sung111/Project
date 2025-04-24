@@ -30,9 +30,8 @@
 		</selectKey>
 
 
-		insert into posts (postid, userid, title, content, postdate, notify,
-		viewcount)
-		values (#{postid}, 'adminid1', #{title}, #{content}, sysdate, 'Y', 0)
+		insert into posts (postid, userid, title, content, postdate, notify, viewcount)
+		values (#{postid}, #{userid}, #{title}, #{content}, sysdate, #{notify}, 0)
 	</insert>
 
 
@@ -82,6 +81,7 @@
 	<select id="searchboard" resultType="Prodto" parameterType="Prodto">
 	        select * from posts
 	        where upper(title) like upper ('%' || #{title} || '%')
+	        
 	</select>
 
 

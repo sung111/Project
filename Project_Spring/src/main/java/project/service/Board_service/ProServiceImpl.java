@@ -103,10 +103,7 @@ public class ProServiceImpl implements ProService {
 	// 페이징 목록 메소드 //searchlist
 		@Override
 		public 	Map<String, Object> SelectPage(Prodto Prodto){
-							
-									  
-					
-					
+													
 		        // 보여줄 시작. 끝 index 찾기
 			    // unreachble code : 위에 끝난 코드가 있음
 			int page = Prodto.getPage();
@@ -125,14 +122,10 @@ public class ProServiceImpl implements ProService {
 				System.out.println("인덱스스타트 :" + indexStart);
 				System.out.println("인덱스엔드 : " + indexEnd);
 				
-				
-				
 				// 한 페이지의 내용 리스트(셀렉트)
 				List list = Prodao.selectpage(Prodto);
 			    System.out.println("서비스 페이지 셀렉트 : " + list);
-			    
-			 			    
-			    
+			    		 			   
 			    // 전체 글 개수
 			    int total = Prodao.totalList();
 			    
@@ -152,47 +145,55 @@ public class ProServiceImpl implements ProService {
 		@Override
 		public 	Map<String, Object> search(Prodto Prodto){
 							
-		
-			
 			// 보여줄 시작. 끝 index 찾기
 		    // unreachble code : 위에 끝난 코드가 있음
 		int page = Prodto.getPage();
 //		if (page <= 0) page = 1;
 //		Prodto.setPage(page);
-
+//
 		int viewCount = Prodto.getPagecount();
-//		if (viewCount <= 0) viewCount = 10;
-//		Prodto.setPagecount(viewCount);
-			
+		if (viewCount <= 0) viewCount = 10;
+		Prodto.setPagecount(viewCount);
+//			
 			int indexStart = (viewCount * (page-1)) + 1;
 			int indexEnd = page * viewCount;
-			
+//			
 			Prodto.setIndexStart(indexStart);
 			Prodto.setIndexEnd(indexEnd);
 			System.out.println("인덱스스타트 :" + indexStart);
 			System.out.println("인덱스엔드 : " + indexEnd);	
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-	  
-		List search = Prodao.search(Prodto);
-	    System.out.println("검색 : " + search);
-	    
+		List<Prodto> list = Prodao.search(Prodto);
+	    System.out.println("검색한 값 : " + list);
 	    
 	    // 전체 글 개수
 	    int total = Prodao.totalList();
 	    
+	    
+	    if (list == null) {
+	        System.out.println("slist 자체가 null입니다!");
+	    } else {
+	        System.out.println("검색 결과 개수: " + list.size());
+	        for (Prodto p : list) {
+	            System.out.println("결과 항목: " + p);
+	        }
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    Map<String, Object> map = new HashMap();
 	    System.out.println("지도 :" + map);
-	    map.put("list", search);
+	    map.put("list", list);
 	    map.put("total", total);
+	    
 	    
 	    
 	    

@@ -206,18 +206,35 @@ width: 50%;
 
     <div class="box">
         <div class="post-title">${con.title}</div>
-        <div class="post-info"> 작성자: 안혜리 | 날짜: ${con.postdate} | 조회수: ${con.viewcount}</div>
+        <div class="post-info"> 작성자: <%= session.getAttribute("userName") %> | 날짜: ${con.postdate} | 조회수: ${con.viewcount}</div>
         <div class="post-content">
           ${con.content}
          
         </div>
+
+
+
+
+
+
+
+<%-- <c:set var = "youtubeid" value = "${fn:substringAfter(${Linkselid.link}, '=')}">
+</c:set> --%>
+
+
 
 <br>
 <br>
 <br> <a href="${Linkselid.link}">${Linkselid.link}</a> 
 <br>
 <%-- <c:forEach var="dolink" items="${linklist}"> --%>
-	<div><a href=${dolink.link}>${dolink.link}</a></div>
+
+<c:set var="link" value="${Linkselid.link}" />
+<c:set var="vIndex" value="${fn:indexOf(link, 'v=') + 2}" />
+<c:set var="videoId" value="${fn:substring(link, vIndex, fn:length(link))}" />
+
+
+<img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg"  alt="image" width="500"><br>	
 <%-- </c:forEach> --%>
 <br>
 <br>
@@ -238,21 +255,48 @@ width: 50%;
 <br>
 <br>
 
+
+
+<div>
+
+<!-- 파일이 있을때 -->
+ <c:if test="${not empty Fileselid}">
+ 
+  <!-- 사진 -->  
  <c:forEach var="flink" items="${Fileselid}"> 
   <img src="downloads?file_name=${flink.file_name}"  alt="image" width="500"><br>
  </c:forEach> 
+ 
+ 
+ 
+<br>
+<br>
+<br>
+<br>
 
-<br>
-<br>
-<br>
-<br>
- <c:forEach var="flink" items="${Fileselid}">      
- <video src="downloads?file_name=${flink.file_name}" alt="video" width="500" controls autoplay></video>        
- </c:forEach>            
+ <!-- 비디오 -->
+ <c:forEach var="flink" items="${Fileselid}">
+ <video src="downloads?file_name=${flink.file_name}" alt="video" width="500" controls autoplay></video>
+  </c:forEach> 
+  
+  
+  <!-- 파일이 없을때 -->
+ <c:if test="${empty Fileselid}"> 
+ 올린 파일이 없습니다
+ </c:if> 
+ 
+ </c:if>
+ 
+ 
+ </div>          
+      
+      
+      
+      
       
         <div class="button-container">
         <!-- <form method ="post" action ="board"> -->
-            <button type="submit" id="list"><a href="select">목록으로</a></button>
+            <button type="submit" id="list"><a href="select?notify=${notify}">목록으로</a></button>
       <!--   </form> -->
         
         
@@ -289,7 +333,7 @@ width: 50%;
        <div class="comment">
             
                 <div class="usercomment">
-                    <span class="author">박혜성</span>
+                    <span class="author"><%= session.getAttribute("userName") %></span>
                     <span class="date">${ddt.commentdate}</span>
                     <p>${ddt.commenttext}</p>
                 </div>

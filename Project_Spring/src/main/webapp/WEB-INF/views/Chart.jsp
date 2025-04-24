@@ -477,6 +477,21 @@ tbody {
 	/* border: 5px solid red; */
 }
 
+
+#todayperform {
+
+
+
+        background-color: lightgray;
+        border: 1px solid lightgray;
+        
+
+      
+
+
+
+}
+
 /* .budaes {
 
 
@@ -582,11 +597,9 @@ top: 100px;
                 <button id="fix">수정</button> -->
 		<!-- <button id="join">등록</button> -->
 		<div id="sch">
-			<select id="sel">
-				<option id="daily">일간</option>
-				<option id="week">주간</option>
-				<option id="month">월간</option>
-			</select>
+			<div id="todayperform">
+			 일간 실적
+			</div>
 
         
 			<div id="cal">
@@ -634,7 +647,9 @@ top: 100px;
 			<tbody>
 
 
-<c:forEach var="dto" items="${queryid}">
+
+
+              <c:forEach var="dto" items="${queryid}">
 					<tr id="budae1">
 						<td class="name">${dto.productname}</td>
 						<td>${dto.t6_8}</td>
@@ -798,8 +813,21 @@ top: 100px;
 					<th class="montime">4주차</th>
 				</tr>
 			</thead>
+			
+			
+			
 			<tbody>
-				<tr id="budae3">
+			<c:forEach var="dmo" items="${querymon}">
+					<tr id="budae3">
+						<td class="name">${dmo.productName}</td>
+						<td>${dmo.week1}</td>
+						<td>${dmo.week2}</td>
+						<td>${dmo.week3}</td>
+						<td>${dmo.week4}</td>				
+					</tr>
+			</c:forEach>
+			
+				<!-- <tr id="budae3">
 					<td class="name">부대찌개</td>
 					<td>400</td>
 					<td>835</td>
@@ -838,7 +866,7 @@ top: 100px;
 					<td>445</td>
 					<td>366</td>
 
-				</tr>
+				</tr> -->
 
 			</tbody>
 		</table>
@@ -1298,19 +1326,72 @@ top: 100px;
 		const ctx3 = document.getElementById('myChart3').getContext('2d');
 		const myChart3 = new Chart(ctx3, {
 
+			
+			/* data : { 
+				labels : [ '06:00~08:00', '08:00~10:00', '10:00~12:00',
+						'12:00~14:00	', '14:00~16:00', '16:00~18:00', ],
+				datasets : [
+					
+					<c:forEach var="dto" items="${query}">
+						{
+							type : 'bar',
+							// select 
+							label : '${dto.productname}',
+							data : [ ${dto.t6_8},
+								     ${dto.t8_10},
+								     ${dto.t10_12},
+								     ${dto.t12_14},
+								     ${dto.t14_16},
+								     ${dto.t16_18}, ],
+							backgroundColor : [ 'rgba(164, 0, 0, 0.43)',
+								                'rgba(98, 151, 0, 0.58)',
+								                'rgba(98, 151, 158, 0.58)',
+								                'rgba(210, 72, 160, 0.4)',
+								                'rgba(210, 185, 160, 0.81)',
+
+							],
+							borderColor : [ 'rgba(164, 0, 0, 0.43)',
+								            'rgba(98, 151, 0, 0.58)',
+								            'rgba(98, 151, 158, 0.58)',
+								            'rgba(210, 72, 160, 0.4)',
+								            
+
+							],
+						// borderWidth: 1
+						}, 
+						</c:forEach> */
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			data : {
 				labels : [ '1주차', '2주차', '3주차', '4주차', ],
 				datasets : [
+					
+					
+					
+					
+					<c:forEach var="dmo" items="${querymon}">
 						{
 							type : 'bar',
 							// select 값이 부대찌개라면
-							label : '부대찌개',
-							data : [ Math.random() * 10000,
-									Math.random() * 10000,
-									Math.random() * 10000,
-									Math.random() * 10000,
-									Math.random() * 10000,
-									Math.random() * 10000, ],
+							label : '${dmo.productName}',
+							data : [ ${dmo.week1},
+								${dmo.week2},
+								${dmo.week3},
+								${dmo.week4},
+									 ],
 							backgroundColor : [ 'rgba(54, 162, 235, 0.2)',
 
 							],
@@ -1320,8 +1401,15 @@ top: 100px;
 						// borderWidth: 1
 
 						},
-
-						{
+						</c:forEach>
+						
+						
+						
+						
+						
+						
+						
+						/* {
 							type : 'bar',
 							// select 값이 부대찌개라면
 							label : '밀푀유나베',
@@ -1339,9 +1427,9 @@ top: 100px;
 							],
 						// borderWidth: 1
 
-						},
+						}, */
 
-						{
+						/* {
 							type : 'bar',
 							// select 값이 부대찌개라면
 							label : '김치찌개',
@@ -1372,9 +1460,9 @@ top: 100px;
 							borderColor : [ 'rgba(54, 121, 217, 0.42)',
 
 							],
-						},
+						}, */
 
-						{
+						/* {
 							type : 'bar',
 							// select 값이 부대찌개라면
 							label : '떡볶이',
@@ -1405,9 +1493,9 @@ top: 100px;
 							borderColor : [ 'rgba(54, 121, 188, 0.38)',
 
 							],
-						},
+						}, */
 
-						{
+						/* {
 							type : 'bar',
 							// select 값이 부대찌개라면
 							label : '곱창전골',
@@ -1438,7 +1526,9 @@ top: 100px;
 							borderColor : [ 'rgba(54, 121, 178, 0.79)',
 
 							],
-						}, ]
+						}, */ 
+						
+						]
 
 			},
 			options : {

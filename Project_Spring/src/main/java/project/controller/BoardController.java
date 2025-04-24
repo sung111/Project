@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ import project.dto.Prodto;
 
 
 @Controller
-public class ProController {
+public class BoardController {
 
 	
 	@Autowired
@@ -84,7 +85,7 @@ public class ProController {
 			@RequestMapping(value = "/select")
 			public String Pagesel(
 					Model model, 
-					
+//					@RequestParam("category") String categoryValue,
 					@ModelAttribute // dto값 파라미터
 					Prodto dto,
 					HttpServletRequest request
@@ -95,6 +96,20 @@ System.out.println("접속중....");
 		            
 				
 				
+HttpSession session = request.getSession();
+String userId = (String) session.getAttribute("userId");
+dto.setUserid(userId);
+String iduser = dto.getUserid();
+System.out.println("Prodto.getUserid(); : " + iduser);
+System.out.println("유저아이디 : " + userId);
+//if(userId.contains("admin")) {
+//         dto.setNotify("P");
+//} else {
+//	     dto.setNotify("H");
+//}
+//
+//String not = dto.getNotify();
+//System.out.println("공지사항 항목은 뭐가 나올까" + not);
 				
 				
 				
@@ -126,7 +141,7 @@ System.out.println("접속중....");
 				// 리스트로 담기 // 호출
 				// List<EmpDTO> list = EmpService.getEmpList();
 				Map map = ProService.SelectPage(dto);
-				System.out.println(" 페이 :" + dto);
+				System.out.println(" 페이지겸셀렉트dto :" + dto);
 				System.out.println(" 맵 크기 " + map.size());
 				System.out.println(" 맵 내용 : " + map);
 //				System.out.println("list.size : " + list.size());
@@ -149,11 +164,36 @@ System.out.println("접속중....");
 //				  
 //				}
 				  // 기본값 설정
+//				if(categoryValue.equals("normal")) {
+//					dto.setNotify("N");  // 일반게시판
+//				} else {
+//					dto.setNotify("Y");  // 공지사항
+//				}
+//				
 				
 				
+				String notifydto = dto.getNotify();
+				System.out.println("이것은 notifydto : " + notifydto);
 				
 				
-				return "board";
+//				 if (notifydto == null || notifydto.isEmpty()) {
+//				        return "redirect:/select?notify=N";
+//				    } else if (notifydto.equals("Y")) {
+//				    	return "redirect:notify";
+//				    } else {
+//				    	return "board";
+//				    }
+				
+				
+				if (notifydto == null || notifydto.isEmpty()) {
+					return "redirect:/select?notify=N";
+			    } 
+				
+				    // 이거 그냥쓰면 jsp라 비어있음
+			    	return "board";
+				
+						
+								
 				// "Model 객체를 사용하여 명시적"으로 추가하고 있습니다.
 				// "클라이언트 요청 파라미터"를 처리하지 않으므로 @ModelAttribute의 자동 바인딩 기능이 필요하지 않습니다.
 			}
@@ -173,6 +213,9 @@ System.out.println("접속중....");
 //	@ResponseBody
 	@RequestMapping(value = "/insert")
 	public String insertEmp(
+			                               
+			@RequestParam("category") String categoryValue,
+			
 			
 			@ModelAttribute
 			Prodto Prodto,
@@ -184,12 +227,47 @@ System.out.println("접속중....");
 //			Filedto Filedto,
 			
 			
-			MultipartHttpServletRequest req
+			MultipartHttpServletRequest req,
+			HttpServletRequest request
 			
 			) {
    
+		if(categoryValue.equals("normal")) {
+			Prodto.setNotify("N");  // 일반게시판
+		} else {
+			Prodto.setNotify("Y");  // 공지사항
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
 		// 1. 글 생성 // 글쓰기에서 목록으로 
 		int intdto = ProService.insertEmpList(Prodto);
+		
+		
+		
+		System.out.println( "옵션 : " + categoryValue);
+		
+		
+		
+		HttpSession session = request.getSession();
+		String userid = (String) session.getAttribute("userId");
+		Prodto.setUserid(userid);
+		
+		String iduser = Prodto.getUserid();
+		System.out.println("Prodto.getUserid(); : " + iduser);
+		System.out.println("유저아이디 : " + userid);
+		
+		
+		String not = Prodto.getNotify();
+		System.out.println("공지사항 항목은 뭐가 나올까" + not);
+		
+		
 		
 		
 		
@@ -267,14 +345,25 @@ System.out.println("접속중....");
 		
 		
 		
+          String notifydto = Prodto.getNotify();
 		
 		
+//          if (notifydto == null || notifydto.isEmpty()) {
+//		        return "redirect:/select?notify=N";
+//		    } else if (notifydto.equals("Y")) {
+//		    	return "Notify";
+//		    } else {
+//		    	return "board";
+//		    }
+//		
 		
 		
-		
-		
-		return "forward:select";
-		
+          if (notifydto == null || notifydto.isEmpty()) {
+				return "redirect:/select?notify=N";
+		    } 
+			
+			    // 이거 그냥쓰면 jsp라 비어있음
+		    	return "board";
 	}
 	
 
@@ -591,17 +680,23 @@ System.out.println("접속중....");
 				) {
 			
 			
-			
+		        System.out.println("검색 title: " + prodto.getTitle());
 			    System.out.println("검색 prodto 조회 :" + prodto);
-			    Map map = ProService.search(prodto);
+			    
+			    Map<String, Object> maps = ProService.search(prodto);
+			    System.out.println(" 검색맵 크기 " + maps.size());
+			    
+				
+//			    System.out.println("검색 결과 수: " + ((List)map.get("resultList")).size());
 //			    int postid = prodto.getPostid();
 //			    System.out.println(" 파일 삭제 포스트아이디" + prodto.getPostid());
-			    System.out.println(" 검색 성공시 1 " + map);
-			    model.addAttribute("search", map);
+			    System.out.println(" 검색 맵 " + maps);
+			    model.addAttribute("map", maps);
 			    model.addAttribute("dto", prodto);
-	
+	            
+			   	    
 			    
-			    if(prodto.getTitle() == "") {
+			    if(prodto.getTitle() == null || prodto.getTitle().trim().isEmpty()) {
 					
 					return "redirect:select";
 					

@@ -2,8 +2,12 @@ package project.dto;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Querydto {
 
@@ -22,6 +26,19 @@ public class Querydto {
 	
 	
 	
+	
+	
+	
+	
+	
+	private String productName;
+    private int week1;
+    private int week2;
+    private int week3;
+    private int week4;
+
+    
+    
 	
 	
 	
