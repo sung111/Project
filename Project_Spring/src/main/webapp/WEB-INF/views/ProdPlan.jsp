@@ -75,7 +75,7 @@
 	</table>
 
 	<table class="new-workorder">
-		<tbody>
+		<tbody class="tb1">
 			<tr class="order-info-list">
 				<td>품명[규격]</td>
 				<td>품목코드</td>

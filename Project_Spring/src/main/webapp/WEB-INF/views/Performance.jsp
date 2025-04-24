@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>실적등록</title>
 <link rel="stylesheet" href="resources\css\Performance.css">
+<link rel="stylesheet" href="resources\css\prodplan.css">
 <script src="resources\js\Performance.js"></script>
 
 </head>
@@ -33,18 +34,18 @@
 			<div class="instView"></div>
 		</div>
 		<div>
-<!-- 			<div class="bord"> -->
-<!-- 				<div class="inBord"> -->
-<!-- 					<div>현재 진행률</div> -->
-<!-- 					<div>%</div> -->
-<!-- 					<div>(제품별)</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="inBord"> -->
-<!-- 					<div>불량률</div> -->
-<!-- 					<div>%</div> -->
-<!-- 					<div>(제품별)</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<!-- 			<div class="bord"> -->
+			<!-- 				<div class="inBord"> -->
+			<!-- 					<div>현재 진행률</div> -->
+			<!-- 					<div>%</div> -->
+			<!-- 					<div>(제품별)</div> -->
+			<!-- 				</div> -->
+			<!-- 				<div class="inBord"> -->
+			<!-- 					<div>불량률</div> -->
+			<!-- 					<div>%</div> -->
+			<!-- 					<div>(제품별)</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 			<div class="box2">
 				<div class="criteria">
 					<div class="wp">제품명</div>
@@ -53,20 +54,25 @@
 					</div>
 				</div>
 				<div class="registration">
-					<div class="rightTop">
-						<div class="wp2">제품명</div>
+					<form method="post" action="performInsert">
+						<div class="rightTop">
+							<div class="wp2">제품명</div>
+							<div>
+								<input type="datetime-local" class="date1" name="searchDateStart">
+<!-- 								<input type="date" class="date1" name="reporttime" step="1"> -->
+							</div>
+							<button class="btn3">등록</button>
+						</div>
 						<div>
-							<input type="datetime-local" class="date1">
+							<div id="ea">
+								생산갯수 : <input type="number" id="myInput" min="1" max="100"
+									oninput="validity.valid||(value='')" value="10" name="productioncount"> pack <input
+									type="hidden" value="" id="productid" name="productid"> <input
+									type="hidden" value="" id="planid" name="planid">
+							</div>
 						</div>
-						<button class="btn3">등록</button>
-					</div>
-					<div>
-						<div id="ea">
-							생산갯수 : <input type="number" id="myInput" min="1" max="100"
-								oninput="validity.valid||(value='')" value="10"> pack
-						</div>
-					</div>
-					<textarea name="" id="" class="textarea1" rows="5"></textarea>
+						<textarea name="performancecomment" id="" class="textarea1" rows="5"></textarea>
+					</form>
 				</div>
 			</div>
 			<div class="box3">

@@ -13,6 +13,7 @@ public class QualityControl_DTO {
 	private int indexStart;
 	private int indexEnd;
 	private int totalCount;
+
 //	페이지네이션 db조회필드
 	private int rnum;
 	private String productname;
@@ -35,7 +36,6 @@ public class QualityControl_DTO {
 	private String qualitycontroltime;
 	private int passpack;
 	private int failpack;
-	
 	
 //	조회하기위한 필드 정의
 	private String searchDateStart;

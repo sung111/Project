@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,8 +73,11 @@ public class Quality_total_controller {
 	@RequestMapping(value="/qualInsert", method=RequestMethod.POST)
 	public int qualInsert(
 			@RequestBody
-			QualityControl_DTO dto
+			QualityControl_DTO dto,
+			HttpSession session
 			) {
+		String userid = (String) session.getAttribute("userId");
+		dto.setUserid(userid);
 		return service.QualityInsert(dto);
 	}
 //	데이터 삭제
@@ -121,5 +126,13 @@ public class Quality_total_controller {
 			int productid
 			) {
 		return service.QaulModalSelect(productid);
+	}
+	
+//	fetch로 세션받기위함
+	@ResponseBody
+	@RequestMapping(value="/getSessionUserId", method=RequestMethod.GET)
+	public String getSessionUserId(HttpSession session) {
+	    String userId = (String) session.getAttribute("userId");
+	    return userId != null ? userId : "";
 	}
 }

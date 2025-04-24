@@ -15,10 +15,7 @@
 <title>품질관리</title>
 <link rel="stylesheet" href="resources\css\qualityControl.css">
 <script src="resources\js\qualityControl.js"></script>
-<link rel="stylesheet" href="">
-
 </head>
-
 <body>
 	<div id="myModal" class="modal">
 		<div class="modal-content">

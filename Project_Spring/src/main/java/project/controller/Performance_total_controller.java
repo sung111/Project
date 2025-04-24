@@ -1,5 +1,7 @@
 package project.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,6 +62,21 @@ public class Performance_total_controller {
 		int result = service.performanceUpdate(dto);
 		return result;
 	}
+	
+//	인서트
+	@RequestMapping(value="/performInsert", method=RequestMethod.POST)
+	public String performInsert(
+			Performance_DTO dto,
+			HttpSession session
+			) {
+		System.out.println((String) session.getAttribute("userId"));
+		String userid = (String) session.getAttribute("userId");
+		dto.setUserid(userid);
+		service.performInsert(dto);
+		return "redirect:/performance";
+	}
+	
+	
 	
 	
 	

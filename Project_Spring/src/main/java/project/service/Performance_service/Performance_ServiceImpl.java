@@ -74,6 +74,13 @@ public class Performance_ServiceImpl implements Performance_Service{
 		return result;
 	}
 	
+	//삽입
+	@Override
+	public int performInsert(Performance_DTO dto) {
+		int result = dao.performInsert(dto);
+		return result;
+	}
+	
 	
 	
 	

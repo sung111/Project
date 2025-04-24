@@ -5,7 +5,30 @@
 
 <mapper namespace="project.mapper.Performance">
 
-
+	<insert id="performInsert">
+		insert into
+			performances
+				(
+					performanceid,
+					productid,
+					planid,
+					userid,
+					reporttime,
+					performancecomment,
+					productioncount
+				)
+			values
+				(
+					SEQ_PERFORMANCES.nextval,
+					#{productid},
+					#{planid},
+					#{userid},
+					TO_DATE(#{searchDateStart}, 'YYYY-MM-DD"T"HH24:MI'),
+					#{performancecomment},
+					#{productioncount}
+				)
+	</insert>
+<!-- searchDateStart , reporttime -->
 <!-- 	업데이트 -->
 	<update id="performanceUpdate">
 		update 

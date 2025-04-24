@@ -20,5 +20,7 @@ public interface Performance_Service {
 	//업뎃
 	public int performanceUpdate(Performance_DTO dto);
 	
+	//삽입
+	public int performInsert(Performance_DTO dto);
 	
 }

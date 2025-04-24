@@ -2,6 +2,8 @@ package project.dto;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 //실적테이블
@@ -13,7 +15,10 @@ public class Performance_DTO {
 	private int productid;
 	private int planid;
 	private String userid;
+	
+//	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private Date reporttime;
+	
 	private String performancecomment;
 	private int productioncount;
 
