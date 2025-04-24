@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.QualityControl_DTO;
@@ -74,6 +75,15 @@ public class Quality_total_controller {
 			) {
 		return service.QualityInsert(dto);
 	}
+//	데이터 삭제
+	@ResponseBody
+	@RequestMapping(value="/QaulDelete", method=RequestMethod.DELETE)
+	public int QaulDelete(
+			@RequestBody
+			QualityControl_DTO dto
+			) {
+		return service.QaulDelete(dto);
+	}
 	
 //	검색리스트
 	@RequestMapping(value="/qualList/search", method=RequestMethod.GET)
@@ -93,6 +103,23 @@ public class Quality_total_controller {
 		return map;
 	}
 	
+//	검색리스트
+	@RequestMapping(value="/QualUpdate", method=RequestMethod.PUT)
+	@ResponseBody
+	public int QualUpdate(
+			@RequestBody
+			QualityControl_DTO dto
+			) {
+		return service.QualUpdate(dto);
+	}
 	
-
+//	모달창구현
+	@RequestMapping(value="/QaulModalSelect", method=RequestMethod.GET)
+	@ResponseBody
+	public QualityControl_DTO QaulModalSelect(
+			@RequestParam("productid")
+			int productid
+			) {
+		return service.QaulModalSelect(productid);
+	}
 }

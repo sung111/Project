@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodplan.css">
 
-</head>
+</head> 
 <body>
 	<table class="search-container">
 		<thead>
@@ -94,7 +94,7 @@
 <c:choose>
   <c:when test="${not empty planList}">
     <c:forEach var="plan" items="${planList}">
-      <tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.productId}">
+      <tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.planId}">
         <td>
           <c:choose>
             <c:when test="${not empty plan.product}">
