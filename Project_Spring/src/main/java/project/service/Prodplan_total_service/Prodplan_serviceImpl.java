@@ -14,24 +14,32 @@ public class Prodplan_serviceImpl implements Prodplan_service {
     @Autowired
     private Prodplan_DAO planDAO;
 
+    // »ý»ê °èÈ¹ ÀüÃ¼ Á¶È¸
     @Override
     public List<ProductionPlan_DTO> getAllPlans() {
         return planDAO.getAllPlans();
     }
-	
-    //ì¶”ê°€
+
+    // »ý»ê °èÈ¹ Ãß°¡
     @Override
     public void insertPlan(ProductionPlan_DTO plan) {
+        if (plan == null) {
+            throw new IllegalArgumentException("»ý»ê °èÈ¹ Á¤º¸°¡ ºñ¾î ÀÖ½À´Ï´Ù.");
+        }
         planDAO.insertPlan(plan); 
     }
-    
-    //ìˆ˜ì •
+
+    // »ý»ê °èÈ¹ ¼öÁ¤
     @Override
     public void updatePlan(ProductionPlan_DTO plan) {
+        if (plan == null || plan.getProductId() <= 0) {
+            throw new IllegalArgumentException("¼öÁ¤ÇÒ °èÈ¹ Á¤º¸ ¶Ç´Â Á¦Ç° ID°¡ ºñ¾î ÀÖ°Å³ª Àß¸øµÇ¾ú½À´Ï´Ù.");
+        }
         planDAO.updatePlan(plan);
     }
+    @Override
+    public List<ProductionPlan_DTO> getProducts(String searchTerm) {
+        return planDAO.getProducts(searchTerm);
+    }
 
-
-
-    
 }

@@ -22,12 +22,14 @@
         <put-attribute name="title" value="홈"/>
     </definition>
 
+    <!-- login 페이지 -->
+    <definition name="login" template="/WEB-INF/views/login.jsp" />
+
     <!-- maintitle 이동하는 위치 -->
 <definition name="*" extends="defaultLayout">
     <put-attribute name="title" value="메인페이지" />
     <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
 </definition>
-
 
 
 </tiles-definitions>

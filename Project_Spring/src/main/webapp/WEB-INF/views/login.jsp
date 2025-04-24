@@ -29,10 +29,9 @@
 			<form class="login-layer" id="login-layer" action="Login_controller"
 				method="post">
 				<h1>Login</h1>
-				<input type="text" name="userId" id="username"
-					placeholder="Username" required>
-					 <input type="password"
-					name="userPw" id="password" placeholder="Password" required>
+<input type="text" name="userId" id="username" placeholder="Username" required>
+<input type="password" name="userPw" id="password" placeholder="Password" required>
+
 				<button type="submit" id="login-button">Login</button>
 			</form>
 			
