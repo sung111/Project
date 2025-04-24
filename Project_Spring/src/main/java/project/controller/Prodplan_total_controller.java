@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 import project.dto.ProductionPlan_DTO;
@@ -19,20 +20,20 @@ public class Prodplan_total_controller {
 
     @GetMapping("/prodplan")
     public String showProductionPlan(HttpSession session, Model model) {
+
+        // 사용자명 세션에서 가져오기
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
 
-        // 서비스에서 계획 목록 가져오기
-        List<ProductionPlan_DTO> planList = prodplanService.getAllPlans();
+        // 생산계획 리스트 가져오기
+        List<ProductionPlan_DTO> planList = (List<ProductionPlan_DTO>) session.getAttribute("planList");
+        if (planList == null) {
+            planList = prodplanService.getAllPlans();
+            session.setAttribute("planList", planList);
+        }
+
         model.addAttribute("planList", planList);
 
-        return "ProdPlan";
+        return "ProdPlan";  
     }
-    
-    @GetMapping("/test-prodplan")
-    public String testRoute() {
-        System.out.println(" Prodplan 컨트롤러 매핑 성공!");
-        return "ProdPlan"; 
-    }
-    
 }

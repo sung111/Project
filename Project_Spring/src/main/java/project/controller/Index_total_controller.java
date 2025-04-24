@@ -16,6 +16,8 @@ import project.service.Users_total_service.User_service;
 @RequestMapping("/")
 public class Index_total_controller {
 
+	
+	
     @Autowired
     User_service user_service;
 
@@ -34,7 +36,7 @@ public class Index_total_controller {
 
             User_DTO user = (User_DTO) session.getAttribute("user");
             if (user != null) {
-                userRole = user.getJob();  
+                userRole = user.getJob();
                 userName = user.getUserName(); 
                 helloUser = userRole + " " + userName + "님, 환영합니다!";
             }

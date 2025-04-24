@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<!-- CSS -->
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/maintitle.css" />
+	
 <!-- 공지사항 -->
 <div class="noticelayer">
   <div class="noticelayer-title">

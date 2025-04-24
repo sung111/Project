@@ -29,26 +29,22 @@
 		<div class="instruction">
 			<div class="instTop">
 				<div class="wkr">작업지시서</div>
-				<div>
-					<button class="btn1">조회</button>
-				</div>
 			</div>
 			<div class="instView"></div>
 		</div>
 		<div>
-
-			<div class="bord">
-				<div class="inBord">
-					<div>현재 진행률</div>
-					<div>%</div>
-					<div>(제품별)</div>
-				</div>
-				<div class="inBord">
-					<div>불량률</div>
-					<div>%</div>
-					<div>(제품별)</div>
-				</div>
-			</div>
+<!-- 			<div class="bord"> -->
+<!-- 				<div class="inBord"> -->
+<!-- 					<div>현재 진행률</div> -->
+<!-- 					<div>%</div> -->
+<!-- 					<div>(제품별)</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="inBord"> -->
+<!-- 					<div>불량률</div> -->
+<!-- 					<div>%</div> -->
+<!-- 					<div>(제품별)</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="box2">
 				<div class="criteria">
 					<div class="wp">제품명</div>
@@ -75,21 +71,25 @@
 			</div>
 			<div class="box3">
 				<form>
-				<div class="box3Top" style="margin: 5px;">
-					<div style="font-size: 16px;">
-						<input type="text" class="wp3" name="productname" placeholder="제품명"style="margin-right: 10px;" value="${param.productname}">
+					<div class="box3Top" style="margin: 5px;">
+						<div style="font-size: 16px;">
+							<input type="text" class="wp3" name="productname"
+								placeholder="제품명" style="margin-right: 10px;"
+								value="${param.productname}">
+						</div>
+						<div class="date2">
+							<input type="datetime-local" class="indate1"
+								name="searchDateStart" value="${ param.searchDateStart }">
+							~ <input type="datetime-local" class="indate2"
+								name="searchDateEnd" value="${ param.searchDateEnd }">
+						</div>
+						<div>
+							<button class="btn4">조회</button>
+						</div>
 					</div>
-					<div class="date2">
-						<input type="datetime-local" class="indate1" name="searchDateStart" value="${ param.searchDateStart }"> ~ <input
-							type="datetime-local" class="indate2" name="searchDateEnd" value="${ param.searchDateEnd }">
-					</div>
-					<div>
-						<button class="btn4">조회</button>
-					</div>
-				</div>
 				</form>
 				<div class="indexBox">
-					<div class="index">
+					<div class="indexsss">
 						<div>날짜</div>
 						<div>제품명</div>
 						<div>수량</div>
@@ -101,11 +101,12 @@
 				<div class="box3View">
 					<c:forEach var="dto" items="${ list }">
 						<div class="dex item">
-							<form method="post" action="performanceDelete" class="kk deleteForm">
+							<form method="post" action="performanceDelete"
+								class="kk deleteForm">
 								<div class="dateB">
 									<!-- gpt 사용했음 fmt 라이브러리 공부해야함. -->
 									<fmt:formatDate value="${dto.reporttime}"
- 										pattern="yyyy-MM-dd HH:mm:ss" />
+										pattern="yyyy-MM-dd HH:mm:ss" />
 								</div>
 								<div class="emdwp">${dto.productname}</div>
 								<div class="emdtn">${dto.productioncount}</div>
@@ -118,8 +119,9 @@
 									<input type="hidden" name="command" value="update">
 									<input type="submit" value="수정">
 								</form>-->
-									<input type="hidden" name="performanceid" class="performId" value="${dto.performanceid}">
-									<input type="submit" value="삭제" style="height: 26px;" class="delete">
+									<input type="hidden" name="performanceid" class="performId"
+										value="${dto.performanceid}"> <input type="submit"
+										value="삭제" style="height: 26px;" class="delete">
 								</div>
 							</form>
 						</div>
@@ -145,21 +147,21 @@
 					}
 					%>
 
-				<c:if test="<%=begin == 1%>">
+					<c:if test="<%=begin == 1%>">
                   [이전]
                 </c:if>
 					<c:if test="<%=begin != 1%>">
 						<c:url var="prevLink" value="/performance">
-							<c:param name="page" value="<%= String.valueOf(begin - 1) %>" />
-						    <c:if test="${not empty param.productname}">
-						      <c:param name="productname" value="${param.productname}" />
-						    </c:if>
-						    <c:if test="${not empty param.searchDateStart}">
-						      <c:param name="searchDateStart" value="${param.searchDateStart}" />
-						    </c:if>
-						    <c:if test="${not empty param.searchDateEnd}">
-						      <c:param name="searchDateEnd" value="${param.searchDateEnd}" />
-						    </c:if>
+							<c:param name="page" value="<%=String.valueOf(begin - 1)%>" />
+							<c:if test="${not empty param.productname}">
+								<c:param name="productname" value="${param.productname}" />
+							</c:if>
+							<c:if test="${not empty param.searchDateStart}">
+								<c:param name="searchDateStart" value="${param.searchDateStart}" />
+							</c:if>
+							<c:if test="${not empty param.searchDateEnd}">
+								<c:param name="searchDateEnd" value="${param.searchDateEnd}" />
+							</c:if>
 						</c:url>
 						<a href=" ${ prevLink }">[이전]</a>
 					</c:if>
@@ -176,7 +178,8 @@
 						<c:url var="pageLink" value="/performance">
 							<c:param name="page" value="${ i }" />
 							<c:param name="productname" value="${ param.productname }" />
-							<c:param name="searchDateStart" value="${ param.searchDateStart }" />
+							<c:param name="searchDateStart"
+								value="${ param.searchDateStart }" />
 							<c:param name="searchDateEnd" value="${ param.searchDateEnd }" />
 						</c:url>
 
@@ -190,17 +193,17 @@
                </c:if>
 					<c:if test="<%=end != lastPage%>">
 						<c:url var="nextLink" value="/performance">
-						    <c:param name="page" value="<%= String.valueOf(end + 1 ) %>" />
-						    
-						    <c:if test="${not empty param.productname}">
-						      <c:param name="productname" value="${param.productname}" />
-						    </c:if>
-						    <c:if test="${not empty param.searchDateStart}">
-						      <c:param name="searchDateStart" value="${param.searchDateStart}" />
-						    </c:if>
-						    <c:if test="${not empty param.searchDateEnd}">
-						      <c:param name="searchDateEnd" value="${param.searchDateEnd}" />
-						    </c:if>
+							<c:param name="page" value="<%=String.valueOf(end + 1)%>" />
+
+							<c:if test="${not empty param.productname}">
+								<c:param name="productname" value="${param.productname}" />
+							</c:if>
+							<c:if test="${not empty param.searchDateStart}">
+								<c:param name="searchDateStart" value="${param.searchDateStart}" />
+							</c:if>
+							<c:if test="${not empty param.searchDateEnd}">
+								<c:param name="searchDateEnd" value="${param.searchDateEnd}" />
+							</c:if>
 						</c:url>
 						<a href="${nextLink}">[다음]</a>
 					</c:if>

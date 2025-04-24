@@ -162,6 +162,24 @@
 				)tmp2
 				where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
 		</select>
+		
+	<!-- 완재품관리 셀렉트 검색 이름이없으면 전체검색 있으면 그것만검색-->
+	<select id="product_SelectALL" resultType="Products_DTO" parameterType="String">
+	
+	select productid,productname,partnumber,expdatedesc,warehouse,productimage
+	from products
+		<where>
+		productdel = 'n' 
+			<if test="_parameter != null">
+		    and productname like ('%' || #{_parameter} || '%') 
+			</if>
+		
+		</where>
+	order by productname
+	
+	</select>
+		
+		
 	
 	<!--  검사기준	완재품 이름만 조회  -->
 		<select id="selectProductsName"   resultType="Products_DTO">
@@ -222,6 +240,7 @@
 	
 	</update>
 	
+<!-- 	프러덕트 삭제  -->
 	<update id="deleteMaterialsProducts_products" parameterType="Materials_DTO">
 		update products
 		set productdel= 'y' 
@@ -251,17 +270,121 @@
 	</select>
 	
 	<!-- 	생산공정 생성 -->
-	<update id="ProductionProcessInsert" parameterType="ProductionProcessDescription_DTO">
+	<insert id="ProductionProcessInsert" parameterType="ProductionProcessDescription_DTO">
 	
 		insert into PROCESSDESCRIPTIONS 
 		(PROCESSID,PRODUCTID,PROCESSSTAGE,DESCRIPTION,EQUIPMENT,HYGIENE,PROCESSDESCRIPTIONSDEL)
 		values ('',#{productid},#{processstage},#{description},#{equipment},#{hygiene},'n')
 
+	</insert>
+
+	<!-- 	생산공정 수정 -->
+	<update id="ProductionProcessupdate" parameterType="ProductionProcessDescription_DTO">
+		update PROCESSDESCRIPTIONS
+		set processstage=#{processstage} ,
+		description=#{description} ,
+		equipment=#{equipment} ,
+		hygiene=#{hygiene}
+		where processid = #{processid}
 	</update>
-
-
+	
+	<!-- 	생산공정 한줄만 셀렉트 -->
+	<select id="ProductionProcess_select_one_line" parameterType="int" resultType="ProductionProcessDescription_DTO">
+	select PROCESSID,PROCESSSTAGE,DESCRIPTION,EQUIPMENT,HYGIENE
+	from PROCESSDESCRIPTIONS
+	where processid = #{_parameter}
+	</select>
+	
+		<!-- 	생산공정 삭제 -->
+	<update id="ProductionProcessDelete" parameterType="ProductionProcessDescription_DTO">
+		update PROCESSDESCRIPTIONS
+		set PROCESSDESCRIPTIONSDEL='y'
+		where processid = #{processid}
+	</update>
+	
+	<!--빌드오브 머터리얼 완제품id > 원재료 조회 -->
+	<select id="BuildOfMaterials_materialSelect" parameterType="int" resultType="Materials_DTO">
+	SELECT 
+	m.MATERIALID, 
+	m.MATERIALNAME, 
+	m.PRICE, 
+	m.SPEC, 
+	m.UNIT, 
+	m.SUPPLIER, 
+	m.PARTNUMBER, 
+	m.LOTNUMBER, 
+	m.WAREHOUSE, 
+	m.MATERIALDEL, 
+	b.MATERIALID  as bom_ma_id, 
+	b.BOMID  , 
+	b.PRODUCTID as bom_pr_id, 
+	b.QUANTITY as bom_quan, 
+	b.bomdel , 
+	i.MATERIALID as inven_ma_id, 
+	i.QUANTITY as inven_quan 
+	FROM  materials m 
+	left JOIN boms b ON m.MATERIALID = b.MATERIALID  
+	left join inventorystatus i on m.MATERIALID = i.MATERIALID 
+	where  m.materialdel = 'n' 
+	and b.productid = ${_parameter}
+	and b.bomdel = 'n' 
+	order by m.MATERIALID 
+		
+	</select>
+	
+	<!--빌드오브 머터리얼 완제품id > 원재료 >생성 >제품명출력 -->
+	<select id="BuildOfMaterials_materialList" resultType="Materials_DTO"  >
+	select MATERIALID,MATERIALNAME from MATERIALS  WHERE materialdel = 'n'
+	</select>
+	
+	<insert id="BuildOfMaterials_materialListInsert" parameterType="Bom_DTO" >
+	insert into boms 
+	 values ('',${quantity},${materialid},${productid},'n')
+	</insert>
+	
+<!-- 	bom material 삭제코드 -->
+	<update id="BuildOfMaterials_materialListDelete" parameterType="Bom_DTO" >
+ 					update boms 
+					 set bomdel  = 'y'
+					where bomid = ${bomid}
+	</update>
+	
+	<!-- 	bom material수정코드 -->
+	<update id="BuildOfMaterials_materialListUpdate" parameterType="Bom_DTO" >
+			  	update boms 
+				set quantity  = ${quantity}
+				where bomid =${bomid}
+	</update>
+	
+	<!-- 	bom 한줄만 셀렉트 -->
+	<select id="BuildOfMaterials_materialOneList" resultType="Materials_DTO" parameterType="int" >
+		SELECT 
+	m.MATERIALID, 
+	m.MATERIALNAME, 
+	m.PRICE, 
+	m.SPEC, 
+	m.UNIT, 
+	m.SUPPLIER, 
+	m.PARTNUMBER, 
+	m.LOTNUMBER, 
+	m.WAREHOUSE, 
+	m.MATERIALDEL, 
+	b.MATERIALID  as bom_ma_id, 
+	b.BOMID  , 
+	b.PRODUCTID as bom_pr_id, 
+	b.QUANTITY as bom_quan, 
+	b.bomdel , 
+	i.MATERIALID as inven_ma_id, 
+	i.QUANTITY as inven_quan 
+	FROM  materials m 
+	left JOIN boms b ON m.MATERIALID = b.MATERIALID  
+	left join inventorystatus i on m.MATERIALID = i.MATERIALID 
+	where  m.materialdel = 'n' 
+	and b.BOMID = ${_parameter}
+	and b.bomdel = 'n' 
+	order by m.MATERIALID 
+	</select>
 	
 
-	
 
 </mapper>

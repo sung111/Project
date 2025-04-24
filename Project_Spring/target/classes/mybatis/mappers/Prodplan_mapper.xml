@@ -3,10 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="project.mapper.Prodplan_mapper">
+<mapper namespace="project.dao.mapper.ProdplanMapper">
+  <!-- 조인 결과 매핑할 resultMap -->
+  <resultMap id="PlanWithProductResultMap" type="project.dto.ProductionPlan_DTO">
+    <id property="planId" column="planid" />
+    <result property="userId" column="userid" />
+    <result property="productId" column="productid" />
+    <result property="totalqty" column="totalqty" />
+    <result property="startDate" column="startdate" />
+    <result property="endDate" column="enddate" />
+    <result property="createDate" column="createdate" />
+    <result property="deliveryDate" column="deliverydate" />
+    <result property="deliveryDest" column="deliverydest" />
+    <result property="planStatus" column="planstatus" />
+    <result property="planCause" column="plancause" />
+    <result property="planNotes" column="plannotes" />
 
-  <select id="getAllPlans" resultType="project.dto.ProductionPlan_DTO">
-    SELECT * FROM production_plan
+    <!-- 조인된 product 정보 매핑 -->
+    <association property="product" javaType="project.dto.Products_DTO">
+      <id property="productId" column="productid" />
+      <result property="productname" column="productname" />
+      <result property="spec" column="spec" />
+      <result property="unit" column="unit" />
+      <result property="partnumber" column="partnumber" />
+      <result property="warehouse" column="warehouse" />
+    </association>
+  </resultMap>
+
+  <!-- 실제 select 쿼리 -->
+  <select id="selectAllPlans" resultMap="PlanWithProductResultMap">
+    SELECT 
+      pp.planid, 
+      pp.userid, 
+      pp.productid, 
+      pp.totalqty, 
+      pp.startdate, 
+      pp.enddate, 
+      pp.createdate, 
+      pp.deliverydate, 
+      pp.deliverydest, 
+      pp.planstatus, 
+      pp.plancause, 
+      pp.plannotes, 
+      p.productname, 
+      p.spec, 
+      p.unit, 
+      p.partnumber, 
+      p.warehouse 
+    FROM productionplans pp
+    LEFT JOIN products p 
+      ON pp.productid = p.productid
   </select>
 
 </mapper>

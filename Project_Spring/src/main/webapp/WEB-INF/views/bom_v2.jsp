@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.util.*" %>
+<%@ page import="project.dto.*" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -171,6 +173,9 @@
           #chang{
             width: 50px;
           }
+          #search-button{
+            font-size: 10px;
+          }
         
         }
     </style>
@@ -186,7 +191,7 @@
             <button class="btn" id="search-button">검색</button>
         </div>
       
-        <table id="appendbody">
+        <table >
             <thead>
                 <tr>
                     <th id="name">완제품 이름</th>
@@ -197,48 +202,77 @@
                 
                 </tr>
             </thead>
-            <c:forEach var="dto" items="${slectall}">
+            <tbody id="appendbody">
+           </tbody>
           
-                <tr>
-                    <td>
-                    	<input type="hidden" value="${dto.productid}" class="productid"></input>
-                        <div class="value move">${dto.productname}</div>
-                        
-                    </td>
-                    <td>
-                        <div>${dto.partnumber}</div>
-                    </td>
-                    <td>
-                        <div class="value hide">${dto.expdatedesc}</div>
-                    </td>
-                    <td>
-                        <div class="value hide">${dto.warehouse}</div> 
-                    </td>
-                    <td><img src="img/${dto.productimage}" alt="${dto.productname}" class="imgg">
-                
-                    </td>
-                 
-                </tr>
-              </c:forEach>
-
+            
+        </table>
     <script>
         window.addEventListener("load", function () {
-           
-            let moves = document.querySelectorAll(".move")
-            for(let i =0; i<moves.length; i++){
-                moves[i].addEventListener("click",function(e){
-                	
-              		let pvalue = e.target.parentNode.querySelector(".productid").value
-                    let namevalue = this.textContent; 
-                    const encodedNamevalue = encodeURIComponent(namevalue);
-                    const encodedpvalue= encodeURIComponent(pvalue);
-                    window.location.href = "Bom_controller?namevalue=" + encodedNamevalue +"&pvalue="+encodedpvalue;
+            search();
 
-                })
-            }
+            document.querySelector("#search-button").addEventListener("click",search)
+                             
+
+         
+
+            function search() {
+                //맨처음한번 조회해오기
+                let searchValue = document.querySelector("#search-text").value
+                //ajax
+            const xhr = new XMLHttpRequest();
+            xhr.open('get', 'bom_v2_select?processname='+searchValue )
+
+            xhr.setRequestHeader('Content-Type', 'application/json')
+
+            xhr.send()
+
+            xhr.onload = function () {
+                let data = (xhr.responseText)
+                console.log(xhr.responseText)
+                data=JSON.parse(data)
+                console.log(data)
+                let list = data.list;
+                document.querySelector("#appendbody").innerHTML = ` `
+                     list.forEach(dto => {
+                                            let newdataHtml = document.createElement("tr")
+                                        
+                                    newdataHtml.innerHTML = `
+                                     <td>
+                                        <input type="hidden" class="productid" value="\${dto.productid}">
+                                        <span class="move">\${dto.productname}</span>
+                                    </td>
+                                    <td>\${dto.partnumber}</td>
+                                    <td>\${dto.expdatedesc}</td>
+                                    <td>\${dto.warehouse}</td>
+                                    
+                                    
+                                    <td><img src="download?filename=\${dto.productimage}" ></td>
+                                 
+                                    `
+                                    document.querySelector("#appendbody").append(newdataHtml)
+
+
+                                
+                                 
+                                         newdataHtml.querySelector(".move").addEventListener("click",function(e){
+                                            
+                                            let pvalue = e.target.parentNode.querySelector(".productid").value
+                                            let productname = e.target.innerHTML
+                                            console.log(pvalue)
+                                            console.log(pvalue)
+                                             location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
+
+                                        })
+                                   
 	
+                                    
+                              
+                            })
+                        }
 
 
+                        }
 
 
 

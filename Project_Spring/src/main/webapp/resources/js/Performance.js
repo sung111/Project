@@ -186,7 +186,6 @@ function init() {
         const emdtn = modimodi.querySelector('#emdtn').value;
         const text1 = modimodi.querySelector('#text1').value;
         const performId = modimodi.querySelector('#performId').value;
-
         fetch("/project/performanceUpdate",{
           method : 'POST',
           headers : {

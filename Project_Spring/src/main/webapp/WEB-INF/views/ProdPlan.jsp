@@ -1,15 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.List, project.dto.ProductionPlan_DTO, project.dto.Products_DTO"%>
-
-<%
-/* 세션에서 데이터 가져오기 */
-List<ProductionPlan_DTO> planList = (List<ProductionPlan_DTO>) session.getAttribute("planList");
-
-/* 사용자 정보 */
-String username = (String) session.getAttribute("username");
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,16 +7,11 @@ String username = (String) session.getAttribute("username");
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HHMES 생산관리</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/prodplan.css">
-<script
-	src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodplan.css">
+
 </head>
-
 <body>
-
 	<table class="search-container">
 		<thead>
 			<tr>
@@ -48,8 +33,10 @@ String username = (String) session.getAttribute("username");
 				</td>
 			</tr>
 			<tr class="submitcontainer">
-				<td><input type="text" name="Prodsearch" class="searchlayer">
-					<input type="submit" class="submitlayer" value="Search"></td>
+				<td>
+					<input type="text" name="Prodsearch" class="searchlayer">
+					<input type="submit" class="submitlayer" value="Search">
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -57,18 +44,31 @@ String username = (String) session.getAttribute("username");
 	<table class="name-layer">
 		<tr class="menufacturer-info">
 			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생성인</div> <input type="text"
-				class="menufacturer-info-completion"
-				value="<%=(username != null) ? username : "알 수 없음"%>" readonly>
+				<div class="menufacturer-info-name">생성인</div>
+				<c:choose>
+  <c:when test="${not empty username}">
+    <input type="text" class="menufacturer-info-completion" value="${username}" readonly />
+  </c:when>
+  <c:otherwise>
+    <input type="text" class="menufacturer-info-completion" value="알 수 없음" readonly />
+  </c:otherwise>
+</c:choose>
+
 			</td>
-			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생산기간</div> <input type="text"
-				class="menufacturer-info-completion"
-				value="<%=(planList != null && !planList.isEmpty())
-		? planList.get(0).getStartDate() + " ~ " + planList.get(0).getEndDate()
-		: "데이터 없음"%>"
-				readonly>
-			</td>
+<td class="menufacturer-info-list">
+	<div class="menufacturer-info-name">생산기간</div>
+	<c:choose>
+		<c:when test="${not empty planList}">
+			<input type="text" class="menufacturer-info-completion"
+				   value="${planList[0].startDate} ~ ${planList[0].endDate}" readonly>
+		</c:when>
+		<c:otherwise>
+			<input type="text" class="menufacturer-info-completion"
+				   value="데이터 없음" readonly>
+		</c:otherwise>
+	</c:choose>
+</td>
+
 		</tr>
 	</table>
 
@@ -90,41 +90,43 @@ String username = (String) session.getAttribute("username");
 				<td>생산사유</td>
 				<td>비고</td>
 			</tr>
-			<%
-			if (planList != null) {
-				for (ProductionPlan_DTO plan : planList) {
-			%>
-			<tr name="prodPlanList" class="order-info-content wolist"
-				data-id="<%=plan.getPlanId()%>" data-pi="<%=plan.getProductId()%>">
-				<td><%=(plan.getProduct() != null) ? plan.getProduct().getProductname() : "데이터 없음"%>
-					<%="["%><%=(plan.getProduct() != null) ? plan.getProduct().getSpec() : "데이터 없음"%>
-					<%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%><%="]"%>
-				</td>
-				<td><%=(plan.getProduct() != null) ? plan.getProduct().getLotnumber() : "데이터 없음"%></td>
-				<td><%=(plan.getProduct() != null) ? plan.getProduct().getUnit() : "데이터 없음"%></td>
-				<td><%=(plan.getProduct() != null) ? plan.getProduct().getWarehouse() : "데이터 없음"%></td>
-				<td><%=plan.getDeliveryDest()%></td>
-				<td><%=(plan.getProduct() != null) ? plan.getProduct().getPartnumber() : "데이터 없음"%></td>
-				<td><%=plan.getTotalqty()%></td>
-				<td><%=plan.getCreateDate()%></td>
-				<td><%=plan.getStartDate()%></td>
-				<td><%=plan.getEndDate()%></td>
-				<td><a>MRP 계산</a></td>
-				<td><%=plan.getPlanStatus()%></td>
-				<td><%=plan.getPlanCause()%></td>
-				<td><%=plan.getPlanNotes()%></td>
-			</tr>
-			<%
-			}
-			} else {
-			%>
-			<tr>
-				<td colspan="14">데이터가 없습니다.</td>
-			</tr>
-			<%
-			}
-			%>
+
+<c:choose>
+  <c:when test="${not empty planList}">
+    <c:forEach var="plan" items="${planList}">
+      <tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.productId}">
+        <td>
+          <c:choose>
+            <c:when test="${not empty plan.product}">
+              ${plan.product.productname}[${plan.product.spec}${plan.product.unit}]
+            </c:when>
+            <c:otherwise>데이터 없음</c:otherwise>
+          </c:choose>
+        </td>
+        <td>${plan.product.lotnumber}</td>
+        <td>${plan.product.unit}</td>
+        <td>${plan.product.warehouse}</td>
+        <td>${plan.deliveryDest}</td>
+        <td>${plan.product.partnumber}</td>
+        <td>${plan.totalqty}</td>
+        <td>${plan.createDate}</td>
+        <td>${plan.startDate}</td>
+        <td>${plan.endDate}</td>
+        <td><a>MRP 계산</a></td>
+        <td>${plan.planStatus}</td>
+        <td>${plan.planCause}</td>
+        <td>${plan.planNotes}</td>
+      </tr>
+    </c:forEach>
+  </c:when>
+  <c:otherwise>
+    <tr>
+      <td colspan="14">데이터가 없습니다.</td>
+    </tr>
+  </c:otherwise>
+</c:choose>
 		</tbody>
+
 		<tfoot>
 			<tr>
 				<td colspan="14">
@@ -139,5 +141,8 @@ String username = (String) session.getAttribute("username");
 			</tr>
 		</tfoot>
 	</table>
+
+<script src="${ pageContext.request.contextPath }/resources/js/prodplan.js"></script>
 </body>
+
 </html>

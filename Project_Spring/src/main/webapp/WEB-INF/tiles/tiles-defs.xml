@@ -4,28 +4,30 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-<definition name="defaultLayout" template="/WEB-INF/views/defaultLayout.jsp">
-    <put-attribute name="topbar" value="/WEB-INF/views/topbar.jsp"/>
-    <put-attribute name="localnav" value="/WEB-INF/views/localnav.jsp"/>
-    <put-attribute name="mainframe" value="/WEB-INF/views/mainframe.jsp"/>
-    <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
-    <put-attribute name="popup" value="/WEB-INF/views/popup.jsp"/>
-    <put-attribute name="chatbot" value="/WEB-INF/views/chatbot.jsp"/>
-    <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
-    <put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
-    <put-attribute name="body" value="/WEB-INF/views/index.jsp"/>
-</definition>
 
+    <!-- 기본 레이아웃 정의 -->
+    <definition name="defaultLayout" template="/WEB-INF/views/defaultLayout.jsp">
+        <put-attribute name="topbar" value="/WEB-INF/views/topbar.jsp"/>
+        <put-attribute name="localnav" value="/WEB-INF/views/localnav.jsp"/>
+        <put-attribute name="mainframe" value="/WEB-INF/views/mainframe.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
+        <put-attribute name="popup" value="/WEB-INF/views/popup.jsp"/>
+        <put-attribute name="chatbot" value="/WEB-INF/views/chatbot.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/MainTitle.jsp"/>
+    </definition>
+
+    <!-- index 페이지용 정의 -->
     <definition name="index" extends="defaultLayout">
-        <put-attribute name="mainframe" value="/WEB-INF/views/index.jsp"/>
         <put-attribute name="title" value="홈"/>
     </definition>
-    
-    <definition name="maintitle" template="/WEB-INF/views/defaultLayout.jsp">
-    <put-attribute name="title" value="메인페이지" />
-    <put-attribute name="body" value="/WEB-INF/views/MainTitle.jsp" />
-    </definition>
-    
-    
-</tiles-definitions>
 
+    <!-- maintitle 하위 페이지용 정의 -->
+<definition name="*" extends="defaultLayout">
+    <put-attribute name="title" value="메인페이지" />
+    <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+</definition>
+
+
+
+</tiles-definitions>

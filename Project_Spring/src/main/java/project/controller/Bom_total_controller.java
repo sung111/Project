@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,9 +27,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import project.dto.Bom_DTO;
 import project.dto.Materials_DTO;
 import project.dto.ProductionProcessDescription_DTO;
 import project.dto.Products_DTO;
+import project.dto.User_DTO;
+import project.service.Build_of_Materials.Build_of_Materials_service;
 import project.service.Standard_total_service.MaterialsProducts_service;
 import project.service.Standard_total_service.Materials_service;
 import project.service.Standard_total_service.Products_service;
@@ -45,9 +50,14 @@ public class Bom_total_controller {
 	MaterialsProducts_service materialsProducts_service;
 	@Autowired
 	production_process_service service; 
+	@Autowired
+	Build_of_Materials_service build_of_Materials_service;
 	
 	@Autowired
 	private ServletContext servletContext;
+	
+
+	
 	
 	
 //	@RequestMapping("/standard" )
@@ -55,10 +65,11 @@ public class Bom_total_controller {
 	public String standard(Model model,@RequestParam(value="view_value", required=false)String view_value,
 			HttpSession httpSession,
 			Materials_DTO materials_DTO,
-			Products_DTO products_DTO) {
-
-//		String Field = (String)httpSession.getAttribute("Field");
-		String Field = "ADMIN";
+			Products_DTO products_DTO ) {
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
+		System.out.println("Field2"+Field2);
+		System.out.println("Field :"+ Field);
 		String id = (String)httpSession.getAttribute("id");
 		System.out.println("Field ="+ Field);
 		
@@ -229,7 +240,9 @@ public class Bom_total_controller {
 			Products_DTO products_DTO
 			)  {
 		System.out.println("inspectionStandards 실행");
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
+		
 
 		try {
 			Map map = Products_service.selectFinishedProduct(products_DTO);
@@ -255,10 +268,12 @@ public class Bom_total_controller {
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
 	public Map<String,Object> insSelectone(
 			@RequestParam("serchname") String serchname,
-			Model model
+			Model model,
+			HttpSession httpSession
 			) {
 		System.out.println("검색값 productname"+serchname);
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> result = new HashMap();
 		
 		try {
@@ -283,11 +298,15 @@ public class Bom_total_controller {
 	@RequestMapping(value="/insSelectproductid",method=RequestMethod.GET)
 	public Map<String,Object> insSelectproductid(
 			@RequestParam("productid") int productid,
-			Model model
+			Model model,
+			HttpSession httpSession
+
 			) {
+		
 		System.out.println("insSelectproductid_프러덕트id검색");
 		System.out.println("검색값 productid"+productid);
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> result = new HashMap();
 		
 		try {
@@ -315,7 +334,7 @@ public class Bom_total_controller {
 	@RequestMapping("/upload")
     public int upload( 
     		MultipartHttpServletRequest req 
-    		) throws UnsupportedEncodingException {
+    		) throws IOException {
 		System.out.println("파일업로드컨트롤러실행");
 		req.setCharacterEncoding("utf-8");
 		
@@ -338,9 +357,15 @@ public class Bom_total_controller {
 		System.out.println("fileName"+fileName);
 		int result = 0;
 		try {
-			//현재프로젝트 내의 img경로 저장
-//			String realPath = servletContext.getRealPath("img");
-			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+
+		//파일 절대경로 자동으로 구하기
+			//이 경로는 Eclipse (특히 WTP - Web Tools Platform)에서 웹 애플리케이션을 실행할 때,
+			//임시로 웹 앱을 배포하는 위치.
+			String realPath = servletContext.getRealPath("/resources/img/");
+			 System.out.println("실제 경로: " + realPath);
+		//파일 절대경로 자동으로 구하기
+			
+//			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 			String productimage = System.currentTimeMillis() + "_" + fileName;
 			String safeFileName = realPath + "\\" +productimage;
 		
@@ -359,7 +384,8 @@ public class Bom_total_controller {
 			//이미지 네임 set으로 넣음
 			
 			Products_DTO dto = new Products_DTO();
-			dto.setProductid(Integer.parseInt(productid));
+		
+			dto.setProductId(Integer.parseInt(productid));
 			dto.setProductname(productname);
 			dto.setNormalcriteria(abnormalcriteria);
 			dto.setAbnormalcriteria(abnormalcriteria);
@@ -387,7 +413,13 @@ public class Bom_total_controller {
 			try {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
-				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+				//-------경로 찾기
+				//이 경로는 Eclipse (특히 WTP - Web Tools Platform)에서 웹 애플리케이션을 실행할 때,
+				//임시로 웹 앱을 배포하는 위치.
+				String path = servletContext.getRealPath("/resources/img/");
+				 System.out.println("실제 경로: " + path);
+				 //----------
+//				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정
@@ -432,13 +464,17 @@ public class Bom_total_controller {
 //생산공정 
 //----------------------
 	@RequestMapping(value="/production_process",method=RequestMethod.GET)
-	public String production_process(Model model
+	public String production_process(Model model,
+			HttpSession httpSession
 			) {
 		try {
+			User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+			String Field = Field2.getJob();
+
 			System.out.println("production_process 실행");
 			List plist = service.SelectProductPnamePid();
 			List dlist = service.SelectProcessDescription(1);
-			String Field = "ADMIN";
+			
 			model.addAttribute("plist",plist);
 			model.addAttribute("dlist",dlist);
 			model.addAttribute("Field",Field);
@@ -454,20 +490,23 @@ public class Bom_total_controller {
 	@ResponseBody
 	@RequestMapping(value="/production_process_view",method=RequestMethod.GET)
 	public Map<String,Object> production_process(@RequestParam("select_value") int select_value
+			,HttpSession httpSession
 			) {  
-		
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> map = new HashMap();
-	
+
 		try {
 			System.out.println("production_process 실행");
 			System.out.println("select_value"+select_value);
 			
 			List Descriptionlist = service.SelectProcessDescription(select_value);
-			String Field = "ADMIN";
+		
 
 			map.put("Descriptionlist", Descriptionlist);
-			map.put("Field", Field);
-			System.out.println("Descriptionlist"+Descriptionlist+""+"Field"+Field);
+			map.put("Field",Field);
+		
+			System.out.println("Descriptionlist"+Descriptionlist);
 			
 		}catch (Exception e) {
 		e.printStackTrace();
@@ -476,6 +515,8 @@ public class Bom_total_controller {
 		
 		return map;
 	}
+	
+	//생산공정 생성
 	@ResponseBody
 	@RequestMapping(value="/production_process_insert",method=RequestMethod.POST)
 	public int production_process_insert(@RequestBody ProductionProcessDescription_DTO dto
@@ -492,6 +533,59 @@ public class Bom_total_controller {
 
 		return result;
 	}
+	//생산공정 수정
+	@ResponseBody
+	@RequestMapping(value="/production_process_update",method=RequestMethod.PUT)
+	public int production_process_update(@RequestBody ProductionProcessDescription_DTO dto
+			) {  
+		System.out.println("production_process_update 실행");
+		
+		int result = 0;
+		try {
+			 result = service.ProductionProcessUpdate(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	//생산공정 한줄만 수정 화면이벤트
+		@ResponseBody
+		@RequestMapping(value="/production_process_one_line",method=RequestMethod.GET)
+		public List production_process_one_line(@RequestParam ("processid") int processid
+				) {  
+			System.out.println("production_process_one_line 실행");
+			
+			List list = null;
+			try {
+				 list = service.ProductionProcess_select_one_line(processid);
+				System.out.println("list :" +list);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return list;
+		}
+		
+	//생산공정 삭제이벤트
+			@ResponseBody
+			@RequestMapping(value="/production_process_delete",method=RequestMethod.PUT)
+			public int production_process_delete(@RequestBody ProductionProcessDescription_DTO dto
+					) {  
+				System.out.println("production_process_delete 실행");
+				int result = 0;
+				
+				try {
+					System.out.println("dto :"+dto);
+					result = service.ProductionProcessDelete(dto);
+					System.out.println("result :" +result);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return result;
+			}
 	
 	
 	
@@ -500,19 +594,165 @@ public class Bom_total_controller {
 	
 //완제품 BOM
 //----
-	@RequestMapping("/bom_v2")
-	public String Bom_v2() {
+			@RequestMapping(value="/bom_v2",method=RequestMethod.GET)
+			public String Bom_v2( HttpSession httpsession ,Model model
+					
+					)  {
+				System.out.println("bom_v2 입장~~~");
+				User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
+				String Field = Field2.getJob();
+//				String Field = "ADMIN";
+				model.addAttribute(Field);
+				return "bom_v2";
+			}
+			
+			
+	@ResponseBody
+	@RequestMapping(value="/bom_v2_select",method=RequestMethod.GET)
+	public Map<String,Object> Bom_v2(@RequestParam (value="processname",required=false) String processname 
+			
+			)  {
 		
-		return "bom_v2";
+	
+		Map<String, Object> map = new HashMap();
+		List list = null;
+		try {
+			list = build_of_Materials_service.Product_All(processname);
+			System.out.println("list : "+ list);
+			map.put("list", list);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return map;
 	}
 	
-//원재료 BOM
+//완제품 > 원재료 메인홤면
 	@RequestMapping("/bomlist")
-	public String Bomlist() {
-		
+	public String Bomlist(Model model,
+			@RequestParam(value="pname",required = false) String pname,
+			@RequestParam(value="pid",required = false) String pid,
+			 HttpSession httpsession
+			) {
+		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
+		String Field = Field2.getJob();
+
+		List mlist = null;
+		try {
+			mlist = build_of_Materials_service.BuildOfMaterials_materialList();
+			model.addAttribute("mlist",mlist);
+			model.addAttribute("Field",Field);
+			model.addAttribute("pid",pid);
+			model.addAttribute("pname",pname);
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 		return "bomlist";
 	}
 	
+	//완제품 > 원재료 메인홤면
+	@ResponseBody
+	@RequestMapping(value="/bomlistSlect",method=RequestMethod.GET)
+	public Map<String,Object> bomlistSlect(
+			@RequestParam(value="pid",required = false) int pid,
+			HttpSession httpSession
+			) {
+		System.out.println("bomlistSlect 시작");
+		Map<String, Object> map = new HashMap();
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
+		List materiallist = null;
+		try {
+			materiallist = build_of_Materials_service.BuildOfMaterials_materialSelect(pid);
+			System.out.println("materiallist :"+materiallist);
+			map.put("list", materiallist);
+			map.put("Field",Field);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return map;
+	}
+	//생성
+	@ResponseBody
+	@RequestMapping(value="/bominsert",method=RequestMethod.POST)
+	public int bominsert(
+			@RequestBody Bom_DTO dto
+			) {
+		System.out.println("bominsert 시작");
+		
+		int result= 0;
+		try {
+			result=build_of_Materials_service.BuildOfMaterials_materialListInsert(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return result;
+	}
+	//삭제
+	@ResponseBody
+	@RequestMapping(value="/bomDelete",method=RequestMethod.PUT)
+	public int bomDelete(
+			@RequestBody Bom_DTO dto
+			) {
+		System.out.println("bomDelete 시작");
+		
+		int result= 0;
+		try {
+			result=build_of_Materials_service.BuildOfMaterials_materialListDelete(dto);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return result;
+	}
+	
+	//완제품 > 원재료 수정클릭시 한출만 출력
+		@ResponseBody
+		@RequestMapping(value="/bomlistSlectOne",method=RequestMethod.GET)
+		public List bomlistSlectOne(
+				@RequestParam(value="bomid",required = false) int bomid
+				) {
+			System.out.println("bomlistSlectOne 시작");
+			List list = null;
+			List materiallist = null;
+			try {
+				list = build_of_Materials_service.BuildOfMaterials_materialOneList(bomid);
+			
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+			return list;
+		}
+		
+		//수정
+		@ResponseBody
+		@RequestMapping(value="/bomUpdate",method=RequestMethod.PUT)
+		public int bomUpdate(
+				@RequestBody Bom_DTO dto
+				) {
+			System.out.println("bomUpdate 시작");
+			
+			int result= 0;
+			try {
+				result=build_of_Materials_service.BuildOfMaterials_materialUpdate(dto);
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+			return result;
+		}
 	
 
 	
