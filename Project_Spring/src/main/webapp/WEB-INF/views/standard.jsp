@@ -5,6 +5,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="project.dto.*" %>
 
+
 						<!DOCTYPE html>
 						<html lang="en">
 
@@ -601,11 +602,18 @@
 										<a href="standard?page=<%= end+1 %>&view_value=${view_value}">[다음]</a>
 									</c:if>
 							</div>
-							<script>
+						
+							<script >
+								
+
 								window
 									.addEventListener(
 										"load",
 										function () {
+											
+
+
+
 											let = text_hides = document.querySelectorAll(".text_hide")
 											for (let i = 0; i < text_hides.length; i++) {
 												text_hides[i].classList.add("none")

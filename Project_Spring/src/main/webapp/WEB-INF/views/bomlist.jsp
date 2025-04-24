@@ -325,64 +325,12 @@
 								</tbody>
 							</table>
 
-
+							
 							<script>
-								window.addEventListener("load", function () {
-									//목록이동버튼
-									pidselect();
+									
 
-									document.querySelector("#back-button").addEventListener("click", () => {
-										location.href = "bom_v2"
-									})
-
-									document.querySelector("#input_show").addEventListener("click", function (e) {
-										console.log("sksks")
-										console.log(e.target.parentNode.parentNode.parentNode.querySelector(".title_insert"))
-										document.querySelector(".title_insert").classList.remove("none")
-
-										//생성>확인 이벤트 아작스보내기
-										document.querySelector("#insert").addEventListener("click", (e) => {
-											console.log(document.querySelector("#matesel").value)
-											console.log(document.querySelector("#inputValue").value)
-											console.log(document.querySelector("#pid").value)
-											let data = {
-												quantity : document.querySelector("#inputValue").value,
-												materialid : document.querySelector("#matesel").value,
-												productid : document.querySelector("#pid").value
-											
-											}
-												const xhr = new XMLHttpRequest();
-												xhr.open('POST','bominsert')
-
-												xhr.setRequestHeader('Content-Type', 'application/json')
-
-												xhr.send(JSON.stringify(data))
-
-												xhr.onload = function () {
-													if(xhr.responseText == 1){
-														alert("생성완료")
-														pidselect();
-													}else if(xhr.responseText == 0){
-														alert("생성실패")
-													}
-												}
-											// const xhr= new XMLHttpRequest();
-											// xhr.open('post')
-										})//생성>취소
-
-										//생성>취소이벤트
-										document.querySelector("#input_hide").addEventListener("click", (e) => {
-											document.querySelector(".title_insert").classList.add("none")
-
-											// const xhr= new XMLHttpRequest();
-											// xhr.open('post')
-										})//생성>취소 이벤트
-
-
-
-									})
-									//맨처음 화면 가져오는
 									function pidselect() {
+									
 										const xhr = new XMLHttpRequest();
 									xhr.open('get', 'bomlistSlect?pid='+document.querySelector("#pid").value )
 
@@ -441,7 +389,7 @@
 																						
 																						
 																document.querySelector("#bodyuphand").append(newdataHtml)
-																
+															
 																
 																
 																//삭제이벤트
@@ -573,6 +521,66 @@
 
 
 									}
+									
+								window.addEventListener("load", function () {
+									
+
+																		
+									//목록이동버튼
+									pidselect();
+
+									document.querySelector("#back-button").addEventListener("click", () => {
+										location.href = "bom_v2"
+									})
+
+									document.querySelector("#input_show").addEventListener("click", function (e) {
+										console.log("sksks")
+										console.log(e.target.parentNode.parentNode.parentNode.querySelector(".title_insert"))
+										document.querySelector(".title_insert").classList.remove("none")
+
+										//생성>확인 이벤트 아작스보내기
+										document.querySelector("#insert").addEventListener("click", (e) => {
+											console.log(document.querySelector("#matesel").value)
+											console.log(document.querySelector("#inputValue").value)
+											console.log(document.querySelector("#pid").value)
+											let data = {
+												quantity : document.querySelector("#inputValue").value,
+												materialid : document.querySelector("#matesel").value,
+												productid : document.querySelector("#pid").value
+											
+											}
+												const xhr = new XMLHttpRequest();
+												xhr.open('POST','bominsert')
+
+												xhr.setRequestHeader('Content-Type', 'application/json')
+
+												xhr.send(JSON.stringify(data))
+
+												xhr.onload = function () {
+													if(xhr.responseText == 1){
+														alert("생성완료")
+														pidselect();
+													}else if(xhr.responseText == 0){
+														alert("생성실패")
+													}
+												}
+											// const xhr= new XMLHttpRequest();
+											// xhr.open('post')
+										})//생성>취소
+
+										//생성>취소이벤트
+										document.querySelector("#input_hide").addEventListener("click", (e) => {
+											document.querySelector(".title_insert").classList.add("none")
+
+											// const xhr= new XMLHttpRequest();
+											// xhr.open('post')
+										})//생성>취소 이벤트
+
+
+
+									})
+									
+									//맨처음 화면 가져오는
 
 
 
