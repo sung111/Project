@@ -265,10 +265,12 @@ public class Bom_total_controller {
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
 	public Map<String,Object> insSelectone(
 			@RequestParam("serchname") String serchname,
-			Model model
+			Model model,
+			HttpSession httpSession
 			) {
 		System.out.println("검색값 productname"+serchname);
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> result = new HashMap();
 		
 		try {
@@ -293,11 +295,15 @@ public class Bom_total_controller {
 	@RequestMapping(value="/insSelectproductid",method=RequestMethod.GET)
 	public Map<String,Object> insSelectproductid(
 			@RequestParam("productid") int productid,
-			Model model
+			Model model,
+			HttpSession httpSession
+
 			) {
+		
 		System.out.println("insSelectproductid_프러덕트id검색");
 		System.out.println("검색값 productid"+productid);
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> result = new HashMap();
 		
 		try {
@@ -448,7 +454,7 @@ public class Bom_total_controller {
 		try {
 			User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 			String Field = Field2.getJob();
-//			String Field  = "ADMIN";
+
 			System.out.println("production_process 실행");
 			List plist = service.SelectProductPnamePid();
 			List dlist = service.SelectProcessDescription(1);
@@ -473,7 +479,7 @@ public class Bom_total_controller {
 		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
 		Map<String,Object> map = new HashMap();
-//		String Field = "ADMIN";
+
 		try {
 			System.out.println("production_process 실행");
 			System.out.println("select_value"+select_value);
@@ -617,7 +623,7 @@ public class Bom_total_controller {
 			) {
 		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
 		String Field = Field2.getJob();
-//		String Field = "ADMIN";
+
 		List mlist = null;
 		try {
 			mlist = build_of_Materials_service.BuildOfMaterials_materialList();
@@ -636,11 +642,13 @@ public class Bom_total_controller {
 	@ResponseBody
 	@RequestMapping(value="/bomlistSlect",method=RequestMethod.GET)
 	public Map<String,Object> bomlistSlect(
-			@RequestParam(value="pid",required = false) int pid
+			@RequestParam(value="pid",required = false) int pid,
+			HttpSession httpSession
 			) {
 		System.out.println("bomlistSlect 시작");
 		Map<String, Object> map = new HashMap();
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		List materiallist = null;
 		try {
 			materiallist = build_of_Materials_service.BuildOfMaterials_materialSelect(pid);

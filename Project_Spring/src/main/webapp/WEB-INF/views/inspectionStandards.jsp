@@ -410,7 +410,7 @@
 																</div>
 															</div>
 														</div>
-														<c:if test="${Field == 'ADMIN'}">
+														<c:if test="${Field == 'admin'}">
 															<div class="btncenter">
 											
 
@@ -561,7 +561,7 @@
 																				</div>
 																			</div>
 																		</div>
-																		\${field == 'ADMIN' ? ctrlHTML: ''}
+																		\${field == 'admin' ? ctrlHTML: ''}
 																		</div>
 																	
 																		`;
