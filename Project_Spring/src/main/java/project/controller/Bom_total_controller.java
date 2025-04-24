@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,6 +55,8 @@ public class Bom_total_controller {
 	
 	@Autowired
 	private ServletContext servletContext;
+	
+
 	
 	
 	
@@ -265,10 +268,12 @@ public class Bom_total_controller {
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
 	public Map<String,Object> insSelectone(
 			@RequestParam("serchname") String serchname,
-			Model model
+			Model model,
+			HttpSession httpSession
 			) {
 		System.out.println("검색값 productname"+serchname);
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> result = new HashMap();
 		
 		try {
@@ -293,11 +298,15 @@ public class Bom_total_controller {
 	@RequestMapping(value="/insSelectproductid",method=RequestMethod.GET)
 	public Map<String,Object> insSelectproductid(
 			@RequestParam("productid") int productid,
-			Model model
+			Model model,
+			HttpSession httpSession
+
 			) {
+		
 		System.out.println("insSelectproductid_프러덕트id검색");
 		System.out.println("검색값 productid"+productid);
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		Map<String,Object> result = new HashMap();
 		
 		try {
@@ -325,7 +334,7 @@ public class Bom_total_controller {
 	@RequestMapping("/upload")
     public int upload( 
     		MultipartHttpServletRequest req 
-    		) throws UnsupportedEncodingException {
+    		) throws IOException {
 		System.out.println("파일업로드컨트롤러실행");
 		req.setCharacterEncoding("utf-8");
 		
@@ -348,9 +357,15 @@ public class Bom_total_controller {
 		System.out.println("fileName"+fileName);
 		int result = 0;
 		try {
-			//현재프로젝트 내의 img경로 저장
-//			String realPath = servletContext.getRealPath("img");
-			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+
+		//파일 절대경로 자동으로 구하기
+			//이 경로는 Eclipse (특히 WTP - Web Tools Platform)에서 웹 애플리케이션을 실행할 때,
+			//임시로 웹 앱을 배포하는 위치.
+			String realPath = servletContext.getRealPath("/resources/img/");
+			 System.out.println("실제 경로: " + realPath);
+		//파일 절대경로 자동으로 구하기
+			
+//			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 			String productimage = System.currentTimeMillis() + "_" + fileName;
 			String safeFileName = realPath + "\\" +productimage;
 		
@@ -369,7 +384,8 @@ public class Bom_total_controller {
 			//이미지 네임 set으로 넣음
 			
 			Products_DTO dto = new Products_DTO();
-			dto.setProductid(Integer.parseInt(productid));
+		
+			dto.setProductId(Integer.parseInt(productid));
 			dto.setProductname(productname);
 			dto.setNormalcriteria(abnormalcriteria);
 			dto.setAbnormalcriteria(abnormalcriteria);
@@ -397,7 +413,13 @@ public class Bom_total_controller {
 			try {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
-				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+				//-------경로 찾기
+				//이 경로는 Eclipse (특히 WTP - Web Tools Platform)에서 웹 애플리케이션을 실행할 때,
+				//임시로 웹 앱을 배포하는 위치.
+				String path = servletContext.getRealPath("/resources/img/");
+				 System.out.println("실제 경로: " + path);
+				 //----------
+//				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정
@@ -448,7 +470,7 @@ public class Bom_total_controller {
 		try {
 			User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 			String Field = Field2.getJob();
-//			String Field  = "ADMIN";
+
 			System.out.println("production_process 실행");
 			List plist = service.SelectProductPnamePid();
 			List dlist = service.SelectProcessDescription(1);
@@ -473,7 +495,7 @@ public class Bom_total_controller {
 		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
 		Map<String,Object> map = new HashMap();
-//		String Field = "ADMIN";
+
 		try {
 			System.out.println("production_process 실행");
 			System.out.println("select_value"+select_value);
@@ -617,7 +639,7 @@ public class Bom_total_controller {
 			) {
 		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
 		String Field = Field2.getJob();
-//		String Field = "ADMIN";
+
 		List mlist = null;
 		try {
 			mlist = build_of_Materials_service.BuildOfMaterials_materialList();
@@ -636,11 +658,13 @@ public class Bom_total_controller {
 	@ResponseBody
 	@RequestMapping(value="/bomlistSlect",method=RequestMethod.GET)
 	public Map<String,Object> bomlistSlect(
-			@RequestParam(value="pid",required = false) int pid
+			@RequestParam(value="pid",required = false) int pid,
+			HttpSession httpSession
 			) {
 		System.out.println("bomlistSlect 시작");
 		Map<String, Object> map = new HashMap();
-		String Field = "ADMIN";
+		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
+		String Field = Field2.getJob();
 		List materiallist = null;
 		try {
 			materiallist = build_of_Materials_service.BuildOfMaterials_materialSelect(pid);

@@ -105,9 +105,21 @@
 
 
 
+<select id="monchsel" resultType="project.dto.Querydto">
 
+SELECT 
+    p.productname,
+    SUM(CASE WHEN TRUNC(r.reportdate) BETWEEN TO_DATE('2025-02-03', 'YYYY-MM-DD') AND TO_DATE('2025-02-09', 'YYYY-MM-DD') THEN r.productioncount ELSE 0 END) AS week1,
+    SUM(CASE WHEN TRUNC(r.reportdate) BETWEEN TO_DATE('2025-02-10', 'YYYY-MM-DD') AND TO_DATE('2025-02-16', 'YYYY-MM-DD') THEN r.productioncount ELSE 0 END) AS week2,
+    SUM(CASE WHEN TRUNC(r.reportdate) BETWEEN TO_DATE('2025-02-17', 'YYYY-MM-DD') AND TO_DATE('2025-02-23', 'YYYY-MM-DD') THEN r.productioncount ELSE 0 END) AS week3,
+    SUM(CASE WHEN TRUNC(r.reportdate) BETWEEN TO_DATE('2025-02-24', 'YYYY-MM-DD') AND TO_DATE('2025-03-02', 'YYYY-MM-DD') THEN r.productioncount ELSE 0 END) AS week4
+FROM performances r
+JOIN products p ON r.productid = p.productid
+WHERE r.reportdate BETWEEN TO_DATE('2025-02-01', 'YYYY-MM-DD') AND TO_DATE('2025-02-29', 'YYYY-MM-DD')
+GROUP BY p.productname
+ORDER BY p.productname;
 
-
+</select>
 
 
 </mapper>

@@ -77,4 +77,31 @@ public class ChartController {
 		return "Chart";
 		          
 	}
+	
+	
+	
+	
+	// 전체 목록 조회
+    //	@ResponseBody
+	@RequestMapping(value = "/monchart")
+	public String monchsel(
+			
+			@ModelAttribute
+			Querydto Querydto,
+		    Model model
+			
+			) {
+
+		
+		List<Querydto> monchsel = Chartservice.monchsel(Querydto);
+		System.out.println(" 월간 차트 전체 : " + Querydto);
+		System.out.println(" 월간 차트 전체 목록 성공시 1 :  " + monchsel);
+		model.addAttribute("querymon", monchsel);
+		return "Chart";
+		          
+	}
+	
+	
+	
+	
 }

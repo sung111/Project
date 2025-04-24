@@ -25,13 +25,22 @@ public class Products_DTO {
 	String lotnumber;
 	
 	private List empnos;
-	
 	private int page = 1; // 현재 페이지
 	private int viewCount =10; // 페이지당 보여줄 수 countPerPage / rowPerPage
 	private int FinishViewCount =2; // 페이지당 보여줄 수 countPerPage / rowPerPage
 	private int indexStart;
 	private int indexEnd;
 	
-  
-
+    public int getProductId() {
+        return productid;
+    }
+    public void setProductId(int productId) {
+        this.productid = productId;
+    }
+    public int getProductid() {
+        return productid;
+    }
+    public void setProductid(int productId) {
+        this.productid = productId;
+    }
 }

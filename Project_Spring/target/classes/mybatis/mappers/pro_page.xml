@@ -24,8 +24,9 @@
        
              SELECT * FROM (
     SELECT ROWNUM AS rnum, inner_data.* FROM (
-        SELECT postid, title, viewcount, postdate, userid
+        SELECT postid, title, viewcount, postdate, userid, notify
         FROM posts
+        where notify = #{notify}
         ORDER BY postdate DESC
     ) inner_data
      <![CDATA[
@@ -35,6 +36,8 @@
   <![CDATA[
   WHERE rnum >= #{indexStart}
   ]]>
+  
+  
         </select> 
         
         <!-- 모든 페이지 -->

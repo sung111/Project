@@ -249,7 +249,7 @@
 								</div>
 							</div>
 							<div id="creatbutton">
-								<c:if test="${Field == 'ADMIN'}">
+								<c:if test="${Field == 'admin'}">
 									<input type="button" value="생성" class="btn " id="input_show">
 								</c:if>
 							</div>
@@ -309,7 +309,7 @@
 										<th>LotNo</th>
 										<th>창고위치</th>
 										<th>품번</th>
-										<c:if test="${Field == 'ADMIN'}">
+										<c:if test="${Field == 'admin'}">
 											<th id="crud_th">수정/삭제</th>
 										</c:if>
 									</tr>
@@ -325,64 +325,12 @@
 								</tbody>
 							</table>
 
-
+							
 							<script>
-								window.addEventListener("load", function () {
-									//목록이동버튼
-									pidselect();
+									
 
-									document.querySelector("#back-button").addEventListener("click", () => {
-										location.href = "bom_v2"
-									})
-
-									document.querySelector("#input_show").addEventListener("click", function (e) {
-										console.log("sksks")
-										console.log(e.target.parentNode.parentNode.parentNode.querySelector(".title_insert"))
-										document.querySelector(".title_insert").classList.remove("none")
-
-										//생성>확인 이벤트 아작스보내기
-										document.querySelector("#insert").addEventListener("click", (e) => {
-											console.log(document.querySelector("#matesel").value)
-											console.log(document.querySelector("#inputValue").value)
-											console.log(document.querySelector("#pid").value)
-											let data = {
-												quantity : document.querySelector("#inputValue").value,
-												materialid : document.querySelector("#matesel").value,
-												productid : document.querySelector("#pid").value
-											
-											}
-												const xhr = new XMLHttpRequest();
-												xhr.open('POST','bominsert')
-
-												xhr.setRequestHeader('Content-Type', 'application/json')
-
-												xhr.send(JSON.stringify(data))
-
-												xhr.onload = function () {
-													if(xhr.responseText == 1){
-														alert("생성완료")
-														pidselect();
-													}else if(xhr.responseText == 0){
-														alert("생성실패")
-													}
-												}
-											// const xhr= new XMLHttpRequest();
-											// xhr.open('post')
-										})//생성>취소
-
-										//생성>취소이벤트
-										document.querySelector("#input_hide").addEventListener("click", (e) => {
-											document.querySelector(".title_insert").classList.add("none")
-
-											// const xhr= new XMLHttpRequest();
-											// xhr.open('post')
-										})//생성>취소 이벤트
-
-
-
-									})
-									//맨처음 화면 가져오는
 									function pidselect() {
+									
 										const xhr = new XMLHttpRequest();
 									xhr.open('get', 'bomlistSlect?pid='+document.querySelector("#pid").value )
 
@@ -396,6 +344,7 @@
 										data=JSON.parse(data)
 										console.log(data)
 										let list = data.list;
+										let Field = data.Field;
 										document.querySelector("#bodyuphand").innerHTML = ` `
 											list.forEach(dto => {
 													let newdataHtml = document.createElement("tr")
@@ -419,16 +368,20 @@
 																<td>\${dto.supplier}</td>
 																<td>\${dto.lotnumber}</td>
 																<td>\${dto.warehouse}</td>
-																<td>\${dto.partNumber}</td>
-																<td>
-																	<div class="crud_contaner">
-																		<input type="hidden" value=\${dto.bomid} class="bomid">
-																		<input type="button" value="수정" class="update btn font_size">
-																		<input type="button" value="삭제" class="delete btn font_size">
-																	</div>
-																</td>
+																<td>\${dto.partNumber}</td>`
 																
-																`
+																if(Field == 'admin'){
+																	newdataHtml.innerHTML += `
+																	<td>
+																		<div class="crud_contaner">
+																			<input type="hidden" value=\${dto.bomid} class="bomid">
+																			<input type="button" value="수정" class="update btn font_size">
+																			<input type="button" value="삭제" class="delete btn font_size">
+																		</div>
+																	</td>`
+																}
+																
+																
 
 														
 																
@@ -436,7 +389,7 @@
 																						
 																						
 																document.querySelector("#bodyuphand").append(newdataHtml)
-																
+															
 																
 																
 																//삭제이벤트
@@ -504,16 +457,22 @@
 																							<td>\${dto[i].supplier}</td>
 																							<td>\${dto[i].lotnumber}</td>
 																							<td>\${dto[i].warehouse}</td>
-																							<td>\${dto[i].partNumber}</td>
-																							<td>
-																								<div class="crud_contaner">
-																									<input type="hidden" value=\${dto[i].bomid} class="bomid">
-																									<input type="button" value="확인" class="ok btn font_size">
-																									<input type="button" value="취소" class="can btn font_size">
-																								</div>
-																							</td>
+																							<td>\${dto[i].partNumber}</td>`
+																							
+																							if(Field == 'admin'){
+																							newtext += `
+																								<td>
+																									<div class="crud_contaner">
+																										<input type="hidden" value=\${dto[i].bomid} class="bomid">
+																										<input type="button" value="확인" class="ok btn font_size">
+																										<input type="button" value="취소" class="can btn font_size">
+																									</div>
+																								</td>`
+																							}
+																							
+																							//수정된값을 넣어주기
 																					
-																						`
+																						
 																						
 																						
 																						
@@ -562,6 +521,66 @@
 
 
 									}
+									
+								window.addEventListener("load", function () {
+									
+
+																		
+									//목록이동버튼
+									pidselect();
+
+									document.querySelector("#back-button").addEventListener("click", () => {
+										location.href = "bom_v2"
+									})
+
+									document.querySelector("#input_show").addEventListener("click", function (e) {
+										console.log("sksks")
+										console.log(e.target.parentNode.parentNode.parentNode.querySelector(".title_insert"))
+										document.querySelector(".title_insert").classList.remove("none")
+
+										//생성>확인 이벤트 아작스보내기
+										document.querySelector("#insert").addEventListener("click", (e) => {
+											console.log(document.querySelector("#matesel").value)
+											console.log(document.querySelector("#inputValue").value)
+											console.log(document.querySelector("#pid").value)
+											let data = {
+												quantity : document.querySelector("#inputValue").value,
+												materialid : document.querySelector("#matesel").value,
+												productid : document.querySelector("#pid").value
+											
+											}
+												const xhr = new XMLHttpRequest();
+												xhr.open('POST','bominsert')
+
+												xhr.setRequestHeader('Content-Type', 'application/json')
+
+												xhr.send(JSON.stringify(data))
+
+												xhr.onload = function () {
+													if(xhr.responseText == 1){
+														alert("생성완료")
+														pidselect();
+													}else if(xhr.responseText == 0){
+														alert("생성실패")
+													}
+												}
+											// const xhr= new XMLHttpRequest();
+											// xhr.open('post')
+										})//생성>취소
+
+										//생성>취소이벤트
+										document.querySelector("#input_hide").addEventListener("click", (e) => {
+											document.querySelector(".title_insert").classList.add("none")
+
+											// const xhr= new XMLHttpRequest();
+											// xhr.open('post')
+										})//생성>취소 이벤트
+
+
+
+									})
+									
+									//맨처음 화면 가져오는
 
 
 

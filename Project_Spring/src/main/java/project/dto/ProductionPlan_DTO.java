@@ -3,14 +3,9 @@ package project.dto;
 import java.sql.Date;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Data
 public class ProductionPlan_DTO {
-
     private int planId;          // 플랜 ID
     private String userId;       // 작성자 ID
     private int productId;       // 상품번호
@@ -26,8 +21,5 @@ public class ProductionPlan_DTO {
 
     // 조인된 상품 정보
     private Products_DTO product;
-
-
-
-
 }
+

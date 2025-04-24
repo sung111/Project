@@ -234,7 +234,7 @@
                 
                 </select>
            			
-               <c:if test="${Field == 'ADMIN'}">	
+               <c:if test="${Field == 'admin'}">	
                     <input type="button" class="btn" id="c1" value="공정 생성" >
                     </c:if>
                     
@@ -251,7 +251,7 @@
                         <th class="table-wid2">설명</th>
                         <th class="table-wid3">사용장비</th>
                         <th class="table-wid4">위생 기준</th>
-                        <c:if test="${Field == 'ADMIN'}">	
+                        <c:if test="${Field == 'admin'}">	
                         <th class="table-wid5">수정/삭제</th>
                         </c:if>
                     </tr>
@@ -396,7 +396,7 @@
                                                 <span class="spantotal">\${dto.hygiene}</span>
                                              </td>
                                                 `
-                                         if(data.Field == 'ADMIN')
+                                         if(data.Field == 'admin')
                                             {DescripBody.innerHTML +=`
                                                 <td class="table-button">
                                                     <input type="hidden"  value="update" name="type">

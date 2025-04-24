@@ -5,6 +5,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="project.dto.*" %>
 
+
 						<!DOCTYPE html>
 						<html lang="en">
 
@@ -291,7 +292,7 @@
 
 
 
-								<c:if test="${Field == 'ADMIN'}">
+								<c:if test="${Field == 'admin'}">
 									
 									<input type="button" value="원재료생성" id="materials_hide" name="generation" class="button button_mo">
 									<input type="button" value="완제품생성" id="finished_hide" name="generation" class="button button_mo">
@@ -387,7 +388,7 @@
 										<th>품번</th>
 										<th class="lotno">LotNo</th>
 										<th>창고위치</th>
-										<c:if test="${Field == 'ADMIN'}">
+										<c:if test="${Field == 'admin'}">
 											<th class="ud">수정/삭제</th>
 										</c:if>
 									</tr>
@@ -432,7 +433,7 @@
 												<td><span class="text_view">${dto.warehouse}</span><input type="text"
 														value="${dto.warehouse}" class="text_hide none" id="warehouse2"></td>
 
-												<c:if test="${Field == 'ADMIN'}">
+												<c:if test="${Field == 'admin'}">
 													<td>
 														<div class="edit_delete_box">
 															<div class="edit_delete_box">
@@ -479,7 +480,7 @@
 										<th>규격</th>
 										<th>단위</th>
 										<th class="lotno">LotNo</th>
-										<c:if test="${Field == 'ADMIN'}">
+										<c:if test="${Field == 'admin'}">
 											<th class="ud">수정/삭제</th>
 										</c:if>
 
@@ -515,7 +516,7 @@
 														id="lotnumber">
 												</td>
 
-												<c:if test="${Field == 'ADMIN'}">
+												<c:if test="${Field == 'admin'}">
 													<td>
 														<div class="edit_delete_box">
 															<div class="edit_delete_box">
@@ -549,7 +550,7 @@
 
 
 
-							</div>
+							
 
 							<div id="page-container">
 								<% int pageNo=1; int viewCount=10; // model에 담은건 request에서 꺼낼 수 있다  
@@ -601,11 +602,18 @@
 										<a href="standard?page=<%= end+1 %>&view_value=${view_value}">[다음]</a>
 									</c:if>
 							</div>
-							<script>
+						
+							<script >
+								
+
 								window
 									.addEventListener(
 										"load",
 										function () {
+											
+
+
+
 											let = text_hides = document.querySelectorAll(".text_hide")
 											for (let i = 0; i < text_hides.length; i++) {
 												text_hides[i].classList.add("none")
@@ -1058,9 +1066,7 @@
 											for (let i = 0; i < oks.length; i++) {
 												oks[i].classList.add("none")
 											}
-											// for (let i = 0; i < oks.length; i++) {
-											// 	delvalues[i].classList.add("none")
-											// }
+										
 											let updates = document.querySelectorAll(".update")
 											for (let i = 0; i < updates.length; i++) {
 													//수정이벤트
@@ -1117,18 +1123,8 @@
 																.add("none")
 															console.log("테스트")
 
-															//전체 삭제버튼 안보이게하기
-															// 													let totals = document
-															// 															.querySelectorAll(".total");
-															// 													for (let i = 0; i < totals.length; i++) {
-															// 														totals[i].classList
-															// 																.add("none");
-															// 													}
 															console.log("토탈찾기 e.target", e.target.parentNode.parentNode.parentNode)
-															// e.target.parentNode.parentNode.parentNode.querySelector(".total").classList
-															// 	.add("none")
-
-															//원재료 확인버튼 클릭시 수정이벤트
+													
 															e.target.parentNode
 																.querySelector(
 																	".ok")
@@ -1218,16 +1214,14 @@
 																			}
 																		}
 																	})
-															//취소 누를시 하이드 텍스트 안보이게하기
-															// 					console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
-															// 					console.log("취소버튼",e.target.parentNode)
+														
 															e.target.parentNode
 																.querySelector(
 																	".cancel")
 																.addEventListener(
 																	"click",
 																	function (e) {
-																		// 						console.log("하이드텍스트",e.target.parentNode.parentNode.parentNode)
+																		
 																		for (let y = 0; y < textHides.length; y++) {
 																			textHides[y].classList
 																				.add("none")
