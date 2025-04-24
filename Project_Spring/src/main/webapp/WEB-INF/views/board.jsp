@@ -22,13 +22,7 @@
 
 </head>
 <style>
-body {
-	background-color: #f8f9fa;
-	display: flex;
-	flex-direction: column; /* 세로 방향으로 정렬 */
-	align-items: center; /* 중앙 정렬 */
-	padding: 20px;
-}
+
 
 .box {
 	width: 100%; /* 너비 조정 */
