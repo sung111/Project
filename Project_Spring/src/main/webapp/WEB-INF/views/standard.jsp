@@ -550,7 +550,7 @@
 
 
 
-							</div>
+							
 
 							<div id="page-container">
 								<% int pageNo=1; int viewCount=10; // model에 담은건 request에서 꺼낼 수 있다  

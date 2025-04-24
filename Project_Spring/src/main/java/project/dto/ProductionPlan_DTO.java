@@ -3,11 +3,7 @@ package project.dto;
 import java.sql.Date;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Data
 public class ProductionPlan_DTO {
     private int planId;          // 플랜 ID

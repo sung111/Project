@@ -384,7 +384,8 @@ public class Bom_total_controller {
 			//이미지 네임 set으로 넣음
 			
 			Products_DTO dto = new Products_DTO();
-			dto.setProductid(Integer.parseInt(productid));
+		
+			dto.setProductId(Integer.parseInt(productid));
 			dto.setProductname(productname);
 			dto.setNormalcriteria(abnormalcriteria);
 			dto.setAbnormalcriteria(abnormalcriteria);

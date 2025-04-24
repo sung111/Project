@@ -50,11 +50,7 @@
 									width: 100%;
 								}
 
-								li {
-									border: 1px solid black;
-									list-style: none;
-									padding: 0;
-								}
+								
 
 								.arrow {
 									height: 20px;
