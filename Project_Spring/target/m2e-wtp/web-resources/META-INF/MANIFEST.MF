@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: zmddh
+=======
+Built-By: fktkz
+>>>>>>> c785c2e24e71491d5427f8ef346a1766012d7b54
 Build-Jdk: 11
 Created-By: Maven Integration for Eclipse
 
