@@ -48,7 +48,7 @@
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 262px;
+    height: 100%;
     overflow-y: scroll;
     margin: 0 10px;
     background-color: white;
@@ -200,7 +200,7 @@
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 336px;
+    height: 100%;
     overflow-y: scroll;
     background-color: white;
     color: black;
@@ -514,7 +514,7 @@
 
   .wkrView {
     border: 1px solid rgb(199, 196, 196);
-    height: 262px;
+    height: 100%;
     overflow-y: scroll;
     margin: 0 10px;
     background-color: white;
@@ -658,7 +658,7 @@
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 336px;
+    height: 100%;
     overflow-y: scroll;
     background-color: white;
     color: black;

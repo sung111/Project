@@ -5,7 +5,25 @@
 
 <mapper namespace="project.mapper.Quality">
 
-<!-- 	테이블 순서대로 전체셀렉 -->
+
+	<delete id="QaulDelete" parameterType="QualityControl_DTO">
+		delete from qualitycontrols
+		where qualitycontrolid = #{qualitycontrolid}
+	</delete>
+
+	<update id="QualUpdate">
+		update qualitycontrols
+		set 
+		    qualitycontroltime = TO_DATE(#{qualitycontroltime}, 'YYYY-MM-DD"T"HH24:MI:SS'),
+		    result = #{result},
+		    comments = #{comments},
+		    passpack = #{passpack},
+		    failpack = #{failpack},
+		    failreason = #{failreason}
+		where qualitycontrolid = #{qualitycontrolid}
+	</update>
+
+<!-- 테이블 순서대로 전체셀렉 -->
 	<select id="QualityView" parameterType="QualityControl_DTO" resultType="QualityControl_DTO">
 		select rnumwhere.* 
 		from
@@ -22,12 +40,12 @@
 		where rnum <![CDATA[ >= ]]> #{indexStart} and rnum <![CDATA[ <= ]]> #{indexEnd}
 	</select>
 	
-<!-- 	테이블 카운트 -->
+<!-- 테이블 카운트 -->
 	<select id="QualityTotalCount" resultType="int">
 		select count(*) from qualitycontrols
 	</select>
 	
-<!-- 	삽입 -->
+<!-- 삽입 -->
 	<insert id="QualityInsert" parameterType="QualityControl_DTO">
 	insert into qualitycontrols
 		(
@@ -57,7 +75,7 @@
 		)
 	</insert>
 	
-<!-- 	검색리스트 -->
+<!-- 검색리스트 -->
 <select id="searchQualList" parameterType="QualityControl_DTO" resultType="QualityControl_DTO">
     SELECT resulttt.*
     FROM (
@@ -91,7 +109,7 @@
 </select>
 
 	
-	<!-- 	검색 테이블 카운트 -->
+<!-- 검색 테이블 카운트 -->
 <select id="searchQualTotalCount" parameterType="QualityControl_DTO" resultType="int">
     SELECT COUNT(*)
     FROM (

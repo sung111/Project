@@ -47,15 +47,28 @@ public class QualityControl_DAOImpl implements QualityControl_DAO{
 //	검색리스트
 	@Override
 	public List searchQualList(QualityControl_DTO dto) {
-		System.out.println(dto);
 		List list = sqlsession.selectList("project.mapper.Quality.searchQualList",dto);
 		return list;
 	}
 	@Override
 	public int searchQualTotalCount(QualityControl_DTO dto) {
-		System.out.println(dto);
 		int result = sqlsession.selectOne("project.mapper.Quality.searchQualTotalCount", dto);
 		return result;
 	}
+	
+//	업뎃
+	@Override
+	public int QualUpdate(QualityControl_DTO dto) {
+		int result = sqlsession.update("project.mapper.Quality.QualUpdate", dto);
+		return result;
+	}
+	
+//	삭제
+	@Override
+	public int QaulDelete(QualityControl_DTO dto) {
+		int result = sqlsession.delete("project.mapper.Quality.QaulDelete", dto);
+		return result;
+	}
+
 	
 }

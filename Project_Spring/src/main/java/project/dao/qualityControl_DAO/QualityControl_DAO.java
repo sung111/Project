@@ -19,4 +19,10 @@ public interface QualityControl_DAO {
 //	검색리스트
 	public List searchQualList(QualityControl_DTO dto);
 	public int searchQualTotalCount(QualityControl_DTO dto);
+	
+//	업뎃
+	public int QualUpdate(QualityControl_DTO dto);
+	
+//	삭제
+	public int QaulDelete(QualityControl_DTO dto);
 }

@@ -74,6 +74,15 @@ public class Quality_total_controller {
 			) {
 		return service.QualityInsert(dto);
 	}
+//	데이터 삭제
+	@ResponseBody
+	@RequestMapping(value="/QaulDelete", method=RequestMethod.DELETE)
+	public int QaulDelete(
+			@RequestBody
+			QualityControl_DTO dto
+			) {
+		return service.QaulDelete(dto);
+	}
 	
 //	검색리스트
 	@RequestMapping(value="/qualList/search", method=RequestMethod.GET)
@@ -93,6 +102,14 @@ public class Quality_total_controller {
 		return map;
 	}
 	
+//	검색리스트
+	@RequestMapping(value="/QualUpdate", method=RequestMethod.PUT)
+	@ResponseBody
+	public int QualUpdate(
+			@RequestBody
+			QualityControl_DTO dto
+			) {
+		return service.QualUpdate(dto);
+	}
 	
-
 }

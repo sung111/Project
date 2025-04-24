@@ -334,19 +334,24 @@ function renderQualList(list){
     const card = document.createElement('div');
     card.className = 'qualList-card'
     card.innerHTML = `
-      <div>${item.qualitycontroltime}</div>
-      <div>${item.productname}</div>
-      <div>${item.result}</div>
-      <div>${failreason}</div>
-      <div>${comments}</div>
-      <div>${item.username}</div>
+      <div class="qualitycontroltime">${item.qualitycontroltime}</div>
+      <div class="productname">${item.productname}</div>
+      <div class="result">${item.result}</div>
+      <div class="failreason">${failreason}</div>
+      <div class="comments">${comments}</div>
+      <div class="passpack">${item.passpack} pack</div>
+      <div class="failpack">${item.failpack} pack</div>
+      <div class="username">${item.username}</div>
       <div>
         <button type="button" class="Modify">수정</button>
         <button type="button" class="delete">삭제</button>
+        <input type="hidden" value="${item.qualitycontrolid}" id="qualitycontrolid">
       </div>
       `
       qualityList.append(card)
   })
+  ModifyBtn();
+  QaulDelete();
 }
 
 // 페이지네이션 버튼임
@@ -519,6 +524,166 @@ function select() {
   }
 }// 실적조회 end //
 
+// 수정
+function ModifyBtn(){
+  const modifybtn = document.querySelectorAll('.Modify');
+  for(let i = 0 ; i < modifybtn.length ; i++){
+    modifybtn[i].addEventListener('click', (e)=>{
+      const modifyBtnClick = e.target.parentNode.parentNode;
+      const qualitycontroltime = modifyBtnClick.querySelector('.qualitycontroltime').innerText
+      const productname = modifyBtnClick.querySelector('.productname').innerText
+      const result = modifyBtnClick.querySelector('.result').innerText
+      const failreason = modifyBtnClick.querySelector('.failreason').innerText
+      const comments = modifyBtnClick.querySelector('.comments').innerText
+      const username = modifyBtnClick.querySelector('.username').innerText
+      const qualitycontrolid = modifyBtnClick.querySelector('#qualitycontrolid').value
+      const passpack = modifyBtnClick.querySelector('.passpack').innerText.slice(0, modifyBtnClick.querySelector('.passpack').innerText.indexOf(" ") )
+      const failpack = modifyBtnClick.querySelector('.failpack').innerText.slice(0, modifyBtnClick.querySelector('.failpack').innerText.indexOf(" ") )
+
+      Number(passpack);
+      Number(failpack);
+
+      // 수정클릭시 innerHTML
+      modifyBtnClick.innerHTML=`
+        <div class="qualitycontroltime">
+          <input id="qualitycontroltime" type="datetime-local" value="${qualitycontroltime}" style="font-size: 11px;"></div>
+        <div class="productname">${productname}</div>
+        <div class="result">
+          <select id="result" style="width: 100%;font-size: 13px;">
+						<option value="합격">합격</option>
+						<option value="불합격">불합격</option>
+					</select>
+        </div>
+        <div>
+          <select id="failreason" disabled style="width: 100%;font-size: 13px;">
+						<option value="무게 미달">무게 미달</option>
+						<option value="외관 불량">외관 불량</option>
+						<option value="자재 불량">자재 불량</option>
+					</select>
+        </div>
+        <div class="comments">
+          <input id="comments" type="text" value="${comments}" style="width: 100%;font-size: 12px;">
+        </div>
+        <div>
+          <input type="number" value="${passpack}" id="passpack" style="font-size: 12px;">
+        </div>
+        <div>
+          <input type="number" value="${failpack}" id="failpack" style="font-size: 12px;">
+        </div>
+        <div class="username">${username}</div>
+        <div>
+          <button type="button" class="Yes">완료</button>
+          <button type="button" class="cancel">취소</button>
+          <input type="hidden" value="${qualitycontrolid}" id="qualitycontrolid">
+        </div>
+      `
+
+      // 합/불 클릭시 불합사유 disabled 넣다 빼기
+      modifyBtnClick.querySelector('#result').addEventListener('change', (e)=>{
+        console.log(e.target.value);
+        if(e.target.value=='불합격'){
+          modifyBtnClick.querySelector('#failreason').disabled = false;
+        } else {
+          modifyBtnClick.querySelector('#failreason').disabled = true;
+        }
+      })
+
+      // 수정취소
+      modifyBtnClick.querySelector('.cancel').addEventListener('click', (e)=>{
+        const tt = confirm("정말로 취소하시겠습니까?");
+        if(tt){
+          alert('수정이 취소되었습니다.');
+          location.reload();
+        }
+      })
+
+      // 완료클릭시
+      modifyBtnClick.querySelector('.Yes').addEventListener('click', (e)=>{
+        const tt = confirm("수정된 내용을 저장하시겠습니까?")
+        if(tt){
+          //input value 저장
+          const qualitycontroltime = modifyBtnClick.querySelector('#qualitycontroltime').value;
+          const result = modifyBtnClick.querySelector('#result').value;
+          if(result=="불합격"){
+            const failreason = modifyBtnClick.querySelector('#failreason').value;
+          }
+          const comments = modifyBtnClick.querySelector('#comments').value;
+          const qualitycontrolid = modifyBtnClick.querySelector('#qualitycontrolid').value;
+          const passpack = modifyBtnClick.querySelector('#passpack').value;
+          const failpack = modifyBtnClick.querySelector('#failpack').value;
+
+          //json 객체로 만들어서 보내기
+          const sendData = {
+            qualitycontroltime : qualitycontroltime,
+            result : result,
+            comments : comments,
+            qualitycontrolid : qualitycontrolid,
+            passpack : passpack,
+            failpack : failpack,
+            failreason : result === "불합격" ? failreason : null
+          }
+
+          // 수정 put fetch 가즈아
+          fetch("/project/QualUpdate",{
+            method : "PUT",
+            headers : {
+              "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(sendData)
+          })
+          .then(res => res.json())
+          .then(result => {
+            if(result === 1){
+              alert('수정완료');
+              location.reload();
+            }
+          })
+          .catch(err => {
+            console.log("수정 실패's : ", err)
+          })
+        } //수정 if 끝
+      })//수정완료 이벤트
 
 
 
+    })//수정 버튼 클릭 이벤트 end
+  }// 반복문 end
+} // function ModifyBtn 끝
+
+
+//삭제버튼
+function QaulDelete(){
+  
+  const qaulDeletes = document.querySelectorAll('.delete');
+  for(let i = 0 ; i < qaulDeletes.length ; i++){
+    qaulDeletes[i].addEventListener('click', (e)=>{
+      const tt = confirm("정말로 삭제하시겠습니까?")
+      if(tt){
+        const qualitycontrolid = document.querySelector('#qualitycontrolid').value;
+        fetch("/project/QaulDelete",{
+          method : "DELETE",
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body : JSON.stringify({
+            qualitycontrolid : qualitycontrolid
+          })
+        }) 
+        .then(res => res.json())
+        .then(result => {
+          if(result === 1){
+            alert("삭제되었습니다.");
+            location.reload();
+          }
+        })
+        .catch(err => {
+          console.log("삐용삐용 에러쓰 : ", err);
+        })
+        // 삭제 fetch end
+      } // 삭제 if end
+    })// 삭제 이벤트 end
+  
+  }
+  
+  
+}
