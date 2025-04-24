@@ -245,8 +245,12 @@ public class Bom_total_controller {
 		
 
 		try {
-			Map map = Products_service.selectFinishedProduct(products_DTO);
+//			Map map = Products_service.selectFinishedProduct(products_DTO);
+//			List name_list = Products_service.selectProductname();
+			Map map = Products_service.selectProductnameserch(products_DTO);
 			List name_list = Products_service.selectProductname();
+			
+			
 			
 			model.addAttribute("map",map);
 			model.addAttribute("pDTO",products_DTO);
@@ -265,10 +269,9 @@ public class Bom_total_controller {
 	
 	// 검색어조회
 	@ResponseBody
-	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
+	@RequestMapping(value="/insSelectone",method=RequestMethod.POST)
 	public Map<String,Object> insSelectone(
 			@RequestBody Products_DTO products_DTO ,
-			Model model,
 			HttpSession httpSession
 			) {
 		System.out.println("검색값 productname"+products_DTO);
@@ -290,7 +293,9 @@ public class Bom_total_controller {
 			map.put("name_list",name_list);
 			map.put("pDTO",products_DTO);
 			System.out.println("밀키트 검색한 결과값name_list ="+name_list);
+			System.out.println("--------------");
 			System.out.println("pickname ="+pickname);
+			System.out.println("--------------");
 			System.out.println("Field ="+Field);
 		
 			
@@ -368,7 +373,8 @@ public class Bom_total_controller {
 
 		
 			
-			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+//			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+			String realPath = "C:\\project\\img";
 			String productimage = System.currentTimeMillis() + "_" + fileName;
 			String safeFileName = realPath + "\\" +productimage;
 		
@@ -417,7 +423,8 @@ public class Bom_total_controller {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
 			
-				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+//				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+				String path = "C:\\project\\img";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정

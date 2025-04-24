@@ -417,7 +417,7 @@
 															</div>
 														</c:if>
 													</div>
-
+														
 
 												</c:forEach>
 											</c:if>
@@ -491,25 +491,30 @@
 												location.href="inspectionStandards?page=1"
 												
 											}else{
-
+												gogo ={
+													serch : value
+												}
 												//ajax
 												const xhr = new XMLHttpRequest();
-												xhr.open('get', 'insSelectone?serchname=' + document.querySelector("#navigation-title-search").value)
+												xhr.open('POST','insSelectone')
 	
 												xhr.setRequestHeader('Content-Type', 'application/json')
-	
-												xhr.send()
-	
+												
+												xhr.send(JSON.stringify(gogo))
+												console.log(gogo);
 												xhr.onload = function () {
 													let data = (xhr.responseText)
 													console.log(xhr.responseText)
 													data=JSON.parse(data)
 													console.log(data)
 													document.querySelector(".standards-top").innerHTML = ` `
-	
-													let picknameList = data.map.pickname;        // 밀키트 검색 결과
+													let page_container = document.querySelector("#page-container")
+													page_container.innerHTML=``
+													let picknameList = data.pickname.list;        // 밀키트 검색 결과
+													let count = data.pickname.count;  	//카운트갯수
+													let pDTO = data.pDTO    			//인덱스값
 													let nameList = data.name_list;           // 전체 제품명 리스트
-													let field = data.Field;
+													let field = data.Field;					//계정 직급
 	
 													
 													if ((picknameList)  && (picknameList.length > 0)) {
@@ -560,59 +565,7 @@
 																		</div>
 																		\${field == 'admin' ? ctrlHTML: ''}
 																		</div>`
-																			pageNo = 1
-																			viewCount = 2 
-																			map = data.map
-																			dto = data.pDTO
-																			pageNo = dto.getPage
-																			viewCount = dto.getFinishViewCount
-																			console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto);
-																			total = map.count
-																			lastPage = Math.ceil(total / viewCount)
-																			groupCount = 5
-																			groupPosition = Math.ceil(pageNo / groupCount)
-																			begin = ((groupPosition-1) * groupCount) + 1;
-																			end = groupPosition * groupCount;
-																			if(end > lastPage){
-																				end = lastPage
-																			} 
-																			if( begin == 1 ){
-																				newdataHtml.innerHTML+=`
-																				[이전]
-															
-																				`
-																			}else if(begin != 1){
-																				newdataHtml.innerHTML+=`
-																				<a href="inspectionStandards?page=<%= begin-1 %>">[이전]</a>
-															
-																				`
-																			}	
-																			for(let i = begin; i<end ; i++){
-																				if(i == dto.page){
-																				
-																					newdataHtml.innerHTML+=`
-																					<a href="inspectionStandards?page=\${ i }" class="bold" >\${ i}</a>
-																					`
-																				}else if(!(begin[i] == dto.page)){
-																					begin[i].style.fontWeight='normal' 
-																					newdataHtml.innerHTML+=`
-																					<a href="inspectionStandards?page=\${ i }" class="bold">\${ i }</a>
-																					`
-																				}
-																				
-																			}
-																			if( end == lastPage ){
-																				newdataHtml.innerHTML+=`
-																				[다음]
-															
-																				`
-																			}else if( end != lastPage){
-																				newdataHtml.innerHTML+=`
-																				<a href="inspectionStandards?page=\${end+1}">[다음]</a>
-															
-																				`
-																			}
-										
+																			
 																			
 																		
 																			
@@ -644,7 +597,7 @@
 																			data=JSON.parse(data)
 																			console.log(data)
 																			document.querySelector(".standards-top").innerHTML = ` `
-							
+																			
 																			let pickid = data.pickid;        // 밀키트 검색 결과
 																			let nameList = data.name_list;           // 전체 제품명 리스트
 																			let field = data.Field;
@@ -789,15 +742,80 @@
 
 
 																	});
-																	
-																} else {
-																	newdataHtml = `
-																	<div>
-																		완제품조회 내용이 없습니다
-																		</div>
-																		`
-																		document.querySelector(".standards-top").append(newdataHtml)
-																	};
+																		let pageNo = 1
+																		let viewCount = 2 
+																		let map = data.pickname
+																		let dto1 = data.pDTO
+																		pageNo = dto1.page
+																		viewCount = dto1.getFinishViewCount
+																		console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto1);
+																		total = map.count
+																		lastPage = Math.ceil(total / viewCount)
+																		groupCount = 5
+																		groupPosition = Math.ceil(pageNo / groupCount)
+																		let begin = ((groupPosition-1) * groupCount) + 1;
+																		let end = groupPosition * groupCount;
+																		// <form method="POST" accept="insSelectone">
+																		// 			<input type="submit" name=page value="\${ i }" class="bold">
+																		// 		</form>
+																		// <form method="POST" accept="insSelectone">
+																		// 			<input type="submit" name=page value="\${ i }" class="">
+																		// 		</form>
+
+																		if(end > lastPage){
+																			end = lastPage
+																		} 
+																		if( begin === 1 ){
+																			page_container.innerHTML+=`
+																			[이전]
+																		
+																			`
+																		}else{
+																			page_container.innerHTML+=`
+																			<a href="insSelectone?page=\${begin-1}">[이전]</a>
+														
+																			`
+																		}	
+
+																		for(let i = begin; i<=end ; i++){
+																			if(i === dto1.page){
+																			
+																				page_container.innerHTML+=`
+																				<a href="inspectionStandards?page=\${ i }" class="$bold">\${ i}</a>
+																				
+								
+																		
+																				`
+																			}else {
+																				
+																				page_container.innerHTML+=`
+																				<a href="inspectionStandards?page=\${ i }" class="">\${ i}</a>
+																			
+																				`
+																			}
+																			
+																		}
+																		if( end === lastPage ){
+																			page_container.innerHTML+=`
+																			[다음]
+														
+																			`
+																		}else{
+																			page_container.innerHTML+=`
+																			<a href="insSelectone?page=\${end+1}">[다음]</a>
+														
+																			`
+																		}
+
+																		
+																	} else {
+																		newdataHtml = `
+																		<div>
+																			완제품조회 내용이 없습니다
+																			</div>
+																			`
+																			document.querySelector(".standards-top").append(newdataHtml)
+																		};
 																	
 															
 															
@@ -1013,10 +1031,68 @@
 
 												} // for end
 
+											
+
 
 									})//온로드 이벤트
 
+									// function pagenation(){
+									// 					let pageNo = 1
+									// 					let viewCount = 2 
+									// 					let map = data.pickname
+									// 					let dto1 = data.pDTO
+									// 					pageNo = dto1.page
+									// 					viewCount = dto1.getFinishViewCount
+									// 					console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto1);
+									// 					total = map.count
+									// 					lastPage = Math.ceil(total / viewCount)
+									// 					groupCount = 5
+									// 					groupPosition = Math.ceil(pageNo / groupCount)
+									// 					let begin = ((groupPosition-1) * groupCount) + 1;
+									// 					let end = groupPosition * groupCount;
+									// 					if(end > lastPage){
+									// 						end = lastPage
+									// 					} 
+									// 					if( begin === 1 ){
+									// 						page_container.innerHTML+=`
+									// 						[이전]
+										
+									// 						`
+									// 					}else{
+									// 						page_container.innerHTML+=`
+									// 						<a href="inspectionStandards?page=\${begin-1}">[이전]</a>
+										
+									// 						`
+									// 					}	
 
+									// 					for(let i = begin; i<=end ; i++){
+									// 						if(i === dto1.page){
+															
+									// 							page_container.innerHTML+=`
+									// 							<a href="inspectionStandards?page=\${ i }" class="bold">\${ i }</a>
+									// 							`
+									// 						}else {
+																
+									// 							page_container.innerHTML+=`
+									// 							<a href="inspectionStandards?page=\${ i }" class="">\${ i }</a>
+									// 							`
+									// 						}
+															
+									// 					}
+									// 					if( end === lastPage ){
+									// 						page_container.innerHTML+=`
+									// 						[다음]
+										
+									// 						`
+									// 					}else{
+									// 						page_container.innerHTML+=`
+									// 						<a href="inspectionStandards?page=\${end+1}">[다음]</a>
+										
+									// 						`
+									// 					}
+
+
+									// 			}
 
 
 								</script>
