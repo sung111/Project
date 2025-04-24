@@ -25,56 +25,48 @@ function init() {
 
 
 
-  // 제품 합/불 기준 불러오기
+  // 합/불 큰버튼
   document.querySelector('.btn2').addEventListener('click', (e) => {
-    const modal = document.querySelector('#myModal')
-    const content = document.querySelector('.modal-content')
-    fetch('Inspection_standards.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('에러발쌩!');
-        }
-        return response.text();
+    //모달창
+    const modal = document.querySelector('#myModal');
+    // 모달창 내용
+    const content = document.querySelector('.modal-content');
+    //제품번호
+    const productid = document.querySelector('#productid11').value;
+    if(!productid){
+      alert("제품을 선택해 주십시오.");
+    } else {
+      fetch(`/project/QaulModalSelect?productid=${productid}`)
+      .then( res => res.json() )
+      .then( data => {
+        console.log(data);
+        console.log(data.productname);
+        content.innerHTML = '';
+        content.innerHTML = `<span class="close">&times;</span>
+                <div style="border: 1px solid #8989ef;border-radius: inherit;margin: 10px;padding: 10px;">
+                  <h1>${data.productname}</h1>
+                  <div>
+                    <img src="download?filename=${data.productimage}"
+                    style="margin: 15px;width: 300px;">
+                  </div>
+                  <div style="display: flex;gap: 20px;margin: 10px auto;max-width: 516px;">
+                    <div style="max-width: 258px;">
+                      <h2>정상제품기준</h2>
+                      <div>${data.normalcriteria}</div>
+                    </div>
+                    <div style="max-width: 258px;">
+                      <h2>비정상제품기준</h2>
+                      <div>${data.abnormalcriteria}</div>
+                    </div>
+                  </div>
+                </div>
+        `
+        modal.style.display = 'block';
       })
-      .then(htmlString => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const sel = doc.querySelectorAll('.standards-contain')
-        const wp = document.querySelector('.wp')
-        for (let i = 0; i < sel.length; i++) {
-          if (wp.innerText == "부대찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[0].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "김치찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[1].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "밀푀유나베") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[2].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "떡볶이") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[3].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "곱창전골") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[4].cloneNode(true));
-            modal.style.display = 'block';
-          }
-        }
-
+      .catch(err =>{
+        console.log("에러 : ", err)
       })
-
-
+    }
   })
   
   // 제품합불기준 모달창 생성시 클릭이벤트

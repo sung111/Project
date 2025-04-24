@@ -267,30 +267,38 @@ public class Bom_total_controller {
 	@ResponseBody
 	@RequestMapping(value="/insSelectone",method=RequestMethod.GET)
 	public Map<String,Object> insSelectone(
-			@RequestParam("serchname") String serchname,
+			@RequestBody Products_DTO products_DTO ,
 			Model model,
 			HttpSession httpSession
 			) {
-		System.out.println("검색값 productname"+serchname);
+		System.out.println("검색값 productname"+products_DTO);
 		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
-		Map<String,Object> result = new HashMap();
 		
+		Map<String,Object> map = new HashMap();
+		Map<String,Object> pickname = new HashMap();
 		try {
-			List pickname = Products_service.selectProductnameserch(serchname);
+			pickname = Products_service.selectProductnameserch(products_DTO);
 			List name_list = Products_service.selectProductname();
 			
-			result.put("Field", Field);
-			result.put("pickname",pickname);
-			result.put("name_list",name_list);
+//			Map map = Products_service.selectFinishedProduct(products_DTO);
+//			List name_list = Products_service.selectProductname();
+			
+			
+			map.put("Field", Field);
+			map.put("pickname",pickname);
+			map.put("name_list",name_list);
+			map.put("pDTO",products_DTO);
 			System.out.println("밀키트 검색한 결과값name_list ="+name_list);
 			System.out.println("pickname ="+pickname);
+			System.out.println("Field ="+Field);
+		
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return result ;
+		return map ;
 	}
 	
 	//수정클릭시 프러덕트id기준으로 조회
@@ -358,14 +366,9 @@ public class Bom_total_controller {
 		int result = 0;
 		try {
 
-		//파일 절대경로 자동으로 구하기
-			//이 경로는 Eclipse (특히 WTP - Web Tools Platform)에서 웹 애플리케이션을 실행할 때,
-			//임시로 웹 앱을 배포하는 위치.
-			String realPath = servletContext.getRealPath("/resources/img/");
-			 System.out.println("실제 경로: " + realPath);
-		//파일 절대경로 자동으로 구하기
+		
 			
-//			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+			String realPath = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 			String productimage = System.currentTimeMillis() + "_" + fileName;
 			String safeFileName = realPath + "\\" +productimage;
 		
@@ -413,13 +416,8 @@ public class Bom_total_controller {
 			try {
 				String fileName = request.getParameter("filename");
 				System.out.println("fileName --"+fileName);
-				//-------경로 찾기
-				//이 경로는 Eclipse (특히 WTP - Web Tools Platform)에서 웹 애플리케이션을 실행할 때,
-				//임시로 웹 앱을 배포하는 위치.
-				String path = servletContext.getRealPath("/resources/img/");
-				 System.out.println("실제 경로: " + path);
-				 //----------
-//				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
+			
+				String path = "C:\\Users\\admin\\Desktop\\project\\Project_Spring\\src\\main\\webapp\\resources\\img";
 				File file = new File(path + "\\" + fileName);
 				
 				//브라우저 캐시를 사용하지 않도록 설정

@@ -130,6 +130,8 @@
 					<div>합격/불합격</div>
 					<div>불합격 사유</div>
 					<div>코멘트</div>
+					<div>합격</div>
+					<div>불합격</div>
 					<div>등록인</div>
 					<div>비고</div>
 				</div>

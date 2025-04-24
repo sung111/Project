@@ -41,6 +41,10 @@ public class QualityControl_DTO {
 	private String searchDateStart;
 	private String searchDateEnd;
 	
+//	모달창을위한 값
+	private String productimage; // 이미지이름
+	private String normalcriteria; //합
+	private String abnormalcriteria; //불합
 	
 	
 	

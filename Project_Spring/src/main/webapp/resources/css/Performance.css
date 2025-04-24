@@ -179,7 +179,7 @@
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 10px;
-    height: 280px;
+    height: 100%;
     overflow-y: scroll;
     background-color: white;
     color: black;
@@ -557,7 +557,7 @@
   .box3View {
     border: 1px solid rgb(199, 196, 196);
     margin: 5px;
-    height: 280px;
+    height: 100%;
     overflow-y: scroll;
     background-color: white;
     color: black;
