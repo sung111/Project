@@ -175,6 +175,11 @@
           text-align: center;
           height: 100%;
         }
+        .btn_flex{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
         
 
         @media screen and (max-width: 767px) {
@@ -306,11 +311,11 @@
                             document.querySelector("#new-tbody").append(newbody)
 
                             newbody.querySelector(".newupdat").addEventListener("click",(ev)=>{
-                                console.log(ev.target.parentNode.parentNode.querySelector("#text1").value)
-                                let text1 = ev.target.parentNode.parentNode.querySelector("#text1").value
-                                let text2 = ev.target.parentNode.parentNode.querySelector("#text2").value
-                                let text3 = ev.target.parentNode.parentNode.querySelector("#text3").value
-                                let text4 = ev.target.parentNode.parentNode.querySelector("#text4").value
+                                console.log(ev.target.parentNode.parentNode.parentNode.querySelector("#text1").value)
+                                let text1 = ev.target.parentNode.parentNode.parentNode.querySelector("#text1").value
+                                let text2 = ev.target.parentNode.parentNode.parentNode.querySelector("#text2").value
+                                let text3 = ev.target.parentNode.parentNode.parentNode.querySelector("#text3").value
+                                let text4 = ev.target.parentNode.parentNode.parentNode.querySelector("#text4").value
                                 console.log( document.querySelector("#milkit").value)
                                 let productid = document.querySelector("#milkit").value
                           
@@ -399,20 +404,22 @@
                                          if(data.Field == 'admin')
                                             {DescripBody.innerHTML +=`
                                                 <td class="table-button">
-                                                    <input type="hidden"  value="update" name="type">
-                                                    <input type="button" value="수정 " class="updat btn ">
-                                                    <input type="hidden"  value="\${dto.processid}"  id="processid_value">
-                                                    <input type="submit" value="삭제 " class="delet btn ">
-                                                </td>
+	                                            	<div class="btn_flex">
+	                                                    <input type="hidden"  value="update" name="type">
+	                                                    <input type="button" value="수정 " class="updat btn ">
+	                                                    <input type="hidden"  value="\${dto.processid}"  id="processid_value">
+	                                                    <input type="button" value="삭제 " class="delet btn ">
+                                                    </div>
+                                                 </td>
                                                 `
                                             }else{DescripBody.innerHTML +=`<td></td>`}
                                         document.querySelector("#new-tbody").append(DescripBody)
                                         
                                         //삭제 버튼 이벤트 만들기
                                         DescripBody.querySelector(".delet").addEventListener("click", function(e){
-                                          console.log("삭제값",e.target.parentNode.querySelector("#processid_value").value)
+                                          console.log("삭제값",e.target.parentNode.parentNode.querySelector("#processid_value").value)
                                            let dto = {
-                                            processid : e.target.parentNode.querySelector("#processid_value").value
+                                            processid : e.target.parentNode.parentNode.querySelector("#processid_value").value
                                            }
                                             const xhr = new XMLHttpRequest();
                                             xhr.open('put','production_process_delete')
@@ -452,7 +459,7 @@
                                                     // e.target.parentNode.parentNode.innerHTML = ``
                                                     // console.log(e.target.parentNode.parentNode)
                                                     data.forEach(dto => {
-                                                        e.target.parentNode.parentNode.innerHTML = `
+                                                        e.target.parentNode.parentNode.parentNode.innerHTML = `
                                                                                     <tr>
                                                                                         <td >
                                                                                         <textarea class="texttotal"id="text1" >\${dto.processstage}</textarea>   
@@ -467,10 +474,11 @@
                                                                                         <textarea class="texttotal" id="text4" >\${dto.hygiene}</textarea>   
                                                                                         </td>                   
                                                                                         <td class="table-button">
-                                                                                      
-                                                                                            <input type="hidden"  value="\${dto.processid}"  id="processid_value">
-                                                                                            <input type="button" value="확인 " class="newupdat btn ">
-                                                                                            <input type="submit" value="취소 " class="can btn ">
+                                                                                            <div class="btn_flex">
+                                                                                                <input type="hidden"  value="\${dto.processid}"  id="processid_value">
+                                                                                                <input type="button" value="확인 " class="newupdat btn ">
+                                                                                                <input type="submit" value="취소 " class="can btn ">
+                                                                                            </div>
                                                                                         </td>
                                                                                     </tr>
                                                                                         `     
@@ -485,11 +493,11 @@
                                                                                     // })
         
                                                                                     DescripBody.querySelector(".newupdat").addEventListener("click",function(ee){
-                                                                                        let text1 = ee.target.parentNode.parentNode.querySelector("#text1").value
-                                                                                        let text2 = ee.target.parentNode.parentNode.querySelector("#text2").value
-                                                                                        let text3 = ee.target.parentNode.parentNode.querySelector("#text3").value
-                                                                                        let text4 = ee.target.parentNode.parentNode.querySelector("#text4").value
-                                                                                        let processid = ee.target.parentNode.querySelector("#processid_value").value
+                                                                                        let text1 = ee.target.parentNode.parentNode.parentNode.querySelector("#text1").value
+                                                                                        let text2 = ee.target.parentNode.parentNode.parentNode.querySelector("#text2").value
+                                                                                        let text3 = ee.target.parentNode.parentNode.parentNode.querySelector("#text3").value
+                                                                                        let text4 = ee.target.parentNode.parentNode.parentNode.querySelector("#text4").value
+                                                                                        let processid = ee.target.parentNode.parentNode.querySelector("#processid_value").value
                                                                                         console.log("-----",text1,text2,text3,text4,processid)
                                                                                       
                                                                                         let productid = document.querySelector("#milkit").value

@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class Products_DTO {
 	
-
+	
 	int productid;
 	String productname;
 	String partnumber;
@@ -24,6 +24,7 @@ public class Products_DTO {
 	String productdel; //삭제유무
 	String lotnumber;
 	
+	String serch;
 	private List empnos;
 	private int page = 1; // 현재 페이지
 	private int viewCount =10; // 페이지당 보여줄 수 countPerPage / rowPerPage

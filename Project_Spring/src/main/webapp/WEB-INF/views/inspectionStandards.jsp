@@ -307,6 +307,7 @@
 								.pname{
 									text-align: center;
 									font-size: 20px;
+									
 								}
 
 								@media screen and (max-width: 600px) {
@@ -506,7 +507,7 @@
 													console.log(data)
 													document.querySelector(".standards-top").innerHTML = ` `
 	
-													let picknameList = data.pickname;        // 밀키트 검색 결과
+													let picknameList = data.map.pickname;        // 밀키트 검색 결과
 													let nameList = data.name_list;           // 전체 제품명 리스트
 													let field = data.Field;
 	
@@ -558,9 +559,67 @@
 																			</div>
 																		</div>
 																		\${field == 'admin' ? ctrlHTML: ''}
-																		</div>
-																	
-																		`;
+																		</div>`
+																			pageNo = 1
+																			viewCount = 2 
+																			map = data.map
+																			dto = data.pDTO
+																			pageNo = dto.getPage
+																			viewCount = dto.getFinishViewCount
+																			console.log(">>>>>>>>> map :"+map +" : "+"dto :"+dto);
+																			total = map.count
+																			lastPage = Math.ceil(total / viewCount)
+																			groupCount = 5
+																			groupPosition = Math.ceil(pageNo / groupCount)
+																			begin = ((groupPosition-1) * groupCount) + 1;
+																			end = groupPosition * groupCount;
+																			if(end > lastPage){
+																				end = lastPage
+																			} 
+																			if( begin == 1 ){
+																				newdataHtml.innerHTML+=`
+																				[이전]
+															
+																				`
+																			}else if(begin != 1){
+																				newdataHtml.innerHTML+=`
+																				<a href="inspectionStandards?page=<%= begin-1 %>">[이전]</a>
+															
+																				`
+																			}	
+																			for(let i = begin; i<end ; i++){
+																				if(i == dto.page){
+																				
+																					newdataHtml.innerHTML+=`
+																					<a href="inspectionStandards?page=\${ i }" class="bold" >\${ i}</a>
+																					`
+																				}else if(!(begin[i] == dto.page)){
+																					begin[i].style.fontWeight='normal' 
+																					newdataHtml.innerHTML+=`
+																					<a href="inspectionStandards?page=\${ i }" class="bold">\${ i }</a>
+																					`
+																				}
+																				
+																			}
+																			if( end == lastPage ){
+																				newdataHtml.innerHTML+=`
+																				[다음]
+															
+																				`
+																			}else if( end != lastPage){
+																				newdataHtml.innerHTML+=`
+																				<a href="inspectionStandards?page=\${end+1}">[다음]</a>
+															
+																				`
+																			}
+										
+																			
+																		
+																			
+																		
+
+																		
+																		
 																		document.querySelector(".standards-top").append(newdataHtml)
 
 																	let us = newdataHtml.querySelectorAll(".u");
