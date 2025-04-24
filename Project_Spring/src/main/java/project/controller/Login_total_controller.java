@@ -43,12 +43,12 @@ public class Login_total_controller {
         if (user != null) {
             //  로그인 성공하면 세션에 userId와 전체 user 객체로 저장됨
             session.setAttribute("userId", user.getUserId());
-<<<<<<< HEAD
+
             session.setAttribute("user", user); // 핵심 추가 부분 
             session.setAttribute("userName", user.getUserName());
-=======
+
             session.setAttribute("user", user); 
->>>>>>> 84ff0b89f9df23a40119aaea10e23ead94e4776d
+
             System.out.println("로그인 성공: " + user.getUserId());
             System.out.println("userName: " + user.getUserName() + ", job: " + user.getJob());
 
