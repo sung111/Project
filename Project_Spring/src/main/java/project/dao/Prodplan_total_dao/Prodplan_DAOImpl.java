@@ -22,10 +22,10 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
     }
 
     //수정
-    @Override
-    public void updatePlan(ProductionPlan_DTO dto) {
-        sqlSession.update(NAMESPACE + ".updatePlan", dto); 
-    }
+	/*
+	 * @Override public void updatePlan(ProductionPlan_DTO dto) {
+	 * sqlSession.update(NAMESPACE + ".updatePlan", dto); }
+	 */
 
 
 

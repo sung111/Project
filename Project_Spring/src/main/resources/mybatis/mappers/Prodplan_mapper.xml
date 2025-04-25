@@ -85,13 +85,21 @@
 
 
 <!-- 수정 -->
-<update id="updatePlan" parameterType="project.dto.ProductionPlan_DTO">
-    UPDATE production_plan
-    SET plan_name = #{planName},
-        plan_date = #{planDate},
-        quantity = #{quantity}
-    WHERE plan_id = #{planId}
-</update>
+<!-- <update id="updatePlan" parameterType="project.dto.ProductionPlan_DTO">
+    UPDATE productionplans
+    SET 
+        deliverydest = COALESCE(#{deliveryDest}, deliverydest),
+        totalqty = #{totalqty},
+        createdate = #{createDate},
+        startdate = #{startDate},
+        enddate = #{endDate},
+        planstatus = #{planStatus},
+        plancause = #{planCause},
+        plannotes = #{planNotes}
+    WHERE planid = #{planId}
+</update> -->
+
+
 
 <!-- 삭제 -->
 <delete id="deletePlan" parameterType="int">

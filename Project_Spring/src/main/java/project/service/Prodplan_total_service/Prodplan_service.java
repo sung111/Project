@@ -9,7 +9,7 @@ public interface Prodplan_service {
     //추가
     void insertPlan(ProductionPlan_DTO plan);    
     //수정
-    void updatePlan(ProductionPlan_DTO dto);
+	/* void updatePlan(ProductionPlan_DTO dto); */
     //삭제
     void deletePlan(int planId);
     List<ProductionPlan_DTO> getProducts(String searchTerm);
