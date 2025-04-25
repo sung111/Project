@@ -64,12 +64,12 @@ public class Prodplan_total_controller {
     }
     
     //수정
-    @PostMapping("/prodplan/update")
-    @ResponseBody
-    public String updatePlan(@ModelAttribute ProductionPlan_DTO dto) {
-        prodplanService.updatePlan(dto);
-        return "success";
-    }
+	/*
+	 * @PostMapping("/prodplan/update")
+	 * 
+	 * @ResponseBody public String updatePlan(@ModelAttribute ProductionPlan_DTO
+	 * dto) { prodplanService.updatePlan(dto); return "success"; }
+	 */
 
     
     //삭제

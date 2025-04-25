@@ -30,10 +30,10 @@ public class Prodplan_serviceImpl implements Prodplan_service {
     }
 
     // 생산 계획 수정
-    @Override
-    public void updatePlan(ProductionPlan_DTO dto) {
-        planDAO.updatePlan(dto);
-    }
+//    @Override
+//    public void updatePlan(ProductionPlan_DTO dto) {
+//        planDAO.updatePlan(dto);
+//    }
 
 
 
