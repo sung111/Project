@@ -15,16 +15,16 @@
     <link rel="stylesheet" href="../css/06_글쓰기.css">
 </head>
 <style>
-body {
+/* body {
     background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
 }
-
+ */
 .box {
-    width: 100%;
+    width: 97%;
     margin: 20px;
     border: 1px solid #d9d9d9;
     padding: 20px;
@@ -39,8 +39,25 @@ h1 {
     border-bottom: 1px solid #d9d9d9;
 }
 
+
+#post {
+padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 95%; 
+    white-space: nowrap;
+
+
+}
+
+
 .post {
     margin-bottom: 15px;
+    
 }
 
 .post label:not(.file-label) {
@@ -88,6 +105,9 @@ h1 {
     cursor: pointer;
     margin-left: 5px; 
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+    position : absolute;
+    bottom : 61.4%;
+    left: 26.5%;
 }
 
 .file-label {
@@ -189,6 +209,41 @@ h1 {
         width: 90%; /* 팝업 너비 조정 */
     }
 }
+
+
+
+
+
+
+#link-input-container {
+
+
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 45px; 
+    position: absolute;
+    top: 36%;
+    white-space: nowrap;
+   
+    
+}
+
+
+
+#file {
+
+display : none;
+
+
+}
+
+
+
 </style>
 <body>
 
@@ -200,7 +255,7 @@ h1 {
             <label for="category">게시판 선택</label>
             <select id="category" name="category">
                                    <!--  이것만 전송 -->
-                <option value="select">선택</option>
+                <option value="select" id="choice" name="choice">-- 카테고리를 선택해주세요 --</option>
                 <option value="notify" id="special" name="special">공지사항</option>
                 <option value="normal" id="normal" name="normal">일반 게시판</option>
             </select>
@@ -226,14 +281,18 @@ h1 {
 	            <div class="button-container">
 	            
 	            
-	                                         
-	                <input type="file" name="file_name" multiple>
-	                
+	                      <!-- 파일올리기 --> 
+	                <div id="file-input-container" margin-top: 10px;">        
+	                <label for="file" id="link-input-container">
+	                첨부 파일
+	                </label>                       
+	                <input type="file" id="file" name="file_name" multiple>
+	                </div>
 	                
 	                
 	                <button type="button" class="link-button" id="link-button">링크 첨부</button>
-	                <button type="button" class="schedule-button" id="schedule-button">일정</button>
-	            </div>
+	                <!-- <button type="button" class="schedule-button" id="schedule-button">일정</button> -->
+	                </div>
 	            
 	            <!-- 내용 -->
 	            <textarea id="content" rows="5"  name="content"></textarea>
@@ -249,12 +308,12 @@ h1 {
 	                
 	                
 	                
-	            <div id="schedule-input-container" style="display:none; margin-top: 10px;">
+	            <!-- <div id="schedule-input-container" style="display:none; margin-top: 10px;">
 	                <label for="schedule-date">일정</label>
 	                <input type="date" id="schedule-date" />
 	            </div>
 	        </div>
-	        <div class="button-post">
+	        <div class="button-post"> -->
 	        
 	        
 	        
@@ -272,7 +331,7 @@ h1 {
 	        
 	            <input type="hidden" name="userid" value="<%= session.getAttribute("userId")%>">
 				<input type="hidden" name="notify" value="notify">
-	            <button type="submit">게시하기</button>
+	            <button type="submit" id="post">게시하기</button>
 	        <!-- </form> -->
         
         </form>
@@ -317,7 +376,24 @@ h1 {
     <% } %>
 
     
-    
+    // 선택 누르고 게시할시 막아버리기 
+     let ch = document.querySelector("#choice");
+     let no = document.querySelector("#normal");
+     let sp = document.querySelector("#special");
+     
+     // value기준
+     let po = document.querySelector("#post");
+     po.addEventListener("click", function() {
+    	if(ch.value == "select") {
+    		console.log("카테고리선택함?")
+    	    alert("카테고리를 선택해주세요");
+    	} else if (no.value == "notify"){
+    		console.log("카테고리말고 다른거선택함?")
+    		alert("글 작성이 완료되었습니다");
+    	} else {
+    		alert("글 작성이 완료되었습니다");
+    	}
+    });
     
     
     

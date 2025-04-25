@@ -14,12 +14,79 @@
     <link rel="stylesheet" href="../css/06_글쓰기.css">
 </head>
 <style>
-body {
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+
+
+
+#fix {
+
+   padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 40px; 
+    white-space: nowrap;
+    
+
+
+
+}
+
+
+
+
+
+
+#fdelete {
+
+    width: 4%;
+    margin: 20px;
+    border: 1px solid #d9d9d9;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgray;
+    position: absolute;
+    left: 58%;
+    bottom: 11.5%;
+    text-decoration: none;
+     
+}
+
+
+
+#link-input-container {
+
+
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 40px; 
+    white-space: nowrap;
+    
+
+
+}
+
+
+#file {
+
+display : none;
+
+
+}
+
+#link-button {
+
+position: absolute;
+left: 23%;
+top : 36.5%
+
 }
 
 .box {
@@ -85,8 +152,9 @@ h1 {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 5px; 
+    margin-left: 42px; 
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+    
 }
 
 .file-label {
@@ -213,26 +281,33 @@ width: 50%;
 }
 
 
+#file-input-container {
 
+position : absolute;
+top : 36.5%
+
+
+
+}
 
 </style>
 <body>
     <div class="box">
         <h1>글쓰기 수정</h1>
         <div class="postbtn">
+        <form method="post" action="conup" enctype="multipart/form-data">
             <label for="category">게시판 선택</label>
-            <select id="category">
-                <option value="1">선택</option>
-                <option value="2">공지사항</option>
-                <option value="3">사내복지</option>
-                <option value="4">일반 게시판</option>
+            <select id="category" name="category">
+                <option value="select" id="choice" name="choice">-- 카테고리를 선택해주세요 --</option>
+                <option value="notify" id="special" name="special">공지사항</option>
+                <option value="normal" id="normal" name="normal">일반 게시판</option>
             </select>
         </div>
             
      
      
      
-      <form method="post" action="conup" enctype="multipart/form-data">
+      
      
      
             
@@ -253,13 +328,13 @@ width: 50%;
             <div class="button-container">
                
                <!-- 차후 테스트 -->
-                <input type="file" id="file-input" name="neme" style="display:none;" />
-                <label for="file-input" class="file-label">파일 첨부</label>
+       <!--          <input type="file" id="file-input" name="neme" style="display:none;" />
+                <label for="file-input" class="file-label">파일 첨부</label> -->
                 
                 
          <%-- <c:forEach var="doo" items="${modi}">  --%>       
                 <button type="button" class="link-button" id="link-button">링크 첨부</button>
-                <button type="button" class="schedule-button" id="schedule-button">일정</button>
+                <!-- <button type="button" class="schedule-button" id="schedule-button">일정</button> -->
          </div>
             
             <textarea id="content" rows="5" name="content" >${modi.content}</textarea> 
@@ -278,9 +353,11 @@ width: 50%;
             
             
             <br>
-            <div id="link-input-container" margin-top: 10px;">
-                <label for="link">첨부 파일</label>
-                <input type="file" id="link" placeholder="파일을 입력하세요" name="file_name" multiple> 
+            <div id="file-input-container" margin-top: 10px;">
+                <label for="file" id="link-input-container">
+                첨부 파일
+                </label> 
+                <input type="file" id="file" placeholder="파일을 입력하세요" name="file_name" multiple> 
             </div>
         
             
@@ -289,21 +366,23 @@ width: 50%;
 			<!-- <form method="post" action="downloads">  -->
 			 ${flink.file_name}<br>
 			<!-- </form> -->
+				<%-- <input type="hidden" name="postid" value="${flink.postid}"> --%>
+			<a href="filedel?fileid=${flink.fileid}&postid=${flink.postid}" id="fdelete">삭제</a>
 			</div>
-			<%-- <input type="hidden" name="postid" value="${flink.postid}"> --%>
-			<a href="filedel?fileid=${flink.fileid}&postid=${flink.postid}">삭제</a>
+		
 			</c:forEach> 
 			
         
         
-        
+           <input type="hidden" name="userid" value="<%= session.getAttribute("userId")%>">
+			<input type="hidden" name="notify" value="notify">
         
         
      <%-- <c:forEach var="doo" items="${modi}"> --%> 
      
         <div class="button-post">
             <input  type="hidden" name="postid" value="${dtolink.postid}"></input>
-            <button type="submit" name="postid" value="${modi.postid}">수정하기</button>
+            <button id="fix" type="submit" name="postid" value="${modi.postid}">수정하기</button>
         </div>
         
      <%-- </c:forEach> --%>
@@ -327,6 +406,34 @@ width: 50%;
 
 
     <script>
+    
+    
+ // 선택 누르고 게시할시 막아버리기 
+    let ch = document.querySelector("#choice");
+    let no = document.querySelector("#normal");
+    let sp = document.querySelector("#special");
+    
+    // value기준
+    let fix = document.querySelector("#fix");
+    fix.addEventListener("click", function() {
+    	if(ch.value == "select") {
+        	alert("카테고리를 선택해주세요");
+        	} else {
+        		alert("글 작성이 완료되었습니다");
+        	}
+   });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         document.getElementById('link-button').addEventListener('click', function () {
             const linkInputContainer = document.getElementById('link-input-container');
             linkInputContainer.style.display = (linkInputContainer.style.display === 'none' || linkInputContainer.style.display === '') ? 'block' : 'none';

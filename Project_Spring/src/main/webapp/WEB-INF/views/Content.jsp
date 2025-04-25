@@ -15,29 +15,50 @@
 </head>
 <style>
 
-body {
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column; /* 세로 방향으로 정렬 */
-    align-items: center; /* 중앙 정렬 */
-    padding: 20px;
+
+
+#modify {
+
+    width : 5%;
+    padding: 10px 15px;
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    margin-left: 95%;
+}
+
+#amodify{
+
+ text-decoration: none;
+}
+
+#list {
+
+   width : 5%;
+    padding: 10px 15px;
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+
 }
 
 
-
-
-
-
-
-
-
 .box {
-    width: 100%; /* 너비 조정 */
+    width: 95%; /* 너비 조정 */
     margin: 20px;
     border: 1px solid #d9d9d9;
     padding: 20px;
     border-radius: 5px;
     background-color: #ffffff;
+    
 }
 
 h1 {
@@ -134,6 +155,8 @@ h2 {
     color: #888;
 }
 
+
+
 .ok {
     width: 50px;
     height: 33px;
@@ -206,14 +229,14 @@ width: 50%;
 
     <div class="box">
         <div class="post-title">${con.title}</div>
-        <div class="post-info"> 작성자: <%= session.getAttribute("userName") %> | 날짜: ${con.postdate} | 조회수: ${con.viewcount}</div>
+        <div class="post-info"> 작성자: 
+        <%= session.getAttribute("userName") %> | 날짜: ${con.postdate} | 조회수: ${con.viewcount}</div>
         <div class="post-content">
           ${con.content}
          
         </div>
 
-
-
+          
 
 
 
@@ -276,13 +299,21 @@ width: 50%;
 
  <!-- 비디오 -->
  <c:forEach var="flink" items="${Fileselid}">
- <video src="downloads?file_name=${flink.file_name}" alt="video" width="500" controls autoplay></video>
+ <video src="downloads?file_name=${flink.file_name}" alt="video" width="500" controls autoplay>
+ <source src="${flink.file_name}" type="video/mp4">
+ </video>
   </c:forEach> 
+  
+  
   
   
   <!-- 파일이 없을때 -->
  <c:if test="${empty Fileselid}"> 
  올린 파일이 없습니다
+ <video width="480" height="300" controls poster="/upload/ss.jpg">
+    <source src="${flink.file_name}" type="video/mp4">
+    브라우저가 video 태그를 지원하지 않습니다.
+  </video>
  </c:if> 
  
  </c:if>
@@ -290,20 +321,24 @@ width: 50%;
  
  </div>          
       
-      
-      
+    
+      <%
+      String notifyParam = request.getParameter("notify");
+      System.out.println("notifyParam 잘받았는지 : " + notifyParam);
+      String notifyValue = ("Y".equals(notifyParam)) ? "Y" : "N";
+      %>
       
       
         <div class="button-container">
         <!-- <form method ="post" action ="board"> -->
-            <button type="submit" id="list"><a href="select?notify=${notify}">목록으로</a></button>
+            <a href="select?notify=${cons}" id="amodify"><button type="submit" id="list">목록</button></a>
       <!--   </form> -->
         
         
         
     <%--  <c:forEach var="dyo" items="${idpost}">  --%>  
         <!-- <form method ="post" action ="conmod"> -->
-            <a href="conmod?postid=${con.postid}"><div id="modify">수정</div></a>
+           <a href="conmod?postid=${con.postid}" id="amodify"><div id="modify">수정</div></a>
         <!-- </form> -->
      <%--  </c:forEach>   --%> 
             
@@ -386,7 +421,7 @@ width: 50%;
                          
               </div>
                     
-                    
+                     
              <form method="post" action="comment"> 
             <div class="comment-section abc">
                 <input type="hidden" value="${con.postid}" name="postid">

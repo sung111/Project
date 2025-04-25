@@ -25,8 +25,9 @@
 
 
 .box {
-	width: 100%; /* 너비 조정 */
-	margin: 20px;
+	width: 97%; /* 너비 조정 */
+	margin: 36px 1px 1px 20px; 
+	
 	border: 1px solid #d9d9d9;
 	padding: 20px;
 	border-radius: 5px;
@@ -161,12 +162,23 @@ position:absolute;
 
 }
 
+#searchform {
 
+position:absolute;
+ top: 12.5%;
+ left: 16.5%;
+ 
+
+}
 
 
 </style>
-
+<%
+    String notifys = request.getParameter("notify");%>
+    
+    
 <form method="post" action="search" id="searchform">
+<input type="hidden" name="notify" value="<%= notifys %>" />
 <input type="text" name="title" placeholder="검색어 입력">
 <button type="submit" class="newpost" id="search">등록</button>
 </form>
@@ -203,7 +215,22 @@ position:absolute;
 
 <body>
 	<div class="box">
-		<h1>일반 게시판</h1>
+	
+<%
+    String notify = request.getParameter("notify");
+
+    if ("N".equals(notify)) {
+%>
+    <h2>일반 게시판입니다</h2>
+<%
+    } else {
+%>
+    <h2>공지 게시판입니다</h2>
+<%
+    }
+%>
+		
+		
 		<div class="postbtn">
 
 			<form method="post" action="write">
@@ -238,7 +265,7 @@ position:absolute;
     <c:forEach var="dto" items="${map.list}">
 		<!-- 게시물 목록 -->                   <!--  id만 따오면 뒤에 따라온다 -->
 		<div class="post" >        <!--  a태그 : get방식(파라미터 뒤에쓰기) form : post방식 -->
-			<span class="content"><a href="Content?postid=${dto.postid}" id="move" >${dto.title}</a></span>
+			<span class="content"><a href="Content?postid=${dto.postid}&notify=<%= notify %>" id="move" >${dto.title}</a></span>
 			<span class="author">${dto.viewcount}</span> 
 			<span class="date">${dto.postdate}</span>
 			<span class="author"><%= session.getAttribute("userName") %></span> 
@@ -278,19 +305,21 @@ position:absolute;
 				} 
 			   %>
 			   
+			   <%-- <%= Prodto == null ? "Prodto is null" : "Pagecount: " + Prodto.getPagecount() %> --%>
 			   
 			   
-			   
-			   <div id="selpage">
+			 <%--   <div id="selpage">
 <form method="get" action="select">  
-	<select name="pagecount" onchange="this.form.submit()">
+
+     <input type="hidden" name="notify" value="${notify}" />
+	<select name="pagecount" onchange="console.log('페이지 변경됨'); this.form.submit()">
     <option value="5" <%= Prodto.getPagecount() == 5 ? "selected" : "" %>>5</option>
     <option value="10" <%= Prodto.getPagecount() == 10 ? "selected" : "" %>>10</option>
     <option value="15" <%= Prodto.getPagecount() == 15 ? "selected" : "" %>>15</option>
     <option value="20" <%= Prodto.getPagecount() == 20 ? "selected" : "" %>>20</option>
     </select>
 </form>	
-               </div>
+               </div> --%>
                
                
 
@@ -320,8 +349,20 @@ position:absolute;
 				
 			%>
 			
-			<span id="font"><%= Prodto.getNotify() %></span>개의 글
+			<%-- <span id="font"><%= Prodto.getNotify() %></span>개의 글 --%>
 			
+			<%-- <c:set var="countN" value="0" /> --%>
+
+<%-- <c:forEach var="dto" items="${map.list}">
+    <c:if test="${dto.notify == 'N'}">
+        <c:set var="countN" value="${countN + 1}" />
+    </c:if>
+</c:forEach> --%>
+
+
+
+<p>전체 ${normalCount}개의 글</p>
+		 
 			
 			<div class="pagination">
 			
@@ -330,7 +371,7 @@ position:absolute;
 				<button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
 			</c:if>
 			<c:if test="<%= begin != 1 %>">			                     
-				<a href="select?page=<%= begin-1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
+				<a href="select?page=<%= begin-1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=N"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
 			</c:if>
 			
 			
@@ -346,7 +387,7 @@ position:absolute;
 				
 				<!--  버튼 누르면 페이징됨과 동시에 카운트유지 
 				1페이지 15누르면 http://localhost:8080/project/select?pagecount=15-->
-				<a href="select?page=${ i }&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
+				<a href="select?page=${ i }&pagecount=<%= Prodto.getPagecount() %>&notify=N" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
 		
 			</c:forEach>
 			
@@ -355,7 +396,7 @@ position:absolute;
 				<button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
 			</c:if>
 			<c:if test="<%= end != lastPage %>">
-				<a href="select?page=<%= end+1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
+				<a href="select?page=<%= end+1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=N"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
 			</c:if>
      	</div>
 </div> 

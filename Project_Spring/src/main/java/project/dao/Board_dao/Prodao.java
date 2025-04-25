@@ -21,7 +21,7 @@ public interface Prodao {
 	
 	
 	public List<Prodto> selectpage(Prodto Prodto);
-	public int totalList();
+	public int totalList(Prodto prodto);
 	public 	List<Prodto> search(Prodto Prodto);
 	
 	

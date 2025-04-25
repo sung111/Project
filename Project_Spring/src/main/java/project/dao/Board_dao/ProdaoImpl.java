@@ -108,11 +108,11 @@ public class ProdaoImpl implements Prodao{
 	
 	// 전체 페이지
 	@Override
-	public 	int totalList(){
+	public 	int totalList(Prodto prodto){
 						
 								                      
   
-	int page = sqlSession.selectOne("mapper.pro.page.totalEmp");
+	int page = sqlSession.selectOne("mapper.pro.page.totalEmp", prodto);
     System.out.println("count(*) : " + page);
     return page;
 								

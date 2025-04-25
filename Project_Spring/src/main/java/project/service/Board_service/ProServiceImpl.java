@@ -127,7 +127,7 @@ public class ProServiceImpl implements ProService {
 			    System.out.println("서비스 페이지 셀렉트 : " + list);
 			    		 			   
 			    // 전체 글 개수
-			    int total = Prodao.totalList();
+			    int total = Prodao.totalList(Prodto);
 			    
 			    Map<String, Object> map = new HashMap();
 			    System.out.println("지도 :" + map);
@@ -144,7 +144,8 @@ public class ProServiceImpl implements ProService {
 		// 검색
 		@Override
 		public 	Map<String, Object> search(Prodto Prodto){
-							
+		
+			
 			// 보여줄 시작. 끝 index 찾기
 		    // unreachble code : 위에 끝난 코드가 있음
 		int page = Prodto.getPage();
@@ -168,7 +169,7 @@ public class ProServiceImpl implements ProService {
 	    System.out.println("검색한 값 : " + list);
 	    
 	    // 전체 글 개수
-	    int total = Prodao.totalList();
+	    int total = Prodao.totalList(Prodto);
 	    
 	    
 	    if (list == null) {
@@ -205,5 +206,13 @@ public class ProServiceImpl implements ProService {
 				}	
 		
 		
+		
+		
+		public int totalist(Prodto prodto) {
+			
+			int total = Prodao.totalList(prodto);
+			
+			return total;
+		}
 		
 }
