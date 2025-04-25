@@ -137,7 +137,18 @@ public class ProdaoImpl implements Prodao{
 			}
 		
 	
-	
+	// 전체 페이지 카운트
+	@Override
+	public 	int Searchcount(Prodto prodto){
+						
+								                      
+  
+	int scount = sqlSession.selectOne("mapper.emp.searchcount", prodto);
+    System.out.println("count(*) 없음? : " + scount);
+    return scount;
+								
+			}
+		
 	
 	
 }

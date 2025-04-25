@@ -24,5 +24,5 @@ public interface Prodao {
 	public int totalList(Prodto prodto);
 	public 	List<Prodto> search(Prodto Prodto);
 	
-	
+	public 	int Searchcount(Prodto prodto);
 }

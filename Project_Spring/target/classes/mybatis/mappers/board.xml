@@ -90,7 +90,12 @@
 	</select>
 
 
-
+    <!-- 검색 숫자 -->
+	<select id="searchcount" resultType="int" parameterType="Prodto">
+	        select count(*) from posts
+	        where upper(title) like upper ('%' || #{title} || '%')
+	        and notify = #{notify} 
+	</select>
 
 
 

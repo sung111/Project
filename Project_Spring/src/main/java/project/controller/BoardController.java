@@ -595,7 +595,7 @@ System.out.println("일반게시글 숫자 :" + normalCount);
 			    
 			    
 			    
-		          HttpSession session = request.getSession();
+		        HttpSession session = request.getSession();
 		  		String userid = (String) session.getAttribute("userId");
 		  		prodto.setUserid(userid);
 		  		
@@ -751,18 +751,28 @@ System.out.println("일반게시글 숫자 :" + normalCount);
 			    Map<String, Object> maps = ProService.search(prodto);
 			    System.out.println(" 검색맵 크기 " + maps.size());
 			    
-				
+			     int countsearch = ProService.Searchcount(prodto);
+				 System.out.println(" 검색 카운트 " + countsearch);
+				 model.addAttribute("countsearch", countsearch);
 			    
 			    
 //			    System.out.println("검색 결과 수: " + ((List)map.get("resultList")).size());
 //			    int postid = prodto.getPostid();
 //			    System.out.println(" 파일 삭제 포스트아이디" + prodto.getPostid());
 			    System.out.println(" 검색 맵 " + maps);
-			    model.addAttribute("map", maps);
+			    model.addAttribute("map", maps);			 
 			    model.addAttribute("dto", prodto);
 	            
+				
+				  
+				 
 			    
+			    		
+			    		
+			    		
+				
 			    
+			   
 			    
 			    
 			    

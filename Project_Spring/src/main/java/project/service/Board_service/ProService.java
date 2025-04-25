@@ -25,6 +25,6 @@ public interface ProService {
 	public 	Map<String, Object> search(Prodto Prodto);
 	public int totalist(Prodto prodto);
 	
-	
+	public 	int Searchcount(Prodto prodto);
 	
 }

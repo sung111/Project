@@ -215,4 +215,19 @@ public class ProServiceImpl implements ProService {
 			return total;
 		}
 		
+		
+		
+		
+		// 검색 카운트 숫자
+		@Override
+		public 	int Searchcount(Prodto prodto){
+							
+									                      
+	  
+		int scount = Prodao.Searchcount(prodto);
+	    System.out.println("count(*) scount 있음? : " + scount);
+	    return scount;
+									
+				}
+		
 }

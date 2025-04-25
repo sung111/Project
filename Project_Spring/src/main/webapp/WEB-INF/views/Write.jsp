@@ -255,9 +255,10 @@ display : none;
             <label for="category">게시판 선택</label>
             <select id="category" name="category">
                                    <!--  이것만 전송 -->
-                <option value="select" id="choice" name="choice">-- 카테고리를 선택해주세요 --</option>
-                <option value="notify" id="special" name="special">공지사항</option>
+                <option value="choice" id="choice" name="choice" selected disabled hidden>-- 카테고리를 선택해주세요 --</option>
                 <option value="normal" id="normal" name="normal">일반 게시판</option>
+                <option value="notify" id="special" name="special">공지사항</option>
+                
             </select>
         </div>
        
@@ -377,25 +378,50 @@ display : none;
 
     
     // 선택 누르고 게시할시 막아버리기 
-     let ch = document.querySelector("#choice");
+     /* let ch = document.querySelector("#choice");
      let no = document.querySelector("#normal");
      let sp = document.querySelector("#special");
-     
+      */
      // value기준
-     let po = document.querySelector("#post");
-     po.addEventListener("click", function() {
-    	if(ch.value == "select") {
+     /* let po = document.querySelector("#post");
+      po.addEventListener("click", function(e) {
+    	  
+    	if(ch.value == "choice") {
     		console.log("카테고리선택함?")
     	    alert("카테고리를 선택해주세요");
-    	} else if (no.value == "notify"){
-    		console.log("카테고리말고 다른거선택함?")
-    		alert("글 작성이 완료되었습니다");
-    	} else {
-    		alert("글 작성이 완료되었습니다");
-    	}
-    });
-    
-    
+    	} 
+    	
+    	 if(no.value == "normal") {
+    		console.log("카테고리선택함?")
+    	    alert("글 작성이 완료되었습니다");
+    	} 
+    	
+    	if(sp.value == "notify") {
+    		console.log("카테고리선택함?")
+    	    alert("글 작성이 완료되었습니다");
+    	} 
+    }); */
+     
+     
+            /* po.addEventListener("click", function(e) {
+    	    // 카테고리 선택이 '선택'이면 중단
+    	    if (ch.value == "1") {
+    	        console.log("카테고리선택함?");
+    	        alert("카테고리를 선택해주세요");
+    	        return; // 아래 로직 실행 안 하고 중단
+    	    }
+    	    console.log("현재 선택된 카테고리:", ch.value);
+    	    console.log("현재 선택된 카테고리:", no.value);
+    	    console.log("현재 선택된 카테고리:", sp.value);
+    	    // 여기부터는 카테고리가 정상 선택된 경우
+    	    if (no.value == "2") {
+    	        console.log("카테고리말고 다른거선택함?");
+    	        alert("글 작성이 완료되었습니다");
+    	    } else {
+    	        alert("글 작성이 완료되었습니다");
+    	    }
+    	});
+     */
     
     
    

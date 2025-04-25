@@ -298,7 +298,7 @@ top : 36.5%
         <form method="post" action="conup" enctype="multipart/form-data">
             <label for="category">게시판 선택</label>
             <select id="category" name="category">
-                <option value="select" id="choice" name="choice">-- 카테고리를 선택해주세요 --</option>
+                <option value="select" id="choice" name="choice" selected disabled hidden>-- 카테고리를 선택해주세요 --</option>
                 <option value="notify" id="special" name="special">공지사항</option>
                 <option value="normal" id="normal" name="normal">일반 게시판</option>
             </select>
@@ -409,19 +409,19 @@ top : 36.5%
     
     
  // 선택 누르고 게시할시 막아버리기 
-    let ch = document.querySelector("#choice");
+  /*   let ch = document.querySelector("#choice");
     let no = document.querySelector("#normal");
-    let sp = document.querySelector("#special");
+    let sp = document.querySelector("#special"); */
     
     // value기준
-    let fix = document.querySelector("#fix");
+    /* let fix = document.querySelector("#fix");
     fix.addEventListener("click", function() {
     	if(ch.value == "select") {
         	alert("카테고리를 선택해주세요");
         	} else {
         		alert("글 작성이 완료되었습니다");
         	}
-   });
+   }); */
     
     
     

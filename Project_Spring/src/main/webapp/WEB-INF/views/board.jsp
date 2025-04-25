@@ -171,6 +171,15 @@ position:absolute;
 
 }
 
+#now {
+
+
+position:absolute;
+ top: 18.7%;
+ left: 25%;
+
+
+}
 
 </style>
 <%
@@ -361,8 +370,8 @@ position:absolute;
 
 
 
-<p>전체 ${normalCount}개의 글</p>
-		 
+<p>전체 <span id="font">${normalCount}</span>개의 글</p>
+	   검색 결과 <span id="font">${countsearch}</span>  개의 글	 
 			
 			<div class="pagination">
 			
