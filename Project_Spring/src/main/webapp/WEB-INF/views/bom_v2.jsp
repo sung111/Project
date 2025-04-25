@@ -24,7 +24,7 @@
 
         .container {
             width: 100%;
-            margin: 0 auto;
+           
         }
 
         .form-group {
@@ -123,6 +123,10 @@
             display: flex;
             justify-content: space-around;
         }
+        #pagehtml{
+          width: 100%;
+            margin: 0 auto;
+        }
 
         @media screen and (max-width: 767px) {
 
@@ -182,46 +186,25 @@
 </head>
 
 <body>
+    <!-- 내용 -->
     <div class="container">
         
-        <div class="form-group">
-            <h1>완제품 관리</h1>
-            <label for="search">완제품 이름</label>
-            <input type="text" id="search-text" placeholder="검색할 완제품 입력">
-            <button class="btn" id="search-button">검색</button>
-        </div>
-      
-        <table >
-            <thead>
-                <tr>
-                    <th id="name">완제품 이름</th>
-                    <th>품번</th>
-                    <th>유통기한</th>
-                    <th id="chang">보관 창고</th>
-                    <th id="jeapoom">완제품 이미지</th>
-                
-                </tr>
-            </thead>
-            <tbody id="appendbody">
-           </tbody>
-          
-            
-        </table>
+
+
+    </div>
+
     <script>
-        window.addEventListener("load", function () {
-            search();
 
-            document.querySelector("#search-button").addEventListener("click",search)
-                             
-
-         
-
-            function search() {
+        window.addEventListener("load",search)
+     
+       
+        function search(event,pageNo,serch) {
                 //맨처음한번 조회해오기
-                let searchValue = document.querySelector("#search-text").value
+                event.preventDefault();
+                
                 //ajax
             const xhr = new XMLHttpRequest();
-            xhr.open('get', 'bom_v2_select?processname='+searchValue )
+            xhr.open('get', 'bom_v2_select?page='+pageNo+'&serch='+serch )
 
             xhr.setRequestHeader('Content-Type', 'application/json')
 
@@ -232,55 +215,191 @@
                 console.log(xhr.responseText)
                 data=JSON.parse(data)
                 console.log(data)
-                let list = data.list;
-                document.querySelector("#appendbody").innerHTML = ` `
-                     list.forEach(dto => {
-                                            let newdataHtml = document.createElement("tr")
-                                        
-                                    newdataHtml.innerHTML = `
-                                     <td>
-                                        <input type="hidden" class="productid" value="\${dto.productid}">
-                                        <span class="move">\${dto.productname}</span>
-                                    </td>
-                                    <td>\${dto.partnumber}</td>
-                                    <td>\${dto.expdatedesc}</td>
-                                    <td>\${dto.warehouse}</td>
-                                    
-                                    
-                                    <td><img src="download?filename=\${dto.productimage}" ></td>
-                                 
-                                    `
-                                    document.querySelector("#appendbody").append(newdataHtml)
-
-
+                let page = data.pDTO.page //현제페이지
+                let serch = data.pDTO.serch //현제검색어 
+                let totalcount = data.slect.conut; //전체 숫자
+                let list = data.slect.list; //가져온 음식 리스트
+                document.querySelector(".container").innerHTML = ` `
+                document.querySelector(".container").innerHTML +=`
+           
+                <div class="form-group">
+                    <h1>완제품 관리</h1>
+                        <label for="search">완제품 이름</label>
+                        <input type="text" id="search-text" placeholder="검색할 완제품 입력" value="\${serch}">
+                        <button class="btn" id="search-button">검색</button>
+                </div>
+            
+                    <table>
+                        <thead>
+                            <tr>
+                                <th id="name">완제품 이름</th>
+                                <th>품번</th>
+                                <th>유통기한</th>
+                                <th id="chang">보관 창고</th>
+                                <th id="jeapoom">완제품 이미지</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody id="appendbody">
+                        
+                        </tbody>
+                    
+                    </table>
+                   
+                `
+                    list.forEach(dto => {
+                  
+                        let newdataHtml = document.createElement("tr")
                                 
-                                 
-                                         newdataHtml.querySelector(".move").addEventListener("click",function(e){
-                                            
-                                            let pvalue = e.target.parentNode.querySelector(".productid").value
-                                            let productname = e.target.innerHTML
-                                            console.log(pvalue)
-                                            console.log(pvalue)
-                                             location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
+                            newdataHtml.innerHTML = `
+                                <td>
+                                <input type="hidden" class="productid" ">
+                                <span class="move">\${dto.productname}</span>
+                            </td>
+                            <td>\${dto.partnumber}</td>
+                            <td>\${dto.expdatedesc}</td>
+                            <td>\${dto.warehouse}</td>
+                            
+                            
+                            <td><img src="download?filename=\${dto.productimage}" ></td>
+                            
+                            `
+                            document.querySelector("#appendbody").append(newdataHtml)
 
-                                        })
-                                   
-	
+
+                                        newdataHtml.querySelector(".move").addEventListener("click",function(e){
+                                        
+                                        let pvalue = e.target.parentNode.querySelector(".productid").value
+                                        let productname = e.target.innerHTML
+                                        console.log(pvalue)
+                                        console.log(pvalue)
+                                            location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
+
+                                    })
                                     
-                              
+        
+                                        
+                                
+                    })
+                    let pageHtml = document.createElement("div")
+                    pageHtml.setAttribute("id" ,"pagehtml")
+                   //현제검색어 serch // 현제페이지page //현제 총카운트 totalcount // 가져온음식 리스트 list
+                    console.log("현제 페이지",page)    //현제 페이지
+                    console.log("검색어",serch)	//검색어																	
+                    console.log("전체카운트",totalcount) //전체카운트
+                    console.log("현제 음식 가져온거",list) // 현제 음식 가져온거
+                    
+              
+                    
+                    
+                    
+                    let dtoo = data.pDTO
+                    let pageNo = 1
+                    let viewCount = 10 
+                    
+                    pageNo = data.pDTO.page
+                    serch = data.pDTO.serch
+                    viewCount = data.pDTO.fourViewCount //
+                    console.log(1,data.pDTO.fourViewCount)
+                    console.log(2,pageNo)
+                    console.log(3,viewCount)
+                   
+                
+                
+                
+                
+                    
+                    let total =totalcount // 전체 겟수
+                    let lastPage = Math.ceil(total / viewCount) 
+                    let groupCount = 5
+                    let groupPosition = Math.ceil(pageNo / groupCount)
+                    let begin = ((groupPosition-1) * groupCount) + 1;
+                    let end = groupPosition * groupCount;
+                    
+                   
+                    
+                    if(end > lastPage){
+                        end = lastPage
+                    } 
+                    if( begin === 1 ){
+                        pageHtml.innerHTML+=`
+                        [이전]
+                    
+                        `
+                    }else{
+                        pageHtml.innerHTML+=`
+                        <a href="bom_v2_select?page=\${begin-1}&serch=\${serch}" class="clickable">[이전]</a>
+                        `
+                    }	
+
+                    for(let i = begin; i<=end ; i++){
+                        if(i === pageNo){
+                            pageHtml.innerHTML+=`
+                            <a href="bom_v2_select?page=\${ i }&serch=\${serch}" class="bold clickable" data-page="\${i}">\${ i}</a>
+                            `
+                        }else {
+                            pageHtml.innerHTML+=`
+                            <a href="bom_v2_select?page=\${ i }&serch=\${serch}" class="clickable" data-page="\${i}">\${ i}</a>
+                            `
+                        }
+                        
+                    }
+                    if( end === lastPage ){
+                        pageHtml.innerHTML+=`
+                        [다음]
+                        `
+                    }else{
+                        pageHtml.innerHTML+=`
+                        <a href="inspectionStandards?page=\${end+1}&serch=\${serch}" class="clickable">[다음]</a>
+                        `
+                    }
+                    
+                    document.querySelector(".container").append(pageHtml)
+
+                    pageHtml.querySelectorAll(".clickable").forEach(dto =>{
+                            dto.addEventListener("click",search)
+
+                            //페이지이동이벤트
+                            dto.addEventListener("click",function(ev){
+                                let search_text =document.querySelector("#search-text").value
+                                    if(search_text == undefined){
+                                        search_text = " ";
+                                    }
+                                    if(e,ev.target.querySelector("data-page") === undefined){
+                                        e,ev.target.querySelector("data-page") = 1;
+                                    }
+
+                                alert(e.target.getAttribute("data-page"))
+                                if(e.target.getAttribute("data-page") === 1){
+
+                                   search(e,ev.target.querySelector("data-page"),search_text)
+
+                                   console.log(e.target.querySelector("data-page"))
+                                //뭘해?
+                               }else{
+                                //뭘해?
+                                //그려?
+                               }
+                           
+                           
+                           
+                           
                             })
-                        }
+
+                    })
+                    //검색  이벤트 
+                    document.querySelector("#search-button").addEventListener("click",search)
+                    //----------------
 
 
-                        }
+            }
+
+
+        }
+       
 
 
 
-
-
-
-
-        })
     </script>
 
 

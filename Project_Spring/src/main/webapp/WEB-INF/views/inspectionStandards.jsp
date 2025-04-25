@@ -433,8 +433,10 @@
 								<div id="page-container">
 									<% int pageNo=1; int viewCount=2; // model에 담은건 request에서 꺼낼 수 있다
 									Map map=(Map)request.getAttribute("map"); 
-									Products_DTO dto=(Products_DTO)request.getAttribute("pDTO"); pageNo=dto.getPage();
-										viewCount=dto.getFinishViewCount(); System.out.println(">>>>>>>>> map :"+map +" : "+
+									Products_DTO dto=(Products_DTO)request.getAttribute("pDTO"); 
+									pageNo=dto.getPage();
+										viewCount=dto.getFinishViewCount(); 
+										System.out.println(">>>>>>>>> map :"+map +" : "+
 										"dto :"+dto);
 
 										int total = (Integer)map.get("count");

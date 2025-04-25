@@ -17,10 +17,24 @@ public class Build_of_Materials_DAOimpl implements Build_of_Materials_DAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<Products_DTO> Product_All(String prosessname) {
+	public List<Products_DTO> Product_All(Products_DTO dto) {
 		List list = null;
 		try {
-			list = sqlSession.selectList("mapper.bom.product_SelectALL",prosessname);
+		
+			int page = dto.getPage(); //현재 페이지 
+			int viewCount = dto.getFourViewCount(); //한페이지당 보여줄 컨텐츠 계수 
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.product_SelectALL",dto);
+			System.out.println("selectProducts 실행");
+			System.out.println("list 값="+ list);
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

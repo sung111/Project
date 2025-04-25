@@ -183,16 +183,22 @@
 	<!-- 완재품관리 셀렉트 검색 이름이없으면 전체검색 있으면 그것만검색-->
 	<select id="product_SelectALL" resultType="Products_DTO" parameterType="String">
 	
-	select productid,productname,partnumber,expdatedesc,warehouse,productimage
-	from products
+
+		select rnum, tmp2.* from(
+	    		select rownum rnum, tmp1.* from(
+	            select productid,productname,partnumber,expdatedesc,warehouse,productimage 
+		from PRODUCTS
 		<where>
-		productdel = 'n' 
-			<if test="_parameter != null">
-		    and productname like ('%' || #{_parameter} || '%') 
+	             PRODUCTDEL = 'n'
+			<if test="serch != null and serch !='' ">
+	    		and productname like ('%' || #{serch} || '%') 
 			</if>
-		
 		</where>
-	order by productname
+	            order by PRODUCTNAME
+	           
+	   			 ) tmp1
+	)tmp2
+	where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
 	
 	</select>
 		

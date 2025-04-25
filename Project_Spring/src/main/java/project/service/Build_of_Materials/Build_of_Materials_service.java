@@ -1,6 +1,7 @@
 package project.service.Build_of_Materials;
 
 import java.util.List;
+import java.util.Map;
 
 import project.dto.Bom_DTO;
 import project.dto.Materials_DTO;
@@ -11,7 +12,8 @@ public interface Build_of_Materials_service {
 
 	
 //사용
-	public List<Products_DTO> Product_All(String prosessname);
+	public  Map<String,Object> Product_All(Products_DTO dto);
+	
 	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid);
 	public List<Materials_DTO> BuildOfMaterials_materialList();
 	public int BuildOfMaterials_materialUpdate(Bom_DTO dto);

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -600,32 +597,42 @@ public class Bom_total_controller {
 	
 //완제품 BOM
 //----
-			@RequestMapping(value="/bom_v2",method=RequestMethod.GET)
-			public String Bom_v2( HttpSession httpsession ,Model model
-					
-					)  {
-				System.out.println("bom_v2 입장~~~");
-				User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
-				String Field = Field2.getJob();
-//				String Field = "ADMIN";
-				model.addAttribute(Field);
-				return "bom_v2";
-			}
-			
-			
-	@ResponseBody
-	@RequestMapping(value="/bom_v2_select",method=RequestMethod.GET)
-	public Map<String,Object> Bom_v2(@RequestParam (value="processname",required=false) String processname 
+	@RequestMapping(value="/bom_v2",method=RequestMethod.GET)
+	public String Bom_v2( HttpSession httpsession ,Model model
 			
 			)  {
-		
-	
+		System.out.println("bom_v2 입장~~~");
+		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
+		String Field = Field2.getJob();
+//				String Field = "ADMIN";
+		model.addAttribute(Field);
+		return "bom_v2";
+	}
+			
+			//=-----------------하고있는곳
+	@ResponseBody
+	@RequestMapping(value="/bom_v2_select",method=RequestMethod.GET)
+	public Map<String,Object> bom_v2_select(
+			Products_DTO dto
+			
+			)  {
 		Map<String, Object> map = new HashMap();
 		List list = null;
+		
 		try {
-			list = build_of_Materials_service.Product_All(processname);
+			String nameserch = dto.getSerch();
+			
+			Map slect = build_of_Materials_service.Product_All(dto);
+			
 			System.out.println("list : "+ list);
-			map.put("list", list);
+			map.put("pDTO", dto);
+			map.put("slect", slect);
+			map.put("nameserch", nameserch);
+			System.out.println("dto :"+dto);
+			System.out.println("---------------");
+			System.out.println("slect :"+slect);
+			System.out.println("---------------");
+			System.out.println("dto :"+dto);
 			
 			
 		}catch (Exception e) {

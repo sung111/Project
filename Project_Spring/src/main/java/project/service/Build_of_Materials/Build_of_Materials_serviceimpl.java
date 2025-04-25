@@ -1,11 +1,14 @@
 package project.service.Build_of_Materials;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import project.dao.Build_of_Materials.Build_of_Materials_DAO;
+import project.dao.Standard_total_dao.Products_DAO;
 import project.dto.Bom_DTO;
 import project.dto.Materials_DTO;
 import project.dto.Products_DTO;
@@ -16,17 +19,30 @@ public class Build_of_Materials_serviceimpl implements Build_of_Materials_servic
 
 	@Autowired 
 	Build_of_Materials_DAO dao;
-
+	@Autowired 
+	Products_DAO products_DAO;
+	
 	@Override
-	public List<Products_DTO> Product_All(String prosessname) {
-		List list = null;
+	public Map<String,Object> Product_All(Products_DTO dto) {
+		Map <String,Object> map = new HashMap();
+		
 		try {
-			list = dao.Product_All(prosessname);
+			
+			//한페이지의 내용만 있는 리스트
+			List list = dao.Product_All(dto);
+			//전체 글 개수 
+			int count = products_DAO.countProducts(dto);
+			
+			map.put("list", list);
+			map.put("count", count);
+			
+			System.out.println("selectProducts 실행");
+			System.out.println("list :"+list+""+"count :"+count);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return map;
 	}
 
 	@Override
