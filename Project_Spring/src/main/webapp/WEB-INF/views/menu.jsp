@@ -27,8 +27,8 @@
         </ul>
         <button class="nav-button">게시판</button>
         <ul class="nav-tag">
-            <li><a href="${pageContext.request.contextPath}/Notify">공지사항</a></li>
-            <li><a href="${pageContext.request.contextPath}/select">일반게시판</a></li>
+            <li><a href="${pageContext.request.contextPath}/select?notify=Y">공지사항</a></li>
+            <li><a href="${pageContext.request.contextPath}/select?notify=N">일반게시판</a></li>
         </ul>
     </div>
 </nav>

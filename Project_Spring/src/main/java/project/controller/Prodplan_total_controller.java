@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,11 +26,11 @@ public class Prodplan_total_controller {
     @GetMapping("/prodplan")
     public String showProductionPlan(HttpSession session, Model model) {
 
-        // ·Î±×ÀÎ »ç¿ëÀÚ Á¤º¸ °¡Á®¿À±â
+        // ë¡œê·¸ì¸ ì‚¬ìš©ì ì´ë¦„ ë¶ˆëŸ¬ì˜¤ê¸°
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
 
-        // ¼¼¼Ç¿¡¼­ °èÈ¹ ¸®½ºÆ® °¡Á®¿À±â
+        // ì„¸ì…˜ì—ì„œ ê³„íš ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
         List<ProductionPlan_DTO> planList = (List<ProductionPlan_DTO>) session.getAttribute("planList");
         if (planList == null) {
             planList = prodplanService.getAllPlans();
@@ -40,6 +41,7 @@ public class Prodplan_total_controller {
         return "ProdPlan";  
     }
 
+    //ì¶”ê°€
     @PostMapping("/prodplan/insert")
     public String insertPlan(@RequestBody ProductionPlan_DTO dto, Model model) {
         try {
@@ -53,10 +55,33 @@ public class Prodplan_total_controller {
         }
     }
 
-    // »óÇ° ¸®½ºÆ®¸¦ ÀÚµ¿À¸·Î ¿Ï¼ºÇÏ°Ô ÇÑ´Ù.
+    // ì¶”ê°€ ì‹œ, ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ ìë™ ì™„ì„± ì²˜ë¦¬.
     @GetMapping("/prodplan/products")
     @ResponseBody
     public List<ProductionPlan_DTO> getProductList(@RequestParam String searchTerm) {
-        return prodplanService.getProducts(searchTerm);  // °Ë»ö¾î¿¡ ¸Â´Â »óÇ° ¹İÈ¯
+    	// ê²€ìƒ‰ì–´ì— í•´ë‹¹í•˜ëŠ” ìƒí’ˆ ë°˜í™˜
+        return prodplanService.getProducts(searchTerm);  
     }
+    
+    //ìˆ˜ì •
+    @PostMapping("/prodplan/update")
+    @ResponseBody
+    public String updatePlan(@ModelAttribute ProductionPlan_DTO dto) {
+        prodplanService.updatePlan(dto);
+        return "success";
+    }
+
+    
+    //ì‚­ì œ
+    @PostMapping("/prodplan/delete")
+    @ResponseBody
+    public String deletePlan(@RequestParam("planId") int planId) {
+        try {
+            prodplanService.deletePlan(planId);
+            return "success";
+        } catch (Exception e) {
+            return "fail: " + e.getMessage();
+        }
+    }
+
 }

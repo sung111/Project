@@ -191,7 +191,7 @@
 
 
 
-	<div id="popup" class="popup">
+	<div id="popups1" class="popups1">
 		<div class="popup-content">
 			<span class="close" onclick="closePopup()">&times;</span>
 			<h1>재고 등록</h1>

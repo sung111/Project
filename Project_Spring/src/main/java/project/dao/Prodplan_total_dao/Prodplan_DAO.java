@@ -9,4 +9,7 @@ public interface Prodplan_DAO {
     void updatePlan(ProductionPlan_DTO plan);     
     void insertPlan(ProductionPlan_DTO plan);    
     List<ProductionPlan_DTO> getProducts(String searchTerm);
+    //삭제
+    void deletePlan(int planId);
+
 }
