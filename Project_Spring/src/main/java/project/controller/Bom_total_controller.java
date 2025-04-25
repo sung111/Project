@@ -240,10 +240,11 @@ public class Bom_total_controller {
 			Products_DTO products_DTO
 			)  {
 		System.out.println("inspectionStandards 실행");
+		System.out.println("컨트롤러가 받은값 :"+products_DTO);
 		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
-		
-
+		String nameserch = products_DTO.getSerch();
+		System.out.println("products_DTO.getSerch() 값은 :"+nameserch);
 		try {
 //			Map map = Products_service.selectFinishedProduct(products_DTO);
 //			List name_list = Products_service.selectProductname();
@@ -251,13 +252,13 @@ public class Bom_total_controller {
 			List name_list = Products_service.selectProductname();
 			
 			
-			
+			model.addAttribute("nameserch",nameserch);
 			model.addAttribute("map",map);
 			model.addAttribute("pDTO",products_DTO);
 			model.addAttribute("name_list",name_list);
 			model.addAttribute("Field",Field);
 			System.out.println("map : "+map);
-			System.out.println("products_DTO"+products_DTO);
+			System.out.println("products_DTO"+products_DTO.getSerch());
 			System.out.println("name_list"+name_list);
 			
 		}catch (Exception e) {
