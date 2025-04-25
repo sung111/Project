@@ -64,7 +64,15 @@ function init() {
     }
   })
 
-  // 제품합불기준 모달창 생성시 클릭이벤트
+  document.querySelector('.btn3').addEventListener('click', (e)=>{
+    e.preventDefault();
+    const tt = confirm("등록하시겠습니까?");
+    if(tt){
+      document.querySelector('#insertForm').submit();
+    }
+  })
+
+  // 모달창 닫기
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
     const modal = document.querySelector('#myModal')
@@ -129,7 +137,6 @@ function init() {
         
       })
     })
-
 
   //수정 드가자이
   const modify = document.querySelectorAll('.tn');

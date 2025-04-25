@@ -54,7 +54,7 @@
 					</div>
 				</div>
 				<div class="registration">
-					<form method="post" action="performInsert">
+					<form method="post" action="performInsert" id="insertForm">
 						<div class="rightTop">
 							<div class="wp2">제품명</div>
 							<div>

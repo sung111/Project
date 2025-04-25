@@ -1,7 +1,7 @@
 window.addEventListener('load', init);
 // 팝업 닫기
 function closePopup() {
-  document.querySelector('#popup').style.display = 'none';
+  document.querySelector('#popups1').style.display = 'none';
 }
 
 function init() {
@@ -29,13 +29,13 @@ function init() {
 
     editingIndex = null; // 수정 모드 초기화
 
-    document.querySelector('#popup').style.display = 'block';
+    document.querySelector('#popups1').style.display = 'block';
   };
 
-  document.querySelector('#popup').addEventListener('click', (e) => {
+  document.querySelector('#popups1').addEventListener('click', (e) => {
     //console.log(e.target.classList.contains("popup"))
-    if (e.target.classList.contains("popup")) {
-      document.querySelector('#popup').style.display = 'none';
+    if (e.target.classList.contains("popups1")) {
+      document.querySelector('#popups1').style.display = 'none';
     }
   })
 
