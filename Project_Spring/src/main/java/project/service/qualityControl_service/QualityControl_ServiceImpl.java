@@ -100,6 +100,24 @@ public class QualityControl_ServiceImpl implements QualityControl_Service {
 		int result = dao.searchQualTotalCount(dto);
 		return result;
 	}
+//	업뎃
+	@Override
+	public int QualUpdate(QualityControl_DTO dto) {
+		int result = dao.QualUpdate(dto);
+		return result;
+	}
+//	삭제
+	@Override
+	public int QaulDelete(QualityControl_DTO dto) {
+		int result = dao.QaulDelete(dto);
+		return result;
+	}
+//	모달창 구현
+	@Override
+	public QualityControl_DTO QaulModalSelect(int productid) {
+		QualityControl_DTO result = dao.QaulModalSelect(productid);
+		return result;
+	}
 	
 	
 }

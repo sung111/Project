@@ -19,57 +19,49 @@ function init() {
 
   // 합/불 큰버튼
   document.querySelector('.btn2').addEventListener('click', (e) => {
-    const modal = document.querySelector('#myModal')
-    const content = document.querySelector('.modal-content')
-
-    fetch('Inspection_standards.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('에러발쌩!');
-        }
-        return response.text();
-      })
-      .then(htmlString => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const sel = doc.querySelectorAll('.standards-contain')
-        const wp = document.querySelector('.wp')
-        for (let i = 0; i < sel.length; i++) {
-          if (wp.innerText == "부대찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[0].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "김치찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[1].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "밀푀유나베") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[2].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "떡볶이") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[3].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "곱창전골") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[4].cloneNode(true));
-            modal.style.display = 'block';
-          }
-        }
-      })
+    //모달창
+    const modal = document.querySelector('#myModal');
+    // 모달창 내용
+    const content = document.querySelector('.modal-content');
+    //제품번호
+    const productid = document.querySelector('#productid11').value;
+    if (!productid) {
+      alert("제품을 선택해 주십시오.");
+    } else {
+      fetch(`/project/QaulModalSelect?productid=${productid}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          console.log(data.productname);
+          content.innerHTML = '';
+          content.innerHTML = `<span class="close">&times;</span>
+                <div style="border: 1px solid #8989ef;border-radius: inherit;margin: 10px;padding: 10px;">
+                  <h1>${data.productname}</h1>
+                  <div>
+                    <img src="download?filename=${data.productimage}"
+                    style="margin: 15px;width: 300px;">
+                  </div>
+                  <div style="display: flex;gap: 20px;margin: 10px auto;max-width: 516px;">
+                    <div style="max-width: 258px;">
+                      <h2>정상제품기준</h2>
+                      <div>${data.normalcriteria}</div>
+                    </div>
+                    <div style="max-width: 258px;">
+                      <h2>비정상제품기준</h2>
+                      <div>${data.abnormalcriteria}</div>
+                    </div>
+                  </div>
+                </div>
+        `
+          modal.style.display = 'block';
+        })
+        .catch(err => {
+          console.log("에러 : ", err)
+        })
+    }
   })
 
-
-
-  // 모달창
+  // 모달창 닫기 이벤트
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
     const modal = document.querySelector('#myModal')
@@ -83,7 +75,6 @@ function init() {
       modal.style.display = "none";
     }
   });
-
 
   // 제품 합/불 라디오버튼클릭시 숨기기/나오기
   const rad = document.querySelectorAll('.rad')
@@ -105,169 +96,103 @@ function init() {
     })
   }
 
-
-
-  //수정
-  // if (e.target.innerText == "수정") {
-  // const now = new Date();
-  // const year = now.getFullYear();
-  // const month = ("0" + (now.getMonth() + 1)).slice(-2);
-  // const day = ("0" + now.getDate()).slice(-2);
-  // const hour = ("0" + now.getHours()).slice(-2);
-  // const minute = ("0" + now.getMinutes()).slice(-2);
-
-  // const date = `${year}-${month}-${day}T${hour}:${minute}`;
-
-  // const emdwp = e.target.parentNode.parentNode.querySelector('.emdwp').innerText
-  // const tkdb = e.target.parentNode.parentNode.querySelector('.tkdb').innerText
-  // const text = e.target.parentNode.parentNode.querySelector('.text1').innerText
-
-
-  // const row = e.target.parentNode.parentNode;
-  // row.dataset.original = row.innerHTML
-
-  // e.target.parentNode.parentNode.innerHTML =
-  //   `
-  //   <div>
-  //     <input type="datetime-local" class="inputT dateB" value="${date}">
-  //   </div>
-  //   <div class="emdwp">${emdwp}</div>
-  //   <div>
-  //     <select name="" id="" class="emdgkq">
-  //       <option value="합격">합격</option>
-  //       <option value="불합격">불합격</option>
-  //     </select>
-  //   </div>
-  //   <div class="">
-  //     <input type="text" class="inputT tkdb" value="${tkdb}">
-  //   </div>
-  //   <div>
-  //     <input type="text" class="inputT text1" value="${text}">
-  //   </div>
-  //   <div>
-  //     <button class="tn">완료</button>
-  //     <button class="tkr">취소</button>
-  //   </div>
-  // `
-  // }
-
-  // 수정완료
-  // if (e.target.innerText == "완료") {
-  //   const view = e.target.parentNode.parentNode
-  //   const tarG = e.target.parentNode.parentNode
-  //   const date = tarG.querySelector('.dateB').value
-  //   const wp = tarG.querySelector('.emdwp').innerText
-  //   const gkq = tarG.querySelector('.emdgkq').value
-  //   const tk = tarG.querySelector('.tkdb').value
-  //   const tT = tarG.querySelector('.text1').value
-  //   view.innerHTML = ""
-  //   view.innerHTML += `
-  //                     <div class="dateB">${date}</div>
-  //                     <div class="emdwp">${wp}</div>
-  //                     <div class="emdgkq">${gkq}</div>
-  //                     <div class="tkdb">${tk}</div>
-  //                     <div class="text1">${tT}</div>
-  //                     <div>
-  //                       <button class="tn">수정</button>
-  //                       <button class="tkr">삭제</button>
-  //                     </div>
-  //                   `
-  //   alert("수정되었습니다.")
-  // }
-
-  //   if (e.target.innerText === "취소") {
-  //     const row = e.target.parentNode.parentNode;
-  //     if (row.dataset.original) {
-  //       row.innerHTML = row.dataset.original;
-  //     }
-  //   }
-  // })
-
-
   // 검색창에 드랍박스 클릭시 불합사유 보이게 or 안보이게
   const searchBox = document.querySelector('#searchResult');
   const searchFail = document.querySelector('#searchFail');
-  searchBox.addEventListener('change',(e)=>{
-    if(searchBox.value == '불합격'){
+  searchBox.addEventListener('change', (e) => {
+    if (searchBox.value == '불합격') {
       searchFail.disabled = false;
       searchFail.parentNode.style.display = "block";
     } else {
       searchFail.disabled = true;
       searchFail.parentNode.style.display = "none";
     }
-  
+
   })
 
   // 새로고침
-  document.querySelector('.btn1').addEventListener('click',(e)=>{
+  document.querySelector('.btn1').addEventListener('click', (e) => {
     location.reload();
   })
 
   //검색버튼
-  document.querySelector('.btn4').addEventListener('click',(e)=>{
+  document.querySelector('.btn4').addEventListener('click', (e) => {
     qualSearchList(1);
   })
 
 
   //등록버튼
-  document.querySelector('.btn3').addEventListener('click', (e)=>{
-    // 보낼데이터 선언
-    const sendData = {};
-    // productid ㅇ, performanceid ㅇ, userid, result ㅇ, failreason ㅇ,comment ㅇ, qualitycontroltime ㅇ, passpack ㅇ, failpack ㅇ
-    // FK
-    sendData.productid = document.querySelector('#productid11').value;
-    //합불 radio
-    const rad = document.querySelectorAll('.rad')
-    for(let i = 0 ; i<rad.length ; i++){
-      if(rad[i].checked){
-        sendData.result = rad[i].value
-        if(rad[i].value == '불합격'){
-          sendData.failreason = document.querySelector('.dropBox').value
+  document.querySelector('.btn3').addEventListener('click', (e) => {
+
+    // 세션아이디 가져오기위한 fetch
+    fetch("/project/getSessionUserId")
+      .then(res => res.text())
+      .then(userid => {
+        if (!userid) {
+          alert("로그인 정보가 없습니다.");
+          return;
         }
-      }
-    }
-    // 합/불 갯수
-    const ea = document.querySelectorAll('.myInput');
-    sendData.passpack = ea[0].value === "" ? 0 : parseInt(ea[0].value);
-    sendData.failpack = ea[1].value === "" ? 0 : parseInt(ea[1].value);
-    //코멘트
-    sendData.comments = document.querySelector('.textBox').value
-    //날짜
-    sendData.qualitycontroltime = document.querySelector('#inputdate').value
-    // 실적 PK -> FK
-    sendData.performanceid = document.querySelector('#performancegaja11').value;
-    // id 일단 박아놓음 세션받아서넣어야함.
-    sendData.userid = 'adminid2'
+        // 보낼데이터 선언
+        const sendData = {};
+        // productid ㅇ, performanceid ㅇ, userid ㅇ, result ㅇ, failreason ㅇ,comment ㅇ, qualitycontroltime ㅇ, passpack ㅇ, failpack ㅇ
+        sendData.userid = userid;
+        // FK
+        sendData.productid = document.querySelector('#productid11').value;
+        //합불 radio
+        const rad = document.querySelectorAll('.rad')
+        for (let i = 0; i < rad.length; i++) {
+          if (rad[i].checked) {
+            sendData.result = rad[i].value
+            if (rad[i].value == '불합격') {
+              sendData.failreason = document.querySelector('.dropBox').value
+            }
+          }
+        }
+        // 합/불 갯수
+        const ea = document.querySelectorAll('.myInput');
+        sendData.passpack = ea[0].value === "" ? 0 : parseInt(ea[0].value);
+        sendData.failpack = ea[1].value === "" ? 0 : parseInt(ea[1].value);
+        //코멘트
+        sendData.comments = document.querySelector('.textBox').value
+        //날짜
+        sendData.qualitycontroltime = document.querySelector('#inputdate').value
+        // 실적 PK -> FK
+        sendData.performanceid = document.querySelector('#performancegaja11').value;
+        // id 일단 박아놓음 세션받아서넣어야함.
+        // sendData.userid = 'adminid2'
 
-    if(document.querySelector('.wp2').innerText == "제품명" || document.querySelector('.wp').innerText == "제품명"){
-      alert("제품을 선택해주세요");
-      return;
-    }
-    if( ea[0].value == '' || ea[1].value == '' ){
-      alert('합/불 갯수를 입력해주세요.');
-      return;
-    }
+        if (document.querySelector('.wp2').innerText == "제품명" || document.querySelector('.wp').innerText == "제품명") {
+          alert("제품을 선택해주세요");
+          return;
+        }
+        if (ea[0].value == '' || ea[1].value == '') {
+          alert('합/불 갯수를 입력해주세요.');
+          return;
+        }
 
-    const tt = confirm("정말로 등록하시겠습니까?");
-    if(tt){
-      fetch("/project/qualInsert",{
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(sendData)
+        const tt = confirm("정말로 등록하시겠습니까?");
+        if (tt) {
+          fetch("/project/qualInsert", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(sendData)
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              alert("등록완료되었습니다.")
+              location.reload();
+            })
+            .catch(error => {
+              console.log('오류발쒱 :', error);
+            })
+        }
       })
-      .then(response => response.json())
-      .then(data =>{
-        console.log(data);
-        alert("등록완료되었습니다.")
-        location.reload();
-      })
-      .catch(error =>{
-        console.log('오류발쒱 :' , error);
-      })
-    }
   }) // 등록 클릭이벤트 end
+
+
 
   //실적조회 페이지네이션과 조회
   loadPerformList(1);
@@ -278,93 +203,98 @@ function init() {
 
 
 // 품질 페이지네이션 fetch 가즈아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
-function loadQualList(page = 1){
-  isSearching=false;
-  fetch("/project/qualList",{
-    method : "POST",
-    headers : {
-      "Content-Type" : "application/json"
+function loadQualList(page = 1) {
+  isSearching = false;
+  fetch("/project/qualList", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     },
-    body : JSON.stringify( { page : page , viewCount : 9 } )
+    body: JSON.stringify({ page: page, viewCount: 9 })
   })
-  .then(response => response.json())
-  .then( data => {
-    renderQualList(data.list);
-    renderQualPagination(data.totalCount, data.page);
-  })
+    .then(response => response.json())
+    .then(data => {
+      renderQualList(data.list);
+      renderQualPagination(data.totalCount, data.page);
+    })
 }
 
 // fetch로 search List가즈아
-function qualSearchList( page = 1 ){
+function qualSearchList(page = 1) {
 
-  if(page === 1){
+  if (page === 1) {
     isSearching = true;
     currentSearchParams = {
-      productname : document.querySelector('.wp3').value,
-      searchDateStart : document.querySelector('.indate1').value,
-      searchDateEnd : document.querySelector('.indate2').value,
-      result : document.querySelector('#searchResult').value,
-      failreason : document.querySelector('#searchFail').value
+      productname: document.querySelector('.wp3').value,
+      searchDateStart: document.querySelector('.indate1').value,
+      searchDateEnd: document.querySelector('.indate2').value,
+      result: document.querySelector('#searchResult').value,
+      failreason: document.querySelector('#searchFail').value
     }
   }
   const params = new URLSearchParams({
     ...currentSearchParams,
     page,
-    viewCount : 9
+    viewCount: 9
   })
   fetch(`/project/qualList/search?${params}`)
-  .then(response => response.json())
-  .then(data =>{
-    renderQualList(data.list);
-    renderQualPagination(data.totalCount, page);
-  })
-  .catch(error =>{
-    console.log('ㅃㅣ용삐용 에러데스요  : ', error);
-  })
+    .then(response => response.json())
+    .then(data => {
+      renderQualList(data.list);
+      renderQualPagination(data.totalCount, page);
+    })
+    .catch(error => {
+      console.log('ㅃㅣ용삐용 에러데스요  : ', error);
+    })
 }
 
 // 품질 렌더링
-function renderQualList(list){
+function renderQualList(list) {
   const qualityList = document.querySelector('.box3View')
   qualityList.innerHTML = ''
-  list.forEach(item =>{
+  list.forEach(item => {
     const failreason = item.failreason ? item.failreason : '';
     const comments = item.comments ? item.comments : '';
-    
+
     const card = document.createElement('div');
     card.className = 'qualList-card'
     card.innerHTML = `
-      <div>${item.qualitycontroltime}</div>
-      <div>${item.productname}</div>
-      <div>${item.result}</div>
-      <div>${failreason}</div>
-      <div>${comments}</div>
-      <div>${item.username}</div>
+      <div class="qualitycontroltime">${item.qualitycontroltime}</div>
+      <div class="productname">${item.productname}</div>
+      <div class="result">${item.result}</div>
+      <div class="failreason">${failreason}</div>
+      <div class="comments">${comments}</div>
+      <div class="passpack">${item.passpack} pack</div>
+      <div class="failpack">${item.failpack} pack</div>
+      <div class="username">${item.username}</div>
       <div>
         <button type="button" class="Modify">수정</button>
         <button type="button" class="delete">삭제</button>
+        <input type="hidden" value="${item.qualitycontrolid}" id="qualitycontrolid">
       </div>
       `
-      qualityList.append(card)
+    qualityList.append(card)
   })
+  ModifyBtn();
+  QaulDelete();
 }
 
 // 페이지네이션 버튼임
-function renderQualPagination(totalCount, currentPage){
+function renderQualPagination(totalCount, currentPage) {
   const pageNationQuality = document.querySelector('.pageNationQuality');
   pageNationQuality.innerHTML = '';
 
   const viewCount = 9;
-  const lastPage = Math.ceil(totalCount/viewCount);
+  const lastPage = Math.ceil(totalCount / viewCount);
 
   const groupSize = 5;
   const currentGroup = Math.ceil(currentPage / groupSize);
-  const groupStart = ( currentGroup - 1 ) * groupSize + 1;
-  let groupEnd = groupStart + groupSize -1 ;
-  if(groupEnd > lastPage ) groupEnd = lastPage;
+  const groupStart = (currentGroup - 1) * groupSize + 1;
+  let groupEnd = groupStart + groupSize - 1;
+  if (groupEnd > lastPage) groupEnd = lastPage;
 
   // [이전]
-  if(groupStart > 1){
+  if (groupStart > 1) {
     const prevBtn = document.createElement('button');
     prevBtn.textContent = '[이전]';
     prevBtn.addEventListener('click', () => {
@@ -465,7 +395,7 @@ function renderPagination(totalCount, currentPage) {
   const viewCount = 7;
   const lastPage = Math.ceil(totalCount / viewCount);
 
-  const groupSize = 5; 
+  const groupSize = 5;
   const currentGroup = Math.ceil(currentPage / groupSize);
   const groupStart = (currentGroup - 1) * groupSize + 1;
   let groupEnd = groupStart + groupSize - 1;
@@ -511,14 +441,174 @@ function select() {
   for (let i = 0; i < selectBtns.length; i++) {
     selectBtns[i].addEventListener('click', (e) => {
       const productName = e.target.parentNode.parentNode.querySelectorAll('div')[1].innerText;
-      document.querySelector('.wp2').innerText = productName; 
-      document.querySelector('.wp').innerText = productName; 
+      document.querySelector('.wp2').innerText = productName;
+      document.querySelector('.wp').innerText = productName;
       document.querySelector('#productid11').value = e.target.parentNode.querySelector('#productid111').value;
       document.querySelector('#performancegaja11').value = e.target.parentNode.querySelector('#performancegaja').value;
     });
   }
 }// 실적조회 end //
 
+// 수정
+function ModifyBtn() {
+  const modifybtn = document.querySelectorAll('.Modify');
+  for (let i = 0; i < modifybtn.length; i++) {
+    modifybtn[i].addEventListener('click', (e) => {
+      const modifyBtnClick = e.target.parentNode.parentNode;
+      const qualitycontroltime = modifyBtnClick.querySelector('.qualitycontroltime').innerText
+      const productname = modifyBtnClick.querySelector('.productname').innerText
+      const result = modifyBtnClick.querySelector('.result').innerText
+      const failreason = modifyBtnClick.querySelector('.failreason').innerText
+      const comments = modifyBtnClick.querySelector('.comments').innerText
+      const username = modifyBtnClick.querySelector('.username').innerText
+      const qualitycontrolid = modifyBtnClick.querySelector('#qualitycontrolid').value
+      const passpack = modifyBtnClick.querySelector('.passpack').innerText.slice(0, modifyBtnClick.querySelector('.passpack').innerText.indexOf(" "))
+      const failpack = modifyBtnClick.querySelector('.failpack').innerText.slice(0, modifyBtnClick.querySelector('.failpack').innerText.indexOf(" "))
+
+      Number(passpack);
+      Number(failpack);
+
+      // 수정클릭시 innerHTML
+      modifyBtnClick.innerHTML = `
+        <div class="qualitycontroltime">
+          <input id="qualitycontroltime" type="datetime-local" value="${qualitycontroltime}" style="font-size: 11px;"></div>
+        <div class="productname">${productname}</div>
+        <div class="result">
+          <select id="result" style="width: 100%;font-size: 13px;">
+						<option value="합격">합격</option>
+						<option value="불합격">불합격</option>
+					</select>
+        </div>
+        <div>
+          <select id="failreason" disabled style="width: 100%;font-size: 13px;">
+						<option value="무게 미달">무게 미달</option>
+						<option value="외관 불량">외관 불량</option>
+						<option value="자재 불량">자재 불량</option>
+					</select>
+        </div>
+        <div class="comments">
+          <input id="comments" type="text" value="${comments}" style="width: 100%;font-size: 12px;">
+        </div>
+        <div>
+          <input type="number" value="${passpack}" id="passpack" style="font-size: 12px;">
+        </div>
+        <div>
+          <input type="number" value="${failpack}" id="failpack" style="font-size: 12px;">
+        </div>
+        <div class="username">${username}</div>
+        <div>
+          <button type="button" class="Yes">완료</button>
+          <button type="button" class="cancel">취소</button>
+          <input type="hidden" value="${qualitycontrolid}" id="qualitycontrolid">
+        </div>
+      `
+      //
+      // 합/불 클릭시 불합사유 disabled 넣다 빼기
+      modifyBtnClick.querySelector('#result').addEventListener('change', (e) => {
+        console.log(e.target.value);
+        if (e.target.value == '불합격') {
+          modifyBtnClick.querySelector('#failreason').disabled = false;
+        } else {
+          modifyBtnClick.querySelector('#failreason').disabled = true;
+        }
+      })
+
+      // 수정취소
+      modifyBtnClick.querySelector('.cancel').addEventListener('click', (e) => {
+        const tt = confirm("정말로 취소하시겠습니까?");
+        if (tt) {
+          alert('수정이 취소되었습니다.');
+          location.reload();
+        }
+      })
+
+      // 완료클릭시
+      modifyBtnClick.querySelector('.Yes').addEventListener('click', (e) => {
+        const tt = confirm("수정된 내용을 저장하시겠습니까?")
+        if (tt) {
+          //input value 저장
+          const qualitycontroltime = modifyBtnClick.querySelector('#qualitycontroltime').value;
+          const result = modifyBtnClick.querySelector('#result').value;
+          if (result == "불합격") {
+            const failreason = modifyBtnClick.querySelector('#failreason').value;
+          }
+          const comments = modifyBtnClick.querySelector('#comments').value;
+          const qualitycontrolid = modifyBtnClick.querySelector('#qualitycontrolid').value;
+          const passpack = modifyBtnClick.querySelector('#passpack').value;
+          const failpack = modifyBtnClick.querySelector('#failpack').value;
+
+          //json 객체로 만들어서 보내기
+          const sendData = {
+            qualitycontroltime: qualitycontroltime,
+            result: result,
+            comments: comments,
+            qualitycontrolid: qualitycontrolid,
+            passpack: passpack,
+            failpack: failpack,
+            failreason: result === "불합격" ? failreason : null
+          }
+
+          // 수정 put fetch 가즈아
+          fetch("/project/QualUpdate", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(sendData)
+          })
+            .then(res => res.json())
+            .then(result => {
+              if (result === 1) {
+                alert('수정완료');
+                location.reload();
+              }
+            })
+            .catch(err => {
+              console.log("수정 실패's : ", err)
+            })
+        } //수정 if 끝
+      })//수정완료 이벤트
 
 
 
+    })//수정 버튼 클릭 이벤트 end
+  }// 반복문 end
+} // function ModifyBtn 끝
+
+
+//삭제버튼
+function QaulDelete() {
+
+  const qaulDeletes = document.querySelectorAll('.delete');
+  for (let i = 0; i < qaulDeletes.length; i++) {
+    qaulDeletes[i].addEventListener('click', (e) => {
+      const tt = confirm("정말로 삭제하시겠습니까?")
+      if (tt) {
+        const qualitycontrolid = document.querySelector('#qualitycontrolid').value;
+        fetch("/project/QaulDelete", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            qualitycontrolid: qualitycontrolid
+          })
+        })
+          .then(res => res.json())
+          .then(result => {
+            if (result === 1) {
+              alert("삭제되었습니다.");
+              location.reload();
+            }
+          })
+          .catch(err => {
+            console.log("삐용삐용 에러쓰 : ", err);
+          })
+        // 삭제 fetch end
+      } // 삭제 if end
+    })// 삭제 이벤트 end
+
+  }
+
+
+}

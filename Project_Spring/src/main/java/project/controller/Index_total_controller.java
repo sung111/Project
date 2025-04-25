@@ -11,26 +11,23 @@ import org.springframework.web.servlet.ModelAndView;
 import project.dto.User_DTO;
 import project.service.Users_total_service.User_service;
 
-//Index_total_controller.java
 @Controller
 @RequestMapping("/")
 public class Index_total_controller {
 
-	
-	
     @Autowired
     User_service user_service;
 
     @GetMapping("index")
     public ModelAndView index(HttpSession session) {
-        // ì„¸ì…˜ì—ì„œ userId ê°€ì ¸ì˜¤ê¸°
+        // ¼¼¼ÇÀ» ÅëÇÑ userId Á¤º¸ °¡Á®¿À±â
         String userId = (String) session.getAttribute("userId");
 
         ModelAndView mv = new ModelAndView();
 
         if (userId != null) {
-            // ì„¸ì…˜ì— ì‚¬ìš©ì ì •ë³´ ìˆì„ ë•Œ
-            String helloUser = "ë¡œê·¸ì¸ì´ í•„ìš”í•œ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤.";
+            // ¼¼¼Ç¿¡ ·Î±×ÀÎµÈ »ç¿ëÀÚ°¡ ÀÖÀ¸¸é
+            String helloUser = "·Î±×ÀÎÇÑ »ç¿ëÀÚÀÔ´Ï´Ù.";
             String userRole = "";
             String userName = "";
 
@@ -38,10 +35,10 @@ public class Index_total_controller {
             if (user != null) {
                 userRole = user.getJob();
                 userName = user.getUserName(); 
-                helloUser = userRole + " " + userName + "ë‹˜, í™˜ì˜í•©ë‹ˆë‹¤!";
+                helloUser = userRole + " " + userName + "´Ô, È¯¿µÇÕ´Ï´Ù!";
             }
 
-            // Tiles ì´ë¦„ìœ¼ë¡œ view ì§€ì •
+            // Tiles ¼³Á¤À» ÅëÇÑ view ·»´õ¸µ
             mv.setViewName("index");
             mv.addObject("userId", userId);
             mv.addObject("helloUser", helloUser);
@@ -52,4 +49,3 @@ public class Index_total_controller {
         return mv;
     }
 }
-

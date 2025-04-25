@@ -40,10 +40,14 @@
 	
 	
 	<!-- 	완제품카운트갑 -->
-	<select id="totalProducts" resultType="int" >
+	<select id="totalProducts" resultType="int" parameterType="Products_DTO">
 		select count(*) from PRODUCTS
-		WHERE PRODUCTDEL = 'n'
-	
+		<where>
+		 PRODUCTDEL = 'n'
+		 <if test="serch != null and serch !='' ">
+		 and PRODUCTNAME like ('%' || #{serch} || '%')
+		 </if>
+		</where>
 	</select>
 	
 <!-- 	원재료/완제품조회 -->
@@ -130,16 +134,29 @@
 	</update>
 			
 <!-- 	완제품 검색으로 이름으로가져오기		 -->
-	<select id="selectProductsserch"   resultType="Products_DTO" parameterType="String">
-	
-	select PRODUCTNAME,PRODUCTIMAGE,NORMALCRITERIA,ABNORMALCRITERIA,PRODUCTID from PRODUCTS
-		<where>
-		 PRODUCTDEL = 'n'
-                <if test="_parameter != null and _parameter !='' ">
-					and PRODUCTNAME like ('%' || #{_parameter} || '%') 
-				</if>
-		</where>
-		order by PRODUCTNAME
+	<select id="selectProductsserch"   resultType="Products_DTO" parameterType="Products_DTO">
+
+		select *
+		    from (
+		    select rownum rnum, tem.*
+		        from (
+		            select PRODUCTNAME,
+		                    PRODUCTIMAGE,
+		                    NORMALCRITERIA,
+		                    ABNORMALCRITERIA,
+		                    PRODUCTID 
+		                    from PRODUCTS
+	                    <where>
+				            PRODUCTDEL = 'n'
+				              <if test="serch != null and serch !='' ">
+				            and PRODUCTNAME like ('%' || #{serch} || '%')
+				            </if>
+			             </where>
+				            order by PRODUCTNAME
+			        )tem
+			    )tem2
+		where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
+		
 	</select>
 	
 	<!-- 	완제품 검색으로 productid로만가져오기		 -->

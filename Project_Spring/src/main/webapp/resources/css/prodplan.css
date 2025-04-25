@@ -9,6 +9,23 @@ tbody{
     width: 100%;
 }
 
+
+.insdellayer{
+	width: 100%; display: flex; justify-content: space-around; align-items: center; 
+}
+
+.ins{
+
+}
+
+.del{
+backgroind-color: #999999
+}
+
+.list-btn{
+	width: 40%; height: 20px; border: 1px solid #000;
+}
+
 .new-workorder{
     width: 100%; table-layout: fixed; border-collapse: collapse;
     /* 열에 문제가 있다면 바로 아래 td 지우기 + table-layout: auto; */

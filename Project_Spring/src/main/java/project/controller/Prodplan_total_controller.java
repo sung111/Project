@@ -1,13 +1,17 @@
 package project.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.servlet.http.HttpSession;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.ProductionPlan_DTO;
 import project.service.Prodplan_total_service.Prodplan_service;
@@ -21,19 +25,38 @@ public class Prodplan_total_controller {
     @GetMapping("/prodplan")
     public String showProductionPlan(HttpSession session, Model model) {
 
-        // ì‚¬ìš©ìëª… ì„¸ì…˜ì—ì„œ ê°€ì ¸ì˜¤ê¸°
+        // ·Î±×ÀÎ »ç¿ëÀÚ Á¤º¸ °¡Á®¿À±â
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
 
-        // ìƒì‚°ê³„íš ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
+        // ¼¼¼Ç¿¡¼­ °èÈ¹ ¸®½ºÆ® °¡Á®¿À±â
         List<ProductionPlan_DTO> planList = (List<ProductionPlan_DTO>) session.getAttribute("planList");
         if (planList == null) {
             planList = prodplanService.getAllPlans();
             session.setAttribute("planList", planList);
         }
-
         model.addAttribute("planList", planList);
 
         return "ProdPlan";  
+    }
+
+    @PostMapping("/prodplan/insert")
+    public String insertPlan(@RequestBody ProductionPlan_DTO dto, Model model) {
+        try {
+            prodplanService.insertPlan(dto);
+            model.addAttribute("success", true);
+            return "successPage"; 
+        } catch (Exception e) {
+            model.addAttribute("success", false);
+            model.addAttribute("message", e.getMessage());
+            return "errorPage"; 
+        }
+    }
+
+    // »óÇ° ¸®½ºÆ®¸¦ ÀÚµ¿À¸·Î ¿Ï¼ºÇÏ°Ô ÇÑ´Ù.
+    @GetMapping("/prodplan/products")
+    @ResponseBody
+    public List<ProductionPlan_DTO> getProductList(@RequestParam String searchTerm) {
+        return prodplanService.getProducts(searchTerm);  // °Ë»ö¾î¿¡ ¸Â´Â »óÇ° ¹İÈ¯
     }
 }

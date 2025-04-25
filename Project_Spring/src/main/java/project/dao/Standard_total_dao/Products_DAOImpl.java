@@ -43,10 +43,10 @@ public class Products_DAOImpl implements Products_DAO {
 	}
 	
 	@Override
-	public int countProducts() {
+	public int countProducts(Products_DTO dto) {
 		int result = 0;
 		try {
-			result = sqlSession.selectOne("mapper.bom.totalProducts");
+			result = sqlSession.selectOne("mapper.bom.totalProducts",dto);
 			System.out.println("countEmp실행");
 			System.out.println("result 값="+result);
 			
@@ -127,16 +127,39 @@ public class Products_DAOImpl implements Products_DAO {
 		return list;
 	}
 	
+	//조회해서 총계수와 같이 가져오는 곳
 	@Override
-	public List<Products_DTO> selectProductnameserch(String name) {
-		System.out.println("selectProductnameserch 받은 이름name"+name);
-		List list = sqlSession.selectList("mapper.bom.selectProductsserch",name);
+	public List<Products_DTO> selectProductnameserch(Products_DTO dto) {
+		
+		List<Products_DTO> list = null;
+		try {
+			
+			int page = dto.getPage();
+			int viewCount = dto.getFinishViewCount();
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.selectProductsserch",dto);
+			System.out.println("selectProducts 실행");
+			System.out.println("list 값="+ list);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+			
 		return list;
+		
 	}
 	
 	@Override
 	public List<Products_DTO> selectProducidserch(int pid) {
-		System.out.println("selectProductnameserch 받은 이름name"+pid);
+		System.out.println("selectProducidserch 받은 이름name"+pid);
 		List list = sqlSession.selectList("mapper.bom.insSelectproductid",pid);
 		return list;
 	}

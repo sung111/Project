@@ -25,8 +25,9 @@
 
 
 .box {
-	width: 100%; /* 너비 조정 */
-	margin: 20px;
+	width: 97%; /* 너비 조정 */
+	margin: 36px 1px 1px 20px; 
+	
 	border: 1px solid #d9d9d9;
 	padding: 20px;
 	border-radius: 5px;
@@ -161,7 +162,14 @@ position:absolute;
 
 }
 
+#searchform {
 
+position:absolute;
+ top: 12.5%;
+ left: 16.5%;
+ 
+
+}
 
 
 </style>
@@ -297,10 +305,10 @@ position:absolute;
 				} 
 			   %>
 			   
-			   <%= Prodto == null ? "Prodto is null" : "Pagecount: " + Prodto.getPagecount() %>
+			   <%-- <%= Prodto == null ? "Prodto is null" : "Pagecount: " + Prodto.getPagecount() %> --%>
 			   
 			   
-			   <div id="selpage">
+			 <%--   <div id="selpage">
 <form method="get" action="select">  
 
      <input type="hidden" name="notify" value="${notify}" />
@@ -311,7 +319,7 @@ position:absolute;
     <option value="20" <%= Prodto.getPagecount() == 20 ? "selected" : "" %>>20</option>
     </select>
 </form>	
-               </div>
+               </div> --%>
                
                
 

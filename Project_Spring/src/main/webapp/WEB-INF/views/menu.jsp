@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <nav>
     <div class="logo-layer">
-    <a href="${pageContext.request.contextPath}/maintitle"><img src="${pageContext.request.contextPath}/resources/img/mainlogo.png" alt="logo" class="logo" id="nav-mainlogo"></a>
+    <a href="${pageContext.request.contextPath}/maintitle""><img src="${pageContext.request.contextPath}/resources/img/mainlogo.png" alt="logo" class="logo" id="nav-mainlogo"></a>
     </div>
     <div class="navigation">
         <button class="nav-button">기준관리</button>

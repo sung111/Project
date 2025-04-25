@@ -56,6 +56,13 @@ public class Performance_DAOImpl implements Performance_DAO{
 		return result;
 	}
 	
+	//업데이트
+	@Override
+	public int performInsert(Performance_DTO dto) {
+		int result = sqlsession.insert("project.mapper.Performance.performInsert", dto);
+		return result;
+	}
+	
 	
 	
 }

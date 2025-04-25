@@ -12,72 +12,67 @@ function init() {
   const minute = ("0" + now.getMinutes()).slice(-2);
   // const second = ("0" + now.getSeconds()).slice(-2);
   const date = `${year}-${month}-${day}T${hour}:${minute}`
-  if(document.querySelector('.indate1').value == null || document.querySelector('.indate1').value == '' ){
+  if (document.querySelector('.indate1').value == null || document.querySelector('.indate1').value == '') {
     document.querySelector('.indate1').value = date
   }
-  if(document.querySelector('.indate2').value == null || document.querySelector('.indate2').value == '' ){
+  if (document.querySelector('.indate2').value == null || document.querySelector('.indate2').value == '') {
     document.querySelector('.indate2').value = date
   }
   document.querySelector('.date1').value = date
-  // console.log(date.indexOf("T")); // 10
-  // console.log( date.slice( date.indexOf("T")+1 ) );
-  // console.log( date.slice( 0 , date.indexOf("T") ) );
 
-
-
-  // 제품 합/불 기준 불러오기
+  // 합/불 큰버튼
   document.querySelector('.btn2').addEventListener('click', (e) => {
-    const modal = document.querySelector('#myModal')
-    const content = document.querySelector('.modal-content')
-    fetch('Inspection_standards.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('에러발쌩!');
-        }
-        return response.text();
+    //모달창
+    const modal = document.querySelector('#myModal');
+    // 모달창 내용
+    const content = document.querySelector('.modal-content');
+    //제품번호
+    const productid = document.querySelector('#productid').value;
+    if(!productid){
+      alert("제품을 선택해 주십시오.");
+    } else {
+      fetch(`/project/QaulModalSelect?productid=${productid}`)
+      .then( res => res.json() )
+      .then( data => {
+        console.log(data);
+        console.log(data.productname);
+        content.innerHTML = '';
+        content.innerHTML = `<span class="close">&times;</span>
+                <div style="border: 1px solid #8989ef;border-radius: inherit;margin: 10px;padding: 10px;">
+                  <h1>${data.productname}</h1>
+                  <div>
+                    <img src="download?filename=${data.productimage}"
+                    style="margin: 15px;width: 300px;">
+                  </div>
+                  <div style="display: flex;gap: 20px;margin: 10px auto;max-width: 516px;">
+                    <div style="max-width: 258px;">
+                      <h2>정상제품기준</h2>
+                      <div>${data.normalcriteria}</div>
+                    </div>
+                    <div style="max-width: 258px;">
+                      <h2>비정상제품기준</h2>
+                      <div>${data.abnormalcriteria}</div>
+                    </div>
+                  </div>
+                </div>
+        `
+        modal.style.display = 'block';
       })
-      .then(htmlString => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const sel = doc.querySelectorAll('.standards-contain')
-        const wp = document.querySelector('.wp')
-        for (let i = 0; i < sel.length; i++) {
-          if (wp.innerText == "부대찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[0].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "김치찌개") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[1].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "밀푀유나베") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[2].cloneNode(true));
-            modal.style.display = 'block';
-
-          } else if (wp.innerText == "떡볶이") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[3].cloneNode(true));
-            modal.style.display = 'block';
-          } else if (wp.innerText == "곱창전골") {
-            content.innerHTML = '';
-            content.innerHTML = '<span class="close">&times;</span>'
-            content.appendChild(sel[4].cloneNode(true));
-            modal.style.display = 'block';
-          }
-        }
-
+      .catch(err =>{
+        console.log("에러 : ", err)
       })
-
-
+    }
   })
-  
-  // 제품합불기준 모달창 생성시 클릭이벤트
+
+  document.querySelector('.btn3').addEventListener('click', (e)=>{
+    e.preventDefault();
+    const tt = confirm("등록하시겠습니까?");
+    if(tt){
+      document.querySelector('#insertForm').submit();
+    }
+  })
+
+  // 모달창 닫기
   document.querySelector('.modal').addEventListener('click', (e) => {
     const closeBtn = document.querySelector(".close");
     const modal = document.querySelector('#myModal')
@@ -96,59 +91,57 @@ function init() {
   //삭제
   const del = document.querySelectorAll('.delete');
   const delf = document.querySelectorAll('.deleteForm');
-  for(let i = 0 ; i < del.length ; i++){
-    del[i].addEventListener('click',(e)=>{
+  for (let i = 0; i < del.length; i++) {
+    del[i].addEventListener('click', (e) => {
       e.preventDefault();
       let tt = confirm("삭제하시겠습니까?");
-      if(tt){
+      if (tt) {
         delf[i].submit();
         alert("삭제되었습니다.")
       }
     })
   }
 
-  //조회버튼 하다가 form으로 도망감
-  // document.querySelector('.btn4').addEventListener('click',(e)=>{
+  // 작지 불러오자ㅣㅣㅣㅣ잇
+  fetch("/project/prodplan")
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
 
-  //   const productname = document.querySelector('.wp3').value;
-  //   const indexStart = document.querySelector('.indate1').value;
-  //   const indexEnd = document.querySelector('.indate2').value;
+      const targetContent1 = doc.querySelector('.name-layer').parentNode;
+      const planView = document.querySelector('.instView');
+      planView.innerHTML = targetContent1.innerHTML;
+      document.querySelector('tfoot').remove();
+      document.querySelector('.search-container').remove();
 
-  //   const params = new URLSearchParams({
-  //     productname : productname,
-  //     searchDateStart : indexStart,
-  //     searchDateEnd : indexEnd
-  //   }).toString();
+      planView.addEventListener('click', (e) => {
+        e.preventDefault();
 
-  //   fetch(`/project/performanceSearch?${params}`,{
-  //     method : "GET",
-  //     headers:{
-  //       "Accept":"application/json"
-  //     }
-  //   })
-  //   .then( response => response.json() )
-  //   .then( data => {
-  //     console.log("받은데이따 : " , data);
-  //     const viewBox = document.querySelector('.box3View');
-  //     viewBox.innerHTML='';
+        const clickedRow = e.target.closest('.order-info-content');
+        if (!clickedRow) return;
 
-  //     const list = data.list;
-  //     const totalCount = data.totalCount;
-  //     console.log("리스트", list);
-  //     console.log("토탈카운따", totalCount);
+        const allRows = planView.querySelectorAll('.order-info-content');
+        allRows.forEach(row => row.style.backgroundColor = '');
+        clickedRow.style.backgroundColor = 'rgb(153, 153, 153)';
 
-  //   })
-  //   .catch(error =>{
-  //     console.log("에러띵 : ", error);
-  //   })
+        const dataId = clickedRow.getAttribute('data-id');
+        const dataPi = clickedRow.getAttribute('data-pi');
+        console.log("선택된 data-id:", dataId, " / data-pi:", dataPi);
 
-  // })
-
+        document.querySelector('#productid').value = dataId;
+        document.querySelector('#planid').value = dataPi;
+        
+        document.querySelector('.wp').innerText = clickedRow.querySelector('td').innerText;
+        document.querySelector('.wp2').innerText = clickedRow.querySelector('td').innerText;
+        
+      })
+    })
 
   //수정 드가자이
   const modify = document.querySelectorAll('.tn');
-  for(let i = 0 ; i < modify.length ; i++){
-    modify[i].addEventListener('click', (e)=>{
+  for (let i = 0; i < modify.length; i++) {
+    modify[i].addEventListener('click', (e) => {
       e.preventDefault();
 
       console.log(e.target.closest("form"))
@@ -181,41 +174,41 @@ function init() {
 
       // 수정완료 클릭시
       const yes = modimodi.querySelector('.yes');
-      yes.addEventListener('click',(e)=>{
+      yes.addEventListener('click', (e) => {
         const time = modimodi.querySelector('#time').value;
         const emdtn = modimodi.querySelector('#emdtn').value;
         const text1 = modimodi.querySelector('#text1').value;
         const performId = modimodi.querySelector('#performId').value;
-        fetch("/project/performanceUpdate",{
-          method : 'POST',
-          headers : {
-            "Content-Type" : "application/json"
+        fetch("/project/performanceUpdate", {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
           },
-          body : JSON.stringify({
+          body: JSON.stringify({
             reporttime: time,
             productioncount: emdtn,
             performancecomment: text1,
             performanceid: performId
           })
         })
-        .then( respnose => respnose.text() )
-        .then( text =>{
-          console.log('text');
-          if(text == 1){
-            alert("수정완료");
-            location.reload();
-          }
-          else{
-            alert("수정실패");
-          }
-        })
-        .catch(error =>{
-          console.log("에러에러에러 :" , error);
-        })
+          .then(respnose => respnose.text())
+          .then(text => {
+            console.log('text');
+            if (text == 1) {
+              alert("수정완료");
+              location.reload();
+            }
+            else {
+              alert("수정실패");
+            }
+          })
+          .catch(error => {
+            console.log("에러에러에러 :", error);
+          })
       }) // 수정완료 클릭 end
 
       //취소클릭시 새로고침
-      modimodi.querySelector('.cancel').addEventListener('click', (e)=>{
+      modimodi.querySelector('.cancel').addEventListener('click', (e) => {
         alert("수정을 취소하셨습니다.");
         location.reload();
       })

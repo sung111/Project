@@ -15,10 +15,7 @@
 <title>품질관리</title>
 <link rel="stylesheet" href="resources\css\qualityControl.css">
 <script src="resources\js\qualityControl.js"></script>
-<link rel="stylesheet" href="">
-
 </head>
-
 <body>
 	<div id="myModal" class="modal">
 		<div class="modal-content">
@@ -130,6 +127,8 @@
 					<div>합격/불합격</div>
 					<div>불합격 사유</div>
 					<div>코멘트</div>
+					<div>합격</div>
+					<div>불합격</div>
 					<div>등록인</div>
 					<div>비고</div>
 				</div>

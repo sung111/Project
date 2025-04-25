@@ -24,7 +24,7 @@ public class Products_serviceImpl implements Products_service {
 		//한페이지의 내용만 있는 리스트
 		List list = products_DAO.selectProducts(dto);
 		//전체 글 개수 
-		int count = products_DAO.countProducts();
+		int count = products_DAO.countProducts(dto);
 		
 		map.put("list2", list);
 		map.put("count", count);
@@ -84,14 +84,14 @@ public class Products_serviceImpl implements Products_service {
 		//한페이지의 내용만 있는 리스트
 		List list = products_DAO.selectFinishedProduct(dto);
 		//전체 글 개수 
-		int count = products_DAO.countProducts();
+		int count = products_DAO.countProducts(dto);
 		
 		map.put("list", list);
 		map.put("count", count);
 		
 		System.out.println("selectProducts 실행");
 		System.out.println("list :"+list+""+"count :"+count);
-		//그대로주고 DB에서 바꾸자 
+	
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -106,10 +106,21 @@ public class Products_serviceImpl implements Products_service {
 		return list;
 	}
 	
+	//조회해서 총계수와 같이 가져오는 곳
 	@Override
-	public List<Products_DTO> selectProductnameserch(String name) {
-		List list = products_DAO.selectProductnameserch(name);
-		return list;
+	public Map<String,Object> selectProductnameserch(Products_DTO dto) {
+		Map <String,Object> map = new HashMap();
+		
+		List list = products_DAO.selectProductnameserch(dto);
+		int count = products_DAO.countProducts(dto);
+		
+		map.put("list", list);
+		map.put("count", count);
+		
+		System.out.println("selectProducts 실행");
+		System.out.println("list :"+list+""+"count :"+count);
+	
+		return map;
 	}
 	
 	@Override

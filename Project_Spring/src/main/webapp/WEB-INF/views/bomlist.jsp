@@ -201,6 +201,32 @@
 								
 									border-collapse: collapse;
 								}
+								.lodingevent_show{
+									width: 100%;
+									height: 100%;
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									margin-bottom: 500px;
+								}
+								
+							
+								.loader {
+								width: 50px;
+								padding: 8px;
+								aspect-ratio: 1;
+								border-radius: 50%;
+								background: #007bff;
+								--_m: 
+									conic-gradient(#0000 10%,#000),
+									linear-gradient(#000 0 0) content-box;
+								-webkit-mask: var(--_m);
+										mask: var(--_m);
+								-webkit-mask-composite: source-out;
+										mask-composite: subtract;
+								animation: l3 1s infinite linear;
+								}
+								@keyframes l3 {to{transform: rotate(1turn)}}
 
 								@media screen and (max-width: 767px) {
 									#back-button {
@@ -232,6 +258,10 @@
 									.crud_contaner{
 										display: flex;
 										justify-content: center;
+									}
+									.quan_text{
+									
+										width: 20px;
 									}
 								
 								}
@@ -315,11 +345,11 @@
 									</tr>
 								</thead>
 								<tbody id="bodyuphand">
-
+									<div class="lodingevent_show" >
+										<div class="loader "></div> 
+									</div>
 									
 
-
-								
 
 
 								</tbody>
@@ -327,9 +357,11 @@
 
 							
 							<script>
-									
+								
+
 
 									function pidselect() {
+										
 									
 										const xhr = new XMLHttpRequest();
 									xhr.open('get', 'bomlistSlect?pid='+document.querySelector("#pid").value )
@@ -389,6 +421,7 @@
 																						
 																						
 																document.querySelector("#bodyuphand").append(newdataHtml)
+																document.querySelector(".lodingevent_show").style.display = "none"
 															
 																
 																

@@ -15,16 +15,16 @@
     <link rel="stylesheet" href="../css/06_글쓰기.css">
 </head>
 <style>
-body {
+/* body {
     background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
 }
-
+ */
 .box {
-    width: 100%;
+    width: 97%;
     margin: 20px;
     border: 1px solid #d9d9d9;
     padding: 20px;
@@ -39,8 +39,25 @@ h1 {
     border-bottom: 1px solid #d9d9d9;
 }
 
+
+#post {
+padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 95%; 
+    white-space: nowrap;
+
+
+}
+
+
 .post {
     margin-bottom: 15px;
+    
 }
 
 .post label:not(.file-label) {
@@ -88,6 +105,9 @@ h1 {
     cursor: pointer;
     margin-left: 5px; 
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+    position : absolute;
+    bottom : 61.4%;
+    left: 26.5%;
 }
 
 .file-label {
@@ -189,6 +209,41 @@ h1 {
         width: 90%; /* 팝업 너비 조정 */
     }
 }
+
+
+
+
+
+
+#link-input-container {
+
+
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 45px; 
+    position: absolute;
+    top: 36%;
+    white-space: nowrap;
+   
+    
+}
+
+
+
+#file {
+
+display : none;
+
+
+}
+
+
+
 </style>
 <body>
 
@@ -226,14 +281,18 @@ h1 {
 	            <div class="button-container">
 	            
 	            
-	                      <!-- 파일올리기 -->                   
-	                <input type="file" name="file_name" multiple>
-	                
+	                      <!-- 파일올리기 --> 
+	                <div id="file-input-container" margin-top: 10px;">        
+	                <label for="file" id="link-input-container">
+	                첨부 파일
+	                </label>                       
+	                <input type="file" id="file" name="file_name" multiple>
+	                </div>
 	                
 	                
 	                <button type="button" class="link-button" id="link-button">링크 첨부</button>
-	                <button type="button" class="schedule-button" id="schedule-button">일정</button>
-	            </div>
+	                <!-- <button type="button" class="schedule-button" id="schedule-button">일정</button> -->
+	                </div>
 	            
 	            <!-- 내용 -->
 	            <textarea id="content" rows="5"  name="content"></textarea>
@@ -326,7 +385,11 @@ h1 {
      let po = document.querySelector("#post");
      po.addEventListener("click", function() {
     	if(ch.value == "select") {
-    	alert("카테고리를 선택해주세요");
+    		console.log("카테고리선택함?")
+    	    alert("카테고리를 선택해주세요");
+    	} else if (no.value == "notify"){
+    		console.log("카테고리말고 다른거선택함?")
+    		alert("글 작성이 완료되었습니다");
     	} else {
     		alert("글 작성이 완료되었습니다");
     	}
