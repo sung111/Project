@@ -20,64 +20,64 @@ public class Login_total_controller {
     @Autowired
     private User_service userService;
 
-    // ·Î±×ÀÎ ÆäÀÌÁö¸¦ Ç¥½Ã
+    // ë¡œê·¸ì¸ í˜ì´ì§€ í‘œì‹œ
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
 
-    // ·Î±×ÀÎ Ã³¸®
+    // ë¡œê·¸ì¸ ì²˜ë¦¬
     @PostMapping("/Login_controller")
     public ModelAndView login(
-            @RequestParam("userId") String userId,  // »ç¿ëÀÚ ¾ÆÀÌµğ
-            @RequestParam("userPw") String userPw,  // »ç¿ëÀÚ ºñ¹Ğ¹øÈ£
-            HttpSession session) {  // ¼¼¼Ç °´Ã¼
+            @RequestParam("userId") String userId,  // ì…ë ¥í•œ ì•„ì´ë””
+            @RequestParam("userPw") String userPw,  // ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸
+            HttpSession session) {  // ì„¸ì…˜ ê°ì²´
 
         ModelAndView mav = new ModelAndView();
 
-        // ·Î±×ÀÎ ½Ãµµ
+        // ë¡œê·¸ì¸ ì‹œë„
         User_DTO user = userService.login(userId, userPw);
 
-        // ·Î±×ÀÎ ¼º°ø ½Ã
+        // ë¡œê·¸ì¸ ì„±ê³µ ì‹œ
         if (user != null) {
-            // ·Î±×ÀÎ ¼º°ø ½Ã userId¿Í user °´Ã¼¸¦ ¼¼¼Ç¿¡ ÀúÀå
+            // ë¡œê·¸ì¸ ì„±ê³µ ì‹œ userIdì™€ user ê°ì²´ë¥¼ ì„¸ì…˜ì— ì €ì¥
             session.setAttribute("userId", user.getUserId());
-            session.setAttribute("user", user); // »ç¿ëÀÚ Á¤º¸
+            session.setAttribute("user", user); // ì‚¬ìš©ì ì •ë³´
             session.setAttribute("userName", user.getUserName());
 
-            // ·Î±×ÀÎµÈ »ç¿ëÀÚ Á¤º¸ Ãâ·Â (µğ¹ö±ë¿ë)
-            System.out.println("·Î±×ÀÎ ¼º°ø: " + user.getUserId());
+            // ë¡œê·¸ì¸ ì„±ê³µ ë¡œê·¸ (ì½˜ì†” ì¶œë ¥)
+            System.out.println("ë¡œê·¸ì¸ ì„±ê³µ: " + user.getUserId());
             System.out.println("userName: " + user.getUserName() + ", job: " + user.getJob());
 
-            // ·Î±×ÀÎ ¼º°ø ½Ã index ÆäÀÌÁö·Î ¸®´ÙÀÌ·ºÆ®
+            // ë¡œê·¸ì¸ ì„±ê³µ ì‹œ index í˜ì´ì§€ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸
             mav.setViewName("redirect:/index");
         } else {
-            // ·Î±×ÀÎ ½ÇÆĞ ½Ã
-            System.out.println("·Î±×ÀÎ ½ÇÆĞ");
+            // ë¡œê·¸ì¸ ì‹¤íŒ¨ ì‹œ
+            System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 
-            // ·Î±×ÀÎ ½ÇÆĞ ½Ã ·Î±×ÀÎ ÆäÀÌÁö·Î ¸®´ÙÀÌ·ºÆ®
+            // ë¡œê·¸ì¸ ì‹¤íŒ¨ ì‹œ ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸
             mav.setViewName("redirect:/login");
-            mav.addObject("error", "¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ Æ²·È½À´Ï´Ù.");  // ¿À·ù ¸Ş½ÃÁö Ãß°¡
-            mav.addObject("userId", userId);  // ·Î±×ÀÎ ½ÃµµÇÑ ¾ÆÀÌµğ °ª ´Ù½Ã Àü´Ş
+            mav.addObject("error", "ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");  // ì˜¤ë¥˜ ë©”ì‹œì§€ ì¶”ê°€
+            mav.addObject("userId", userId);  // ë¡œê·¸ì¸ ì‹œë„í•œ ì•„ì´ë”” ê°’ ë‹¤ì‹œ ì „ë‹¬
         }
 
         return mav;
     }
 
-    // ·Î±×¾Æ¿ô Ã³¸®
+    // ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
     @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletResponse response) {
 
-        // ¼¼¼ÇÀ» ¹«È¿È­ÇÏ¿© ·Î±×¾Æ¿ô Ã³¸®
+        // ì„¸ì…˜ì„ ë¬´íš¨í™”í•˜ì—¬ ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
         session.invalidate();
 
-        // »ç¿ëÀÚ ¾ÆÀÌµğ ÄíÅ° »èÁ¦
+        // ì‚¬ìš©ì ì•„ì´ë”” ì¿ í‚¤ ì‚­ì œ
         Cookie cookie = new Cookie("userId", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
 
-        // ·Î±×ÀÎ ÆäÀÌÁö·Î ¸®´ÙÀÌ·ºÆ®
+        // ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸
         return "redirect:/login";
     }
 }

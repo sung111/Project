@@ -49,11 +49,24 @@
       p.spec, 
       p.unit, 
       p.partnumber, 
-      p.warehouse 
+      p.warehouse,
+      p.lotnumber
     FROM productionplans pp
     LEFT JOIN products p 
       ON pp.productid = p.productid
   </select>
+
+<!-- 조회 -->
+<select id="getProducts" parameterType="String" resultMap="PlanWithProductResultMap">
+  SELECT 
+    pp.planid, pp.userid, pp.productid, pp.totalqty, pp.startdate,
+    pp.enddate, pp.createdate, pp.deliverydate, pp.deliverydest,
+    pp.planstatus, pp.plancause, pp.plannotes,
+    p.productname, p.spec, p.unit, p.partnumber, p.warehouse
+  FROM productionplans pp
+  LEFT JOIN products p ON pp.productid = p.productid
+  WHERE p.productname LIKE CONCAT('%', #{searchTerm}, '%')
+</select>
 
 <!-- 추가 -->
 <insert id="insertPlan" parameterType="project.dto.ProductionPlan_DTO">
@@ -66,29 +79,33 @@
     )
 </insert>
 
-<!-- 수정 -->
-<update id="updatePlan" parameterType="project.dto.ProductionPlan_DTO">
-    UPDATE productionplans
-    SET
-        totalqty = #{totalqty},
-        startDate = #{startDate},
-        endDate = #{endDate},
-        planStatus = #{planStatus},
-        planCause = #{planCause},
-        planNotes = #{planNotes}
-    WHERE planId = #{planId}
-</update>
 
-<select id="getProducts" parameterType="String" resultMap="PlanWithProductResultMap">
-  SELECT 
-    pp.planid, pp.userid, pp.productid, pp.totalqty, pp.startdate,
-    pp.enddate, pp.createdate, pp.deliverydate, pp.deliverydest,
-    pp.planstatus, pp.plancause, pp.plannotes,
-    p.productname, p.spec, p.unit, p.partnumber, p.warehouse
-  FROM productionplans pp
-  LEFT JOIN products p ON pp.productid = p.productid
-  WHERE p.productname LIKE CONCAT('%', #{searchTerm}, '%')
-</select>
+
+
+
+
+<!-- 수정 -->
+<!-- <update id="updatePlan" parameterType="project.dto.ProductionPlan_DTO">
+    UPDATE productionplans
+    SET 
+        deliverydest = COALESCE(#{deliveryDest}, deliverydest),
+        totalqty = #{totalqty},
+        createdate = #{createDate},
+        startdate = #{startDate},
+        enddate = #{endDate},
+        planstatus = #{planStatus},
+        plancause = #{planCause},
+        plannotes = #{planNotes}
+    WHERE planid = #{planId}
+</update> -->
+
+
+
+<!-- 삭제 -->
+<delete id="deletePlan" parameterType="int">
+    DELETE FROM productionplans
+    WHERE planid = #{planId}
+</delete>
 
 
 </mapper>

@@ -10,7 +10,7 @@ public interface Build_of_Materials_DAO {
 
 
 //사용
-	public List<Products_DTO> Product_All(String prosessname);
+	public List<Products_DTO> Product_All(Products_DTO dto);
 	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid);
 	public List<Materials_DTO> BuildOfMaterials_materialOneList(int bomid);
 	public int BuildOfMaterials_materialUpdate(Bom_DTO dto);

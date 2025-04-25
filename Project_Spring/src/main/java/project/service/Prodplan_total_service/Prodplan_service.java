@@ -4,12 +4,15 @@ import java.util.List;
 import project.dto.ProductionPlan_DTO;
 
 public interface Prodplan_service {
-	//Á¶È¸
+	//ï¿½ï¿½È¸
     List<ProductionPlan_DTO> getAllPlans();  
-    //»ý¼º
+    //ì¶”ê°€
     void insertPlan(ProductionPlan_DTO plan);    
-    //¼öÁ¤
-    void updatePlan(ProductionPlan_DTO plan);    
+    //ìˆ˜ì •
+	/* void updatePlan(ProductionPlan_DTO dto); */
+    //ì‚­ì œ
+    void deletePlan(int planId);
     List<ProductionPlan_DTO> getProducts(String searchTerm);
+    
 
 }

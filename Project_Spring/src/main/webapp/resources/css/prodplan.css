@@ -1,5 +1,7 @@
 
-
+.workorder-a{
+	width: 100%; height: 100%; text-decoration-line: none; text-align: center; border: none; color: #fff;
+}
 
 thead{
      all:unset; display: table-header-group;
@@ -11,15 +13,18 @@ tbody{
 
 
 .insdellayer{
-	width: 100%; display: flex; justify-content: space-around; align-items: center; 
+	width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center; 
 }
 
-.ins{
-
+.com{
+	color: #007bff;
+}
+.cancel{
+	background-color: #d9d9d9;
 }
 
-.del{
-backgroind-color: #999999
+.del {
+background-color: #999999;
 }
 
 .list-btn{
@@ -78,7 +83,8 @@ cursor: default;
 }
 
 .order-info-content td{
-     height: 100%; border-right: 1px solid #999999; 
+     /* height: 100%; */ 
+     height: 40px; border-right: 1px solid #999999; 
 }
 .order-info-content-delete{
  color: #F44336; font-weight: 800; cursor: pointer;

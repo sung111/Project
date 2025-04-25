@@ -14,32 +14,42 @@ public class Prodplan_serviceImpl implements Prodplan_service {
     @Autowired
     private Prodplan_DAO planDAO;
 
-    // »ı»ê °èÈ¹ ÀüÃ¼ Á¶È¸
+    // ìƒì‚° ê³„íš ì „ì²´ ì¡°íšŒ
     @Override
     public List<ProductionPlan_DTO> getAllPlans() {
         return planDAO.getAllPlans();
     }
 
-    // »ı»ê °èÈ¹ Ãß°¡
+    // ìƒì‚° ê³„íš ì¶”ê°€
     @Override
     public void insertPlan(ProductionPlan_DTO plan) {
         if (plan == null) {
-            throw new IllegalArgumentException("»ı»ê °èÈ¹ Á¤º¸°¡ ºñ¾î ÀÖ½À´Ï´Ù.");
+            throw new IllegalArgumentException("ìƒì‚° ê³„íš ì •ë³´ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.");
         }
         planDAO.insertPlan(plan); 
     }
 
-    // »ı»ê °èÈ¹ ¼öÁ¤
-    @Override
-    public void updatePlan(ProductionPlan_DTO plan) {
-        if (plan == null || plan.getProductId() <= 0) {
-            throw new IllegalArgumentException("¼öÁ¤ÇÒ °èÈ¹ Á¤º¸ ¶Ç´Â Á¦Ç° ID°¡ ºñ¾î ÀÖ°Å³ª Àß¸øµÇ¾ú½À´Ï´Ù.");
-        }
-        planDAO.updatePlan(plan);
-    }
+    // ìƒì‚° ê³„íš ìˆ˜ì •
+//    @Override
+//    public void updatePlan(ProductionPlan_DTO dto) {
+//        planDAO.updatePlan(dto);
+//    }
+
+
+
+    // ìƒí’ˆ ê²€ìƒ‰ ìë™ì™„ì„±ìš©
     @Override
     public List<ProductionPlan_DTO> getProducts(String searchTerm) {
         return planDAO.getProducts(searchTerm);
+    }
+    
+    //ìƒì‚° ê³„íš ì‚­ì œ
+    @Override
+    public void deletePlan(int planId) {
+        if (planId <= 0) {
+            throw new IllegalArgumentException("ìœ íš¨í•˜ì§€ ì•Šì€ ìƒì‚°ê³„íš ëª…ë ¹ì…ë‹ˆë‹¤.");
+        }
+        planDAO.deletePlan(planId);
     }
 
 }
