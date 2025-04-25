@@ -21,10 +21,13 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".selectAllPlans");
     }
 
+    //수정
     @Override
-    public void updatePlan(ProductionPlan_DTO plan) {
-        sqlSession.update(NAMESPACE + ".updatePlan", plan);
+    public void updatePlan(ProductionPlan_DTO dto) {
+        sqlSession.update(NAMESPACE + ".updatePlan", dto); 
     }
+
+
 
     @Override
     public void insertPlan(ProductionPlan_DTO plan) {
@@ -34,6 +37,12 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
     @Override
     public List<ProductionPlan_DTO> getProducts(String searchTerm) {
         return sqlSession.selectList(NAMESPACE + ".getProducts", searchTerm);
+    }
+
+    //삭제
+    @Override
+    public void deletePlan(int planId) {
+        sqlSession.delete(NAMESPACE + ".deletePlan", planId);
     }
 
     

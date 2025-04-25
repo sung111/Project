@@ -12,7 +12,7 @@ import project.dto.WorkOrder_DTO;
 public class Workorder_total_controller {
 
 
-    @GetMapping("/workorder")
+    @GetMapping("prodplan/workorder")
     public String showWorkOrder(
         @RequestParam(value = "id", required = false) Integer workorderId, 
         Model model
@@ -24,7 +24,7 @@ public class Workorder_total_controller {
         // JSP에 전달
         model.addAttribute("workOrder", workOrder);
 
-        return "workorder"; // workorder.jsp 반환
+        return "WorkOrder";
     }
 }
 

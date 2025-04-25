@@ -20,14 +20,14 @@ public class Index_total_controller {
 
     @GetMapping("index")
     public ModelAndView index(HttpSession session) {
-        // ¼¼¼ÇÀ» ÅëÇÑ userId Á¤º¸ °¡Á®¿À±â
+        // ì„¸ì…˜ì—ì„œ ì €ì¥ëœ userIdë¥¼ ë¶ˆëŸ¬ì˜¨ë‹¤
         String userId = (String) session.getAttribute("userId");
 
         ModelAndView mv = new ModelAndView();
 
         if (userId != null) {
-            // ¼¼¼Ç¿¡ ·Î±×ÀÎµÈ »ç¿ëÀÚ°¡ ÀÖÀ¸¸é
-            String helloUser = "·Î±×ÀÎÇÑ »ç¿ëÀÚÀÔ´Ï´Ù.";
+            // ì„¸ì…˜ì— ë¡œê·¸ì¸ëœ ì‚¬ìš©ìê°€ ì¡´ì¬í•  ê²½ìš°
+            String helloUser = "ë¡œê·¸ì¸ëœ ì‚¬ìš©ìì…ë‹ˆë‹¤.";
             String userRole = "";
             String userName = "";
 
@@ -35,10 +35,10 @@ public class Index_total_controller {
             if (user != null) {
                 userRole = user.getJob();
                 userName = user.getUserName(); 
-                helloUser = userRole + " " + userName + "´Ô, È¯¿µÇÕ´Ï´Ù!";
+                helloUser = userRole + " " + userName + "ë‹˜, í™˜ì˜í•©ë‹ˆë‹¤!";
             }
 
-            // Tiles ¼³Á¤À» ÅëÇÑ view ·»´õ¸µ
+            // Tiles ì„¤ì •ì— ë”°ë¥¸ view ì§€ì •
             mv.setViewName("index");
             mv.addObject("userId", userId);
             mv.addObject("helloUser", helloUser);
