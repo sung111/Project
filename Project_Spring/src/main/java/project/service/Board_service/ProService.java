@@ -23,7 +23,7 @@ public interface ProService {
 	
 	public 	Map<String, Object> SelectPage(Prodto Prodto);
 	public 	Map<String, Object> search(Prodto Prodto);
-	
+	public int totalist(Prodto prodto);
 	
 	
 	

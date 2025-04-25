@@ -598,7 +598,7 @@ System.out.println("유저아이디 : " + userId);
 		
 		
 		// 검색
-		@RequestMapping(value = "/searchss")
+		@RequestMapping(value = "/Nosearch")
 		public String search(
 				
 				// 404시 이쪽으로 안들어오는거
@@ -628,11 +628,11 @@ System.out.println("유저아이디 : " + userId);
 			    
 			    if(prodto.getTitle() == null || prodto.getTitle().trim().isEmpty()) {
 					
-					return "redirect:select";
+					return "redirect:notify";
 					
 				} else {
 					
-					return "board";					
+					return "Notify";					
 				}
 			    
 			

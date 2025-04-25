@@ -41,9 +41,10 @@
         </select> 
         
         <!-- 모든 페이지 -->
-        <select id="totalEmp" resultType="int">
+        <select id="totalEmp" parameterType="Prodto" resultType="int">
         
-        select count(*) from posts where notify = #{notify}
+        select count(*) from posts 
+        where notify = #{notify}
         
         </select>
         

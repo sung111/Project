@@ -200,7 +200,7 @@ h1 {
             <label for="category">게시판 선택</label>
             <select id="category" name="category">
                                    <!--  이것만 전송 -->
-                <option value="select">선택</option>
+                <option value="select" id="choice" name="choice">-- 카테고리를 선택해주세요 --</option>
                 <option value="notify" id="special" name="special">공지사항</option>
                 <option value="normal" id="normal" name="normal">일반 게시판</option>
             </select>
@@ -226,7 +226,7 @@ h1 {
 	            <div class="button-container">
 	            
 	            
-	                                         
+	                      <!-- 파일올리기 -->                   
 	                <input type="file" name="file_name" multiple>
 	                
 	                
@@ -249,12 +249,12 @@ h1 {
 	                
 	                
 	                
-	            <div id="schedule-input-container" style="display:none; margin-top: 10px;">
+	            <!-- <div id="schedule-input-container" style="display:none; margin-top: 10px;">
 	                <label for="schedule-date">일정</label>
 	                <input type="date" id="schedule-date" />
 	            </div>
 	        </div>
-	        <div class="button-post">
+	        <div class="button-post"> -->
 	        
 	        
 	        
@@ -272,7 +272,7 @@ h1 {
 	        
 	            <input type="hidden" name="userid" value="<%= session.getAttribute("userId")%>">
 				<input type="hidden" name="notify" value="notify">
-	            <button type="submit">게시하기</button>
+	            <button type="submit" id="post">게시하기</button>
 	        <!-- </form> -->
         
         </form>
@@ -317,7 +317,20 @@ h1 {
     <% } %>
 
     
-    
+    // 선택 누르고 게시할시 막아버리기 
+     let ch = document.querySelector("#choice");
+     let no = document.querySelector("#normal");
+     let sp = document.querySelector("#special");
+     
+     // value기준
+     let po = document.querySelector("#post");
+     po.addEventListener("click", function() {
+    	if(ch.value == "select") {
+    	alert("카테고리를 선택해주세요");
+    	} else {
+    		alert("글 작성이 완료되었습니다");
+    	}
+    });
     
     
     

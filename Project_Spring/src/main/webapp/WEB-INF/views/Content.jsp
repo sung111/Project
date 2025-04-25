@@ -206,14 +206,14 @@ width: 50%;
 
     <div class="box">
         <div class="post-title">${con.title}</div>
-        <div class="post-info"> 작성자: <%= session.getAttribute("userName") %> | 날짜: ${con.postdate} | 조회수: ${con.viewcount}</div>
+        <div class="post-info"> 작성자: 
+        <%= session.getAttribute("userName") %> | 날짜: ${con.postdate} | 조회수: ${con.viewcount}</div>
         <div class="post-content">
           ${con.content}
          
         </div>
 
-
-
+          
 
 
 
@@ -290,13 +290,17 @@ width: 50%;
  
  </div>          
       
-      
-      
+    
+      <%
+      String notifyParam = request.getParameter("notify");
+      System.out.println("notifyParam 잘받았는지 : " + notifyParam);
+      String notifyValue = ("Y".equals(notifyParam)) ? "Y" : "N";
+      %>
       
       
         <div class="button-container">
         <!-- <form method ="post" action ="board"> -->
-            <button type="submit" id="list"><a href="select?notify=${notify}">목록으로</a></button>
+            <button type="submit" id="list"><a href="select?notify=${cons}">목록으로</a></button>
       <!--   </form> -->
         
         
@@ -386,7 +390,7 @@ width: 50%;
                          
               </div>
                     
-                    
+                     
              <form method="post" action="comment"> 
             <div class="comment-section abc">
                 <input type="hidden" value="${con.postid}" name="postid">

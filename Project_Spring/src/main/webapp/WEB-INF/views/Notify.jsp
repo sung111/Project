@@ -172,7 +172,7 @@ position:absolute;
 
 </style>
 
-<form method="post" action="search" id="searchform">
+<form method="post" action="Nosearch" id="searchform">
 <input type="text" name="title" placeholder="검색어 입력">
 <button type="submit" class="newpost" id="search">등록</button>
 </form>
@@ -219,7 +219,7 @@ position:absolute;
 		
 <%-- 유저 : <%= session.getAttribute("userId") %> --%>
 
-<c:if test="${not empty map.list}">
+<%-- <c:if test="${not empty map.list}">
       <c:forEach var="dlo" items="${map.list}">
 		<!-- 게시물 목록 -->                   <!--  id만 따오면 뒤에 따라온다 -->
 		<div class="post" >        <!--  a태그 : get방식(파라미터 뒤에쓰기) form : post방식 -->
@@ -232,7 +232,7 @@ position:absolute;
 </c:if>		
 <c:if test="${empty map.list}">
     <p>검색 결과가 없습니다.</p>
-</c:if>
+</c:if> --%>
 
 
 
@@ -341,7 +341,7 @@ position:absolute;
 				<button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
 			</c:if>
 			<c:if test="<%= begin != 1 %>">			                     
-				<a href="select?page=<%= begin-1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
+				<a href="notify?page=<%= begin-1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=Y"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
 			</c:if>
 			
 			
@@ -357,7 +357,7 @@ position:absolute;
 				
 				<!--  버튼 누르면 페이징됨과 동시에 카운트유지 
 				1페이지 15누르면 http://localhost:8080/project/select?pagecount=15-->
-				<a href="select?page=${ i }&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
+				<a href="notify?page=${ i }&pagecount=<%= Prodto.getPagecount() %>&notify=Y" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
 		
 			</c:forEach>
 			
@@ -366,7 +366,7 @@ position:absolute;
 				<button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
 			</c:if>
 			<c:if test="<%= end != lastPage %>">
-				<a href="select?page=<%= end+1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
+				<a href="notify?page=<%= end+1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=Y"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
 			</c:if>
      	</div>
 </div> 

@@ -129,8 +129,9 @@ System.out.println("유저아이디 : " + userId);
 //				dto.setViewCount(viewCount); 
 				
 				
-				
-				
+int normalCount = ProService.totalist(dto);
+model.addAttribute("normalCount", normalCount);
+System.out.println("일반게시글 숫자 :" + normalCount);				
 				
 				
 //                List<Prodto> search = ProService.search(dto);
@@ -176,6 +177,8 @@ System.out.println("유저아이디 : " + userId);
 				System.out.println("이것은 notifydto : " + notifydto);
 				
 				
+				
+				
 //				 if (notifydto == null || notifydto.isEmpty()) {
 //				        return "redirect:/select?notify=N";
 //				    } else if (notifydto.equals("Y")) {
@@ -215,7 +218,7 @@ System.out.println("유저아이디 : " + userId);
 	public String insertEmp(
 			                               
 			@RequestParam("category") String categoryValue,
-			
+			Model model, 
 			
 			@ModelAttribute
 			Prodto Prodto,
@@ -234,8 +237,10 @@ System.out.println("유저아이디 : " + userId);
    
 		if(categoryValue.equals("normal")) {
 			Prodto.setNotify("N");  // 일반게시판
-		} else {
+		} else if(categoryValue.equals("notify")){
 			Prodto.setNotify("Y");  // 공지사항
+		} else {
+			return "redirect:write";
 		}
 
 		
@@ -338,7 +343,13 @@ System.out.println("유저아이디 : " + userId);
   }
 		
 		
-		
+            Map map = ProService.SelectPage(Prodto);
+			System.out.println(" 페이지겸셀렉트dto :" + Prodto);
+			System.out.println(" 맵 크기 " + map.size());
+			System.out.println(" 맵 내용 : " + map);
+//			System.out.println("list.size : " + list.size());
+			model.addAttribute("map", map);  // 돌려줄때 map.empno처럼 표기.
+			model.addAttribute("dto", Prodto);   // 명시적으로 쓰기
 		
 		
 		
@@ -358,12 +369,13 @@ System.out.println("유저아이디 : " + userId);
 //		
 		
 		
-          if (notifydto == null || notifydto.isEmpty()) {
-				return "redirect:/select?notify=N";
-		    } 
+			/*
+			 * if (notifydto == null || notifydto.isEmpty()) { return
+			 * "redirect:/select?notify=N"; }
+			 */
 			
 			    // 이거 그냥쓰면 jsp라 비어있음
-		    	return "board";
+		    	return "redirect:/select?notify=" + notifydto;
 	}
 	
 
@@ -390,14 +402,15 @@ System.out.println("유저아이디 : " + userId);
 		    
 		
 		
-		
+		String notifydto = prodto.getNotify();
+		System.out.println("공지사항dto 확인하기!!!! : " + notifydto);
 		
 		
 		    System.out.println(" 컨텐츠 DTO :" + prodto);
 		    Prodto dtopro = ProService.Contentemp(prodto);
 		    int view = ProService.Viewcount(prodto);
 		    model.addAttribute("con", dtopro);
-		    
+		    model.addAttribute("cons", notifydto);
 		    
 		    
 //	        List<Comdto> comsel = Comservice.Comsel(postid);
@@ -459,7 +472,7 @@ System.out.println("유저아이디 : " + userId);
 			
 		}
 		
-	
+	    
 		
 		
 		// 글 수정 정보
@@ -498,15 +511,25 @@ System.out.println("유저아이디 : " + userId);
 			
 		}	
 		
+		// 수정 입구
+		@RequestMapping(value = "/Modifyin")
+		public String Modifyin() {
+				
+		
+			return "Modify";
+			
+		}
 		
 		// 글 수정
 		@RequestMapping(value = "/conup")
 		public String conup(
 				
-				
+				HttpServletRequest request,
+				@RequestParam("category") String categoryValue,
 				MultipartHttpServletRequest req,
 				@ModelAttribute Prodto prodto,
-				@ModelAttribute Linkdto linkdto
+				@ModelAttribute Linkdto linkdto,
+				Model model
 //				Filedto filedto
 //				Model model
 									
@@ -517,8 +540,12 @@ System.out.println("유저아이디 : " + userId);
 				System.out.println("post아이디 수정씨 : " + id);
 				// 키포인트
 			
-			
-			 
+			    // 공지사항 일반게시판 글 구분
+				if(categoryValue.equals("normal")) {
+					prodto.setNotify("N");  // 일반게시판
+				} else {
+					prodto.setNotify("Y");  // 공지사항
+				}
 			
 			
 			    System.out.println(" 컨텐츠 수정임 DTO " + prodto);
@@ -568,23 +595,60 @@ System.out.println("유저아이디 : " + userId);
 			    
 			    
 			    
+		          HttpSession session = request.getSession();
+		  		String userid = (String) session.getAttribute("userId");
+		  		prodto.setUserid(userid);
+		  		
+		  		String iduser = prodto.getUserid();
+		  		System.out.println("Prodto.getUserid(); : " + iduser);
+		  		System.out.println("유저아이디 : " + userid);
+		  		
+		  		
+		  		String not = prodto.getNotify();
+		  		System.out.println("공지사항 항목은 뭐가 나올까" + not);
 			    
 			    
 			    
 			    
 			    
+		            Map map = ProService.SelectPage(prodto);
+					System.out.println(" 페이지겸셀렉트dto :" + prodto);
+					System.out.println(" 맵 크기 " + map.size());
+					System.out.println(" 맵 내용 : " + map);
+//					System.out.println("list.size : " + list.size());
+					model.addAttribute("map", map);  // 돌려줄때 map.empno처럼 표기.
+					model.addAttribute("dto", prodto);   // 명시적으로 쓰기	    
 			    
+					
 			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			return "forward:select";
+					if(categoryValue.equals("normal")) { 
+						prodto.setNotify("N");
+						
+//						return "redirect:/select?notify=N";
+					} else if(categoryValue.equals("notify")){
+						prodto.setNotify("Y");
+						
+//						return "redirect:/select?notify=Y";
+					} else {
+						 return "redirect:/conmod?postid=" + prodto.getPostid();
+						
+					}
+					
+					
+					
+					
+					ProService.Conup(prodto);
+					return "redirect:/select?notify=" + prodto.getNotify();
 			
 		}	
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		// 파일 다운로드
@@ -681,12 +745,15 @@ System.out.println("유저아이디 : " + userId);
 			
 			
 		        System.out.println("검색 title: " + prodto.getTitle());
+		        System.out.println("검색 notify: " + prodto.getNotify());
 			    System.out.println("검색 prodto 조회 :" + prodto);
 			    
 			    Map<String, Object> maps = ProService.search(prodto);
 			    System.out.println(" 검색맵 크기 " + maps.size());
 			    
 				
+			    
+			    
 //			    System.out.println("검색 결과 수: " + ((List)map.get("resultList")).size());
 //			    int postid = prodto.getPostid();
 //			    System.out.println(" 파일 삭제 포스트아이디" + prodto.getPostid());
@@ -694,7 +761,15 @@ System.out.println("유저아이디 : " + userId);
 			    model.addAttribute("map", maps);
 			    model.addAttribute("dto", prodto);
 	            
-			   	    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
 			    
 			    if(prodto.getTitle() == null || prodto.getTitle().trim().isEmpty()) {
 					

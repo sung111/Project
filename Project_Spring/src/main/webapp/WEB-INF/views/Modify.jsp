@@ -220,19 +220,19 @@ width: 50%;
     <div class="box">
         <h1>글쓰기 수정</h1>
         <div class="postbtn">
+        <form method="post" action="conup" enctype="multipart/form-data">
             <label for="category">게시판 선택</label>
-            <select id="category">
-                <option value="1">선택</option>
-                <option value="2">공지사항</option>
-                <option value="3">사내복지</option>
-                <option value="4">일반 게시판</option>
+            <select id="category" name="category">
+                <option value="select" id="choice" name="choice">-- 카테고리를 선택해주세요 --</option>
+                <option value="notify" id="special" name="special">공지사항</option>
+                <option value="normal" id="normal" name="normal">일반 게시판</option>
             </select>
         </div>
             
      
      
      
-      <form method="post" action="conup" enctype="multipart/form-data">
+      
      
      
             
@@ -296,14 +296,15 @@ width: 50%;
 			
         
         
-        
+           <input type="hidden" name="userid" value="<%= session.getAttribute("userId")%>">
+			<input type="hidden" name="notify" value="notify">
         
         
      <%-- <c:forEach var="doo" items="${modi}"> --%> 
      
         <div class="button-post">
             <input  type="hidden" name="postid" value="${dtolink.postid}"></input>
-            <button type="submit" name="postid" value="${modi.postid}">수정하기</button>
+            <button id="fix" type="submit" name="postid" value="${modi.postid}">수정하기</button>
         </div>
         
      <%-- </c:forEach> --%>
@@ -327,6 +328,34 @@ width: 50%;
 
 
     <script>
+    
+    
+ // 선택 누르고 게시할시 막아버리기 
+    let ch = document.querySelector("#choice");
+    let no = document.querySelector("#normal");
+    let sp = document.querySelector("#special");
+    
+    // value기준
+    let fix = document.querySelector("#fix");
+    fix.addEventListener("click", function() {
+    	if(ch.value == "select") {
+        	alert("카테고리를 선택해주세요");
+        	} else {
+        		alert("글 작성이 완료되었습니다");
+        	}
+   });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         document.getElementById('link-button').addEventListener('click', function () {
             const linkInputContainer = document.getElementById('link-input-container');
             linkInputContainer.style.display = (linkInputContainer.style.display === 'none' || linkInputContainer.style.display === '') ? 'block' : 'none';
