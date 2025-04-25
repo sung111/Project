@@ -204,6 +204,7 @@
                 
                 //ajax
             const xhr = new XMLHttpRequest();
+            //if pageNo 언디판 serch 언디파인 if else문 써서 값을 넣거나 뺴자 
             xhr.open('get', 'bom_v2_select?page='+pageNo+'&serch='+serch )
 
             xhr.setRequestHeader('Content-Type', 'application/json')
