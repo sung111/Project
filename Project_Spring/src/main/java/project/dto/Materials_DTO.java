@@ -30,10 +30,13 @@ public class Materials_DTO {
 	int bom_pr_id; //bom 프로덕트 아이디
 	int inven_ma_id; // 인벤토리 메터리얼아이디
 	int inven_quan;  // 남은 원자재 수량
+	int productid;
+	
 	
 	private List empnos;
 	private int page = 1; // 현재 페이지
 	private int viewCount =10; // 페이지당 보여줄 수 countPerPage / rowPerPage
+	private int BuildOfMaterialsviewCount = 7; //페이지당 보여줄계수
 	private int indexStart;
 	private int indexEnd;
 	

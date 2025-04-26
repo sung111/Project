@@ -46,15 +46,25 @@ public class Build_of_Materials_serviceimpl implements Build_of_Materials_servic
 	}
 
 	@Override
-	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid) {
+	public Map<String,Object> BuildOfMaterials_materialSelect(Materials_DTO dto) {
 		List list = null;
+		Map <String,Object> map = new HashMap();
 		try {
-			list = dao.BuildOfMaterials_materialSelect(productid);
+			//한페이지의 내용만 있는 리스트
+			list = dao.BuildOfMaterials_materialSelect(dto);
+			//전체 글 개수 
+			int count = dao.BuildOfMaterials_materialCount(dto);
+			map.put("list", list);
+			map.put("count", count);
+			System.out.println("BuildOfMaterials_materialSelect 실행");
+			System.out.println("list :"+list+""+"count :"+count);
+		
+		
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return map;
 	}
 
 	@Override
