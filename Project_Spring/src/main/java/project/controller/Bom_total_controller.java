@@ -598,14 +598,18 @@ public class Bom_total_controller {
 //완제품 BOM
 //----
 	@RequestMapping(value="/bom_v2",method=RequestMethod.GET)
-	public String Bom_v2( HttpSession httpsession ,Model model
+	public String Bom_v2( HttpSession httpsession ,Model model,
+			@RequestParam(value="page",required = false) String page
 			
 			)  {
 		System.out.println("bom_v2 입장~~~");
 		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
 		String Field = Field2.getJob();
 //				String Field = "ADMIN";
-		model.addAttribute(Field);
+		model.addAttribute("Field",Field);
+		model.addAttribute("pageNo",page);
+		
+		
 		return "bom_v2";
 	}
 			
@@ -650,6 +654,7 @@ public class Bom_total_controller {
 	public String Bomlist(Model model,
 			@RequestParam(value="pname",required = false) String pname,
 			@RequestParam(value="pid",required = false) String pid,
+			@RequestParam(value="page",required = false) int page,
 			 HttpSession httpsession
 			) {
 		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
@@ -662,6 +667,7 @@ public class Bom_total_controller {
 			model.addAttribute("Field",Field);
 			model.addAttribute("pid",pid);
 			model.addAttribute("pname",pname);
+			model.addAttribute("page",page);
 		}catch (Exception e) {
 			e.printStackTrace();
 			
@@ -684,6 +690,10 @@ public class Bom_total_controller {
 		List materiallist = null;
 		int productid = materials_DTO.getProductid();
 		try {
+			
+			System.out.println("----------");
+			System.out.println("받아온값 getPage--"+materials_DTO.getPage()+"  getProductid"+materials_DTO.getProductid());
+			System.out.println("---------");
 			Map list = build_of_Materials_service.BuildOfMaterials_materialSelect(materials_DTO);
 			System.out.println("materiallist :"+materiallist);
 			map.put("list", materiallist);

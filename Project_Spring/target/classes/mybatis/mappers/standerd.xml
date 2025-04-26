@@ -351,7 +351,7 @@
                 left JOIN boms b ON m.MATERIALID = b.MATERIALID  
                 left join inventorystatus i on m.MATERIALID = i.MATERIALID 
                 where  m.materialdel = 'n' 
-                and b.productid = ${}
+                and b.productid = #{productid}
                 and b.bomdel = 'n' 
                 order by m.MATERIALID 
     		 ) tmp1
@@ -367,21 +367,21 @@ where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
 	
 	<insert id="BuildOfMaterials_materialListInsert" parameterType="Bom_DTO" >
 	insert into boms 
-	 values ('',${quantity},${materialid},${productid},'n')
+	 values ('',#{quantity},#{materialid},#{productid},'n')
 	</insert>
 	
 <!-- 	bom material 삭제코드 -->
 	<update id="BuildOfMaterials_materialListDelete" parameterType="Bom_DTO" >
  					update boms 
 					 set bomdel  = 'y'
-					where bomid = ${bomid}
+					where bomid = #{bomid}
 	</update>
 	
 	<!-- 	bom material수정코드 -->
 	<update id="BuildOfMaterials_materialListUpdate" parameterType="Bom_DTO" >
 			  	update boms 
-				set quantity  = ${quantity}
-				where bomid =${bomid}
+				set quantity  = #{quantity}
+				where bomid =#{bomid}
 	</update>
 	
 	<!-- 	bom 한줄만 셀렉트 -->
@@ -408,7 +408,7 @@ where rnum <![CDATA[>=]]> #{indexStart} and rnum <![CDATA[<=]]> #{indexEnd}
 	left JOIN boms b ON m.MATERIALID = b.MATERIALID  
 	left join inventorystatus i on m.MATERIALID = i.MATERIALID 
 	where  m.materialdel = 'n' 
-	and b.BOMID = ${_parameter}
+	and b.BOMID = #{_parameter}
 	and b.bomdel = 'n' 
 	order by m.MATERIALID 
 	</select>
@@ -438,10 +438,10 @@ SELECT
 	left JOIN boms b ON m.MATERIALID = b.MATERIALID  
 	left join inventorystatus i on m.MATERIALID = i.MATERIALID 
 	where  m.materialdel = 'n' 
-	and b.productid = ${productid}
+	and b.productid = #{productid}
 	and b.bomdel = 'n' 
 	order by m.MATERIALID 
-    )count;
+    )count
 </select>
 
 

@@ -187,8 +187,9 @@
 
 <body>
     <!-- 내용 -->
-    <div class="container">
-        
+     <input type="hidden" value="${pageNo}" id="firstpageNo">
+        <div class="container">
+       
 
 
     </div>
@@ -196,8 +197,8 @@
     <script>
 
         window.addEventListener("load",search)
-     
-       
+        
+        
         function search(event,pageNo,serch) {
                 //맨처음한번 조회해오기
                 event.preventDefault();
@@ -205,7 +206,9 @@
                 //ajax
             const xhr = new XMLHttpRequest();
             //if pageNo 언디판 serch 언디파인 if else문 써서 값을 넣거나 뺴자 
-            if(pageNo === undefined){
+           let firstpageNo = document.querySelector("#firstpageNo").value
+        //    pageNo = firstpageNo 
+           if(pageNo === undefined ){
                 pageNo = 1
                 console.log("pageNo if작동")
             }
@@ -213,7 +216,7 @@
                 serch = " "
                 console.log("serch if작동")
             }
-           
+           console.log("pageNo",pageNo,"serch",serch,"firstpageNo",firstpageNo)
             xhr.open('get', 'bom_v2_select?page='+pageNo+'&serch='+serch )
             xhr.setRequestHeader('Content-Type', 'application/json')
 
@@ -283,7 +286,8 @@
                                         let productname = e.target.innerHTML
                                         console.log(pvalue)
                                         console.log(pvalue)
-                                            location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
+                                        location.href = "bomlist?pid=" + pvalue + "&pname="+productname +"&page="+page;
+                                        // alert("pvalue"+pvalue+"  productname"+productname+"  page"+page)
 
                                     })
                                     
