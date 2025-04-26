@@ -99,38 +99,93 @@
 			<c:choose>
 				<c:when test="${not empty planList}">
 					<c:forEach var="plan" items="${planList}">
-<tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.planId}">
-    <td class="productname"><c:choose>
-        <c:when test="${not empty plan.product}">
-            ${plan.product.productname}[${plan.product.spec}${plan.product.unit}]
-        </c:when>
-        <c:otherwise>데이터 없음</c:otherwise>
-    </c:choose></td>
-    <td class="lotnumber">${plan.product.lotnumber}</td>
-    <td class="unit">${plan.product.unit}</td>
-    <td class="warehouse">${plan.product.warehouse}</td>
-    <td class="deliveryDest">${plan.deliveryDest}</td>
-    <td class="partnumber">${plan.product.partnumber}</td>
-    <td class="totalqty">${plan.totalqty}</td>
-    <td class="createDate">${plan.createDate}</td>
-    <td class="startDate">${plan.startDate}</td>
-    <td class="endDate">${plan.endDate}</td>
-    <td><a>MRP 계산</a></td>
-    <td class="planStatus">${plan.planStatus}</td>
-    <td class="planCause">${plan.planCause}</td>
-    <td class="planNotes">${plan.planNotes}</td>
-    <td class="insdellayer">
-        <form class="list-btn ins">
-            <input type="hidden" name="planId" value="${plan.planId}" />
-            <input type="submit" value="수정" class="mdf-btn" id="mdf-btn"/>
-        </form>
-        <form action="${pageContext.request.contextPath}/prodplan/delete" method="post" 
-              onsubmit="return confirm('정말 삭제하시겠습니까?');" class="list-btn del">
-            <input type="hidden" name="planId" value="${plan.planId}" />
-            <input type="submit" value="삭제" />
-        </form>
-    </td>
-</tr>
+						<tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.planId}">
+<td class="productname">
+    <p>${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
+<select name="productname" id="productSelect" style="display: none;">
+    <c:forEach var="product" items="${productList}">
+        <c:if test="${not empty product.productname}">
+            <option value="${product.productname}">
+                ${product.productname}[${product.spec}${product.unit}]
+            </option>
+            <script>
+                console.log("Loaded product:", "${product.productname} [${product.spec}${product.unit}]");
+            </script>
+        </c:if>
+    </c:forEach>
+</select>
+
+</td>
+
+							<td class="lotnumber">
+								<p>${plan.product.lotnumber}</p> <input type="text" name="lotnumber" value="${plan.product.lotnumber}" style="display: none;" />
+							</td>
+							<td class="unit">
+								<p>${plan.product.unit}</p> <input type="text" name="unit" value="${plan.product.unit}" style="display: none;" />
+							</td>
+							<td class="warehouse">
+								<p>${plan.product.warehouse}</p> <input type="text"
+								name="warehouse" value="${plan.product.warehouse}"
+								style="display: none;" />
+							</td>
+							<td class="deliveryDest">
+								<p>${plan.deliveryDest}</p> <input type="text"
+								name="deliveryDest" value="${plan.deliveryDest}"
+								style="display: none;" />
+							</td>
+							<td class="partnumber">
+								<p>${plan.product.partnumber}</p> <input type="text"
+								name="partnumber" value="${plan.product.partnumber}"
+								style="display: none;" />
+							</td>
+							<td class="totalqty">
+								<p>${plan.totalqty}</p> <input type="text" name="totalqty"
+								value="${plan.totalqty}" style="display: none;" />
+							</td>
+							<td class="createDate">
+								<p>${plan.createDate}</p> <input type="text" name="createDate"
+								value="${plan.createDate}" style="display: none;" />
+							</td>
+							<td class="startDate">
+								<p>${plan.startDate}</p> <input type="text" name="startDate"
+								value="${plan.startDate}" style="display: none;" />
+							</td>
+							<td class="endDate">
+								<p>${plan.endDate}</p> <input type="text" name="endDate"
+								value="${plan.endDate}" style="display: none;" />
+							</td>
+							<td><a>MRP 계산</a></td>
+							<td class="planStatus">
+								<p>${plan.planStatus}</p> <input type="text" name="planStatus"
+								value="${plan.planStatus}" style="display: none;" />
+							</td>
+							<td class="planCause">
+								<p>${plan.planCause}</p> <input type="text" name="planCause"
+								value="${plan.planCause}" style="display: none;" />
+							</td>
+							<td class="planNotes">
+								<p>${plan.planNotes}</p> <input type="text" name="planNotes"
+								value="${plan.planNotes}" style="display: none;" />
+							</td>
+							<td class="insdellayer">
+									<button type="button" class="list-btn mdf-btn ins" id="mdf-btn">수정</button>
+
+								<form
+									action="${pageContext.request.contextPath}/prodplan/delete"
+									method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');"
+									class="list-btn del">
+									<input type="hidden" name="planId" value="${plan.planId}" /> <input
+										type="submit" value="삭제" />
+								</form>
+
+								<form class="list-btn comp">
+									<input type="hidden" name="planId" /><button type="button" class="com" id="comp-btn">확인</button>
+								</form>
+
+								<button type="button" class="list-btn cancel-btn" id="cancel-btn">취소</button>
+							</td>
+						</tr>
+
 
 					</c:forEach>
 				</c:when>
@@ -155,16 +210,57 @@
 					<button type="button" class="WO-buttonlist newProdPlan-btn">상품계획생성</button>
 					<button type="button" class="WO-buttonlist workOrder-btn">
 						<!-- 스타일로 버튼처럼 보이게 처리하는 게 좋아요 -->
-						<a href="${pageContext.request.contextPath}/prodplan/workorder"
-							class="workorder-a">작업지시서</a>
+						<a href="${pageContext.request.contextPath}/prodplan/workorder" class="workorder-a">작업지시서</a>
 					</button>
 				</td>
 			</tr>
 		</tfoot>
 	</table>
-	<script src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
-<script>
-	// 상품계획생성 버튼을 클릭하면 새 행이 추가된다. 
+	<script
+		src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
+	<script>
+	
+	// 예시로 미리 상품 리스트 배열을 만든다고 치자
+	const productList = [
+	    { name: "상품A", spec: "규격A", unit: "kg" },
+	    { name: "상품B", spec: "규격B", unit: "g" },
+	    { name: "상품C", spec: "규격C", unit: "개" }
+	];
+
+	document.querySelectorAll('.product-input').forEach(input => {
+	    input.addEventListener('click', function(e) {
+	        const listDiv = this.nextElementSibling; // input 바로 다음 div
+	        listDiv.innerHTML = ''; // 기존 리스트 초기화
+
+	        productList.forEach(product => {
+	            const item = document.createElement('div');
+	            item.textContent = `${product.name}[${product.spec}${product.unit}]`;
+	            item.style.padding = '5px';
+	            item.style.cursor = 'pointer';
+
+	            item.addEventListener('click', () => {
+	                input.value = product.name;
+	                listDiv.style.display = 'none';
+	            });
+
+	            listDiv.appendChild(item);
+	        });
+
+	        listDiv.style.display = 'block';
+	    });
+	});
+
+	// 외부 클릭 시 목록 숨기기
+	document.addEventListener('click', function(e) {
+	    if (!e.target.classList.contains('product-input')) {
+	        document.querySelectorAll('.product-list').forEach(list => {
+	            list.style.display = 'none';
+	        });
+	    }
+	});
+
+	
+	// 생성
     $(document).ready(function () {
         $(document).on('click', '.newProdPlan-btn', function () {
             let $tbody = $('.tb1');
@@ -185,19 +281,12 @@
                     <td><input type="text" class="planCauseInput" placeholder="생산사유" /></td>
                     <td><input type="text" class="planNotesInput" placeholder="비고" /></td>
                     <td class="insdellayer">
-					<form
-					action="${pageContext.request.contextPath}/prodplan/insert"
-					method="post" class="list-btn com">
-					<input type="hidden" name="planId" value="${plan.planId}" 
-					onsubmit="return confirm('상품 생산계획을 작성하시겠습니까?');"/> <input
-						type="submit" value="생성" />
+					<form action="${pageContext.request.contextPath}/prodplan/insert" method="post" class="list-btn com">
+					<input type="hidden" name="planId" value="${plan.planId}"  onsubmit="return confirm('상품 생산계획을 작성하시겠습니까?');"/> 
+					<input type="submit" value="생성" />
 				</form> 
-				<form
-					action="${pageContext.request.contextPath}/prodplan/insert"
-					method="post" onsubmit="return confirm('정말 취소하시겠습니까?');"
-					class="list-btn cancel">
-					<input type="hidden" name="planId" value="${plan.planId}" /> <input
-						type="submit" value="취소" />
+				<form action="${pageContext.request.contextPath}/prodplan/insert" method="post" onsubmit="return confirm('정말 취소하시겠습니까?');" class="list-btn cancel">
+					<input type="hidden" name="planId" value="${plan.planId}" /> <input type="submit" value="취소" />
 				</form>
 				</td>
                 </tr>
@@ -206,79 +295,99 @@
         });
     });
 
-	// 수정
-	document.addEventListener("DOMContentLoaded", function () {
-		document.querySelectorAll(".mdf-btn").forEach(btn => {
-			btn.addEventListener("click", function (e) {
-				e.preventDefault();
+// 수정
+document.querySelectorAll('.ins').forEach(button => {
+    button.addEventListener('click', function() {
+        const tr = this.closest('tr');
+        editRow(tr);
+    });
+});
 
-				const row = this.closest('tr');
+// 취소
+document.querySelectorAll('.cancel-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const tr = this.closest('tr');
+        cancelRow(tr);
+    });
+});
 
-				// 수정 중이면 return 방지
-				if (row.classList.contains('editing')) return;
-				row.classList.add('editing');
+function editRow(trElement) {
+    const pTags = trElement.querySelectorAll('p');
+    const originalValues = [];
 
-				const tds = row.querySelectorAll("td");
-				const originalData = [];
+    // p 태그들의 원래 값 저장
+    pTags.forEach(p => {
+        originalValues.push(p.textContent.trim());
+    });
 
-				const excludeIndexes = [2, 3, 5, 10]; // 단위, 보관, 창고위치, MRP
+    // p 태그 숨기고, input 또는 select 보이기
+    pTags.forEach((p, index) => {
+        p.style.display = 'none';
 
-				tds.forEach((td, index) => {
-					// 원래 내용 저장
-					originalData[index] = td.innerHTML;
+        const nextElement = p.nextElementSibling;
+        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
+            nextElement.style.display = 'inline';
+            // input이면 value 설정, select면 selectedIndex 맞추는 처리도 가능
+            if (nextElement.tagName === 'INPUT') {
+                nextElement.value = originalValues[index];
+            }
+            // select는 따로 선택된 값 세팅 안 해줘도 돼. (기본값 세팅되어 있다고 가정)
+        }
+    });
 
-					// 수정 제외 항목은 그대로 두기
-					if (!td.classList.contains("insdellayer") && !excludeIndexes.includes(index)) {
-						const text = td.textContent.trim();
-						td.innerHTML = `<input type="text" value="${text}" style="width:95%;" />`;
-					}
-				});
+    // 버튼 토글
+    const editButton = trElement.querySelector('.ins');
+    const deleteButton = trElement.querySelector('.del');
+    const confirmButton = trElement.querySelector('.comp');
+    const cancelButton = trElement.querySelector('.cancel-btn');
 
-				const actionTd = row.querySelector(".insdellayer");
-				const originalBtn = actionTd.innerHTML;
+    if (editButton) editButton.style.display = 'none';
+    if (deleteButton) deleteButton.style.display = 'none';
+    if (confirmButton) confirmButton.style.display = 'inline';
+    if (cancelButton) cancelButton.style.display = 'inline';
+}
 
-				// 버튼 교체
-				actionTd.innerHTML = `
-					<button type="button" class="confirm-btn">확인</button>
-					<button type="button" class="cancel-btn">취소</button>
-				`;
+function cancelRow(trElement) {
+    const pTags = trElement.querySelectorAll('p');
 
-				// 확인 버튼
-				actionTd.querySelector(".confirm-btn").addEventListener("click", function () {
-					const updatedData = [];
-					tds.forEach((td, index) => {
-						if (!td.classList.contains("insdellayer") && td.querySelector('input')) {
-							updatedData[index] = td.querySelector('input').value;
-							td.innerHTML = updatedData[index];
-						} else if (!td.classList.contains("insdellayer")) {
-							updatedData[index] = td.textContent.trim();
-						}
-					});
+    // p 태그 다시 보이고 input/select 숨기기
+    pTags.forEach(p => {
+        p.style.display = 'inline';
 
-					// 버튼 원상 복구
-					actionTd.innerHTML = originalBtn;
-					row.classList.remove('editing');
-				});
+        const nextElement = p.nextElementSibling;
+        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
+            nextElement.style.display = 'none';
+        }
+    });
 
-				// 취소 버튼
-				actionTd.querySelector(".cancel-btn").addEventListener("click", function () {
-					tds.forEach((td, index) => {
-						td.innerHTML = originalData[index];
-					});
+    // 버튼 토글
+    const editButton = trElement.querySelector('.ins');
+    const deleteButton = trElement.querySelector('.del');
+    const confirmButton = trElement.querySelector('.comp');
+    const cancelButton = trElement.querySelector('.cancel-btn');
 
-					actionTd.innerHTML = originalBtn;
-					row.classList.remove('editing');
-				});
-			});
-		});
-	});
+    if (editButton) editButton.style.display = 'inline';
+    if (deleteButton) deleteButton.style.display = 'inline';
+    if (confirmButton) confirmButton.style.display = 'none';
+    if (cancelButton) cancelButton.style.display = 'none';
+}
+
+
+function cancelRow(trElement) {
+    // tr 안의 모든 p 태그 가져오기
+    const pTags = trElement.querySelectorAll('p');
+
+    // 모든 input 태그 숨기고 p 태그 다시 보이게 처리
+    pTags.forEach(p => { p.style.display = 'inline';
+        // 해당 p에 대응하는 input을 숨김
+        const input = p.nextElementSibling;  if (input && input.tagName === 'INPUT') { input.style.display = 'none'; } });
+    // 수정, 삭제 버튼 보이게 하고 확인, 취소 버튼 숨기기
+    const editButton = trElement.querySelector('.ins'); const deleteButton = trElement.querySelector('.del'); const confirmButton = trElement.querySelector('.comp'); const cancelButton = trElement.querySelector('.cancel-btn');
+    if (editButton) editButton.style.display = 'inline';  if (deleteButton) deleteButton.style.display = 'inline'; if (confirmButton) confirmButton.style.display = 'none';  if (cancelButton) cancelButton.style.display = 'none'; 
+}
 
 	//삭제
-	function deleteRow(button) {
-		// 삭제 기능 처리 (원하는 로직을 추가)
-		var row = button.closest('tr');
-		row.parentNode.removeChild(row);  // 해당 행 삭제
-	}
+	function deleteRow(button) { var row = button.closest('tr'); row.parentNode.removeChild(row);  }
 
 	// 상품명 클릭 시 product 리스트 조회
 	$(document).on('click', '.productNameInput', function () {
@@ -323,119 +432,6 @@
 		});
 	});
 
-	// 테이블에서 상품 클릭 시 값 채우기
-	$(document).on('click', '.product-item', function () {
-		let name = $(this).find('td:eq(0)').text();
-		let spec = $(this).find('td:eq(1)').text();
-		let unit = $(this).find('td:eq(2)').text();
-		let warehouse = $(this).find('td:eq(3)').text();
-
-		let $tr = $(this).closest('tr').prevAll('tr').eq(0);
-		$tr.find('.productNameInput').val(name);
-		$tr.find('.specInput').val(spec);
-		$tr.find('.unitInput').val(unit);
-		$tr.find('.warehouseInput').val(warehouse);
-
-		// 검색결과 테이블 제거
-		$('.search-result-table').remove();
-	});
-
-	document.addEventListener("DOMContentLoaded", function () {
-		const tbody = document.querySelector("#prodPlanTable tbody");
-
-		// 수정 버튼 클릭 이벤트
-		// 품목코드, 단위, 보관, 창고위치는 수정 불가
-		tbody.addEventListener("click", function (e) {
-			if (e.target.classList.contains("editBtn")) {
-				const row = e.target.closest("tr");
-
-				if (row.dataset.mode === "edit") return;
-
-				row.dataset.mode = "edit";
-
-				const cells = row.querySelectorAll("td");
-				const originalData = [];
-
-				for (let i = 1; i <= 8; i++) {
-					originalData.push(cells[i].textContent.trim());
-					if (i === 2 || i === 3 || i === 4 || i === 6) {
-						continue; 
-					}
-
-					const input = document.createElement("input");
-					input.type = "text";
-					input.value = cells[i].textContent.trim();
-					input.classList.add("editInput");
-					cells[i].textContent = "";
-					cells[i].appendChild(input);
-				}
-
-				// 명령 버튼 교체
-				const actionCell = cells[9];
-				const confirmBtn = document.createElement("button");
-				confirmBtn.textContent = "확인";
-				confirmBtn.className = "confirmBtn";
-
-				const cancelBtn = document.createElement("button");
-				cancelBtn.textContent = "취소";
-				cancelBtn.className = "cancelBtn";
-
-				actionCell.innerHTML = "";
-				actionCell.appendChild(confirmBtn);
-				actionCell.appendChild(cancelBtn);
-
-				// 취소 버튼 이벤트
-				cancelBtn.addEventListener("click", function () {
-					for (let i = 1; i <= 8; i++) {
-						cells[i].textContent = originalData[i - 1];
-					}
-
-					actionCell.innerHTML = "";
-					const restoreBtn = document.createElement("button");
-					restoreBtn.textContent = "수정";
-					restoreBtn.className = "editBtn";
-					actionCell.appendChild(restoreBtn);
-
-					delete row.dataset.mode;
-				});
-
-				// 확인 버튼 이벤트
-				confirmBtn.addEventListener("click", function () {
-					const newData = {};
-					newData.plan_no = cells[1].textContent.trim(); // plan_no는 수정불가
-
-					// input이 있는 셀은 input 값, 아닌 셀은 텍스트
-					newData.product_name = cells[2].textContent.trim(); // 수정불가
-					newData.standard = cells[3].textContent.trim();      // 수정불가
-					newData.unit = cells[4].textContent.trim();          // 수정불가
-					newData.plan_date = cells[5].querySelector("input").value;
-					newData.storage = cells[6].textContent.trim();       // 수정불가
-					newData.quantity = cells[7].querySelector("input").value;
-					newData.mrp_calculation = cells[8].querySelector("input").value;
-
-					fetch("/project/prodplan/update", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify(newData)
-					})
-					.then(response => {
-						if (!response.ok) throw new Error("서버 오류");
-						return response.json();
-					})
-					.then(data => {
-						alert("수정되었습니다.");
-						location.reload();
-					})
-					.catch(error => {
-						console.error("수정 실패", error);
-						alert("수정 실패");
-					});
-				});
-			}
-		});
-	});
 </script>
 </body>
 </html>
