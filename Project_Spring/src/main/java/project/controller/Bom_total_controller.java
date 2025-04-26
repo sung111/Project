@@ -618,7 +618,9 @@ public class Bom_total_controller {
 			)  {
 		Map<String, Object> map = new HashMap();
 		List list = null;
-		
+		System.out.println("=============================");
+		System.out.println("전달받은페이지"+dto.getPage());
+		System.out.println("=============================");
 		try {
 			String nameserch = dto.getSerch();
 			
