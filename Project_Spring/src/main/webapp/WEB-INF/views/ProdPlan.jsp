@@ -44,37 +44,25 @@
 		</tbody>
 	</table>
 
-	<table class="name-layer">
-		<tr class="menufacturer-info">
-			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생성인</div> <c:choose>
-					<c:when test="${not empty username}">
-						<input type="text" class="menufacturer-info-completion"
-							value="${username}" readonly />
-					</c:when>
-					<c:otherwise>
-						<input type="text" class="menufacturer-info-completion"
-							value="알 수 없음" readonly />
-					</c:otherwise>
-				</c:choose>
+<table class="name-layer">
+    <tr class="menufacturer-info">
+        <td class="menufacturer-info-list">
+            <div class="menufacturer-info-name">생성인</div> 
+            <input type="text" id="creator" name="creator" class="menufacturer-info-completion"
+                value="${not empty username ? username : ''}" readonly />
+        </td>
 
-			</td>
-			<td class="menufacturer-info-list">
-				<div class="menufacturer-info-name">생산기간</div> <c:choose>
-					<c:when test="${not empty planList}">
-						<input type="text" class="menufacturer-info-completion"
-							value="${planList[0].startDate} ~ ${planList[0].endDate}"
-							readonly>
-					</c:when>
-					<c:otherwise>
-						<input type="text" class="menufacturer-info-completion"
-							value="데이터 없음" readonly>
-					</c:otherwise>
-				</c:choose>
-			</td>
+        <td class="menufacturer-info-list">
+            <div class="menufacturer-info-name">생산기간</div>
+            <input type="text" id="productionPeriod" name="productionPeriod" class="menufacturer-info-completion"
+                value="" readonly />
+        </td>
+    </tr>
+</table>
 
-		</tr>
-	</table>
+
+
+
 
 	<table class="new-workorder">
 		<tbody class="tb1">
@@ -96,109 +84,123 @@
 				<td>명령</td>
 			</tr>
 
-			<c:choose>
-				<c:when test="${not empty planList}">
-					<c:forEach var="plan" items="${planList}">
-						<tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.planId}">
+<c:choose>
+    <c:when test="${not empty planList}">
+        <c:forEach var="plan" items="${planList}">
+            <tr name="prodPlanList" 
+    class="order-info-content wolist" 
+    data-id="${plan.productId}" 
+    data-pi="${plan.planId}" 
+    data-username="${plan.userId}" 
+    data-startdate="${plan.startDate}" 
+    data-enddate="${plan.endDate}">
+            
 <td class="productname">
     <p>${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
-<select name="productname" id="productSelect" style="display: none;">
-    <c:forEach var="product" items="${productList}">
-        <c:if test="${not empty product.productname}">
-            <option value="${product.productname}">
-                ${product.productname}[${product.spec}${product.unit}]
+    <form action="${pageContext.request.contextPath}/prodplan/update" method="post">
+    <select name="productname" id="productSelect" class="productSelect" style="display: none;">
+        <c:forEach var="item" items="${planList}">
+            <option value="${item.product.productname}">
+                ${item.product.productname}[${item.product.spec}${item.product.unit}]
             </option>
-            <script>
-                console.log("Loaded product:", "${product.productname} [${product.spec}${product.unit}]");
-            </script>
-        </c:if>
-    </c:forEach>
-</select>
-
+        </c:forEach>
+    </select>
 </td>
 
-							<td class="lotnumber">
-								<p>${plan.product.lotnumber}</p> <input type="text" name="lotnumber" value="${plan.product.lotnumber}" style="display: none;" />
-							</td>
-							<td class="unit">
-								<p>${plan.product.unit}</p> <input type="text" name="unit" value="${plan.product.unit}" style="display: none;" />
-							</td>
-							<td class="warehouse">
-								<p>${plan.product.warehouse}</p> <input type="text"
-								name="warehouse" value="${plan.product.warehouse}"
-								style="display: none;" />
-							</td>
-							<td class="deliveryDest">
-								<p>${plan.deliveryDest}</p> <input type="text"
-								name="deliveryDest" value="${plan.deliveryDest}"
-								style="display: none;" />
-							</td>
-							<td class="partnumber">
-								<p>${plan.product.partnumber}</p> <input type="text"
-								name="partnumber" value="${plan.product.partnumber}"
-								style="display: none;" />
-							</td>
-							<td class="totalqty">
-								<p>${plan.totalqty}</p> <input type="text" name="totalqty"
-								value="${plan.totalqty}" style="display: none;" />
-							</td>
-							<td class="createDate">
-								<p>${plan.createDate}</p> <input type="text" name="createDate"
-								value="${plan.createDate}" style="display: none;" />
-							</td>
-							<td class="startDate">
-								<p>${plan.startDate}</p> <input type="text" name="startDate"
-								value="${plan.startDate}" style="display: none;" />
-							</td>
-							<td class="endDate">
-								<p>${plan.endDate}</p> <input type="text" name="endDate"
-								value="${plan.endDate}" style="display: none;" />
-							</td>
-							<td><a>MRP 계산</a></td>
-							<td class="planStatus">
-								<p>${plan.planStatus}</p> <input type="text" name="planStatus"
-								value="${plan.planStatus}" style="display: none;" />
-							</td>
-							<td class="planCause">
-								<p>${plan.planCause}</p> <input type="text" name="planCause"
-								value="${plan.planCause}" style="display: none;" />
-							</td>
-							<td class="planNotes">
-								<p>${plan.planNotes}</p> <input type="text" name="planNotes"
-								value="${plan.planNotes}" style="display: none;" />
-							</td>
-							<td class="insdellayer">
-									<button type="button" class="list-btn mdf-btn ins" id="mdf-btn">수정</button>
 
-								<form
-									action="${pageContext.request.contextPath}/prodplan/delete"
-									method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');"
-									class="list-btn del">
-									<input type="hidden" name="planId" value="${plan.planId}" /> <input
-										type="submit" value="삭제" />
-								</form>
+                <td class="lotnumber">
+                    <p>${plan.product.lotnumber}</p>
+                    <input type="text" name="lotnumber" value="${plan.product.lotnumber}" style="display: none;" readonly/>
+                </td>
 
-								<form class="list-btn comp">
-									<input type="hidden" name="planId" /><button type="button" class="com" id="comp-btn">확인</button>
-								</form>
+                <td class="unit">
+                    <p>${plan.product.unit}</p>
+                    <input type="text" name="unit" value="${plan.product.unit}" style="display: none;" readonly/>
+                </td>
 
-								<button type="button" class="list-btn cancel-btn" id="cancel-btn">취소</button>
-							</td>
-						</tr>
+                <td class="warehouse">
+                    <p>${plan.product.warehouse}</p>
+                    <input type="text" name="warehouse" value="${plan.product.warehouse}" style="display: none;" readonly/>
+                </td>
 
+                <td class="deliveryDest">
+                    <p>${plan.deliveryDest}</p>
+                    <input type="text" name="deliveryDest" value="${plan.deliveryDest}" style="display: none;" />
+                </td>
 
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<td colspan="14">데이터가 없습니다.</td>
-						<td data-original-value="${plan.product.productname}"><c:choose>
-								<c:when test="${not empty plan.product}">${plan.product.productname}</c:when>
-								<c:otherwise>데이터 없음</c:otherwise>
-							</c:choose></td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
+                <td class="partnumber">
+                    <p>${plan.product.partnumber}</p>
+                    <input type="text" name="partnumber" value="${plan.product.partnumber}" style="display: none;" readonly/>
+                </td>
+
+                <td class="totalqty">
+                    <p>${plan.totalqty}</p>
+                    <input type="text" name="totalqty" value="${plan.totalqty}" style="display: none;" />
+                </td>
+
+                <td class="createDate">
+                    <p>${plan.createDate}</p>
+                    <input type="date" name="createDate" value="${plan.createDate}" style="display: none;" />
+                </td>
+
+                <td class="startDate">
+                    <p>${plan.startDate}</p>
+                    <input type="date" name="startDate" value="${plan.startDate}" style="display: none;" />
+                </td>
+
+                <td class="endDate">
+                    <p>${plan.endDate}</p>
+                    <input type="date" name="endDate" value="${plan.endDate}" style="display: none;" />
+                </td>
+
+                <td><a>MRP 계산</a></td>
+
+                <td class="planStatus">
+                    <p>${plan.planStatus}</p>
+                    <input type="text" name="planStatus" value="${plan.planStatus}" style="display: none;" />
+                </td>
+
+                <td class="planCause">
+                    <p>${plan.planCause}</p>
+                    <input type="text" name="planCause" value="${plan.planCause}" style="display: none;" />
+                </td>
+
+                <td class="planNotes">
+                    <p>${plan.planNotes}</p>
+                    <input type="text" name="planNotes" value="${plan.planNotes}" style="display: none;" />
+                </td>
+
+                <td class="insdellayer">
+<button type="button" class="list-btn mdf-btn ins" id="mdf-btn">수정</button>
+
+<form action="${pageContext.request.contextPath}/prodplan/delete" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');" class="list-btn del">
+    <input type="hidden" name="planId" value="${plan.planId}" />
+    <input type="submit" value="삭제" class="delete-btn"/>
+</form>
+
+<input type="hidden" name="planId" value="${plan.planId}" />
+<button type="button" class="comp">확인</button>   <!-- ★ type="button" 수정 -->
+<button type="button" class="list-btn cancel-btn">취소</button>
+                </td>
+            </tr>
+        </c:forEach>
+    </c:when>
+
+    <c:otherwise>
+        <tr>
+            <td colspan="14">데이터가 없습니다.</td>
+            <td data-original-value="${plan.product.productname}">
+                <c:choose>
+                    <c:when test="${not empty plan.product}">
+                        ${plan.product.productname}
+                    </c:when>
+                    <c:otherwise>데이터 없음</c:otherwise>
+                </c:choose>
+            </td>
+        </tr>
+    </c:otherwise>
+</c:choose>
+
 		</tbody>
 
 		<tfoot>
@@ -220,13 +222,9 @@
 		src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
 	<script>
 	
-	// 예시로 미리 상품 리스트 배열을 만든다고 치자
-	const productList = [
-	    { name: "상품A", spec: "규격A", unit: "kg" },
-	    { name: "상품B", spec: "규격B", unit: "g" },
-	    { name: "상품C", spec: "규격C", unit: "개" }
-	];
 
+
+	
 	document.querySelectorAll('.product-input').forEach(input => {
 	    input.addEventListener('click', function(e) {
 	        const listDiv = this.nextElementSibling; // input 바로 다음 div
@@ -281,10 +279,10 @@
                     <td><input type="text" class="planCauseInput" placeholder="생산사유" /></td>
                     <td><input type="text" class="planNotesInput" placeholder="비고" /></td>
                     <td class="insdellayer">
-					<form action="${pageContext.request.contextPath}/prodplan/insert" method="post" class="list-btn com">
-					<input type="hidden" name="planId" value="${plan.planId}"  onsubmit="return confirm('상품 생산계획을 작성하시겠습니까?');"/> 
-					<input type="submit" value="생성" />
-				</form> 
+                    <form action="${pageContext.request.contextPath}/prodplan/insert" method="post" class="list-btn com" id="newPlanForm">
+                    <input type="hidden" name="planId" value="${plan.planId}" />
+                    <input type="submit" value="생성" />
+                </form>
 				<form action="${pageContext.request.contextPath}/prodplan/insert" method="post" onsubmit="return confirm('정말 취소하시겠습니까?');" class="list-btn cancel">
 					<input type="hidden" name="planId" value="${plan.planId}" /> <input type="submit" value="취소" />
 				</form>
@@ -295,142 +293,173 @@
         });
     });
 
-// 수정
-document.querySelectorAll('.ins').forEach(button => {
-    button.addEventListener('click', function() {
-        const tr = this.closest('tr');
-        editRow(tr);
-    });
-});
+ // 수정 함수 호출
+    document.querySelectorAll('.ins').forEach(button => { button.addEventListener('click', function() { const tr = this.closest('tr');  editRow(tr);  });  });
+    // 취소
+    document.querySelectorAll('.cancel-btn').forEach(button => { button.addEventListener('click', function() { const tr = this.closest('tr'); cancelRow(tr); }); });
+    //수정 태그로 전환
+    function editRow(trElement) { const pTags = trElement.querySelectorAll('p'); const originalValues = []; pTags.forEach(p => { originalValues.push(p.textContent.trim());});
+        pTags.forEach((p, index) => { p.style.display = 'none'; const nextElement = p.nextElementSibling; 
+        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT'))  { nextElement.style.display = 'inline'; 
+        if (nextElement.tagName === 'INPUT') { nextElement.value = originalValues[index]; } }
+        });
 
-// 취소
-document.querySelectorAll('.cancel-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        const tr = this.closest('tr');
-        cancelRow(tr);
-    });
-});
+        
+        const editButton = trElement.querySelector('.ins');
+        const deleteButton = trElement.querySelector('.delete-btn');
+        const confirmButton = trElement.querySelector('.comp');
+        const cancelButton = trElement.querySelector('.cancel-btn');
 
-function editRow(trElement) {
-    const pTags = trElement.querySelectorAll('p');
-    const originalValues = [];
+        if (editButton) editButton.style.display = 'none'; if (deleteButton) deleteButton.style.display = 'none';
+        if (confirmButton) confirmButton.style.display = 'inline'; if (cancelButton) cancelButton.style.display = 'inline';
 
-    // p 태그들의 원래 값 저장
-    pTags.forEach(p => {
-        originalValues.push(p.textContent.trim());
-    });
+        if (confirmButton) {
+            confirmButton.onclick = function () {
+                // 수정 후 수정 버튼, 확인 버튼 숨기기
+                if (editButton) editButton.style.display = 'inline';
+                if (deleteButton) deleteButton.style.display = 'inline';
+                if (confirmButton) confirmButton.style.display = 'none';
+                if (cancelButton) cancelButton.style.display = 'none';
 
-    // p 태그 숨기고, input 또는 select 보이기
-    pTags.forEach((p, index) => {
-        p.style.display = 'none';
+                // 삭제 버튼 숨기기
+                if (deleteButton) deleteButton.style.display = 'none'; 
 
-        const nextElement = p.nextElementSibling;
-        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
-            nextElement.style.display = 'inline';
-            // input이면 value 설정, select면 selectedIndex 맞추는 처리도 가능
-            if (nextElement.tagName === 'INPUT') {
-                nextElement.value = originalValues[index];
+                pTags.forEach((p, index) => {
+                    p.style.display = 'inline';
+                    const nextElement = p.nextElementSibling;
+                    if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
+                        p.textContent = nextElement.value;
+                        nextElement.style.display = 'none';
+                    }
+                });
+            };
+        }
+
+
+        //취소 버튼
+        if (cancelButton) { cancelButton.onclick = function () {
+                if (editButton) editButton.style.display = 'inline'; if (deleteButton) deleteButton.style.display = 'inline';  if (confirmButton) confirmButton.style.display = 'none'; if (cancelButton) cancelButton.style.display = 'none';
+                pTags.forEach((p, index) => { p.style.display = 'inline'; const nextElement = p.nextElementSibling;
+                    if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) { nextElement.style.display = 'none'; }
+                });
+            };
+        }
+    }
+
+    function cancelRow(trElement) {
+        const pTags = trElement.querySelectorAll('p');
+        pTags.forEach(p => {
+            p.style.display = 'inline';
+            const input = p.nextElementSibling;
+            if (input && (input.tagName === 'INPUT' || input.tagName === 'SELECT')) {
+                input.style.display = 'none';
             }
-            // select는 따로 선택된 값 세팅 안 해줘도 돼. (기본값 세팅되어 있다고 가정)
-        }
-    });
+        });
 
-    // 버튼 토글
-    const editButton = trElement.querySelector('.ins');
-    const deleteButton = trElement.querySelector('.del');
-    const confirmButton = trElement.querySelector('.comp');
-    const cancelButton = trElement.querySelector('.cancel-btn');
+        const editButton = trElement.querySelector('.ins');
+        const deleteButton = trElement.querySelector('.delete-btn'); // 🔥
+        const confirmButton = trElement.querySelector('.comp');
+        const cancelButton = trElement.querySelector('.cancel-btn');
 
-    if (editButton) editButton.style.display = 'none';
-    if (deleteButton) deleteButton.style.display = 'none';
-    if (confirmButton) confirmButton.style.display = 'inline';
-    if (cancelButton) cancelButton.style.display = 'inline';
-}
-
-function cancelRow(trElement) {
-    const pTags = trElement.querySelectorAll('p');
-
-    // p 태그 다시 보이고 input/select 숨기기
-    pTags.forEach(p => {
-        p.style.display = 'inline';
-
-        const nextElement = p.nextElementSibling;
-        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
-            nextElement.style.display = 'none';
-        }
-    });
-
-    // 버튼 토글
-    const editButton = trElement.querySelector('.ins');
-    const deleteButton = trElement.querySelector('.del');
-    const confirmButton = trElement.querySelector('.comp');
-    const cancelButton = trElement.querySelector('.cancel-btn');
-
-    if (editButton) editButton.style.display = 'inline';
-    if (deleteButton) deleteButton.style.display = 'inline';
-    if (confirmButton) confirmButton.style.display = 'none';
-    if (cancelButton) cancelButton.style.display = 'none';
-}
+        if (editButton) editButton.style.display = 'inline';
+        if (deleteButton) deleteButton.style.display = 'inline'; // 🔥
+        if (confirmButton) confirmButton.style.display = 'none';
+        if (cancelButton) cancelButton.style.display = 'none';
+    }
 
 
-function cancelRow(trElement) {
-    // tr 안의 모든 p 태그 가져오기
-    const pTags = trElement.querySelectorAll('p');
-
-    // 모든 input 태그 숨기고 p 태그 다시 보이게 처리
-    pTags.forEach(p => { p.style.display = 'inline';
-        // 해당 p에 대응하는 input을 숨김
-        const input = p.nextElementSibling;  if (input && input.tagName === 'INPUT') { input.style.display = 'none'; } });
-    // 수정, 삭제 버튼 보이게 하고 확인, 취소 버튼 숨기기
-    const editButton = trElement.querySelector('.ins'); const deleteButton = trElement.querySelector('.del'); const confirmButton = trElement.querySelector('.comp'); const cancelButton = trElement.querySelector('.cancel-btn');
-    if (editButton) editButton.style.display = 'inline';  if (deleteButton) deleteButton.style.display = 'inline'; if (confirmButton) confirmButton.style.display = 'none';  if (cancelButton) cancelButton.style.display = 'none'; 
-}
 
 	//삭제
 	function deleteRow(button) { var row = button.closest('tr'); row.parentNode.removeChild(row);  }
 
-	// 상품명 클릭 시 product 리스트 조회
 	$(document).on('click', '.productNameInput', function () {
-		let $input = $(this);
+	    let $input = $(this);
 
-		// 이전 검색결과 테이블을 지우기
-		$('.search-result-table').remove();
+	    // 이전 검색결과 테이블을 지우기
+	    $('.search-result-table').remove();
 
-		// 상품 검색박스 추가
-		let searchBox = $('<input type="text" class="product-search-box" placeholder="상품명 검색">');
-		searchBox.insertAfter($input).focus();
+	    // 상품 검색박스 추가
+	    let searchBox = $('<input type="text" class="product-search-box" placeholder="상품명 검색">');
+	    searchBox.insertAfter($input).focus();
 
-		// 검색박스에 키입력 시 상품명 검색
-		searchBox.on('keyup', function () {
-			let searchTerm = $(this).val();
+	    // 검색박스에 키입력 시 상품명 검색
+	    searchBox.on('keyup', function () {
+	        let searchTerm = $(this).val();
 
-			if (searchTerm.length > 1) {
-				$.ajax({
-					url: '/project/prodplan/products',
-					method: 'GET',
-					data: { searchTerm: searchTerm },
-					success: function (data) {
-						let $table = $('<table class="search-result-table"></table>');
-						$table.append('<tr><th>상품명</th><th>규격</th><th>단위</th><th>창고</th></tr>');
+	        if (searchTerm.length > 1) {
+	            $.ajax({
+	                url: '/project/prodplan/products',
+	                method: 'GET',
+	                data: { searchTerm: searchTerm },
+	                success: function (data) {
+	                    let $table = $('<table class="search-result-table"></table>');
+	                    $table.append('<tr><th>상품명</th><th>규격</th><th>단위</th><th>창고</th></tr>');
 
-						data.forEach(item => {
-							$table.append(
-								`<tr class="product-item" data-id="${item.product.productId}">
-									<td>${item.product.productname}</td>
-									<td>${item.product.spec}</td>
-									<td>${item.product.unit}</td>
-									<td>${item.product.warehouse}</td>
-								</tr>`
-							);
-						});
+	                    data.forEach(item => {
+	                        $table.append(
+	                            `<tr class="product-item" data-id="${item.productId}">
+	                                <td>${item.productname}</td>
+	                                <td>${item.spec}</td>
+	                                <td>${item.unit}</td>
+	                                <td>${item.warehouse}</td>
+	                            </tr>`
+	                        );
+	                    });
 
-						// 검색결과 테이블 표시
-						$table.insertAfter(searchBox);
-					}
-				});
-			}
-		});
+	                    // 검색결과 테이블 표시
+	                    $table.insertAfter(searchBox);
+	                }
+	            });
+	        }
+	    });
 	});
+
+	$(document).on('click', '.product-item', function () {
+	    let productId = $(this).data('id');
+	    let productName = $(this).find('td').eq(0).text(); // 상품명
+	    let spec = $(this).find('td').eq(1).text(); // 규격
+	    let unit = $(this).find('td').eq(2).text(); // 단위
+	    let warehouse = $(this).find('td').eq(3).text(); // 창고
+
+	    // 상품 정보가 선택된 tr에 자동으로 채워짐
+	    let tr = $(this).closest('tr'); // 해당 행 (tr)
+
+	    tr.find('input[name="productname"]').val(productName);
+	    tr.find('input[name="spec"]').val(spec);
+	    tr.find('input[name="unit"]').val(unit);
+	    tr.find('input[name="warehouse"]').val(warehouse);
+
+	    // p 태그도 업데이트
+	    tr.find('.productname p').text(productName);
+	    tr.find('.spec p').text(spec);
+	    tr.find('.unit p').text(unit);
+	    tr.find('.warehouse p').text(warehouse);
+
+	    // 검색 박스와 결과 테이블 지우기
+	    $('.search-result-table').remove();
+	});
+
+	function insertPlan(insertData) {
+	    $.ajax({
+	        url: `${pageContextPath}/prodplan/insert`, // 컨트롤러의 경로에 맞춰 수정
+	        type: 'POST',
+	        contentType: 'application/json',
+	        data: JSON.stringify(insertData), // 데이터를 JSON 형식으로 전송
+	        success: function(response) {
+	            if (response === 'success') {
+	                alert('생산계획 저장 성공!');
+	                location.reload(); // 저장 후 새로고침
+	            } else {
+	                alert('저장 실패: ' + response);
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            alert('오류 발생: ' + error);
+	        }
+	    });
+	}
+
+
 
 </script>
 </body>

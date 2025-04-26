@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.dao.mapper.ProdplanMapper">
+
   <!-- 조인 결과 매핑할 resultMap -->
   <resultMap id="PlanWithProductResultMap" type="project.dto.ProductionPlan_DTO">
     <id property="planId" column="planid" />
@@ -30,7 +31,7 @@
     </association>
   </resultMap>
 
-  <!-- 실제 select 쿼리 -->
+  <!-- 실제 select 쿼리: 모든 생산 계획 조회 -->
   <select id="selectAllPlans" resultMap="PlanWithProductResultMap">
     SELECT 
       pp.planid, 
@@ -56,20 +57,46 @@
       ON pp.productid = p.productid
   </select>
 
-<!-- 조회 -->
-<select id="getProducts" parameterType="String" resultMap="PlanWithProductResultMap">
-  SELECT 
-    pp.planid, pp.userid, pp.productid, pp.totalqty, pp.startdate,
-    pp.enddate, pp.createdate, pp.deliverydate, pp.deliverydest,
-    pp.planstatus, pp.plancause, pp.plannotes,
-    p.productname, p.spec, p.unit, p.partnumber, p.warehouse
-  FROM productionplans pp
-  LEFT JOIN products p ON pp.productid = p.productid
-  WHERE p.productname LIKE CONCAT('%', #{searchTerm}, '%')
-</select>
+  <!-- 상품 자동완성용 검색 쿼리 -->
+  <select id="getProducts" parameterType="String" resultMap="PlanWithProductResultMap">
+    SELECT 
+      pp.planid, pp.userid, pp.productid, pp.totalqty, pp.startdate,
+      pp.enddate, pp.createdate, pp.deliverydate, pp.deliverydest,
+      pp.planstatus, pp.plancause, pp.plannotes,
+      p.productname, p.spec, p.unit, p.partnumber, p.warehouse
+    FROM productionplans pp
+    LEFT JOIN products p ON pp.productid = p.productid
+    WHERE p.productname LIKE CONCAT('%', #{searchTerm}, '%')
+  </select>
 
-<!-- 추가 -->
-<insert id="insertPlan" parameterType="project.dto.ProductionPlan_DTO">
+  <!-- 생산 계획 세부 정보 조회 -->
+  <select id="getPlanDetails" parameterType="int" resultMap="PlanWithProductResultMap">
+    SELECT 
+      pp.planid, 
+      pp.userid, 
+      pp.productid, 
+      pp.totalqty, 
+      pp.startdate, 
+      pp.enddate, 
+      pp.createdate, 
+      pp.deliverydate, 
+      pp.deliverydest, 
+      pp.planstatus, 
+      pp.plancause, 
+      pp.plannotes, 
+      p.productname, 
+      p.spec, 
+      p.unit, 
+      p.partnumber, 
+      p.warehouse
+    FROM productionplans pp
+    LEFT JOIN products p 
+      ON pp.productid = p.productid
+    WHERE pp.planid = #{planId}
+  </select>
+
+  <!-- 추가 -->
+  <insert id="insertPlan" parameterType="project.dto.ProductionPlan_DTO">
     INSERT INTO productionplans (
         userId, productId, totalqty, startDate, endDate, createDate,
         deliveryDate, deliveryDest, planStatus, planCause, planNotes
@@ -77,35 +104,31 @@
         #{userId}, #{productId}, #{totalqty}, #{startDate}, #{endDate}, #{createDate},
         #{deliveryDate}, #{deliveryDest}, #{planStatus}, #{planCause}, #{planNotes}
     )
-</insert>
+  </insert>
 
-
-
-
-
-
-<!-- 수정 -->
-<!-- <update id="updatePlan" parameterType="project.dto.ProductionPlan_DTO">
+  <!-- 수정 -->
+  <update id="updateProdPlan" parameterType="project.dto.ProductionPlan_DTO">
     UPDATE productionplans
-    SET 
-        deliverydest = COALESCE(#{deliveryDest}, deliverydest),
+    SET productname = #{productname},
+        lotnumber = #{lotnumber},
+        unit = #{unit},
+        warehouse = #{warehouse},
+        deliveryDest = #{deliveryDest},
+        partnumber = #{partnumber},
         totalqty = #{totalqty},
-        createdate = #{createDate},
-        startdate = #{startDate},
-        enddate = #{endDate},
-        planstatus = #{planStatus},
-        plancause = #{planCause},
-        plannotes = #{planNotes}
-    WHERE planid = #{planId}
-</update> -->
+        createDate = #{createDate},
+        startDate = #{startDate},
+        endDate = #{endDate},
+        planStatus = #{planStatus},
+        planCause = #{planCause},
+        planNotes = #{planNotes}
+    WHERE planId = #{planId}
+  </update>
 
-
-
-<!-- 삭제 -->
-<delete id="deletePlan" parameterType="int">
+  <!-- 삭제 -->
+  <delete id="deletePlan" parameterType="int">
     DELETE FROM productionplans
     WHERE planid = #{planId}
-</delete>
-
+  </delete>
 
 </mapper>

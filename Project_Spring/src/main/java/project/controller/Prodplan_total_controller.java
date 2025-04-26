@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,15 +22,17 @@ public class Prodplan_total_controller {
 
     @Autowired
     private Prodplan_service prodplanService;
+    @Autowired
+    private Prodplan_service prodplan_service;
 
     @GetMapping("/prodplan")
     public String showProductionPlan(HttpSession session, Model model) {
 
-        // ë¡œê·¸ì¸ ì‚¬ìš©ì ì´ë¦„ ë¶ˆëŸ¬ì˜¤ê¸°
+        // ·Î±×ÀÎ »ç¿ëÀÚ ÀÌ¸§ °¡Á®¿À±â
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
 
-        // ì„¸ì…˜ì—ì„œ ê³„íš ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
+        // ¼¼¼Ç¿¡¼­ »ı»ê °èÈ¹ ¸®½ºÆ® °¡Á®¿À±â
         List<ProductionPlan_DTO> planList = (List<ProductionPlan_DTO>) session.getAttribute("planList");
         if (planList == null) {
             planList = prodplanService.getAllPlans();
@@ -41,38 +43,34 @@ public class Prodplan_total_controller {
         return "ProdPlan";  
     }
 
-    //ì¶”ê°€
+    // »ı»ê°èÈ¹ Ãß°¡
     @PostMapping("/prodplan/insert")
-    public String insertPlan(@RequestBody ProductionPlan_DTO dto, Model model) {
+    @ResponseBody
+    public String insertPlan(@RequestBody ProductionPlan_DTO dto) {
         try {
             prodplanService.insertPlan(dto);
-            model.addAttribute("success", true);
-            return "successPage"; 
+            return "success";
         } catch (Exception e) {
-            model.addAttribute("success", false);
-            model.addAttribute("message", e.getMessage());
-            return "errorPage"; 
+            return "fail: " + e.getMessage();
         }
     }
 
-    // ì¶”ê°€ ì‹œ, ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ ìë™ ì™„ì„± ì²˜ë¦¬.
+    // »óÇ° ¸®½ºÆ® °Ë»ö (ÀÚµ¿ ¿Ï¼º¿ë)
     @GetMapping("/prodplan/products")
     @ResponseBody
     public List<ProductionPlan_DTO> getProductList(@RequestParam String searchTerm) {
-    	// ê²€ìƒ‰ì–´ì— í•´ë‹¹í•˜ëŠ” ìƒí’ˆ ë°˜í™˜
+        // °Ë»ö¾î¿¡ ÇØ´çÇÏ´Â »óÇ° ¹İÈ¯
         return prodplanService.getProducts(searchTerm);  
     }
-    
-    //ìˆ˜ì •
-	/*
-	 * @PostMapping("/prodplan/update")
-	 * 
-	 * @ResponseBody public String updatePlan(@ModelAttribute ProductionPlan_DTO
-	 * dto) { prodplanService.updatePlan(dto); return "success"; }
-	 */
+
+    @PostMapping("/prodplan/update")
+    public String updateProdPlan(ProductionPlan_DTO productionPlanDTO) {
+        prodplan_service.updatePlan(productionPlanDTO);
+        return "redirect:/prodplan/list"; 
+    }
 
     
-    //ì‚­ì œ
+    // »ı»ê°èÈ¹ »èÁ¦
     @PostMapping("/prodplan/delete")
     @ResponseBody
     public String deletePlan(@RequestParam("planId") int planId) {
@@ -83,5 +81,17 @@ public class Prodplan_total_controller {
             return "fail: " + e.getMessage();
         }
     }
-
+    
+    // »ı»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸ (planId·Î Á¶È¸)
+    @GetMapping("/prodplan/details/{planId}")
+    public String getPlanDetails(@PathVariable("planId") int planId, Model model) {
+        // planId·Î »ı»ê°èÈ¹ ¼¼ºÎ Á¤º¸¸¦ °¡Á®¿À±â
+        ProductionPlan_DTO planDetails = prodplanService.getPlanDetails(planId);
+        if (planDetails != null) {
+            model.addAttribute("planDetails", planDetails);
+        } else {
+            model.addAttribute("error", "ÇØ´ç »ı»ê°èÈ¹À» Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+        }
+        return "prodplan/planDetails";  // 'prodplan/planDetails.jsp'·Î Àü´Ş
+    }
 }
