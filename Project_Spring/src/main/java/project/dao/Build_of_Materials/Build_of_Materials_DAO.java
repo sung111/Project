@@ -11,7 +11,10 @@ public interface Build_of_Materials_DAO {
 
 //사용
 	public List<Products_DTO> Product_All(Products_DTO dto);
-	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid);
+	//페이지네이션조회
+	public List<Materials_DTO> BuildOfMaterials_materialSelect(Materials_DTO dto);
+	public int BuildOfMaterials_materialCount (Materials_DTO dto);
+	
 	public List<Materials_DTO> BuildOfMaterials_materialOneList(int bomid);
 	public int BuildOfMaterials_materialUpdate(Bom_DTO dto);
 	public List<Materials_DTO> BuildOfMaterials_materialList();

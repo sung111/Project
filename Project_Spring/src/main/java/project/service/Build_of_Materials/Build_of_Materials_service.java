@@ -14,7 +14,11 @@ public interface Build_of_Materials_service {
 //사용
 	public  Map<String,Object> Product_All(Products_DTO dto);
 	
-	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid);
+	//페이지네이션
+	public Map<String,Object> BuildOfMaterials_materialSelect(Materials_DTO dto);
+	
+	
+	
 	public List<Materials_DTO> BuildOfMaterials_materialList();
 	public int BuildOfMaterials_materialUpdate(Bom_DTO dto);
 	public int BuildOfMaterials_materialListInsert(Bom_DTO dto);

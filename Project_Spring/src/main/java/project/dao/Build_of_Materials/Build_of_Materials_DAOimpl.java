@@ -43,10 +43,25 @@ public class Build_of_Materials_DAOimpl implements Build_of_Materials_DAO {
 	}
 
 	@Override
-	public List<Materials_DTO> BuildOfMaterials_materialSelect(int productid) {
+	public List<Materials_DTO> BuildOfMaterials_materialSelect(Materials_DTO dto) {
 		List list = null;
 		try {
-			list = sqlSession.selectList("mapper.bom.BuildOfMaterials_materialSelect",productid);
+			System.out.println("BuildOfMaterials_materialSelect 실행");
+			int page = dto.getPage();
+			int viewCount = dto.getBuildOfMaterialsviewCount();
+			
+			int indexStart = (viewCount * (page-1)) +1; //이전페이지 마지막에서 +1
+			int indexEnd = page * viewCount; // 비번페이지 마지막 
+			
+			dto.setIndexStart(indexStart);
+			dto.setIndexEnd(indexEnd);
+			
+			list = sqlSession.selectList("mapper.bom.BuildOfMaterials_materialSelect",dto);
+			System.out.println("list 값="+ list);
+			
+			
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,6 +122,21 @@ public class Build_of_Materials_DAOimpl implements Build_of_Materials_DAO {
 		int result = 0;
 		try {
 			result = sqlSession.update("mapper.bom.BuildOfMaterials_materialListUpdate",dto);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int BuildOfMaterials_materialCount(Materials_DTO dto) {
+		int result = 0;
+		try {
+			result = sqlSession.selectOne("mapper.bom.BuildOfMaterials_materialCount",dto);
+			System.out.println("BuildOfMaterials_materialCount실행");
+			System.out.println("result 값="+result);
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
