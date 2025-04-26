@@ -21,13 +21,11 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".selectAllPlans");
     }
 
-    //ìˆ˜ì •
-	/*
-	 * @Override public void updatePlan(ProductionPlan_DTO dto) {
-	 * sqlSession.update(NAMESPACE + ".updatePlan", dto); }
-	 */
-
-
+    // ¼öÁ¤
+    @Override
+    public void updatePlan(ProductionPlan_DTO dto) {
+        sqlSession.update(NAMESPACE + ".updatePlan", dto);
+    }
 
     @Override
     public void insertPlan(ProductionPlan_DTO plan) {
@@ -39,11 +37,15 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".getProducts", searchTerm);
     }
 
-    //ì‚­ì œ
+    // »èÁ¦
     @Override
     public void deletePlan(int planId) {
         sqlSession.delete(NAMESPACE + ".deletePlan", planId);
     }
 
-    
+    // »ý»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸
+    @Override
+    public ProductionPlan_DTO getPlanDetails(int planId) {
+        return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  // Mapper¿¡¼­ Äõ¸® ½ÇÇà
+    }
 }
