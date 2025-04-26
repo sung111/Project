@@ -102,13 +102,19 @@
 						<tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}" data-pi="${plan.planId}">
 <td class="productname">
     <p>${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
-    <select name="productname" style="display: none;">
-        <c:forEach var="product" items="${productList}">
+<select name="productname" id="productSelect" style="display: none;">
+    <c:forEach var="product" items="${productList}">
+        <c:if test="${not empty product.productname}">
             <option value="${product.productname}">
                 ${product.productname}[${product.spec}${product.unit}]
             </option>
-        </c:forEach>
-    </select>
+            <script>
+                console.log("Loaded product:", "${product.productname} [${product.spec}${product.unit}]");
+            </script>
+        </c:if>
+    </c:forEach>
+</select>
+
 </td>
 
 							<td class="lotnumber">
@@ -204,8 +210,7 @@
 					<button type="button" class="WO-buttonlist newProdPlan-btn">상품계획생성</button>
 					<button type="button" class="WO-buttonlist workOrder-btn">
 						<!-- 스타일로 버튼처럼 보이게 처리하는 게 좋아요 -->
-						<a href="${pageContext.request.contextPath}/prodplan/workorder"
-							class="workorder-a">작업지시서</a>
+						<a href="${pageContext.request.contextPath}/prodplan/workorder" class="workorder-a">작업지시서</a>
 					</button>
 				</td>
 			</tr>

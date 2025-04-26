@@ -609,7 +609,7 @@ public class Bom_total_controller {
 		return "bom_v2";
 	}
 			
-			//=-----------------하고있는곳
+//조회 및 화면 렌더링
 	@ResponseBody
 	@RequestMapping(value="/bom_v2_select",method=RequestMethod.GET)
 	public Map<String,Object> bom_v2_select(

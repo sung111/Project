@@ -28,7 +28,7 @@
   <div class="taglayer">
     <div class="noticelayer-title">
       <h2>신규 상품등록</h2>
-      <a class="more" href="componant/process.html">더 보기</a>
+      <a class="more" href="standard">더 보기</a>
     </div>
     <ul class="taglist">
       <li><a>부대찌개 밀키트 업데이트</a><div><span>2025-01-21</span></div></li>
@@ -42,7 +42,7 @@
   <div class="taglayer">
     <div class="noticelayer-title">
       <h2>품질관리</h2>
-      <a class="more" href="">더 보기</a>
+      <a class="more" href="qual">더 보기</a>
     </div>
     <ul class="taglist">
       <li><a>김치찌개 밀키드 품질 점검 완료</a><div><span>2025-01-27</span></div></li>
@@ -52,10 +52,10 @@
     </ul>
   </div>
 
-  <!-- 사내복지 -->
+  <!-- 공지사항 -->
   <div class="taglayer">
     <div class="noticelayer-title">
-      <h2>사내복지</h2>
+      <h2>공지사항</h2>
       <a class="more" href="/componant/03_사내복지.html">더 보기</a>
     </div>
     <ul class="taglist">
