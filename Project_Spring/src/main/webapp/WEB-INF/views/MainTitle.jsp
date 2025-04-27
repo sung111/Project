@@ -7,7 +7,7 @@
 <div class="noticelayer">
   <div class="noticelayer-title">
     <h2>공지사항</h2>
-    <a class="Notice-more" href="/componant/02_공지사항.html">더 보기</a>
+    <a class="Notice-more" href="${pageContext.request.contextPath}/select?notify=Y">더 보기</a>
   </div>
   <ul class="notice">
     <li class="notice-latestlist">

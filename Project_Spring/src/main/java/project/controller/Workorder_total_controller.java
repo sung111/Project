@@ -3,28 +3,26 @@ package project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import project.dto.WorkOrder_DTO;
+import project.service.Workorder_total_service.Workorder_service;
 
 @Controller
 public class Workorder_total_controller {
 
+    @Autowired
+    private Workorder_service workorderService;  
 
-    @GetMapping("prodplan/workorder")
-    public String showWorkOrder(
-        @RequestParam(value = "id", required = false) Integer workorderId, 
-        Model model
-    ) {
-        // workorderIdê°€ ì œê³µë˜ì—ˆì„ ê²½ìš° ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
-        WorkOrder_DTO workOrder = null;
-
-
-        // JSPì— ì „ë‹¬
+    @RequestMapping("/prodplan/workorder")
+    public String showWorkOrder(Model model) {
+        WorkOrder_DTO workOrder = workorderService.getWorkOrderById(1);
+        if (workOrder == null) {
+            model.addAttribute("error", "ÀÛ¾÷ Áö½Ã¼­¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            return "errorPage"; 
+        }
         model.addAttribute("workOrder", workOrder);
-
-        return "WorkOrder";
+        return "workOrderPage";
     }
-}
 
+}

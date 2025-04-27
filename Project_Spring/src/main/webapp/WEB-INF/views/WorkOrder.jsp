@@ -33,15 +33,7 @@
 				<td class="productinfo-info-list">
 					<div class="productinfo-info-name">품명[규격]</div> <input type="text"
 					class="productinfo-info-productname" alt="productinfo-품명[규격]">
-<ul id="finishi-list" class="finishi-list">
-    <li>
-    <%-- ${workOrder.product.productname} [${workOrder.product.spec} ${workOrder.product.unit}] --%>
-            ${workOrder.product.productname != null ? workOrder.product.productname : "상품명 없음"}
-        [${workOrder.product.spec != null ? workOrder.product.spec : "규격 없음"}]
-        ${workOrder.product.unit != null ? workOrder.product.unit : "단위 없음"}
-    </li>
-    
-</ul>
+
 					<button type="button" class="productsearch" alt="조회">조회</button>
 				</td>
 				<td class="productinfo-info-list">
@@ -73,11 +65,6 @@
 					<td>
 						<!-- 제조과정 --> <iframe id="processFrame"
 							src="production_process.html" style="display: none;"></iframe>
-					</td>
-				</tr>
-				<tr class="check-info-buttoncontainer">
-					<td class="check-info-buttonlayer">
-						<button type="button" class="check-info-close">나가기</button>
 					</td>
 				</tr>
 			</table>

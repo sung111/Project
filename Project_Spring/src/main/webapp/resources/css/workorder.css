@@ -1,12 +1,12 @@
 .productinfo{
-    width: 100%; height: 700px; margin: 0 auto; display: flex; flex-wrap: wrap;
+    width: 100%; height: 100%; margin: 0 auto; display: flex; flex-wrap: wrap;
 } 
 .productinfo table{
-    width: 100%;
+    width: 100%; height: 10%;
 }
-/* 정보창 CSS */
+/* �젙蹂댁갹 CSS */
 .productinfo-info{
-    width: 100%; height: 120px; display: flex; flex-wrap: wrap;
+    width: 100%; height: 20%; display: flex; flex-wrap: wrap;
 }
 .productinfo-info-list{
     width: 50%; height: 40px; border: 1px solid #999999; position: relative;text-align: center; display: flex; justify-content: center; align-items: center;
@@ -39,9 +39,9 @@
 .productsearch{
     width: 20%; height: 90%; 
 }
-/* 자재창 CSS */
+/* �옄�옱李� CSS */
 .material-info{
-    width: 100%; height: 60%; display: flex; flex-direction: column; border: 1px solid #666666;
+    width: 100%; height: 40%; display: flex; flex-direction: column; border: 1px solid #666666;
 }
 .material-info-title{
     width: 100%; height: 40px; color: #ffffff;background-color: #007bff; display: flex; justify-content: center; align-items: center; font-weight: 100;
@@ -58,9 +58,9 @@
 .material-info-content td{
     width: 100%; height: 100%; border-right: 1px solid #999999; display: flex; justify-content: center; align-items: center; background-color: #ffffff; font-size: 10px;
 }
-/* 확인창 CSS */
+/* �솗�씤李� CSS */
 .check-info {
-    width: 100%; height: 80%; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    width: 100%; height: 40%; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
 }
 .check-info table{
     height: 100%;
@@ -74,12 +74,6 @@
 }
 .check-info-buttoncontainer{
     width: 100%; 
-}
-.check-info-buttonlayer{
-    width: 100%; height: 100%; margin-bottom: 10px; display: flex; justify-content: space-around;
-}
-.check-info-buttonlayer input, button{
-    width: 30%; height: 50px; font-size: 20px; letter-spacing: 3px; border: 1px solid #999999; 
 }
 .check-info-registration{
     background-color: #4CAF50; 

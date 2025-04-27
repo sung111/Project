@@ -8,7 +8,9 @@
 <div class="popup-page" id="popup-page">
     <div id="popup-title" class="popup-title">
         <h2>안녕하세요. <%=userName%> 님!</h2>
-        <div id="chatbot-icon" class="chatbot-icon"></div>
+        <div id="chatbot-icon" class="chatbot-icon">
+        <img src="${pageContext.request.contextPath}/resources/img/chatbot.png" alt="chatbot-img" class="chatbot-img" id="chatbot-img">
+        </div>
     </div>
     <p>현재 <%=userName%>님의 권한은 <%=userRole%>입니다.</p>
     <div id="popup-buttonlayer" class="popup-buttonlayer">
