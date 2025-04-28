@@ -19,46 +19,6 @@
 
 #fix {
 
-   padding: 5px 10px; /* 패딩 조정 */
-    font-size: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    margin-left: 40px; 
-    white-space: nowrap;
-    
-
-
-
-}
-
-
-
-
-
-
-#fdelete {
-
-    width: 4%;
-    margin: 20px;
-    border: 1px solid #d9d9d9;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: lightgray;
-    position: absolute;
-    left: 58%;
-    bottom: 11.5%;
-    text-decoration: none;
-     
-}
-
-
-
-#link-input-container {
-
-
     padding: 5px 10px; /* 패딩 조정 */
     font-size: 10px;
     border: none;
@@ -71,6 +31,77 @@
     
 
 
+
+}
+
+
+
+
+#link-container {
+
+    width: 13%;
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    
+}
+
+
+#link-button {
+
+position: absolute;
+left: 22%;
+top : 35.8%;
+
+
+
+}
+
+
+
+#file-input-container {
+
+
+    width: 9%;
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    
+    white-space: nowrap;
+ 
+
+
+}
+
+ /* 파일 첨부 */
+#file-container {
+
+    width: 7%;
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    
+
+
+
+
+
 }
 
 
@@ -81,16 +112,10 @@ display : none;
 
 }
 
-#link-button {
 
-position: absolute;
-left: 23%;
-top : 36.5%
-
-}
 
 .box {
-    width: 100%;
+    width: 98.1%;
     margin: 20px;
     border: 1px solid #d9d9d9;
     padding: 20px;
@@ -143,24 +168,28 @@ h1 {
     text-align: right;
 }
 
+ /* 링크 첨부 */
 .button-container button,
 .file-label{
-    padding: 5px 10px; /* 패딩 조정 */
+
+    padding: 5px 10px; 
     font-size: 10px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 42px; 
-    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
     
+    
+    white-space: nowrap; 
+    /* 텍스트가 줄 바꿈되지 않도록 설정 */
 }
 
+/* 버튼처럼 보이도록 설정 */
 .file-label {
-    display: inline-block; /* 버튼처럼 보이도록 설정 */
+    display: inline-block; 
     text-align: center;
-    margin-left: 0;
+    
 }
 
 .postbtn {
@@ -214,21 +243,47 @@ h1 {
     color: black;
     text-decoration: none;
 }
-@media (max-width: 768px) {
-    .box {
-        width: 90%; /* 모바일에서는 너비를 줄임 */
+
+
+#fdelete {
+
+    
+  
+    border: 1px solid #d9d9d9;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgray;
+   
+     
+    bottom: 20px; /* 아래로 이동 */
+   
+    min-width: 15px;
+    left: 5%;
+    
+    text-align: center;
+    text-decoration: none;
+    
+    
+     display: inline-block;  /* 글자 길이에 맞게 크기 조정 */
+  padding: 10px 15px;     /* 내부 여백 */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  min-width: 85px;         /* 너무 커지는 걸 방지 */
+     
     }
 
-    .post textarea {
-        height: 200px; /* 모바일에서는 텍스트 영역 높이 조정 */
-    }
 
-    .button-container button,.file-label {
-        font-size: 12px; /* 버튼 텍스트 크기 조정 */
-    }
-}
 
-@media (max-width: 480px) {
+
+
+
+
+
+ 
+
+@media (max-width: 780px) {
     h1 {
         font-size: 24px; /* 모바일에서 제목 크기 조정 */
     }
@@ -243,18 +298,137 @@ h1 {
     }
 
     .button-container button {
-        width: 100%; /* 버튼을 전체 너비로 설정 */
+         /* 버튼을 전체 너비로 설정 */
         margin-left: 0; /* 왼쪽 여백 제거 */
         margin-top: 5px; /* 위쪽 여백 추가 */
     }
 
     .file-label {
-        width: 100%; /* 파일 라벨도 전체 너비로 설정 */
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    width: 15%;
+    
+    
+    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
     }
 
     .popup-content {
         width: 90%; /* 팝업 너비 조정 */
+     
     }
+    
+    
+    
+    #fdelete {
+
+    
+    
+    
+    border: 1px solid #d9d9d9;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgray;
+   
+    
+    bottom: 6%; /* 아래로 이동 */
+    
+     
+    left: 50%;
+    
+    text-align: center;
+    text-decoration: none;
+     
+     
+  display: inline-block;  /* 글자 길이에 맞게 크기 조정 */
+  padding: 10px 15px;     /* 내부 여백 */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  min-width: 85px;         /* 너무 커지는 걸 방지 */
+     
+    }
+
+#link-button {
+
+position: absolute;
+top: 305px;
+left: 17%;
+
+
+}
+
+
+
+#link-container {
+
+    width: 13%;
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    
+}
+
+
+
+
+ #file-input-container {
+
+    width: 15%;
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+
+ 
+}
+
+ /* 파일 첨부 */
+#file-container {
+    width: 15%;
+    padding: 5px 10px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    
+
+
+
+
+
+}
+
+
+#file {
+
+display : none;
+
+
+}
+
+
+
 }
 
 
@@ -278,17 +452,20 @@ margin-top : 5%;
 
 width: 50%;
 
+
+
+  display: inline-block;  /* 글자 길이에 맞게 크기 조정 */
+  padding: 10px 15px;     /* 내부 여백 */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  max-width: 90%;         /* 너무 커지는 걸 방지 */
+
 }
 
 
-#file-input-container {
 
-position : absolute;
-top : 36.5%
-
-
-
-}
 
 </style>
 <body>
@@ -354,7 +531,7 @@ top : 36.5%
             
             <br>
             <div id="file-input-container" margin-top: 10px;">
-                <label for="file" id="link-input-container">
+                <label for="file" id="file-container">
                 첨부 파일
                 </label> 
                 <input type="file" id="file" placeholder="파일을 입력하세요" name="file_name" multiple> 
@@ -362,6 +539,7 @@ top : 36.5%
         
             
             <c:forEach var="flink" items="${Fileselid}">
+            
 			 <div id="attach">첨부된 파일 :
 			<!-- <form method="post" action="downloads">  -->
 			 ${flink.file_name}<br>

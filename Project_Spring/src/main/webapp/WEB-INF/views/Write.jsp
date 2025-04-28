@@ -48,7 +48,7 @@ padding: 5px 10px; /* 패딩 조정 */
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 95%; 
+    margin-right: 100px; 
     white-space: nowrap;
 
 
@@ -94,8 +94,11 @@ padding: 5px 10px; /* 패딩 조정 */
     text-align: right;
 }
 
+/* 링크 첨부 */
 .button-container button,
 .file-label{
+
+
     padding: 5px 10px; /* 패딩 조정 */
     font-size: 10px;
     border: none;
@@ -103,11 +106,11 @@ padding: 5px 10px; /* 패딩 조정 */
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 5px; 
+    
+    margin-top: -3.4%;
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
-    position : absolute;
-    bottom : 61.4%;
-    left: 26.5%;
+  
+    
 }
 
 .file-label {
@@ -215,24 +218,6 @@ padding: 5px 10px; /* 패딩 조정 */
 
 
 
-#link-input-container {
-
-
-    padding: 5px 10px; /* 패딩 조정 */
-    font-size: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    margin-left: 45px; 
-    position: absolute;
-    top: 36%;
-    white-space: nowrap;
-   
-    
-}
-
 
 
 #file {
@@ -242,6 +227,34 @@ display : none;
 
 }
 
+
+
+
+/* 파일첨부 */
+#file-container {
+
+
+    padding: 5px 5px; /* 패딩 조정 */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 45px; 
+    margin-top: -3.3%;
+    white-space: nowrap;
+    
+    
+    
+}
+
+#file-input-container {
+
+
+   
+    
+}
 
 
 </style>
@@ -283,15 +296,15 @@ display : none;
 	            
 	            
 	                      <!-- 파일올리기 --> 
-	                <div id="file-input-container" margin-top: 10px;">        
-	                <label for="file" id="link-input-container">
+	                <div id="file-container" margin-top: 10px;">        
+	                <label for="file" id="file-input-container">
 	                첨부 파일
 	                </label>                       
 	                <input type="file" id="file" name="file_name" multiple>
 	                </div>
 	                
 	                
-	                <button type="button" class="link-button" id="link-button">링크 첨부</button>
+	                <button type="button" class="link-button" id="linked-button">링크 첨부</button>
 	                <!-- <button type="button" class="schedule-button" id="schedule-button">일정</button> -->
 	                </div>
 	            
@@ -425,7 +438,7 @@ display : none;
     
     
    
-        document.getElementById('link-button').addEventListener('click', function () {
+        document.getElementById('linked-button').addEventListener('click', function () {
             const linkInputContainer = document.getElementById('link-input-container');
             linkInputContainer.style.display = (linkInputContainer.style.display === 'none' || linkInputContainer.style.display === '') ? 'block' : 'none';
         });

@@ -134,12 +134,8 @@ color: inherit;
 
 #now {
 
-
-
-width : 20%;
-position: absolute;
-        top: 150px;
-        left: -70px;
+width: 8%;
+margin-right: 90%;
 
 
 }
@@ -165,21 +161,13 @@ position:absolute;
 #searchform {
 
 position:absolute;
- top: 12.5%;
- left: 16.5%;
+ top: 13.6%;
+ left: 18.3%;
  
 
 }
 
-#now {
 
-
-position:absolute;
- top: 18.7%;
- left: 25%;
-
-
-}
 
 </style>
 <%
@@ -189,7 +177,7 @@ position:absolute;
 <form method="post" action="search" id="searchform">
 <input type="hidden" name="notify" value="<%= notifys %>" />
 <input type="text" name="title" placeholder="검색어 입력">
-<button type="submit" class="newpost" id="search">등록</button>
+<button type="submit" class="newpost" id="search">검색</button>
 </form>
 
 <%-- <% Prodto pt = new Prodto() %>
@@ -376,6 +364,12 @@ position:absolute;
 			<div class="pagination">
 			
 			
+			<c:forEach var="i" begin="<%= begin %>" end="<%= end %>">
+			<c:if test="${i == dto.page }">
+			<div id="now"><span id="font">${ i }</span>페이지</div>
+			</c:if>
+			</c:forEach>
+			
 			<c:if test="<%= begin == 1 %>">
 				<button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
 			</c:if>
@@ -387,7 +381,7 @@ position:absolute;
 			<c:forEach var="i" begin="<%= begin %>" end="<%= end %>">
 			<!--  서식 적용 -->
 				<c:if test="${i == dto.page }">
-				    <div id="now"><span id="font">${ i }</span>페이지</div>
+				  
 					<c:set var="clazz" value="bold" />
 				</c:if>				
 				<c:if test="${ not (i == dto.page) }">
