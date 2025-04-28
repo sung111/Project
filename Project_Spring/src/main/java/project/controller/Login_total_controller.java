@@ -78,6 +78,6 @@ public class Login_total_controller {
         response.addCookie(cookie);
 
         // 로그인 페이지로 리다이렉트
-        return "redirect:/login";
+        return "redirect:/maintitle";
     }
 }
