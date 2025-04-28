@@ -19,7 +19,8 @@
 
 #modify {
 
-    width : 5%;
+    margin-left: 95%;
+    width: 5%;
     padding: 10px 15px;
     font-size: 10px;
     border: none;
@@ -28,7 +29,6 @@
     color: white;
     cursor: pointer;
     text-align: center;
-    margin-left: 95%;
 }
 
 #amodify{
@@ -38,7 +38,7 @@
 
 #list {
 
-   width : 5%;
+   
     padding: 10px 15px;
     font-size: 10px;
     border: none;
@@ -181,6 +181,15 @@ margin-top : 5%;
 
 width: 50%;
 
+
+ display: inline-block;  /* 글자 길이에 맞게 크기 조정 */
+  padding: 10px 15px;     /* 내부 여백 */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  max-width: 90%;         /* 너무 커지는 걸 방지 */
+
 }
 
 
@@ -188,11 +197,24 @@ width: 50%;
 
 
 
+@media (max-width: 880px) {
+    
 
+#modify {
 
+    margin-left: 93%;
+    width: 7%;
+    padding: 10px 15px;
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
 
-
-
+}
 
 
 .modal {
@@ -257,7 +279,7 @@ width: 50%;
 <c:set var="videoId" value="${fn:substring(link, vIndex, fn:length(link))}" />
 
 
-<img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg"  alt="image" width="500"><br>	
+<img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg"  alt="image" width="80%"><br>	
 <%-- </c:forEach> --%>
 <br>
 <br>
@@ -268,11 +290,12 @@ width: 50%;
  <div id="attach">첨부된 파일 : 
 <!-- <form method="post" action="downloads">  -->
  <a href="downloads?file_name=${flink.file_name}"  id="href">${flink.file_name}</a><br>
-
-  
 <!-- </form> -->
 </div>
 </c:forEach> 
+
+
+
 <br>
 <br>
 <br>
@@ -287,7 +310,7 @@ width: 50%;
  
   <!-- 사진 -->  
  <c:forEach var="flink" items="${Fileselid}"> 
-  <img src="downloads?file_name=${flink.file_name}"  alt="image" width="500"><br>
+  <img src="downloads?file_name=${flink.file_name}"  alt="image" width="80%"><br>
  </c:forEach> 
  
  
@@ -299,7 +322,7 @@ width: 50%;
 
  <!-- 비디오 -->
  <c:forEach var="flink" items="${Fileselid}">
- <video src="downloads?file_name=${flink.file_name}" alt="video" width="500" controls autoplay>
+ <video src="downloads?file_name=${flink.file_name}" alt="video" width="80%" controls autoplay>
  <source src="${flink.file_name}" type="video/mp4">
  </video>
   </c:forEach> 
