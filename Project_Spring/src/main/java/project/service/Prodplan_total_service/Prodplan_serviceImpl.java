@@ -14,42 +14,64 @@ public class Prodplan_serviceImpl implements Prodplan_service {
     @Autowired
     private Prodplan_DAO planDAO;
 
-    // ìƒì‚° ê³„íš ì „ì²´ ì¡°íšŒ
+    // »ı»ê °èÈ¹ ÀüÃ¼ Á¶È¸
     @Override
     public List<ProductionPlan_DTO> getAllPlans() {
         return planDAO.getAllPlans();
     }
 
-    // ìƒì‚° ê³„íš ì¶”ê°€
+    // »ı»ê °èÈ¹ Ãß°¡
     @Override
     public void insertPlan(ProductionPlan_DTO plan) {
         if (plan == null) {
-            throw new IllegalArgumentException("ìƒì‚° ê³„íš ì •ë³´ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.");
+            throw new IllegalArgumentException("»ı»ê °èÈ¹ Á¤º¸°¡ ´©¶ôµÇ¾ú½À´Ï´Ù.");
         }
         planDAO.insertPlan(plan); 
     }
 
-    // ìƒì‚° ê³„íš ìˆ˜ì •
-//    @Override
-//    public void updatePlan(ProductionPlan_DTO dto) {
-//        planDAO.updatePlan(dto);
-//    }
+    // »ı»ê °èÈ¹ ¼öÁ¤
+    @Override
+    public void updatePlan(ProductionPlan_DTO dto) {
+        if (dto == null) {
+            throw new IllegalArgumentException("¼öÁ¤ÇÒ »ı»ê °èÈ¹ Á¤º¸°¡ ¾ø½À´Ï´Ù.");
+        }
+        planDAO.updatePlan(dto);
+    }
 
-
-
-    // ìƒí’ˆ ê²€ìƒ‰ ìë™ì™„ì„±ìš©
+    // »óÇ° °Ë»ö ÀÚµ¿¿Ï¼º¿ë
     @Override
     public List<ProductionPlan_DTO> getProducts(String searchTerm) {
         return planDAO.getProducts(searchTerm);
     }
     
-    //ìƒì‚° ê³„íš ì‚­ì œ
+    // »ı»ê °èÈ¹ »èÁ¦
     @Override
     public void deletePlan(int planId) {
         if (planId <= 0) {
-            throw new IllegalArgumentException("ìœ íš¨í•˜ì§€ ì•Šì€ ìƒì‚°ê³„íš ëª…ë ¹ì…ë‹ˆë‹¤.");
+            throw new IllegalArgumentException("À¯È¿ÇÏÁö ¾ÊÀº »ı»ê °èÈ¹ ¹øÈ£ÀÔ´Ï´Ù.");
         }
         planDAO.deletePlan(planId);
     }
 
+    // »ı»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸
+    @Override
+    public ProductionPlan_DTO getPlanDetails(int planId) {
+        return planDAO.getPlanDetails(planId);  // DAO¿¡¼­ µ¥ÀÌÅÍ¸¦ °¡Á®¿É´Ï´Ù.
+    }
+    
+
+    //ÆäÀÌÁö³×ÀÌ¼Ç
+    @Autowired
+    private Prodplan_DAO prodplan_DAO;  
+    @Override
+    public int getTotalCount() {
+        return prodplan_DAO.getTotalCount();  
+    }
+
+    @Override
+    public List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount) {
+        return prodplan_DAO.getProdPlanList(pageNo, viewCount);  // DAOÀÇ ¸Ş¼Òµå È£Ãâ
+    }
+
+    
 }

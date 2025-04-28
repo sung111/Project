@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OOOOO 생산 정보</title>
+<title>HHMES 작업지시서</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/workorder.css">
 <!-- js -->
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<div class="productinfo">
+	<form class="productinfo">
 		<table>
 			<tr class="productinfo-info">
 				<td class="productinfo-info-list">
@@ -33,15 +33,7 @@
 				<td class="productinfo-info-list">
 					<div class="productinfo-info-name">품명[규격]</div> <input type="text"
 					class="productinfo-info-productname" alt="productinfo-품명[규격]">
-<ul id="finishi-list" class="finishi-list">
-    <li>
-    <%-- ${workOrder.product.productname} [${workOrder.product.spec} ${workOrder.product.unit}] --%>
-            ${workOrder.product.productname != null ? workOrder.product.productname : "상품명 없음"}
-        [${workOrder.product.spec != null ? workOrder.product.spec : "규격 없음"}]
-        ${workOrder.product.unit != null ? workOrder.product.unit : "단위 없음"}
-    </li>
-    
-</ul>
+
 					<button type="button" class="productsearch" alt="조회">조회</button>
 				</td>
 				<td class="productinfo-info-list">
@@ -75,14 +67,9 @@
 							src="production_process.html" style="display: none;"></iframe>
 					</td>
 				</tr>
-				<tr class="check-info-buttoncontainer">
-					<td class="check-info-buttonlayer">
-						<button type="button" class="check-info-close">나가기</button>
-					</td>
-				</tr>
 			</table>
 		</div>
-	</div>
+	</form>
 </body>
 
 </html>

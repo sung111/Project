@@ -1,16 +1,26 @@
 package project.dao.Prodplan_total_dao;
 
 import java.util.List;
-
 import project.dto.ProductionPlan_DTO;
 
 public interface Prodplan_DAO {
     List<ProductionPlan_DTO> getAllPlans();       
 
-	/* void updatePlan(ProductionPlan_DTO plan); */     
+    // ¼öÁ¤
+    void updatePlan(ProductionPlan_DTO plan);
+    
+    // Ãß°¡
     void insertPlan(ProductionPlan_DTO plan);    
+    
     List<ProductionPlan_DTO> getProducts(String searchTerm);
-    //ì‚­ì œ
-    void deletePlan(int planId);
 
+    // »èÁ¦
+    void deletePlan(int planId);
+    
+    // »ý»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸
+    ProductionPlan_DTO getPlanDetails(int planId);  // Ãß°¡
+    
+    int getTotalCount();
+    List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount);
+    
 }

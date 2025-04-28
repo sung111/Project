@@ -1,23 +1,50 @@
 package project.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/maintitle")
-public class Maintitle_total_controller {
+import project.service.Maintitle_service.Maintitle_service;
 
-	@GetMapping
-	public String loadMaintitlePage() {
-	    return "MainTitle"; 
+@Controller
+public class Maintitle_total_controller {
+	
+	@Autowired
+	Maintitle_service service;
+
+	@RequestMapping("/maintitle")
+	public String loadMaintitlePage(Model model) {
+	 
+		try {
+		System.out.println("loadMaintitlePage Ïã§Ìñâ");
+	    List titleAnnouncement = service.titleAnnouncement();
+	    List titleGeneralBulletinBoard = service.titleGeneralBulletinBoard();
+	    List titleFinishedProduct = service.titleFinishedProduct();
+	    List titleQualityControl = service.titleQualityControl();
+	    
+	    model.addAttribute("Announcement",titleAnnouncement);
+	    model.addAttribute("GeneralBulletinBoard",titleGeneralBulletinBoard);
+	    model.addAttribute("FinishedProduct",titleFinishedProduct);
+	    model.addAttribute("QualityControl",titleQualityControl);
+	    System.out.println("1"+titleAnnouncement);
+	    System.out.println("2"+titleGeneralBulletinBoard);
+	    System.out.println("3"+titleFinishedProduct);
+	    System.out.println("4"+titleQualityControl);
+
+	    }catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "MainTitle"; 
 	}
 
-    // ∆‰¿Ã¡ˆ∏Ì ±‚π› ∞Ê∑Œ √≥∏Æ
-    @GetMapping("/{page}")
-    public String loadMaintitlePage(@PathVariable("page") String page) {
-        return "MainTitle/" + page;  
-    }
+
+
+    
+    
+
 }
 

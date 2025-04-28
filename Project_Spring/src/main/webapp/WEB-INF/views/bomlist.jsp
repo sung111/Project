@@ -209,6 +209,23 @@
 									align-items: center;
 									margin-bottom: 500px;
 								}
+								#pagenation{
+									width: 13%;
+									margin: 0 auto;
+								}
+								.font_color{
+									background-color: #ffffff;
+									border: #ffffff;
+									font-size: 20px;
+									
+								}
+								.font_color:hover{
+									background-color: #b6b0b0;
+									border: #b6b0b0;
+									border-radius: 10px;
+									
+									
+								}
 								
 							
 								.loader {
@@ -263,6 +280,10 @@
 									
 										width: 20px;
 									}
+									.bold{
+									
+										font-weight: bold;
+									}
 								
 								}
 							</style>
@@ -276,6 +297,8 @@
 							<div id="boodea">
 								<div>
 									<h2>${pname}</h2>
+									<!-- 목록이동누르면 이전전 페이징 그대로 가기 해보자잇! -->
+									<!-- <input type="text" value="${page}" id="beforeid"> -->
 								</div>
 							</div>
 							<div id="creatbutton">
@@ -354,17 +377,25 @@
 
 								</tbody>
 							</table>
+							<div id="pagenation">
+							
+							</div>
 
 							
 							<script>
+									
 								
 
-
-									function pidselect() {
-										
+									function pidselect(pid,page) {
 									
+										
+									//pid=재료
 										const xhr = new XMLHttpRequest();
-									xhr.open('get', 'bomlistSlect?pid='+document.querySelector("#pid").value )
+										//pid 출력할때 '${pid}'써야되는이유를 모르게씀
+										if(page === undefined){
+											page = 1
+										}
+									xhr.open('get', 'bomlistSlect?productid='+'${pid}'+'&page='+page )
 
 									xhr.setRequestHeader('Content-Type', 'application/json')
 
@@ -375,13 +406,16 @@
 										console.log(xhr.responseText)
 										data=JSON.parse(data)
 										console.log(data)
-										let list = data.list;
+										let list = data.list.list;
 										let Field = data.Field;
+										let b = data.pDTO.page
+										
 										document.querySelector("#bodyuphand").innerHTML = ` `
 											list.forEach(dto => {
 													let newdataHtml = document.createElement("tr")
 												
 													newdataHtml.innerHTML = `
+																
 																<td>\${dto.materialname}</td>
 																<td>\${dto.bom_quan}/개</td>
 																<td>\${dto.price}</td>
@@ -410,19 +444,18 @@
 																			<input type="button" value="수정" class="update btn font_size">
 																			<input type="button" value="삭제" class="delete btn font_size">
 																		</div>
-																	</td>`
+																	</td>
+																
+																	
+																	`
+
 																}
+																document.querySelector("#bodyuphand").append(newdataHtml)
+																document.querySelector(".lodingevent_show").style.display = "none"
 																
 																
 
-														
-																
-																					
-																						
-																						
-																document.querySelector("#bodyuphand").append(newdataHtml)
-																document.querySelector(".lodingevent_show").style.display = "none"
-															
+
 																
 																
 																//삭제이벤트
@@ -539,7 +572,9 @@
 
 																						})
 																						newdataHtml.querySelector(".can").addEventListener("click",function(ee){
-																							pidselect();
+																							let productid = document.querySelector("#pid").value
+																							
+																							pidselect(productid,page);
 																						})
 																						 
 																					}			
@@ -550,20 +585,113 @@
 																						
 																})
 											})
+											let pagenation = document.querySelector("#pagenation")
+											pagenation.innerHTML=``
+											
+										pageNo = data.pDTO.page
+										viewCount = data.pDTO.buildOfMaterialsviewCount
+									
+										console.log(2,pageNo)
+										console.log(3,viewCount)
+									
+										
+										let total =data.list.count // 전체 겟수
+										let lastPage = Math.ceil(total / viewCount) 
+										let groupCount = 5
+										let groupPosition = Math.ceil(pageNo / groupCount)
+										let begin = ((groupPosition-1) * groupCount) + 1;
+										let end = groupPosition * groupCount;
+										
+										console.log("현제 페이지",page)    //현제 페이지
+																										
+										console.log("전체카운트",total) //전체카운트
+										console.log("현제 음식 가져온거",list) // 현제 음식 가져온거
+										
+										
+										
+										if(end > lastPage){
+											end = lastPage
+											} 
+											if( begin === 1 ){
+												pagenation.innerHTML+=`
+												<input type="button" value="이전" class="font_color">
+											
+												`
+											}else{
+												pagenation.innerHTML+=`
+												<input type="button" value="이전" class="clickable font_color" data-page="\${begin-1}">
+												
+												`
+											}	
+
+											for(let i = begin; i<=end ; i++){
+												if(i === pageNo){
+													pagenation.innerHTML+=`
+													<input type="button" class="bold clickable font_color" data-page="\${i}" value="\${i}">
+													
+													`
+												}else {
+													pagenation.innerHTML+=`
+												
+													<input type="button" class="clickable font_color" data-page="\${i}" value="\${i}">
+													`
+												}
+												
+											}
+											if( end === lastPage ){
+												pagenation.innerHTML+=`
+													<input type="button" class="font_color" value="다음">
+												`
+											}else{
+												pagenation.innerHTML+=`
+												<input type="button" value="다음" class="clickable font_color" data-page="\${end+1}">
+												
+												`
+											}
+											
+											let data_page = pagenation.querySelectorAll(".clickable");
+											data_page.forEach(dto =>{
+												dto.addEventListener("click",function(e){
+													if(e.target.getAttribute("data-page") == page){
+														console.log(e.target.getAttribute("data-page"))
+													}else{
+														console.log(e.target.getAttribute("data-page"))
+														let productid = document.querySelector("#pid").value
+														let page = e.target.getAttribute("data-page")
+														pidselect(productid,page)
+													}
+													
+													// href="bomlistSlect?page=\${ i }&page=\${pageNo}" class="clickable" data-page="\${i}"
+													// <a href="bomlistSlect?page=\${begin-1}&page=\${pageNo}" class="clickable">[이전]</a>
+												})
+
+											})
+
+											
+											
+											
 										}
 
 
 									}
 									
-								window.addEventListener("load", function () {
+								window.addEventListener("load", function (event) {
 									
-
+									
 																		
 									//목록이동버튼
-									pidselect();
+									let page;
+										if(page === undefined){
+											page = 1
+										}
+								
+									pidselect(pid,page);
+									console.log("=========",'${pid}')
+									console.log("음식이름",'${pname}')
 
 									document.querySelector("#back-button").addEventListener("click", () => {
-										location.href = "bom_v2"
+										
+										location.href = "bom_v2?"
 									})
 
 									document.querySelector("#input_show").addEventListener("click", function (e) {

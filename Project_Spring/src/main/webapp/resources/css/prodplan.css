@@ -11,12 +11,14 @@ tbody{
     width: 100%;
 }
 
-
+.comp, .cancel-btn{
+	display: none;
+}
 .insdellayer{
 	width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center; 
 }
 
-.com{
+.comp{
 	color: #007bff;
 }
 .cancel{
@@ -33,12 +35,12 @@ background-color: #999999;
 
 .new-workorder{
     width: 100%; table-layout: fixed; border-collapse: collapse;
-    /* 열에 문제가 있다면 바로 아래 td 지우기 + table-layout: auto; */
+    /* �뿴�뿉 臾몄젣媛� �엳�떎硫� 諛붾줈 �븘�옒 td 吏��슦湲� + table-layout: auto; */
 }
 .new-workorder td {
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-/* 작성주 위치 CSS */
+/* �옉�꽦二� �쐞移� CSS */
 .menufacturer-info{
     width: 100%; height: 40px; 
 }
@@ -52,7 +54,7 @@ background-color: #999999;
     width: 70%; height: 100%; float: right;  outline: none; text-align: center; border: 0;
 }
  
-/* 작성품목 위치 CSS */
+/* �옉�꽦�뭹紐� �쐞移� CSS */
 
 .order-info-list{
     width: auto; height: 40px; color: #ffffff; background-color: #007bff; border: 1px solid #999999; font-weight: 300; 
@@ -101,7 +103,7 @@ cursor: default;
     outline: none;
 }
 
-/* 버튼 위치 CSS */
+/* 踰꾪듉 �쐞移� CSS */
 
 .order-buttonlayer{
     display: flex; float: right; margin-top: 20px;

@@ -598,18 +598,22 @@ public class Bom_total_controller {
 //완제품 BOM
 //----
 	@RequestMapping(value="/bom_v2",method=RequestMethod.GET)
-	public String Bom_v2( HttpSession httpsession ,Model model
+	public String Bom_v2( HttpSession httpsession ,Model model,
+			@RequestParam(value="page",required = false) String page
 			
 			)  {
 		System.out.println("bom_v2 입장~~~");
 		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
 		String Field = Field2.getJob();
 //				String Field = "ADMIN";
-		model.addAttribute(Field);
+		model.addAttribute("Field",Field);
+		model.addAttribute("pageNo",page);
+		
+		
 		return "bom_v2";
 	}
 			
-			//=-----------------하고있는곳
+//조회 및 화면 렌더링
 	@ResponseBody
 	@RequestMapping(value="/bom_v2_select",method=RequestMethod.GET)
 	public Map<String,Object> bom_v2_select(
@@ -618,7 +622,9 @@ public class Bom_total_controller {
 			)  {
 		Map<String, Object> map = new HashMap();
 		List list = null;
-		
+		System.out.println("=============================");
+		System.out.println("전달받은페이지"+dto.getPage());
+		System.out.println("=============================");
 		try {
 			String nameserch = dto.getSerch();
 			
@@ -643,11 +649,12 @@ public class Bom_total_controller {
 		return map;
 	}
 	
-//완제품 > 원재료 메인홤면
+//완제품 > 원재료 메인홤면 > 타이틀 완제품 이름, 생성시 들어가는 원재료 이름ㅁ
 	@RequestMapping("/bomlist")
 	public String Bomlist(Model model,
 			@RequestParam(value="pname",required = false) String pname,
 			@RequestParam(value="pid",required = false) String pid,
+			@RequestParam(value="page",required = false) int page,
 			 HttpSession httpsession
 			) {
 		User_DTO Field2 = (User_DTO) httpsession.getAttribute("user");
@@ -660,6 +667,7 @@ public class Bom_total_controller {
 			model.addAttribute("Field",Field);
 			model.addAttribute("pid",pid);
 			model.addAttribute("pname",pname);
+			model.addAttribute("page",page);
 		}catch (Exception e) {
 			e.printStackTrace();
 			
@@ -671,19 +679,28 @@ public class Bom_total_controller {
 	@ResponseBody
 	@RequestMapping(value="/bomlistSlect",method=RequestMethod.GET)
 	public Map<String,Object> bomlistSlect(
-			@RequestParam(value="pid",required = false) int pid,
+			Materials_DTO materials_DTO,
 			HttpSession httpSession
 			) {
+		
 		System.out.println("bomlistSlect 시작");
 		Map<String, Object> map = new HashMap();
 		User_DTO Field2 = (User_DTO) httpSession.getAttribute("user");
 		String Field = Field2.getJob();
 		List materiallist = null;
+		int productid = materials_DTO.getProductid();
 		try {
-			materiallist = build_of_Materials_service.BuildOfMaterials_materialSelect(pid);
+			
+			System.out.println("----------");
+			System.out.println("받아온값 getPage--"+materials_DTO.getPage()+"  getProductid"+materials_DTO.getProductid());
+			System.out.println("---------");
+			Map list = build_of_Materials_service.BuildOfMaterials_materialSelect(materials_DTO);
 			System.out.println("materiallist :"+materiallist);
 			map.put("list", materiallist);
 			map.put("Field",Field);
+			map.put("productid", productid);
+			map.put("list", list);
+			map.put("pDTO", materials_DTO);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -691,6 +708,7 @@ public class Bom_total_controller {
 		}
 		return map;
 	}
+	
 	//생성
 	@ResponseBody
 	@RequestMapping(value="/bominsert",method=RequestMethod.POST)

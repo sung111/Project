@@ -187,8 +187,9 @@
 
 <body>
     <!-- 내용 -->
-    <div class="container">
-        
+     <input type="hidden" value="${pageNo}" id="firstpageNo">
+        <div class="container">
+       
 
 
     </div>
@@ -196,8 +197,8 @@
     <script>
 
         window.addEventListener("load",search)
-     
-       
+        
+        
         function search(event,pageNo,serch) {
                 //맨처음한번 조회해오기
                 event.preventDefault();
@@ -205,8 +206,18 @@
                 //ajax
             const xhr = new XMLHttpRequest();
             //if pageNo 언디판 serch 언디파인 if else문 써서 값을 넣거나 뺴자 
+           let firstpageNo = document.querySelector("#firstpageNo").value
+        //    pageNo = firstpageNo 
+           if(pageNo === undefined ){
+                pageNo = 1
+                console.log("pageNo if작동")
+            }
+            if(serch === undefined){
+                serch = " "
+                console.log("serch if작동")
+            }
+           console.log("pageNo",pageNo,"serch",serch,"firstpageNo",firstpageNo)
             xhr.open('get', 'bom_v2_select?page='+pageNo+'&serch='+serch )
-
             xhr.setRequestHeader('Content-Type', 'application/json')
 
             xhr.send()
@@ -254,12 +265,13 @@
                                 
                             newdataHtml.innerHTML = `
                                 <td>
-                                <input type="hidden" class="productid" ">
+                                <input type="hidden" class="productid" value="\${dto.productid}">
                                 <span class="move">\${dto.productname}</span>
-                            </td>
-                            <td>\${dto.partnumber}</td>
-                            <td>\${dto.expdatedesc}</td>
-                            <td>\${dto.warehouse}</td>
+                                </td>
+
+                                <td>\${dto.partnumber}</td>
+                                <td>\${dto.expdatedesc}</td>
+                                <td>\${dto.warehouse}</td>
                             
                             
                             <td><img src="download?filename=\${dto.productimage}" ></td>
@@ -274,7 +286,8 @@
                                         let productname = e.target.innerHTML
                                         console.log(pvalue)
                                         console.log(pvalue)
-                                            location.href = "bomlist?pid=" + pvalue + "&pname="+productname;
+                                        location.href = "bomlist?pid=" + pvalue + "&pname="+productname +"&page="+page;
+                                        // alert("pvalue"+pvalue+"  productname"+productname+"  page"+page)
 
                                     })
                                     
@@ -285,42 +298,42 @@
                     let pageHtml = document.createElement("div")
                     pageHtml.setAttribute("id" ,"pagehtml")
                    //현제검색어 serch // 현제페이지page //현제 총카운트 totalcount // 가져온음식 리스트 list
-                    console.log("현제 페이지",page)    //현제 페이지
-                    console.log("검색어",serch)	//검색어																	
-                    console.log("전체카운트",totalcount) //전체카운트
-                    console.log("현제 음식 가져온거",list) // 현제 음식 가져온거
-                    
-              
-                    
-                    
-                    
-                    let dtoo = data.pDTO
-                    let pageNo = 1
-                    let viewCount = 10 
-                    
-                    pageNo = data.pDTO.page
-                    serch = data.pDTO.serch
-                    viewCount = data.pDTO.fourViewCount //
-                    console.log(1,data.pDTO.fourViewCount)
-                    console.log(2,pageNo)
-                    console.log(3,viewCount)
                    
-                
-                
-                
-                
-                    
-                    let total =totalcount // 전체 겟수
-                    let lastPage = Math.ceil(total / viewCount) 
-                    let groupCount = 5
-                    let groupPosition = Math.ceil(pageNo / groupCount)
-                    let begin = ((groupPosition-1) * groupCount) + 1;
-                    let end = groupPosition * groupCount;
-                    
                    
-                    
-                    if(end > lastPage){
-                        end = lastPage
+                   
+                   
+                   
+                   let dtoo = data.pDTO
+                   let pageNo = 1
+                   let viewCount = 10 
+                   
+                   pageNo = data.pDTO.page
+                   serch = data.pDTO.serch
+                   viewCount = data.pDTO.fourViewCount //
+                   console.log(1,data.pDTO.fourViewCount)
+                   console.log(2,pageNo)
+                   console.log(3,viewCount)
+                   
+                   
+                   
+                   
+                   
+                   let total =data.slect.count // 전체 겟수
+                   let lastPage = Math.ceil(total / viewCount) 
+                   let groupCount = 5
+                   let groupPosition = Math.ceil(pageNo / groupCount)
+                   let begin = ((groupPosition-1) * groupCount) + 1;
+                   let end = groupPosition * groupCount;
+                   
+                   console.log("현제 페이지",page)    //현제 페이지
+                   console.log("검색어",serch)	//검색어																	
+                   console.log("전체카운트",total) //전체카운트
+                   console.log("현제 음식 가져온거",list) // 현제 음식 가져온거
+                   
+                   
+                   
+                   if(end > lastPage){
+                       end = lastPage
                     } 
                     if( begin === 1 ){
                         pageHtml.innerHTML+=`
@@ -361,25 +374,25 @@
                             dto.addEventListener("click",search)
 
                             //페이지이동이벤트
-                            dto.addEventListener("click",function(ev){
+                            dto.addEventListener("click",function(e){
                                 let search_text =document.querySelector("#search-text").value
-                                    if(search_text == undefined){
-                                        search_text = " ";
-                                    }
-                                    if(e,ev.target.querySelector("data-page") === undefined){
-                                        e,ev.target.querySelector("data-page") = 1;
-                                    }
+                                 
 
-                                alert(e.target.getAttribute("data-page"))
-                                if(e.target.getAttribute("data-page") === 1){
-
-                                   search(e,ev.target.querySelector("data-page"),search_text)
-
-                                   console.log(e.target.querySelector("data-page"))
-                                //뭘해?
-                               }else{
-                                //뭘해?
-                                //그려?
+                                
+                                if(e.target.getAttribute("data-page") == 1){
+                                    
+                                  
+                                }else{
+                                    console.log("전달인자1 존재")
+                                    console.log("전달인자2",e.target.getAttribute("data-page"))
+                                    console.log("전달인자3",search_text)
+                                    // alert(e.target.getAttribute("data-page"),search_text)
+                                    let nowpage = e.target.getAttribute("data-page")
+                                    console.log("nowpage",nowpage)
+                                   
+                                    search(e ,nowpage, search_text)
+                                    
+                                
                                }
                            
                            
@@ -389,7 +402,12 @@
 
                     })
                     //검색  이벤트 
-                    document.querySelector("#search-button").addEventListener("click",search)
+                    document.querySelector("#search-button").addEventListener("click",function(e){
+                        let texval = document.querySelector("#search-text").value
+                        let startpaage = 1
+                        search(e ,startpaage, texval)
+                    })
+
                     //----------------
 
 

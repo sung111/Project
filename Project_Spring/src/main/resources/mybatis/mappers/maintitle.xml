@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 상위 이름 -->
+<mapper namespace="mapper.emp">
+
+<!-- 공지사항조회 -->
+<select id="titleAnnouncement" resultType="maintitle_DTO">
+	select postdate,title 
+		from(
+			select postdate,title from posts
+			where notify = 'Y'
+			order by postid desc 
+		)
+	where rownum <![CDATA[<=]]> 2
+	order by postdate desc
+
+</select>
+
+<!-- 일반게시판조회 -->
+<select id="titleGeneralBulletinBoard" resultType="maintitle_DTO">
+	select postdate,title 
+		from(
+			select postdate,title from posts
+			where notify = 'N'
+			order by postid desc 
+		)
+	where rownum <![CDATA[<=]]> 4
+	order by postdate desc
+
+</select>
+
+
+<!-- 완제품 조회 -->
+<select id="titleFinishedProduct" resultType="maintitle_DTO">
+	select creatdate,productname
+		from(
+			select creatdate,productname from products
+			where productdel = 'n'
+			order by productid desc 
+		)
+	where rownum <![CDATA[<=]]> 4
+	order by creatdate desc
+
+
+</select>
+
+
+<!-- 품질관리 조회 -->
+<select id="titleQualityControl" resultType="maintitle_DTO">
+SELECT qc.QUALITYCONTROLTIME, qc.result,  p.productname
+FROM (
+    SELECT QUALITYCONTROLTIME, productid, result
+    FROM QUALITYCONTROLS
+    ORDER BY qualitycontrolid DESC
+) qc
+JOIN products p ON qc.productid = p.productid
+WHERE ROWNUM  <![CDATA[<=]]> 4
+ORDER BY qc.QUALITYCONTROLTIME DESC
+
+
+</select>
+
+
+
+	
+
+
+
+</mapper>

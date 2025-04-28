@@ -1,6 +1,8 @@
 package project.dao.Prodplan_total_dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,11 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".selectAllPlans");
     }
 
-    //ìˆ˜ì •
-	/*
-	 * @Override public void updatePlan(ProductionPlan_DTO dto) {
-	 * sqlSession.update(NAMESPACE + ".updatePlan", dto); }
-	 */
-
-
+    // ¼öÁ¤
+    @Override
+    public void updatePlan(ProductionPlan_DTO dto) {
+        sqlSession.update(NAMESPACE + ".updatePlan", dto);
+    }
 
     @Override
     public void insertPlan(ProductionPlan_DTO plan) {
@@ -39,10 +39,29 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".getProducts", searchTerm);
     }
 
-    //ì‚­ì œ
+    // »èÁ¦
     @Override
     public void deletePlan(int planId) {
         sqlSession.delete(NAMESPACE + ".deletePlan", planId);
+    }
+
+    // »ý»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸
+    @Override
+    public ProductionPlan_DTO getPlanDetails(int planId) {
+        return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  // Mapper¿¡¼­ Äõ¸® ½ÇÇà
+    }
+    
+    @Override
+    public int getTotalCount() {
+        return sqlSession.selectOne("ProdPlanMapper.getTotalCount");
+    }
+
+    @Override
+    public List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount) {
+        Map<String, Object> params = new HashMap<String, Object>(); 
+        params.put("pageNo", pageNo);
+        params.put("viewCount", viewCount);
+        return sqlSession.selectList("ProdPlanMapper.getProdPlanList", params);
     }
 
     

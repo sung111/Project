@@ -1,5 +1,12 @@
+a{
+	text-decoration-line: none;
+}
 .chatbot-icon{
-	width: 35px; height: 35px; border: 1px solid #007bff;
+	width: 35px; height: 35px; border: 1px solid #007bff; display: flex; justify-content: center; align-items: center;
+}
+
+.chatbot-img{
+	width: 30px; height: 30px;
 }
 
 .logo{

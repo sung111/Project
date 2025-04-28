@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WorkorderMapper">
+
+    <!-- 작업지시서 정보 조회 -->
+<select id="selectWorkOrderById" parameterType="project.dto.WorkOrder_DTO" resultType="project.dto.WorkOrder_DTO">
+    SELECT 
+        ORDERID AS orderId,
+        ORDERDATE AS orderDate,
+        PRODUCTID AS productId
+    FROM WORKORDERS
+    WHERE ORDERID = #{orderId}
+</select>
+
+
+</mapper>
