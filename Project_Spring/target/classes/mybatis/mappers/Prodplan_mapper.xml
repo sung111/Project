@@ -130,5 +130,15 @@
     DELETE FROM productionplans
     WHERE planid = #{planId}
   </delete>
+  
+    <!-- 페이지네이션 데이터 조회 -->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM productionplans
+    </select>
+<select id="getProdPlanList" resultType="project.dto.ProductionPlan_DTO">
+    SELECT * FROM productionplans
+    LIMIT #{viewCount} OFFSET #{pageNo}
+</select>
+
 
 </mapper>

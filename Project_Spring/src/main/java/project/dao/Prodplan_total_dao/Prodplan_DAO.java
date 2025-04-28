@@ -19,4 +19,8 @@ public interface Prodplan_DAO {
     
     // 생산 계획 세부 정보 조회
     ProductionPlan_DTO getPlanDetails(int planId);  // 추가
+    
+    int getTotalCount();
+    List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount);
+    
 }

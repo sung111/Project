@@ -1,234 +1,263 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-        <!DOCTYPE html>
-        <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>HHMES 생산관리</title>
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodplan.css">
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HHMES 생산관리</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/prodplan.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
-        <body>
-            <table class="search-container">
-                <thead>
-                    <tr>
-                        <td class="search-contaoner-name">전체 상품 생산계획</td>
-                        <td class="search-contaoner-name">일정별 상품 생산계획</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="search-table">
-                        <td class="ProdPlanbtnList">
-                            <button class="ProdPlanbtn">일간</button>
-                            <button class="ProdPlanbtn">주간</button>
-                            <button class="ProdPlanbtn">월간</button>
-                        </td>
-                        <td class="ProdPlanbtnList">
-                            <button class="ProdPlanbtn">일간</button>
-                            <button class="ProdPlanbtn">주간</button>
-                            <button class="ProdPlanbtn">월간</button>
-                        </td>
-                    </tr>
-                    <tr class="submitcontainer">
-                        <td><input type="text" name="Prodsearch" class="searchlayer">
-                            <input type="submit" class="submitlayer" value="Search">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<body>
+	<table class="search-container">
+		<thead>
+			<tr>
+				<td class="search-contaoner-name">전체 상품 생산계획</td>
+				<td class="search-contaoner-name">일정별 상품 생산계획</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="search-table">
+				<td class="ProdPlanbtnList">
+					<button class="ProdPlanbtn">일간</button>
+					<button class="ProdPlanbtn">주간</button>
+					<button class="ProdPlanbtn">월간</button>
+				</td>
+				<td class="ProdPlanbtnList">
+					<button class="ProdPlanbtn">일간</button>
+					<button class="ProdPlanbtn">주간</button>
+					<button class="ProdPlanbtn">월간</button>
+				</td>
+			</tr>
+			<tr class="submitcontainer">
+				<td><input type="text" name="Prodsearch" class="searchlayer">
+					<input type="submit" class="submitlayer" value="Search"></td>
+			</tr>
+		</tbody>
+	</table>
 
-            <table class="name-layer">
-                <tr class="menufacturer-info">
-                    <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">생성인</div>
-                        <input type="text" id="creator" name="creator" class="menufacturer-info-completion"
-                            value="${not empty username ? username : ''}" readonly />
-                    </td>
+	<table class="name-layer">
+		<tr class="menufacturer-info">
+			<td class="menufacturer-info-list">
+				<div class="menufacturer-info-name">생성인</div> <input type="text"
+				id="creator" name="creator" class="menufacturer-info-completion"
+				value="${not empty username ? username : ''}" readonly />
+			</td>
 
-                    <td class="menufacturer-info-list">
-                        <div class="menufacturer-info-name">생산기간</div>
-                        <input type="text" id="productionPeriod" name="productionPeriod"
-                            class="menufacturer-info-completion" value="" readonly />
-                    </td>
-                </tr>
-            </table>
-
-
-
-
-
-            <table class="new-workorder">
-                <tbody class="tb1">
-                    <tr class="order-info-list">
-                        <td>품명[규격]</td>
-                        <td>품목코드</td>
-                        <td>단위</td>
-                        <td>보관</td>
-                        <td>납품업체</td>
-                        <td>창고위치</td>
-                        <td>생산수량</td>
-                        <td>작업계획생성일</td>
-                        <td>생산시작일</td>
-                        <td>생산종료일</td>
-                        <td>MRP계산</td>
-                        <td>생산계획현황</td>
-                        <td>생산사유</td>
-                        <td>비고</td>
-                        <td>명령</td>
-                    </tr>
-
-                    <c:choose>
-                        <c:when test="${not empty planList}">
-                            <c:forEach var="plan" items="${planList}">
-                                <tr name="prodPlanList" class="order-info-content wolist" data-id="${plan.productId}"
-                                    data-pi="${plan.planId}" data-username="${plan.userId}"
-                                    data-startdate="${plan.startDate}" data-enddate="${plan.endDate}">
-
-                                    <td class="productname">
-                                        <p>${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
-                                        <form action="${pageContext.request.contextPath}/prodplan/update" method="post">
-                                            <select name="productname" id="productSelect" class="productSelect"
-                                                style="display: none;">
-                                                <c:forEach var="item" items="${planList}">
-                                                    <option value="${item.product.productname}">
-                                                        ${item.product.productname}[${item.product.spec}${item.product.unit}]
-                                                    </option>
-                                                </c:forEach>
-                                                </>
-                                    </td>
+			<td class="menufacturer-info-list">
+				<div class="menufacturer-info-name">생산기간</div> <input type="text"
+				id="productionPeriod" name="productionPeriod"
+				class="menufacturer-info-completion" value="" readonly />
+			</td>
+		</tr>
+	</table>
 
 
-                                    <td class="lotnumber">
-                                        <p>${plan.product.lotnumber}</p>
-                                        <input type="text" name="lotnumber" value="${plan.product.lotnumber}"
-                                            style="display: none;" readonly />
-                                    </td>
 
-                                    <td class="unit">
-                                        <p>${plan.product.unit}</p>
-                                        <input type="text" name="unit" value="${plan.product.unit}"
-                                            style="display: none;" readonly />
-                                    </td>
 
-                                    <td class="warehouse">
-                                        <p>${plan.product.warehouse}</p>
-                                        <input type="text" name="warehouse" value="${plan.product.warehouse}"
-                                            style="display: none;" readonly />
-                                    </td>
 
-                                    <td class="deliveryDest">
-                                        <p>${plan.deliveryDest}</p>
-                                        <input type="text" name="deliveryDest" value="${plan.deliveryDest}"
-                                            style="display: none;" />
-                                    </td>
+	<table class="new-workorder">
+		<tbody class="tb1">
+			<tr class="order-info-list">
+				<td>품명[규격]</td>
+				<td>품목코드</td>
+				<td>단위</td>
+				<td>보관</td>
+				<td>납품업체</td>
+				<td>창고위치</td>
+				<td>생산수량</td>
+				<td>작업계획생성일</td>
+				<td>생산시작일</td>
+				<td>생산종료일</td>
+				<td>MRP계산</td>
+				<td>생산계획현황</td>
+				<td>생산사유</td>
+				<td>비고</td>
+				<td>명령</td>
+			</tr>
 
-                                    <td class="partnumber">
-                                        <p>${plan.product.partnumber}</p>
-                                        <input type="text" name="partnumber" value="${plan.product.partnumber}"
-                                            style="display: none;" readonly />
-                                    </td>
+			<c:choose>
+				<c:when test="${not empty planList}">
+					<c:forEach var="plan" items="${planList}">
+						<tr name="prodPlanList" class="order-info-content wolist"
+							data-id="${plan.productId}" data-pi="${plan.planId}"
+							data-username="${plan.userId}" data-startdate="${plan.startDate}"
+							data-enddate="${plan.endDate}">
 
-                                    <td class="totalqty">
-                                        <p>${plan.totalqty}</p>
-                                        <input type="text" name="totalqty" value="${plan.totalqty}"
-                                            style="display: none;" />
-                                    </td>
+							<td class="productname">
+								<p>${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
+								<form
+									action="${pageContext.request.contextPath}/prodplan/update"
+									method="post">
+									<select name="productname" id="productSelect"
+										class="productSelect" style="display: none;">
+										<c:forEach var="item" items="${planList}">
+											<option value="${item.product.productname}">
+												${item.product.productname}[${item.product.spec}${item.product.unit}]
+											</option>
+										</c:forEach> </> 
+							</td>
 
-                                    <td class="createDate">
-                                        <p>${plan.createDate}</p>
-                                        <input type="date" name="createDate" value="${plan.createDate}"
-                                            style="display: none;" />
-                                    </td>
 
-                                    <td class="startDate">
-                                        <p>${plan.startDate}</p>
-                                        <input type="date" name="startDate" value="${plan.startDate}"
-                                            style="display: none;" />
-                                    </td>
+							<td class="lotnumber">
+								<p>${plan.product.lotnumber}</p> <input type="text"
+								name="lotnumber" value="${plan.product.lotnumber}"
+								style="display: none;" readonly />
+							</td>
 
-                                    <td class="endDate">
-                                        <p>${plan.endDate}</p>
-                                        <input type="date" name="endDate" value="${plan.endDate}"
-                                            style="display: none;" />
-                                    </td>
+							<td class="unit">
+								<p>${plan.product.unit}</p> <input type="text" name="unit"
+								value="${plan.product.unit}" style="display: none;" readonly />
+							</td>
 
-                                    <td><a>MRP 계산</a></td>
+							<td class="warehouse">
+								<p>${plan.product.warehouse}</p> <input type="text"
+								name="warehouse" value="${plan.product.warehouse}"
+								style="display: none;" readonly />
+							</td>
 
-                                    <td class="planStatus">
-                                        <p>${plan.planStatus}</p>
-                                        <input type="text" name="planStatus" value="${plan.planStatus}"
-                                            style="display: none;" />
-                                    </td>
+							<td class="deliveryDest">
+								<p>${plan.deliveryDest}</p> <input type="text"
+								name="deliveryDest" value="${plan.deliveryDest}"
+								style="display: none;" />
+							</td>
 
-                                    <td class="planCause">
-                                        <p>${plan.planCause}</p>
-                                        <input type="text" name="planCause" value="${plan.planCause}"
-                                            style="display: none;" />
-                                    </td>
+							<td class="partnumber">
+								<p>${plan.product.partnumber}</p> <input type="text"
+								name="partnumber" value="${plan.product.partnumber}"
+								style="display: none;" readonly />
+							</td>
 
-                                    <td class="planNotes">
-                                        <p>${plan.planNotes}</p>
-                                        <input type="text" name="planNotes" value="${plan.planNotes}"
-                                            style="display: none;" />
-                                    </td>
+							<td class="totalqty">
+								<p>${plan.totalqty}</p> <input type="text" name="totalqty"
+								value="${plan.totalqty}" style="display: none;" />
+							</td>
 
-                                    <td class="insdellayer">
-                                        <button type="button" class="list-btn mdf-btn ins" id="mdf-btn">수정</button>
+							<td class="createDate">
+								<p>${plan.createDate}</p> <input type="date" name="createDate"
+								value="${plan.createDate}" style="display: none;" />
+							</td>
 
-                                        <form action="${pageContext.request.contextPath}/prodplan/delete" method="post"
-                                            onsubmit="return confirm('정말 삭제하시겠습니까?');" class="list-btn del">
-                                            <input type="hidden" name="planId" value="${plan.planId}" />
-                                            <input type="submit" value="삭제" class="delete-btn" />
-                                        </form>
+							<td class="startDate">
+								<p>${plan.startDate}</p> <input type="date" name="startDate"
+								value="${plan.startDate}" style="display: none;" />
+							</td>
 
-                                        <input type="hidden" name="planId" value="${plan.planId}" />
-                                        <button type="button" class="comp">확인</button> <!-- ★ type="button" 수정 -->
-                                        <button type="button" class="list-btn cancel-btn">취소</button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </c:when>
+							<td class="endDate">
+								<p>${plan.endDate}</p> <input type="date" name="endDate"
+								value="${plan.endDate}" style="display: none;" />
+							</td>
 
-                        <c:otherwise>
-                            <tr>
-                                <td colspan="14">데이터가 없습니다.</td>
-                                <td data-original-value="${plan.product.productname}">
-                                    <c:choose>
-                                        <c:when test="${not empty plan.product}">
+							<td><a>MRP 계산</a></td>
+
+							<td class="planStatus">
+								<p>${plan.planStatus}</p> <input type="text" name="planStatus"
+								value="${plan.planStatus}" style="display: none;" />
+							</td>
+
+							<td class="planCause">
+								<p>${plan.planCause}</p> <input type="text" name="planCause"
+								value="${plan.planCause}" style="display: none;" />
+							</td>
+
+							<td class="planNotes">
+								<p>${plan.planNotes}</p> <input type="text" name="planNotes"
+								value="${plan.planNotes}" style="display: none;" />
+							</td>
+
+							<td class="insdellayer">
+								<button type="button" class="list-btn mdf-btn ins" id="mdf-btn">수정</button>
+
+								<form
+									action="${pageContext.request.contextPath}/prodplan/delete"
+									method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');"
+									class="list-btn del">
+									<input type="hidden" name="planId" value="${plan.planId}" /> <input
+										type="submit" value="삭제" class="delete-btn" />
+								</form> <input type="hidden" name="planId" value="${plan.planId}" />
+								<button type="button" class="comp">확인</button> <!-- ★ type="button" 수정 -->
+								<button type="button" class="list-btn cancel-btn">취소</button>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<tr>
+						<td colspan="14">데이터가 없습니다.</td>
+						<td data-original-value="${plan.product.productname}"><c:choose>
+								<c:when test="${not empty plan.product}">
                                             ${plan.product.productname}
                                         </c:when>
-                                        <c:otherwise>데이터 없음</c:otherwise>
-                                    </c:choose>
-                                </td>
-                            </tr>
-                        </c:otherwise>
-                    </c:choose>
+								<c:otherwise>데이터 없음</c:otherwise>
+							</c:choose></td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
 
-                </tbody>
+		</tbody>
 
-                <tfoot>
-                    <tr>
-                        <td colspan="14">
-                            <div id="pagination-container"></div>
-                        </td>
-                        <td colspan="14" class="order-buttonlayer">
-                            <button type="button" class="WO-buttonlist newProdPlan-btn">상품계획생성</button>
-                            <button type="button" class="WO-buttonlist workOrder-btn">
-                                <!-- 스타일로 버튼처럼 보이게 처리하는 게 좋아요 -->
-                                <a href="${pageContext.request.contextPath}/prodplan/workorder"
-                                    class="workorder-a">작업지시서</a>
-                            </button>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            <script src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
-            <script>
+		<tfoot>
+			<tr>
+				<!-- 페이지네이션 -->
+<!-- 페이지네이션 -->
+<td colspan="14">
+    <div id="pagination-container">
+        <ul class="pagination">
+            <!-- 첫 페이지로 이동 버튼 -->
+            <c:if test="${pageNo > 1}">
+                <li><a href="?pageNo=1&viewCount=${viewCount}">&lt;&lt; 첫 페이지</a></li>
+            </c:if>
+
+            <!-- 이전 페이지 -->
+            <c:if test="${pageNo > 1}">
+                <li><a href="?pageNo=${pageNo - 1}&viewCount=${viewCount}">&laquo; 이전</a></li>
+            </c:if>
+
+            <!-- 페이지 번호 -->
+            <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+                <li class="${i == pageNo ? 'active' : ''}">
+                    <a href="?pageNo=${i}&viewCount=${viewCount}">${i}</a>
+                </li>
+            </c:forEach>
+
+            <!-- 다음 페이지 -->
+            <c:if test="${pageNo < lastPage}">
+                <li><a href="?pageNo=${pageNo + 1}&viewCount=${viewCount}">다음 &raquo;</a></li>
+            </c:if>
+
+            <!-- 마지막 페이지로 이동 버튼 -->
+            <c:if test="${pageNo < lastPage}">
+                <li><a href="?pageNo=${lastPage}&viewCount=${viewCount}">마지막 페이지 &gt;&gt;</a></li>
+            </c:if>
+        </ul>
+    </div>
+</td>
+
+
+
+				<td colspan="14" class="order-buttonlayer">
+					<button type="button" class="WO-buttonlist newProdPlan-btn">상품계획생성</button>
+					<button type="button" class="WO-buttonlist workOrder-btn">
+						<!-- 스타일로 버튼처럼 보이게 처리하는 게 좋아요 -->
+						<a href="${pageContext.request.contextPath}/prodplan/workorder"
+							class="workorder-a">작업지시서</a>
+					</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
+	<script>
     // 시간별 필터링 (일간, 주간, 월간)
     function getProductionPlan(range) {
         const today = new Date();
@@ -375,37 +404,55 @@
     });
 
     // 생성 버튼 클릭
-    $(document).ready(function () {
-        $(document).on('click', '.newProdPlan-btn', function () {
-            let $tbody = $('.tb1');
-            let newRow = `
-                <tr class="order-info-content wolist">
-                    <td><input type="text" class="productNameInput" placeholder="상품명" /></td>
-                    <td><input type="text" class="lotnumberInput" placeholder="품목코드" /></td>
-                    <td><input type="text" class="unitInput" placeholder="단위" /></td>
-                    <td><input type="text" class="warehouseInput" placeholder="보관" /></td>
-                    <td><input type="text" class="deliveryDestInput" placeholder="납품업체" /></td>
-                    <td><input type="text" class="partNumberInput" placeholder="창고위치" /></td>
-                    <td><input type="text" class="totalQtyInput" placeholder="생산수량" /></td>
-                    <td><input type="text" class="createDateInput" placeholder="작업계획생성일" /></td>
-                    <td><input type="text" class="startDateInput" placeholder="생산시작일" /></td>
-                    <td><input type="text" class="endDateInput" placeholder="생산종료일" /></td>
-                    <td><a>MRP 계산</a></td>
-                    <td><input type="text" class="planStatusInput" placeholder="생산계획현황" /></td>
-                    <td><input type="text" class="planCauseInput" placeholder="생산사유" /></td>
-                    <td><input type="text" class="planNotesInput" placeholder="비고" /></td>
-                    <td class="insdellayer">
-                        <form action="${pageContext.request.contextPath}/prodplan/insert" method="post" class="list-btn com">
-                            <input type="submit" value="생성" />
-                        </form>
-                        <form action="${pageContext.request.contextPath}/prodplan/cancel" method="post" onsubmit="return confirm('정말 취소하시겠습니까?');" class="list-btn cancel">
-                            <input type="submit" value="취소" />
-                        </form>
-                    </td>
-                </tr>`;
-            $tbody.append(newRow);
-        });
+   $(document).ready(function () {
+    $(document).on('click', '.newProdPlan-btn', function () {
+        let $tbody = $('.tb1');
+        let newRow = `
+            <tr name="prodPlanList" class="order-info-content wolist">
+                <td><input type="text" class="productNameInput" placeholder="상품명" /></td>
+                <td><input type="text" class="lotnumberInput" placeholder="품목코드" /></td>
+                <td><input type="text" class="unitInput" placeholder="단위" /></td>
+                <td><input type="text" class="warehouseInput" placeholder="보관" /></td>
+                <td><input type="text" class="deliveryDestInput" placeholder="납품업체" /></td>
+                <td><input type="text" class="partNumberInput" placeholder="창고위치" /></td>
+                <td><input type="text" class="totalQtyInput" placeholder="생산수량" /></td>
+                <td><input type="text" class="createDateInput" placeholder="작업계획생성일" /></td>
+                <td><input type="text" class="startDateInput" placeholder="생산시작일" /></td>
+                <td><input type="text" class="endDateInput" placeholder="생산종료일" /></td>
+                <td><a>MRP 계산</a></td>
+                <td><input type="text" class="planStatusInput" placeholder="생산계획현황" /></td>
+                <td><input type="text" class="planCauseInput" placeholder="생산사유" /></td>
+                <td><input type="text" class="planNotesInput" placeholder="비고" /></td>
+                <td class="insdellayer">
+                    <form action="${pageContext.request.contextPath}/prodplan/insert" method="post" class="list-btn com">
+                        <input type="submit" value="생성" />
+                    </form>
+                    <form action="${pageContext.request.contextPath}/prodplan/cancel" method="post" onsubmit="return confirm('정말 취소하시겠습니까?');" class="list-btn cancel">
+                        <input type="submit" value="취소" />
+                    </form>
+                </td>
+            </tr>`;
+
+        // 테이블에 새로운 행을 추가
+        $tbody.append(newRow);
+
+        // 페이지네이션을 새로 계산 (예시로 페이지 번호를 1 증가시키는 코드)
+        let currentPage = getCurrentPageNumber(); // 현재 페이지 번호를 가져오는 함수
+        updatePagination(currentPage + 1); // 페이지네이션을 새로 업데이트하는 함수
     });
+});
+
+// 페이지 번호를 가져오는 예시 함수 (구현 필요)
+function getCurrentPageNumber() {
+    return parseInt($('#pagination-container .pagination .active').text(), 10);
+}
+
+// 페이지네이션을 업데이트하는 예시 함수 (구현 필요)
+function updatePagination(pageNumber) {
+    // 페이지네이션 로직을 여기에 구현
+    console.log("페이지 번호 업데이트: ", pageNumber);
+}
+
 
     // 수정 버튼 클릭
     document.querySelectorAll('.ins').forEach(button => {
@@ -467,6 +514,6 @@
     }
 </script>
 
-        </body>
+</body>
 
-        </html>
+</html>

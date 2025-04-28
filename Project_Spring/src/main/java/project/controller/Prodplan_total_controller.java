@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -94,4 +95,30 @@ public class Prodplan_total_controller {
         }
         return "prodplan/planDetails";  // 'prodplan/planDetails.jsp'로 전달
     }
+    
+    @RequestMapping("/list")
+    public String getProdPlanList(@RequestParam(defaultValue = "1") int pageNo, 
+                                  @RequestParam(defaultValue = "10") int viewCount, 
+                                  Model model) {
+
+        // 총 데이터 개수 조회
+        int totalCount = prodplanService.getTotalCount(); 
+        List<ProductionPlan_DTO> prodPlans = prodplanService.getProdPlanList(pageNo, viewCount);  
+        int lastPage = (int) Math.ceil((double) totalCount / viewCount);
+        
+        // 페이지 네비게이션의 시작 페이지와 끝 페이지 계산
+        int startPage = ((pageNo - 1) / 5) * 5 + 1; 
+        int endPage = Math.min(startPage + 4, lastPage);
+
+        // 모델에 데이터 추가
+        model.addAttribute("prodPlans", prodPlans);  
+        model.addAttribute("pageNo", pageNo);       
+        model.addAttribute("lastPage", lastPage);    
+        model.addAttribute("startPage", startPage); 
+        model.addAttribute("endPage", endPage);    
+        model.addAttribute("totalCount", totalCount);
+
+        return "prodPlanList";
+    }
+
 }

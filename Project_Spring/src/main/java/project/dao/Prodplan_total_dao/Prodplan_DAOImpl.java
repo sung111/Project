@@ -1,6 +1,8 @@
 package project.dao.Prodplan_total_dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +50,19 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
     public ProductionPlan_DTO getPlanDetails(int planId) {
         return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  // Mapper에서 쿼리 실행
     }
+    
+    @Override
+    public int getTotalCount() {
+        return sqlSession.selectOne("ProdPlanMapper.getTotalCount");
+    }
+
+    @Override
+    public List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount) {
+        Map<String, Object> params = new HashMap<String, Object>(); 
+        params.put("pageNo", pageNo);
+        params.put("viewCount", viewCount);
+        return sqlSession.selectList("ProdPlanMapper.getProdPlanList", params);
+    }
+
+    
 }

@@ -58,4 +58,20 @@ public class Prodplan_serviceImpl implements Prodplan_service {
     public ProductionPlan_DTO getPlanDetails(int planId) {
         return planDAO.getPlanDetails(planId);  // DAO에서 데이터를 가져옵니다.
     }
+    
+
+    //페이지네이션
+    @Autowired
+    private Prodplan_DAO prodplan_DAO;  
+    @Override
+    public int getTotalCount() {
+        return prodplan_DAO.getTotalCount();  
+    }
+
+    @Override
+    public List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount) {
+        return prodplan_DAO.getProdPlanList(pageNo, viewCount);  // DAO의 메소드 호출
+    }
+
+    
 }

@@ -20,5 +20,9 @@ public interface Prodplan_service {
     List<ProductionPlan_DTO> getProducts(String searchTerm);
 
     // 생산 계획 세부 정보 조회
-    ProductionPlan_DTO getPlanDetails(int planId);  // 추가
+    ProductionPlan_DTO getPlanDetails(int planId);
+    
+    int getTotalCount();
+    List<ProductionPlan_DTO> getProdPlanList(int pageNo, int viewCount);
+    
 }
