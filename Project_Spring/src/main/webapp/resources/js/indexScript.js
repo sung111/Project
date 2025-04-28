@@ -55,216 +55,51 @@ document.addEventListener('DOMContentLoaded', function () {
         console.warn("closePopupBtn 요소가 존재하지 않습니다.");
     }
 
-    // 로컬 네비게이션 스크립트
-    const localBar = document.querySelector(".local-bar");
-    const contextPath = document.body.getAttribute("data-contextPath") || "/project";
-    console.log("contextPath: ", contextPath);
+document.addEventListener("DOMContentLoaded", function() {
+    const contextPath = document.body.getAttribute('data-contextPath');  // 정확한 contextPath 가져오기
 
-    function LocalNavigationbar(tagname, componantname) {
-        localBar.innerHTML = `<li>Home</li> <li>> ${tagname}</li> <li>> ${componantname}</li>`;
-    }
+    // 메뉴 항목들에 클릭 이벤트 추가
+    const menuItems = document.querySelectorAll('.nav-tag a');
+    
+    menuItems.forEach(function(item) {
+        item.addEventListener("click", function(event) {
+            event.preventDefault();  // 기본 동작인 링크 이동을 막습니다.
 
-    document.querySelector("#nav-mainlogo").addEventListener("click", function () {
-        window.location.href = contextPath + "/maintitle";
+            // 클릭된 메뉴의 href 값을 가져옵니다.
+            const url = item.getAttribute('href');
+
+            // 해당 메뉴 클릭 시 페이지를 mainframe 영역에 로드합니다.
+            loadPage(url);
+        });
     });
 
-    // 메뉴 링크 연결 스크립트
-    // 부품코드 페이지
-    // document.querySelector("#nav-bomlist").addEventListener("click", function () {
-    //     fetch(contextPath + "/standard")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
+    // 페이지를 mainframe에 로드하는 함수
+    function loadPage(url) {
+        // `contextPath`를 경로 앞에 추가해줍니다.
+        const fullUrl = contextPath + url;
 
-    //                 // URL을 변경해서 사용자가 직접 새로고침해도 같은 페이지로
-    //                 history.pushState(null, null, contextPath + "/standard");
+        // 해당 URL로 Ajax 요청을 보냄
+        fetch(fullUrl)
+            .then(response => response.text())
+            .then(html => {
+                // mainframe 영역에 로드된 페이지를 삽입
+                document.querySelector('.mainframe').innerHTML = html;
 
-    //                 // 네비게이션 텍스트도 변경
-    //                 LocalNavigationbar('공정관리', '부품코드');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
+                // URL을 변경하여 페이지 상태를 기록 (브라우저 뒤로가기 등을 처리하기 위함)
+                history.pushState(null, null, fullUrl);
+            })
+            .catch(err => {
+                console.error('페이지 로드 실패:', err);
+            });
+    }
 
-    // // 검사기준 페이지
-    // document.querySelector("#nav-inspection").addEventListener("click", function () {
-    //     fetch(contextPath + "/inspectionStandards")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
+    // 뒤로가기 버튼 등에서 발생할 수 있는 이벤트를 처리하여 history 상태를 관리
+    window.onpopstate = function(event) {
+        loadPage(location.pathname);
+    };
+});
 
-    //                 // URL을 변경해서 사용자가 직접 새로고침해도 같은 페이지로
-    //                 history.pushState(null, null, contextPath + "/inspectionStandards");
-
-    //                 // 네비게이션 텍스트도 변경
-    //                 LocalNavigationbar('공정관리', '검사기준');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // document.querySelector("#nav-process").addEventListener("click", function () {
-    //     fetch(contextPath + "/production_process")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL을 변경해서 사용자가 직접 새로고침해도 같은 페이지로
-    //                 history.pushState(null, null, contextPath + "/production_process");
-
-    //                 // 네비게이션 텍스트도 변경
-    //                 LocalNavigationbar('공정관리', '생산공정');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // // BOM
-    // document.querySelector("#nav-bom").addEventListener("click", function () {
-    //     fetch(contextPath + "/bom_v2")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL을 변경해서 사용자가 직접 새로고침해도 같은 페이지로
-    //                 history.pushState(null, null, contextPath + "/bom_v2");
-
-    //                 // 네비게이션 텍스트도 변경
-    //                 LocalNavigationbar('공정관리', 'BOM');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // // 생산관리 페이지
-    // document.querySelector("#nav-workorder").addEventListener("click", function () {
-    //     fetch(contextPath + "/prodplan")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL 변경 
-    //                 history.pushState(null, null, contextPath + "/prodplan");
-
-    //                 // 로컬 네비게이션
-    //                 LocalNavigationbar('생산관리', '생산계획');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // // 실적등록 페이지
-    // document.querySelector("#nav-perfomanceRegistratio").addEventListener("click", function () {
-    //     fetch(contextPath + "/performance")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL 변경 
-    //                 history.pushState(null, null, contextPath + "/performance");
-
-    //                 // 로컬 네비게이션
-    //                 LocalNavigationbar('생산관리', '실적등록');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // // 품질관리 페이지
-    // document.querySelector("#nav-qualityControl").addEventListener("click", function () {
-    //     fetch(contextPath + "/qual")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL 변경 
-    //                 history.pushState(null, null, contextPath + "/qual");
-
-    //                 // 로컬 네비게이션
-    //                 LocalNavigationbar('생산관리', '품질관리');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // // 재고현황조회 페이지
-    // document.querySelector("#nav-inventory").addEventListener("click", function () {
-    //     fetch(contextPath + "/inven")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL 변경 
-    //                 history.pushState(null, null, contextPath + "/inven");
-
-    //                 // 로컬 네비게이션
-    //                 LocalNavigationbar('생산관리', '재고현황조회');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
-
-    // // 일반 게시판 페이지
-    // document.querySelector("#nav-일반게시판").addEventListener("click", function () {
-    //     fetch(contextPath + "/select")
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             if (mainContent) {
-    //                 mainContent.innerHTML = html;
-
-    //                 // URL 변경 
-    //                 history.pushState(null, null, contextPath + "/select");
-
-    //                 // 로컬 네비게이션
-    //                 LocalNavigationbar('게시판', '일반게시판');
-    //             } else {
-    //                 console.error("파일을 불러오는 중 오류가 발생했습니다.");
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('생산 계획 페이지 로드 실패:', err);
-    //         });
-    // });
+    
 
     // 마이페이지 팝업
     document.getElementById("mypage-a").addEventListener("click", function () {

@@ -92,20 +92,28 @@
 							data-username="${plan.userId}" data-startdate="${plan.startDate}"
 							data-enddate="${plan.endDate}">
 
-							<td class="productname">
-								<p>${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
-								<form
-									action="${pageContext.request.contextPath}/prodplan/update"
-									method="post">
-									<select name="productname" id="productSelect"
-										class="productSelect" style="display: none;">
-										<c:forEach var="item" items="${planList}">
-											<option value="${item.product.productname}">
-												${item.product.productname}[${item.product.spec}${item.product.unit}]
-											</option>
-										</c:forEach> </> 
-							</td>
-
+<td class="productname">
+    <p id="productDisplay">${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
+    <input type="hidden" name="productname" id="productnameInput" value="${plan.product.productname}">
+    <input type="text" id="productInput" class="productInput" value="${plan.product.productname}" readonly>
+    <%-- <select id="productSelect" class="productSelect">
+        <c:forEach var="item" items="${planList}">
+            <option value="${item.product.productname}">
+                ${item.product.productname}[${item.product.spec}${item.product.unit}]
+            </option>
+        </c:forEach>
+    </select> --%>
+    <form action="${pageContext.request.contextPath}/product/select" method="post" id="productForm">
+    <select id="productSelect" name="selectedProduct">
+        <c:forEach var="item" items="${planList}">
+            <option value="${item.product.productname}">
+                ${item.product.productname}[${item.product.spec}${item.product.unit}]
+            </option>
+        </c:forEach>
+    </select>
+    <input type="submit" style="display: none;">
+</form>
+</td>
 
 							<td class="lotnumber">
 								<p>${plan.product.lotnumber}</p> <input type="text"
@@ -177,7 +185,7 @@
 								<button type="button" class="list-btn mdf-btn ins" id="mdf-btn">수정</button>
 
 								<form
-									action="${pageContext.request.contextPath}/prodplan/delete"
+									action="/project/prodplan/delete"
 									method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');"
 									class="list-btn del">
 									<input type="hidden" name="planId" value="${plan.planId}" /> <input
@@ -455,63 +463,108 @@ function updatePagination(pageNumber) {
 
 
     // 수정 버튼 클릭
-    document.querySelectorAll('.ins').forEach(button => {
-        button.addEventListener('click', function () {
-            const tr = this.closest('tr');
-            editRow(tr);
-        });
+ // 수정 버튼 클릭
+document.querySelectorAll('.ins').forEach(button => {
+    button.addEventListener('click', function () {
+        const tr = this.closest('tr');
+        editRow(tr);
+    });
+});
+
+// 취소 버튼 클릭
+document.querySelectorAll('.cancel-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const tr = this.closest('tr');
+        cancelRow(tr);
+    });
+});
+
+function editRow(trElement) {
+    const pTags = trElement.querySelectorAll('p');
+    const originalValues = [];
+
+    pTags.forEach(p => {
+        originalValues.push(p.textContent.trim());
     });
 
-    // 취소 버튼 클릭
-    document.querySelectorAll('.cancel-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const tr = this.closest('tr');
-            cancelRow(tr);
-        });
-    });
+    pTags.forEach((p, index) => {
+        p.style.display = 'none'; // p 태그 숨기기
 
-    function editRow(trElement) {
-        const pTags = trElement.querySelectorAll('p');
-        const originalValues = [];
+        const nextElement = p.nextElementSibling;
 
-        pTags.forEach(p => {
-            originalValues.push(p.textContent.trim());
-        });
+        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
+            nextElement.style.display = 'inline'; // input, select 보이게 하기
 
-        pTags.forEach((p, index) => {
-            p.style.display = 'none';
-            const nextElement = p.nextElementSibling;
-            if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
-                nextElement.style.display = 'inline';
-                if (nextElement.tagName === 'INPUT') nextElement.value = originalValues[index];
+            if (nextElement.tagName === 'INPUT') {
+                nextElement.value = originalValues[index];
             }
-        });
+        }
+    });
 
-        const editButton = trElement.querySelector('.ins');
-        const deleteButton = trElement.querySelector('.delete-btn');
-        const confirmButton = trElement.querySelector('.comp');
-        const cancelButton = trElement.querySelector('.cancel-btn');
+    // 수정 시 입력 필드와 select 필드를 보이게 함
+    const productInput = trElement.querySelector('#productInput');
+    const productSelect = trElement.querySelector('#productSelect');
+    
+    if (productInput) productInput.style.display = 'inline'; // input 보이기
+    if (productSelect) productSelect.style.display = 'inline'; // select 보이기
 
-        if (editButton) editButton.style.display = 'none';
-        if (deleteButton) deleteButton.style.display = 'none';
-        if (confirmButton) confirmButton.style.display = 'inline';
-        if (cancelButton) cancelButton.style.display = 'inline';
+    const editButton = trElement.querySelector('.ins');
+    const deleteButton = trElement.querySelector('.delete-btn');
+    const confirmButton = trElement.querySelector('.comp');
+    const cancelButton = trElement.querySelector('.cancel-btn');
+
+    if (editButton) editButton.style.display = 'none';
+    if (deleteButton) deleteButton.style.display = 'none';
+    if (confirmButton) confirmButton.style.display = 'inline';
+    if (cancelButton) cancelButton.style.display = 'inline';
+}
+
+function cancelRow(trElement) {
+    trElement.querySelectorAll('p').forEach(p => p.style.display = 'inline'); // p 태그 다시 보이기
+    trElement.querySelectorAll('input, select').forEach(input => input.style.display = 'none'); // input, select 숨기기
+
+    const editButton = trElement.querySelector('.ins');
+    const deleteButton = trElement.querySelector('.delete-btn');
+    const confirmButton = trElement.querySelector('.comp');
+    const cancelButton = trElement.querySelector('.cancel-btn');
+
+    if (editButton) editButton.style.display = 'inline';
+    if (deleteButton) deleteButton.style.display = 'inline';
+    if (confirmButton) confirmButton.style.display = 'none';
+    if (cancelButton) cancelButton.style.display = 'none';
+}
+
+    
+    
+    
+    
+document.addEventListener('DOMContentLoaded', function() {
+    const inputField = document.getElementById("productInput");
+    inputField.addEventListener("click", toggleSelect);
+});
+
+function toggleSelect() {
+    var inputField = document.getElementById("productInput");
+    var selectList = document.getElementById("productSelect");
+
+    if (selectList.style.display === "none" || selectList.style.display === "") {
+        inputField.style.display = "none"; 
+        selectList.style.display = "block"; 
+    } else {
+        inputField.style.display = "block"; 
+        selectList.style.display = "none"; 
     }
+}
 
-    function cancelRow(trElement) {
-        trElement.querySelectorAll('p').forEach(p => p.style.display = 'inline');
-        trElement.querySelectorAll('input, select').forEach(input => input.style.display = 'none');
+function updateProductName() {
+    var selectList = document.getElementById("productSelect");
+    var selectedValue = selectList.options[selectList.selectedIndex].value;
+    document.getElementById("productInput").value = selectedValue;  
+    document.getElementById("productnameInput").value = selectedValue; 
+    selectList.style.display = "none"; 
+    document.getElementById("productInput").style.display = "block"; 
+}
 
-        const editButton = trElement.querySelector('.ins');
-        const deleteButton = trElement.querySelector('.delete-btn');
-        const confirmButton = trElement.querySelector('.comp');
-        const cancelButton = trElement.querySelector('.cancel-btn');
-
-        if (editButton) editButton.style.display = 'inline';
-        if (deleteButton) deleteButton.style.display = 'inline';
-        if (confirmButton) confirmButton.style.display = 'none';
-        if (cancelButton) cancelButton.style.display = 'none';
-    }
 </script>
 
 </body>

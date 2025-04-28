@@ -6,9 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import project.dto.ProductionPlan_DTO;
+import project.dto.Products_DTO;
 
 @Repository
 public class Prodplan_DAOImpl implements Prodplan_DAO {
@@ -40,9 +43,16 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
     }
 
     // 삭제
+    @Autowired
+    private Prodplan_DAO planDAO;
+
+    // 생산 계획 삭제
     @Override
     public void deletePlan(int planId) {
-        sqlSession.delete(NAMESPACE + ".deletePlan", planId);
+        if (planId <= 0) {
+            throw new IllegalArgumentException("유효하지 않은 생산 계획 번호입니다.");
+        }
+        planDAO.deletePlan(planId);
     }
 
     // 생산 계획 세부 정보 조회
@@ -64,5 +74,4 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList("ProdPlanMapper.getProdPlanList", params);
     }
 
-    
 }
