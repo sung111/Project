@@ -41,13 +41,10 @@ public class Maintitle_total_controller {
 		return "MainTitle"; 
 	}
 
-//    // �������� ��� ��� ó��
-//    @GetMapping("/maintitle")
-//    public String loadMaintitlePage(@PathVariable("page") String page) {
-//    	System.out.println("시발머임");
-//        return "MainTitle/" + page;  
-//    }
+
+
     
- 
+    
+
 }
 

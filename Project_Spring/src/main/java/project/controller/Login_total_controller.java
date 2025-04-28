@@ -29,8 +29,8 @@ public class Login_total_controller {
     // 로그인 처리
     @PostMapping("/Login_controller")
     public ModelAndView login(
-            @RequestParam("userId") String userId,  // 입력한 아이디
-            @RequestParam("userPw") String userPw,  // 입력한 비밀번호
+            @RequestParam("userId") String userId,
+            @RequestParam("userPw") String userPw,
             HttpSession session) {  // 세션 객체
 
         ModelAndView mav = new ModelAndView();
@@ -57,7 +57,7 @@ public class Login_total_controller {
 
             // 로그인 실패 시 로그인 페이지로 리다이렉트
             mav.setViewName("redirect:/login");
-            mav.addObject("error", "아이디 또는 비밀번호가 일치하지 않습니다.");  // 오류 메시지 추가
+            mav.addObject("error", "아이디 또는 비밀번호가 일치하지 않습니다."); 
             mav.addObject("userId", userId);  // 로그인 시도한 아이디 값 다시 전달
         }
 

@@ -16,13 +16,10 @@ public class Workorder_total_controller {
 
     @RequestMapping("/prodplan/workorder")
     public String showWorkOrder(Model model) {
-        WorkOrder_DTO workOrder = workorderService.getWorkOrderById(1);
-        if (workOrder == null) {
-            model.addAttribute("error", "작업 지시서를 찾을 수 없습니다.");
-            return "errorPage"; 
-        }
+        WorkOrder_DTO workOrder = workorderService.getWorkOrderById(39);
+
         model.addAttribute("workOrder", workOrder);
-        return "workOrderPage";
+        return "WorkOrder";
     }
 
 }
