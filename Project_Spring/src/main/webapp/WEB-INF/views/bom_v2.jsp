@@ -389,9 +389,9 @@
                                     // alert(e.target.getAttribute("data-page"),search_text)
                                     let nowpage = e.target.getAttribute("data-page")
                                     console.log("nowpage",nowpage)
-                                    alert(nowpage)
+                                   
                                     search(e ,nowpage, search_text)
-
+                                    
                                 
                                }
                            
