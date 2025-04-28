@@ -104,7 +104,7 @@
                 ${item.product.productname}[${item.product.spec}${item.product.unit}]
             </option>
         </c:forEach>
-    </select>
+    </>
 </td>
 
 
@@ -221,11 +221,103 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/prodplan.js"></script>
 	<script>
-	
+		/* 시간 */
+    const today = new Date();
+    // 현재 활성화된 버튼을 기억하는 변수
+    let activeButton = null;
+    document.queryorAll('.ProdPlanbtn').forEach(button => {
+        button.addEventListener('click', function () {
+            const parentTd = this.closest('td');
+            const isOverall = parentTd.previousElementSibling?.innerText.includes('전체');
+            const type = this.innerText; // 일간 / 주간 / 월간
 
+            // 같은 버튼을 다시 누르면 초기화
+            if (activeButton === this) {
+                resetView();
+                resetButtonStyles();
+                activeButton = null;
+                return; 
+            }
 
+            activeButton = this;
+
+            // 버튼 스타일 초기화 후 현재 버튼 스타일 적용
+            resetButtonStyles();
+            this.style.color = '#007bff';
+            this.style.border = '1px solid #007bff';
+
+            // 기간 설정
+            let startCheck, endCheck;
+            const now = new Date(); // 버튼 클릭 순간 기준으로 새로 계산
+
+            if (isOverall) {
+                if (type === '일간') {
+                    startCheck = new Date(now);
+                    endCheck = new Date(now);
+                } else if (type === '주간') {
+                    const day = now.getDay() || 7; // 일요일(0) -> 7로 조정
+                    startCheck = new Date(now);
+                    startCheck.setDate(now.getDate() - day + 1); // 월요일
+                    endCheck = new Date(startCheck);
+                    endCheck.setDate(startCheck.getDate() + 6); // 일요일
+                } else if (type === '월간') {
+                    startCheck = new Date(now.getFullYear(), now.getMonth(), 1);
+                    endCheck = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                }
+            } else {
+                if (type === '일간') {
+                    startCheck = new Date(now);
+                    endCheck = new Date(now);
+                } else if (type === '주간') {
+                    startCheck = new Date(now);
+                    const day = now.getDay() || 7; // 일요일(0) -> 7
+                    endCheck = new Date(now);
+                    endCheck.setDate(now.getDate() + (7 - day)); // 이번주 일요일
+                } else if (type === '월간') {
+                    startCheck = new Date(now);
+                    endCheck = new Date(now.getFullYear(), now.getMonth() + 1, 0); // 이번달 마지막날
+                }
+            }
+
+            // 모든 tr 돌면서 startDate와 endDate 비교
+            document.queryorAll('tr[name="prodPlanList"]').forEach(tr => {
+                const startInput = tr.queryor('input[name="startDate"]');
+                const endInput = tr.queryor('input[name="endDate"]');
+
+                if (!startInput || !endInput) {
+                    tr.style.display = 'none'; // start나 end 없으면 숨김
+                    return;
+                }
+
+                const startDate = new Date(startInput.value);
+                const endDate = new Date(endInput.value);
+
+                // 겹치는 구간이 있으면 보여주고 아니면 숨기기
+                if (startDate <= endCheck && endDate >= startCheck) {
+                    tr.style.display = '';
+                } else {
+                    tr.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    function resetView() {
+        // 모든 tr 보여주기
+        document.queryorAll('tr[name="prodPlanList"]').forEach(tr => {
+            tr.style.display = '';
+        });
+    }
+
+    function resetButtonStyles() {
+        // 모든 버튼 스타일 초기화
+        document.queryorAll('.ProdPlanbtn').forEach(btn => {
+            btn.style.color = '#999999';
+            btn.style.border = '1px solid #999999';
+        });
+    }
 	
-	document.querySelectorAll('.product-input').forEach(input => {
+	document.queryorAll('.product-input').forEach(input => {
 	    input.addEventListener('click', function(e) {
 	        const listDiv = this.nextElementSibling; // input 바로 다음 div
 	        listDiv.innerHTML = ''; // 기존 리스트 초기화
@@ -251,7 +343,7 @@
 	// 외부 클릭 시 목록 숨기기
 	document.addEventListener('click', function(e) {
 	    if (!e.target.classList.contains('product-input')) {
-	        document.querySelectorAll('.product-list').forEach(list => {
+	        document.queryorAll('.product-list').forEach(list => {
 	            list.style.display = 'none';
 	        });
 	    }
@@ -294,21 +386,21 @@
     });
 
  // 수정 함수 호출
-    document.querySelectorAll('.ins').forEach(button => { button.addEventListener('click', function() { const tr = this.closest('tr');  editRow(tr);  });  });
+    document.queryorAll('.ins').forEach(button => { button.addEventListener('click', function() { const tr = this.closest('tr');  editRow(tr);  });  });
     // 취소
-    document.querySelectorAll('.cancel-btn').forEach(button => { button.addEventListener('click', function() { const tr = this.closest('tr'); cancelRow(tr); }); });
+    document.queryorAll('.cancel-btn').forEach(button => { button.addEventListener('click', function() { const tr = this.closest('tr'); cancelRow(tr); }); });
     //수정 태그로 전환
-    function editRow(trElement) { const pTags = trElement.querySelectorAll('p'); const originalValues = []; pTags.forEach(p => { originalValues.push(p.textContent.trim());});
+    function editRow(trElement) { const pTags = trElement.queryorAll('p'); const originalValues = []; pTags.forEach(p => { originalValues.push(p.textContent.trim());});
         pTags.forEach((p, index) => { p.style.display = 'none'; const nextElement = p.nextElementSibling; 
-        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT'))  { nextElement.style.display = 'inline'; 
+        if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === ''))  { nextElement.style.display = 'inline'; 
         if (nextElement.tagName === 'INPUT') { nextElement.value = originalValues[index]; } }
         });
 
         
-        const editButton = trElement.querySelector('.ins');
-        const deleteButton = trElement.querySelector('.delete-btn');
-        const confirmButton = trElement.querySelector('.comp');
-        const cancelButton = trElement.querySelector('.cancel-btn');
+        const editButton = trElement.queryor('.ins');
+        const deleteButton = trElement.queryor('.delete-btn');
+        const confirmButton = trElement.queryor('.comp');
+        const cancelButton = trElement.queryor('.cancel-btn');
 
         if (editButton) editButton.style.display = 'none'; if (deleteButton) deleteButton.style.display = 'none';
         if (confirmButton) confirmButton.style.display = 'inline'; if (cancelButton) cancelButton.style.display = 'inline';
@@ -327,7 +419,7 @@
                 pTags.forEach((p, index) => {
                     p.style.display = 'inline';
                     const nextElement = p.nextElementSibling;
-                    if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) {
+                    if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === '')) {
                         p.textContent = nextElement.value;
                         nextElement.style.display = 'none';
                     }
@@ -340,7 +432,7 @@
         if (cancelButton) { cancelButton.onclick = function () {
                 if (editButton) editButton.style.display = 'inline'; if (deleteButton) deleteButton.style.display = 'inline';  if (confirmButton) confirmButton.style.display = 'none'; if (cancelButton) cancelButton.style.display = 'none';
                 pTags.forEach((p, index) => { p.style.display = 'inline'; const nextElement = p.nextElementSibling;
-                    if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === 'SELECT')) { nextElement.style.display = 'none'; }
+                    if (nextElement && (nextElement.tagName === 'INPUT' || nextElement.tagName === '')) { nextElement.style.display = 'none'; }
                 });
             };
         }

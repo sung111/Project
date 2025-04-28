@@ -14,10 +14,12 @@ public class Maintitle_total_controller {
 	    return "MainTitle"; 
 	}
 
-    // ÆäÀÌÁö¸í ±â¹Ý °æ·Î Ã³¸®
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
     @GetMapping("/{page}")
     public String loadMaintitlePage(@PathVariable("page") String page) {
         return "MainTitle/" + page;  
     }
+    
+    
 }
 

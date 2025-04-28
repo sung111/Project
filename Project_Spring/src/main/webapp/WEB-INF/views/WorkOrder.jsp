@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OOOOO 생산 정보</title>
+<title>HHMES 작업지시서</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/workorder.css">
 <!-- js -->
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<div class="productinfo">
+	<form class="productinfo">
 		<table>
 			<tr class="productinfo-info">
 				<td class="productinfo-info-list">
@@ -69,7 +69,7 @@
 				</tr>
 			</table>
 		</div>
-	</div>
+	</form>
 </body>
 
 </html>
