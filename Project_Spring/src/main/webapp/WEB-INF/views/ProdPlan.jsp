@@ -96,13 +96,6 @@
     <p id="productDisplay">${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
     <input type="hidden" name="productname" id="productnameInput" value="${plan.product.productname}">
     <input type="text" id="productInput" class="productInput" value="${plan.product.productname}" readonly>
-    <%-- <select id="productSelect" class="productSelect">
-        <c:forEach var="item" items="${planList}">
-            <option value="${item.product.productname}">
-                ${item.product.productname}[${item.product.spec}${item.product.unit}]
-            </option>
-        </c:forEach>
-    </select> --%>
     <form action="${pageContext.request.contextPath}/product/select" method="post" id="productForm">
     <select id="productSelect" name="selectedProduct">
         <c:forEach var="item" items="${planList}">

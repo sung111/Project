@@ -18,11 +18,15 @@ public class Workorder_serviceImpl implements Workorder_service {
     @Override
     public WorkOrder_DTO getWorkOrderById(int orderId) {
         return workorderDAO.getWorkOrderWithProductById(orderId);
-        // getWorkOrderById °Ê getWorkOrderWithProductById ∑Œ ∏¬√Á¡‹
     }
 
     @Override
     public List<Products_DTO> getProducts() {
         return workorderDAO.getProducts();
+    }
+
+    @Override
+    public Products_DTO getProductByName(String productName) {
+        return workorderDAO.getProductByName(productName);
     }
 }

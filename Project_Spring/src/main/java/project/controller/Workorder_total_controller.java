@@ -1,15 +1,16 @@
 package project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import project.service.Workorder_total_service.Workorder_service;
-import project.dto.WorkOrder_DTO;
 import project.dto.Products_DTO;
-
-import java.util.List;
+import project.dto.WorkOrder_DTO;
+import project.service.Workorder_total_service.Workorder_service;
 
 @Controller
 public class Workorder_total_controller {
@@ -19,14 +20,26 @@ public class Workorder_total_controller {
 
     @RequestMapping("/prodplan/workorder")
     public String showWorkOrder(Model model) {
-        // orderId가 39인 작업지시서 + 제품정보 가져오기
         WorkOrder_DTO workOrder = workorderService.getWorkOrderById(39);
         model.addAttribute("workOrder", workOrder);
 
-        // 전체 상품 목록 가져오기
         List<Products_DTO> products = workorderService.getProducts();
         model.addAttribute("productList", products);
 
-        return "WorkOrder"; // WorkOrder.jsp
+        return "WorkOrder"; 
+    }
+    
+    @RequestMapping("/prodplan/getProductDetails")
+    public String getProductDetails(@RequestParam("productName") String productName, Model model) {
+        Products_DTO product = workorderService.getProductByName(productName);
+
+        if (product != null) {
+            model.addAttribute("lotno", product.getLotnumber());
+            model.addAttribute("unit", product.getUnit());
+        } else {
+            model.addAttribute("error", "제품을 찾을 수 없습니다.");
+        }
+
+        return "WorkOrder"; 
     }
 }

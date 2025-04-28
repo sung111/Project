@@ -14,7 +14,6 @@ public class Workorder_DAOImpl implements Workorder_DAO {
     @Autowired
     private SqlSession sqlSession;
 
-    // 작업지시서와 해당 제품 정보를 함께 가져오는 메서드
     @Override
     public WorkOrder_DTO getWorkOrderWithProductById(int orderId) {
         // 작업지시서 정보 조회
@@ -29,9 +28,15 @@ public class Workorder_DAOImpl implements Workorder_DAO {
         return workOrder;
     }
 
-    // 상품 목록을 조회하는 메서드
+    // 상품 목록을 조회
+    @Override
     public List<Products_DTO> getProducts() {
-        // 상품 목록 조회
         return sqlSession.selectList("WorkorderMapper.selectAllProducts");
+    }
+
+    // 제품명으로 제품 정보를 조회
+    @Override
+    public Products_DTO getProductByName(String productName) {
+        return sqlSession.selectOne("WorkorderMapper.selectProductByName", productName);
     }
 }

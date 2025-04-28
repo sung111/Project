@@ -84,3 +84,26 @@
 #processFrame{
     width: 100%; height: 100%;
 }
+
+
+        .product-options {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 300px;
+            z-index: 1000;
+        }
+        .product-options ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .product-options li {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .product-options li:hover {
+            background-color: #f0f0f0;
+        }
