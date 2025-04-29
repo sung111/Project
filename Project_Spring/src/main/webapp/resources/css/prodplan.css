@@ -2,7 +2,7 @@
 	display: none;
 }
 
-.productSelect{
+.productForm{
 	display: none;
 }
 
@@ -10,11 +10,20 @@
 	width: 100%; height: 100%; text-decoration-line: none; text-align: center; border: none; color: #fff;
 }
 
+#pagination-container{
+	width: 60%; margin-left: 20px;
+}
+.pagination{
+	display: flex; justify-content: space-between; align-items:center;
+}
+.pagenation-btn{
+	width: 60px; height: 20px; background-color: #d9d9d9; border: 1px solid #000;
+}
 thead{
      all:unset; display: table-header-group;
 }
 
-tbody{
+tbody{ 
     width: 100%;
 }
 

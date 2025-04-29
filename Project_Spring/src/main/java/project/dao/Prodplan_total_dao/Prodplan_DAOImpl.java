@@ -26,7 +26,7 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".selectAllPlans");
     }
 
-    // ¼öÁ¤
+    // ï¿½ï¿½ï¿½ï¿½
     @Override
     public void updatePlan(ProductionPlan_DTO dto) {
         sqlSession.update(NAMESPACE + ".updatePlan", dto);
@@ -42,23 +42,23 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".getProducts", searchTerm);
     }
 
-    // »èÁ¦
+    // ï¿½ï¿½ï¿½ï¿½
     @Autowired
     private Prodplan_DAO planDAO;
 
-    // »ý»ê °èÈ¹ »èÁ¦
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¹ ï¿½ï¿½ï¿½ï¿½
     @Override
     public void deletePlan(int planId) {
         if (planId <= 0) {
-            throw new IllegalArgumentException("À¯È¿ÇÏÁö ¾ÊÀº »ý»ê °èÈ¹ ¹øÈ£ÀÔ´Ï´Ù.");
+            throw new IllegalArgumentException("ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¹ ï¿½ï¿½È£ï¿½Ô´Ï´ï¿½.");
         }
         planDAO.deletePlan(planId);
     }
 
-    // »ý»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
     @Override
     public ProductionPlan_DTO getPlanDetails(int planId) {
-        return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  // Mapper¿¡¼­ Äõ¸® ½ÇÇà
+        return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  
     }
     
     @Override

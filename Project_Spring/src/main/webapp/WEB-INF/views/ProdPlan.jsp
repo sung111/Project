@@ -96,8 +96,8 @@
     <p id="productDisplay">${plan.product.productname}[${plan.product.spec}${plan.product.unit}]</p>
     <input type="hidden" name="productname" id="productnameInput" value="${plan.product.productname}">
     <input type="text" id="productInput" class="productInput" value="${plan.product.productname}" readonly>
-    <form action="${pageContext.request.contextPath}/product/select" method="post" id="productForm">
-    <select id="productSelect" name="selectedProduct">
+    <form action="${pageContext.request.contextPath}/product/select" method="post" id="productForm" class="productForm" style="display: none";">
+    <select id="productSelect" name="selectedProduct" class="productSelect">
         <c:forEach var="item" items="${planList}">
             <option value="${item.product.productname}">
                 ${item.product.productname}[${item.product.spec}${item.product.unit}]
@@ -210,7 +210,7 @@
 			<tr>
 				<!-- 페이지네이션 -->
 <!-- 페이지네이션 -->
-<td colspan="14">
+<%-- <td colspan="14">
     <div id="pagination-container">
         <ul class="pagination">
             <!-- 첫 페이지로 이동 버튼 -->
@@ -220,7 +220,9 @@
 
             <!-- 이전 페이지 -->
             <c:if test="${pageNo > 1}">
-                <li><a href="?pageNo=${pageNo - 1}&viewCount=${viewCount}">&laquo; 이전</a></li>
+                <li><a 
+                href="?pageNo=${pageNo - 1}&viewCount=${viewCount}"
+                > 이전</a></li>
             </c:if>
 
             <!-- 페이지 번호 -->
@@ -232,13 +234,30 @@
 
             <!-- 다음 페이지 -->
             <c:if test="${pageNo < lastPage}">
-                <li><a href="?pageNo=${pageNo + 1}&viewCount=${viewCount}">다음 &raquo;</a></li>
+                <li><a 
+                href="?pageNo=${pageNo + 1}&viewCount=${viewCount}"
+                >다음 </a></li>
             </c:if>
 
             <!-- 마지막 페이지로 이동 버튼 -->
             <c:if test="${pageNo < lastPage}">
                 <li><a href="?pageNo=${lastPage}&viewCount=${viewCount}">마지막 페이지 &gt;&gt;</a></li>
             </c:if>
+        </ul>
+    </div>
+</td> --%>
+
+<td colspan="14">
+    <div id="pagination-container">
+        <ul class="pagination">
+            <!-- 이전 페이지 -->
+                <li><button class="pagenation-btn"><</button></li>
+            <!-- 페이지 번호 -->
+                <li class="pagenation-number">
+                    <a >1</a>
+                </li>
+            <!-- 다음 페이지 -->
+                <li><button class="pagenation-btn">></button></li>
         </ul>
     </div>
 </td>
@@ -472,6 +491,9 @@ document.querySelectorAll('.cancel-btn').forEach(button => {
     });
 });
 
+
+const productSelect = trElement.querySelector('#productForm');
+
 function editRow(trElement) {
     const pTags = trElement.querySelectorAll('p');
     const originalValues = [];
@@ -496,10 +518,11 @@ function editRow(trElement) {
 
     // 수정 시 입력 필드와 select 필드를 보이게 함
     const productInput = trElement.querySelector('#productInput');
-    const productSelect = trElement.querySelector('#productSelect');
+    const productSelect = trElement.querySelector('#productForm');
+
     
-    if (productInput) productInput.style.display = 'inline'; // input 보이기
-    if (productSelect) productSelect.style.display = 'inline'; // select 보이기
+    if (productInput) productInput.style.display = 'inline'; 
+    if (productSelect) productSelect.style.display = 'inline'; 
 
     const editButton = trElement.querySelector('.ins');
     const deleteButton = trElement.querySelector('.delete-btn');
@@ -525,6 +548,7 @@ function cancelRow(trElement) {
     if (deleteButton) deleteButton.style.display = 'inline';
     if (confirmButton) confirmButton.style.display = 'none';
     if (cancelButton) cancelButton.style.display = 'none';
+    if (productSelect) productSelect.style.display = 'none';
 }
 
     
