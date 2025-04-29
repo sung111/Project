@@ -25,6 +25,8 @@
     <!-- login 페이지 -->
     <definition name="login" template="/WEB-INF/views/login.jsp" />
 
+<!-- mypage -->
+<definition name="mypage" template="/WEB-INF/views/mypage.jsp" />
     <!-- maintitle 이동하는 위치 -->
 <definition name="*" extends="defaultLayout">
     <put-attribute name="title" value="메인페이지" />

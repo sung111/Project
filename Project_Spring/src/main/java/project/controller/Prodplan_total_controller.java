@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.dto.ProductionPlan_DTO;
+import project.dto.Products_DTO;
 import project.service.Prodplan_total_service.Prodplan_service;
 
 @Controller
@@ -56,7 +57,7 @@ public class Prodplan_total_controller {
         }
     }
 
-    // 상품 리스트 검색 (자동 완성용)
+    // 상품 리스트 검색
     @GetMapping("/prodplan/products")
     @ResponseBody
     public List<ProductionPlan_DTO> getProductList(@RequestParam String searchTerm) {
@@ -93,15 +94,14 @@ public class Prodplan_total_controller {
         } else {
             model.addAttribute("error", "해당 생산계획을 찾을 수 없습니다.");
         }
-        return "prodplan/planDetails";  // 'prodplan/planDetails.jsp'로 전달
+        return "prodplan/planDetails"; 
     }
     
+    //페이지네이션
     @RequestMapping("/list")
     public String getProdPlanList(@RequestParam(defaultValue = "1") int pageNo, 
                                   @RequestParam(defaultValue = "10") int viewCount, 
                                   Model model) {
-
-        // 총 데이터 개수 조회
         int totalCount = prodplanService.getTotalCount(); 
         List<ProductionPlan_DTO> prodPlans = prodplanService.getProdPlanList(pageNo, viewCount);  
         int lastPage = (int) Math.ceil((double) totalCount / viewCount);

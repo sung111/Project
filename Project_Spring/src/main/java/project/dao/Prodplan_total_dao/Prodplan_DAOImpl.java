@@ -6,9 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import project.dto.ProductionPlan_DTO;
+import project.dto.Products_DTO;
 
 @Repository
 public class Prodplan_DAOImpl implements Prodplan_DAO {
@@ -23,7 +26,7 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".selectAllPlans");
     }
 
-    // ¼öÁ¤
+    // ï¿½ï¿½ï¿½ï¿½
     @Override
     public void updatePlan(ProductionPlan_DTO dto) {
         sqlSession.update(NAMESPACE + ".updatePlan", dto);
@@ -39,16 +42,23 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList(NAMESPACE + ".getProducts", searchTerm);
     }
 
-    // »èÁ¦
+    // ï¿½ï¿½ï¿½ï¿½
+    @Autowired
+    private Prodplan_DAO planDAO;
+
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¹ ï¿½ï¿½ï¿½ï¿½
     @Override
     public void deletePlan(int planId) {
-        sqlSession.delete(NAMESPACE + ".deletePlan", planId);
+        if (planId <= 0) {
+            throw new IllegalArgumentException("ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¹ ï¿½ï¿½È£ï¿½Ô´Ï´ï¿½.");
+        }
+        planDAO.deletePlan(planId);
     }
 
-    // »ý»ê °èÈ¹ ¼¼ºÎ Á¤º¸ Á¶È¸
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
     @Override
     public ProductionPlan_DTO getPlanDetails(int planId) {
-        return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  // Mapper¿¡¼­ Äõ¸® ½ÇÇà
+        return sqlSession.selectOne(NAMESPACE + ".getPlanDetails", planId);  
     }
     
     @Override
@@ -64,5 +74,4 @@ public class Prodplan_DAOImpl implements Prodplan_DAO {
         return sqlSession.selectList("ProdPlanMapper.getProdPlanList", params);
     }
 
-    
 }

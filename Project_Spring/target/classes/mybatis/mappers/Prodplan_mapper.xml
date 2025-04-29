@@ -63,7 +63,7 @@
       pp.planid, pp.userid, pp.productid, pp.totalqty, pp.startdate,
       pp.enddate, pp.createdate, pp.deliverydate, pp.deliverydest,
       pp.planstatus, pp.plancause, pp.plannotes,
-      p.productname, p.spec, p.unit, p.partnumber, p.warehouse
+      p.productname, p.spec, p.unit, p.partnumber, p.warehouse, p.lotnumber
     FROM productionplans pp
     LEFT JOIN products p ON pp.productid = p.productid
     WHERE p.productname LIKE CONCAT('%', #{searchTerm}, '%')
@@ -88,7 +88,8 @@
       p.spec, 
       p.unit, 
       p.partnumber, 
-      p.warehouse
+      p.warehouse,
+      p.lotnumber
     FROM productionplans pp
     LEFT JOIN products p 
       ON pp.productid = p.productid
