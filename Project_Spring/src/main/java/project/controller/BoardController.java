@@ -128,17 +128,23 @@ System.out.println("유저아이디 : " + userId);
 //				dto.setPage(page);
 //				dto.setViewCount(viewCount); 
 				
-				
+// 페이지숫자
 int normalCount = ProService.totalist(dto);
 model.addAttribute("normalCount", normalCount);
-System.out.println("일반게시글 숫자 :" + normalCount);				
+System.out.println("일반게시글 숫자 :" + normalCount);	
+// 페이지숫자
+
 				
 				
 //                List<Prodto> search = ProService.search(dto);
                 
-                
+                //조회수
 				int view = ProService.Viewcount(dto);
-			     // ??????????
+				// 조회수 
+				
+				
+				
+				
 				// 리스트로 담기 // 호출
 				// List<EmpDTO> list = EmpService.getEmpList();
 				Map map = ProService.SelectPage(dto);

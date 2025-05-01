@@ -171,7 +171,8 @@ position:absolute;
 
 </style>
 <%
-    String notifys = request.getParameter("notify");%>
+    String notifys = request.getParameter("notify");
+    %>
     
     
 <form method="post" action="search" id="searchform">
@@ -231,7 +232,7 @@ position:absolute;
 		<div class="postbtn">
 
 			<form method="post" action="write">
-				<button type="submit" class="newpost">글 쓰기</button>
+				<button type="submit" class="newpost" id="write">글 쓰기</button>
 			</form>
 		</div>
 
@@ -358,7 +359,7 @@ position:absolute;
 
 
 
-<p>전체 <span id="font">${normalCount}</span>개의 글</p>
+       <p>전체 <span id="font">${normalCount}</span>개의 글</p>
 	   검색 결과 <span id="font">${countsearch}</span>  개의 글	 
 			
 			<div class="pagination">
@@ -374,7 +375,7 @@ position:absolute;
 				<button onclick="changePage(currentPage - 1)" id="prevButton">이전</button>
 			</c:if>
 			<c:if test="<%= begin != 1 %>">			                     
-				<a href="select?page=<%= begin-1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=N"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
+				<a href="select?page=<%= begin-1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>"><button onclick="changePage(currentPage - 1)" id="prevButton">이전</button></a>
 			</c:if>
 			
 			
@@ -390,7 +391,7 @@ position:absolute;
 				
 				<!--  버튼 누르면 페이징됨과 동시에 카운트유지 
 				1페이지 15누르면 http://localhost:8080/project/select?pagecount=15-->
-				<a href="select?page=${ i }&pagecount=<%= Prodto.getPagecount() %>&notify=N" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
+				<a href="select?page=${ i }&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>" class="${clazz }"><button onclick="changePage(1)">${ i }</button></a>
 		
 			</c:forEach>
 			
@@ -399,7 +400,7 @@ position:absolute;
 				<button onclick="changePage(currentPage + 1)" id="nextButton">다음</button>
 			</c:if>
 			<c:if test="<%= end != lastPage %>">
-				<a href="select?page=<%= end+1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=N"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
+				<a href="select?page=<%= end+1 %>&pagecount=<%= Prodto.getPagecount() %>&notify=<%= Prodto.getNotify() %>"><button onclick="changePage(currentPage + 1)" id="nextButton">다음</button></a>
 			</c:if>
      	</div>
 </div> 
@@ -559,6 +560,33 @@ position:absolute;
 	
 	
 	
+	
+	//관리자가 아닐시에 글쓰기버튼 사라짐
+	<% HttpSession sessions = request.getSession();
+	// 세션으로 정보 받아오기 (로그인)
+	String userId = (String) session.getAttribute("userId"); 
+	boolean isNormalUser = userId != null && userId.contains("user");
+	String notifyz = request.getParameter("notify"); %>
+	
+	
+	<% if (isNormalUser & notifyz.equals("Y")) { %>
+		
+		<%-- <% System.out.println("나는 관리자가 아니야"); %> --%>
+		// 자바스크립트에서는 console.log 이용 권장
+		console.log("나는 관리자가 아니야");
+		
+		
+		window.addEventListener("DOMContentLoaded", function() {
+			
+			
+		let noti = document.querySelector("#write");	
+		noti.style.display = "none";
+		
+		
+		});
+		
+		
+		<% } %> 
 	
 	
 	

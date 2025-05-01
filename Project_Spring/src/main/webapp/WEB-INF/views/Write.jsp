@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/06_글쓰기.css">
 </head>
 <style>
+
 /* body {
     background-color: #f8f9fa;
     display: flex;
@@ -23,6 +24,10 @@
     padding: 20px;
 }
  */
+ 
+
+ 
+  /* 전체박스 */
 .box {
     width: 97%;
     margin: 20px;
@@ -32,6 +37,7 @@
     background-color: #ffffff;
 }
 
+/* 제목 */
 h1 {
     text-align: center;
     margin-bottom: 20px;
@@ -39,9 +45,9 @@ h1 {
     border-bottom: 1px solid #d9d9d9;
 }
 
-
+ /* 게시하기 */
 #post {
-padding: 5px 10px; /* 패딩 조정 */
+padding: 5px 10px; 
     font-size: 10px;
     border: none;
     border-radius: 5px;
@@ -119,6 +125,18 @@ padding: 5px 10px; /* 패딩 조정 */
     margin-left: 0;
 }
 
+
+ /* 링크첨부 */
+#linked-button {
+ 
+ margin-bottom : -1px;
+ margin-left : 3px;
+ 
+ 
+ }
+
+
+
 .postbtn {
     margin-bottom: 10px;
     margin-left: 5px;
@@ -170,6 +188,10 @@ padding: 5px 10px; /* 패딩 조정 */
     color: black;
     text-decoration: none;
 }
+
+
+
+ /* 반응형 개별 css 적용 */
 @media (max-width: 768px) {
     .box {
         width: 90%; /* 모바일에서는 너비를 줄임 */
@@ -382,7 +404,7 @@ display : none;
 
     <% if (isNormalUser) { %>
         document.addEventListener("DOMContentLoaded", function() {
-            const btn = document.querySelector(".postbtn");
+            const btn = document.querySelector("#special");
             if (btn) {
                 btn.style.display = "none";
             }

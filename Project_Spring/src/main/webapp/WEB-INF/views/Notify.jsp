@@ -547,6 +547,7 @@ position:absolute;
 		
 	<% HttpSession sessions = request.getSession();
 	String userId = (String) session.getAttribute("userId"); 
+	
 	boolean isNormalUser = userId != null && userId.contains("user");%>
 	
 	

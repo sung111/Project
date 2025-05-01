@@ -19,11 +19,14 @@
 
 #modify {
 
-    margin-left: 95%;
-    width: 5%;
+
+
+    
+    margin-left: 95.1%;
+    width: 4.9%;
     padding: 10px 15px;
     font-size: 10px;
-    border: none;
+    border: 1px solid lightgray;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
@@ -129,7 +132,7 @@ h2 {
 .comment-section button {
     padding: 10px 15px;
     font-size: 10px;
-    border: none;
+    border: 1px solid lightgray;;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
@@ -158,8 +161,12 @@ h2 {
 
 
 .ok {
-    width: 50px;
+
+
+    width: 70px;
     height: 33px;
+    
+    
 }
 
 
@@ -202,7 +209,7 @@ width: 50%;
 
 #modify {
 
-    margin-left: 93%;
+    margin-left: 92%;
     width: 7%;
     padding: 10px 15px;
     font-size: 10px;
@@ -331,13 +338,13 @@ width: 50%;
   
   
   <!-- 파일이 없을때 -->
- <c:if test="${empty Fileselid}"> 
+<%--  <c:if test="${empty Fileselid}"> 
  올린 파일이 없습니다
  <video width="480" height="300" controls poster="/upload/ss.jpg">
     <source src="${flink.file_name}" type="video/mp4">
     브라우저가 video 태그를 지원하지 않습니다.
   </video>
- </c:if> 
+ </c:if>  --%>
  
  </c:if>
  
@@ -358,7 +365,7 @@ width: 50%;
       <!--   </form> -->
         
         
-        
+             <br>
     <%--  <c:forEach var="dyo" items="${idpost}">  --%>  
         <!-- <form method ="post" action ="conmod"> -->
            <a href="conmod?postid=${con.postid}" id="amodify"><div id="modify">수정</div></a>
@@ -366,10 +373,10 @@ width: 50%;
      <%--  </c:forEach>   --%> 
             
             
-            
+                     
                <%-- <c:forEach var="dxo" items="${idpost}">  --%>   
                     <form method="post" action="condel">
-                    <button class="commentbtn" type="submit" name="postid" value="${con.postid}">삭제</button>
+                    <button class="commentbtn" type="submit" name="postid" value="${con.postid}" id="delb">삭제</button>
                     </form>
               <%--  </c:forEach> --%> 
             
@@ -393,6 +400,8 @@ width: 50%;
                 <div class="usercomment">
                     <span class="author"><%= session.getAttribute("userName") %></span>
                     <span class="date">${ddt.commentdate}</span>
+                    <br>
+                    <br>
                     <p>${ddt.commenttext}</p>
                 </div>
                 
@@ -400,13 +409,13 @@ width: 50%;
                 <div class="cmtbtn">
                 
                 
-                    <button class="commentbtn" type="submit" >수정</button>
+                    <button class="commentbtn" type="submit" id="fixc">수정</button>
                     
                     
                     <form method="post" action="delcon"> 
                     <input type="hidden" name="postid" value="${ddt.postid}" />
                     <input type="hidden" name="commentid" value="${ddt.commentid}">
-                    <button class="commentbtndel" type="submit" value="${ddt.commentid}">삭제</button>
+                    <button class="commentbtndel" type="submit" value="${ddt.commentid}" id="delc">삭제</button>
                     </form>
                     
                 </div>
@@ -498,6 +507,44 @@ width: 50%;
         
         
         <script>
+        
+        
+        
+        
+      //관리자가 아닐시에 글쓰기버튼 사라짐
+    	<% HttpSession sessions = request.getSession();
+    	// 세션으로 정보 받아오기 (로그인)
+    	String userId = (String) session.getAttribute("userId"); 
+    	boolean isNormalUser = userId != null && userId.contains("user");
+    	%>
+    	
+    	
+    	<% if (isNormalUser) { %>
+    		
+    		<%-- <% System.out.println("나는 관리자가 아니야"); %> --%>
+    		// 자바스크립트에서는 console.log 이용 권장
+    		console.log("나는 관리자가 아니야");
+    		
+    		
+    		window.addEventListener("DOMContentLoaded", function() {
+    			
+    			
+    		let delb = document.querySelector("#delb");
+    		let fixb = document.querySelector("#modify");
+    		delb.style.display = "none";
+    		fixb.style.display = "none";
+    		
+    		
+    		});
+    		
+    		
+    		<% } %> 
+    	
+        
+        
+        
+        
+        
         
         
         
