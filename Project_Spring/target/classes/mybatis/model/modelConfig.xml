@@ -25,7 +25,6 @@
 		<typeAlias type="project.dto.QualityControl_DTO" alias="QualityControl_DTO"/>
 		<typeAlias type="project.dto.WorkOrder_DTO" alias="WorkOrder_DTO" />
 	</typeAliases>
-
        
            
 </configuration>
