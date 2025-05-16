@@ -56,7 +56,7 @@
 ## 🪪 팀원 소개
 <div align="center">
 
-| 사진 | <img src="https://github.com/user-attachments/assets/398fa2ca-55a6-4d60-b3ea-40d3d66f20ec" width="120"/> | <img src="https://github.com/user-attachments/assets/c08c5efb-52ec-4807-9676-9b898355442f" width="120">| <img src="https://github.com/user-attachments/assets/d331b811-1e6f-434a-9bac-06b991fea9a2" width="120"/> | <img src="https://github.com/user-attachments/assets/d331b811-1e6f-434a-9bac-06b991fea9a2" width="120"/> |
+| 사진 | <img src="https://github.com/user-attachments/assets/398fa2ca-55a6-4d60-b3ea-40d3d66f20ec" width="120"/> | <img src="https://github.com/user-attachments/assets/c08c5efb-52ec-4807-9676-9b898355442f" width="120">| <img src="https://github.com/user-attachments/assets/19abd105-5505-42dc-927f-1ae648535cdb" width="120"/> | <img src="https://github.com/user-attachments/assets/d331b811-1e6f-434a-9bac-06b991fea9a2" width="120"/> |
 |:--:|:--:|:--:|:--:|:--:|
 | 이름 | [박혜성](https://github.com/sung111) | [서영석](https://github.com/naisha855) | [김경민](https://github.com/parparlong) | [채민병](https://github.com/MOZZITARO) |
 | 역할 | 팀장<br>ERD-cloud 제작<br>프로젝트 계획관리 | PPT 제작<br>디자인 기획 | UML 제작<br>스토리보드 제작 | 자료조사 |
